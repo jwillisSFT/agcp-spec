@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/tenant.json",
+  "title": "Tenant",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "state": {
+      "$ref": "common.json#/$defs/tenant_state_enum"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "state",
+    "created_at"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/meta_response.json",
+  "title": "MetaResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "implementation_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "implementation_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "supported_spec_versions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 16
+      },
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true
+    },
+    "supported_profiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "crypto_profiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 32
+      },
+      "maxItems": 16,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "implementation_name",
+    "implementation_version",
+    "supported_spec_versions",
+    "supported_profiles"
+  ]
+}

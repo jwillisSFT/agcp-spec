@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/execution_commit_request.json",
+  "title": "ExecutionCommitRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "ledger_authorization_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "execution_result": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "action_id",
+    "ledger_authorization_ref",
+    "execution_result"
+  ]
+}

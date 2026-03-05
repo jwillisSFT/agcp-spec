@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/action_envelope.json",
+  "title": "ActionEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "principal_type": {
+          "type": "string",
+          "enum": [
+            "AGENT",
+            "SERVICE",
+            "USER",
+            "SYSTEM"
+          ]
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 64,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "principal_id",
+        "principal_type"
+      ]
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "target_surface": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "intent": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "parameters": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "operation_type",
+        "target_surface"
+      ]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "thread_id": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "mission_id": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 256
+          }
+        }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "signatures": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/signature"
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "content_hash": {
+          "$ref": "common.json#/$defs/hash_hex"
+        }
+      },
+      "required": [
+        "signatures"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "action_id",
+    "idempotency_key",
+    "timestamp",
+    "producer",
+    "operation",
+    "provenance"
+  ]
+}

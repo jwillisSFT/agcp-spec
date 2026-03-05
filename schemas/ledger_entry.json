@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/ledger_entry.json",
+  "title": "LedgerEntry",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "ledger_entry_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "TENANT_STATE_CHECK",
+        "SCHEMA_VALIDATION",
+        "PROVENANCE_VERIFICATION",
+        "POLICY_RESOLUTION",
+        "PEC_CONSTRAINTS",
+        "PEC_INVARIANTS",
+        "PEC_HITL",
+        "DECISION",
+        "EXECUTION_AUTHORIZED",
+        "EXECUTION_COMMITTED"
+      ]
+    },
+    "timestamp": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "decision": {
+      "$ref": "common.json#/$defs/decision_enum"
+    },
+    "rejection_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "constraint_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "constraint_evaluation.json"
+      },
+      "maxItems": 1024
+    },
+    "invariant_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "invariant_evaluation.json"
+      },
+      "maxItems": 1024
+    },
+    "hitl": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "required_cosign_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 2048
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ledger_authorization_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "execution_result": {
+          "type": "object"
+        }
+      }
+    },
+    "prev_hash": {
+      "$ref": "common.json#/$defs/hash_hex"
+    },
+    "entry_hash": {
+      "$ref": "common.json#/$defs/hash_hex"
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "ledger_entry_ref",
+    "stage",
+    "timestamp"
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/common.json",
+  "title": "AGCP Common Types",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    }
+  },
+  "required": [
+    "schema_version"
+  ],
+  "$defs": {
+    "uuid_like": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "timestamp_rfc3339": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hash_hex": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{16,128}$"
+    },
+    "uri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "decision_enum": {
+      "type": "string",
+      "enum": [
+        "ACCEPT",
+        "REJECT",
+        "PENDING_HITL"
+      ]
+    },
+    "constraint_outcome_enum": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "invariant_enforcement_enum": {
+      "type": "string",
+      "enum": [
+        "Hard",
+        "Soft"
+      ]
+    },
+    "pass_fail_enum": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "tenant_state_enum": {
+      "type": "string",
+      "enum": [
+        "PROVISIONED",
+        "ACTIVE",
+        "SUSPENDED",
+        "DECOMMISSIONED"
+      ]
+    },
+    "artifact_status_enum": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE",
+        "DEPRECATED",
+        "RETIRED"
+      ]
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "alg": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 64
+        },
+        "kid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sig": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 8192
+        },
+        "payload_hash": {
+          "$ref": "#/$defs/hash_hex"
+        }
+      },
+      "required": [
+        "alg",
+        "kid",
+        "sig"
+      ]
+    },
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "principal_type": {
+          "type": "string",
+          "enum": [
+            "AGENT",
+            "SERVICE",
+            "USER",
+            "SYSTEM"
+          ]
+        },
+        "display_name": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "principal_id",
+        "principal_type"
+      ]
+    },
+    "registry_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "hash": {
+          "$ref": "#/$defs/hash_hex"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
+    }
+  }
+}

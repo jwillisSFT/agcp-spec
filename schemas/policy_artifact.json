@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/policy_artifact.json",
+  "title": "PolicyArtifact",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "policy_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "policy_module_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "effective_start": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "effective_end": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "status": {
+      "$ref": "common.json#/$defs/artifact_status_enum"
+    },
+    "hash": {
+      "$ref": "common.json#/$defs/hash_hex"
+    },
+    "signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 256
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "policy_id",
+    "version",
+    "policy_module_ref",
+    "effective_start",
+    "status"
+  ]
+}

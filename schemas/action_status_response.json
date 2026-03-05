@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/action_status_response.json",
+  "title": "ActionStatusResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "REJECTED",
+        "PENDING_HITL",
+        "AUTHORIZED",
+        "EXECUTED"
+      ]
+    },
+    "decision": {
+      "$ref": "common.json#/$defs/decision_enum"
+    },
+    "rejection_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "required_cosign_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "constraint_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "constraint_evaluation.json"
+      },
+      "maxItems": 1024
+    },
+    "invariant_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "invariant_evaluation.json"
+      },
+      "maxItems": 1024
+    },
+    "ledger_authorization_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "latest_ledger_entry_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "execution_result": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "action_id",
+    "state",
+    "decision",
+    "latest_ledger_entry_ref"
+  ]
+}

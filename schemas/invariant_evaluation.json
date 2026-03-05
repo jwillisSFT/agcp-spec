@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/invariant_evaluation.json",
+  "title": "InvariantEvaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "invariant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "invariant_type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "enforcement_level": {
+      "$ref": "common.json#/$defs/invariant_enforcement_enum"
+    },
+    "outcome": {
+      "$ref": "common.json#/$defs/pass_fail_enum"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 2048
+    }
+  },
+  "required": [
+    "invariant_id",
+    "invariant_type",
+    "enforcement_level",
+    "outcome"
+  ]
+}

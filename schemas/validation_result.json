@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/validation_result.json",
+  "title": "ValidationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "decision": {
+      "$ref": "common.json#/$defs/decision_enum"
+    },
+    "rejection_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "failed_constraints": {
+      "type": "array",
+      "items": {
+        "$ref": "constraint_evaluation.json"
+      },
+      "maxItems": 512
+    },
+    "violated_invariants": {
+      "type": "array",
+      "items": {
+        "$ref": "invariant_evaluation.json"
+      },
+      "maxItems": 512
+    },
+    "required_cosign_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "ledger_entry_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 2048
+      },
+      "maxItems": 64
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "action_id",
+    "decision"
+  ]
+}

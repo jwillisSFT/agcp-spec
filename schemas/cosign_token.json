@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/spec/0.9.0/schemas/cosign_token.json",
+  "title": "CosignToken",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.9.0"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "cosigner": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "cosign_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "maxItems": 32,
+      "uniqueItems": true
+    },
+    "issued_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "expires_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "signature": {
+      "$ref": "common.json#/$defs/signature"
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "action_id",
+    "cosigner",
+    "issued_at",
+    "expires_at",
+    "signature"
+  ]
+}
