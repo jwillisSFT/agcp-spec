@@ -1,5 +1,3 @@
-/spec/AGCP-Core-v0.9.0.md
-
 # AGCP Core Specification v0.9.0
 
 Status: Normative  
@@ -436,5 +434,6 @@ AGCP is:
 
 It defines behavioral guarantees, not implementation internals.
 ```
+
 
 
