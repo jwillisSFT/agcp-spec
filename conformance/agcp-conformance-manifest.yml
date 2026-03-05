@@ -1,0 +1,46 @@
+agcp_conformance_manifest:
+  spec:
+    name: AGCP
+    version: "0.9.0"
+    status: public-review
+
+  normative_documents:
+    - core/AGCP-Core-Specification.md
+    - core/AGCP-Ledger-Storage-Contract.md
+    - core/AGCP-Policy-Evaluation-Contract.md
+    - interfaces/AGCP-HTTP-Interface.md
+    - governance/AGCP-Versioning.md
+
+  assertion_registry:
+    file: conformance/assertions.json
+    description: Normative assertion identifiers used to define conformance requirements.
+
+  test_matrix:
+    file: conformance/AGCP-Test-Matrix.md
+    description: Mapping between assertions and test cases.
+
+  deterministic_test_vectors:
+    file: conformance/AGCP-Conformance-Test-Vectors.md
+    description: Deterministic execution scenarios used to verify lifecycle behavior and ledger effects.
+
+  harness_specification:
+    file: conformance/AGCP-Conformance-Harness.yml
+    description: Specification for running automated conformance tests.
+
+  pass_criteria:
+    requirements:
+      - All normative assertions must be satisfied.
+      - All deterministic test vectors must pass.
+      - No illegal ledger transitions may occur.
+      - Lifecycle state must be derivable solely from ordered ledger entries.
+
+  determinism_requirements:
+    - Stage execution order must match the defined evaluation pipeline.
+    - Replay of identical requests with identical idempotency keys must not mutate ledger history.
+    - Derived lifecycle state must match ledger-derived state.
+
+  conformance_levels:
+    reference_implementation:
+      description: Demonstrates full architectural compliance but may omit operational hardening.
+    production_implementation:
+      description: Fully operational implementation meeting all normative and operational requirements.
