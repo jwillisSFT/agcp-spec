@@ -1,0 +1,400 @@
+openapi: 3.1.0
+
+info:
+  title: AGCP HTTP Interface (OpenAPI-style Contract)
+  version: 0.9.0
+  description: |
+    OpenAPI-style contract for the AGCP HTTP interface, aligned to the normative
+    Action lifecycle state machine and transition table.
+
+    Normative lifecycle constraints captured here:
+      - Canonical externally observable action states exclude SUBMITTED.
+      - Only permitted transitions:
+          PENDING_HITL -> AUTHORIZED | REJECTED
+          AUTHORIZED -> EXECUTED
+          (SUBMITTED is transient and not externally observable)
+      - Idempotency-Key semantics on submit.
+      - executions/commit requires AUTHORIZED and ledger_authorization_ref match.
+      - actions/{id}/cosign is only valid when state is PENDING_HITL.
+
+servers:
+  - url: https://{host}
+    variables:
+      host:
+        default: api.example.com
+
+tags:
+  - name: Actions
+  - name: Executions
+
+security:
+  - bearerAuth: []
+
+paths:
+  /agcp/v1/actions/submit:
+    post:
+      tags: [Actions]
+      operationId: submitAction
+      summary: Submit an action for evaluation (deterministic pipeline) and return post-decision state view.
+      description: |
+        SUBMITTED is transient and MUST NOT be externally observable. The response MUST reflect
+        the post-decision state (REJECTED, PENDING_HITL, or AUTHORIZED).
+
+        Idempotency:
+          - If Idempotency-Key is reused with identical payload, return the existing action view.
+          - If Idempotency-Key is reused with a different payload, return 409 IDEMPOTENCY_CONFLICT.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Client-provided idempotency key scoped to (tenant_id, endpoint).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionSubmitRequest"
+      responses:
+        "200":
+          description: Post-decision action view (never SUBMITTED).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionView"
+        "400":
+          description: Invalid request (e.g., schema validation failure).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden (e.g., tenant state invalid or tenant scope violation).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Conflict (e.g., idempotency conflict).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /agcp/v1/actions/{action_id}:
+    get:
+      tags: [Actions]
+      operationId: getAction
+      summary: Get an action by id (canonical externally observable view).
+      description: |
+        MUST NOT return SUBMITTED in the state field.
+      parameters:
+        - name: action_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Canonical action view.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionView"
+        "404":
+          description: Not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden (e.g., tenant scope violation).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /agcp/v1/actions/{action_id}/cosign:
+    post:
+      tags: [Actions]
+      operationId: cosignAction
+      summary: Submit a cosign token for a PENDING_HITL action.
+      description: |
+        Valid only when the current action state is PENDING_HITL.
+        Upon quorum satisfaction, the action transitions to AUTHORIZED.
+      parameters:
+        - name: action_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CosignRequest"
+      responses:
+        "200":
+          description: Updated action view (PENDING_HITL or AUTHORIZED). If quorum is satisfied, state is AUTHORIZED.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionView"
+        "400":
+          description: Invalid cosign token format or request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden (e.g., tenant scope violation).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Conflict (e.g., invalid transition; action not in PENDING_HITL; token replay that would alter terminal state).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /agcp/v1/executions/commit:
+    post:
+      tags: [Executions]
+      operationId: commitExecution
+      summary: Commit an execution result for an AUTHORIZED action.
+      description: |
+        Valid only when:
+          - action state is AUTHORIZED
+          - ledger_authorization_ref matches the authorization reference for the action
+          - tenant is ACTIVE
+
+        On success, action transitions to EXECUTED (terminal).
+        Replays MUST be rejected.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExecutionCommitRequest"
+      responses:
+        "200":
+          description: Updated action view (EXECUTED).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionView"
+        "400":
+          description: Invalid request (e.g., malformed execution result).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden (e.g., tenant state invalid or tenant scope violation).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Conflict (e.g., ACTION_NOT_AUTHORIZED; invalid transition; authorization ref mismatch; replay).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ActionState:
+      type: string
+      description: |
+        Canonical externally observable action lifecycle state.
+        SUBMITTED is transient and MUST NOT be externally observable.
+      enum:
+        - REJECTED
+        - PENDING_HITL
+        - AUTHORIZED
+        - EXECUTED
+
+    PecDecision:
+      type: string
+      description: PEC decision output mapped to lifecycle state.
+      enum:
+        - ACCEPT
+        - REJECT
+        - PENDING_HITL
+
+    LedgerStage:
+      type: string
+      description: Ledger stage alignment used to derive lifecycle state.
+      enum:
+        - SCHEMA_VALIDATION
+        - PROVENANCE_VERIFICATION
+        - POLICY_RESOLUTION
+        - PEC_CONSTRAINTS
+        - PEC_INVARIANTS
+        - PEC_HITL
+        - DECISION
+        - EXECUTION_AUTHORIZED
+        - EXECUTION_COMMITTED
+
+    RejectionCode:
+      type: string
+      description: |
+        Rejection codes (illustrative set; keep aligned with registry).
+        Implementations MAY return additional codes defined by the registry.
+      enum:
+        - IDEMPOTENCY_CONFLICT
+        - ACTION_NOT_AUTHORIZED
+        - TENANT_STATE_INVALID
+        - TENANT_SCOPE_VIOLATION
+        - COSIGN_INVALID
+        - COSIGN_EXPIRED
+        - SCHEMA_VALIDATION_FAILED
+        - PROVENANCE_INVALID
+        - POLICY_NOT_FOUND
+
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [error, rejection_code]
+      properties:
+        error:
+          type: string
+        rejection_code:
+          $ref: "#/components/schemas/RejectionCode"
+        detail:
+          type: string
+        action_id:
+          type: string
+        tenant_id:
+          type: string
+        retryable:
+          type: boolean
+
+    Provenance:
+      type: object
+      description: Request provenance envelope (placeholder; align with provenance spec).
+      properties:
+        signer:
+          type: string
+        signature:
+          type: string
+        signed_at:
+          type: string
+          format: date-time
+      required: [signer, signature, signed_at]
+
+    PolicyRef:
+      type: object
+      description: Policy reference (placeholder; align with policy resolution rules).
+      properties:
+        policy_id:
+          type: string
+        policy_version:
+          type: string
+      required: [policy_id]
+
+    ActionPayload:
+      type: object
+      description: Opaque action payload evaluated by PEC (schema governed outside this contract).
+      additionalProperties: true
+
+    ActionSubmitRequest:
+      type: object
+      additionalProperties: false
+      required: [tenant_id, policy_ref, action, provenance]
+      properties:
+        tenant_id:
+          type: string
+        policy_ref:
+          $ref: "#/components/schemas/PolicyRef"
+        action:
+          $ref: "#/components/schemas/ActionPayload"
+        provenance:
+          $ref: "#/components/schemas/Provenance"
+
+    CosignRequest:
+      type: object
+      additionalProperties: false
+      required: [token]
+      properties:
+        token:
+          type: string
+          description: Cosign token (tenant-bound, action-bound, signed, unexpired, non-reusable).
+
+    ExecutionResult:
+      type: object
+      description: Execution result payload committed by executor (placeholder).
+      additionalProperties: true
+
+    ExecutionCommitRequest:
+      type: object
+      additionalProperties: false
+      required: [tenant_id, action_id, ledger_authorization_ref, execution_result, provenance]
+      properties:
+        tenant_id:
+          type: string
+        action_id:
+          type: string
+        ledger_authorization_ref:
+          type: string
+          description: Must match the action's authorization reference.
+        execution_result:
+          $ref: "#/components/schemas/ExecutionResult"
+        provenance:
+          $ref: "#/components/schemas/Provenance"
+
+    LedgerRef:
+      type: object
+      additionalProperties: false
+      required: [stage, ref]
+      properties:
+        stage:
+          $ref: "#/components/schemas/LedgerStage"
+        ref:
+          type: string
+          description: Opaque ledger reference pointer for the stage entry.
+
+    ActionView:
+      type: object
+      additionalProperties: false
+      required: [tenant_id, action_id, state]
+      properties:
+        tenant_id:
+          type: string
+        action_id:
+          type: string
+        state:
+          $ref: "#/components/schemas/ActionState"
+
+        # Optional but recommended fields for conformance-grade interoperability:
+        decision:
+          $ref: "#/components/schemas/PecDecision"
+        rejection_code:
+          $ref: "#/components/schemas/RejectionCode"
+
+        required_cosign_roles:
+          type: array
+          items:
+            type: string
+          description: Present when state is PENDING_HITL.
+
+        ledger_authorization_ref:
+          type: string
+          description: Present when state is AUTHORIZED or EXECUTED.
+
+        ledger_refs:
+          type: array
+          items:
+            $ref: "#/components/schemas/LedgerRef"
+          description: Stage-aligned ledger references that support derivability of state.
