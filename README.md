@@ -1,10 +1,10 @@
-# AGCP — Governance Control Plane Architecture
+# AGCP — AI Governance Control Plane Architecture
 
 **Status:** Public Review  
 **Version:** v0.9.0  
 **Series:** AGCP Core Specification  
 
-AGCP defines a deterministic governance control-plane architecture for execution-bound authorization, lifecycle derivation, invariant enforcement, and multitenant isolation in AI and other automated systems.
+AI Governance Control Plane (AGCP) defines a deterministic governance control-plane architecture for execution-bound authorization, lifecycle derivation, invariant enforcement, and multitenant isolation in AI and other automated systems.
 
 The architecture is designed to eliminate reliance on independently mutable status fields, enforce per-action total ordering invariants, and require execution-time re-derivation of authorization eligibility from append-only ledger state.
 
