@@ -1,0 +1,207 @@
+{
+  "suite_id": "agcp_conformance_v0_9_0_extended",
+  "generated_at": "2026-02-25T17:46:47Z",
+  "assertions": [
+    {
+      "assertion_id": "A-COMMIT-GATING",
+      "description": "Commit MUST succeed only when action state is AUTHORIZED AND ledger_authorization_ref matches; otherwise it MUST return conflict and MUST NOT append.",
+      "applies_to": {
+        "endpoints": [
+          "/agcp/v1/executions/commit"
+        ]
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Commit gating rule reflected by commit tests."
+      }
+    },
+    {
+      "assertion_id": "A-COSIGN-GATING",
+      "description": "Cosign MUST be accepted only when action state is PENDING_HITL and token is valid and unexpired; otherwise MUST return conflict and MUST NOT append.",
+      "applies_to": {
+        "endpoints": [
+          "/agcp/v1/actions/{action_id}/cosign"
+        ]
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Cosign gating rule reflected by cosign tests."
+      }
+    },
+    {
+      "assertion_id": "A-DERIVATION",
+      "description": "Returned state MUST equal state derived from ledger history.",
+      "applies_to": {
+        "responses": {
+          "require_state_matches_derived_from_ledger": true,
+          "derivation_rules": [
+            {
+              "if_stage_exists": "EXECUTION_COMMITTED",
+              "state": "EXECUTED"
+            },
+            {
+              "else_if_stage_exists": "EXECUTION_AUTHORIZED",
+              "state": "AUTHORIZED"
+            },
+            {
+              "else_if_latest_decision": {
+                "type": "REJECT"
+              },
+              "state": "REJECTED"
+            },
+            {
+              "else_if_latest_decision": {
+                "type": "PENDING_HITL"
+              },
+              "state": "PENDING_HITL"
+            },
+            {
+              "else_if_latest_decision": {
+                "type": "ACCEPT"
+              },
+              "state": "AUTHORIZED"
+            },
+            {
+              "else": null,
+              "state": "__NON_OBSERVABLE__"
+            }
+          ]
+        },
+        "ledger": {}
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Derived from suite-wide conformance assertions embedded in the harness."
+      }
+    },
+    {
+      "assertion_id": "A-IDEMPOTENCY-NO-MUTATION",
+      "description": "Idempotency conflict (same Idempotency-Key, different payload) MUST NOT append to the ledger or mutate any existing action.",
+      "applies_to": {
+        "endpoints": [
+          "/agcp/v1/actions/submit"
+        ],
+        "when": "rejection_code == IDEMPOTENCY_CONFLICT"
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Reinforces ledger_no_append requirement for idempotency conflicts."
+      }
+    },
+    {
+      "assertion_id": "A-ORDERING",
+      "description": "When ledger_append is expected, stage ordering MUST match exactly.",
+      "applies_to": {
+        "responses": {},
+        "ledger": {
+          "enforce_exact_order_on_expected_append": true
+        }
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Derived from suite-wide conformance assertions embedded in the harness."
+      }
+    },
+    {
+      "assertion_id": "A-STATE-NO-SUBMITTED",
+      "description": "Canonical responses MUST NOT expose SUBMITTED.",
+      "applies_to": {
+        "responses": {
+          "must_not_include_state": [
+            "SUBMITTED",
+            "SUBMITTED_TRANSIENT"
+          ]
+        },
+        "ledger": {}
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Derived from suite-wide conformance assertions embedded in the harness."
+      }
+    },
+    {
+      "assertion_id": "A-TENANT-ACTIVE-GATING",
+      "description": "Operations MUST enforce tenant ACTIVE gating where required (submit and commit at minimum).",
+      "applies_to": {
+        "endpoints": [
+          "/agcp/v1/actions/submit",
+          "/agcp/v1/executions/commit"
+        ]
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Tenant state invalid tests cover this behavior."
+      }
+    },
+    {
+      "assertion_id": "A-TERMINAL-NO-TRANSITION",
+      "description": "Terminal states (REJECTED, EXECUTED) MUST reject further state transitions; no ledger append is permitted for transition attempts.",
+      "applies_to": {
+        "states": [
+          "REJECTED",
+          "EXECUTED"
+        ],
+        "operations": [
+          "cosign",
+          "commit",
+          "submit-replay"
+        ]
+      },
+      "severity": "MUST",
+      "source": {
+        "spec_documents": [
+          "AGCP Core Specification v0.9.0",
+          "AGCP HTTP Interface Specification v0.9.0",
+          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
+          "AGCP Conformance Harness Spec.yml"
+        ],
+        "notes": "Ensures replay and terminal-safety behavior."
+      }
+    }
+  ],
+  "notes": [
+    "This file is generated from the harness 'assertions' block and augmented with a small set of common conformance assertions."
+  ]
+}

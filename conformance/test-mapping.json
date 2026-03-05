@@ -1,0 +1,581 @@
+{
+  "suite_id": "agcp_conformance_v0_9_0_extended",
+  "generated_at": "2026-02-25T17:46:47Z",
+  "requirements": [
+    {
+      "requirement_id": "REQ-COMMIT-APPENDS-COMMITTED",
+      "statement": "Successful commit MUST append EXECUTION_COMMITTED and action becomes EXECUTED.",
+      "sources": [
+        "Core: terminal state EXECUTED",
+        "Harness TV-COM-001"
+      ],
+      "tests": [
+        "TV-COM-001"
+      ]
+    },
+    {
+      "requirement_id": "REQ-COMMIT-AUTH-REF-MATCH",
+      "statement": "Commit MUST require matching ledger_authorization_ref; mismatch => 409 ACTION_NOT_AUTHORIZED and no append.",
+      "sources": [
+        "Core: authorization reference gating",
+        "Harness TV-COM-004"
+      ],
+      "tests": [
+        "TV-COM-004"
+      ]
+    },
+    {
+      "requirement_id": "REQ-COMMIT-ONLY-AUTHORIZED",
+      "statement": "Commit MUST only be valid in AUTHORIZED; otherwise 409 ACTION_NOT_AUTHORIZED and no append.",
+      "sources": [
+        "Core: transitions",
+        "Harness TV-COM-002/003"
+      ],
+      "tests": [
+        "TV-COM-002",
+        "TV-COM-003"
+      ]
+    },
+    {
+      "requirement_id": "REQ-COMMIT-REPLAY-REJECT",
+      "statement": "Commit replay after EXECUTED MUST be rejected with 409 ACTION_NOT_AUTHORIZED and no append.",
+      "sources": [
+        "Core: terminality",
+        "Harness TV-COM-005"
+      ],
+      "tests": [
+        "TV-COM-005"
+      ]
+    },
+    {
+      "requirement_id": "REQ-COMMIT-TENANT-INACTIVE",
+      "statement": "If tenant is not ACTIVE, commit MUST return 403 TENANT_STATE_INVALID and no append.",
+      "sources": [
+        "Multitenant Profile: Tenant gating",
+        "Harness TV-COM-006"
+      ],
+      "tests": [
+        "TV-COM-006"
+      ]
+    },
+    {
+      "requirement_id": "REQ-COSIGN-ONLY-PENDING",
+      "statement": "Cosign MUST only be valid in PENDING_HITL; otherwise 409 ACTION_NOT_AUTHORIZED and no append.",
+      "sources": [
+        "Core: transitions",
+        "Harness TV-COS-003/006"
+      ],
+      "tests": [
+        "TV-COS-003",
+        "TV-COS-006"
+      ]
+    },
+    {
+      "requirement_id": "REQ-COSIGN-QUORUM-AUTH",
+      "statement": "When cosign completes quorum, system MUST append EXECUTION_AUTHORIZED and action becomes AUTHORIZED.",
+      "sources": [
+        "PEC: HITL evaluation",
+        "Harness TV-COS-002"
+      ],
+      "tests": [
+        "TV-COS-002"
+      ]
+    },
+    {
+      "requirement_id": "REQ-COSIGN-VALIDITY",
+      "statement": "Invalid cosign token MUST be rejected with 409 COSIGN_INVALID; expired token with 409 COSIGN_EXPIRED; no append.",
+      "sources": [
+        "Security/HITL token rules",
+        "Harness TV-COS-004/005"
+      ],
+      "tests": [
+        "TV-COS-004",
+        "TV-COS-005"
+      ]
+    },
+    {
+      "requirement_id": "REQ-CROSS-TENANT-PROFILE",
+      "statement": "Cross-tenant access MUST follow the chosen profile consistently (FORBID_403 or HIDE_404) across endpoints.",
+      "sources": [
+        "Multitenant Profile: Tenant isolation",
+        "Harness cross_tenant_strategy + XTEN tests"
+      ],
+      "tests": [
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "requirement_id": "REQ-GET-NOT-FOUND",
+      "statement": "GET action MUST return 404 (or profile-defined behavior) when action does not exist or is hidden.",
+      "sources": [
+        "HTTP Interface: retrieval",
+        "Harness TV-GET-001/002"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-GET-NOT-READY-NO-SUBMITTED",
+      "statement": "If an action has no decision yet, GET MUST NOT expose SUBMITTED; it MUST return the profile-defined non-observable response (default 404).",
+      "sources": [
+        "Core: SUBMITTED non-observable",
+        "Harness TV-GET-002"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-IDEMPOTENCY-CONFLICT",
+      "statement": "Submit with the same Idempotency-Key and different payload MUST return 409 IDEMPOTENCY_CONFLICT and MUST NOT append.",
+      "sources": [
+        "HTTP Interface: Idempotency",
+        "Harness TV-SUB-009"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-IDEMPOTENCY-REPLAY",
+      "statement": "Submit with the same Idempotency-Key and identical payload MUST return the existing action view and MUST NOT append.",
+      "sources": [
+        "HTTP Interface: Idempotency",
+        "Harness TV-SUB-008"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-LEDGER-ORDERING",
+      "statement": "Ledger stages MUST be appended in the mandated deterministic order; constraints precede invariants; HITL follows invariants.",
+      "sources": [
+        "Core: Determinism & Ordering",
+        "PEC: Evaluation ordering",
+        "Harness assertion A-ORDERING"
+      ],
+      "tests": [
+        "TV-COS-002",
+        "TV-COM-001"
+      ]
+    },
+    {
+      "requirement_id": "REQ-STATE-DERIVED-FROM-LEDGER",
+      "statement": "Returned action state MUST equal the state derived from ledger history.",
+      "sources": [
+        "Core: Ledger derivability",
+        "Harness assertion A-DERIVATION"
+      ],
+      "tests": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "requirement_id": "REQ-STATE-NO-SUBMITTED",
+      "statement": "Canonical responses MUST NOT expose SUBMITTED (or any transient submitted state).",
+      "sources": [
+        "Core: Action Lifecycle (SUBMITTED non-observable)",
+        "HTTP Interface: Action retrieval responses",
+        "Harness assertion A-STATE-NO-SUBMITTED"
+      ],
+      "tests": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "requirement_id": "REQ-SUBMIT-ACCEPT-AUTH",
+      "statement": "On ACCEPT, submit MUST produce AUTHORIZED state and append EXECUTION_AUTHORIZED.",
+      "sources": [
+        "Core: Decision mapping",
+        "Harness TV-SUB-001"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-SUBMIT-HITL-PENDING",
+      "statement": "If HITL required, submit MUST produce PENDING_HITL and include required_cosign_roles.",
+      "sources": [
+        "PEC: HITL evaluation",
+        "Harness TV-SUB-002"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-SUBMIT-INVARIANT-HARD-FAIL",
+      "statement": "Hard invariant failure MUST result in REJECTED with an invariant rejection_code.",
+      "sources": [
+        "PEC: Invariant evaluation",
+        "Harness TV-SUB-003"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-SUBMIT-POLICY-NOT-FOUND",
+      "statement": "If policy resolution fails, submit MUST return 400 POLICY_NOT_FOUND and short-circuit PEC stages.",
+      "sources": [
+        "HTTP Interface/Core: Policy resolution",
+        "Harness TV-SUB-007"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-SUBMIT-PROV-FAIL",
+      "statement": "Provenance verification failure MUST return 400 PROVENANCE_INVALID and short-circuit subsequent stages.",
+      "sources": [
+        "Security Profile: Provenance verification",
+        "Harness TV-SUB-005"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-SUBMIT-SCHEMA-FAIL",
+      "statement": "Schema validation failure MUST return 400 SCHEMA_VALIDATION_FAILED and short-circuit subsequent stages.",
+      "sources": [
+        "Core/HTTP: Schema validation outside PEC",
+        "Harness TV-SUB-004"
+      ],
+      "tests": []
+    },
+    {
+      "requirement_id": "REQ-SUBMIT-TENANT-INACTIVE",
+      "statement": "If tenant is not ACTIVE, submit MUST return 403 TENANT_STATE_INVALID and must not proceed to policy/PEC.",
+      "sources": [
+        "Multitenant Profile: Tenant gating",
+        "Harness TV-SUB-006"
+      ],
+      "tests": []
+    }
+  ],
+  "test_to_requirements": [
+    {
+      "test_id": "TV-COS-001",
+      "requirement_ids": [
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COS-002",
+      "requirement_ids": [
+        "REQ-COSIGN-QUORUM-AUTH",
+        "REQ-LEDGER-ORDERING",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COS-003",
+      "requirement_ids": [
+        "REQ-COSIGN-ONLY-PENDING",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COS-004",
+      "requirement_ids": [
+        "REQ-COSIGN-VALIDITY",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COS-005",
+      "requirement_ids": [
+        "REQ-COSIGN-VALIDITY",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COS-006",
+      "requirement_ids": [
+        "REQ-COSIGN-ONLY-PENDING",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COM-001",
+      "requirement_ids": [
+        "REQ-COMMIT-APPENDS-COMMITTED",
+        "REQ-LEDGER-ORDERING",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COM-002",
+      "requirement_ids": [
+        "REQ-COMMIT-ONLY-AUTHORIZED",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COM-003",
+      "requirement_ids": [
+        "REQ-COMMIT-ONLY-AUTHORIZED",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COM-004",
+      "requirement_ids": [
+        "REQ-COMMIT-AUTH-REF-MATCH",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COM-005",
+      "requirement_ids": [
+        "REQ-COMMIT-REPLAY-REJECT",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-COM-006",
+      "requirement_ids": [
+        "REQ-COMMIT-TENANT-INACTIVE",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-XTEN-SETUP",
+      "requirement_ids": [
+        "REQ-CROSS-TENANT-PROFILE",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-XTEN-001",
+      "requirement_ids": [
+        "REQ-CROSS-TENANT-PROFILE",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-XTEN-002",
+      "requirement_ids": [
+        "REQ-CROSS-TENANT-PROFILE",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    },
+    {
+      "test_id": "TV-XTEN-003",
+      "requirement_ids": [
+        "REQ-CROSS-TENANT-PROFILE",
+        "REQ-STATE-DERIVED-FROM-LEDGER",
+        "REQ-STATE-NO-SUBMITTED"
+      ]
+    }
+  ],
+  "assertion_to_tests": [
+    {
+      "assertion_id": "A-STATE-NO-SUBMITTED",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "assertion_id": "A-ORDERING",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "assertion_id": "A-DERIVATION",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "assertion_id": "A-IDEMPOTENCY-NO-MUTATION",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "assertion_id": "A-TERMINAL-NO-TRANSITION",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "assertion_id": "A-COMMIT-GATING",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "assertion_id": "A-COSIGN-GATING",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "assertion_id": "A-TENANT-ACTIVE-GATING",
+      "test_ids": [
+        "TV-COS-001",
+        "TV-COS-002",
+        "TV-COS-003",
+        "TV-COS-004",
+        "TV-COS-005",
+        "TV-COS-006",
+        "TV-COM-001",
+        "TV-COM-002",
+        "TV-COM-003",
+        "TV-COM-004",
+        "TV-COM-005",
+        "TV-COM-006",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003"
+      ]
+    }
+  ],
+  "notes": [
+    "Requirement IDs are a lightweight traceability layer derived from the harness behaviors and suite assertions.",
+    "For full OASIS-grade traceability, replace the 'sources' strings with exact section anchors from the Core/PEC/HTTP/Security specs."
+  ]
+}

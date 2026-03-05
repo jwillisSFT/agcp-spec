@@ -1,0 +1,966 @@
+# AGCP Conformance Harness Spec (Deterministic Test Vectors) — EXTENDED (Part 1/2)
+# Version: 0.9.0 (contract-aligned)
+#
+# Part 1 includes:
+#   - globals, hooks, suite-wide assertions
+#   - SUBMIT vectors (including schema/provenance/tenant/policy failures, idempotent replay)
+#   - GET vectors (including "transient pre-decision must not expose SUBMITTED")
+#
+# Type notes:
+#   - ${VAR} denotes harness variable substitution.
+#   - presteps are executed before the main request.
+#   - expected.ledger_append is an ordered list of required stage appends (append-only).
+
+meta:
+  suite_id: agcp_conformance_v0_9_0_extended
+  part: "1/2"
+  assumptions:
+    - ledger_is_append_only: true
+    - action_state_is_derived_from_ledger: true
+    - externally_observable_states: [REJECTED, PENDING_HITL, AUTHORIZED, EXECUTED]
+    - submitted_is_transient_and_not_observable: true
+    - constraint_evaluation_precedes_invariant_evaluation: true
+
+globals:
+  base_url: "https://api.example.com"
+
+  tenants:
+    T1: "T1"
+    T2: "T2"  # used in cross-tenant tests in Part 2
+
+  auth:
+    T1:
+      scheme: bearer
+      token: "TEST_TOKEN_FOR_T1"
+    T2:
+      scheme: bearer
+      token: "TEST_TOKEN_FOR_T2"
+
+  policy_ref:
+    valid:
+      policy_id: "P1"
+      policy_version: "1.0.0"
+    missing:
+      policy_id: "P_MISSING"
+      policy_version: "9.9.9"
+
+  provenance:
+    valid:
+      signer: "client:test"
+      signature: "SIG_VALID"
+      signed_at: "2026-02-25T12:00:00Z"
+    invalid:
+      signer: "client:test"
+      signature: "SIG_INVALID"
+      signed_at: "2026-02-25T12:00:00Z"
+
+hooks:
+  # Default hooks (can be overridden per-test)
+  tenant_state:
+    T1: ACTIVE
+    T2: ACTIVE
+
+  policy_resolution:
+    P1: found
+    P_MISSING: not_found
+
+  pec:
+    constraints_outcome: PASS          # PASS|FAIL
+    constraints_rejection_code: "CONSTRAINT_FAIL"
+    invariants_hard_fail: false
+    invariants_rejection_code: "INVARIANT_HARD_FAIL"
+    hitl_requires: false
+    hitl_required_cosign_roles: ["RISK_OFFICER", "SECURITY_LEAD"]
+
+assertions:
+  # Applied after each test unless the test overrides (rare).
+  - id: A-STATE-NO-SUBMITTED
+    description: "Canonical responses MUST NOT expose SUBMITTED."
+    apply_to_responses:
+      must_not_include_state: ["SUBMITTED", "SUBMITTED_TRANSIENT"]
+
+  - id: A-ORDERING
+    description: "When ledger_append is expected, stage ordering MUST match exactly."
+    apply_to_ledger:
+      enforce_exact_order_on_expected_append: true
+
+  - id: A-DERIVATION
+    description: "Returned state MUST equal state derived from ledger history."
+    apply_to_responses:
+      require_state_matches_derived_from_ledger: true
+      derivation_rules:
+        - if_stage_exists: EXECUTION_COMMITTED
+          state: EXECUTED
+        - else_if_stage_exists: EXECUTION_AUTHORIZED
+          state: AUTHORIZED
+        - else_if_latest_decision: { type: REJECT }
+          state: REJECTED
+        - else_if_latest_decision: { type: PENDING_HITL }
+          state: PENDING_HITL
+        - else_if_latest_decision: { type: ACCEPT }
+          state: AUTHORIZED
+        - else:
+          state: "__NON_OBSERVABLE__"
+
+tests:
+
+  # ----------------------------
+  # SUBMIT — SUCCESS CASES
+  # ----------------------------
+
+  - id: TV-SUB-001
+    name: "Submit happy path ACCEPT -> AUTHORIZED"
+    arrange:
+      auth_as: T1
+      hooks:
+        tenant_state: { T1: ACTIVE }
+        policy_resolution: { P1: found }
+        pec:
+          constraints_outcome: PASS
+          invariants_hard_fail: false
+          hitl_requires: false
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers:
+        Idempotency-Key: "K1"
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "do_something", amount: 10 }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    capture:
+      save_action_id_as: "A_SUB_001"
+      save_ledger_authorization_ref_as: "LAR_SUB_001"
+    expected:
+      http:
+        status: 200
+        body:
+          state: AUTHORIZED
+          decision: ACCEPT
+      ledger_append:
+        - stage: SCHEMA_VALIDATION
+          match: { ok: true }
+        - stage: PROVENANCE_VERIFICATION
+          match: { ok: true }
+        - stage: TENANT_STATE_VALIDATION
+          match: { ok: true }
+        - stage: POLICY_RESOLUTION
+          match: { ok: true }
+        - stage: PEC_CONSTRAINTS
+          match: { outcome: PASS }
+        - stage: PEC_INVARIANTS
+          match: { hard_fail: false }
+        - stage: PEC_HITL
+          match: { requires_hitl: false }
+        - stage: DECISION
+          match: { type: ACCEPT }
+        - stage: EXECUTION_AUTHORIZED
+          match_any:
+            - { via: "SUBMIT_ACCEPT" }
+            - { via: "SUBMIT" }
+            - {}
+
+  - id: TV-SUB-002
+    name: "Submit HITL required -> PENDING_HITL"
+    arrange:
+      auth_as: T1
+      hooks:
+        tenant_state: { T1: ACTIVE }
+        policy_resolution: { P1: found }
+        pec:
+          constraints_outcome: PASS
+          invariants_hard_fail: false
+          hitl_requires: true
+          hitl_required_cosign_roles: ["RISK_OFFICER"]
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers:
+        Idempotency-Key: "K2"
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "needs_review" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    capture:
+      save_action_id_as: "A_SUB_002"
+    expected:
+      http:
+        status: 200
+        body:
+          state: PENDING_HITL
+          decision: PENDING_HITL
+          required_cosign_roles: ["RISK_OFFICER"]
+      ledger_append:
+        - stage: SCHEMA_VALIDATION
+          match: { ok: true }
+        - stage: PROVENANCE_VERIFICATION
+          match: { ok: true }
+        - stage: TENANT_STATE_VALIDATION
+          match: { ok: true }
+        - stage: POLICY_RESOLUTION
+          match: { ok: true }
+        - stage: PEC_CONSTRAINTS
+          match: { outcome: PASS }
+        - stage: PEC_INVARIANTS
+          match: { hard_fail: false }
+        - stage: PEC_HITL
+          match: { requires_hitl: true }
+        - stage: DECISION
+          match: { type: PENDING_HITL }
+
+  - id: TV-SUB-003
+    name: "Submit hard invariant FAIL -> REJECTED"
+    arrange:
+      auth_as: T1
+      hooks:
+        tenant_state: { T1: ACTIVE }
+        policy_resolution: { P1: found }
+        pec:
+          constraints_outcome: PASS
+          invariants_hard_fail: true
+          invariants_rejection_code: "INVARIANT_HARD_FAIL"
+          hitl_requires: false
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers:
+        Idempotency-Key: "K3"
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "violates_hard_invariant" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    capture:
+      save_action_id_as: "A_SUB_003"
+    expected:
+      http:
+        status: 200
+        body:
+          state: REJECTED
+          decision: REJECT
+          rejection_code: "INVARIANT_HARD_FAIL"
+      ledger_append:
+        - stage: SCHEMA_VALIDATION
+          match: { ok: true }
+        - stage: PROVENANCE_VERIFICATION
+          match: { ok: true }
+        - stage: TENANT_STATE_VALIDATION
+          match: { ok: true }
+        - stage: POLICY_RESOLUTION
+          match: { ok: true }
+        - stage: PEC_CONSTRAINTS
+          match: { outcome: PASS }
+        - stage: PEC_INVARIANTS
+          match: { hard_fail: true }
+        - stage: DECISION
+          match: { type: REJECT, rejection_code: "INVARIANT_HARD_FAIL" }
+
+  # ----------------------------
+  # SUBMIT — FAILURE/SHORT-CIRCUIT CASES
+  # ----------------------------
+
+  - id: TV-SUB-004
+    name: "Schema validation failure -> 400 SCHEMA_VALIDATION_FAILED and short-circuit"
+    arrange:
+      auth_as: T1
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers:
+        Idempotency-Key: "K4"
+      body:
+        # Intentionally malformed: missing tenant_id / policy_ref etc.
+        bogus: true
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 400
+        body:
+          rejection_code: SCHEMA_VALIDATION_FAILED
+      ledger_append:
+        - stage: SCHEMA_VALIDATION
+          match: { ok: false }
+        - stage: DECISION
+          match: { type: REJECT, rejection_code: SCHEMA_VALIDATION_FAILED }
+
+  - id: TV-SUB-005
+    name: "Provenance invalid -> 400 PROVENANCE_INVALID and short-circuit"
+    arrange:
+      auth_as: T1
+      hooks:
+        tenant_state: { T1: ACTIVE }
+        policy_resolution: { P1: found }
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers:
+        Idempotency-Key: "K5"
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "x" }
+        provenance: { signer: "client:test", signature: "SIG_INVALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 400
+        body:
+          rejection_code: PROVENANCE_INVALID
+      ledger_append:
+        - stage: SCHEMA_VALIDATION
+          match: { ok: true }
+        - stage: PROVENANCE_VERIFICATION
+          match: { ok: false }
+        - stage: DECISION
+          match: { type: REJECT, rejection_code: PROVENANCE_INVALID }
+
+  - id: TV-SUB-006
+    name: "Tenant not ACTIVE -> 403 TENANT_STATE_INVALID and short-circuit"
+    arrange:
+      auth_as: T1
+      hooks:
+        tenant_state: { T1: SUSPENDED }
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers:
+        Idempotency-Key: "K6"
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "x" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 403
+        body:
+          rejection_code: TENANT_STATE_INVALID
+      ledger_append:
+        - stage: SCHEMA_VALIDATION
+          match: { ok: true }
+        - stage: PROVENANCE_VERIFICATION
+          match: { ok: true }
+        - stage: TENANT_STATE_VALIDATION
+          match: { ok: false }
+        - stage: DECISION
+          match: { type: REJECT, rejection_code: TENANT_STATE_INVALID }
+
+  - id: TV-SUB-007
+    name: "Policy not found -> 400 POLICY_NOT_FOUND and short-circuit"
+    arrange:
+      auth_as: T1
+      hooks:
+        tenant_state: { T1: ACTIVE }
+        policy_resolution: { P_MISSING: not_found }
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers:
+        Idempotency-Key: "K7"
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P_MISSING", policy_version: "9.9.9" }
+        action: { op: "x" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 400
+        body:
+          rejection_code: POLICY_NOT_FOUND
+      ledger_append:
+        - stage: SCHEMA_VALIDATION
+          match: { ok: true }
+        - stage: PROVENANCE_VERIFICATION
+          match: { ok: true }
+        - stage: TENANT_STATE_VALIDATION
+          match: { ok: true }
+        - stage: POLICY_RESOLUTION
+          match: { ok: false }
+        - stage: DECISION
+          match: { type: REJECT, rejection_code: POLICY_NOT_FOUND }
+
+  # ----------------------------
+  # SUBMIT — IDEMPOTENCY CASES
+  # ----------------------------
+
+  - id: TV-SUB-008
+    name: "Idempotent replay with identical payload -> returns same action view, no new ledger entries"
+    arrange:
+      auth_as: T1
+      presteps:
+        - method: POST
+          path: /agcp/v1/actions/submit
+          headers: { Idempotency-Key: "K8" }
+          body:
+            tenant_id: "T1"
+            policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+            action: { op: "idem_ok", v: 1 }
+            provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+          expect_status: 200
+          capture:
+            save_action_id_as: "A_IDEM_008"
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers: { Idempotency-Key: "K8" }
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "idem_ok", v: 1 }  # identical
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 200
+        # State must match what the first call produced (AUTHORIZED/PENDING_HITL/REJECTED).
+        body:
+          action_id: "${A_IDEM_008}"
+      ledger_no_append: true
+
+  - id: TV-SUB-009
+    name: "Idempotency conflict -> 409 IDEMPOTENCY_CONFLICT, no ledger changes"
+    arrange:
+      auth_as: T1
+      presteps:
+        - method: POST
+          path: /agcp/v1/actions/submit
+          headers: { Idempotency-Key: "K9" }
+          body:
+            tenant_id: "T1"
+            policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+            action: { op: "idem_conflict", v: 1 }
+            provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+          expect_status: 200
+          capture:
+            save_action_id_as: "A_IDEM_009"
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers: { Idempotency-Key: "K9" }
+      body:
+        tenant_id: "T1"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "idem_conflict", v: 2 }  # changed payload
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: IDEMPOTENCY_CONFLICT
+      ledger_no_append: true
+
+  # ----------------------------
+  # GET — RETRIEVAL CASES
+  # ----------------------------
+
+  - id: TV-GET-001
+    name: "Get AUTHORIZED action returns AUTHORIZED (never SUBMITTED)"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_SUB_001"
+    request:
+      method: GET
+      path: "/agcp/v1/actions/${A_SUB_001}"
+    expected:
+      http:
+        status: 200
+        body:
+          state: AUTHORIZED
+      ledger_no_append: true
+
+  - id: TV-GET-002
+    name: "Get action with only pre-decision ledger -> must not expose SUBMITTED (return 404 recommended)"
+    arrange:
+      auth_as: T1
+      # Create an action with partial ledger (no DECISION) via a harness-only capability.
+      # If your implementation does not support this, you can skip or simulate with an injected ledger fixture.
+      fixtures:
+        create_action_with_ledger_only:
+          tenant_id: "T1"
+          action_id: "A_TRANSIENT_002"
+          ledger_entries:
+            - stage: SCHEMA_VALIDATION
+              data: { ok: true }
+            - stage: PROVENANCE_VERIFICATION
+              data: { ok: true }
+            - stage: TENANT_STATE_VALIDATION
+              data: { ok: true }
+            - stage: POLICY_RESOLUTION
+              data: { ok: true }
+            - stage: PEC_CONSTRAINTS
+              data: { outcome: PASS }
+    request:
+      method: GET
+      path: "/agcp/v1/actions/A_TRANSIENT_002"
+    expected:
+      http:
+        status: 404
+        body:
+          # You may choose a dedicated NOT_READY code later; for now keep it non-observable.
+          rejection_code: ACTION_NOT_AUTHORIZED
+      ledger_no_append: true
+      
+# AGCP Conformance Harness Spec (Deterministic Test Vectors) — EXTENDED (Part 2/2)
+# Version: 0.9.0 (contract-aligned)
+#
+# Part 2 includes:
+#   - COSIGN vectors (valid/no quorum, valid/quorum -> AUTHORIZED, invalid, expired, wrong state)
+#   - COMMIT vectors (authorized OK, pending/rejected, mismatch auth ref, replay after executed, tenant not ACTIVE)
+#   - CROSS-TENANT vectors (GET/COSIGN/COMMIT) with a selectable strategy: 403 or 404
+#
+# This file is intended to be used with Part 1/2, which defines meta/globals/hooks/assertions.
+
+meta:
+  suite_id: agcp_conformance_v0_9_0_extended
+  part: "2/2"
+  depends_on: "agcp_conformance_v0_9_0_part1.yaml"
+
+# Harness setting: choose one strategy and keep it consistent across endpoints.
+# - "FORBID_403": return 403 TENANT_SCOPE_VIOLATION on cross-tenant access.
+# - "HIDE_404": return 404 to avoid tenant enumeration.
+cross_tenant_strategy: "HIDE_404"
+
+tests:
+
+  # ----------------------------
+  # COSIGN — VALID/INVALID/STATE CASES
+  # ----------------------------
+
+  - id: TV-COS-001
+    name: "Valid cosign, quorum not yet satisfied -> remain PENDING_HITL"
+    arrange:
+      auth_as: T1
+      # Ensure there is a PENDING_HITL action with 2 required roles
+      presteps:
+        - method: POST
+          path: /agcp/v1/actions/submit
+          headers: { Idempotency-Key: "K_COS_001" }
+          body:
+            tenant_id: "T1"
+            policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+            action: { op: "hitl_two_roles" }
+            provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+          hooks:
+            pec:
+              constraints_outcome: PASS
+              invariants_hard_fail: false
+              hitl_requires: true
+              hitl_required_cosign_roles: ["RISK_OFFICER", "SECURITY_LEAD"]
+          expect_status: 200
+          expect_body: { state: PENDING_HITL }
+          capture:
+            save_action_id_as: "A_COS_001"
+      cosign_token: "CT_RISK_OFFICER_VALID"
+      quorum_rule: "EACH_REQUIRED_ROLE_AT_LEAST_ONE_COSIGN"
+    request:
+      method: POST
+      path: "/agcp/v1/actions/${A_COS_001}/cosign"
+      body: { token: "${CT_RISK_OFFICER_VALID}" }
+    expected:
+      http:
+        status: 200
+        body:
+          state: PENDING_HITL
+      # No lifecycle ledger stage is required for a non-quorum cosign in the current stage set.
+      ledger_no_append: true
+
+  - id: TV-COS-002
+    name: "Valid cosign completes quorum -> transition to AUTHORIZED"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_SUB_002"   # from Part 1: HITL required with ["RISK_OFFICER"]
+      cosign_token: "CT_RISK_OFFICER_VALID"
+      quorum_rule: "EACH_REQUIRED_ROLE_AT_LEAST_ONE_COSIGN"
+    request:
+      method: POST
+      path: "/agcp/v1/actions/${A_SUB_002}/cosign"
+      body: { token: "${CT_RISK_OFFICER_VALID}" }
+    expected:
+      http:
+        status: 200
+        body:
+          state: AUTHORIZED
+      ledger_append:
+        - stage: EXECUTION_AUTHORIZED
+          match_any:
+            - { via: "HITL_QUORUM" }
+            - {}
+
+  - id: TV-COS-003
+    name: "Cosign on AUTHORIZED -> 409 ACTION_NOT_AUTHORIZED"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_SUB_001"  # AUTHORIZED from Part 1
+    request:
+      method: POST
+      path: "/agcp/v1/actions/${A_SUB_001}/cosign"
+      body: { token: "CT_ANY" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: ACTION_NOT_AUTHORIZED
+      ledger_no_append: true
+
+  - id: TV-COS-004
+    name: "Cosign token expired -> 409 COSIGN_EXPIRED"
+    arrange:
+      auth_as: T1
+      # Create PENDING_HITL action with 1 required role
+      presteps:
+        - method: POST
+          path: /agcp/v1/actions/submit
+          headers: { Idempotency-Key: "K_COS_004" }
+          body:
+            tenant_id: "T1"
+            policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+            action: { op: "hitl_one_role" }
+            provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+          hooks:
+            pec:
+              constraints_outcome: PASS
+              invariants_hard_fail: false
+              hitl_requires: true
+              hitl_required_cosign_roles: ["RISK_OFFICER"]
+          expect_status: 200
+          expect_body: { state: PENDING_HITL }
+          capture:
+            save_action_id_as: "A_COS_004"
+      cosign_token: "CT_EXPIRED"
+    request:
+      method: POST
+      path: "/agcp/v1/actions/${A_COS_004}/cosign"
+      body: { token: "${CT_EXPIRED}" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: COSIGN_EXPIRED
+      ledger_no_append: true
+
+  - id: TV-COS-005
+    name: "Cosign token invalid signature/binding -> 409 COSIGN_INVALID"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_COS_004" # still PENDING_HITL
+      cosign_token: "CT_INVALID"
+    request:
+      method: POST
+      path: "/agcp/v1/actions/${A_COS_004}/cosign"
+      body: { token: "${CT_INVALID}" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: COSIGN_INVALID
+      ledger_no_append: true
+
+  - id: TV-COS-006
+    name: "Cosign on REJECTED -> 409 ACTION_NOT_AUTHORIZED"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_SUB_003"  # REJECTED from Part 1
+    request:
+      method: POST
+      path: "/agcp/v1/actions/${A_SUB_003}/cosign"
+      body: { token: "CT_ANY" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: ACTION_NOT_AUTHORIZED
+      ledger_no_append: true
+
+  # ----------------------------
+  # COMMIT — SUCCESS/FAILURE/REPLAY/TENANT CASES
+  # ----------------------------
+
+  - id: TV-COM-001
+    name: "Commit AUTHORIZED with matching auth ref -> EXECUTED"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_SUB_001"  # AUTHORIZED from Part 1
+      hooks:
+        tenant_state: { T1: ACTIVE }
+      read_from_action_view:
+        ledger_authorization_ref_as: "LAR_COM_001"
+    request:
+      method: POST
+      path: /agcp/v1/executions/commit
+      body:
+        tenant_id: "T1"
+        action_id: "${A_SUB_001}"
+        ledger_authorization_ref: "${LAR_COM_001}"
+        execution_result: { result: "ok", details: { latency_ms: 12 } }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 200
+        body: { state: EXECUTED }
+      ledger_append:
+        - stage: EXECUTION_COMMITTED
+          match:
+            ledger_authorization_ref: "${LAR_COM_001}"
+
+  - id: TV-COM-002
+    name: "Commit when PENDING_HITL -> 409 ACTION_NOT_AUTHORIZED"
+    arrange:
+      auth_as: T1
+      # Create a PENDING_HITL action
+      presteps:
+        - method: POST
+          path: /agcp/v1/actions/submit
+          headers: { Idempotency-Key: "K_COM_002" }
+          body:
+            tenant_id: "T1"
+            policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+            action: { op: "pending_commit_not_allowed" }
+            provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+          hooks:
+            pec:
+              constraints_outcome: PASS
+              invariants_hard_fail: false
+              hitl_requires: true
+              hitl_required_cosign_roles: ["RISK_OFFICER"]
+          expect_status: 200
+          expect_body: { state: PENDING_HITL }
+          capture:
+            save_action_id_as: "A_COM_002"
+    request:
+      method: POST
+      path: /agcp/v1/executions/commit
+      body:
+        tenant_id: "T1"
+        action_id: "${A_COM_002}"
+        ledger_authorization_ref: "LAR_SHOULD_NOT_EXIST"
+        execution_result: { result: "x" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: ACTION_NOT_AUTHORIZED
+      ledger_no_append: true
+
+  - id: TV-COM-003
+    name: "Commit when REJECTED -> 409 ACTION_NOT_AUTHORIZED"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_SUB_003"  # REJECTED
+    request:
+      method: POST
+      path: /agcp/v1/executions/commit
+      body:
+        tenant_id: "T1"
+        action_id: "${A_SUB_003}"
+        ledger_authorization_ref: "LAR_NONE"
+        execution_result: { result: "x" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: ACTION_NOT_AUTHORIZED
+      ledger_no_append: true
+
+  - id: TV-COM-004
+    name: "Commit with mismatched ledger_authorization_ref -> 409 ACTION_NOT_AUTHORIZED"
+    arrange:
+      auth_as: T1
+      # Create a fresh AUTHORIZED action so we don't depend on A_SUB_001's eventual EXECUTED state.
+      presteps:
+        - method: POST
+          path: /agcp/v1/actions/submit
+          headers: { Idempotency-Key: "K_COM_004" }
+          body:
+            tenant_id: "T1"
+            policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+            action: { op: "authorized_for_mismatch" }
+            provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+          hooks:
+            pec:
+              constraints_outcome: PASS
+              invariants_hard_fail: false
+              hitl_requires: false
+          expect_status: 200
+          expect_body: { state: AUTHORIZED }
+          capture:
+            save_action_id_as: "A_COM_004"
+      read_from_action_view:
+        action_id: "${A_COM_004}"
+        ledger_authorization_ref_as: "LAR_COM_004_REAL"
+    request:
+      method: POST
+      path: /agcp/v1/executions/commit
+      body:
+        tenant_id: "T1"
+        action_id: "${A_COM_004}"
+        ledger_authorization_ref: "LAR_BAD"
+        execution_result: { result: "x" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: ACTION_NOT_AUTHORIZED
+      ledger_no_append: true
+
+  - id: TV-COM-005
+    name: "Commit replay after EXECUTED -> 409 ACTION_NOT_AUTHORIZED"
+    arrange:
+      auth_as: T1
+      # Ensure an EXECUTED action exists by committing A_SUB_001 first (if not already executed).
+      presteps:
+        - method: GET
+          path: "/agcp/v1/actions/${A_SUB_001}"
+          expect_status_any: [200, 404]
+        - method: POST
+          path: /agcp/v1/executions/commit
+          when_action_state_is: AUTHORIZED
+          body:
+            tenant_id: "T1"
+            action_id: "${A_SUB_001}"
+            ledger_authorization_ref: "${LAR_SUB_001}"
+            execution_result: { result: "ok" }
+            provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+          expect_status_any: [200, 409]  # 409 if already executed
+      ensure_state: EXECUTED
+      read_from_action_view:
+        action_id: "${A_SUB_001}"
+        ledger_authorization_ref_as: "LAR_COM_005"
+    request:
+      method: POST
+      path: /agcp/v1/executions/commit
+      body:
+        tenant_id: "T1"
+        action_id: "${A_SUB_001}"
+        ledger_authorization_ref: "${LAR_COM_005}"
+        execution_result: { result: "ok_again" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 409
+        body:
+          rejection_code: ACTION_NOT_AUTHORIZED
+      ledger_no_append: true
+
+  - id: TV-COM-006
+    name: "Commit when tenant not ACTIVE -> 403 TENANT_STATE_INVALID"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_COM_004"  # AUTHORIZED action created earlier
+      hooks:
+        tenant_state: { T1: SUSPENDED }
+      read_from_action_view:
+        action_id: "${A_COM_004}"
+        ledger_authorization_ref_as: "LAR_COM_006"
+    request:
+      method: POST
+      path: /agcp/v1/executions/commit
+      body:
+        tenant_id: "T1"
+        action_id: "${A_COM_004}"
+        ledger_authorization_ref: "${LAR_COM_006}"
+        execution_result: { result: "x" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status: 403
+        body:
+          rejection_code: TENANT_STATE_INVALID
+      ledger_no_append: true
+
+  # ----------------------------
+  # CROSS-TENANT — STRATEGY-DEPENDENT CASES
+  # ----------------------------
+
+  - id: TV-XTEN-SETUP
+    name: "Setup: create an action under tenant T2 for cross-tenant tests"
+    arrange:
+      auth_as: T2
+      hooks:
+        tenant_state: { T2: ACTIVE }
+        policy_resolution: { P1: found }
+        pec:
+          constraints_outcome: PASS
+          invariants_hard_fail: false
+          hitl_requires: false
+    request:
+      method: POST
+      path: /agcp/v1/actions/submit
+      headers: { Idempotency-Key: "K_XTEN_SETUP" }
+      body:
+        tenant_id: "T2"
+        policy_ref: { policy_id: "P1", policy_version: "1.0.0" }
+        action: { op: "belongs_to_T2" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    capture:
+      save_action_id_as: "A_T2_001"
+    expected:
+      http:
+        status: 200
+      # Ledger assertions are not repeated here; Part 1 covers submit ordering already.
+
+  - id: TV-XTEN-001
+    name: "Cross-tenant GET should be forbidden or hidden"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_T2_001"
+    request:
+      method: GET
+      path: "/agcp/v1/actions/${A_T2_001}"
+    expected:
+      http:
+        status_by_strategy:
+          FORBID_403:
+            status: 403
+            body: { rejection_code: TENANT_SCOPE_VIOLATION }
+          HIDE_404:
+            status: 404
+            body: { rejection_code: ACTION_NOT_AUTHORIZED }
+      ledger_no_append: true
+
+  - id: TV-XTEN-002
+    name: "Cross-tenant COSIGN should be forbidden or hidden"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_T2_001"
+    request:
+      method: POST
+      path: "/agcp/v1/actions/${A_T2_001}/cosign"
+      body: { token: "CT_ANY" }
+    expected:
+      http:
+        status_by_strategy:
+          FORBID_403:
+            status: 403
+            body: { rejection_code: TENANT_SCOPE_VIOLATION }
+          HIDE_404:
+            status: 404
+            body: { rejection_code: ACTION_NOT_AUTHORIZED }
+      ledger_no_append: true
+
+  - id: TV-XTEN-003
+    name: "Cross-tenant COMMIT should be forbidden or hidden"
+    arrange:
+      auth_as: T1
+      use_action_id: "A_T2_001"
+    request:
+      method: POST
+      path: /agcp/v1/executions/commit
+      body:
+        tenant_id: "T1"
+        action_id: "${A_T2_001}"
+        ledger_authorization_ref: "LAR_ANY"
+        execution_result: { result: "x" }
+        provenance: { signer: "client:test", signature: "SIG_VALID", signed_at: "2026-02-25T12:00:00Z" }
+    expected:
+      http:
+        status_by_strategy:
+          FORBID_403:
+            status: 403
+            body: { rejection_code: TENANT_SCOPE_VIOLATION }
+          HIDE_404:
+            status: 404
+            body: { rejection_code: ACTION_NOT_AUTHORIZED }
+      ledger_no_append: true
