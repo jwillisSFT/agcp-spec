@@ -284,4 +284,4 @@ Public technical review comments should be submitted via **GitHub Issues**.
 
 ---
 
-AGCP is an architectural control-plane framework designed to improve distributed system reliability, lifecycle determinism, and execution-bound governance correctness.
+AGCP specifies a control-plane architecture intended to improve distributed system reliability, lifecycle determinism, and execution-bound governance correctness.
