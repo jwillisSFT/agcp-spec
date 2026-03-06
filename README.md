@@ -10,6 +10,26 @@ The architecture is designed to eliminate reliance on independently mutable stat
 
 ---
 
+## Specification Status
+
+AGCP v0.9.0 is released for **public technical review**.
+
+The purpose of this review is to evaluate:
+
+- architectural correctness
+- determinism guarantees
+- lifecycle derivation model
+- conformance framework completeness
+- multitenant isolation guarantees
+
+The specification may change based on review feedback.
+
+No stability guarantees are made for the v0.x series.
+
+Implementations built against this version should expect possible normative adjustments before the v1.0 release.
+
+---
+
 # Purpose
 
 AGCP provides a structural control-plane model for governing automated actions in distributed systems. It addresses technical challenges including:
