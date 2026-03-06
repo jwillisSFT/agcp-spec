@@ -1,0 +1,48 @@
+name: Specification Review Comment
+description: Submit feedback on the AGCP specification
+title: "[Spec Review]: "
+labels: ["review"]
+body:
+  - type: input
+    id: section
+    attributes:
+      label: Specification Section
+      description: Section number or document reference
+      placeholder: e.g. AGCP-Core.md Section 5.2
+    validations:
+      required: true
+
+  - type: input
+    id: assertion
+    attributes:
+      label: Assertion ID (if applicable)
+      placeholder: e.g. AGCP-A0012
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Issue Category
+      options:
+        - Normative Defect
+        - Structural Gap
+        - Ambiguity
+        - Conformance Clarification
+        - Security Concern
+        - Determinism Concern
+        - Multitenant Isolation Concern
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the issue or concern
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed Resolution
+      description: Suggested clarification or specification language
