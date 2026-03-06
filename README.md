@@ -100,9 +100,9 @@ A structured review path:
 
 ---
 
-# Repository Structure
+## Repository Structure
 
-
+```
 agcp-spec/
 │
 ├─ README.md
@@ -110,53 +110,53 @@ agcp-spec/
 ├─ LICENSE
 │
 ├─ spec/
-│ ├─ AGCP-Core.md
-│ ├─ AGCP-Policy-Evaluation-Contract.md
-│ ├─ AGCP-HTTP-Interface.md
-│ ├─ AGCP-HITL-Token.md
-│ ├─ AGCP-Multitenant-Operational-Profile.md
-│ ├─ AGCP-Security-Profile.md
-│ ├─ AGCP-Ledger-Storage-Contract.md
-│ ├─ AGCP-Provenance-Wire-Format.md
-│ └─ AGCP-Error-Mapping.md
+│   ├─ AGCP-Core.md
+│   ├─ AGCP-Policy-Evaluation-Contract.md
+│   ├─ AGCP-HTTP-Interface.md
+│   ├─ AGCP-HITL-Token.md
+│   ├─ AGCP-Multitenant-Operational-Profile.md
+│   ├─ AGCP-Security-Profile.md
+│   ├─ AGCP-Ledger-Storage-Contract.md
+│   ├─ AGCP-Provenance-Wire-Format.md
+│   └─ AGCP-Error-Mapping.md
 │
 ├─ lifecycle/
-│ ├─ AGCP-Action-Lifecycle-State-Diagram.md
-│ ├─ AGCP-Normative-State-Transition-Table.md
-│ └─ AGCP-Transition-Annex.md
+│   ├─ AGCP-Action-Lifecycle-State-Diagram.md
+│   ├─ AGCP-Normative-State-Transition-Table.md
+│   └─ AGCP-Transition-Annex.md
 │
 ├─ schemas/
-│ ├─ action-envelope.schema.json
-│ ├─ validation-result.schema.json
-│ ├─ error-response.schema.json
-│ └─ ...
+│   ├─ action-envelope.schema.json
+│   ├─ validation-result.schema.json
+│   ├─ error-response.schema.json
+│   └─ ...
 │
 ├─ registries/
-│ ├─ rejection-codes.json
-│ ├─ constraint-types.json
-│ ├─ invariant-types.json
-│ └─ ...
+│   ├─ rejection-codes.json
+│   ├─ constraint-types.json
+│   ├─ invariant-types.json
+│   └─ ...
 │
 ├─ conformance/
-│ ├─ AGCP-Conformance.md
-│ ├─ AGCP-Assertion-Registry.md
-│ ├─ AGCP-Test-Matrix.md
-│ └─ AGCP-Conformance-Test-Vectors.md
+│   ├─ AGCP-Conformance.md
+│   ├─ AGCP-Assertion-Registry.md
+│   ├─ AGCP-Test-Matrix.md
+│   └─ AGCP-Conformance-Test-Vectors.md
 │
 ├─ api/
-│ └─ AGCP-HTTP-Contract.yaml
+│   └─ AGCP-HTTP-Contract.yaml
 │
 ├─ governance/
-│ ├─ AGCP-Versioning.md
-│ ├─ CHANGELOG.md
-│ └─ CONTRIBUTING.md
+│   ├─ AGCP-Versioning.md
+│   ├─ CHANGELOG.md
+│   └─ CONTRIBUTING.md
 │
 ├─ reference/
-│ └─ AGCP-HTTP-Reference-Pseudocode.md
+│   └─ AGCP-HTTP-Reference-Pseudocode.md
 │
 └─ diagrams/
-└─ agcp-control-plane.png
-
+    └─ agcp-control-plane.png
+```
 
 ---
 
