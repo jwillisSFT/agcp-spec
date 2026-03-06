@@ -1,0 +1,127 @@
+{
+  "registry_name": "rejection-code-registry",
+  "registry_version": "0.9.0",
+  "status": "ACTIVE",
+  "entries": [
+    {
+      "name": "UNSUPPORTED_SPEC_VERSION",
+      "status": "ACTIVE",
+      "http_status": 400,
+      "description": "The requested AGCP spec version is not supported (typically unsupported MAJOR)."
+    },
+    {
+      "name": "TENANT_SCOPE_VIOLATION",
+      "status": "ACTIVE",
+      "http_status": 403,
+      "description": "A request attempted cross-tenant access or referenced a tenant-scoped artifact from another tenant."
+    },
+    {
+      "name": "TENANT_STATE_INVALID",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "The tenant state does not allow the requested operation or the requested transition is invalid."
+    },
+    {
+      "name": "SCHEMA_INVALID",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "The submitted JSON payload failed schema validation."
+    },
+    {
+      "name": "SIGNATURE_INVALID",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "Provenance signature verification failed."
+    },
+    {
+      "name": "IDEMPOTENCY_CONFLICT",
+      "status": "ACTIVE",
+      "http_status": 409,
+      "description": "The same idempotency_key was reused with a different payload."
+    },
+    {
+      "name": "POLICY_RESOLUTION_FAILED",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "Active policy could not be resolved for the tenant and effective window."
+    },
+    {
+      "name": "POLICY_MODULE_INVALID",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "The policy evaluation module failed integrity validation or failed required structural checks."
+    },
+    {
+      "name": "POLICY_MODULE_UNAVAILABLE",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "The referenced policy evaluation module could not be loaded or resolved."
+    },
+    {
+      "name": "POLICY_MODULE_NONDETERMINISTIC",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "The policy evaluation module exhibits nondeterminism or violates PEC determinism constraints."
+    },
+    {
+      "name": "POLICY_EVALUATION_OUTPUT_INVALID",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "The policy evaluation module produced outputs that do not conform to PEC output requirements."
+    },
+    {
+      "name": "UNKNOWN_CONSTRAINT_TYPE",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "A constraint type was referenced that is not defined in the constraint-type registry."
+    },
+    {
+      "name": "UNKNOWN_INVARIANT_TYPE",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "An invariant type was referenced that is not defined in the invariant-type registry."
+    },
+    {
+      "name": "ACTION_NOT_FOUND",
+      "status": "ACTIVE",
+      "http_status": 404,
+      "description": "The referenced action_id does not exist within the tenant scope."
+    },
+    {
+      "name": "ACTION_NOT_AUTHORIZED",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "Execution commit attempted without a valid authorization state and ledger binding."
+    },
+    {
+      "name": "COSIGN_INVALID",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "Cosign token verification failed (invalid signature, wrong binding, or malformed token)."
+    },
+    {
+      "name": "COSIGN_EXPIRED",
+      "status": "ACTIVE",
+      "http_status": 422,
+      "description": "Cosign token is expired."
+    },
+    {
+      "name": "RATE_LIMITED",
+      "status": "ACTIVE",
+      "http_status": 429,
+      "description": "Tenant or global rate limit exceeded."
+    },
+    {
+      "name": "PAYLOAD_TOO_LARGE",
+      "status": "ACTIVE",
+      "http_status": 413,
+      "description": "Request payload exceeds maximum configured size."
+    },
+    {
+      "name": "INTERNAL_ERROR",
+      "status": "ACTIVE",
+      "http_status": 500,
+      "description": "An unexpected internal error occurred."
+    }
+  ]
+}
