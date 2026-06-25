@@ -1,7 +1,7 @@
 # AGCP — Governance Control Plane Architecture
 
 **Status:** Public Review  
-**Version:** v0.9.0  
+**Version:** v1.0.0  
 **Series:** AGCP Core Specification  
 
 AGCP specifies a deterministic governance control-plane architecture for execution-bound authorization, lifecycle derivation, invariant enforcement, and multitenant isolation in automated systems.
@@ -24,7 +24,7 @@ The purpose of this review is to evaluate:
 
 The specification may change based on review feedback.
 
-No stability guarantees are made for the v0.x series.
+No stability guarantees are made for the v1.x series.
 
 Implementations built against this version should expect possible normative adjustments before the v1.0 release.
 
@@ -108,6 +108,7 @@ agcp-spec/
 ├─ README.md
 ├─ ARCHITECTURE.md
 ├─ LICENSE
+├─ NOTICE.md
 │
 ├─ spec/
 │   ├─ AGCP-Core.md
@@ -256,14 +257,6 @@ AGCP requires that identical governance envelopes processed under identical conf
 - decision outcomes
 
 Replay behavior must not depend on timestamp ordering or mutable status fields.
-
----
-
-# Patent Notice
-
-Certain aspects of the AGCP architecture may be subject to pending patent applications.
-
-Publication of this specification does not grant any patent license except where explicitly stated. Implementers are responsible for assessing intellectual property considerations applicable to their use.
 
 ---
 
