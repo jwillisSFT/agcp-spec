@@ -1,7 +1,6 @@
 # AGCP Architecture Overview
 
 Status: Informational  
-Version: 1.0.1  
 Category: Architectural Overview  
 
 This document provides a high-level description of the Governance Control Plane (AGCP) architecture.  
