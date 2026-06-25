@@ -1,38 +1,12 @@
-AGCP Specification License
+Copyright © 2026 John M. Willis and Sustainable Future Tech, Inc.
 
-Copyright (c) 2026 Sustainable Future Tech Inc.
+This work is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
 
-This repository contains the AGCP (Governance Control Plane Architecture)
-specification and related documentation.
+Under this license, you are free to:
 
-The documentation in this repository is licensed under the
-Creative Commons Attribution 4.0 International License (CC BY 4.0).
+- Share the material in any medium or format  
+- Adapt, remix, transform, and build upon the material  
+- Use the material for any purpose, including commercial use  
 
-You are free to:
-
-  - Share — copy and redistribute the material in any medium or format
-  - Adapt — remix, transform, and build upon the material for any purpose
-
-Under the following terms:
-
-  - Attribution — You must give appropriate credit, provide a link to the license,
-    and indicate if changes were made. You may do so in any reasonable manner,
-    but not in any way that suggests the licensor endorses you or your use.
-
-Full license text is available at:
-https://creativecommons.org/licenses/by/4.0/legalcode
-
-
-PATENT NOTICE
-
-Certain aspects of the AGCP architecture described in this repository
-may be subject to pending patent applications.
-
-This license grants rights under copyright only.
-No patent rights are granted, whether express or implied.
-
-Implementers are solely responsible for determining whether any patent
-rights apply to their implementation and for obtaining any necessary
-permissions.
-
-The licensor reserves all patent rights not expressly granted.
+Attribution is required as specified in the license:  
+https://creativecommons.org/licenses/by/4.0/
