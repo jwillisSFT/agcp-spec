@@ -228,7 +228,7 @@ Conformance claims must declare:
 
 # Public Review Process
 
-AGCP v0.9.0 is released for public technical review.
+AGCP v1.0.1 is released for public technical review.
 
 Feedback categories:
 
