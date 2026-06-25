@@ -11,7 +11,7 @@ The architecture is designed to eliminate reliance on independently mutable stat
 
 ## Specification Status
 
-AGCP v1.0.1 is released for **public technical review**.
+AGCP is released for **public technical review**.
 
 The purpose of this review is to evaluate:
 
