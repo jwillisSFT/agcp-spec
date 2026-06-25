@@ -76,7 +76,7 @@ Cross-tenant artifact resolution and ledger access are structurally constrained.
 
 # How to Review This Specification
 
-AGCP v0.9.0 is released for **public technical review**.
+AGCP v1.0.1 is released for **public technical review**.
 
 Reviewers do not need to read the entire specification to contribute.  
 Feedback is most valuable when focused on:
@@ -268,7 +268,7 @@ AGCP follows semantic versioning.
 - **MINOR** — additive normative clarifications  
 - **PATCH** — editorial or non-behavioral corrections  
 
-The **v0.9.0 release** is designated as Public Review.
+The **v1.0.1 release** is designated as Public Review.
 
 ---
 
