@@ -1,7 +1,6 @@
 # AGCP — Governance Control Plane Architecture
 
 **Status:** Public Review  
-**Version:** v1.0.1  
 **Series:** AGCP Core Specification  
 
 AGCP specifies a deterministic governance control-plane architecture for execution-bound authorization, lifecycle derivation, invariant enforcement, and multitenant isolation in automated systems.
@@ -76,7 +75,7 @@ Cross-tenant artifact resolution and ledger access are structurally constrained.
 
 # How to Review This Specification
 
-AGCP v1.0.1 is released for **public technical review**.
+AGCP is released for **public technical review**.
 
 Reviewers do not need to read the entire specification to contribute.  
 Feedback is most valuable when focused on:
@@ -228,7 +227,7 @@ Conformance claims must declare:
 
 # Public Review Process
 
-AGCP v1.0.1 is released for public technical review.
+AGCP is released for public technical review.
 
 Feedback categories:
 
@@ -268,7 +267,7 @@ AGCP follows semantic versioning.
 - **MINOR** — additive normative clarifications  
 - **PATCH** — editorial or non-behavioral corrections  
 
-The **v1.0.1 release** is designated as Public Review.
+This release is designated as Public Review.
 
 ---
 
