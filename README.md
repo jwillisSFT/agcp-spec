@@ -1,7 +1,7 @@
 # AGCP — Governance Control Plane Architecture
 
 **Status:** Public Review  
-**Version:** v1.0.0  
+**Version:** v1.0.1  
 **Series:** AGCP Core Specification  
 
 AGCP specifies a deterministic governance control-plane architecture for execution-bound authorization, lifecycle derivation, invariant enforcement, and multitenant isolation in automated systems.
