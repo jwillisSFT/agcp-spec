@@ -1,3 +1,7 @@
+> **Repository status:** This repository is currently being updated for the AGCP v2.0 specification release.  
+> Stable archived releases remain available through GitHub Releases and Zenodo.  
+> During the update window, `main` may contain transitional files.
+
 # AGCP — Governance Control Plane Architecture
 
 **Status:** Public Review  
