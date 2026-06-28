@@ -1,0 +1,814 @@
+# AGCP HTTP Reference Implementation Pseudocode
+
+**Status:** Informational  
+**Series:** AGCP Core  
+**Applies To:** AGCP HTTP Interface implementations
+
+---
+
+# 1. Purpose
+
+This document provides informational reference pseudocode for an AGCP HTTP interface implementation.
+
+It illustrates one deterministic way to implement the HTTP-facing behavior defined by:
+
+- AGCP Core Specification
+- AGCP HTTP Interface Specification
+- `api/AGCP-HTTP-Contract.yaml`
+- AGCP Error Mapping
+- AGCP rejection-code registry
+- AGCP conformance requirements
+
+This document is not normative. If this document conflicts with the AGCP Core Specification, the AGCP HTTP Interface Specification, or `api/AGCP-HTTP-Contract.yaml`, those documents govern.
+
+Implementations MAY use different internal architecture, storage systems, concurrency models, or component boundaries provided that externally observable behavior remains conformant.
+
+---
+
+# 2. Reference Architecture Assumptions
+
+The reference implementation assumes the following externally observable governance pipeline:
+
+1. Proposal Qualification
+2. Governance Decision Function
+3. Execution Authorization
+4. Commit Boundary
+5. Continuation Integrity, where applicable
+6. Governance Evidence production
+
+The reference implementation assumes the following HTTP endpoints from `api/AGCP-HTTP-Contract.yaml`:
+
+- `GET /agcp/v1/meta`
+- `POST /agcp/v1/proposals/submit`
+- `GET /agcp/v1/proposals/{proposal_id}`
+- `POST /agcp/v1/proposals/{proposal_id}/human-review`
+- `GET /agcp/v1/execution-authorizations/{authorization_id}`
+- `POST /agcp/v1/commit-boundary/commit`
+- `GET /agcp/v1/governance-evidence/{evidence_id}`
+- governance artifact registration and retrieval endpoints
+
+---
+
+# 3. Core Data Model Assumptions
+
+## 3.1 Proposal
+
+A Proposal represents a governance-significant request submitted to AGCP processing.
+
+Reference fields:
+
+```text
+proposal_id
+tenant_id
+governance_domain_id
+action_id
+action_representation
+governance_context
+provenance
+idempotency_key
+```
+
+## 3.2 Governance Evidence
+
+Governance Evidence is the externally observable audit and replay basis for AGCP processing.
+
+Reference fields:
+
+```text
+governance_evidence_id
+tenant_id
+governance_domain_id
+associated_object_id
+stage
+processing_outcome
+proposal_id
+action_id
+canonical_state_ref
+policy_ref
+authority_lineage_ref
+processing_timestamp
+```
+
+## 3.3 Execution Authorization
+
+Execution Authorization is an authorization artifact produced after a governance decision permits progression toward Commit Boundary processing.
+
+Reference fields:
+
+```text
+authorization_id
+proposal_id
+action_id
+tenant_id
+governance_domain_id
+authorization_outcome
+canonical_state_ref
+authority_lineage_ref
+governance_evidence_refs
+```
+
+## 3.4 Commit Boundary Result
+
+Commit Boundary processing binds authoritative Execution Authorization to the governance-significant Action immediately before execution.
+
+Reference fields:
+
+```text
+commit_boundary_ref
+proposal_id
+action_id
+tenant_id
+governance_domain_id
+commit_outcome
+governance_evidence_refs
+```
+
+---
+
+# 4. Enumerations
+
+## 4.1 QualificationOutcome
+
+```text
+Qualified Proposal
+Structural Refusal
+```
+
+## 4.2 GovernanceOutcome
+
+```text
+Authorized
+Denied
+Structural Refusal
+Pending Human Review
+Deferred
+Governed Re-evaluation Required
+```
+
+## 4.3 ExecutionAuthorizationOutcome
+
+```text
+Authorized for Commit Boundary Processing
+Authorization Failure
+Governed Re-evaluation Required
+```
+
+## 4.4 CommitBoundaryOutcome
+
+```text
+Commit Successful
+Commit Failed
+Governed Re-evaluation Required
+```
+
+## 4.5 ContinuationOutcome
+
+```text
+Continue Execution
+DEGRADED
+Suspend Execution
+Resume Execution
+Governed Termination
+```
+
+---
+
+# 5. Storage Interfaces
+
+These storage interfaces are illustrative only.
+
+## 5.1 Idempotency Store
+
+```text
+idempotency_get(tenant_id, endpoint_id, idempotency_key)
+idempotency_put_if_absent(record)
+```
+
+Reference record:
+
+```text
+tenant_id
+endpoint_id
+idempotency_key
+request_fingerprint
+response_ref
+created_at
+```
+
+## 5.2 Proposal Store
+
+```text
+proposal_get(tenant_id, governance_domain_id, proposal_id)
+proposal_create_if_absent(proposal_record)
+proposal_update(proposal_record)
+```
+
+## 5.3 Execution Authorization Store
+
+```text
+authorization_get(tenant_id, governance_domain_id, authorization_id)
+authorization_create(authorization_record)
+authorization_mark_consumed(authorization_id)
+```
+
+## 5.4 Governance Evidence Store
+
+```text
+evidence_append(evidence_record)
+evidence_get(tenant_id, governance_domain_id, evidence_id)
+evidence_list_for_object(tenant_id, governance_domain_id, associated_object_id)
+```
+
+## 5.5 Governance Artifact Store
+
+```text
+artifact_register(artifact_record)
+artifact_get(tenant_id, governance_domain_id, artifact_id)
+artifact_activate(artifact_id)
+artifact_reject(artifact_id)
+```
+
+---
+
+# 6. Deterministic Helper Functions
+
+## 6.1 Canonical Request Fingerprint
+
+```text
+function canonical_fingerprint(json_obj):
+
+    canonical = canonicalize_json(json_obj)
+    return sha256_hex(canonical)
+```
+
+Canonicalization should:
+
+- recursively sort object keys;
+- normalize whitespace;
+- encode as UTF-8;
+- preserve semantic JSON values;
+- produce stable output for identical input.
+
+## 6.2 Tenant and Governance-Domain Validation
+
+```text
+function require_tenant_and_domain_valid(tenant_id, governance_domain_id):
+
+    tenant_state = tenant_get_state(tenant_id)
+
+    if tenant_state is not ACTIVE:
+        return error_response(403, TENANT_STATE_INVALID)
+
+    if not governance_domain_exists(tenant_id, governance_domain_id):
+        return error_response(403, GOVERNANCE_DOMAIN_VIOLATION)
+
+    return OK
+```
+
+## 6.3 Tenant Scope Check
+
+```text
+function require_same_tenant(request_tenant, resource_tenant):
+
+    if request_tenant != resource_tenant:
+        return error_response(403, TENANT_SCOPE_VIOLATION)
+
+    return OK
+```
+
+## 6.4 Governance Evidence Append
+
+```text
+function record_evidence(stage, associated_object_id, processing_outcome, context):
+
+    evidence = {
+        governance_evidence_id: new_id(),
+        tenant_id: context.tenant_id,
+        governance_domain_id: context.governance_domain_id,
+        associated_object_id: associated_object_id,
+        stage: stage,
+        processing_outcome: processing_outcome,
+        proposal_id: context.proposal_id,
+        action_id: context.action_id,
+        canonical_state_ref: context.canonical_state_ref,
+        policy_ref: context.policy_ref,
+        authority_lineage_ref: context.authority_lineage_ref,
+        processing_timestamp: authoritative_timestamp()
+    }
+
+    evidence_append(evidence)
+
+    return evidence.governance_evidence_id
+```
+
+---
+
+# 7. Proposal Submission Reference Flow
+
+Endpoint:
+
+```text
+POST /agcp/v1/proposals/submit
+```
+
+Reference pseudocode:
+
+```text
+function submit_proposal(request, idempotency_key):
+
+    endpoint_id = "POST /agcp/v1/proposals/submit"
+
+    validate_schema(request, ProposalSubmitRequest)
+
+    fingerprint = canonical_fingerprint(request)
+
+    existing = idempotency_get(request.tenant_id, endpoint_id, idempotency_key)
+
+    if existing exists:
+        if existing.request_fingerprint != fingerprint:
+            return error_response(409, IDEMPOTENCY_CONFLICT)
+        return load_response(existing.response_ref)
+
+    require_tenant_and_domain_valid(
+        request.tenant_id,
+        request.governance_domain_id
+    )
+
+    verify_provenance(request.provenance)
+
+    proposal = create_proposal_record(request)
+
+    qualification = run_proposal_qualification(proposal)
+
+    record_evidence(
+        "Proposal Qualification",
+        proposal.proposal_id,
+        qualification.outcome,
+        proposal.context
+    )
+
+    if qualification.outcome == "Structural Refusal":
+        view = build_proposal_view(
+            proposal,
+            qualification_outcome = "Structural Refusal",
+            governance_outcome = "Structural Refusal"
+        )
+
+        persist_idempotent_response(idempotency_key, fingerprint, view)
+
+        return response(200, view)
+
+    canonical_state_ref = resolve_canonical_state(proposal)
+
+    policy_set = resolve_applicable_policy(proposal, canonical_state_ref)
+
+    authority_lineage_ref = resolve_authority_lineage(proposal)
+
+    governance_decision = run_governance_decision_function(
+        proposal,
+        canonical_state_ref,
+        policy_set,
+        authority_lineage_ref
+    )
+
+    record_evidence(
+        "Governance Decision Function",
+        proposal.proposal_id,
+        governance_decision.outcome,
+        proposal.context
+    )
+
+    authorization = null
+
+    if governance_decision.outcome == "Authorized":
+        authorization = run_execution_authorization(
+            proposal,
+            governance_decision,
+            canonical_state_ref,
+            authority_lineage_ref
+        )
+
+        record_evidence(
+            "Execution Authorization",
+            proposal.proposal_id,
+            authorization.outcome,
+            proposal.context
+        )
+
+    view = build_proposal_view(
+        proposal,
+        qualification_outcome = qualification.outcome,
+        governance_outcome = governance_decision.outcome,
+        execution_authorization_ref = authorization.authorization_id if authorization exists
+    )
+
+    persist_idempotent_response(idempotency_key, fingerprint, view)
+
+    return response(200, view)
+```
+
+Expected externally observable behavior:
+
+- Transient internal processing states are not returned.
+- Structural Refusal is returned as an authoritative governance outcome.
+- Authorized does not itself execute the Action.
+- Execution requires later Commit Boundary processing.
+- Governance Evidence references are produced for applicable stages.
+
+---
+
+# 8. Proposal Retrieval Reference Flow
+
+Endpoint:
+
+```text
+GET /agcp/v1/proposals/{proposal_id}
+```
+
+Reference pseudocode:
+
+```text
+function get_proposal(tenant_id, governance_domain_id, proposal_id):
+
+    require_tenant_and_domain_valid(tenant_id, governance_domain_id)
+
+    proposal = proposal_get(tenant_id, governance_domain_id, proposal_id)
+
+    if proposal does not exist:
+        return error_response(404, PROPOSAL_NOT_FOUND)
+
+    evidence_refs = evidence_list_for_object(
+        tenant_id,
+        governance_domain_id,
+        proposal_id
+    )
+
+    view = build_proposal_view_from_records(proposal, evidence_refs)
+
+    return response(200, view)
+```
+
+The response conforms to `ProposalView` in `api/AGCP-HTTP-Contract.yaml`.
+
+---
+
+# 9. Human Review Reference Flow
+
+Endpoint:
+
+```text
+POST /agcp/v1/proposals/{proposal_id}/human-review
+```
+
+Reference pseudocode:
+
+```text
+function submit_human_review(proposal_id, request, idempotency_key):
+
+    validate_schema(request, HumanReviewRequest)
+
+    require_tenant_and_domain_valid(
+        request.tenant_id,
+        request.governance_domain_id
+    )
+
+    proposal = proposal_get(
+        request.tenant_id,
+        request.governance_domain_id,
+        proposal_id
+    )
+
+    if proposal does not exist:
+        return error_response(404, PROPOSAL_NOT_FOUND)
+
+    if proposal.governance_outcome not in ["Pending Human Review", "Deferred"]:
+        return error_response(409, GOVERNANCE_DOMAIN_VIOLATION)
+
+    verify_provenance(request.provenance)
+
+    validate_human_review_artifact(
+        proposal,
+        request.human_review_artifact
+    )
+
+    updated_decision = run_governed_reevaluation(
+        proposal,
+        request.human_review_artifact
+    )
+
+    record_evidence(
+        "Governance Decision Function",
+        proposal.proposal_id,
+        updated_decision.outcome,
+        proposal.context
+    )
+
+    if updated_decision.outcome == "Authorized":
+        authorization = run_execution_authorization(
+            proposal,
+            updated_decision,
+            proposal.canonical_state_ref,
+            proposal.authority_lineage_ref
+        )
+
+        record_evidence(
+            "Execution Authorization",
+            proposal.proposal_id,
+            authorization.outcome,
+            proposal.context
+        )
+
+    view = build_proposal_view_from_current_state(proposal)
+
+    return response(200, view)
+```
+
+Human-review artifacts are governed inputs. They do not themselves execute the Action.
+
+---
+
+# 10. Execution Authorization Retrieval Reference Flow
+
+Endpoint:
+
+```text
+GET /agcp/v1/execution-authorizations/{authorization_id}
+```
+
+Reference pseudocode:
+
+```text
+function get_execution_authorization(
+    tenant_id,
+    governance_domain_id,
+    authorization_id
+):
+
+    require_tenant_and_domain_valid(tenant_id, governance_domain_id)
+
+    authorization = authorization_get(
+        tenant_id,
+        governance_domain_id,
+        authorization_id
+    )
+
+    if authorization does not exist:
+        return error_response(404, AUTHORIZATION_NOT_FOUND)
+
+    return response(200, build_execution_authorization_view(authorization))
+```
+
+Execution Authorization retrieval does not execute or commit the Action.
+
+---
+
+# 11. Commit Boundary Reference Flow
+
+Endpoint:
+
+```text
+POST /agcp/v1/commit-boundary/commit
+```
+
+Reference pseudocode:
+
+```text
+function commit_boundary(request, idempotency_key):
+
+    validate_schema(request, CommitBoundaryRequest)
+
+    require_tenant_and_domain_valid(
+        request.tenant_id,
+        request.governance_domain_id
+    )
+
+    verify_provenance(request.provenance)
+
+    proposal = proposal_get(
+        request.tenant_id,
+        request.governance_domain_id,
+        request.proposal_id
+    )
+
+    if proposal does not exist:
+        return error_response(404, PROPOSAL_NOT_FOUND)
+
+    authorization = authorization_get(
+        request.tenant_id,
+        request.governance_domain_id,
+        request.execution_authorization_ref
+    )
+
+    if authorization does not exist:
+        return error_response(409, EXECUTION_AUTHORIZATION_INVALID)
+
+    if authorization.action_id != request.action_id:
+        return error_response(409, EXECUTION_AUTHORIZATION_INVALID)
+
+    if authorization.outcome != "Authorized for Commit Boundary Processing":
+        return error_response(409, ACTION_NOT_AUTHORIZED)
+
+    verify_authority_remains_valid(authorization.authority_lineage_ref)
+
+    verify_canonical_state_still_suitable(
+        proposal,
+        authorization.canonical_state_ref
+    )
+
+    verify_governance_context_still_valid(proposal.governance_context)
+
+    verify_action_representation_unchanged(proposal.action_representation)
+
+    commit_result = perform_commit_boundary_binding(
+        proposal,
+        authorization,
+        request.execution_context
+    )
+
+    if commit_result.outcome == "Commit Successful":
+        authorization_mark_consumed(authorization.authorization_id)
+
+    record_evidence(
+        "Commit Boundary",
+        proposal.proposal_id,
+        commit_result.outcome,
+        proposal.context
+    )
+
+    return response(200, build_commit_boundary_result(commit_result))
+```
+
+Commit Boundary processing is the only illustrated point at which authorized execution may become operationally real.
+
+---
+
+# 12. Governance Evidence Retrieval Reference Flow
+
+Endpoint:
+
+```text
+GET /agcp/v1/governance-evidence/{evidence_id}
+```
+
+Reference pseudocode:
+
+```text
+function get_governance_evidence(
+    tenant_id,
+    governance_domain_id,
+    evidence_id
+):
+
+    require_tenant_and_domain_valid(tenant_id, governance_domain_id)
+
+    evidence = evidence_get(
+        tenant_id,
+        governance_domain_id,
+        evidence_id
+    )
+
+    if evidence does not exist:
+        return error_response(404, GOVERNANCE_EVIDENCE_INVALID)
+
+    return response(200, build_governance_evidence_view(evidence))
+```
+
+Governance Evidence retrieval is tenant-scoped and governance-domain-scoped.
+
+---
+
+# 13. Governance Artifact Registration Reference Flow
+
+Example endpoint:
+
+```text
+POST /agcp/v1/governance-artifacts/policy-modules
+```
+
+Reference pseudocode:
+
+```text
+function register_policy_evaluation_module(request, idempotency_key):
+
+    validate_schema(request, PolicyEvaluationModuleArtifact)
+
+    require_tenant_and_domain_valid(
+        request.tenant_id,
+        request.governance_domain_id
+    )
+
+    verify_provenance(request.provenance)
+
+    integrity_result = validate_artifact_integrity(request)
+
+    if integrity_result failed:
+        record_evidence(
+            "Governance Self-Protection",
+            request.artifact_id,
+            "Rejected",
+            request.context
+        )
+
+        return error_response(422, GOVERNANCE_ARTIFACT_INVALID)
+
+    determinism_result = validate_policy_module_determinism(request)
+
+    if determinism_result failed:
+        record_evidence(
+            "Governance Self-Protection",
+            request.artifact_id,
+            "Rejected",
+            request.context
+        )
+
+        return error_response(422, POLICY_MODULE_NONDETERMINISTIC)
+
+    artifact = artifact_register(request)
+
+    record_evidence(
+        "Governance Self-Protection",
+        artifact.artifact_id,
+        "Registered",
+        artifact.context
+    )
+
+    return response(200, build_governance_artifact_view(artifact))
+```
+
+Artifact registration does not necessarily imply operational activation.
+
+---
+
+# 14. Deterministic Replay Reference Flow
+
+```text
+function deterministic_replay(proposal_id, evidence_refs):
+
+    evidence_set = load_evidence_set(evidence_refs)
+
+    verify_evidence_integrity(evidence_set)
+
+    reconstructed_inputs = reconstruct_authoritative_inputs(evidence_set)
+
+    replayed_qualification = replay_proposal_qualification(
+        reconstructed_inputs
+    )
+
+    replayed_decision = replay_governance_decision_function(
+        reconstructed_inputs
+    )
+
+    replayed_authorization = replay_execution_authorization(
+        reconstructed_inputs
+    )
+
+    replayed_commit = replay_commit_boundary_processing(
+        reconstructed_inputs
+    )
+
+    compare_replay_to_original(
+        replayed_qualification,
+        replayed_decision,
+        replayed_authorization,
+        replayed_commit,
+        evidence_set
+    )
+
+    return replay_result
+```
+
+Replay is successful only when the governance interpretation is reproduced from authoritative Governance Evidence and referenced authoritative inputs.
+
+---
+
+# 15. Determinism Requirements Illustrated
+
+A conformant implementation should ensure that:
+
+1. Proposal Qualification occurs before Governance Decision Function processing.
+2. Governance Decision Function processing occurs before Execution Authorization.
+3. Execution Authorization occurs before Commit Boundary processing.
+4. Commit Boundary processing occurs before execution becomes operationally real.
+5. Governance Evidence is produced for applicable governance-significant processing.
+6. Canonical State is authoritative over runtime observation.
+7. Authority Lineage is preserved and validated.
+8. Tenant and governance-domain isolation are enforced.
+9. Idempotency prevents duplicate or conflicting request processing.
+10. Deterministic replay reproduces governance interpretation from Governance Evidence.
+
+---
+
+# 16. Relationship to Normative Specifications
+
+This document illustrates one possible deterministic reference implementation approach.
+
+The normative requirements are defined by:
+
+- AGCP Core Specification
+- AGCP HTTP Interface Specification
+- `api/AGCP-HTTP-Contract.yaml`
+- AGCP Conformance Specification
+- AGCP Error Mapping
+- AGCP rejection-code registry
+
+Implementations need not follow this internal pseudocode, but externally observable HTTP behavior must conform to the normative AGCP specifications.
