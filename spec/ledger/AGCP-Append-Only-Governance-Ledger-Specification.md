@@ -38,7 +38,19 @@ The ledger SHALL provide:
 7.  Cryptographic integrity support
 8.  Deterministic replay support
 
-## 3. Ledger Entry
+## 3. Canonical State Authority
+
+The ordered Append-Only Governance Ledger SHALL be the authoritative source for Canonical State derivation.
+
+Canonical State SHALL be derived exclusively from ledger entries in sequence order, or from a verifiable materialized state whose derivation from the ordered Append-Only Governance Ledger can be deterministically reproduced.
+
+Sequence order, not timestamp order, SHALL determine the authoritative order of governance state transitions.
+
+Materialized state views, caches, indexes, and other derived representations SHALL NOT supersede the ordered Append-Only Governance Ledger as the authoritative governance record.
+
+Implementations SHALL be capable of reproducing the Canonical State from the ordered ledger for deterministic replay, audit, and conformance verification.
+
+## 4. Ledger Entry
 
 Every ledger entry SHALL contain at least:
 
@@ -59,7 +71,7 @@ Entries MAY additionally include:
 -   previous_entry_hash
 -   implementation metadata
 
-## 4. Append-Only Guarantee
+## 5. Append-Only Guarantee
 
 Once committed, a ledger entry SHALL NOT be:
 
@@ -75,7 +87,7 @@ Permitted operations are limited to:
 
 Historical updates are prohibited.
 
-## 5. Ordering
+## 6. Ordering
 
 Ordering SHALL be determined exclusively by `sequence_value`.
 
@@ -87,14 +99,14 @@ Gapless sequencing MAY be implemented but is not required.
 
 Timestamps SHALL NOT be authoritative ordering signals.
 
-## 6. Sequence Assignment
+## 7. Sequence Assignment
 
 Sequence assignment SHALL guarantee a single deterministic ordering.
 
 No two entries within the same ledger partition SHALL share the same
 sequence value.
 
-## 7. Concurrency
+## 8. Concurrency
 
 Concurrent writes SHALL NOT produce:
 
@@ -103,7 +115,7 @@ Concurrent writes SHALL NOT produce:
 
 Implementations SHALL serialize ledger appends for a given partition.
 
-## 8. Isolation
+## 9. Isolation
 
 Ledger records SHALL be isolated by tenant.
 
@@ -113,7 +125,7 @@ isolate records by Governance Domain.
 Cross-boundary access SHALL require explicit authorization defined by
 applicable governance policy.
 
-## 9. Retrieval
+## 10. Retrieval
 
 Implementations SHALL support deterministic retrieval preserving append
 order.
@@ -121,7 +133,7 @@ order.
 Retrieval SHALL return the complete ordered governance history for the
 requested scope.
 
-## 10. Integrity
+## 11. Integrity
 
 Implementations SHALL provide mechanisms to detect unauthorized
 modification.
@@ -137,7 +149,7 @@ Examples include:
 The specific mechanism is implementation-defined provided integrity is
 preserved.
 
-## 11. Governance Evidence
+## 12. Governance Evidence
 
 Every governance-significant operation SHALL result in Governance
 Evidence.
@@ -148,7 +160,7 @@ The Governance Evidence remains the canonical description of the
 governance event, while the ledger provides immutable ordering and
 preservation.
 
-## 12. Replay
+## 13. Replay
 
 The ledger SHALL preserve sufficient information to support
 deterministic replay and governance audit.
@@ -156,7 +168,7 @@ deterministic replay and governance audit.
 Replay SHALL produce identical governance outcomes when evaluated using
 the same governance configuration and policy artifacts.
 
-## 13. Failure Handling
+## 14. Failure Handling
 
 Failed governance processing SHALL NOT modify existing ledger entries.
 
@@ -165,7 +177,7 @@ history.
 
 Rollback of committed ledger entries is prohibited.
 
-## 14. Storage Independence
+## 15. Storage Independence
 
 The required behavior is normative; the storage technology is not.
 
@@ -178,7 +190,7 @@ Permissible implementations include:
 -   blockchain-style ledgers
 -   write-once storage
 
-## 15. Conformance
+## 16. Conformance
 
 Conformant implementations SHALL provide:
 
@@ -191,7 +203,7 @@ Conformant implementations SHALL provide:
 -   integrity verification
 -   deterministic replay support
 
-## 16. Relationship to Other Specifications
+## 17. Relationship to Other Specifications
 
 This specification complements:
 
@@ -202,6 +214,6 @@ This specification complements:
 -   Policy Evaluation Contract (PEC)
 -   AGCP HTTP Interface Specification
 
-## 17. Repository Versioning
+## 18. Repository Versioning
 
 Repository releases govern versioning of this specification.
