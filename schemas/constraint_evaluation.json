@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/constraint_evaluation.json",
-  "title": "ConstraintEvaluation",
+  "$id": "https://agcp.example/schemas/constraint_evaluation.json",
+  "title": "Constraint Evaluation",
+  "description": "Result of evaluating a single AGCP constraint during a governance processing stage.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -10,10 +11,14 @@
       "minLength": 1,
       "maxLength": 128
     },
-    "type": {
+    "constraint_type": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 256
+      "maxLength": 256,
+      "description": "Constraint type identifier from the constraint-type registry."
+    },
+    "governance_stage": {
+      "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
     },
     "outcome": {
       "$ref": "common.json#/$defs/constraint_outcome_enum"
@@ -21,11 +26,32 @@
     "reason": {
       "type": "string",
       "maxLength": 2048
+    },
+    "rejection_code": {
+      "$ref": "common.json#/$defs/rejection_code"
+    },
+    "policy_ref": {
+      "$ref": "common.json#/$defs/policy_ref"
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "evaluation_timestamp": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined diagnostic metadata.",
+      "additionalProperties": true
     }
   },
   "required": [
     "constraint_id",
-    "type",
+    "constraint_type",
+    "governance_stage",
     "outcome"
   ]
 }

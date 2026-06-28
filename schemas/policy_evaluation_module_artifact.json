@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/policy_evaluation_module_artifact.json",
+  "title": "Policy Evaluation Module Artifact",
+  "description": "Schema for registration and lifecycle management of a Policy Evaluation Module (PEM) artifact.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "module_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "artifact_release": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "module_hash": {
+      "$ref": "common.json#/$defs/hash_hex"
+    },
+    "artifact_ref": {
+      "$ref": "common.json#/$defs/uri"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "policy_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "constraint_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "invariant_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "determinism_verified": {
+      "type": "boolean"
+    },
+    "status": {
+      "$ref": "common.json#/$defs/governance_artifact_status_enum"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "activated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "tenant_id",
+    "module_id",
+    "artifact_ref",
+    "integrity_signature",
+    "determinism_verified",
+    "status",
+    "created_at"
+  ]
+}

@@ -1,0 +1,381 @@
+{
+  "registry": "AGCP Rejection Code Registry",
+  "status": "Normative",
+  "series": "AGCP Core",
+  "versioning": {
+    "authority": "repository release tag",
+    "embedded_version": false
+  },
+  "description": "Authoritative registry of rejection and failure codes used by AGCP HTTP interfaces, Governance Evidence, conformance tests, and implementation error reporting.",
+  "fields": {
+    "code": "Stable rejection code identifier.",
+    "category": "Functional error category.",
+    "default_http_status": "Default HTTP status code for HTTP interfaces.",
+    "retryable": "Whether the same request may succeed without changing authoritative governance inputs.",
+    "governance_stage": "Primary AGCP stage or supporting service associated with the code.",
+    "governance_evidence": "Whether Governance Evidence is normally required when the error is attributable to a governed object.",
+    "description": "Normative description of the rejection condition."
+  },
+  "codes": [
+    {
+      "code": "IDEMPOTENCY_CONFLICT",
+      "category": "request_conflict",
+      "default_http_status": 409,
+      "retryable": false,
+      "governance_stage": "HTTP Interface",
+      "governance_evidence": "not_required",
+      "description": "The same Idempotency-Key was reused with a different request payload for the same tenant and endpoint."
+    },
+    {
+      "code": "SCHEMA_VALIDATION_FAILED",
+      "category": "request_validation",
+      "default_http_status": 400,
+      "retryable": false,
+      "governance_stage": "Proposal Qualification",
+      "governance_evidence": "conditional",
+      "description": "The request, Proposal, governance artifact, or submitted object failed required schema validation."
+    },
+    {
+      "code": "PROVENANCE_INVALID",
+      "category": "provenance",
+      "default_http_status": 400,
+      "retryable": false,
+      "governance_stage": "Proposal Qualification",
+      "governance_evidence": "required_when_attributable",
+      "description": "Required provenance, signature, attribution, or binding information is invalid, missing, expired, unverifiable, or not logically associated with the governed object."
+    },
+    {
+      "code": "TENANT_STATE_INVALID",
+      "category": "tenant_isolation",
+      "default_http_status": 403,
+      "retryable": true,
+      "governance_stage": "Tenant and Domain Isolation",
+      "governance_evidence": "required_when_attributable",
+      "description": "The tenant state does not permit the requested governance operation."
+    },
+    {
+      "code": "TENANT_SCOPE_VIOLATION",
+      "category": "tenant_isolation",
+      "default_http_status": 403,
+      "retryable": false,
+      "governance_stage": "Tenant and Domain Isolation",
+      "governance_evidence": "conditional",
+      "description": "The request attempts to access, operate on, or infer a resource outside the authorized tenant scope."
+    },
+    {
+      "code": "GOVERNANCE_DOMAIN_VIOLATION",
+      "category": "domain_isolation",
+      "default_http_status": 403,
+      "retryable": false,
+      "governance_stage": "Cross-Domain Authority Isolation",
+      "governance_evidence": "conditional",
+      "description": "The request violates governance-domain isolation, domain sovereignty, or governed cross-domain authority requirements."
+    },
+    {
+      "code": "RESOURCE_NOT_FOUND",
+      "category": "resource",
+      "default_http_status": 404,
+      "retryable": false,
+      "governance_stage": "HTTP Interface",
+      "governance_evidence": "not_required",
+      "description": "The requested resource was not found or is intentionally hidden by a cross-scope disclosure policy."
+    },
+    {
+      "code": "PROPOSAL_NOT_FOUND",
+      "category": "resource",
+      "default_http_status": 404,
+      "retryable": false,
+      "governance_stage": "HTTP Interface",
+      "governance_evidence": "not_required",
+      "description": "The requested Proposal does not exist within the authorized tenant and governance-domain scope."
+    },
+    {
+      "code": "AUTHORIZATION_NOT_FOUND",
+      "category": "resource",
+      "default_http_status": 404,
+      "retryable": false,
+      "governance_stage": "Execution Authorization",
+      "governance_evidence": "not_required",
+      "description": "The requested Execution Authorization does not exist within the authorized tenant and governance-domain scope."
+    },
+    {
+      "code": "GOVERNANCE_EVIDENCE_NOT_FOUND",
+      "category": "resource",
+      "default_http_status": 404,
+      "retryable": false,
+      "governance_stage": "Governance Evidence",
+      "governance_evidence": "not_required",
+      "description": "The requested Governance Evidence record does not exist within the authorized tenant and governance-domain scope."
+    },
+    {
+      "code": "GOVERNANCE_ARTIFACT_NOT_FOUND",
+      "category": "resource",
+      "default_http_status": 404,
+      "retryable": false,
+      "governance_stage": "Governance Self-Protection",
+      "governance_evidence": "not_required",
+      "description": "The requested governance artifact does not exist within the authorized tenant and governance-domain scope."
+    },
+    {
+      "code": "POLICY_NOT_FOUND",
+      "category": "policy",
+      "default_http_status": 422,
+      "retryable": true,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "No applicable governance policy could be resolved for the Proposal under the relevant tenant, governance-domain, Canonical State, and governance context."
+    },
+    {
+      "code": "POLICY_MODULE_UNAVAILABLE",
+      "category": "policy",
+      "default_http_status": 503,
+      "retryable": true,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "A required Policy Evaluation Module or policy-evaluation dependency is unavailable."
+    },
+    {
+      "code": "POLICY_MODULE_NONDETERMINISTIC",
+      "category": "policy",
+      "default_http_status": 422,
+      "retryable": false,
+      "governance_stage": "Governance Self-Protection",
+      "governance_evidence": "required_when_attributable",
+      "description": "A Policy Evaluation Module failed determinism validation or was detected to depend on nondeterministic inputs or behavior."
+    },
+    {
+      "code": "POLICY_EVALUATION_OUTPUT_INVALID",
+      "category": "policy",
+      "default_http_status": 422,
+      "retryable": false,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "Policy evaluation produced missing, malformed, unsupported, or non-conformant output."
+    },
+    {
+      "code": "PROPOSAL_STRUCTURAL_REFUSAL",
+      "category": "proposal_qualification",
+      "default_http_status": 400,
+      "retryable": false,
+      "governance_stage": "Proposal Qualification",
+      "governance_evidence": "required_when_attributable",
+      "description": "The Proposal failed structural or prerequisite qualification and was structurally refused."
+    },
+    {
+      "code": "GOVERNANCE_DENIED",
+      "category": "governance_decision",
+      "default_http_status": 200,
+      "retryable": false,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required",
+      "description": "The Governance Decision Function produced Denied as the authoritative governance outcome."
+    },
+    {
+      "code": "PENDING_HUMAN_REVIEW",
+      "category": "governance_decision",
+      "default_http_status": 200,
+      "retryable": true,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required",
+      "description": "The Governance Decision Function produced Pending Human Review as the authoritative governance outcome."
+    },
+    {
+      "code": "GOVERNED_REEVALUATION_REQUIRED",
+      "category": "governance_decision",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "The requested operation cannot proceed until governed re-evaluation occurs."
+    },
+    {
+      "code": "AUTHORIZATION_FAILURE",
+      "category": "execution_authorization",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Execution Authorization",
+      "governance_evidence": "required_when_attributable",
+      "description": "Execution Authorization failed or did not produce Authorized for Commit Boundary Processing."
+    },
+    {
+      "code": "EXECUTION_AUTHORIZATION_INVALID",
+      "category": "execution_authorization",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Execution Authorization",
+      "governance_evidence": "required_when_attributable",
+      "description": "The supplied Execution Authorization is missing, invalid, expired, revoked, consumed, not bound to the Action, or otherwise unsuitable for Commit Boundary processing."
+    },
+    {
+      "code": "ACTION_NOT_AUTHORIZED",
+      "category": "commit_boundary",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Commit Boundary",
+      "governance_evidence": "required_when_attributable",
+      "description": "The Action is not authorized for Commit Boundary processing."
+    },
+    {
+      "code": "COMMIT_BOUNDARY_REQUIRED",
+      "category": "commit_boundary",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Commit Boundary",
+      "governance_evidence": "required_when_attributable",
+      "description": "The requested governance-significant execution requires successful Commit Boundary processing before it may become operationally real."
+    },
+    {
+      "code": "COMMIT_BOUNDARY_FAILED",
+      "category": "commit_boundary",
+      "default_http_status": 422,
+      "retryable": true,
+      "governance_stage": "Commit Boundary",
+      "governance_evidence": "required_when_attributable",
+      "description": "Commit Boundary processing failed because one or more commit prerequisites were not satisfied."
+    },
+    {
+      "code": "ACTION_REPRESENTATION_MUTATED",
+      "category": "proposal_integrity",
+      "default_http_status": 409,
+      "retryable": false,
+      "governance_stage": "Commit Boundary",
+      "governance_evidence": "required_when_attributable",
+      "description": "The qualified Action Representation changed after qualification or no longer matches the authoritative qualified Proposal."
+    },
+    {
+      "code": "GOVERNANCE_CONTEXT_INVALID",
+      "category": "proposal_integrity",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Commit Boundary",
+      "governance_evidence": "required_when_attributable",
+      "description": "The Governance Context is missing, invalid, stale, inconsistent, or no longer suitable for the requested governed operation."
+    },
+    {
+      "code": "CANONICAL_STATE_INVALID",
+      "category": "canonical_state",
+      "default_http_status": 422,
+      "retryable": true,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "Canonical State is incomplete, inconsistent, unverifiable, stale, unsuitable, or fails integrity, provenance, freshness, or consistency validation."
+    },
+    {
+      "code": "CANONICAL_STATE_UNAVAILABLE",
+      "category": "canonical_state",
+      "default_http_status": 503,
+      "retryable": true,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "Required Canonical State cannot be resolved or made available for governance evaluation."
+    },
+    {
+      "code": "AUTHORITY_LINEAGE_INVALID",
+      "category": "authority",
+      "default_http_status": 403,
+      "retryable": true,
+      "governance_stage": "Delegation and Authority Lineage",
+      "governance_evidence": "required_when_attributable",
+      "description": "Authority Lineage is missing, invalid, incomplete, expired, unverifiable, or not sufficient for the requested governance operation."
+    },
+    {
+      "code": "AUTHORITY_REVOKED",
+      "category": "authority",
+      "default_http_status": 403,
+      "retryable": false,
+      "governance_stage": "Delegation and Authority Lineage",
+      "governance_evidence": "required_when_attributable",
+      "description": "Required authority or delegated authority has been revoked."
+    },
+    {
+      "code": "AUTHORITY_REPLAY_DETECTED",
+      "category": "authority",
+      "default_http_status": 409,
+      "retryable": false,
+      "governance_stage": "Delegation and Authority Lineage",
+      "governance_evidence": "required_when_attributable",
+      "description": "The request attempts unauthorized replay or reuse of authority, delegation, approval, or authorization material."
+    },
+    {
+      "code": "HUMAN_REVIEW_INVALID",
+      "category": "human_review",
+      "default_http_status": 422,
+      "retryable": false,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "A human-review artifact is malformed, invalid, unauthoritative, insufficient, or not bound to the Proposal."
+    },
+    {
+      "code": "HUMAN_REVIEW_EXPIRED",
+      "category": "human_review",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Governance Decision Function",
+      "governance_evidence": "required_when_attributable",
+      "description": "A human-review artifact, approval, cosign, or adjudication artifact is expired and cannot be considered."
+    },
+    {
+      "code": "GOVERNANCE_ARTIFACT_INVALID",
+      "category": "governance_artifact",
+      "default_http_status": 422,
+      "retryable": false,
+      "governance_stage": "Governance Self-Protection",
+      "governance_evidence": "required_when_attributable",
+      "description": "A governance-significant artifact failed integrity, structure, provenance, authority, invariant, or validation requirements."
+    },
+    {
+      "code": "GOVERNANCE_ARTIFACT_UNAUTHORIZED",
+      "category": "governance_artifact",
+      "default_http_status": 403,
+      "retryable": false,
+      "governance_stage": "Governance Self-Protection",
+      "governance_evidence": "required_when_attributable",
+      "description": "The actor, authority, tenant, or governance domain is not authorized to register, modify, activate, retire, or otherwise affect the governance artifact."
+    },
+    {
+      "code": "GOVERNANCE_ARTIFACT_ACTIVATION_DENIED",
+      "category": "governance_artifact",
+      "default_http_status": 422,
+      "retryable": true,
+      "governance_stage": "Governance Self-Protection",
+      "governance_evidence": "required_when_attributable",
+      "description": "The governance artifact cannot become operationally effective because validation, authority, invariant, prerequisite, or self-protection requirements are not satisfied."
+    },
+    {
+      "code": "GOVERNANCE_EVIDENCE_INCOMPLETE",
+      "category": "governance_evidence",
+      "default_http_status": 422,
+      "retryable": false,
+      "governance_stage": "Governance Evidence",
+      "governance_evidence": "not_required",
+      "description": "Governance Evidence is missing required fields or is insufficient to establish required processing state, traceability, attribution, or replayability."
+    },
+    {
+      "code": "GOVERNANCE_EVIDENCE_INVALID",
+      "category": "governance_evidence",
+      "default_http_status": 422,
+      "retryable": false,
+      "governance_stage": "Governance Evidence",
+      "governance_evidence": "not_required",
+      "description": "Governance Evidence is corrupted, unverifiable, non-attributable, out of order, not logically associated with the governed object, or otherwise invalid."
+    },
+    {
+      "code": "REPLAY_REJECTED",
+      "category": "replay",
+      "default_http_status": 409,
+      "retryable": false,
+      "governance_stage": "Governance Evidence",
+      "governance_evidence": "conditional",
+      "description": "Deterministic replay was rejected because required evidence, authoritative inputs, Canonical State references, integrity checks, or governance interpretation could not be reproduced."
+    },
+    {
+      "code": "INTERNAL_ERROR",
+      "category": "implementation",
+      "default_http_status": 503,
+      "retryable": true,
+      "governance_stage": "HTTP Interface",
+      "governance_evidence": "conditional",
+      "description": "An implementation failure prevented the request from completing. This code SHALL NOT be used to mask deterministic governance failures that have a more specific rejection code."
+    }
+  ]
+}

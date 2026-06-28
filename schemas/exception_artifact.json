@@ -1,32 +1,34 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/exception_artifact.json",
-  "title": "ExceptionArtifact",
+  "$id": "https://agcp.example/schemas/exception_artifact.json",
+  "title": "Exception Artifact",
+  "description": "Schema for an AGCP governed exception artifact. Exception artifacts may modify constraint evaluation outcomes only when tenant-scoped, authority-backed, unexpired, applicable, and recorded in the governance decision basis.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "0.9.0"
-    },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
     },
     "exception_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 128
     },
-    "version": {
+    "artifact_release": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 64
+      "maxLength": 128,
+      "description": "Repository release or implementation release for this exception artifact."
     },
     "status": {
-      "$ref": "common.json#/$defs/artifact_status_enum"
+      "$ref": "common.json#/$defs/governance_artifact_status_enum"
     },
     "scope": {
       "type": "object",
+      "description": "Governance scope in which this exception may apply.",
       "additionalProperties": false,
       "properties": {
         "constraint_ids": {
@@ -49,6 +51,14 @@
           "maxItems": 256,
           "uniqueItems": true
         },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/policy_ref"
+          },
+          "maxItems": 64,
+          "uniqueItems": true
+        },
         "operation_types": {
           "type": "array",
           "items": {
@@ -68,8 +78,26 @@
           },
           "maxItems": 128,
           "uniqueItems": true
+        },
+        "governance_stages": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
+          },
+          "maxItems": 16,
+          "uniqueItems": true
         }
       }
+    },
+    "exception_effect": {
+      "type": "string",
+      "enum": [
+        "ALLOW_CONSTRAINT_OVERRIDE",
+        "REQUIRE_GOVERNED_REEVALUATION",
+        "DEFER_DECISION",
+        "RECORD_ONLY"
+      ],
+      "description": "Governed effect of the exception when applicable."
     },
     "expiration": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
@@ -83,12 +111,18 @@
           "approver": {
             "$ref": "common.json#/$defs/principal"
           },
+          "authority_lineage_ref": {
+            "$ref": "common.json#/$defs/authority_lineage_ref"
+          },
           "approved_at": {
             "$ref": "common.json#/$defs/timestamp_rfc3339"
           },
           "note": {
             "type": "string",
             "maxLength": 2048
+          },
+          "integrity_signature": {
+            "$ref": "common.json#/$defs/signature"
           }
         },
         "required": [
@@ -99,20 +133,37 @@
       "minItems": 1,
       "maxItems": 16
     },
-    "hash": {
+    "artifact_hash": {
       "$ref": "common.json#/$defs/hash_hex"
     },
-    "signature": {
+    "integrity_signature": {
       "$ref": "common.json#/$defs/signature"
+    },
+    "registry_ref": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "activated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "retired_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined exception metadata.",
+      "additionalProperties": true
     }
   },
   "required": [
-    "schema_version",
     "tenant_id",
     "exception_id",
-    "version",
     "status",
+    "exception_effect",
     "expiration",
-    "approvals"
+    "approvals",
+    "created_at"
   ]
 }

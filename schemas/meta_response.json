@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/meta_response.json",
-  "title": "MetaResponse",
+  "$id": "https://agcp.example/schemas/meta_response.json",
+  "title": "AGCP Metadata Response",
+  "description": "Metadata response for AGCP HTTP interface capability discovery. Specification versioning is managed by repository release tags; this schema does not embed supported_spec_versions.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -10,23 +11,19 @@
       "minLength": 1,
       "maxLength": 256
     },
-    "implementation_version": {
+    "implementation_release": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 64
+      "maxLength": 128,
+      "description": "Implementation release identifier. This is not the AGCP specification version."
     },
-    "supported_spec_versions": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 16
-      },
-      "minItems": 1,
-      "maxItems": 16,
-      "uniqueItems": true
+    "http_contract": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Identifier or artifact reference for the implemented AGCP HTTP contract."
     },
-    "supported_profiles": {
+    "supported_conformance_levels": {
       "type": "array",
       "items": {
         "type": "string",
@@ -34,13 +31,23 @@
           "L1",
           "L2",
           "L3",
-          "L4",
-          "L5"
+          "L4"
         ]
       },
       "minItems": 1,
-      "maxItems": 5,
+      "maxItems": 4,
       "uniqueItems": true
+    },
+    "supported_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "maxItems": 64,
+      "uniqueItems": true,
+      "description": "Implementation-supported AGCP capabilities, such as Proposal Qualification, Governance Decision Function, Execution Authorization, Commit Boundary, Continuation Integrity, Governance Evidence, Governance Self-Protection, or Autonomous Coordination."
     },
     "crypto_profiles": {
       "type": "array",
@@ -51,12 +58,20 @@
       },
       "maxItems": 16,
       "uniqueItems": true
+    },
+    "registry_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/registry_ref"
+      },
+      "maxItems": 32,
+      "uniqueItems": true,
+      "description": "Optional references to AGCP registries implemented by this deployment."
     }
   },
   "required": [
     "implementation_name",
-    "implementation_version",
-    "supported_spec_versions",
-    "supported_profiles"
+    "supported_conformance_levels",
+    "supported_capabilities"
   ]
 }

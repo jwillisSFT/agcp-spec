@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/policy_artifact.json",
+  "title": "Governance Policy Artifact",
+  "description": "Schema for an AGCP Governance Policy artifact. A policy artifact references a validated Policy Evaluation Module (PEM) artifact and defines the governance rules applicable within a tenant and governance domain.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "policy_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "artifact_release": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Repository release or implementation release for this policy artifact."
+    },
+    "status": {
+      "$ref": "common.json#/$defs/governance_artifact_status_enum"
+    },
+    "policy_hash": {
+      "$ref": "common.json#/$defs/hash_hex"
+    },
+    "artifact_ref": {
+      "$ref": "common.json#/$defs/uri"
+    },
+    "policy_module_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Identifier of the validated Policy Evaluation Module artifact used by this policy."
+    },
+    "constraint_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "invariant_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "effective_from": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "effective_until": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "activated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "retired_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined policy metadata.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "tenant_id",
+    "policy_id",
+    "policy_module_ref",
+    "status",
+    "artifact_ref",
+    "integrity_signature",
+    "created_at"
+  ]
+}

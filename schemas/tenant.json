@@ -1,26 +1,45 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/tenant.json",
-  "title": "Tenant",
+  "$id": "https://agcp.example/schemas/tenant.json",
+  "title": "AGCP Tenant",
+  "description": "Tenant definition for AGCP governance. Specification versioning is managed by repository releases and is not embedded in this schema.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "0.9.0"
-    },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
     },
     "state": {
       "$ref": "common.json#/$defs/tenant_state_enum"
     },
     "created_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "last_updated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "governance_configuration": {
+      "$ref": "common.json#/$defs/governance_configuration_ref"
+    },
+    "default_policy_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "default_constraint_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "default_invariant_registry": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined tenant metadata.",
+      "additionalProperties": true
     }
   },
   "required": [
-    "schema_version",
     "tenant_id",
     "state",
     "created_at"

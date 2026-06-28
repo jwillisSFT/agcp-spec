@@ -1,37 +1,43 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/constraint_artifact.json",
-  "title": "ConstraintArtifact",
+  "$id": "https://agcp.example/schemas/constraint_artifact.json",
+  "title": "Constraint Artifact",
+  "description": "Schema for an AGCP Constraint artifact. Constraint artifacts define deterministic governance constraints evaluated within Proposal Qualification, the Governance Decision Function, Commit Boundary processing, Governance Self-Protection, or other applicable AGCP stages.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "0.9.0"
-    },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
     },
     "constraint_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 128
     },
-    "version": {
+    "artifact_release": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 64
+      "maxLength": 128,
+      "description": "Repository release or implementation release for this constraint artifact."
     },
-    "type": {
+    "constraint_type": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 256
+      "maxLength": 256,
+      "description": "Constraint type identifier registered in registries/constraint-type-registry.json or an authorized extension registry."
     },
     "status": {
-      "$ref": "common.json#/$defs/artifact_status_enum"
+      "$ref": "common.json#/$defs/governance_artifact_status_enum"
+    },
+    "default_stage": {
+      "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
     },
     "scope": {
       "type": "object",
+      "description": "Governance scope in which this constraint applies.",
       "additionalProperties": false,
       "properties": {
         "operation_types": {
@@ -53,31 +59,65 @@
           },
           "maxItems": 128,
           "uniqueItems": true
+        },
+        "governance_stages": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
+          },
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/policy_ref"
+          },
+          "maxItems": 64,
+          "uniqueItems": true
         }
       }
     },
     "parameters": {
-      "type": "object"
+      "type": "object",
+      "description": "Deterministic constraint parameters. Parameters SHALL NOT require nondeterministic runtime inputs.",
+      "additionalProperties": true
     },
-    "effective_start": {
+    "effective_from": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "effective_end": {
+    "effective_until": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "hash": {
+    "artifact_hash": {
       "$ref": "common.json#/$defs/hash_hex"
     },
-    "signature": {
+    "integrity_signature": {
       "$ref": "common.json#/$defs/signature"
+    },
+    "registry_ref": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "activated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "retired_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined constraint metadata.",
+      "additionalProperties": true
     }
   },
   "required": [
-    "schema_version",
     "tenant_id",
     "constraint_id",
-    "version",
-    "type",
-    "status"
+    "constraint_type",
+    "status",
+    "created_at"
   ]
 }

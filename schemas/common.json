@@ -1,18 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/common.json",
+  "$id": "https://agcp.example/schemas/common.json",
   "title": "AGCP Common Types",
+  "description": "Shared JSON Schema definitions for AGCP-conformant schemas. Specification release versioning is managed by repository release tags; this schema intentionally does not embed a schema_version field.",
   "type": "object",
   "additionalProperties": false,
-  "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "0.9.0"
-    }
-  },
-  "required": [
-    "schema_version"
-  ],
   "$defs": {
     "uuid_like": {
       "type": "string",
@@ -20,6 +12,36 @@
       "maxLength": 128
     },
     "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "governance_domain_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "proposal_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "authorization_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "governance_evidence_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "artifact_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 128
@@ -36,12 +58,48 @@
       "type": "string",
       "format": "uri"
     },
-    "decision_enum": {
+    "qualification_outcome_enum": {
       "type": "string",
       "enum": [
-        "ACCEPT",
-        "REJECT",
-        "PENDING_HITL"
+        "Qualified Proposal",
+        "Structural Refusal"
+      ]
+    },
+    "governance_outcome_enum": {
+      "type": "string",
+      "enum": [
+        "Authorized",
+        "Denied",
+        "Structural Refusal",
+        "Pending Human Review",
+        "Deferred",
+        "Governed Re-evaluation Required"
+      ]
+    },
+    "execution_authorization_outcome_enum": {
+      "type": "string",
+      "enum": [
+        "Authorized for Commit Boundary Processing",
+        "Authorization Failure",
+        "Governed Re-evaluation Required"
+      ]
+    },
+    "commit_boundary_outcome_enum": {
+      "type": "string",
+      "enum": [
+        "Commit Successful",
+        "Commit Failed",
+        "Governed Re-evaluation Required"
+      ]
+    },
+    "continuation_outcome_enum": {
+      "type": "string",
+      "enum": [
+        "Continue Execution",
+        "DEGRADED",
+        "Suspend Execution",
+        "Resume Execution",
+        "Governed Termination"
       ]
     },
     "constraint_outcome_enum": {
@@ -75,14 +133,39 @@
         "DECOMMISSIONED"
       ]
     },
-    "artifact_status_enum": {
+    "governance_artifact_status_enum": {
       "type": "string",
       "enum": [
-        "DRAFT",
-        "ACTIVE",
-        "DEPRECATED",
-        "RETIRED"
+        "Registered",
+        "Validation Pending",
+        "Accepted",
+        "Rejected",
+        "Active",
+        "Retired",
+        "Governed Re-evaluation Required"
       ]
+    },
+    "governance_pipeline_stage_enum": {
+      "type": "string",
+      "enum": [
+        "Proposal Qualification",
+        "Governance Decision Function",
+        "Execution Authorization",
+        "Commit Boundary",
+        "Continuation Integrity",
+        "Governance Evidence",
+        "Tenant and Domain Isolation",
+        "Delegation and Authority Lineage",
+        "Cross-Domain Authority Isolation",
+        "Governance Self-Protection",
+        "Autonomous Coordination"
+      ]
+    },
+    "rejection_code": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "A rejection code registered in registries/rejection-code-registry.json."
     },
     "signature": {
       "type": "object",
@@ -141,6 +224,144 @@
         "principal_type"
       ]
     },
+    "provenance": {
+      "type": "object",
+      "description": "Provenance envelope for governance-significant submitted inputs.",
+      "additionalProperties": false,
+      "properties": {
+        "signer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "signature": {
+          "$ref": "#/$defs/signature"
+        },
+        "signed_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "signer",
+        "signature",
+        "signed_at"
+      ]
+    },
+    "policy_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "policy_release": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "policy_hash": {
+          "$ref": "#/$defs/hash_hex"
+        }
+      },
+      "required": [
+        "policy_id"
+      ]
+    },
+    "canonical_state_ref": {
+      "type": "object",
+      "description": "Reference to authoritative Canonical State used for governance processing.",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_state_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "canonical_state_hash": {
+          "$ref": "#/$defs/hash_hex"
+        },
+        "resolved_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "canonical_state_id"
+      ]
+    },
+    "authority_lineage_ref": {
+      "type": "object",
+      "description": "Reference to Authority Lineage used for governance processing.",
+      "additionalProperties": false,
+      "properties": {
+        "authority_lineage_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "authority_lineage_hash": {
+          "$ref": "#/$defs/hash_hex"
+        }
+      },
+      "required": [
+        "authority_lineage_id"
+      ]
+    },
+    "governance_context_ref": {
+      "type": "object",
+      "description": "Reference to Governance Context associated with a Proposal.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_context_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "governance_context_hash": {
+          "$ref": "#/$defs/hash_hex"
+        }
+      },
+      "required": [
+        "governance_context_id"
+      ]
+    },
+    "governance_configuration_ref": {
+      "type": "object",
+      "description": "Reference to applicable governance configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_configuration_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "governance_configuration_hash": {
+          "$ref": "#/$defs/hash_hex"
+        }
+      },
+      "required": [
+        "governance_configuration_id"
+      ]
+    },
+    "stage_evidence_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stage": {
+          "$ref": "#/$defs/governance_pipeline_stage_enum"
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "stage",
+        "ref"
+      ]
+    },
     "registry_ref": {
       "type": "object",
       "additionalProperties": false,
@@ -150,18 +371,18 @@
           "minLength": 1,
           "maxLength": 256
         },
-        "version": {
+        "release": {
           "type": "string",
           "minLength": 1,
-          "maxLength": 64
+          "maxLength": 128,
+          "description": "Repository release tag or registry release identifier."
         },
         "hash": {
           "$ref": "#/$defs/hash_hex"
         }
       },
       "required": [
-        "name",
-        "version"
+        "name"
       ]
     }
   }

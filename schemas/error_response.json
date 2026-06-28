@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/error_response.json",
-  "title": "ErrorResponse",
+  "$id": "https://agcp.example/schemas/error_response.json",
+  "title": "AGCP ErrorResponse",
+  "description": "Standard error response for AGCP HTTP interfaces. Rejection codes SHALL be defined by the AGCP rejection-code registry.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -10,21 +11,50 @@
       "additionalProperties": false,
       "properties": {
         "rejection_code": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+          "$ref": "common.json#/$defs/rejection_code"
         },
         "message": {
           "type": "string",
           "maxLength": 4096
         },
         "details": {
-          "type": "object"
+          "type": "object",
+          "description": "Implementation-defined diagnostic information.",
+          "additionalProperties": true
+        },
+        "http_status": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 599
+        },
+        "governance_stage": {
+          "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "governance_evidence_generated": {
+          "type": "boolean",
+          "description": "Indicates whether Governance Evidence was generated for this outcome."
         }
       },
       "required": [
         "rejection_code",
         "message"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "governance_stage"
+            ]
+          },
+          "then": {
+            "required": [
+              "governance_evidence_generated"
+            ]
+          }
+        }
       ]
     }
   },

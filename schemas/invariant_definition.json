@@ -1,73 +1,138 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/spec/0.9.0/schemas/invariant_definition.json",
-  "title": "InvariantDefinition",
+  "$id": "https://agcp.example/schemas/invariant_definition.json",
+  "title": "Invariant Definition",
+  "description": "Schema for an AGCP invariant definition artifact. Invariant definitions specify deterministic governance invariants evaluated across AGCP governance stages, including Governance Decision Function processing, Execution Authorization, Commit Boundary processing, Continuation Integrity, Governance Evidence, and Governance Self-Protection.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "0.9.0"
-    },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
     },
     "invariant_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 128
     },
-    "version": {
+    "artifact_release": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 64
+      "maxLength": 128,
+      "description": "Repository release or implementation release for this invariant definition."
     },
     "invariant_type": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 256
+      "maxLength": 256,
+      "description": "Invariant type identifier registered in registries/invariant-type-registry.json or an authorized extension registry."
     },
     "enforcement_level": {
       "$ref": "common.json#/$defs/invariant_enforcement_enum"
     },
+    "default_stage": {
+      "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
+    },
     "evaluation_ref": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 512
+      "maxLength": 512,
+      "description": "Deterministic evaluation reference, rule identifier, module reference, or implementation-independent evaluation handle."
     },
     "evaluation_parameters": {
-      "type": "object"
+      "type": "object",
+      "description": "Deterministic invariant evaluation parameters. Parameters SHALL NOT require nondeterministic runtime inputs.",
+      "additionalProperties": true
     },
     "rejection_code": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128
+      "$ref": "common.json#/$defs/rejection_code"
     },
     "status": {
-      "$ref": "common.json#/$defs/artifact_status_enum"
+      "$ref": "common.json#/$defs/governance_artifact_status_enum"
     },
-    "effective_start": {
+    "scope": {
+      "type": "object",
+      "description": "Governance scope in which this invariant applies.",
+      "additionalProperties": false,
+      "properties": {
+        "operation_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "target_surfaces": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "governance_stages": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
+          },
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/policy_ref"
+          },
+          "maxItems": 64,
+          "uniqueItems": true
+        }
+      }
+    },
+    "effective_from": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "effective_end": {
+    "effective_until": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "hash": {
+    "artifact_hash": {
       "$ref": "common.json#/$defs/hash_hex"
     },
-    "signature": {
+    "integrity_signature": {
       "$ref": "common.json#/$defs/signature"
+    },
+    "registry_ref": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "activated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "retired_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined invariant metadata.",
+      "additionalProperties": true
     }
   },
   "required": [
-    "schema_version",
     "tenant_id",
     "invariant_id",
-    "version",
     "invariant_type",
     "enforcement_level",
     "evaluation_ref",
     "rejection_code",
-    "status"
+    "status",
+    "created_at"
   ]
 }
