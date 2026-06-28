@@ -1,207 +1,441 @@
 {
-  "suite_id": "agcp_conformance_v0_9_0_extended",
-  "generated_at": "2026-02-25T17:46:47Z",
-  "assertions": [
+  "suite_id": "agcp_conformance",
+  "artifact_type": "conformance_harness_checks",
+  "status": "informational_executable_mapping",
+  "versioning": {
+    "model": "repository_release",
+    "embedded_spec_version": false
+  },
+  "generated_at": "2026-06-28T19:58:27Z",
+  "traceability_model": {
+    "authoritative_chain": [
+      "Normative Specification",
+      "Normative Statement (NS)",
+      "Conformance Requirement (CR)",
+      "Test Case (TC)"
+    ],
+    "harness_layer": "Harness checks and test vectors provide executable realization of Test Cases and SHALL NOT introduce independent normative requirements."
+  },
+  "checks": [
     {
-      "assertion_id": "A-COMMIT-GATING",
-      "description": "Commit MUST succeed only when action state is AUTHORIZED AND ledger_authorization_ref matches; otherwise it MUST return conflict and MUST NOT append.",
+      "check_id": "CHECK-PROPOSAL-QUALIFICATION",
+      "validated_capability": "Proposal Qualification accepts valid proposals and refuses malformed or inadmissible proposals.",
+      "severity": "MUST",
       "applies_to": {
-        "endpoints": [
-          "/agcp/v1/executions/commit"
+        "pipeline_stages": [
+          "Proposal Qualification"
+        ],
+        "schemas": [
+          "proposal_submit_request.json",
+          "proposal_view.json",
+          "error_response.json"
+        ],
+        "test_vectors": [
+          "TV-PROP-001",
+          "TV-PROP-002"
         ]
       },
-      "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
-        ],
-        "notes": "Commit gating rule reflected by commit tests."
-      }
+      "expected_behavior": [
+        "Valid proposals proceed to governance processing.",
+        "Structurally invalid proposals are refused or rejected using the applicable rejection code.",
+        "Proposal Qualification produces Governance Evidence where required.",
+        "No Execution Authorization or Commit Boundary processing occurs for structurally refused proposals."
+      ],
+      "evidence_required": [
+        "Proposal record",
+        "Proposal Qualification outcome",
+        "Governance Evidence reference",
+        "Applicable rejection code"
+      ]
     },
     {
-      "assertion_id": "A-COSIGN-GATING",
-      "description": "Cosign MUST be accepted only when action state is PENDING_HITL and token is valid and unexpired; otherwise MUST return conflict and MUST NOT append.",
+      "check_id": "CHECK-GOVERNANCE-DECISION",
+      "validated_capability": "Governance Decision Function produces deterministic governance outcomes from qualified proposals and authoritative inputs.",
+      "severity": "MUST",
       "applies_to": {
-        "endpoints": [
-          "/agcp/v1/actions/{action_id}/cosign"
+        "pipeline_stages": [
+          "Governance Decision Function"
+        ],
+        "schemas": [
+          "governance_decision_result.json",
+          "constraint_evaluation.json",
+          "invariant_evaluation.json",
+          "governance_evidence.json"
+        ],
+        "test_vectors": [
+          "TV-GOV-001",
+          "TV-GOV-002",
+          "TV-GOV-003"
         ]
       },
-      "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
-        ],
-        "notes": "Cosign gating rule reflected by cosign tests."
-      }
+      "expected_behavior": [
+        "Authorized decisions are produced only when applicable governance policy permits the Proposal.",
+        "Denied decisions are produced when applicable governance policy rejects the Proposal.",
+        "Pending Human Review is produced when governance policy requires Human Review.",
+        "Governance decisions are deterministic for identical authoritative inputs."
+      ],
+      "evidence_required": [
+        "Governance Decision Result",
+        "Policy reference",
+        "Canonical State reference",
+        "Authority Lineage reference",
+        "Governance Evidence reference"
+      ]
     },
     {
-      "assertion_id": "A-DERIVATION",
-      "description": "Returned state MUST equal state derived from ledger history.",
-      "applies_to": {
-        "responses": {
-          "require_state_matches_derived_from_ledger": true,
-          "derivation_rules": [
-            {
-              "if_stage_exists": "EXECUTION_COMMITTED",
-              "state": "EXECUTED"
-            },
-            {
-              "else_if_stage_exists": "EXECUTION_AUTHORIZED",
-              "state": "AUTHORIZED"
-            },
-            {
-              "else_if_latest_decision": {
-                "type": "REJECT"
-              },
-              "state": "REJECTED"
-            },
-            {
-              "else_if_latest_decision": {
-                "type": "PENDING_HITL"
-              },
-              "state": "PENDING_HITL"
-            },
-            {
-              "else_if_latest_decision": {
-                "type": "ACCEPT"
-              },
-              "state": "AUTHORIZED"
-            },
-            {
-              "else": null,
-              "state": "__NON_OBSERVABLE__"
-            }
-          ]
-        },
-        "ledger": {}
-      },
+      "check_id": "CHECK-HUMAN-REVIEW",
+      "validated_capability": "Human Review is enforced when required and cannot be bypassed before Execution Authorization.",
       "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
-        ],
-        "notes": "Derived from suite-wide conformance assertions embedded in the harness."
-      }
-    },
-    {
-      "assertion_id": "A-IDEMPOTENCY-NO-MUTATION",
-      "description": "Idempotency conflict (same Idempotency-Key, different payload) MUST NOT append to the ledger or mutate any existing action.",
       "applies_to": {
-        "endpoints": [
-          "/agcp/v1/actions/submit"
+        "pipeline_stages": [
+          "Human Review"
         ],
-        "when": "rejection_code == IDEMPOTENCY_CONFLICT"
-      },
-      "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
+        "schemas": [
+          "human_review_artifact.json",
+          "governance_evidence.json"
         ],
-        "notes": "Reinforces ledger_no_append requirement for idempotency conflicts."
-      }
-    },
-    {
-      "assertion_id": "A-ORDERING",
-      "description": "When ledger_append is expected, stage ordering MUST match exactly.",
-      "applies_to": {
-        "responses": {},
-        "ledger": {
-          "enforce_exact_order_on_expected_append": true
-        }
-      },
-      "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
-        ],
-        "notes": "Derived from suite-wide conformance assertions embedded in the harness."
-      }
-    },
-    {
-      "assertion_id": "A-STATE-NO-SUBMITTED",
-      "description": "Canonical responses MUST NOT expose SUBMITTED.",
-      "applies_to": {
-        "responses": {
-          "must_not_include_state": [
-            "SUBMITTED",
-            "SUBMITTED_TRANSIENT"
-          ]
-        },
-        "ledger": {}
-      },
-      "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
-        ],
-        "notes": "Derived from suite-wide conformance assertions embedded in the harness."
-      }
-    },
-    {
-      "assertion_id": "A-TENANT-ACTIVE-GATING",
-      "description": "Operations MUST enforce tenant ACTIVE gating where required (submit and commit at minimum).",
-      "applies_to": {
-        "endpoints": [
-          "/agcp/v1/actions/submit",
-          "/agcp/v1/executions/commit"
+        "test_vectors": [
+          "TV-HR-001",
+          "TV-HR-002",
+          "TV-HR-003"
         ]
       },
-      "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
-        ],
-        "notes": "Tenant state invalid tests cover this behavior."
-      }
+      "expected_behavior": [
+        "Partial Human Review does not satisfy quorum.",
+        "Valid Human Review satisfying required roles permits progression to Execution Authorization.",
+        "Invalid, expired, unauthorized, or replayed Human Review artifacts are rejected.",
+        "Human Review decisions are bound to the applicable Proposal, tenant, and Authority Lineage."
+      ],
+      "evidence_required": [
+        "Human Review Artifact",
+        "Reviewer identity",
+        "Authority Lineage reference",
+        "Quorum status",
+        "Governance Evidence reference"
+      ]
     },
     {
-      "assertion_id": "A-TERMINAL-NO-TRANSITION",
-      "description": "Terminal states (REJECTED, EXECUTED) MUST reject further state transitions; no ledger append is permitted for transition attempts.",
+      "check_id": "CHECK-EXECUTION-AUTHORIZATION",
+      "validated_capability": "Execution Authorization is produced only after required governance prerequisites are satisfied.",
+      "severity": "MUST",
       "applies_to": {
-        "states": [
-          "REJECTED",
-          "EXECUTED"
+        "pipeline_stages": [
+          "Execution Authorization"
         ],
-        "operations": [
-          "cosign",
-          "commit",
-          "submit-replay"
+        "schemas": [
+          "execution_authorization_view.json",
+          "governance_evidence.json"
+        ],
+        "test_vectors": [
+          "TV-AUTH-001",
+          "TV-AUTH-002"
         ]
       },
+      "expected_behavior": [
+        "Execution Authorization succeeds only after valid Governance Decision and required Human Review completion.",
+        "Execution Authorization fails when required authority, Canonical State, governance configuration, tenant state, or Governance Domain conditions are not satisfied.",
+        "Execution Authorization does not itself perform execution.",
+        "Execution Authorization produces Governance Evidence and an ordered ledger entry where required."
+      ],
+      "evidence_required": [
+        "Execution Authorization artifact",
+        "Authorization outcome",
+        "Proposal reference",
+        "Authority Lineage reference",
+        "Canonical State reference",
+        "Governance Evidence reference"
+      ]
+    },
+    {
+      "check_id": "CHECK-COMMIT-BOUNDARY",
+      "validated_capability": "Commit Boundary processing gates governance-significant execution and validates current governance conditions immediately before commit.",
       "severity": "MUST",
-      "source": {
-        "spec_documents": [
-          "AGCP Core Specification v0.9.0",
-          "AGCP HTTP Interface Specification v0.9.0",
-          "AGCP Policy Evaluation Contract (PEC) Specification v0.9.0",
-          "AGCP Conformance Harness Spec.yml"
+      "applies_to": {
+        "pipeline_stages": [
+          "Commit Boundary"
         ],
-        "notes": "Ensures replay and terminal-safety behavior."
-      }
+        "schemas": [
+          "commit_boundary_request.json",
+          "commit_boundary_result.json",
+          "governance_evidence.json"
+        ],
+        "test_vectors": [
+          "TV-CB-001",
+          "TV-CB-002",
+          "TV-CB-003"
+        ]
+      },
+      "expected_behavior": [
+        "Successful commit requires valid Execution Authorization.",
+        "Commit Boundary processing rejects missing, invalid, or stale authorization.",
+        "Commit Boundary processing validates current governance conditions.",
+        "No governance-significant execution occurs before successful Commit Boundary processing.",
+        "Successful Commit Boundary processing is recorded in the Append-Only Governance Ledger."
+      ],
+      "evidence_required": [
+        "Commit Boundary request",
+        "Commit Boundary result",
+        "Execution Authorization reference",
+        "Canonical State reference",
+        "Governance Evidence reference",
+        "Ledger entry reference"
+      ]
+    },
+    {
+      "check_id": "CHECK-GOVERNANCE-EVIDENCE",
+      "validated_capability": "Governance Evidence is produced, linked, attributable, integrity-protected, and sufficient for audit and deterministic replay.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Governance Evidence"
+        ],
+        "schemas": [
+          "governance_evidence.json"
+        ],
+        "test_vectors": [
+          "TV-LEDGER-001",
+          "TV-LEDGER-003",
+          "TV-META-003"
+        ]
+      },
+      "expected_behavior": [
+        "Governance Evidence conforms to the published schema.",
+        "Governance Evidence includes required references to tenant, proposal, governance stage, outcome, provenance, and ledger reference.",
+        "Governance Evidence remains attributable and integrity-protected.",
+        "Governance Evidence supports deterministic replay and independent verification."
+      ],
+      "evidence_required": [
+        "governance_evidence_id",
+        "tenant_id",
+        "proposal_id",
+        "governance_stage",
+        "stage_outcome",
+        "integrity_signature",
+        "ledger_reference"
+      ]
+    },
+    {
+      "check_id": "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+      "validated_capability": "Append-Only Governance Ledger preserves immutable ordered governance history.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Append-Only Governance Ledger"
+        ],
+        "schemas": [
+          "governance_evidence.json"
+        ],
+        "test_vectors": [
+          "TV-LEDGER-001",
+          "TV-LEDGER-002",
+          "TV-LEDGER-003",
+          "TV-META-001"
+        ]
+      },
+      "expected_behavior": [
+        "Governance-significant events are recorded in ledger sequence order.",
+        "Ledger entries are immutable and append-only.",
+        "Ledger sequence order is authoritative.",
+        "Timestamp ordering is not accepted as authoritative for Canonical State derivation.",
+        "Tampered, deleted, replaced, or reordered ledger histories are rejected or produce non-equivalent results."
+      ],
+      "evidence_required": [
+        "ledger_entry_id",
+        "ledger_sequence_value",
+        "artifact_reference",
+        "governance_evidence_reference",
+        "previous_ledger_entry_hash where implemented"
+      ]
+    },
+    {
+      "check_id": "CHECK-CANONICAL-STATE",
+      "validated_capability": "Canonical State is derived from ordered ledger history or a verifiable materialized state reproducible from that history.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Canonical State Derivation",
+          "Deterministic Replay"
+        ],
+        "schemas": [
+          "governance_evidence.json"
+        ],
+        "test_vectors": [
+          "TV-LEDGER-001",
+          "TV-LEDGER-002",
+          "TV-META-003"
+        ]
+      },
+      "expected_behavior": [
+        "Canonical State is reproducible from ordered Append-Only Governance Ledger entries.",
+        "Materialized Canonical State views are verifiable against ordered ledger history.",
+        "Reordered ledger histories are rejected or produce a non-equivalent Canonical State.",
+        "Timestamp ordering is not accepted as a substitute for ledger sequence ordering."
+      ],
+      "evidence_required": [
+        "Canonical State reference",
+        "Ordered ledger entries",
+        "Governance Evidence references",
+        "Ledger reconstruction evidence"
+      ]
+    },
+    {
+      "check_id": "CHECK-IDEMPOTENCY",
+      "validated_capability": "Repeated proposal submission with the same idempotency key or replay-protection mechanism does not create conflicting governance state.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Proposal Qualification",
+          "Governance Evidence",
+          "Append-Only Governance Ledger"
+        ],
+        "test_vectors": [
+          "TV-META-002"
+        ]
+      },
+      "expected_behavior": [
+        "Identical replay produces an equivalent response.",
+        "Conflicting replay is rejected.",
+        "No duplicate governance-significant ledger event is appended unless explicitly permitted by idempotency semantics.",
+        "Governance Evidence remains consistent."
+      ],
+      "evidence_required": [
+        "Idempotency or replay-protection key",
+        "Proposal reference",
+        "Governance Evidence reference",
+        "Ledger entries before and after replay"
+      ]
+    },
+    {
+      "check_id": "CHECK-TENANT-STATE-GATING",
+      "validated_capability": "Tenant lifecycle state gates proposal submission, Execution Authorization, and Commit Boundary processing.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Tenant and Governance Domain Isolation",
+          "Proposal Qualification",
+          "Execution Authorization",
+          "Commit Boundary"
+        ],
+        "schemas": [
+          "tenant.json"
+        ],
+        "test_vectors": [
+          "TV-PROP-001",
+          "TV-PROP-002",
+          "TV-AUTH-002",
+          "TV-CB-003"
+        ]
+      },
+      "expected_behavior": [
+        "ACTIVE tenants may perform permitted governance operations.",
+        "PROVISIONED, SUSPENDED, or DECOMMISSIONED tenants are restricted according to the Core Specification.",
+        "Tenant state violations are rejected using the applicable rejection code.",
+        "Tenant state enforcement is deterministic and tenant-scoped."
+      ],
+      "evidence_required": [
+        "Tenant record",
+        "Tenant state",
+        "Governance Evidence reference",
+        "Applicable rejection code"
+      ]
+    },
+    {
+      "check_id": "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+      "validated_capability": "Tenant and Governance Domain isolation prevent unauthorized cross-boundary governance operations.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Tenant and Governance Domain Isolation",
+          "Cross-Domain Authority Isolation"
+        ],
+        "test_vectors": [
+          "TV-XTEN-001",
+          "TV-XTEN-002",
+          "TV-XDOM-001"
+        ]
+      },
+      "expected_behavior": [
+        "Unauthorized cross-tenant operations are rejected.",
+        "Unauthorized cross-domain operations are rejected where Governance Domains are implemented.",
+        "Cross-boundary operations do not mutate unauthorized governance state.",
+        "Cross-boundary operations do not append successful unauthorized Commit Boundary entries.",
+        "Tenant and Governance Domain non-disclosure behavior is preserved where applicable."
+      ],
+      "evidence_required": [
+        "Tenant context",
+        "Governance Domain context",
+        "Access decision",
+        "Applicable rejection code",
+        "Governance Evidence reference where recorded"
+      ]
+    },
+    {
+      "check_id": "CHECK-PROVENANCE",
+      "validated_capability": "Governance-significant requests and artifacts include valid provenance and reject invalid provenance.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Proposal Qualification",
+          "Human Review",
+          "Execution Authorization",
+          "Commit Boundary",
+          "Governance Evidence"
+        ],
+        "schemas": [
+          "common.json",
+          "governance_evidence.json"
+        ],
+        "test_vectors": [
+          "TV-PROP-001",
+          "TV-PROP-002",
+          "TV-HR-003"
+        ]
+      },
+      "expected_behavior": [
+        "Valid provenance is accepted when otherwise authorized.",
+        "Invalid provenance is rejected before governance processing continues.",
+        "Provenance is tenant-scoped.",
+        "Replay protection is enforced for provenance-bearing artifacts."
+      ],
+      "evidence_required": [
+        "Provenance object",
+        "Signature verification result",
+        "Replay-protection result",
+        "Applicable rejection code"
+      ]
+    },
+    {
+      "check_id": "CHECK-REGISTRIES",
+      "validated_capability": "Governance processing uses published registries and rejects unknown registered values.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Governance Decision Function",
+          "Policy Evaluation Contract"
+        ],
+        "registries": [
+          "constraint-type-registry.json",
+          "invariant-type-registry.json",
+          "rejection-code-registry.json"
+        ]
+      },
+      "expected_behavior": [
+        "Unknown constraint types are rejected.",
+        "Unknown invariant types are rejected.",
+        "Referenced rejection codes exist in the rejection-code registry.",
+        "Registry lookup is deterministic and tenant-scoped where applicable."
+      ],
+      "evidence_required": [
+        "Registry reference",
+        "Registry lookup result",
+        "Applicable rejection code"
+      ]
     }
   ],
   "notes": [
-    "This file is generated from the harness 'assertions' block and augmented with a small set of common conformance assertions."
+    "This file replaces the legacy assertions.json model with executable harness checks.",
+    "check_id values are harness-local identifiers and are not an independent normative traceability layer.",
+    "The authoritative traceability chain remains Normative Specification -> NS -> CR -> TC.",
+    "Harness checks SHALL remain synchronized with the Requirements Traceability Matrix, conformance test cases, and conformance test vectors."
   ]
 }
