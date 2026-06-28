@@ -15,6 +15,8 @@ governance-significant events and provides the foundation for governance
 integrity, deterministic replay, auditability, and evidence
 preservation.
 
+Governance Evidence provides the canonical description and cryptographic proof of each governance event, while the ordered Append-Only Governance Ledger provides the authoritative ordering and persistence required for deterministic Canonical State derivation.
+
 The ledger records governance events including, but not limited to:
 
 -   Proposal submission
@@ -156,9 +158,11 @@ Evidence.
 
 Ledger entries SHALL reference the associated Governance Evidence.
 
-The Governance Evidence remains the canonical description of the
-governance event, while the ledger provides immutable ordering and
-preservation.
+Governance Evidence describes and cryptographically proves individual governance events.
+
+The ordered Append-Only Governance Ledger establishes the authoritative ordering and immutable persistence of those governance events.
+
+Canonical State SHALL be derived from the ordered Append-Only Governance Ledger together with the Governance Evidence referenced by each ledger entry.
 
 ## 13. Replay
 
