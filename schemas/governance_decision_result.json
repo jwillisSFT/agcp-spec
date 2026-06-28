@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/governance_decision_result.json",
+  "title": "Governance Decision Result",
+  "description": "Canonical result produced by the Governance Decision Function following successful Proposal Qualification. This schema captures the authoritative governance decision prior to Execution Authorization and Commit Boundary processing.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": {
+      "$ref": "common.json#/$defs/proposal_id"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "decision": {
+      "$ref": "common.json#/$defs/governance_outcome_enum"
+    },
+    "decision_timestamp": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "policy_ref": {
+      "$ref": "common.json#/$defs/policy_ref"
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "constraint_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "constraint_evaluation.json"
+      },
+      "description": "Results of all evaluated constraints."
+    },
+    "invariant_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "invariant_evaluation.json"
+      },
+      "description": "Results of all evaluated invariants."
+    },
+    "required_human_review_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Required reviewer roles when the decision outcome is Pending Human Review."
+    },
+    "rejection_code": {
+      "$ref": "common.json#/$defs/rejection_code"
+    },
+    "governance_evidence_ref": {
+      "$ref": "common.json#/$defs/stage_evidence_ref"
+    },
+    "decision_basis": {
+      "type": "object",
+      "description": "Implementation-independent explanation of the authoritative basis for the governance decision.",
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "proposal_id",
+    "tenant_id",
+    "decision",
+    "decision_timestamp",
+    "constraint_evaluations",
+    "invariant_evaluations",
+    "governance_evidence_ref"
+  ]
+}

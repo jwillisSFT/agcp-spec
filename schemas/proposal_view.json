@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/proposal_view.json",
+  "title": "Proposal View",
+  "description": "Canonical externally observable view of an AGCP Proposal and its governance lifecycle. This schema summarizes Proposal Qualification, Governance Decision Function processing, Execution Authorization status, Commit Boundary status, and references to Governance Evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": {
+      "$ref": "common.json#/$defs/proposal_id"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "qualification_outcome": {
+      "$ref": "common.json#/$defs/qualification_outcome_enum"
+    },
+    "governance_decision": {
+      "$ref": "common.json#/$defs/governance_outcome_enum"
+    },
+    "execution_authorization": {
+      "$ref": "common.json#/$defs/execution_authorization_outcome_enum"
+    },
+    "commit_boundary_outcome": {
+      "$ref": "common.json#/$defs/commit_boundary_outcome_enum"
+    },
+    "continuation_outcome": {
+      "$ref": "common.json#/$defs/continuation_outcome_enum"
+    },
+    "policy_ref": {
+      "$ref": "common.json#/$defs/policy_ref"
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "common.json#/$defs/governance_configuration_ref"
+    },
+    "governance_decision_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Reference to the Governance Decision Result associated with this Proposal."
+    },
+    "execution_authorization_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Reference to the Execution Authorization associated with this Proposal."
+    },
+    "commit_boundary_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Reference to the Commit Boundary result associated with this Proposal."
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/stage_evidence_ref"
+      },
+      "maxItems": 128,
+      "uniqueItems": true,
+      "description": "References to Governance Evidence generated throughout the Proposal lifecycle."
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "last_updated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined metadata that SHALL NOT alter normative governance semantics.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "proposal_id",
+    "tenant_id",
+    "qualification_outcome",
+    "governance_decision",
+    "governance_evidence_refs",
+    "created_at"
+  ]
+}

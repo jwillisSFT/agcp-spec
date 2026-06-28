@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/execution_authorization_view.json",
+  "title": "Execution Authorization View",
+  "description": "Externally observable view of an AGCP Execution Authorization. Execution Authorization validates whether an authorized governance decision remains eligible for Commit Boundary processing; it does not itself execute the Action.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "authorization_id": {
+      "$ref": "common.json#/$defs/authorization_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "proposal_id": {
+      "$ref": "common.json#/$defs/proposal_id"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "authorization_outcome": {
+      "$ref": "common.json#/$defs/execution_authorization_outcome_enum"
+    },
+    "authorized_for_commit_boundary": {
+      "type": "boolean",
+      "description": "True only when authorization_outcome is Authorized for Commit Boundary Processing."
+    },
+    "governance_decision_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Reference to the Governance Decision Result that forms the basis for this Execution Authorization."
+    },
+    "policy_ref": {
+      "$ref": "common.json#/$defs/policy_ref"
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "common.json#/$defs/governance_configuration_ref"
+    },
+    "authorization_timestamp": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "expires_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339",
+      "description": "Optional expiration time after which this authorization SHALL NOT be used for Commit Boundary processing."
+    },
+    "consumed_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339",
+      "description": "Timestamp at which this authorization was consumed by successful Commit Boundary processing, if applicable."
+    },
+    "rejection_code": {
+      "$ref": "common.json#/$defs/rejection_code"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/stage_evidence_ref"
+      },
+      "uniqueItems": true,
+      "maxItems": 64
+    },
+    "authorization_basis": {
+      "type": "object",
+      "description": "Implementation-independent basis for the authorization outcome.",
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined metadata that SHALL NOT alter normative authorization semantics.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "authorization_id",
+    "tenant_id",
+    "proposal_id",
+    "authorization_outcome",
+    "authorized_for_commit_boundary",
+    "authorization_timestamp",
+    "governance_evidence_refs"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/commit_boundary_request.json",
+  "title": "Commit Boundary Request",
+  "description": "Request schema for invoking AGCP Commit Boundary processing. Commit Boundary processing verifies that authoritative Execution Authorization, Canonical State, Authority Lineage, Governance Context, tenant/domain constraints, and governance configuration remain valid immediately before the governed Action may become operationally real.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "proposal_id": {
+      "$ref": "common.json#/$defs/proposal_id"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "execution_authorization_ref": {
+      "$ref": "common.json#/$defs/authorization_id",
+      "description": "Identifier of the authoritative Execution Authorization that must be bound to the Action at Commit Boundary processing."
+    },
+    "governance_decision_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Reference to the Governance Decision Result that formed the basis for Execution Authorization."
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "common.json#/$defs/governance_configuration_ref"
+    },
+    "execution_context": {
+      "type": "object",
+      "description": "Execution context to be validated against the authorized Governance Context and Action Representation before commit. This context SHALL NOT alter the qualified Action Representation.",
+      "additionalProperties": true
+    },
+    "action_representation_hash": {
+      "$ref": "common.json#/$defs/hash_hex",
+      "description": "Optional integrity hash of the qualified Action Representation used to detect mutation before Commit Boundary processing."
+    },
+    "request_timestamp": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined request metadata that SHALL NOT alter normative commit semantics.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "tenant_id",
+    "proposal_id",
+    "action_id",
+    "execution_authorization_ref",
+    "execution_context",
+    "provenance"
+  ]
+}

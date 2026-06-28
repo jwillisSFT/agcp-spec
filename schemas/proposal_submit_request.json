@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/proposal_submit_request.json",
+  "title": "Proposal Submit Request",
+  "description": "Schema for submitting a governance-significant Proposal to an AGCP-conformant implementation. Proposal submission initiates Proposal Qualification and subsequent governance processing.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "proposal_id": {
+      "$ref": "common.json#/$defs/proposal_id",
+      "description": "Client-supplied or caller-visible Proposal identifier. Implementations MAY assign this if omitted, provided deterministic idempotency behavior is preserved."
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id",
+      "description": "Identifier for the governance-significant Action proposed by this request. Implementations MAY assign this if omitted, provided deterministic idempotency behavior is preserved."
+    },
+    "policy_ref": {
+      "$ref": "common.json#/$defs/policy_ref"
+    },
+    "action_representation": {
+      "type": "object",
+      "description": "Canonical Action Representation submitted for governance processing. This object is intentionally domain-specific and SHALL be evaluated only through applicable AGCP governance processing.",
+      "additionalProperties": true
+    },
+    "governance_context": {
+      "type": "object",
+      "description": "Governance Context associated with the Proposal. It SHALL include all context required by applicable policy, Canonical State resolution, authority evaluation, and conformance assessment.",
+      "additionalProperties": true,
+      "properties": {
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "authority_lineage_ref": {
+          "$ref": "common.json#/$defs/authority_lineage_ref"
+        },
+        "governance_configuration_ref": {
+          "$ref": "common.json#/$defs/governance_configuration_ref"
+        },
+        "request_context": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "submitted_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "client_request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Optional client-side request correlation identifier. This is not a substitute for HTTP Idempotency-Key semantics."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined metadata that SHALL NOT alter normative governance semantics.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "tenant_id",
+    "action_representation",
+    "governance_context",
+    "provenance"
+  ]
+}

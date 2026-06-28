@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/governance_artifact_view.json",
+  "title": "Governance Artifact View",
+  "description": "Canonical externally observable view of an AGCP governance artifact. This schema provides a unified read model for policy artifacts, Policy Evaluation Module artifacts, constraint artifacts, invariant definitions, exception artifacts, and other governance-significant artifacts.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "$ref": "common.json#/$defs/artifact_id"
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "Policy Evaluation Module",
+        "Governance Policy",
+        "Constraint",
+        "Invariant",
+        "Exception",
+        "Governance Configuration",
+        "Registry",
+        "Other"
+      ]
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "artifact_status": {
+      "$ref": "common.json#/$defs/governance_artifact_status_enum"
+    },
+    "artifact_release": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Repository release, implementation release, or artifact release identifier."
+    },
+    "artifact_ref": {
+      "$ref": "common.json#/$defs/uri"
+    },
+    "artifact_hash": {
+      "$ref": "common.json#/$defs/hash_hex"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "policy_ref": {
+      "$ref": "common.json#/$defs/policy_ref"
+    },
+    "registry_ref": {
+      "$ref": "common.json#/$defs/registry_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "common.json#/$defs/governance_configuration_ref"
+    },
+    "effective_from": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "effective_until": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "activated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "retired_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/stage_evidence_ref"
+      },
+      "maxItems": 128,
+      "uniqueItems": true,
+      "description": "Governance Evidence references associated with artifact validation, activation, rejection, retirement, or governed re-evaluation."
+    },
+    "artifact_summary": {
+      "type": "object",
+      "description": "Implementation-independent summary fields for display or retrieval. This field SHALL NOT replace the canonical artifact schema.",
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined metadata that SHALL NOT alter normative artifact semantics.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "artifact_id",
+    "artifact_type",
+    "tenant_id",
+    "artifact_status",
+    "created_at",
+    "governance_evidence_refs"
+  ]
+}

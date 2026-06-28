@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.example/schemas/commit_boundary_result.json",
+  "title": "Commit Boundary Result",
+  "description": "Canonical result produced by AGCP Commit Boundary processing. This schema records the authoritative outcome of final governance validation immediately before operational commitment and references the resulting Governance Evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": {
+      "$ref": "common.json#/$defs/proposal_id"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "authorization_id": {
+      "$ref": "common.json#/$defs/authorization_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "commit_boundary_outcome": {
+      "$ref": "common.json#/$defs/commit_boundary_outcome_enum"
+    },
+    "commit_timestamp": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "policy_ref": {
+      "$ref": "common.json#/$defs/policy_ref"
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "common.json#/$defs/governance_configuration_ref"
+    },
+    "rejection_code": {
+      "$ref": "common.json#/$defs/rejection_code"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/stage_evidence_ref"
+      },
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "commit_basis": {
+      "type": "object",
+      "description": "Implementation-independent explanation of the authoritative basis for the Commit Boundary outcome.",
+      "additionalProperties": true
+    },
+    "execution_result_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Optional reference to an execution record created after a successful commit."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Implementation-defined metadata that SHALL NOT alter normative commit semantics.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "proposal_id",
+    "action_id",
+    "authorization_id",
+    "tenant_id",
+    "commit_boundary_outcome",
+    "commit_timestamp",
+    "governance_evidence_refs"
+  ]
+}
