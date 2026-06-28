@@ -1,191 +1,189 @@
 # AGCP Architecture Overview
 
-Status: Informational  
-Category: Architectural Overview  
+## Purpose
 
-This document provides a high-level description of the Governance Control Plane (AGCP) architecture.  
-It is intended to orient readers and implementers before they review the normative specification documents.
+This document provides a high-level overview of the Artificial Intelligence Governance Control Plane (AGCP) architecture and explains how the specification artifacts within this repository relate to one another.
 
-Normative requirements are defined in the specifications located under the `spec/` directory.
+Normative requirements are defined exclusively by the **AGCP Core Specification**. This document is informative and introduces no additional normative requirements.
 
 ---
 
-# 1. Architectural Model
+# Architecture Overview
 
-AGCP defines a **deterministic governance control plane** for automated systems.
+AGCP is a deterministic runtime governance architecture that evaluates and authorizes governance-significant actions immediately prior to execution.
 
-The core principle of AGCP is that **execution eligibility is derived from canonical system state rather than mutable authorization flags**.
+Rather than governing model behavior or training, AGCP governs **action execution** at the runtime execution boundary (the **Commit Boundary**), ensuring that every governed action satisfies deterministic governance requirements before execution is permitted.
 
-Execution authority is therefore determined by evaluating:
-
-1. Governance policy
-2. Deterministic constraints and invariants
-3. Human-in-the-loop authorization when required
-4. Canonical ledger state
-
-This evaluation occurs **before an action is permitted to commit**.
+The architecture is implementation independent and may be applied to autonomous agents, orchestration platforms, enterprise applications, APIs, robotic systems, cyber-physical systems, and other autonomous or programmatic execution environments.
 
 ---
 
-# 2. Control Plane Responsibilities
+# Runtime Governance Pipeline
 
-The AGCP control plane is responsible for:
+At a high level, governed execution proceeds through the following stages:
 
-- validating governance envelopes
-- verifying provenance
-- resolving applicable policy modules
-- evaluating policy constraints
-- enforcing invariants
-- coordinating human-in-the-loop approval
-- deriving lifecycle state
-- recording all governance decisions in an append-only ledger
+```
+Proposal
+    │
+    ▼
+Proposal Qualification
+    │
+    ▼
+Governance Decision Function
+    │
+    ▼
+Execution Authorization
+    │
+    ▼
+Commit Boundary
+    │
+    ▼
+Governed Execution
+    │
+    ▼
+Governance Evidence
+```
 
-The control plane does **not perform execution itself**.  
-Instead it determines whether execution is permitted.
-
----
-
-# 3. Deterministic Evaluation Pipeline
-
-All actions submitted to AGCP pass through a fixed evaluation pipeline:
-
-
-SCHEMA_VALIDATION
-PROVENANCE_VERIFICATION
-TENANT_STATE_VALIDATION
-POLICY_RESOLUTION
-PEC_CONSTRAINTS
-PEC_INVARIANTS
-PEC_HITL
-DECISION
-EXECUTION_AUTHORIZED
-EXECUTION_COMMITTED
-
-
-The ordering of these stages is deterministic and MUST NOT be altered.
+Each stage is described normatively in the AGCP Core Specification.
 
 ---
 
-# 4. Ledger Model
+# Architectural Principles
 
-AGCP uses an append-only governance ledger.
+The AGCP architecture is founded on several core principles:
 
-Each evaluation stage produces a ledger entry that records:
+* deterministic governance decisions
+* implementation independence
+* explicit governance authority
+* separation of reasoning from execution governance
+* non-bypassable execution authorization
+* immutable governance evidence
+* tenant and domain isolation
+* governance configuration integrity
+* auditable governance lifecycle
 
-- stage identifier
-- evaluation result
-- supporting metadata
-
-Lifecycle state is derived from ledger history rather than stored as mutable state.
-
-This ensures that system behavior is:
-
-- deterministic
-- replayable
-- auditable
+These principles are further explained in the Architecture Reference Model (ARM).
 
 ---
 
-# 5. Lifecycle Model
+# Specification Ecosystem
 
-The externally observable action states are:
+The AGCP specification is organized into complementary artifacts.
 
-
-REJECTED
-PENDING_HITL
-AUTHORIZED
-EXECUTED
-
-
-The internal state `SUBMITTED` is transient and MUST NOT be returned by canonical retrieval endpoints.
-
-Lifecycle state transitions are defined in:
-
-
-lifecycle/
-
+| Artifact                               | Purpose                                                                                           |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| AGCP Core Specification                | Normative execution governance requirements                                                       |
+| Architecture Reference Model (ARM)     | Informative architectural explanations and rationale                                              |
+| Normative Statements                   | Individually traceable normative requirements derived from the Core                               |
+| Runtime Governance Requirements        | Requirements catalog                                                                              |
+| Requirements Traceability Matrix (RTM) | Traceability across requirements, specifications, normative statements, and conformance artifacts |
+| Conformance Test Suite                 | Verification of normative behavior                                                                |
+| Companion Specifications               | Protocols, schemas, APIs, operational profiles, and related implementation specifications         |
 
 ---
 
-# 6. Human-in-the-Loop Authorization
+# Repository Organization
 
-Certain actions may require explicit human authorization.
+The repository is organized into the following major areas:
 
-In these cases AGCP enters the state:
-
-
-PENDING_HITL
-
-
-Authorized principals may submit **cosign tokens**.
-
-Once the required quorum is satisfied the system records:
-
-
-EXECUTION_AUTHORIZED
-
-
----
-
-# 7. Execution Commit
-
-Execution of an action is permitted only if:
-
-1. the action is in state `AUTHORIZED`
-2. the authorization reference matches the ledger
-3. provenance validation succeeds
-4. tenant state is valid
-
-Successful execution produces the ledger stage:
-
-
-EXECUTION_COMMITTED
-
-
----
-
-# 8. Multitenant Isolation
-
-AGCP supports multi-tenant deployments.
-
-All operations are tenant-scoped and implementations MUST enforce:
-
-- tenant-scoped policy resolution
-- tenant-scoped key lookup
-- tenant-scoped ledger queries
-
-Cross-tenant access MUST be rejected.
-
----
-
-# 9. Repository Structure
-
-
-agcp-spec/
-
-
-The repository is organized into the following primary directories.
-
-| Directory | Purpose |
-|---|---|
-| `spec/` | Normative specification documents |
-| `lifecycle/` | Action lifecycle model |
-| `schemas/` | JSON schema definitions |
-| `registries/` | Enumerated registries |
-| `conformance/` | Conformance testing artifacts |
-| `api/` | OpenAPI interface specification |
-| `reference/` | Informational reference materials |
-| `governance/` | Specification governance process |
-| `diagrams/` | Architecture diagrams |
-
----
-
-# 10. Specification Documents
-
-The normative AGCP specification consists of the documents under:
-
-
+```
 spec/
+    Core Specification
+    Architecture Reference Model
+    Normative Statements
+    Companion Specifications
 
+requirements/
+    Runtime Governance Requirements
 
-These define the authoritative protocol requirements for AGCP implementations.
+rtm/
+    Requirements Traceability Matrix
+
+schemas/
+    JSON Schemas
+
+api/
+    HTTP and API Specifications
+
+registries/
+    Registry Definitions
+
+conformance/
+    Conformance Specifications
+    Test Artifacts
+
+assessment/
+    Assessment Frameworks
+
+reference/
+    Reference Material
+```
+
+---
+
+# Governance Artifacts
+
+The repository contains three categories of artifacts.
+
+## Normative
+
+Normative artifacts define required behavior.
+
+Examples include:
+
+* AGCP Core Specification
+* Normative Statements
+* Companion Specifications
+
+## Informative
+
+Informative artifacts provide architectural explanation, rationale, implementation guidance, and examples.
+
+Examples include:
+
+* Architecture Reference Model
+* Architecture Overview
+* Reference documentation
+
+## Machine-readable
+
+Machine-readable artifacts support implementation and conformance.
+
+Examples include:
+
+* JSON Schemas
+* OpenAPI definitions
+* Registry definitions
+* Conformance mappings
+* Test manifests
+
+---
+
+# Conformance
+
+Conformance is determined by satisfying the normative requirements defined in the Core Specification.
+
+Traceability between requirements, normative statements, implementation artifacts, and conformance tests is maintained through the Requirements Traceability Matrix (RTM).
+
+---
+
+# Versioning
+
+Repository releases are managed through GitHub Releases.
+
+Released versions are archived through Zenodo.
+
+The repository may contain work in progress between official releases.
+
+---
+
+# Additional Information
+
+The following documents provide further information:
+
+* AGCP Core Specification
+* AGCP Architecture Reference Model
+* AGCP Normative Statements
+* Runtime Governance Requirements
+* Requirements Traceability Matrix
+* Conformance Test Suite
