@@ -1,548 +1,227 @@
-# AGCP HTTP Interface Specification v0.9.0
+# AGCP HTTP Interface Specification
 
-**Status:** Normative  
-**Version:** 0.9.0  
-**Series:** AGCP Core  
+**Status:** Normative\
+**Series:** AGCP Core\
 **Applies To:** All AGCP-conformant implementations
 
----
+------------------------------------------------------------------------
 
 # 1. Introduction
 
-This document defines the required HTTP interface for interacting with an AGCP implementation.
+This specification defines the normative HTTP interface for interacting
+with an AGCP-conformant Governance Control Plane.
 
 The HTTP interface standardizes:
 
-- Tenant provisioning
-- Policy and registry artifact management
-- Action submission
-- Decision retrieval
-- HITL cosign flows
-- Execution commit
-- Ledger access
-- Metadata/version discovery
+-   Proposal submission
+-   Proposal and Action retrieval
+-   Human review interaction
+-   Execution Authorization retrieval
+-   Commit Boundary processing
+-   Governance Evidence retrieval
+-   Tenant-scoped governance artifact management
+-   Metadata discovery
 
-This specification defines behavioral requirements, **not implementation architecture**.
+This specification defines externally observable behavior and interface
+requirements. It does not prescribe implementation architecture.
 
----
+------------------------------------------------------------------------
 
 # 2. General Protocol Requirements
 
 ## 2.1 Transport
 
-AGCP implementations **MUST** support:
+Implementations SHALL support HTTPS using TLS 1.2 or higher.
 
-- HTTPS over TLS 1.2 or higher.
-
-Plain HTTP **MUST NOT** be supported in production deployments.
-
----
+Plain HTTP SHALL NOT be supported in production deployments.
 
 ## 2.2 Media Type
 
-All requests and responses **MUST** use:
+All requests and responses SHALL use:
 
-```
-Content-Type: application/json
-```
+    Content-Type: application/json
 
----
+## 2.3 Specification Identification
 
-## 2.3 Version Header
+Implementations MAY expose supported specification identifiers through
+metadata endpoints.
 
-All responses **MUST** include:
+Repository releases are the authoritative versioning mechanism for this
+specification.
 
-```
-AGCP-Spec-Version: 0.9.0
-```
+## 2.4 Error Responses
 
-Requests **MAY** include:
+All error responses SHALL include:
 
-```
-AGCP-Spec-Version: 0.9
-```
+-   rejection_code
+-   message
+-   optional detail
+-   applicable governance evidence reference where available
 
-If an unsupported **MAJOR** version is requested, the implementation **MUST** return:
+Rejection codes SHALL correspond to the AGCP rejection-code registry.
 
-```
-HTTP 400
-rejection_code: UNSUPPORTED_SPEC_VERSION
-```
-
----
-
-## 2.4 Error Response Format
-
-All error responses **MUST** conform to:
-
-```json
-{
-  "error": {
-    "rejection_code": "STRING",
-    "message": "Human-readable explanation",
-    "details": {}
-  }
-}
-```
-
-`rejection_code` **MUST** exist in the rejection-code registry.
-
----
+------------------------------------------------------------------------
 
 # 3. Metadata Endpoint
 
-## 3.1 GET /agcp/v1/meta
+`GET /agcp/v1/meta`
 
-Returns implementation metadata.
+Returns implementation metadata including supported conformance levels,
+supported governance capabilities, and implementation identification.
 
-### Response
+This endpoint SHALL be accessible without tenant context.
 
-```json
-{
-  "implementation_name": "string",
-  "implementation_version": "string",
-  "supported_spec_versions": ["0.9"],
-  "supported_profiles": ["L1","L2","L3","L4","L5"],
-  "crypto_profiles": ["LEGACY","PQC","HYBRID"]
-}
-```
+------------------------------------------------------------------------
 
-This endpoint **MUST** be accessible without tenant context.
+# 4. Tenant and Governance Domain Management
 
----
+Implementations SHALL support tenant-scoped governance.
 
-# 4. Tenant Management
+All governance operations SHALL enforce tenant isolation and
+governance-domain isolation.
 
-## 4.1 POST /agcp/v1/tenants
+Cross-tenant or unauthorized cross-domain requests SHALL fail.
 
-Creates a new tenant.
+------------------------------------------------------------------------
 
-### Request
+# 5. Governance Artifact Management
 
-```json
-{
-  "tenant_id": "string",
-  "initial_state": "PROVISIONED"
-}
-```
+The interface SHALL support management of:
 
-### Response
+-   Policy Evaluation Modules
+-   Governance Policies
+-   Constraints
+-   Invariants
+-   Exceptions
+-   Governance Configuration
 
-```json
-{
-  "tenant_id": "string",
-  "state": "PROVISIONED"
-}
-```
+Artifact validation SHALL occur prior to activation.
 
-`tenant_id` **MUST** be globally unique within the deployment.
+------------------------------------------------------------------------
 
----
+# 6. Proposal Submission
 
-## 4.2 GET /agcp/v1/tenants/{tenant_id}
+`POST /agcp/v1/proposals/submit`
 
-Returns tenant state.
+Proposal submission SHALL initiate the normative governance pipeline.
 
----
+The observable processing sequence SHALL be:
 
-## 4.3 PATCH /agcp/v1/tenants/{tenant_id}
+1.  Proposal Qualification
+2.  Governance Decision Function
+3.  Execution Authorization
+4.  Commit Boundary
+5.  Continuation Integrity (where applicable)
 
-Transitions tenant state.
+Transient internal processing states SHALL NOT be externally observable.
 
-Allowed transitions:
+------------------------------------------------------------------------
 
-```
-PROVISIONED → ACTIVE
-ACTIVE → SUSPENDED
-ACTIVE → DECOMMISSIONED
-SUSPENDED → ACTIVE
-```
+# 7. Proposal Retrieval
 
-Invalid transitions **MUST** return:
+The interface SHALL expose the authoritative externally observable
+Proposal state and governance outcome.
 
-```
-HTTP 422
-rejection_code: TENANT_STATE_INVALID
-```
+Responses SHALL include applicable references to:
 
----
+-   Canonical State
+-   Governance Context
+-   Authority Lineage
+-   Governance Evidence
+-   Execution Authorization (where applicable)
 
-# 5. Policy Module Management
+------------------------------------------------------------------------
 
-## 5.1 POST /agcp/v1/policy-modules
+# 8. Human Review
 
-Registers a Policy Evaluation Module (PEM).
+Interfaces supporting Pending Human Review SHALL permit governed
+submission of human-review artifacts in accordance with applicable
+governance policy.
 
-### Request
+------------------------------------------------------------------------
 
-```json
-{
-  "tenant_id": "string",
-  "module_id": "string",
-  "version": "string",
-  "module_hash": "string",
-  "artifact": "base64-encoded or URI",
-  "signature": "string"
-}
-```
+# 9. Execution Authorization
 
-### Response
+Execution Authorization resources SHALL expose only authoritative
+authorization information and SHALL NOT themselves initiate execution.
 
-```json
-{
-  "module_id": "string",
-  "version": "string",
-  "status": "REGISTERED"
-}
-```
+------------------------------------------------------------------------
 
-If module fails integrity validation:
+# 10. Commit Boundary
 
-```
-HTTP 422
-rejection_code: POLICY_MODULE_INVALID
-```
+Commit Boundary requests SHALL verify:
 
----
+-   authoritative Execution Authorization
+-   Canonical State validity
+-   Authority Lineage validity
+-   tenant and governance-domain constraints
+-   governance configuration validity
 
-# 6. Policy Artifact Management
+Successful Commit Boundary processing SHALL bind authoritative execution
+authorization to the governance-significant Action immediately before
+execution.
 
-## 6.1 POST /agcp/v1/policies
+------------------------------------------------------------------------
 
-Registers a policy referencing a module.
+# 11. Governance Evidence
 
-### Request
+Interfaces SHALL permit retrieval of Governance Evidence sufficient for:
 
-Conforms to `PolicyArtifact.json`.
+-   audit
+-   deterministic replay
+-   traceability
+-   conformance assessment
+-   forensic reconstruction
 
-Key fields:
+------------------------------------------------------------------------
 
-- tenant_id
-- policy_id
-- version
-- policy_module_ref
-- effective_start
-- effective_end
-- status
+# 12. Determinism
 
-### Response
+Identical authoritative inputs SHALL produce identical governance
+interpretation and observable governance outcomes.
 
-```json
-{
-  "policy_id": "string",
-  "version": "string",
-  "status": "ACTIVE"
-}
-```
+------------------------------------------------------------------------
 
-If referenced module unavailable:
+# 13. Multitenant Requirements
 
-```
-rejection_code: POLICY_MODULE_UNAVAILABLE
-```
+All governance operations except metadata discovery SHALL require tenant
+context and enforce tenant isolation.
 
----
+------------------------------------------------------------------------
 
-# 7. Constraint Management
+# 14. HTTP Status Codes
 
-## 7.1 POST /agcp/v1/constraints
+Standard HTTP status codes SHALL be used.
 
-Registers a `ConstraintArtifact`.
+Application-specific semantics SHALL be conveyed using AGCP rejection
+codes.
 
-Request body **MUST** conform to `ConstraintArtifact.json`.
+------------------------------------------------------------------------
 
-Unknown constraint type **MUST** be rejected.
+# 15. Conformance
 
----
+Implementations claiming AGCP conformance SHALL implement all mandatory
+endpoints and SHALL preserve deterministic behavior, governance
+ordering, tenant isolation, governance evidence production, and
+authoritative governance outcomes.
 
-# 8. Invariant Management
+------------------------------------------------------------------------
 
-## 8.1 POST /agcp/v1/invariants
+# 16. Security Considerations
 
-Registers an `InvariantDefinition`.
+Implementations SHALL authenticate requests, validate provenance,
+protect Authority Lineage, preserve Canonical State integrity, and
+prevent replay.
 
-Must include:
+------------------------------------------------------------------------
 
-- invariant_type
-- evaluation_ref
-- enforcement_level
+# 17. Non-Goals
 
-Unknown invariant type **MUST** be rejected.
+This specification does not define:
 
----
-
-# 9. Exception Management
-
-## 9.1 POST /agcp/v1/exceptions
-
-Registers an `ExceptionArtifact`.
-
-Must include:
-
-- scope
-- expiration
-- approvals
-
-Expired exceptions **MUST NOT** be considered during PEC evaluation.
-
----
-
-# 10. Action Submission
-
-## 10.1 POST /agcp/v1/actions/submit
-
-Submits an `ActionEnvelope` for evaluation.
-
-### Request
-
-Conforms to `ActionEnvelope.json`.
-
----
-
-### Validation Ordering (Mandatory)
-
-Upon submission, implementation **MUST** perform:
-
-1. Schema validation
-2. Provenance signature verification
-3. Tenant state validation
-4. Policy resolution
-5. PEC constraint evaluation
-6. PEC invariant evaluation
-7. PEC HITL evaluation
-8. Decision computation
-9. Ledger append
-
----
-
-### Response
-
-Conforms to `ValidationResult.json`.
-
-Possible decisions:
-
-```
-ACCEPT
-REJECT
-PENDING_HITL
-```
-
-If duplicate `idempotency_key` with mismatched payload:
-
-```
-HTTP 409
-rejection_code: IDEMPOTENCY_CONFLICT
-```
-
----
-
-# 11. Action Retrieval
-
-## 11.1 GET /agcp/v1/actions/{action_id}
-
-Returns the canonical governance status of an action.
-
-The response **MUST** conform to:
-
-```
-ActionStatusResponse.json
-```
-
-The lifecycle state **SHALL** reflect the **Action Lifecycle Model** defined in the Core Specification.
-
----
-
-## Response Semantics
-
-The response **SHALL** include:
-
-- Current lifecycle state
-- Decision outcome
-- Rejection code (if applicable)
-- HITL requirements (if pending)
-- Constraint evaluation results
-- Invariant evaluation results
-- Ledger authorization reference (if AUTHORIZED or EXECUTED)
-- Execution result (if EXECUTED)
-- Latest ledger entry reference
-
-`SUBMITTED` state **SHALL NOT** be externally observable.
-
-If `action_id` does not exist within tenant scope:
-
-```
-HTTP 404
-rejection_code: ACTION_NOT_FOUND
-```
-
-Cross-tenant retrieval **MUST** return:
-
-```
-HTTP 403
-rejection_code: TENANT_SCOPE_VIOLATION
-```
-
----
-
-# 12. HITL Cosign
-
-## 12.1 POST /agcp/v1/actions/{action_id}/cosign
-
-### Request
-
-```json
-{
-  "tenant_id": "string",
-  "cosign_token": "string"
-}
-```
-
-Invalid token **MUST** return:
-
-```
-rejection_code: COSIGN_INVALID
-```
-
-Expired token **MUST** return:
-
-```
-rejection_code: COSIGN_EXPIRED
-```
-
-Upon quorum satisfaction, action state transitions to:
-
-```
-AUTHORIZED
-```
-
----
-
-# 13. Execution Commit
-
-## 13.1 POST /agcp/v1/executions/commit
-
-Commits execution of an authorized action.
-
-### Request
-
-```json
-{
-  "tenant_id": "string",
-  "action_id": "string",
-  "ledger_authorization_ref": "string",
-  "execution_result": {}
-}
-```
-
-Implementation **MUST** verify:
-
-- action state is `AUTHORIZED`
-- ledger reference matches
-- tenant scope matches
-
-If invalid:
-
-```
-rejection_code: ACTION_NOT_AUTHORIZED
-```
-
-Execution result **MUST** be appended to the ledger.
-
----
-
-# 14. Ledger Access
-
-## 14.1 GET /agcp/v1/ledger/entries/{ledger_ref}
-
-Returns ledger entry.
-
-Cross-tenant access **MUST** return:
-
-```
-HTTP 403
-rejection_code: TENANT_SCOPE_VIOLATION
-```
-
----
-
-# 15. Determinism Requirements
-
-Identical `ActionEnvelope` submissions **MUST** produce identical decision results when:
-
-- tenant state unchanged
-- registry unchanged
-- policy unchanged
-
-Replay determinism **MUST** be testable via the conformance harness.
-
----
-
-# 16. Multitenant Requirements
-
-All endpoints except `/meta` **MUST** require `tenant_id`.
-
-Implementations **MUST** enforce tenant namespace isolation.
-
----
-
-# 17. Status Codes
-
-Standard HTTP status usage:
-
-```
-200 OK
-201 Created
-400 Bad Request
-403 Forbidden
-409 Conflict
-422 Unprocessable Entity
-503 Service Unavailable
-```
-
-Rejection codes provide semantic detail.
-
----
-
-# 18. Conformance Requirements
-
-An implementation **MUST**:
-
-- Implement all **REQUIRED** endpoints
-- Enforce ordering guarantees
-- Enforce deterministic PEC evaluation
-- Enforce multitenant isolation
-- Produce structured error responses
-
----
-
-# 19. Versioning & Compatibility
-
-Within a **MAJOR** version:
-
-- **MINOR** versions **MUST** remain compatible.
-
-Unsupported **MAJOR** versions **MUST** be rejected.
-
----
-
-# 20. Security Considerations
-
-All endpoints **MUST** require authentication (implementation-defined).
-
-- Envelope signature **MUST** be verified
-- Cosign tokens **MUST** be verified
-- Policy modules **MUST** be integrity-checked
-- Replay protection **MUST** be enforced
-
----
-
-# 21. Non-Goals
-
-This specification **does not define**:
-
-- Internal storage architecture
-- Database schema
-- Clustering model
-- Performance thresholds
-- Policy language implementation
-- UI design
+-   internal storage architecture
+-   implementation language
+-   database schema
+-   deployment topology
+-   policy language
+-   user interface design
