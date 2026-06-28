@@ -2,25 +2,32 @@ openapi: 3.1.0
 
 info:
   title: AGCP HTTP Interface Contract
-  version: github-release
+  version: release-managed
   description: |
-    OpenAPI-style contract for the AGCP HTTP interface aligned with the AGCP Core
-    governance pipeline and Policy Evaluation Contract
+    Machine-readable HTTP interface contract for AGCP-conformant implementations.
 
-    Normative governance pipeline:
+    The authoritative release version for this contract is the GitHub release tag.
+    The OpenAPI info.version value is intentionally release-managed to avoid
+    embedding release numbers in specification contents.
+
+    This contract defines the exact HTTP surface for the AGCP HTTP interface:
+      - paths
+      - operations
+      - request bodies
+      - response bodies
+      - common schemas
+      - status-code mappings
+      - rejection-code references
+
+    Normative governance behavior is defined by the AGCP Core Specification.
+    This contract expresses the HTTP representation of that behavior.
+
+    The AGCP governance pipeline is:
       1. Proposal Qualification
       2. Governance Decision Function
       3. Execution Authorization
       4. Commit Boundary
       5. Continuation Integrity, where applicable
-
-    This contract uses current AGCP terminology:
-      - Governance Decision Function, not policy engine or decision engine
-      - Canonical State, not state snapshot
-      - Governance Evidence, not ledger as the normative evidence concept
-      - Execution Authorization, not authorization-as-execution
-      - Commit Boundary processing, not direct execution commit
-      - Governance outcomes defined by the AGCP Core Specification
 
 servers:
   - url: https://{host}
@@ -29,16 +36,44 @@ servers:
         default: api.example.com
 
 tags:
+  - name: Metadata
+    description: Implementation metadata and capability discovery.
   - name: Proposals
-  - name: Actions
+    description: Proposal submission and Proposal retrieval.
+  - name: Human Review
+    description: Governed human-review artifact submission.
   - name: Execution Authorization
+    description: Execution Authorization retrieval.
   - name: Commit Boundary
+    description: Commit Boundary processing.
   - name: Governance Evidence
+    description: Governance Evidence retrieval.
+  - name: Governance Artifacts
+    description: Tenant-scoped governance artifact registration and retrieval.
 
 security:
   - bearerAuth: []
 
 paths:
+  /agcp/v1/meta:
+    get:
+      tags: [Metadata]
+      operationId: getMetadata
+      summary: Get AGCP implementation metadata.
+      description: |
+        Returns implementation metadata, supported conformance levels, supported
+        governance capabilities, and supported HTTP contract capabilities.
+
+        This endpoint MAY be accessible without tenant context.
+      security: []
+      responses:
+        "200":
+          description: Implementation metadata.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MetadataResponse"
+
   /agcp/v1/proposals/submit:
     post:
       tags: [Proposals]
@@ -48,15 +83,15 @@ paths:
         Submits a governance-significant Proposal for Proposal Qualification and
         Governance Decision Function processing.
 
-        The response SHALL reflect an authoritative governance outcome or structural
-        refusal. Transient internal processing states SHALL NOT be exposed as canonical
+        The response SHALL reflect an authoritative externally observable governance
+        result. Transient internal processing states SHALL NOT be exposed as canonical
         externally observable governance states.
 
         Idempotency:
-          - If Idempotency-Key is reused with identical payload, return the existing
-            ProposalView.
-          - If Idempotency-Key is reused with a different payload, return 409
-            IDEMPOTENCY_CONFLICT.
+          - If Idempotency-Key is reused with identical payload, the implementation
+            SHALL return the existing ProposalView.
+          - If Idempotency-Key is reused with a different payload, the implementation
+            SHALL return 409 with rejection_code IDEMPOTENCY_CONFLICT.
       parameters:
         - name: Idempotency-Key
           in: header
@@ -95,6 +130,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Semantically invalid governance input.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Required governance service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /agcp/v1/proposals/{proposal_id}:
     get:
@@ -107,6 +154,16 @@ paths:
       parameters:
         - name: proposal_id
           in: path
+          required: true
+          schema:
+            type: string
+        - name: tenant_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: governance_domain_id
+          in: query
           required: true
           schema:
             type: string
@@ -132,21 +189,27 @@ paths:
 
   /agcp/v1/proposals/{proposal_id}/human-review:
     post:
-      tags: [Proposals]
+      tags: [Human Review]
       operationId: submitHumanReview
       summary: Submit human-review evidence for a Proposal requiring human review.
       description: |
         Valid only when the current governance outcome is Pending Human Review or
-        Deferred and the applicable governance policy permits human-review submission.
+        Deferred and applicable governance policy permits human-review submission.
 
-        Human-review evidence SHALL remain governed, attributable, tenant-scoped, and
-        associated with the Proposal and Governance Evidence.
+        Human-review evidence SHALL remain governed, attributable, tenant-scoped,
+        governance-domain-scoped, and associated with the Proposal and Governance Evidence.
       parameters:
         - name: proposal_id
           in: path
           required: true
           schema:
             type: string
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Client-provided idempotency key scoped to tenant_id and endpoint.
       requestBody:
         required: true
         content:
@@ -173,7 +236,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         "409":
-          description: Invalid governance transition or replayed/invalid human-review artifact.
+          description: Invalid governance transition or replayed human-review artifact.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Human-review artifact is not acceptable for the governed Proposal.
           content:
             application/json:
               schema:
@@ -186,10 +255,21 @@ paths:
       summary: Get an Execution Authorization by identifier.
       description: |
         Returns the authoritative Execution Authorization record, where available.
+
         Execution Authorization SHALL NOT itself perform execution.
       parameters:
         - name: authorization_id
           in: path
+          required: true
+          schema:
+            type: string
+        - name: tenant_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: governance_domain_id
+          in: query
           required: true
           schema:
             type: string
@@ -225,7 +305,7 @@ paths:
           - Execution Authorization produced Authorized for Commit Boundary Processing
           - execution_authorization_ref matches the authoritative Execution Authorization
           - required authority remains valid
-          - tenant and governance domain constraints remain satisfied
+          - tenant and governance-domain constraints remain satisfied
           - governance configuration remains valid
           - the qualified Action Representation and Governance Context remain valid
 
@@ -234,6 +314,13 @@ paths:
 
         Replays or attempts using invalid, expired, revoked, consumed, or modified
         authorization SHALL fail or require Governed Re-evaluation.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Client-provided idempotency key scoped to tenant_id and endpoint.
       requestBody:
         required: true
         content:
@@ -265,6 +352,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Commit prerequisites are not satisfied.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Required governance service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /agcp/v1/governance-evidence/{evidence_id}:
     get:
@@ -278,6 +377,16 @@ paths:
       parameters:
         - name: evidence_id
           in: path
+          required: true
+          schema:
+            type: string
+        - name: tenant_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: governance_domain_id
+          in: query
           required: true
           schema:
             type: string
@@ -301,6 +410,142 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /agcp/v1/governance-artifacts/policy-modules:
+    post:
+      tags: [Governance Artifacts]
+      operationId: registerPolicyEvaluationModule
+      summary: Register a Policy Evaluation Module artifact.
+      description: |
+        Registers a tenant-scoped Policy Evaluation Module artifact.
+
+        Registration SHALL NOT make the artifact operationally effective unless all
+        applicable governance validation and activation prerequisites are satisfied.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PolicyEvaluationModuleArtifact"
+      responses:
+        "200":
+          description: Governance artifact view.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GovernanceArtifactView"
+        "400":
+          description: Invalid artifact structure.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden tenant, governance domain, or authority condition.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Artifact validation failed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /agcp/v1/governance-artifacts/policies:
+    post:
+      tags: [Governance Artifacts]
+      operationId: registerGovernancePolicy
+      summary: Register a governance policy artifact.
+      description: |
+        Registers a tenant-scoped and governance-domain-scoped policy artifact.
+        Operational activation is governed by AGCP Governance Self-Protection and
+        artifact validation requirements.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GovernancePolicyArtifact"
+      responses:
+        "200":
+          description: Governance artifact view.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GovernanceArtifactView"
+        "400":
+          description: Invalid artifact structure.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden tenant, governance domain, or authority condition.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Artifact validation failed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /agcp/v1/governance-artifacts/{artifact_id}:
+    get:
+      tags: [Governance Artifacts]
+      operationId: getGovernanceArtifact
+      summary: Get a governance artifact by identifier.
+      parameters:
+        - name: artifact_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: tenant_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: governance_domain_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Governance artifact view.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GovernanceArtifactView"
+        "403":
+          description: Forbidden tenant or governance domain condition.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Governance artifact not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   securitySchemes:
     bearerAuth:
@@ -309,6 +554,32 @@ components:
       bearerFormat: JWT
 
   schemas:
+    MetadataResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - implementation_name
+        - supported_conformance_levels
+        - supported_capabilities
+      properties:
+        implementation_name:
+          type: string
+        implementation_release:
+          type: string
+          description: Implementation release identifier. The specification release is managed externally.
+        supported_conformance_levels:
+          type: array
+          items:
+            type: string
+            enum: [L1, L2, L3, L4]
+        supported_capabilities:
+          type: array
+          items:
+            type: string
+        http_contract:
+          type: string
+          description: Identifier for the implemented HTTP contract artifact.
+
     GovernanceOutcome:
       type: string
       description: Authoritative governance outcome produced by the Governance Decision Function.
@@ -352,6 +623,18 @@ components:
         - Suspend Execution
         - Resume Execution
         - Governed Termination
+
+    GovernanceArtifactStatus:
+      type: string
+      description: Externally observable governance artifact status.
+      enum:
+        - Registered
+        - Validation Pending
+        - Accepted
+        - Rejected
+        - Active
+        - Retired
+        - Governed Re-evaluation Required
 
     GovernancePipelineStage:
       type: string
@@ -400,6 +683,9 @@ components:
         - POLICY_MODULE_NONDETERMINISTIC
         - HUMAN_REVIEW_INVALID
         - HUMAN_REVIEW_EXPIRED
+        - GOVERNANCE_ARTIFACT_INVALID
+        - GOVERNANCE_ARTIFACT_UNAUTHORIZED
+        - GOVERNANCE_ARTIFACT_ACTIVATION_DENIED
         - GOVERNANCE_EVIDENCE_INCOMPLETE
         - GOVERNANCE_EVIDENCE_INVALID
         - REPLAY_REJECTED
@@ -718,3 +1004,72 @@ components:
         processing_timestamp:
           type: string
           format: date-time
+
+    PolicyEvaluationModuleArtifact:
+      type: object
+      additionalProperties: true
+      required:
+        - tenant_id
+        - governance_domain_id
+        - artifact_id
+        - artifact_hash
+        - provenance
+      properties:
+        tenant_id:
+          type: string
+        governance_domain_id:
+          type: string
+        artifact_id:
+          type: string
+        artifact_hash:
+          type: string
+        artifact_uri:
+          type: string
+        artifact_payload:
+          type: string
+          description: Optional encoded artifact payload.
+        provenance:
+          $ref: "#/components/schemas/Provenance"
+
+    GovernancePolicyArtifact:
+      type: object
+      additionalProperties: true
+      required:
+        - tenant_id
+        - governance_domain_id
+        - artifact_id
+        - policy_ref
+        - provenance
+      properties:
+        tenant_id:
+          type: string
+        governance_domain_id:
+          type: string
+        artifact_id:
+          type: string
+        policy_ref:
+          $ref: "#/components/schemas/PolicyRef"
+        provenance:
+          $ref: "#/components/schemas/Provenance"
+
+    GovernanceArtifactView:
+      type: object
+      additionalProperties: false
+      required:
+        - tenant_id
+        - governance_domain_id
+        - artifact_id
+        - artifact_status
+      properties:
+        tenant_id:
+          type: string
+        governance_domain_id:
+          type: string
+        artifact_id:
+          type: string
+        artifact_status:
+          $ref: "#/components/schemas/GovernanceArtifactStatus"
+        governance_evidence_refs:
+          type: array
+          items:
+            $ref: "#/components/schemas/StageEvidenceRef"
