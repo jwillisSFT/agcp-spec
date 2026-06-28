@@ -1,129 +1,123 @@
 # AGCP Specification Changelog
 
-This document records versioned changes to the AGCP specification set.
+**Status:** Informational  
+**Current Published Normative Release:** v2.0.0
 
-The versioning model follows Semantic Versioning:
+---
 
-MAJOR.MINOR.PATCH
+# Purpose
 
-Compatibility rules and governance procedures are defined in:
+This document records the published release history of the Autonomous Governance Control Plane (AGCP).
 
-/governance/AGCP-Versioning.md
+Each published release identifies the normative specification set, schemas, registries, conformance artifacts, and supporting documentation applicable to that release.
+
+Versioning follows Semantic Versioning (MAJOR.MINOR.PATCH).
+
+The governing rules for versioning, compatibility, and release management are defined in:
+
+`/governance/AGCP Versioning and Governance Specification.md`
+
+---
+
+# Version 2.0.0
+
+**Release Status:** Current Published Normative Release
+
+## Summary
+
+Version 2.0.0 represents the current published normative AGCP release.
+
+This release introduces the governance progression architecture centered on Proposal Qualification, Governance Decision Function, Human Review, Execution Authorization, Commit Boundary, Governance Evidence, the Append-Only Governance Ledger, and Canonical State derived from the ordered ledger.
+
+## Major Highlights
+
+- Governance progression model
+- Canonical State architecture
+- Ordered Append-Only Governance Ledger
+- Governance Evidence framework
+- Updated conformance architecture
+- Repository-wide documentation modernization
+
+---
+
+# Version 1.0.3
+
+**Release Status:** Public Normative Release
+
+## Summary
+
+Version 1.0.3 represents the mature public AGCP 1.x specification series.
+
+This release stabilized the core governance architecture and provided the basis for subsequent architectural evolution incorporated into Version 2.0.0.
 
 ---
 
 # Version 0.9.0
 
-Release Date: 2026-02-25  
-Compatibility: Initial Public Review Release
+**Release Status:** Initial Public Review
 
 ## Summary
 
-Initial public specification release of the AGCP Core architecture and supporting profiles.
+Version 0.9.0 was the initial public review release.
 
-This release establishes the normative baseline for public review and implementation prototyping.
-
-## Specification Documents
-
-The following documents are included in this release:
-
-- AGCP-Core
-- AGCP-HTTP-Interface
-- AGCP-PEC
-- AGCP-Security-Profile
-- AGCP-Multitenant-Profile
-- AGCP-Conformance
-- AGCP-Versioning-and-Governance
-
-## Schema Bundle
-
-Version: 0.9.0
-
-Includes:
-
-- ActionEnvelope schema
-- HITL token schema
-- Operational profile schema
-- Supporting schema definitions
-
-## Registry Bundle
-
-Includes the following registries:
-
-- Rejection Code Registry
-- Constraint Type Registry
-- Invariant Type Registry
-
-## Conformance Framework
-
-Includes:
-
-- Conformance Harness Specification
-- Assertion Registry
-- Requirement mapping
-- Test matrix
-
-## Compatibility Notes
-
-This is the first public release. No backward compatibility constraints apply.
+It established the initial public specification set and solicited implementation and community feedback that informed the Version 1.x and Version 2.x releases.
 
 ---
 
 # Changelog Format
 
-Future entries MUST follow this format.
+Future releases SHOULD include:
 
-Each release entry SHOULD include:
-
-Version number  
-Release date  
-Compatibility classification (MAJOR / MINOR / PATCH)
-
-Sections:
-
-Summary  
-Specification Changes  
-Schema Changes  
-Registry Changes  
-Conformance Changes  
-Security Changes  
-Compatibility Impact  
-Migration Guidance (if required)
+- Version
+- Release Date
+- Release Status
+- Summary
+- Normative Specification Changes
+- Schema Changes
+- Registry Changes
+- Conformance Changes
+- Documentation Changes
+- Security Changes
+- Compatibility Impact
+- Migration Guidance (if applicable)
 
 ---
 
-# Example Entry (Future Release)
+# Example Future Entry
 
-## Version 0.10.0
+## Version 2.1.0
 
-Release Date: YYYY-MM-DD  
-Compatibility: MINOR
+**Release Status:** Minor Release
 
 ### Summary
 
-Added support for additional invariant types.
+Adds backward-compatible governance capabilities and clarifications.
 
-### Specification Changes
+### Normative Specification Changes
 
-- Clarified PEC invariant evaluation ordering.
-- Added new invariant enforcement guidance.
+- Clarified Governance Decision Function semantics.
+- Expanded Human Review guidance.
 
 ### Schema Changes
 
-- Added optional field `invariant_parameters`.
+- Added optional governance metadata fields.
 
 ### Registry Changes
 
-- Added new invariant type `core.resource_quota`.
+- Added new governance evidence type.
 
 ### Conformance Changes
 
-- Added new conformance assertion `A-INVARIANT-PARAMETERS`.
+- Added new Conformance Requirements and Test Cases.
+
+### Documentation Changes
+
+- Expanded implementation guidance.
 
 ### Compatibility Impact
 
-Backward compatible within MAJOR version.
+Backward compatible within the Version 2 MAJOR release.
 
 ### Migration Guidance
 
-Existing implementations do not require modification.
+Existing Version 2.0.x implementations remain compatible without modification.
