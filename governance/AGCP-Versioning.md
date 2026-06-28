@@ -1,380 +1,680 @@
-# AGCP Versioning and Governance Specification v0.9.0
+# AGCP Versioning and Governance Specification
 
 **Status:** Normative  
-**Version:** 0.9.0  
-**Series:** AGCP Core  
+**Repository Versioning:** Repository Release Governed  
 **Applies To:** All AGCP-conformant implementations
 
 ---
 
 # 1. Purpose
 
-This document defines:
+This specification defines the versioning, compatibility, and governance model for the Autonomous Governance Control Plane (AGCP).
 
-- The versioning model for AGCP
-- Backward and forward compatibility rules
-- Schema and registry version alignment
-- Change control requirements
-- Governance process for specification evolution
-- Namespace management rules
-- Conformance impact rules
-- Release lifecycle model
+It establishes the rules governing:
 
-This specification ensures that AGCP remains:
+- specification versioning;
+- repository releases;
+- compatibility;
+- schema evolution;
+- registry management;
+- change control;
+- conformance impact;
+- governance processes; and
+- interoperability across implementations.
 
-- Deterministic
-- Interoperable
-- Stable across implementations
-- Safe for multi-vendor adoption
-- Suitable for formal standards governance
+The objectives of this specification are to ensure that AGCP remains:
+
+- deterministic;
+- interoperable;
+- implementation independent;
+- stable across repository releases;
+- suitable for multi-vendor adoption; and
+- suitable for long-term standards governance.
 
 ---
 
-# 2. Versioning Model
+# 2. Repository Versioning
 
-AGCP uses **Semantic Versioning**:
+AGCP is published as a versioned repository.
 
-`MAJOR.MINOR.PATCH`
+A repository release represents the authoritative collection of:
+
+- normative specifications;
+- schemas;
+- registries;
+- conformance artifacts;
+- reference documentation;
+- lifecycle documentation; and
+- supporting implementation guidance.
+
+Repository releases define the complete set of artifacts applicable to a particular AGCP release.
+
+Individual informative documents MAY evolve independently provided they remain consistent with the repository release in which they are published.
+
+---
+
+# 3. Semantic Versioning Model
+
+Repository releases use Semantic Versioning.
+
+```text
+MAJOR.MINOR.PATCH
+```
 
 Example:
 
-`0.9.0`
+```text
+0.9.0
+```
+
+The version number applies to the repository release as a whole rather than requiring identical embedded version numbers within every document.
 
 ---
 
-## 2.1 MAJOR Version
+# 4. Version Classification
 
-A **MAJOR version increment** is REQUIRED when:
+## 4.1 MAJOR Version
 
-- A breaking change is introduced
-- Required fields are removed
-- Required fields are modified
-- Behavioral guarantees change
-- Determinism guarantees change
-- Security guarantees are weakened
-- Multitenant isolation semantics change
-- PEC input/output contract changes
-- Conformance assertion semantics change
+A MAJOR version increment is REQUIRED whenever one or more of the following occur:
 
-MAJOR versions are **NOT required for additive extensions**.
+- breaking specification changes;
+- removal of required schema properties;
+- modification of required schema semantics;
+- changes to deterministic governance behavior;
+- changes to Proposal Qualification semantics;
+- changes to Governance Decision semantics;
+- changes to Human Review semantics;
+- changes to Execution Authorization semantics;
+- changes to Commit Boundary semantics;
+- changes to Canonical State derivation;
+- changes to Governance Evidence semantics;
+- changes to ordered Append-Only Governance Ledger semantics;
+- weakening of security guarantees;
+- weakening of multitenant isolation guarantees;
+- incompatible changes to conformance requirements.
 
----
-
-## 2.2 MINOR Version
-
-A **MINOR version increment** is REQUIRED when:
-
-- Optional fields are added
-- Registry entries are added (non-breaking)
-- New endpoints are added (optional)
-- Conformance profiles are extended
-- New constraint or invariant types are added
-- Clarifications that do not alter normative meaning are introduced
-
-MINOR updates **MUST preserve backward compatibility within the same MAJOR series**.
+MAJOR version increments are not required for purely additive, backward-compatible extensions.
 
 ---
 
-## 2.3 PATCH Version
+## 4.2 MINOR Version
 
-A **PATCH version increment** is REQUIRED when:
+A MINOR version increment is REQUIRED when:
 
-- Editorial corrections are made
-- Typographical errors are corrected
-- Examples are clarified
-- Non-normative explanatory content is updated
+- optional schema properties are added;
+- new registries are introduced;
+- registry entries are added without breaking compatibility;
+- optional endpoints are introduced;
+- new governance capabilities are added without altering existing behavior;
+- new conformance profiles are introduced;
+- clarifications are added that do not change normative meaning.
 
-PATCH updates **MUST NOT alter normative behavior**.
-
----
-
-# 3. Specification Scope Versioning
-
-The following artifacts **MUST share the same MAJOR.MINOR version**:
-
-- AGCP-Core
-- AGCP-HTTP-Interface
-- AGCP-PEC
-- AGCP-Security-Profile
-- AGCP-Multitenant-Profile
-- AGCP-Conformance
-- AGCP-Versioning-and-Governance
-
-Schemas and registries **MUST align with the same MAJOR.MINOR version**.
-
-PATCH alignment is recommended but **not strictly required if behavior unchanged**.
+MINOR releases SHALL preserve backward compatibility within the same MAJOR version.
 
 ---
 
-# 4. Schema Version Alignment
+## 4.3 PATCH Version
 
-All JSON schemas **MUST include**:
+A PATCH version increment is REQUIRED for:
 
-`"schema_version": "0.9.0"`
+- editorial corrections;
+- typographical corrections;
+- documentation improvements;
+- clarification of examples;
+- non-normative explanatory updates.
 
-Schema changes:
-
-| Change | Version Impact |
-|------|------|
-Removing required property | MAJOR increment |
-Adding required property | MAJOR increment |
-Adding optional property | MINOR increment |
-Tightening validation rules | MAJOR increment |
-Expanding enum values | MINOR increment (if non-breaking) |
+PATCH releases SHALL NOT alter normative implementation behavior.
 
 ---
 
-# 5. Registry Governance
+# 5. Compatibility Model
 
-Registries are **normative artifacts**.
+## 5.1 Repository Compatibility
 
-The following registries are Core-managed:
+Artifacts within a repository release are intended to operate together as a coherent specification set.
+
+Implementations claiming conformance SHOULD implement artifacts from a single repository release whenever practical.
+
+---
+
+## 5.2 Same-Major Compatibility
+
+Implementations conforming to a particular MAJOR version SHALL interoperate with:
+
+- all MINOR releases of that MAJOR version; and
+- all PATCH releases of that MAJOR version,
+
+subject to optional capability negotiation where applicable.
+
+---
+
+## 5.3 Cross-Major Compatibility
+
+Implementations SHALL reject requests requiring unsupported MAJOR versions.
+
+The appropriate rejection code SHALL be defined by the published rejection-code registry.
+
+Cross-major interoperability is not guaranteed.
+
+---
+
+# 6. Specification Alignment
+
+The following specification families SHALL remain aligned within the same repository release:
+
+- Core Specification
+- HTTP Interface Specification
+- Policy Evaluation Contract
+- Security Specification
+- Multitenant Operational Specification
+- Governance Specifications
+- Conformance Specifications
+
+Normative schemas and registries SHALL remain consistent with the repository release in which they are published.
+
+PATCH-level editorial updates MAY occur independently provided normative behavior remains unchanged.
+
+---
+
+# 7. Registry Governance
+
+Normative registries are authoritative components of the AGCP repository.
+
+Registries provide stable identifiers, controlled vocabularies, and machine-readable metadata that support interoperability and deterministic governance behavior.
+
+Core-managed registries include, where applicable:
 
 - Rejection Code Registry
 - Constraint Type Registry
 - Invariant Type Registry
+- Governance Stage Registry
+- Governance Evidence Type Registry
+- Human Review Role Registry
+
+Additional registries MAY be introduced in future repository releases provided they comply with the compatibility rules defined by this specification.
 
 ---
 
-## 5.1 Registry Entry Rules
+## 7.1 Registry Entry Requirements
 
-Each registry entry **MUST include**:
+Each registry entry SHALL include, at a minimum:
 
-- name
-- status (ACTIVE \| DEPRECATED \| RETIRED)
-- description
-- version introduced
+- identifier;
+- name;
+- status;
+- description;
+- repository release introduced.
 
-Optional:
+Additional metadata MAY include:
 
-- parameters_schema (for constraint types)
-- http_status (for rejection codes)
+- parameters schema;
+- associated specification;
+- applicable interfaces;
+- associated Governance Domains;
+- associated conformance requirements.
 
----
-
-## 5.2 Registry Status Semantics
-
-**ACTIVE**
-
-Entry may be used in conformance implementations.
-
-**DEPRECATED**
-
-Entry remains valid but **SHOULD NOT be used in new implementations**.
-
-**RETIRED**
-
-Entry **MUST NOT be used in new implementations**.
-
-Implementations **MAY still process legacy artifacts referencing it**.
+Registry entries SHALL remain uniquely identifiable across repository releases.
 
 ---
 
-## 5.3 Registry Namespace Rules
+## 7.2 Registry Status
 
-Core namespace prefix:
+Registry entries SHALL use one of the following lifecycle states.
 
-`core.`
+### ACTIVE
 
-Experimental namespace prefix:
+The entry is approved for use by conformant implementations.
 
-`x.`
+### DEPRECATED
 
-Vendor namespace prefix:
+The entry remains valid for compatibility purposes but SHOULD NOT be used in new implementations.
 
-`vendor.<vendor_name>.`
+Migration guidance SHOULD be provided.
 
-Core namespace modifications require governance approval.
+### RETIRED
 
-Vendor namespace entries **do NOT modify Core conformance guarantees**.
+The entry SHALL NOT be used in new implementations.
 
----
-
-# 6. Compatibility Rules
-
-## 6.1 Within Same MAJOR
-
-Implementations claiming conformance to MAJOR version **X MUST interoperate with**:
-
-- All MINOR versions within X
-- All PATCH versions within X
+Implementations MAY continue to recognize retired entries when processing historical artifacts or maintaining backward compatibility.
 
 ---
 
-## 6.2 Cross-MAJOR Behavior
+## 7.3 Registry Namespace Rules
 
-An implementation **MUST reject requests specifying unsupported MAJOR version**.
+Core-managed registry identifiers SHALL occupy the core namespace.
 
-Rejection code:
+Experimental identifiers SHALL use the `x.` namespace.
 
-`UNSUPPORTED_SPEC_VERSION`
+Vendor-specific identifiers SHALL use a vendor-qualified namespace.
 
----
+Example:
 
-# 7. Change Control Process
+```text
+vendor.example.constraint.example_constraint
+```
 
-All normative changes **MUST include**:
-
-- Problem statement
-- Proposed modification
-- Impact analysis
-- Schema impact
-- Registry impact
-- Conformance impact
-- Security impact
-- Multitenant impact
-- Compatibility classification (MAJOR/MINOR/PATCH)
-- Migration guidance
-
-Changes **MUST be tracked via versioned release snapshots**.
+Vendor namespaces SHALL NOT modify or redefine Core registry semantics.
 
 ---
 
-# 8. Conformance Impact Rules
+# 8. Schema Governance
+
+Normative schemas SHALL evolve in a manner consistent with the compatibility guarantees defined by this specification.
+
+Schema evolution SHALL preserve deterministic interoperability across conformant implementations.
+
+## 8.1 Version Alignment
+
+Normative schemas SHALL remain aligned with the repository release in which they are published.
+
+Schemas MAY include explicit schema version metadata where appropriate.
+
+## 8.2 Compatibility Rules
+
+Typical compatibility classifications include:
+
+| Schema Change | Version Impact |
+|---------------|----------------|
+| Remove required property | MAJOR |
+| Add required property | MAJOR |
+| Add optional property | MINOR |
+| Tighten validation constraints | MAJOR |
+| Expand enumerated values without breaking compatibility | MINOR |
+| Editorial clarification | PATCH |
+
+Implementations SHOULD reject schema versions that are incompatible with their supported repository release.
+
+---
+
+# 9. Change Control Process
+
+Normative changes SHALL follow a documented governance process.
+
+Each proposed normative change SHOULD include:
+
+- problem statement;
+- proposed modification;
+- rationale;
+- specification impact;
+- schema impact;
+- registry impact;
+- conformance impact;
+- security impact;
+- multitenant impact;
+- compatibility classification;
+- migration guidance.
+
+Repository releases SHALL preserve an auditable history of normative changes.
+
+---
+
+## 9.1 Change Classification
+
+Each approved change SHALL be classified as:
+
+- MAJOR;
+- MINOR; or
+- PATCH,
+
+consistent with the Semantic Versioning model defined by this specification.
+
+---
+
+## 9.2 Repository Snapshots
+
+Each repository release SHOULD preserve an immutable snapshot of:
+
+- normative specifications;
+- schemas;
+- registries;
+- conformance artifacts;
+- reference documentation.
+
+Repository snapshots support reproducibility, deterministic conformance testing, and long-term interoperability.
+
+---
+
+# 10. Conformance Impact Rules
+
+Changes affecting conformance SHALL be evaluated for compatibility impact.
+
+Typical classifications include:
 
 | Change | Version Impact |
-|------|------|
-Add new rejection codes | MINOR |
-Change rejection semantics | MAJOR |
-Add new conformance assertions | MINOR |
-Remove conformance assertions | MAJOR |
-Modify ordering guarantees | MAJOR |
+|--------|----------------|
+| Add new Normative Statements | MINOR |
+| Remove or modify Normative Statements | MAJOR |
+| Add new Conformance Requirements | MINOR |
+| Remove or modify Conformance Requirements | MAJOR |
+| Add new Test Cases without changing existing behavior | MINOR |
+| Modify Test Case behavior affecting normative verification | MAJOR |
+| Add new Harness Checks | MINOR |
+| Modify Harness Checks affecting normative verification | MAJOR |
+| Modify deterministic governance ordering | MAJOR |
+| Modify Canonical State derivation semantics | MAJOR |
+| Modify Governance Evidence semantics | MAJOR |
+| Modify ordered Append-Only Governance Ledger semantics | MAJOR |
+
+Conformance artifacts SHALL remain traceable through the normative conformance model:
+
+```text
+Normative Specification
+        ↓
+Normative Statement
+        ↓
+Conformance Requirement
+        ↓
+Test Case
+        ↓
+Harness Check
+        ↓
+Harness Test Vector
+```
 
 ---
 
-# 9. Governance Structure (Standards Process Context)
+# 11. Governance Process
 
-AGCP governance **SHALL include**:
+The AGCP governance process SHALL support the orderly evolution of the specifications while preserving interoperability and deterministic behavior.
 
-- Public review process
-- Documented ballot mechanism
-- Version tagging
-- Public issue tracking
-- Change logs
+Repository governance SHOULD include:
 
-Governance model **MUST ensure**:
+- public review;
+- documented issue tracking;
+- repository release tagging;
+- published change history;
+- documented approval process.
 
-- Vendor neutrality
-- Deterministic stability
-- Security-first evolution
-- Backward compatibility discipline
+The governance process SHALL preserve:
 
----
+- vendor neutrality;
+- deterministic behavior;
+- backward compatibility discipline;
+- security-first evolution;
+- transparent technical decision making.
 
-# 10. Release Lifecycle
+Repository governance defines how specifications evolve.
 
-Each release **MUST include**:
-
-- Version number
-- Release date
-- Changelog
-- Normative specification set
-- Schema bundle
-- Registry bundle
-- Conformance assertion mapping
-- Audit report (recommended)
-
-Release states:
-
-`Draft → Committee Specification → Final Standard`
+It does not prescribe the governance structure of any particular standards organization.
 
 ---
 
-# 11. Experimental Features
+# 12. Release Lifecycle
 
-Experimental features **MUST**:
+Each repository release SHALL include, at a minimum:
 
-- Use `x.` namespace
-- Be clearly labeled non-normative
-- Not impact Core conformance
+- repository release identifier;
+- publication date;
+- release notes;
+- normative specification set;
+- schema bundle;
+- registry bundle;
+- conformance artifact bundle;
+- reference documentation;
+- lifecycle documentation.
 
-Experimental features **MAY be promoted to core namespace via governance vote**.
+Where applicable, a repository release SHOULD also include:
 
----
+- implementation guidance;
+- audit report;
+- migration guidance;
+- known compatibility considerations.
 
-# 12. Deprecation Policy
-
-Deprecation **MUST**:
-
-- Be announced in MINOR release
-- Remain valid for at least one additional MINOR cycle
-- Provide migration guidance
-
-Removal **requires MAJOR increment**.
-
----
-
-# 13. Determinism Stability Rule
-
-Any change that impacts:
-
-- PEC input contract
-- PEC output contract
-- Evaluation ordering
-- Invariant enforcement logic
-- Multitenant isolation guarantees
-
-**MUST be classified as MAJOR.**
+Repository releases represent immutable snapshots of the AGCP specification.
 
 ---
 
-# 14. Security Stability Rule
+## 12.1 Release States
 
-Any change that:
+Repository releases MAY progress through lifecycle states including:
 
-- Weakens signature validation requirements
-- Weakens tenant isolation
-- Weakens replay protection
-- Weakens execution gating
-- Weakens ledger immutability
+```text
+Draft
+    ↓
+Public Review
+    ↓
+Committee Specification
+    ↓
+Release Candidate
+    ↓
+Final Standard
+```
 
-**MUST be classified as MAJOR.**
-
----
-
-# 15. Documentation Versioning Requirements
-
-Each specification document **MUST include**:
-
-- Version
-- Status
-- Publication date
-- Change history section
-
-Each schema and registry file **MUST include a version identifier**.
+Alternative release processes MAY be used by adopting organizations provided that published repository releases remain stable and reproducible.
 
 ---
 
-# 16. Interoperability Guarantees
+# 13. Experimental Features
 
-AGCP guarantees that:
+Experimental capabilities enable architectural innovation while preserving normative interoperability.
 
-- Conformant implementations of the same MAJOR version can exchange ActionEnvelopes
-- Deterministic PEC behavior is preserved across implementations
-- Registry semantics remain stable within MAJOR version
-- Conformance assertions remain stable within MAJOR version
+Experimental features SHALL:
 
----
+- be clearly identified as experimental;
+- remain outside normative conformance requirements;
+- avoid modifying normative Core semantics;
+- preserve deterministic externally observable behavior.
 
-# 17. Non-Goals
+Experimental features SHOULD use the `x.` namespace.
 
-This document does **not**:
+Experimental features MAY be promoted into the Core through the documented repository governance process.
 
-- Define OASIS procedural mechanics
-- Define organizational governance beyond technical version control
-- Mandate specific voting thresholds
-- Mandate specific repository hosting platforms
+Promotion of an experimental capability into the Core SHALL follow the compatibility rules defined by this specification.
 
 ---
 
-# 18. Summary
+# 14. Deprecation Policy
 
-The AGCP Versioning and Governance Specification ensures:
+Normative specifications, schemas, registries, interfaces, and conformance artifacts MAY be deprecated.
 
-- Predictable evolution
-- Interoperability across vendors
-- Deterministic stability
-- Multitenant safety continuity
-- Security guarantee preservation
+Deprecation SHALL:
 
-All AGCP implementations **MUST adhere to this versioning and governance model to claim conformance**.
+- be announced in a MINOR repository release;
+- include migration guidance;
+- remain supported for at least one subsequent MINOR release unless an exceptional security issue requires earlier removal.
+
+Removal of normative behavior SHALL require a MAJOR repository release.
+
+Historical repository releases SHALL remain available for interoperability and audit purposes where practical.
+
+---
+
+# 15. Determinism Stability Rule
+
+Deterministic governance behavior is a foundational architectural guarantee of AGCP.
+
+Any change affecting one or more of the following SHALL be classified as a MAJOR change:
+
+- Proposal Qualification semantics;
+- Governance Decision Function semantics;
+- Human Review semantics;
+- Execution Authorization semantics;
+- Commit Boundary semantics;
+- governance progression ordering;
+- Canonical State derivation;
+- Governance Evidence semantics;
+- ordered Append-Only Governance Ledger semantics;
+- deterministic replay behavior;
+- multitenant isolation guarantees;
+- Governance Domain isolation semantics.
+
+Repository evolution SHALL preserve deterministic externally observable governance behavior across conformant implementations within the same MAJOR version.
+
+---
+
+# 16. Security Stability Rule
+
+Security guarantees are normative architectural guarantees.
+
+Changes that weaken one or more of the following SHALL require a MAJOR repository release:
+
+- provenance validation;
+- cryptographic verification;
+- replay protection;
+- tenant isolation;
+- Governance Domain isolation;
+- Human Review integrity;
+- Execution Authorization integrity;
+- Commit Boundary validation;
+- Governance Evidence integrity;
+- ordered Append-Only Governance Ledger integrity;
+- Canonical State integrity.
+
+Security enhancements that strengthen existing guarantees without breaking compatibility MAY be introduced in MINOR releases.
+
+---
+
+# 17. Documentation Requirements
+
+Normative specifications SHALL include, where applicable:
+
+- document title;
+- status;
+- repository versioning information;
+- purpose;
+- scope;
+- normative content.
+
+Publication metadata MAY additionally include:
+
+- publication date;
+- document history;
+- repository release reference.
+
+Normative schemas and registries SHOULD include sufficient metadata to identify the repository release with which they are associated.
+
+Informative documentation MAY evolve independently provided that it remains consistent with the repository release in which it is published.
+
+---
+
+# 18. Repository Documentation
+
+A repository release SHOULD include documentation sufficient to support:
+
+- implementation;
+- conformance testing;
+- interoperability;
+- governance review;
+- security assessment;
+- architectural understanding.
+
+Typical documentation includes:
+
+- normative specifications;
+- lifecycle documentation;
+- conformance documentation;
+- implementation guidance;
+- reference documentation;
+- research publications.
+
+Only the normative specifications define implementation requirements.
+
+All other documentation is informative unless explicitly stated otherwise.
+
+---
+
+# 19. Interoperability Guarantees
+
+AGCP is designed to support interoperable governance processing across conformant implementations.
+
+Conformant implementations of the same MAJOR repository release SHALL preserve equivalent externally observable governance behavior.
+
+Interoperability guarantees include:
+
+- consistent Proposal processing;
+- deterministic governance progression;
+- consistent Proposal Qualification behavior;
+- consistent Governance Decision Function behavior;
+- consistent Human Review behavior;
+- consistent Execution Authorization behavior;
+- consistent Commit Boundary behavior;
+- equivalent Canonical State derivation;
+- equivalent Governance Evidence semantics;
+- equivalent ordered Append-Only Governance Ledger semantics;
+- deterministic replay using equivalent authoritative inputs.
+
+Implementation architecture, programming language, storage technology, deployment model, and execution platform MAY differ provided these externally observable guarantees are preserved.
+
+---
+
+# 20. Repository Governance
+
+The AGCP repository is the authoritative publication mechanism for the specification.
+
+Repository governance SHALL ensure that:
+
+- normative specifications remain internally consistent;
+- schemas remain aligned with normative behavior;
+- registries remain authoritative and version controlled;
+- conformance artifacts remain traceable to the normative specifications;
+- informative documentation remains consistent with the published architecture.
+
+Normative specifications define implementation requirements.
+
+Schemas define normative data structures.
+
+Registries define controlled vocabularies and stable identifiers.
+
+Conformance artifacts verify implementation behavior.
+
+Reference, lifecycle, implementation guidance, and research documents provide informative architectural support and SHALL NOT introduce additional normative requirements unless explicitly designated as normative.
+
+---
+
+# 21. Relationship to Other Specifications
+
+This specification defines the governance model for repository evolution.
+
+It complements, but does not replace, the following specifications:
+
+- AGCP Core Specification
+- AGCP HTTP Interface Specification
+- AGCP Policy Evaluation Contract
+- AGCP Security Specification
+- AGCP Multitenant Operational Specification
+- AGCP Governance Evidence Specification
+- AGCP Append-Only Governance Ledger Specification
+- AGCP Human Review Specification
+- AGCP Conformance Specification
+
+All specifications within a repository release SHALL be interpreted as a coherent specification set.
+
+Where inconsistencies exist, the Core Specification governs architectural behavior unless another specification explicitly defines a more specialized normative requirement within its scope.
+
+---
+
+# 22. Non-Goals
+
+This specification does not:
+
+- define the governance structure of any particular standards organization;
+- prescribe organizational voting procedures;
+- require a particular repository hosting platform;
+- mandate a specific software development workflow;
+- require a particular release cadence;
+- define implementation-specific deployment architectures.
+
+These matters remain the responsibility of the organizations adopting, publishing, or implementing AGCP.
+
+---
+
+# 23. Summary
+
+This specification establishes the versioning and governance model for the Autonomous Governance Control Plane.
+
+It defines:
+
+- repository versioning;
+- Semantic Versioning rules;
+- compatibility classifications;
+- registry governance;
+- schema governance;
+- change control;
+- repository governance;
+- conformance impact classification;
+- interoperability guarantees; and
+- long-term specification stability.
+
+Together with the other normative AGCP specifications, this specification provides a stable foundation for deterministic governance processing, interoperable implementations, and long-term evolution of the AGCP standard.
+
+Conformant implementations SHALL adhere to this versioning and governance model when claiming conformance to an AGCP repository release.
