@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: AGCP HTTP Interface Contract
-  version: release-managed
+  version: git-release
   description: |
     Machine-readable HTTP interface contract for AGCP-conformant implementations.
 
