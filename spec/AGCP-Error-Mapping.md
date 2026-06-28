@@ -1,138 +1,323 @@
-# AGCP Endpoint-Level Error Mapping Table
+# AGCP Endpoint-Level Error Mapping
 
-Version: 0.9.0  
-Status: Normative  
-Scope: Defines the required mapping between HTTP status codes, rejection codes, and ledger append behavior for AGCP endpoints. This document ensures deterministic and interoperable error handling across implementations.
-
----
-
-# 1. Conformance Rules
-
-Implementations MUST comply with the following rules.
-
-1. Implementations MUST use the exact HTTP status codes and `rejection_code` values defined in this document.
-
-2. If `ledger_append = YES`, a `DECISION` stage entry MUST be appended to the ledger unless explicitly stated otherwise.
-
-3. If `ledger_append = NO`, no new ledger entry SHALL be created.
-
-4. Cross-tenant handling MUST be consistent across all endpoints. Implementations MUST choose either:
-
-- **Hide profile** (404)
-- **Forbid profile** (403)
-
-Once chosen, the strategy MUST be applied uniformly across the system.
+**Status:** Normative  
+**Series:** AGCP Core  
+**Scope:** HTTP status codes, rejection codes, and Governance Evidence behavior for the AGCP HTTP interface.
 
 ---
 
-# 2. POST /agcp/v1/actions/submit
+# 1. Purpose
 
-| Failure Path | HTTP Status | rejection_code | ledger_append |
-|--------------|------------|----------------|---------------|
-| Schema validation failure | 400 | SCHEMA_VALIDATION_FAILED | YES |
+This document defines the required mapping between HTTP status codes, AGCP rejection codes, and Governance Evidence behavior for AGCP HTTP endpoints.
+
+It is aligned with:
+
+- `api/AGCP-HTTP-Contract.yaml`
+- `spec/AGCP-HTTP-Interface.md`
+- AGCP Core Specification
+- AGCP rejection-code registry
+
+The OpenAPI contract defines endpoint schemas and response structures. This document defines the required error semantics for those endpoints.
+
+---
+
+# 2. General Error Rules
+
+Implementations SHALL comply with the following rules.
+
+1. Error responses SHALL conform to the `ErrorResponse` schema defined in `api/AGCP-HTTP-Contract.yaml`.
+
+2. Error responses SHALL include a `rejection_code`.
+
+3. `rejection_code` values SHALL be selected from the AGCP rejection-code registry or from an implementation extension registry that does not weaken AGCP normative behavior.
+
+4. HTTP status codes SHALL represent protocol-level semantics.
+
+5. Rejection codes SHALL represent governance-level semantics.
+
+6. Governance Evidence SHALL be produced for governance-significant refusals, denials, failed evaluations, authorization failures, Commit Boundary failures, artifact validation failures, and governed re-evaluation outcomes where the implementation has sufficient context to associate evidence with a governed object.
+
+7. Governance Evidence SHALL NOT be required for unauthenticated requests, malformed requests that cannot be associated with a tenant or governed object, or pre-governance transport failures.
+
+8. Cross-tenant and unauthorized cross-domain access SHALL NOT disclose protected resource existence unless the implementation explicitly adopts a forbid profile.
+
+---
+
+# 3. Cross-Tenant and Cross-Domain Handling
+
+Implementations SHALL apply one cross-scope disclosure strategy consistently.
+
+## 3.1 Hide Profile
+
+The implementation returns:
+
+```text
+HTTP 404
+rejection_code: RESOURCE_NOT_FOUND or applicable not-found code
+```
+
+## 3.2 Forbid Profile
+
+The implementation returns:
+
+```text
+HTTP 403
+rejection_code: TENANT_SCOPE_VIOLATION
+```
+
+or:
+
+```text
+HTTP 403
+rejection_code: GOVERNANCE_DOMAIN_VIOLATION
+```
+
+The selected strategy SHALL be applied uniformly across protected retrieval endpoints.
+
+---
+
+# 4. POST /agcp/v1/proposals/submit
+
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Malformed JSON or schema validation failure before tenant association | 400 | SCHEMA_VALIDATION_FAILED | NO |
+| Schema validation failure after tenant/proposal association | 400 | SCHEMA_VALIDATION_FAILED | YES |
 | Provenance invalid | 400 | PROVENANCE_INVALID | YES |
-| Tenant not ACTIVE | 403 | TENANT_STATE_INVALID | YES |
-| Policy not found | 400 | POLICY_NOT_FOUND | YES |
-| Constraint failure | 200 | CONSTRAINT_FAIL | YES |
-| Hard invariant failure | 200 | INVARIANT_HARD_FAIL | YES |
+| Tenant state invalid | 403 | TENANT_STATE_INVALID | YES |
+| Tenant scope violation | 403 | TENANT_SCOPE_VIOLATION | YES |
+| Governance domain violation | 403 | GOVERNANCE_DOMAIN_VIOLATION | YES |
+| Policy not found | 422 | POLICY_NOT_FOUND | YES |
+| Canonical State invalid or unavailable | 422 or 503 | CANONICAL_STATE_INVALID or CANONICAL_STATE_UNAVAILABLE | YES |
+| Authority Lineage invalid | 403 | AUTHORITY_LINEAGE_INVALID | YES |
+| Proposal structural refusal | 400 | PROPOSAL_STRUCTURAL_REFUSAL | YES |
+| Governance denial | 200 | GOVERNANCE_DENIED | YES |
+| Pending human review | 200 | PENDING_HUMAN_REVIEW | YES |
+| Governed re-evaluation required | 200 or 409 | GOVERNED_REEVALUATION_REQUIRED | YES |
+| Policy module unavailable | 503 | POLICY_MODULE_UNAVAILABLE | YES |
+| Policy evaluation output invalid | 422 | POLICY_EVALUATION_OUTPUT_INVALID | YES |
+| Policy module nondeterministic | 422 | POLICY_MODULE_NONDETERMINISTIC | YES |
 | Idempotency conflict | 409 | IDEMPOTENCY_CONFLICT | NO |
 
 Notes:
 
-- Constraint and invariant failures return **HTTP 200** because the request was valid but governance rejected execution.
-- A `DECISION` ledger entry MUST record the rejection.
+- Governance denial is a valid governance outcome, not a transport failure.
+- Pending Human Review is a valid governance outcome, not a transport failure.
+- Structural Refusal may be returned as an error response when the Proposal cannot be qualified.
+- Idempotency conflicts SHALL NOT produce new Governance Evidence because the request is rejected before new governance processing begins.
 
 ---
 
-# 3. GET /agcp/v1/actions/{action_id}
+# 5. GET /agcp/v1/proposals/{proposal_id}
 
-| Failure Path | HTTP Status | rejection_code | ledger_append |
-|--------------|------------|----------------|---------------|
-| Action not found (or hidden cross-tenant) | 404 | ACTION_NOT_AUTHORIZED | NO |
-| Cross-tenant (forbid profile) | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Proposal not found | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, forbid profile | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Governance-domain violation, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Governance-domain violation, forbid profile | 403 | GOVERNANCE_DOMAIN_VIOLATION | NO |
 
 Notes:
 
-- Implementations using the hide profile SHOULD always return 404 for cross-tenant access.
-- No ledger append occurs for retrieval failures.
+- Retrieval failures SHALL NOT create new Governance Evidence unless the implementation explicitly records access-denial evidence as an implementation extension.
+- Retrieval SHALL NOT expose transient internal processing states.
 
 ---
 
-# 4. POST /agcp/v1/actions/{action_id}/cosign
+# 6. POST /agcp/v1/proposals/{proposal_id}/human-review
 
-| Failure Path | HTTP Status | rejection_code | ledger_append |
-|--------------|------------|----------------|---------------|
-| Invalid signature | 409 | COSIGN_INVALID | NO |
-| Expired token | 409 | COSIGN_EXPIRED | NO |
-| Replay detected | 409 | COSIGN_INVALID | NO |
-| Action not PENDING_HITL | 409 | ACTION_NOT_AUTHORIZED | NO |
-| Cross-tenant (hide profile) | 404 | ACTION_NOT_AUTHORIZED | NO |
-| Cross-tenant (forbid profile) | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Malformed request | 400 | SCHEMA_VALIDATION_FAILED | NO |
+| Proposal not found | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, forbid profile | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Governance-domain violation | 403 | GOVERNANCE_DOMAIN_VIOLATION | NO |
+| Human-review artifact invalid | 422 | HUMAN_REVIEW_INVALID | YES |
+| Human-review artifact expired | 409 | HUMAN_REVIEW_EXPIRED | YES |
+| Proposal not in Pending Human Review or Deferred state | 409 | GOVERNED_REEVALUATION_REQUIRED | YES |
+| Authority Lineage invalid | 403 | AUTHORITY_LINEAGE_INVALID | YES |
+| Idempotency conflict | 409 | IDEMPOTENCY_CONFLICT | NO |
 
 Notes:
 
-- Cosign failures MUST NOT modify the ledger.
-- HITL validation occurs before any ledger modification.
+- Human-review artifacts are governed inputs.
+- Human-review submission SHALL NOT itself perform execution.
+- If human-review processing causes the governance decision to become Authorized, subsequent Execution Authorization behavior SHALL be reflected in Governance Evidence.
 
 ---
 
-# 5. POST /agcp/v1/executions/commit
+# 7. GET /agcp/v1/execution-authorizations/{authorization_id}
 
-| Failure Path | HTTP Status | rejection_code | ledger_append |
-|--------------|------------|----------------|---------------|
-| Tenant not ACTIVE | 403 | TENANT_STATE_INVALID | NO |
-| Action not AUTHORIZED | 409 | ACTION_NOT_AUTHORIZED | NO |
-| Ledger authorization ref mismatch | 409 | ACTION_NOT_AUTHORIZED | NO |
-| Replay commit after EXECUTED | 409 | ACTION_NOT_AUTHORIZED | NO |
-| Cross-tenant (hide profile) | 404 | ACTION_NOT_AUTHORIZED | NO |
-| Cross-tenant (forbid profile) | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Authorization not found | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, forbid profile | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Governance-domain violation, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Governance-domain violation, forbid profile | 403 | GOVERNANCE_DOMAIN_VIOLATION | NO |
 
 Notes:
 
-- Commit failures MUST NOT append ledger entries.
-- Only successful commits append `EXECUTION_COMMITTED`.
+- Retrieving Execution Authorization SHALL NOT execute or commit an Action.
+- Retrieval failures do not require new Governance Evidence.
 
 ---
 
-# 6. Success Path Notes
+# 8. POST /agcp/v1/commit-boundary/commit
 
-Successful operations produce the following behavior.
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Malformed request | 400 | SCHEMA_VALIDATION_FAILED | NO |
+| Tenant state invalid | 403 | TENANT_STATE_INVALID | YES |
+| Tenant scope violation | 403 | TENANT_SCOPE_VIOLATION | YES |
+| Governance-domain violation | 403 | GOVERNANCE_DOMAIN_VIOLATION | YES |
+| Proposal not found | 404 | RESOURCE_NOT_FOUND | NO |
+| Execution Authorization not found | 409 | EXECUTION_AUTHORIZATION_INVALID | YES |
+| Execution Authorization invalid, expired, revoked, or consumed | 409 | EXECUTION_AUTHORIZATION_INVALID | YES |
+| Action not authorized for Commit Boundary processing | 409 | ACTION_NOT_AUTHORIZED | YES |
+| Action Representation mutated after qualification | 409 | ACTION_REPRESENTATION_MUTATED | YES |
+| Governance Context invalid | 409 | GOVERNANCE_CONTEXT_INVALID | YES |
+| Canonical State invalid or unavailable | 422 or 503 | CANONICAL_STATE_INVALID or CANONICAL_STATE_UNAVAILABLE | YES |
+| Authority Lineage invalid | 403 | AUTHORITY_LINEAGE_INVALID | YES |
+| Authority revoked | 403 | AUTHORITY_REVOKED | YES |
+| Authority replay detected | 409 | AUTHORITY_REPLAY_DETECTED | YES |
+| Commit prerequisite failure | 422 | COMMIT_BOUNDARY_FAILED | YES |
+| Governed re-evaluation required | 409 | GOVERNED_REEVALUATION_REQUIRED | YES |
+| Idempotency conflict | 409 | IDEMPOTENCY_CONFLICT | NO |
 
-### Successful ACCEPT decision on submit
+Notes:
 
-```
-HTTP 200
-state = AUTHORIZED
-ledger_append = YES
-```
-
-### Successful PENDING_HITL decision
-
-```
-HTTP 200
-state = PENDING_HITL
-ledger_append = YES
-```
-
-### Successful commit
-
-```
-HTTP 200
-state = EXECUTED
-ledger_append = YES
-stage = EXECUTION_COMMITTED
-```
+- Commit Boundary failure SHALL NOT make the Action operationally real.
+- Successful Commit Boundary processing SHALL produce Governance Evidence.
+- Replay or reuse of consumed authorization SHALL fail.
 
 ---
 
-# 7. Versioning
+# 9. GET /agcp/v1/governance-evidence/{evidence_id}
 
-Any change to:
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Governance Evidence not found | 404 | RESOURCE_NOT_FOUND | NO |
+| Governance Evidence incomplete or invalid | 422 | GOVERNANCE_EVIDENCE_INVALID | NO |
+| Cross-tenant access, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, forbid profile | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Governance-domain violation, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Governance-domain violation, forbid profile | 403 | GOVERNANCE_DOMAIN_VIOLATION | NO |
 
-- HTTP status codes
-- rejection_code values
-- ledger append behavior
+Notes:
 
-constitutes a **breaking change**.
+- Retrieval of Governance Evidence SHALL preserve tenant and governance-domain isolation.
+- Invalid evidence SHALL NOT be treated as sufficient for deterministic replay.
 
-Breaking changes MUST require a **MAJOR version increment**.
+---
+
+# 10. POST /agcp/v1/governance-artifacts/policy-modules
+
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Malformed artifact request | 400 | SCHEMA_VALIDATION_FAILED | NO |
+| Tenant state invalid | 403 | TENANT_STATE_INVALID | YES |
+| Tenant scope violation | 403 | TENANT_SCOPE_VIOLATION | YES |
+| Governance-domain violation | 403 | GOVERNANCE_DOMAIN_VIOLATION | YES |
+| Artifact integrity validation failed | 422 | GOVERNANCE_ARTIFACT_INVALID | YES |
+| Unauthorized artifact registration | 403 | GOVERNANCE_ARTIFACT_UNAUTHORIZED | YES |
+| Policy module unavailable | 503 | POLICY_MODULE_UNAVAILABLE | YES |
+| Policy module nondeterministic | 422 | POLICY_MODULE_NONDETERMINISTIC | YES |
+| Artifact activation denied | 422 | GOVERNANCE_ARTIFACT_ACTIVATION_DENIED | YES |
+| Idempotency conflict | 409 | IDEMPOTENCY_CONFLICT | NO |
+
+Notes:
+
+- Registration SHALL NOT imply operational activation.
+- Artifact validation failures are governance-significant and SHOULD produce Governance Evidence where attributable.
+
+---
+
+# 11. POST /agcp/v1/governance-artifacts/policies
+
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Malformed policy artifact | 400 | SCHEMA_VALIDATION_FAILED | NO |
+| Tenant state invalid | 403 | TENANT_STATE_INVALID | YES |
+| Tenant scope violation | 403 | TENANT_SCOPE_VIOLATION | YES |
+| Governance-domain violation | 403 | GOVERNANCE_DOMAIN_VIOLATION | YES |
+| Referenced policy module unavailable | 503 | POLICY_MODULE_UNAVAILABLE | YES |
+| Policy artifact invalid | 422 | GOVERNANCE_ARTIFACT_INVALID | YES |
+| Unauthorized policy registration | 403 | GOVERNANCE_ARTIFACT_UNAUTHORIZED | YES |
+| Policy activation denied | 422 | GOVERNANCE_ARTIFACT_ACTIVATION_DENIED | YES |
+| Idempotency conflict | 409 | IDEMPOTENCY_CONFLICT | NO |
+
+Notes:
+
+- Policy registration and policy activation are distinct governance events.
+- Activation SHALL occur only after applicable governance validation succeeds.
+
+---
+
+# 12. GET /agcp/v1/governance-artifacts/{artifact_id}
+
+| Failure Path | HTTP Status | rejection_code | Governance Evidence |
+|---|---:|---|---|
+| Artifact not found | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Cross-tenant access, forbid profile | 403 | TENANT_SCOPE_VIOLATION | NO |
+| Governance-domain violation, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
+| Governance-domain violation, forbid profile | 403 | GOVERNANCE_DOMAIN_VIOLATION | NO |
+
+Notes:
+
+- Retrieval failures do not require new Governance Evidence.
+- Access-denial evidence MAY be recorded as an implementation extension.
+
+---
+
+# 13. HTTP Status Code Guidance
+
+| HTTP Status | Meaning |
+|---:|---|
+| 200 | Request processed and authoritative AGCP response returned |
+| 400 | Request malformed or structurally invalid |
+| 403 | Tenant, governance-domain, authority, or authorization prohibition |
+| 404 | Resource not found or intentionally hidden |
+| 409 | Conflict with current governance state, authorization state, idempotency, replay, or transition state |
+| 422 | Semantically invalid governance artifact, evidence, policy, Canonical State, or validation result |
+| 503 | Required governance dependency unavailable |
+
+---
+
+# 14. Governance Evidence Rules
+
+Governance Evidence SHALL be produced when:
+
+- a Proposal is qualified;
+- a Proposal is structurally refused after association;
+- the Governance Decision Function produces an outcome;
+- Execution Authorization produces an outcome;
+- Commit Boundary processing succeeds or fails after association;
+- Governance Self-Protection validates, rejects, or requires re-evaluation of a governance artifact;
+- governed re-evaluation is required;
+- deterministic replay succeeds or fails where replay is an exposed operation.
+
+Governance Evidence SHALL NOT be required when:
+
+- a request is malformed before tenant or governed-object association;
+- authentication fails before governance processing begins;
+- a protected resource is not found;
+- a cross-tenant retrieval is rejected without disclosing protected resource state;
+- an idempotency conflict prevents new governance processing.
+
+---
+
+# 15. Breaking Change Guidance
+
+A change to any of the following is a breaking interface change:
+
+- required HTTP status code mapping;
+- required rejection code mapping;
+- required `ErrorResponse` structure;
+- required Governance Evidence behavior;
+- endpoint path or method;
+- required request or response schema.
+
+Specification release versioning is managed by repository release tags.
