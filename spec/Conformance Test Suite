@@ -1,6 +1,3 @@
-Below is **Batch 1: TC-001 through TC-010**, updated so each TC covers all NS IDs mapped to its CR in the RTM, with one TC per CR. Sources used: Normative Statements, Conformance Test Suite, and RTM mapping.  
-
-````markdown
 # TC-001 — Submit → Authorized
 
 **Requirement**  
