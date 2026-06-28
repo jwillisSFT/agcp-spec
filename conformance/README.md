@@ -1,123 +1,155 @@
-# AGCP Conformance Framework
+# Conformance
 
-Version: 0.9.0
+## Purpose
 
-This directory contains the artifacts used to define and verify AGCP conformance.
+This directory contains the AGCP conformance framework used to verify
+that an implementation satisfies the normative requirements defined by
+the AGCP specifications.
 
-AGCP conformance is verified through a layered traceability model:
+The conformance artifacts provide human-readable documentation,
+machine-readable mappings, executable harness checks, and deterministic
+test vectors. Together they support repeatable, auditable, and
+deterministic verification of AGCP implementations.
 
-Specification  
-→ Assertions  
-→ Requirements  
-→ Conformance Tests
+------------------------------------------------------------------------
 
-Each layer is represented by files in this directory.
+# Conformance Architecture
 
----
+The authoritative traceability model is:
 
-# Conformance Artifacts
+``` text
+Normative Specification
+        ↓
+Normative Statement (NS)
+        ↓
+Conformance Requirement (CR)
+        ↓
+Test Case (TC)
+```
 
-## assertions.json
+The executable conformance layer builds upon that foundation:
 
-Canonical machine-readable registry of normative assertions.
+``` text
+Test Case (TC)
+        ↓
+Harness Check
+        ↓
+Harness Test Vector
+```
 
-Assertions represent behavioral guarantees derived from the AGCP specifications.
+Harness Checks and Harness Test Vectors SHALL NOT introduce independent
+normative requirements.
 
-Example assertions include:
+------------------------------------------------------------------------
 
-- Deterministic ledger ordering
-- Lifecycle derivability from ledger state
-- Authorization gating for execution commits
-- Idempotency safety
-- Terminal state safety
+# Directory Contents
 
-All conformance tests ultimately verify one or more assertions.
+  -----------------------------------------------------------------------
+  Artifact                              Purpose
+  ------------------------------------- ---------------------------------
+  AGCP-Conformance.md                   Defines the AGCP conformance
+                                        model, profiles, and verification
+                                        requirements.
 
----
+  AGCP-Test-Matrix.md                   Human-readable summary of
+                                        validated capabilities and
+                                        representative Harness Test
+                                        Vectors.
 
-## AGCP-Assertion-Registry.md
+  AGCP-Conformance-Test-Vectors.md      Deterministic execution scenarios
+                                        covering governance behavior and
+                                        observable outcomes.
 
-Human-readable index of assertions.
+  AGCP-Conformance-Harness-Spec.yml     Defines execution behavior for
+                                        the automated conformance
+                                        harness.
 
-This file exists to assist reviewers and implementers during specification review.
+  AGCP Harness Check Registry.md        Human-readable registry of
+                                        executable Harness Checks.
 
-The canonical registry remains `assertions.json`.
+  harness-checks.json *(or              Machine-readable Harness Check
+  assertions.json until renamed)*       registry.
 
----
+  test-mapping.json                     Machine-readable mapping between
+                                        NS, CR, TC, and representative
+                                        Harness Test Vectors.
 
-## test-mapping.json
+  agcp-conformance-manifest.yml         Index of the conformance package
+                                        and execution metadata.
+  -----------------------------------------------------------------------
 
-Defines traceability between:
+------------------------------------------------------------------------
 
-tests → requirements → assertions
+# Scope
 
-This layer allows the conformance harness to validate that every assertion is enforced by one or more tests.
+The conformance suite verifies, where applicable:
 
----
+-   Proposal Qualification
+-   Governance Decision Function
+-   Human Review
+-   Execution Authorization
+-   Commit Boundary
+-   Governance Evidence
+-   Provenance validation
+-   Ordered Append-Only Governance Ledger behavior
+-   Canonical State reconstruction
+-   Deterministic replay
+-   Idempotency
+-   Tenant lifecycle enforcement
+-   Tenant and Governance Domain isolation
+-   Published registries
 
-## AGCP Conformance Harness Spec.yml
+------------------------------------------------------------------------
 
-Executable definition of the AGCP conformance harness.
+# Canonical State
 
-The harness defines:
+Conformance verification requires Canonical State to be derived from the
+ordered Append-Only Governance Ledger, or from a verifiable materialized
+state whose derivation can be deterministically reproduced from ordered
+ledger entries.
 
-- Test suites
-- Test vectors
-- Endpoint behavior checks
-- Assertion enforcement rules
+Ledger sequence order is authoritative. Timestamp order is not.
 
-Implementations claiming AGCP conformance must pass the harness.
+------------------------------------------------------------------------
 
----
+# Relationship to the Requirements Traceability Matrix
 
-# Conformance Model
+The Requirements Traceability Matrix (RTM) is the authoritative mapping
+between:
 
-The AGCP conformance framework uses the following verification chain:
+-   Normative Statements (NS)
+-   Conformance Requirements (CR)
+-   Test Cases (TC)
 
-Specification  
-↓  
-Assertion  
-↓  
-Requirement  
-↓  
-Test
+The conformance artifacts in this directory provide the executable
+realization of those mappings and SHALL remain synchronized with the
+RTM.
 
-This structure ensures that all normative guarantees in the specification are verifiable through automated testing.
+------------------------------------------------------------------------
 
----
+# Normative vs. Informational Artifacts
 
-# Conformance Claim
+Normative artifacts define required implementation behavior.
 
-An implementation may claim AGCP conformance only if:
+Informational artifacts explain, summarize, or execute the normative
+model without creating new requirements.
 
-1. All conformance tests pass.
-2. No registered assertion is violated.
-3. Observed behavior matches the normative specification.
+Machine-readable artifacts support automation but do not supersede the
+normative specifications.
 
----
+------------------------------------------------------------------------
 
-# Review Guidance
+# Repository Versioning
 
-During public review, issues related to behavioral guarantees should reference the relevant **Assertion ID**.
+This directory follows repository-release versioning.
 
-Example:
+Individual artifacts generally do not embed specification version
+numbers unless required for interoperability.
 
-Assertion: `A-ORDERING`  
-Issue: Deterministic evaluation ordering clarification.
+------------------------------------------------------------------------
 
-Assertion identifiers provide stable references for discussing specification behavior.
+# Future Evolution
 
----
-
-# Future Conformance Extensions
-
-Future versions of AGCP may introduce additional conformance domains, including:
-
-- Deterministic replay verification
-- Distributed ledger consistency validation
-- Cross-node lifecycle reconstruction
-- Multi-ledger federation safety
-
-These additions will extend the assertion registry and conformance harness.
-
----
+Future repository releases may expand the conformance suite with
+additional Harness Checks, Test Vectors, or execution capabilities while
+preserving the authoritative NS → CR → TC traceability model.
