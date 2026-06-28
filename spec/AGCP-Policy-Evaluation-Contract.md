@@ -1,364 +1,204 @@
-# AGCP Policy Evaluation Contract (PEC) Specification v0.9.0
+# AGCP Policy Evaluation Contract (PEC) Specification 
+
+**Status:** Normative\
+**Series:** AGCP Core\
+**Applies To:** All AGCP-conformant implementations
+
+## 1. Purpose
+
+The Policy Evaluation Contract (PEC) defines the normative behavioral
+contract between the Governance Decision Function (GDF) and a Policy
+Evaluation Module (PEM). It standardizes deterministic evaluation of
+governance policy while remaining independent of policy language,
+execution engine, or implementation technology.
+
+PEC SHALL provide:
+
+-   Deterministic policy evaluation
+-   Engine independence
+-   Implementation independence
+-   Tenant and governance-domain isolation
+-   Canonical State--based evaluation
+-   Governance Evidence production
+-   Conformance testability
 
-Status: Normative  
-Version: 0.9.0  
-Series: AGCP Core  
-Applies To: All AGCP-conformant implementations
+PEC does **not** define:
 
----
+-   A policy language
+-   A rule engine
+-   A bytecode format
+-   A deployment architecture
+
+## 2. Architectural Context
 
-# 1. Purpose
+PEC is a component of the Governance Decision Function defined by the
+AGCP Core Specification.
 
-The Policy Evaluation Contract (PEC) defines the mandatory, deterministic interface by which an AGCP implementation evaluates:
+The normative governance pipeline is:
 
-- Constraints
-- Invariants
-- Human-in-the-loop (HITL) triggers
-- Final governance decisions
+1.  Proposal Qualification
+2.  Governance Decision Function
+    -   Canonical State establishment
+    -   Policy resolution
+    -   Policy Evaluation Module (PEC)
+    -   Policy interaction resolution
+    -   Governance outcome determination
+3.  Execution Authorization
+4.  Commit Boundary
+5.  Continuation Integrity
 
-PEC ensures:
+PEC SHALL NOT perform Execution Authorization, Commit Boundary
+processing, or Continuation Integrity processing.
 
-- Deterministic behavior
-- Engine neutrality
-- Multitenant safety
-- Conformance testability
-- Policy/runtime decoupling
+## 3. Design Principles
 
-PEC does not mandate a policy language or runtime engine.
+PEC SHALL be:
 
----
+-   Deterministic
+-   Side-effect free
+-   Replayable
+-   Tenant isolated
+-   Governance-domain isolated
+-   Canonical State driven
+-   Implementation independent
 
-# 2. Design Principles
+## 4. Terminology
 
-PEC is designed to guarantee:
+-   **PEC** --- Policy Evaluation Contract.
+-   **PEM** --- Policy Evaluation Module implementing this contract.
+-   **GDF** --- Governance Decision Function.
+-   **Canonical State** --- Authoritative governance state used for
+    evaluation.
+-   **Governance Context** --- Context required to evaluate a Qualified
+    Proposal.
+-   **Authority Lineage** --- Authoritative chain establishing
+    governance authority.
 
-- Determinism
-- Side-effect freedom
-- Isolation
-- Explicit ordering
-- Registry compliance
-- Testability via black-box conformance
+## 5. Required Inputs
 
----
+A PEC implementation SHALL receive at minimum:
 
-# 3. Terminology
+-   Qualified Proposal
+-   Canonical State reference
+-   Governance Context
+-   Applicable governance policy
+-   Resolved constraints
+-   Resolved invariants
+-   Resolved exceptions
+-   Authority Lineage
+-   Tenant context
+-   Governance domain context
+-   Governance configuration reference
 
-## 3.1 PEC
+Inputs SHALL be deterministic and replayable.
 
-Policy Evaluation Contract.
+## 6. Determinism Requirements
 
-## 3.2 PEM
+PEC SHALL NOT depend upon:
 
-Policy Evaluation Module — a tenant-scoped implementation that satisfies PEC.
+-   Current system time (except authoritative timestamps supplied in
+    inputs)
+-   Random values
+-   Environment variables
+-   Mutable global state
+-   Network access
+-   External side effects
 
-## 3.3 PEC Input
+Identical authoritative inputs SHALL produce identical outputs.
 
-Canonical input object passed to the PEM.
+## 7. Evaluation Responsibilities
 
-## 3.4 PEC Outputs
+The PEM SHALL evaluate:
 
-Structured output objects returned by evaluation functions.
+1.  Constraints
+2.  Invariants
+3.  Human-review requirements
+4.  Applicable policy interactions
 
----
+The PEM SHALL return sufficient information for the Governance Decision
+Function to produce an authoritative governance outcome.
 
-# 4. Required Evaluation Model
+## 8. Governance Outcomes
 
-An AGCP implementation MUST support a tenant-scoped PEM that provides the following logical evaluation stages:
+PEC SHALL support the governance outcomes defined by the AGCP Core
+Specification:
 
-- Constraint evaluation
-- Invariant evaluation
-- HITL evaluation
-- Decision computation
+-   Authorized
+-   Denied
+-   Structural Refusal
+-   Pending Human Review
+-   Deferred
+-   Governed Re-evaluation Required
 
-Implementations MAY internally combine these stages, but observable outputs MUST reflect the defined ordering.
+The Governance Decision Function remains the authoritative producer of
+governance outcomes.
 
----
+## 9. Canonical State
 
-# 5. Evaluation Ordering (Mandatory)
+All evaluations SHALL be performed against authoritative Canonical
+State.
 
-The following order MUST be enforced:
+Non-authoritative observations, telemetry, cached state, or speculative
+state SHALL NOT supersede Canonical State.
 
-1. Schema validation (outside PEC)
-2. Provenance verification (outside PEC)
-3. Tenant state validation (outside PEC)
-4. Policy resolution (outside PEC)
-5. Constraint evaluation
-6. Invariant evaluation
-7. HITL evaluation
-8. Decision computation
-9. Ledger append (outside PEC)
+## 10. Authority Lineage
 
-Constraint evaluation MUST precede invariant evaluation.  
-HITL evaluation MUST occur after invariant evaluation.
+Policy evaluation SHALL preserve Authority Lineage and SHALL NOT expand
+or weaken delegated authority.
 
-Tenant state validation SHALL occur prior to invocation of the Policy Evaluation Module (PEM).
+## 11. Governance Evidence
 
-An implementation MUST verify that the tenant state permits action submission before invoking constraint evaluation, invariant evaluation, or HITL evaluation within PEC.
+PEC SHALL produce sufficient evidence to support:
 
-Tenant state validation is outside the scope of PEC and is part of the governance control plane validation pipeline defined in the Core Specification.
+-   Deterministic replay
+-   Governance interpretation
+-   Traceability
+-   Attribution
+-   Integrity
 
----
+## 12. Side Effects
 
-# 6. PEC Input Object (Normative)
+PEC SHALL NOT:
 
-The PEC input object MUST contain:
+-   Commit execution
+-   Modify Canonical State
+-   Update governance configuration
+-   Append Governance Evidence directly
+-   Modify external systems
 
-- tenant_id (string)
-- action_envelope (object)
-- resolved_policies (array)
-- resolved_constraints (array)
-- resolved_invariants (array)
-- resolved_exceptions (array)
-- state_snapshot (object)
-- registries (object)
-- request_context (object, optional)
+All side effects occur outside PEC.
 
----
+## 13. Deterministic Replay
 
-## 6.1 Determinism Restrictions
+Replay using identical authoritative inputs SHALL reproduce the same
+policy interpretation and support the Governance Decision Function
+replay requirements defined by the AGCP Core Specification.
 
-PEC input MUST NOT include:
+## 14. Conformance
 
-- Current system time (beyond `action_envelope.timestamp`)
-- Random values
-- Network-derived values
-- Mutable global state
-- Environment variables
-- Non-repeatable data
+Conformant implementations SHALL satisfy all applicable AGCP Runtime
+Governance Requirements and Normative Statements governing Proposal
+Qualification, Governance Decision Function, Canonical State, Governance
+Evidence, Authority Lineage, and deterministic replay.
 
-If nondeterministic inputs are detected, the implementation MUST reject policy activation with:
+## 15. Security
 
+Implementations SHOULD integrity-protect Policy Evaluation Modules
+through authenticated distribution, version control, and cryptographic
+verification.
 
-POLICY_MODULE_NONDETERMINISTIC
+## 16. Versioning
 
+Breaking interface changes require a MAJOR version increment.
 
----
+Backward-compatible additions require a MINOR version increment.
 
-# 7. Constraint Evaluation Stage
+Editorial clarifications require a PATCH increment.
 
-The PEM MUST evaluate each constraint in `resolved_constraints`.
+## 17. Summary
 
-Each evaluation result MUST include:
-
-- constraint_id
-- type
-- outcome (`PASS | FAIL | NOT_APPLICABLE`)
-- reason
-
-Unknown constraint types MUST result in `FAIL` unless explicitly permitted via an active exception.
-
-Constraint failures MUST be recorded.
-
----
-
-# 8. Invariant Evaluation Stage
-
-The PEM MUST evaluate each invariant in `resolved_invariants`.
-
-Each evaluation result MUST include:
-
-- invariant_id
-- invariant_type
-- enforcement_level (`Hard | Soft`)
-- outcome (`PASS | FAIL`)
-- reason
-
-If any Hard invariant produces `FAIL`, the final decision MUST be `REJECT`.
-
-Soft invariant failures MUST be recorded but MAY allow continuation.
-
----
-
-# 9. HITL Evaluation Stage
-
-The PEM MUST evaluate HITL requirements.
-
-Output MUST include:
-
-- required (boolean)
-- required_cosign_roles (array of strings)
-- reason
-
-If `required` is true and quorum not satisfied, final decision MUST be `PENDING_HITL`.
-
----
-
-# 10. Decision Computation Stage
-
-The final decision output MUST include:
-
-- decision (`ACCEPT | REJECT | PENDING_HITL`)
-- rejection_code (string or null)
-- failed_constraints (array)
-- violated_invariants (array)
-- required_cosign_roles (array)
-
-Rules:
-
-- If `REJECT` → `rejection_code` MUST be present.
-- If `ACCEPT` or `PENDING_HITL` → `rejection_code` MUST be null.
-- Hard invariant violations MUST cause `REJECT`.
-- Constraint failures MUST cause `REJECT` unless valid exception applies.
-
----
-
-# 11. Determinism Requirements
-
-Given identical:
-
-- PEC input
-- Registry state
-- Policy module version
-- Tenant state
-
-The PEM MUST produce identical:
-
-- Constraint outputs
-- Invariant outputs
-- HITL outputs
-- Decision outputs
-
-Determinism is REQUIRED for conformance.
-
-Replay tests MUST succeed under the **L3 profile**.
-
----
-
-# 12. Policy Module Validation
-
-Before activation, a PEM MUST:
-
-- Pass integrity validation
-- Pass determinism validation (static or runtime)
-- Produce outputs conforming to the PEC output contract
-
-If output structure invalid → reject with:
-
-
-POLICY_EVALUATION_OUTPUT_INVALID
-
-
-If module unavailable → reject with:
-
-
-POLICY_MODULE_UNAVAILABLE
-
-
----
-
-# 13. Multitenant Safety
-
-The PEM MUST operate strictly within the tenant scope.
-
-PEC input MUST contain only tenant-scoped artifacts.
-
-Cross-tenant references MUST be rejected prior to PEC evaluation.
-
----
-
-# 14. Exception Handling
-
-Resolved exceptions MAY modify constraint evaluation outcomes.
-
-Exceptions MUST:
-
-- Be tenant-scoped
-- Be unexpired
-- Be recorded in the decision basis
-
-Expired exceptions MUST NOT be considered.
-
----
-
-# 15. Output Validation
-
-The AGCP implementation MUST validate PEC outputs before computing the final decision.
-
-If required fields are missing → reject with:
-
-
-POLICY_EVALUATION_OUTPUT_INVALID
-
-
----
-
-# 16. Side-Effect Prohibition
-
-The PEM MUST:
-
-- Not perform network calls
-- Not mutate external state
-- Not write to disk
-- Not alter tenant registry state
-- Not alter the ledger
-
-All side effects MUST occur **outside PEC** in the governance pipeline.
-
----
-
-# 17. Performance Constraints
-
-PEC evaluation MUST be bounded.
-
-Infinite loops or unbounded recursion MUST cause module rejection.
-
----
-
-# 18. Conformance Implications
-
-An implementation claiming **L3 or higher** MUST demonstrate:
-
-- Deterministic replay consistency
-- Hard invariant enforcement
-- Proper ordering
-- Proper rejection code behavior
-
----
-
-# 19. Non-Goals
-
-PEC does not define:
-
-- Policy language
-- Runtime engine
-- Bytecode format
-- Deployment model
-- Performance optimization
-
-PEC defines **behavioral contract only**.
-
----
-
-# 20. Versioning
-
-Changes to PEC input/output contract require **MAJOR version increment**.
-
-Additions of optional fields require **MINOR version increment**.
-
-Clarifications require **PATCH increment**.
-
----
-
-# 21. Security Considerations
-
-PEM artifacts SHOULD be:
-
-- Integrity verified
-- Version controlled
-- Cryptographically signed
-
-Policy modules MUST NOT weaken multitenant isolation guarantees.
-
----
-
-# 22. Summary
-
-PEC ensures:
-
-- Engine neutrality
-- Deterministic governance
-- Conformance testability
-- Policy-runtime decoupling
-- Multitenant safety
-
-All AGCP implementations MUST satisfy this contract to claim **Core conformance**.
+The Policy Evaluation Contract standardizes deterministic policy
+evaluation while preserving implementation independence. It forms a
+normative component of the Governance Decision Function and ensures
+policy evaluation remains replayable, testable, Canonical State--driven,
+and consistent with the AGCP Core Specification.
