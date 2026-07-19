@@ -78,8 +78,8 @@ agcp_conformance_manifest:
     - Governance pipeline execution order must conform to the applicable normative pipeline.
     - Identical authoritative inputs must produce equivalent externally observable governance outcomes.
     - Replay of identical proposals using the applicable replay-protection or idempotency mechanism must not create conflicting governance state.
-    - Ledger sequence order, not timestamp order, must determine authoritative ordering for Canonical State derivation.
-    - Reordered ledger histories must be rejected or must produce Canonical State that is not accepted as equivalent to the authoritative Canonical State.
+    - Ledger sequence order, not timestamp order, SHALL determine the authoritative ordering of recorded governance events and the derivation of Derived Lifecycle State.
+    - Where Canonical State incorporates Governance Ledger records, those records SHALL be interpreted according to authoritative ledger ordering. Other Canonical State facts SHALL be resolved from their applicable qualified authoritative governance sources.
     - Materialized Canonical State views must be reproducible from ordered Append-Only Governance Ledger entries.
 
   conformance_profiles:
