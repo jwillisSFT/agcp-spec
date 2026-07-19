@@ -233,28 +233,26 @@
       "contextual_ns_ids": [],
       "file": "TC011-TC020.md"
     },
-    {
-      "tc_id": "TC-019",
-      "cr_id": "CR-019",
-      "title": "Commit Authorized Action",
-      "direct_ns_ids": [
-        "NS-5.1-01",
-        "NS-8.6-02",
-        "NS-9.2-01",
-        "NS-9.5-01"
-      ],
-      "conditional_ns_ids": [
-        "NS-9.6-01"
-      ],
-      "contextual_ns_ids": [
-        "NS-8.1-01",
-        "NS-9.2-02",
-        "NS-9.6-03",
-        "NS-5.2.3-01"
-      ],
-      "file": "TC011-TC020.md"
-    },
-    {
+{
+  "tc_id": "TC-019",
+  "cr_id": "CR-019",
+  "title": "Commit Authorized Action",
+  "direct_ns_ids": [
+    "NS-5.1-01",
+    "NS-8.6-02",
+    "NS-9.2-01",
+    "NS-9.5-01",
+    "NS-9.6-01"
+  ],
+  "conditional_ns_ids": [],
+  "contextual_ns_ids": [
+    "NS-8.1-01",
+    "NS-9.2-02",
+    "NS-9.6-03",
+    "NS-5.2.3-01"
+  ],
+  "file": "TC011-TC020.md"
+}    {
       "tc_id": "TC-020",
       "cr_id": "CR-020",
       "title": "Commit While Pending HITL",
