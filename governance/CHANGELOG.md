@@ -7,7 +7,7 @@
 
 # Purpose
 
-This document records the published release history of the Autonomous Governance Control Plane (AGCP).
+This document records the published release history of the Artificial Intelligence Governance Control Plane (AGCP).
 
 Each published release identifies the normative specification set, schemas, registries, conformance artifacts, and supporting documentation applicable to that release.
 
