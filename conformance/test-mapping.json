@@ -1,441 +1,1699 @@
 {
-  "suite_id": "agcp_conformance",
-  "artifact_type": "conformance_harness_checks",
-  "status": "informational_executable_mapping",
-  "versioning": {
-    "model": "repository_release",
-    "embedded_spec_version": false
-  },
-  "generated_at": "2026-06-28T19:58:27Z",
-  "traceability_model": {
-    "authoritative_chain": [
-      "Normative Specification",
-      "Normative Statement (NS)",
-      "Conformance Requirement (CR)",
-      "Test Case (TC)"
-    ],
-    "harness_layer": "Harness checks and test vectors provide executable realization of Test Cases and SHALL NOT introduce independent normative requirements."
-  },
-  "checks": [
+  "source_workbook": "AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
+  "test_count": 122,
+  "tests": [
     {
-      "check_id": "CHECK-PROPOSAL-QUALIFICATION",
-      "validated_capability": "Proposal Qualification accepts valid proposals and refuses malformed or inadmissible proposals.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Proposal Qualification"
-        ],
-        "schemas": [
-          "proposal_submit_request.json",
-          "proposal_view.json",
-          "error_response.json"
-        ],
-        "test_vectors": [
-          "TV-PROP-001",
-          "TV-PROP-002"
-        ]
-      },
-      "expected_behavior": [
-        "Valid proposals proceed to governance processing.",
-        "Structurally invalid proposals are refused or rejected using the applicable rejection code.",
-        "Proposal Qualification produces Governance Evidence where required.",
-        "No Execution Authorization or Commit Boundary processing occurs for structurally refused proposals."
+      "tc_id": "TC-001",
+      "cr_id": "CR-001",
+      "title": "Submit -> Authorized",
+      "direct_ns_ids": [
+        "NS-7.5-04",
+        "NS-7.6-01"
       ],
-      "evidence_required": [
-        "Proposal record",
-        "Proposal Qualification outcome",
-        "Governance Evidence reference",
-        "Applicable rejection code"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-7.1-01",
+        "NS-7.2-03",
+        "NS-7.3-01",
+        "NS-7.3-02",
+        "NS-7.4-02",
+        "NS-7.6-02"
+      ],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-GOVERNANCE-DECISION",
-      "validated_capability": "Governance Decision Function produces deterministic governance outcomes from qualified proposals and authoritative inputs.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Governance Decision Function"
-        ],
-        "schemas": [
-          "governance_decision_result.json",
-          "constraint_evaluation.json",
-          "invariant_evaluation.json",
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-GOV-001",
-          "TV-GOV-002",
-          "TV-GOV-003"
-        ]
-      },
-      "expected_behavior": [
-        "Authorized decisions are produced only when applicable governance policy permits the Proposal.",
-        "Denied decisions are produced when applicable governance policy rejects the Proposal.",
-        "Pending Human Review is produced when governance policy requires Human Review.",
-        "Governance decisions are deterministic for identical authoritative inputs."
+      "tc_id": "TC-002",
+      "cr_id": "CR-002",
+      "title": "Submit -> Pending HITL",
+      "direct_ns_ids": [
+        "NS-7.5-01",
+        "NS-13.6B-01"
       ],
-      "evidence_required": [
-        "Governance Decision Result",
-        "Policy reference",
-        "Canonical State reference",
-        "Authority Lineage reference",
-        "Governance Evidence reference"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-HUMAN-REVIEW",
-      "validated_capability": "Human Review is enforced when required and cannot be bypassed before Execution Authorization.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Human Review"
-        ],
-        "schemas": [
-          "human_review_artifact.json",
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-HR-001",
-          "TV-HR-002",
-          "TV-HR-003"
-        ]
-      },
-      "expected_behavior": [
-        "Partial Human Review does not satisfy quorum.",
-        "Valid Human Review satisfying required roles permits progression to Execution Authorization.",
-        "Invalid, expired, unauthorized, or replayed Human Review artifacts are rejected.",
-        "Human Review decisions are bound to the applicable Proposal, tenant, and Authority Lineage."
+      "tc_id": "TC-003",
+      "cr_id": "CR-003",
+      "title": "Submit -> Rejected (Hard Invariant Failure)",
+      "direct_ns_ids": [
+        "NS-7.4-05"
       ],
-      "evidence_required": [
-        "Human Review Artifact",
-        "Reviewer identity",
-        "Authority Lineage reference",
-        "Quorum status",
-        "Governance Evidence reference"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-5.5-01",
+        "NS-5.5-02"
+      ],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-EXECUTION-AUTHORIZATION",
-      "validated_capability": "Execution Authorization is produced only after required governance prerequisites are satisfied.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Execution Authorization"
-        ],
-        "schemas": [
-          "execution_authorization_view.json",
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-AUTH-001",
-          "TV-AUTH-002"
-        ]
-      },
-      "expected_behavior": [
-        "Execution Authorization succeeds only after valid Governance Decision and required Human Review completion.",
-        "Execution Authorization fails when required authority, Canonical State, governance configuration, tenant state, or Governance Domain conditions are not satisfied.",
-        "Execution Authorization does not itself perform execution.",
-        "Execution Authorization produces Governance Evidence and an ordered ledger entry where required."
+      "tc_id": "TC-004",
+      "cr_id": "CR-004",
+      "title": "Schema Validation Failure",
+      "direct_ns_ids": [
+        "NS-4.15-01",
+        "NS-6.1-01",
+        "NS-6.1-02",
+        "NS-6.2-02",
+        "NS-6.3-02",
+        "NS-6.5-01",
+        "NS-6.6-01",
+        "NS-6.7-02",
+        "NS-7.2-01"
       ],
-      "evidence_required": [
-        "Execution Authorization artifact",
-        "Authorization outcome",
-        "Proposal reference",
-        "Authority Lineage reference",
-        "Canonical State reference",
-        "Governance Evidence reference"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-6.3-01",
+        "NS-6.4-01",
+        "NS-6.4-03",
+        "NS-6.6-02",
+        "NS-6.6-03",
+        "NS-6.7-01",
+        "NS-6.7-03"
+      ],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-COMMIT-BOUNDARY",
-      "validated_capability": "Commit Boundary processing gates governance-significant execution and validates current governance conditions immediately before commit.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Commit Boundary"
-        ],
-        "schemas": [
-          "commit_boundary_request.json",
-          "commit_boundary_result.json",
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-CB-001",
-          "TV-CB-002",
-          "TV-CB-003"
-        ]
-      },
-      "expected_behavior": [
-        "Successful commit requires valid Execution Authorization.",
-        "Commit Boundary processing rejects missing, invalid, or stale authorization.",
-        "Commit Boundary processing validates current governance conditions.",
-        "No governance-significant execution occurs before successful Commit Boundary processing.",
-        "Successful Commit Boundary processing is recorded in the Append-Only Governance Ledger."
+      "tc_id": "TC-005",
+      "cr_id": "CR-005",
+      "title": "Provenance Validation Failure",
+      "direct_ns_ids": [
+        "NS-6.4-02",
+        "NS-7.6A-02"
       ],
-      "evidence_required": [
-        "Commit Boundary request",
-        "Commit Boundary result",
-        "Execution Authorization reference",
-        "Canonical State reference",
-        "Governance Evidence reference",
-        "Ledger entry reference"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-GOVERNANCE-EVIDENCE",
-      "validated_capability": "Governance Evidence is produced, linked, attributable, integrity-protected, and sufficient for audit and deterministic replay.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Governance Evidence"
-        ],
-        "schemas": [
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-LEDGER-001",
-          "TV-LEDGER-003",
-          "TV-META-003"
-        ]
-      },
-      "expected_behavior": [
-        "Governance Evidence conforms to the published schema.",
-        "Governance Evidence includes required references to tenant, proposal, governance stage, outcome, provenance, and ledger reference.",
-        "Governance Evidence remains attributable and integrity-protected.",
-        "Governance Evidence supports deterministic replay and independent verification."
+      "tc_id": "TC-006",
+      "cr_id": "CR-006",
+      "title": "Tenant Inactive on Submit",
+      "direct_ns_ids": [
+        "NS-7.4-03"
       ],
-      "evidence_required": [
-        "governance_evidence_id",
-        "tenant_id",
-        "proposal_id",
-        "governance_stage",
-        "stage_outcome",
-        "integrity_signature",
-        "ledger_reference"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
-      "validated_capability": "Append-Only Governance Ledger preserves immutable ordered governance history.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Append-Only Governance Ledger"
-        ],
-        "schemas": [
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-LEDGER-001",
-          "TV-LEDGER-002",
-          "TV-LEDGER-003",
-          "TV-META-001"
-        ]
-      },
-      "expected_behavior": [
-        "Governance-significant events are recorded in ledger sequence order.",
-        "Ledger entries are immutable and append-only.",
-        "Ledger sequence order is authoritative.",
-        "Timestamp ordering is not accepted as authoritative for Canonical State derivation.",
-        "Tampered, deleted, replaced, or reordered ledger histories are rejected or produce non-equivalent results."
+      "tc_id": "TC-007",
+      "cr_id": "CR-007",
+      "title": "Policy Not Found",
+      "direct_ns_ids": [
+        "NS-7.4-01"
       ],
-      "evidence_required": [
-        "ledger_entry_id",
-        "ledger_sequence_value",
-        "artifact_reference",
-        "governance_evidence_reference",
-        "previous_ledger_entry_hash where implemented"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-7.2-02"
+      ],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-CANONICAL-STATE",
-      "validated_capability": "Canonical State is derived from ordered ledger history or a verifiable materialized state reproducible from that history.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Canonical State Derivation",
-          "Deterministic Replay"
-        ],
-        "schemas": [
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-LEDGER-001",
-          "TV-LEDGER-002",
-          "TV-META-003"
-        ]
-      },
-      "expected_behavior": [
-        "Canonical State is reproducible from ordered Append-Only Governance Ledger entries.",
-        "Materialized Canonical State views are verifiable against ordered ledger history.",
-        "Reordered ledger histories are rejected or produce a non-equivalent Canonical State.",
-        "Timestamp ordering is not accepted as a substitute for ledger sequence ordering."
+      "tc_id": "TC-008",
+      "cr_id": "CR-008",
+      "title": "Idempotent Replay (Identical Payload)",
+      "direct_ns_ids": [
+        "NS-6.2-01",
+        "NS-5.2.1-01"
       ],
-      "evidence_required": [
-        "Canonical State reference",
-        "Ordered ledger entries",
-        "Governance Evidence references",
-        "Ledger reconstruction evidence"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-IDEMPOTENCY",
-      "validated_capability": "Repeated proposal submission with the same idempotency key or replay-protection mechanism does not create conflicting governance state.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Proposal Qualification",
-          "Governance Evidence",
-          "Append-Only Governance Ledger"
-        ],
-        "test_vectors": [
-          "TV-META-002"
-        ]
-      },
-      "expected_behavior": [
-        "Identical replay produces an equivalent response.",
-        "Conflicting replay is rejected.",
-        "No duplicate governance-significant ledger event is appended unless explicitly permitted by idempotency semantics.",
-        "Governance Evidence remains consistent."
+      "tc_id": "TC-009",
+      "cr_id": "CR-009",
+      "title": "Idempotency Conflict",
+      "direct_ns_ids": [
+        "NS-6.6A-01"
       ],
-      "evidence_required": [
-        "Idempotency or replay-protection key",
-        "Proposal reference",
-        "Governance Evidence reference",
-        "Ledger entries before and after replay"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-TENANT-STATE-GATING",
-      "validated_capability": "Tenant lifecycle state gates proposal submission, Execution Authorization, and Commit Boundary processing.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Tenant and Governance Domain Isolation",
-          "Proposal Qualification",
-          "Execution Authorization",
-          "Commit Boundary"
-        ],
-        "schemas": [
-          "tenant.json"
-        ],
-        "test_vectors": [
-          "TV-PROP-001",
-          "TV-PROP-002",
-          "TV-AUTH-002",
-          "TV-CB-003"
-        ]
-      },
-      "expected_behavior": [
-        "ACTIVE tenants may perform permitted governance operations.",
-        "PROVISIONED, SUSPENDED, or DECOMMISSIONED tenants are restricted according to the Core Specification.",
-        "Tenant state violations are rejected using the applicable rejection code.",
-        "Tenant state enforcement is deterministic and tenant-scoped."
+      "tc_id": "TC-010",
+      "cr_id": "CR-010",
+      "title": "GET Authorized Action",
+      "direct_ns_ids": [
+        "NS-13.6A-02"
       ],
-      "evidence_required": [
-        "Tenant record",
-        "Tenant state",
-        "Governance Evidence reference",
-        "Applicable rejection code"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC001-TC010.md"
     },
     {
-      "check_id": "CHECK-TENANT-AND-DOMAIN-ISOLATION",
-      "validated_capability": "Tenant and Governance Domain isolation prevent unauthorized cross-boundary governance operations.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Tenant and Governance Domain Isolation",
-          "Cross-Domain Authority Isolation"
-        ],
-        "test_vectors": [
-          "TV-XTEN-001",
-          "TV-XTEN-002",
-          "TV-XDOM-001"
-        ]
-      },
-      "expected_behavior": [
-        "Unauthorized cross-tenant operations are rejected.",
-        "Unauthorized cross-domain operations are rejected where Governance Domains are implemented.",
-        "Cross-boundary operations do not mutate unauthorized governance state.",
-        "Cross-boundary operations do not append successful unauthorized Commit Boundary entries.",
-        "Tenant and Governance Domain non-disclosure behavior is preserved where applicable."
+      "tc_id": "TC-011",
+      "cr_id": "CR-011",
+      "title": "Transient State Not Externally Observable",
+      "direct_ns_ids": [
+        "NS-13.6A-03"
       ],
-      "evidence_required": [
-        "Tenant context",
-        "Governance Domain context",
-        "Access decision",
-        "Applicable rejection code",
-        "Governance Evidence reference where recorded"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
     },
     {
-      "check_id": "CHECK-PROVENANCE",
-      "validated_capability": "Governance-significant requests and artifacts include valid provenance and reject invalid provenance.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Proposal Qualification",
-          "Human Review",
-          "Execution Authorization",
-          "Commit Boundary",
-          "Governance Evidence"
-        ],
-        "schemas": [
-          "common.json",
-          "governance_evidence.json"
-        ],
-        "test_vectors": [
-          "TV-PROP-001",
-          "TV-PROP-002",
-          "TV-HR-003"
-        ]
-      },
-      "expected_behavior": [
-        "Valid provenance is accepted when otherwise authorized.",
-        "Invalid provenance is rejected before governance processing continues.",
-        "Provenance is tenant-scoped.",
-        "Replay protection is enforced for provenance-bearing artifacts."
+      "tc_id": "TC-012",
+      "cr_id": "CR-012",
+      "title": "Valid Cosign, Quorum Not Yet Met",
+      "direct_ns_ids": [
+        "NS-13.6B-02"
       ],
-      "evidence_required": [
-        "Provenance object",
-        "Signature verification result",
-        "Replay-protection result",
-        "Applicable rejection code"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
     },
     {
-      "check_id": "CHECK-REGISTRIES",
-      "validated_capability": "Governance processing uses published registries and rejects unknown registered values.",
-      "severity": "MUST",
-      "applies_to": {
-        "pipeline_stages": [
-          "Governance Decision Function",
-          "Policy Evaluation Contract"
-        ],
-        "registries": [
-          "constraint-type-registry.json",
-          "invariant-type-registry.json",
-          "rejection-code-registry.json"
-        ]
-      },
-      "expected_behavior": [
-        "Unknown constraint types are rejected.",
-        "Unknown invariant types are rejected.",
-        "Referenced rejection codes exist in the rejection-code registry.",
-        "Registry lookup is deterministic and tenant-scoped where applicable."
+      "tc_id": "TC-013",
+      "cr_id": "CR-013",
+      "title": "Valid Cosign Completes Quorum",
+      "direct_ns_ids": [
+        "NS-13.6B-03"
       ],
-      "evidence_required": [
-        "Registry reference",
-        "Registry lookup result",
-        "Applicable rejection code"
-      ]
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-014",
+      "cr_id": "CR-014",
+      "title": "Cosign Wrong State",
+      "direct_ns_ids": [
+        "NS-13.6B-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-015",
+      "cr_id": "CR-015",
+      "title": "Cosign Expired",
+      "direct_ns_ids": [
+        "NS-13.6B-01",
+        "NS-13.6B-06"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-016",
+      "cr_id": "CR-016",
+      "title": "Cosign Invalid Signature",
+      "direct_ns_ids": [
+        "NS-13.6B-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-017",
+      "cr_id": "CR-017",
+      "title": "HITL Expiration -> Rejected",
+      "direct_ns_ids": [
+        "NS-13.6B-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-018",
+      "cr_id": "CR-018",
+      "title": "Governance Cancellation -> Rejected",
+      "direct_ns_ids": [
+        "NS-13.6B-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-019",
+      "cr_id": "CR-019",
+      "title": "Commit Authorized Action",
+      "direct_ns_ids": [
+        "NS-5.1-01",
+        "NS-8.6-02",
+        "NS-9.2-01",
+        "NS-9.5-01"
+      ],
+      "conditional_ns_ids": [
+        "NS-9.6-01"
+      ],
+      "contextual_ns_ids": [
+        "NS-8.1-01",
+        "NS-9.2-02",
+        "NS-9.6-03",
+        "NS-5.2.3-01"
+      ],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-020",
+      "cr_id": "CR-020",
+      "title": "Commit While Pending HITL",
+      "direct_ns_ids": [
+        "NS-13.6A-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC011-TC020.md"
+    },
+    {
+      "tc_id": "TC-021",
+      "cr_id": "CR-021",
+      "title": "Commit While Rejected",
+      "direct_ns_ids": [
+        "NS-13.6A-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-022",
+      "cr_id": "CR-022",
+      "title": "Authorization Reference Mismatch",
+      "direct_ns_ids": [
+        "NS-9.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-023",
+      "cr_id": "CR-023",
+      "title": "Replay Commit After Executed",
+      "direct_ns_ids": [
+        "NS-13.6A-05"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-024",
+      "cr_id": "CR-024",
+      "title": "Tenant Suspended Before Commit",
+      "direct_ns_ids": [
+        "NS-9.6A-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-025",
+      "cr_id": "CR-025",
+      "title": "Tenant Decommissioned Before Commit",
+      "direct_ns_ids": [
+        "NS-12.4-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-026",
+      "cr_id": "CR-026",
+      "title": "Cross-Tenant GET",
+      "direct_ns_ids": [
+        "NS-11.1-02",
+        "NS-11.2-01",
+        "NS-11.4-02",
+        "NS-11.5-01",
+        "NS-11.5-03",
+        "NS-11.7-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-11.2-02",
+        "NS-11.3-01",
+        "NS-11.3-02",
+        "NS-11.5-02",
+        "NS-11.6-04",
+        "NS-11.7-01",
+        "NS-11.7-03"
+      ],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-027",
+      "cr_id": "CR-027",
+      "title": "Cross-Tenant Cosign",
+      "direct_ns_ids": [
+        "NS-11.1-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-028",
+      "cr_id": "CR-028",
+      "title": "Cross-Tenant Commit",
+      "direct_ns_ids": [
+        "NS-11.1-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-029",
+      "cr_id": "CR-029",
+      "title": "Cross-Tenant Policy Resolution",
+      "direct_ns_ids": [
+        "NS-11.1-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-030",
+      "cr_id": "CR-030",
+      "title": "Cross-Tenant Ledger Access",
+      "direct_ns_ids": [
+        "NS-11.4-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-11.6-03"
+      ],
+      "file": "TC021-TC030.md"
+    },
+    {
+      "tc_id": "TC-031",
+      "cr_id": "CR-031",
+      "title": "Dual Authorized Conflicting Actions",
+      "direct_ns_ids": [
+        "NS-4.5-01",
+        "NS-4.11-01",
+        "NS-8.1-02",
+        "NS-8.2-01",
+        "NS-8.2-02",
+        "NS-8.4-01",
+        "NS-8.5-01",
+        "NS-8.5-02",
+        "NS-8.5-03",
+        "NS-8.6-01",
+        "NS-8.7-02",
+        "NS-13.6-05"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-8.2-03",
+        "NS-8.2-04",
+        "NS-8.3-01",
+        "NS-8.3-02",
+        "NS-8.6-03",
+        "NS-8.7-01",
+        "NS-8.7-03",
+        "NS-13.6-06"
+      ],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-032",
+      "cr_id": "CR-032",
+      "title": "Stale Authorization After Prior Commit",
+      "direct_ns_ids": [
+        "NS-8.1-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-033",
+      "cr_id": "CR-033",
+      "title": "Divergent State Assumption Conflict",
+      "direct_ns_ids": [
+        "NS-13.2-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-034",
+      "cr_id": "CR-034",
+      "title": "Concurrent Authorization Race",
+      "direct_ns_ids": [
+        "NS-7.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-035",
+      "cr_id": "CR-035",
+      "title": "Canonical State Changes During HITL",
+      "direct_ns_ids": [
+        "NS-13.4-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-036",
+      "cr_id": "CR-036",
+      "title": "Missing Intent",
+      "direct_ns_ids": [
+        "NS-6.4-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-4.3-01"
+      ],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-037",
+      "cr_id": "CR-037",
+      "title": "Missing Target Resource",
+      "direct_ns_ids": [
+        "NS-6.4-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-4.3-01"
+      ],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-038",
+      "cr_id": "CR-038",
+      "title": "Missing Requested Effect",
+      "direct_ns_ids": [
+        "NS-6.4-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-4.3-01"
+      ],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-039",
+      "cr_id": "CR-039",
+      "title": "Expired Proposal",
+      "direct_ns_ids": [
+        "NS-7.4-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-040",
+      "cr_id": "CR-040",
+      "title": "Malformed Delegation References",
+      "direct_ns_ids": [
+        "NS-12.2-02",
+        "NS-12.4-01",
+        "NS-12.7-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-12.3-01",
+        "NS-12.7-01"
+      ],
+      "file": "TC031-TC040.md"
+    },
+    {
+      "tc_id": "TC-041",
+      "cr_id": "CR-041",
+      "title": "Malformed Evidence References",
+      "direct_ns_ids": [
+        "NS-7.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-042",
+      "cr_id": "CR-042",
+      "title": "Canonical Hash Mismatch",
+      "direct_ns_ids": [
+        "NS-10.7-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-10.5-01"
+      ],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-043",
+      "cr_id": "CR-043",
+      "title": "Missing Mission/Task Lineage",
+      "direct_ns_ids": [
+        "NS-6.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-044",
+      "cr_id": "CR-044",
+      "title": "Broken Delegation Chain",
+      "direct_ns_ids": [
+        "NS-4.4-01",
+        "NS-12.4-03",
+        "NS-12.6-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-12.6-05",
+        "NS-14.6-02",
+        "NS-16.6-03"
+      ],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-045",
+      "cr_id": "CR-045",
+      "title": "Conflicting Originating Actor",
+      "direct_ns_ids": [
+        "NS-12.3-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-6.6A-02"
+      ],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-046",
+      "cr_id": "CR-046",
+      "title": "Context Attempts to Override Canonical State",
+      "direct_ns_ids": [
+        "NS-6.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-047",
+      "cr_id": "CR-047",
+      "title": "Provenance Continuity Gap",
+      "direct_ns_ids": [
+        "NS-10.8A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-048",
+      "cr_id": "CR-048",
+      "title": "Canonical State Unavailable",
+      "direct_ns_ids": [
+        "NS-9.6A-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-049",
+      "cr_id": "CR-049",
+      "title": "Stale Canonical State",
+      "direct_ns_ids": [
+        "NS-4.6-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-7.4-01"
+      ],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-050",
+      "cr_id": "CR-050",
+      "title": "Conflicting Canonical-State Sources",
+      "direct_ns_ids": [
+        "NS-7.4-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC041-TC050.md"
+    },
+    {
+      "tc_id": "TC-051",
+      "cr_id": "CR-051",
+      "title": "Telemetry Conflicts With Canonical State",
+      "direct_ns_ids": [
+        "NS-7.6-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-052",
+      "cr_id": "CR-052",
+      "title": "Canonical-State Hash Mismatch",
+      "direct_ns_ids": [
+        "NS-4.6-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-053",
+      "cr_id": "CR-053",
+      "title": "Structural Refusal Due to Invariant Violation",
+      "direct_ns_ids": [
+        "NS-6.5-02",
+        "NS-6.5-03",
+        "NS-7.4-05",
+        "NS-7.5-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-054",
+      "cr_id": "CR-054",
+      "title": "Structural Refusal Due to Missing Evidence",
+      "direct_ns_ids": [
+        "NS-7.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-055",
+      "cr_id": "CR-055",
+      "title": "Structural Refusal Due to Canonical-State Conflict",
+      "direct_ns_ids": [
+        "NS-7.4-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-056",
+      "cr_id": "CR-056",
+      "title": "Refusal Record Missing Attribution",
+      "direct_ns_ids": [
+        "NS-10.8A-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-057",
+      "cr_id": "CR-057",
+      "title": "Refusal Record Not Replayable",
+      "direct_ns_ids": [
+        "NS-10.8A-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-10.7-01"
+      ],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-058",
+      "cr_id": "CR-058",
+      "title": "Escalation Required but Missing Artifact",
+      "direct_ns_ids": [
+        "NS-13.6B-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-059",
+      "cr_id": "CR-059",
+      "title": "Escalation Resolved to Commit",
+      "direct_ns_ids": [
+        "NS-13.6B-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-060",
+      "cr_id": "CR-060",
+      "title": "Escalation Resolved to Refusal",
+      "direct_ns_ids": [
+        "NS-13.6B-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC051-TC060.md"
+    },
+    {
+      "tc_id": "TC-061",
+      "cr_id": "CR-061",
+      "title": "Deferred Authorization Expires",
+      "direct_ns_ids": [
+        "NS-13.6B-05"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-062",
+      "cr_id": "CR-062",
+      "title": "Missing Canonical-State Reference",
+      "direct_ns_ids": [
+        "NS-10.4-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-10.4-02"
+      ],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-063",
+      "cr_id": "CR-063",
+      "title": "Missing Invariant References",
+      "direct_ns_ids": [
+        "NS-7.5-02",
+        "NS-7.5-03",
+        "NS-7.5-05"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-064",
+      "cr_id": "CR-064",
+      "title": "Missing Evidence Hashes",
+      "direct_ns_ids": [
+        "NS-10.5-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-10.5-01"
+      ],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-065",
+      "cr_id": "CR-065",
+      "title": "Invalid Signer Identity",
+      "direct_ns_ids": [
+        "NS-13.6B-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-12.6-04"
+      ],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-066",
+      "cr_id": "CR-066",
+      "title": "Receipt Replay Hash Mismatch",
+      "direct_ns_ids": [
+        "NS-10.7-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-067",
+      "cr_id": "CR-067",
+      "title": "Evidence Changes Between Proposal and Commit",
+      "direct_ns_ids": [
+        "NS-10.1-02",
+        "NS-10.2-01",
+        "NS-10.2-03",
+        "NS-10.3-01",
+        "NS-10.3-02",
+        "NS-10.8-01",
+        "NS-10.8-03",
+        "NS-10.8A-03",
+        "NS-10.9-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-7.6-03",
+        "NS-8.6-04",
+        "NS-10.2-02",
+        "NS-10.8-02",
+        "NS-10.9-02",
+        "NS-10.9-03",
+        "NS-13.6-03"
+      ],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-068",
+      "cr_id": "CR-068",
+      "title": "Evidence Unavailable at Commit",
+      "direct_ns_ids": [
+        "NS-9.6A-01",
+        "NS-9.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-10.6-01",
+        "NS-10.6-02"
+      ],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-069",
+      "cr_id": "CR-069",
+      "title": "Evidence Lineage Gap Across Agents",
+      "direct_ns_ids": [
+        "NS-16.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-070",
+      "cr_id": "CR-070",
+      "title": "Governance Context Preserved Across Handoff",
+      "direct_ns_ids": [
+        "NS-16.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC061-TC070.md"
+    },
+    {
+      "tc_id": "TC-071",
+      "cr_id": "CR-071",
+      "title": "Downstream Agent Drops Context",
+      "direct_ns_ids": [
+        "NS-16.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-072",
+      "cr_id": "CR-072",
+      "title": "Cross-Domain Delegation Requires Escalation",
+      "direct_ns_ids": [
+        "NS-14.1-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-073",
+      "cr_id": "CR-073",
+      "title": "REST vs Message Bus Same Result",
+      "direct_ns_ids": [
+        "NS-5.2.6-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-074",
+      "cr_id": "CR-074",
+      "title": "Canonically Equivalent Payloads Same Result",
+      "direct_ns_ids": [
+        "NS-5.2.1-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-075",
+      "cr_id": "CR-075",
+      "title": "Different Implementations Produce Same Decision",
+      "direct_ns_ids": [
+        "NS-5.2.1-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-5.9-02"
+      ],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-076",
+      "cr_id": "CR-076",
+      "title": "Same Proposal + Same State + Same Invariants = Same Decision",
+      "direct_ns_ids": [
+        "NS-7.7-02",
+        "NS-5.2.1-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-7.7-01",
+        "NS-7.7-03"
+      ],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-077",
+      "cr_id": "CR-077",
+      "title": "Same Proposal Across Distributed Nodes",
+      "direct_ns_ids": [
+        "NS-5.2.6-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-078",
+      "cr_id": "CR-078",
+      "title": "Determinism Under Non-Deterministic Agent Inputs",
+      "direct_ns_ids": [
+        "NS-5.2.1-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-079",
+      "cr_id": "CR-079",
+      "title": "Authorized Actions Successfully Commit",
+      "direct_ns_ids": [
+        "NS-9.5-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-080",
+      "cr_id": "CR-080",
+      "title": "Unauthorized Actions Never Commit",
+      "direct_ns_ids": [
+        "NS-9.5-03",
+        "NS-9.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC071-TC080.md"
+    },
+    {
+      "tc_id": "TC-081",
+      "cr_id": "CR-081",
+      "title": "Every Action Follows Valid Lifecycle Transitions",
+      "direct_ns_ids": [
+        "NS-13.6A-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-082",
+      "cr_id": "CR-082",
+      "title": "Derived State Matches Ledger Reconstruction",
+      "direct_ns_ids": [
+        "NS-4.6-03",
+        "NS-4.6-05",
+        "NS-10.8A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-13.6A-01",
+        "NS-5.2.5-01",
+        "NS-5.2.5-02"
+      ],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-083",
+      "cr_id": "CR-083",
+      "title": "Canonical State and Decision Remain Synchronized",
+      "direct_ns_ids": [
+        "NS-7.6-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-084",
+      "cr_id": "CR-084",
+      "title": "Commit Uses Latest Canonical State",
+      "direct_ns_ids": [
+        "NS-9.1-01",
+        "NS-9.5-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-13.6-07"
+      ],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-085",
+      "cr_id": "CR-085",
+      "title": "Decision Fully Reconstructable from Ledger",
+      "direct_ns_ids": [
+        "NS-10.7-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-10.7-01",
+        "NS-10.7-02"
+      ],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-086",
+      "cr_id": "CR-086",
+      "title": "Receipt Reproduces Original Decision",
+      "direct_ns_ids": [
+        "NS-10.1-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-087",
+      "cr_id": "CR-087",
+      "title": "Inadmissible Actions Produce Structural Refusal",
+      "direct_ns_ids": [
+        "NS-7.5-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-7.4-01"
+      ],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-088",
+      "cr_id": "CR-088",
+      "title": "Refused Actions Never Execute",
+      "direct_ns_ids": [
+        "NS-9.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-089",
+      "cr_id": "CR-089",
+      "title": "Implementation Passes AGCP Conformance Suite",
+      "direct_ns_ids": [
+        "NS-1.5-01",
+        "NS-1.5-02",
+        "NS-2.7-01",
+        "NS-2.7-03",
+        "NS-3.4-05",
+        "NS-5.9-01",
+        "NS-5.9-03",
+        "NS-17.1-01",
+        "NS-17.2-03",
+        "NS-17.3-01",
+        "NS-17.4-01",
+        "NS-17.4-02",
+        "NS-17.5-01",
+        "NS-17.5-02",
+        "NS-17.6-01",
+        "NS-17.6-02",
+        "NS-17.6-03",
+        "NS-17.7-01",
+        "NS-17.7-02",
+        "NS-17.8-01",
+        "NS-17.8-02",
+        "NS-17.9-01",
+        "NS-17.9-02",
+        "NS-17.10-01",
+        "NS-17.10-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-1.2-01",
+        "NS-2.1-01",
+        "NS-2.4-01",
+        "NS-2.6-01",
+        "NS-2.7-02",
+        "NS-3.3-01",
+        "NS-3.3-02",
+        "NS-3.4-01",
+        "NS-3.4-02",
+        "NS-3.4-03",
+        "NS-3.4-04",
+        "NS-3.5-01",
+        "NS-3.6-01",
+        "NS-3.6-02",
+        "NS-3.6-03",
+        "NS-3.6-04",
+        "NS-3.7-01",
+        "NS-4.1-01",
+        "NS-4.1-02",
+        "NS-4.8-01",
+        "NS-4.19-01",
+        "NS-4.19-02",
+        "NS-5.2-01",
+        "NS-5.3-01",
+        "NS-5.3-02",
+        "NS-5.3-03",
+        "NS-5.4-01",
+        "NS-5.7-01",
+        "NS-5.7-02",
+        "NS-5.8-01",
+        "NS-17.2-02",
+        "NS-17.5-03",
+        "NS-17.7-03",
+        "NS-17.8-03"
+      ],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-090",
+      "cr_id": "CR-090",
+      "title": "Independent Implementations Produce Equivalent Outcomes",
+      "direct_ns_ids": [
+        "NS-5.2.1-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-5.9-02"
+      ],
+      "file": "TC081-TC090.md"
+    },
+    {
+      "tc_id": "TC-091",
+      "cr_id": "CR-091",
+      "title": "Degraded Governance State",
+      "direct_ns_ids": [
+        "NS-13.6C-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-092",
+      "cr_id": "CR-092",
+      "title": "DEGRADED as Non-Terminal State",
+      "direct_ns_ids": [
+        "NS-13.6C-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-093",
+      "cr_id": "CR-093",
+      "title": "Re-Evaluation Required from DEGRADED State",
+      "direct_ns_ids": [
+        "NS-13.5-02",
+        "NS-13.5-03",
+        "NS-13.5-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-094",
+      "cr_id": "CR-094",
+      "title": "Admissible Set Determination",
+      "direct_ns_ids": [
+        "NS-7.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-095",
+      "cr_id": "CR-095",
+      "title": "Deterministic Adjudication of Competing Futures",
+      "direct_ns_ids": [
+        "NS-7.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-096",
+      "cr_id": "CR-096",
+      "title": "Authority Re-Derivation at Commit",
+      "direct_ns_ids": [
+        "NS-8.4-02",
+        "NS-8.6A-01",
+        "NS-8.6A-02",
+        "NS-8.6A-03",
+        "NS-12.1-01",
+        "NS-12.1-02",
+        "NS-12.2-01",
+        "NS-12.5-01",
+        "NS-12.5-02",
+        "NS-12.6-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-8.6-05",
+        "NS-13.6-01"
+      ],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-097",
+      "cr_id": "CR-097",
+      "title": "Evidence Qualification Before Admissibility",
+      "direct_ns_ids": [
+        "NS-7.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-098",
+      "cr_id": "CR-098",
+      "title": "Continuation Integrity Preservation",
+      "direct_ns_ids": [
+        "NS-13.1-01",
+        "NS-13.2-01",
+        "NS-13.3-01",
+        "NS-13.4-05",
+        "NS-13.5-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-13.2-04",
+        "NS-13.3-02",
+        "NS-13.6-04",
+        "NS-13.7-01",
+        "NS-13.7-03"
+      ],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-099",
+      "cr_id": "CR-099",
+      "title": "Admissible Path Viability Tracking",
+      "direct_ns_ids": [
+        "NS-13.1-02",
+        "NS-13.2-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-13.6C-03",
+        "NS-13.7-02"
+      ],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-100",
+      "cr_id": "CR-100",
+      "title": "Degraded Continuation Detection",
+      "direct_ns_ids": [
+        "NS-13.4-02",
+        "NS-13.6C-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-13.4-01"
+      ],
+      "file": "TC091-TC100.md"
+    },
+    {
+      "tc_id": "TC-101",
+      "cr_id": "CR-101",
+      "title": "Continuation Recovery Support",
+      "direct_ns_ids": [
+        "NS-13.4-06",
+        "NS-13.6C-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-102",
+      "cr_id": "CR-102",
+      "title": "Governance Realization Layer",
+      "direct_ns_ids": [
+        "NS-7.1-02",
+        "NS-9.6A-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-5.2.2-01",
+        "NS-5.2.2-02",
+        "NS-5.2.4-01"
+      ],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-103",
+      "cr_id": "CR-103",
+      "title": "State Qualification Prior to Admissibility",
+      "direct_ns_ids": [
+        "NS-4.6-01",
+        "NS-7.6A-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-4.6-02",
+        "NS-5.2.5-03"
+      ],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-104",
+      "cr_id": "CR-104",
+      "title": "Governance Decision State Suitability",
+      "direct_ns_ids": [
+        "NS-7.4-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-105",
+      "cr_id": "CR-105",
+      "title": "Composite Proposal Representation",
+      "direct_ns_ids": [
+        "NS-9.6B-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-106",
+      "cr_id": "CR-106",
+      "title": "Governance Dependency Graph Evaluation",
+      "direct_ns_ids": [
+        "NS-9.6B-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-107",
+      "cr_id": "CR-107",
+      "title": "Composite Admissibility Re-Evaluation",
+      "direct_ns_ids": [
+        "NS-9.6B-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-108",
+      "cr_id": "CR-108",
+      "title": "Coupling Classification",
+      "direct_ns_ids": [
+        "NS-9.6B-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-109",
+      "cr_id": "CR-109",
+      "title": "Partial Bind Governance",
+      "direct_ns_ids": [
+        "NS-9.6B-01",
+        "NS-9.6B-05"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-110",
+      "cr_id": "CR-110",
+      "title": "Governance Compilation",
+      "direct_ns_ids": [
+        "NS-15.6A-04"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-15.6A-01"
+      ],
+      "file": "TC101-TC110.md"
+    },
+    {
+      "tc_id": "TC-111",
+      "cr_id": "CR-111",
+      "title": "Constitutional Validation",
+      "direct_ns_ids": [
+        "NS-15.5-03",
+        "NS-15.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-15.2-03"
+      ],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-112",
+      "cr_id": "CR-112",
+      "title": "Constitutional Constraint Preservation",
+      "direct_ns_ids": [
+        "NS-15.5-02",
+        "NS-15.6A-02",
+        "NS-15.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-113",
+      "cr_id": "CR-113",
+      "title": "Governance Self-Protection",
+      "direct_ns_ids": [
+        "NS-15.1-01",
+        "NS-15.1-02",
+        "NS-15.2-02",
+        "NS-15.4-01",
+        "NS-15.4-02",
+        "NS-15.5-01",
+        "NS-15.6-01",
+        "NS-15.6A-03",
+        "NS-15.7-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-15.2-01",
+        "NS-15.3-01",
+        "NS-15.3-02",
+        "NS-15.6-02",
+        "NS-15.6-03",
+        "NS-15.7-01",
+        "NS-15.7-03"
+      ],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-114",
+      "cr_id": "CR-114",
+      "title": "Governance Omission Analysis",
+      "direct_ns_ids": [
+        "NS-15.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-115",
+      "cr_id": "CR-115",
+      "title": "Recursive Authority Containment",
+      "direct_ns_ids": [
+        "NS-12.4-02",
+        "NS-16.6A-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-12.7-03"
+      ],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-116",
+      "cr_id": "CR-116",
+      "title": "Cross-Domain Authority Isolation",
+      "direct_ns_ids": [
+        "NS-12.6-03",
+        "NS-14.1-01",
+        "NS-14.2-01",
+        "NS-14.4-02",
+        "NS-14.5-01",
+        "NS-14.5-02",
+        "NS-14.6-03",
+        "NS-14.7-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-11.6-01",
+        "NS-11.6-02",
+        "NS-13.6-02",
+        "NS-14.2-02",
+        "NS-14.3-01",
+        "NS-14.3-02",
+        "NS-14.4-01",
+        "NS-14.6-01",
+        "NS-14.6-04",
+        "NS-14.6-05",
+        "NS-14.7-01",
+        "NS-14.7-03",
+        "NS-16.6-04"
+      ],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-117",
+      "cr_id": "CR-117",
+      "title": "Governance Self-Modification Isolation",
+      "direct_ns_ids": [
+        "NS-15.6B-01",
+        "NS-15.6B-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-118",
+      "cr_id": "CR-118",
+      "title": "Autonomous Coordination Bounds",
+      "direct_ns_ids": [
+        "NS-16.1-02",
+        "NS-16.2-02",
+        "NS-16.4-01",
+        "NS-16.4-02",
+        "NS-16.4-03",
+        "NS-16.5-01",
+        "NS-16.5-02",
+        "NS-16.6-01",
+        "NS-16.6-02",
+        "NS-16.6A-01",
+        "NS-16.7-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-16.1-01",
+        "NS-16.2-01",
+        "NS-16.3-01",
+        "NS-16.3-02",
+        "NS-16.6-05",
+        "NS-16.6-06",
+        "NS-16.7-01",
+        "NS-16.7-03"
+      ],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-119",
+      "cr_id": "CR-119",
+      "title": "Enforcement Context Availability",
+      "direct_ns_ids": [
+        "NS-9.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-9.3-01",
+        "NS-9.3-02"
+      ],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-120",
+      "cr_id": "CR-120",
+      "title": "Enforcement Decision Integrity",
+      "direct_ns_ids": [
+        "NS-9.4-01",
+        "NS-9.4-02",
+        "NS-9.4-04",
+        "NS-9.6A-03"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-9.4-03"
+      ],
+      "file": "TC111-TC120.md"
+    },
+    {
+      "tc_id": "TC-121",
+      "cr_id": "CR-121",
+      "title": "Governance Enforcement Binding",
+      "direct_ns_ids": [
+        "NS-4.7-01",
+        "NS-9.1-02",
+        "NS-9.6-04",
+        "NS-9.6A-04",
+        "NS-5.2.3-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-9.6-02",
+        "NS-9.7-01",
+        "NS-9.7-02",
+        "NS-9.7-03"
+      ],
+      "file": "TC121-TC122.md"
+    },
+    {
+      "tc_id": "TC-122",
+      "cr_id": "CR-122",
+      "title": "Risk-Based Re-Evaluation",
+      "direct_ns_ids": [
+        "NS-13.2-04",
+        "NS-13.3-01",
+        "NS-13.4-01",
+        "NS-13.4-03",
+        "NS-13.4-04",
+        "NS-13.4-05",
+        "NS-13.7-02"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-13.3-02",
+        "NS-13.7-03"
+      ],
+      "file": "TC121-TC122.md"
     }
-  ],
-  "notes": [
-    "This file replaces the legacy assertions.json model with executable harness checks.",
-    "check_id values are harness-local identifiers and are not an independent normative traceability layer.",
-    "The authoritative traceability chain remains Normative Specification -> NS -> CR -> TC.",
-    "Harness checks SHALL remain synchronized with the Requirements Traceability Matrix, conformance test cases, and conformance test vectors."
   ]
 }
