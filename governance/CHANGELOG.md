@@ -15,7 +15,7 @@ Versioning follows Semantic Versioning (MAJOR.MINOR.PATCH).
 
 The governing rules for versioning, compatibility, and release management are defined in:
 
-`/governance/AGCP Versioning and Governance Specification.md`
+`governance/AGCP-Versioning.md`
 
 ---
 
