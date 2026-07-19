@@ -69,7 +69,7 @@ agcp_conformance_manifest:
       - All applicable Normative Statement, Conformance Requirement, and Test Case mappings must pass.
       - All applicable deterministic test vectors must pass.
       - Governance-significant events must be recorded in the Append-Only Governance Ledger where required.
-      - Canonical State must be derived from the ordered Append-Only Governance Ledger, or from a verifiable materialized state whose derivation from the ordered ledger can be deterministically reproduced.
+      - Canonical State SHALL be deterministically resolved from qualified authoritative governance sources. The ordered Governance Ledger is authoritative for recorded governance events, authoritative event ordering, and Derived Lifecycle State.
       - Governance Evidence must be produced, linked, attributable, integrity-protected, and sufficient for audit and deterministic replay.
       - Human Review, Execution Authorization, and Commit Boundary requirements must be enforced where applicable.
       - Tenant and Governance Domain isolation requirements must be enforced where applicable.
