@@ -103,10 +103,7 @@ The conformance suite verifies, where applicable:
 
 # Canonical State
 
-Conformance verification requires Canonical State to be derived from the
-ordered Append-Only Governance Ledger, or from a verifiable materialized
-state whose derivation can be deterministically reproduced from ordered
-ledger entries.
+Canonical State SHALL be deterministically resolved from qualified authoritative governance sources. The ordered Governance Ledger is authoritative for recorded governance events, authoritative event ordering, and Derived Lifecycle State. Materialized governance state used for replay must be verifiably derived from the applicable authoritative sources and ledger records.
 
 Ledger sequence order is authoritative. Timestamp order is not.
 
