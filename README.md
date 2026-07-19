@@ -27,10 +27,6 @@ The purpose of this review is to evaluate:
 
 The specification may change based on review feedback.
 
-No stability guarantees are made for the v1.x series.
-
-Implementations built against this version should expect possible normative adjustments before the v1.0 release.
-
 ---
 
 # Purpose
@@ -45,7 +41,7 @@ AGCP provides a structural control-plane model for governing automated actions i
 - Replay inconsistency under evolving configuration
 
 AGCP is **not a policy language**.  
-It is a deterministic governance substrate.
+It is a deterministic governance foundation.
 
 ---
 
@@ -96,7 +92,7 @@ Feedback is most valuable when focused on:
 A structured review path:
 
 1. `ARCHITECTURE.md` — system overview
-2. `spec/AGCP-Core.md` — core governance model
+2. `spec/AGCP-Core.docx` — core governance model
 3. `lifecycle/AGCP-Normative-State-Transition-Table.md`
 4. `spec/AGCP-Policy-Evaluation-Contract.md`
 5. `conformance/AGCP-Conformance.md`
@@ -114,7 +110,7 @@ agcp-spec/
 ├─ NOTICE.md
 │
 ├─ spec/
-│   ├─ AGCP-Core.md
+│   ├─ AGCP-Core.docx
 │   ├─ AGCP-Policy-Evaluation-Contract.md
 │   ├─ AGCP-HTTP-Interface.md
 │   ├─ AGCP-HITL-Token.md
@@ -293,7 +289,7 @@ Although AGCP may be applied to AI-enabled systems, the architecture is general 
 Security-sensitive concerns or matters not appropriate for public issue tracking may be directed to:
 
 
-agcp.spec.review@sustainablefuturetech.com
+research@agcp.ai
 
 
 Public technical review comments should be submitted via **GitHub Issues**.
