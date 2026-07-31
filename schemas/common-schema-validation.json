@@ -1,8 +1,8 @@
 {
   "status": "PASS",
-  "validated_at": "2026-07-30",
-  "definition_count": 63,
-  "used_definition_count": 63,
+  "validated_at": "2026-07-31",
+  "definition_count": 62,
+  "used_definition_count": 62,
   "unused_definitions": [],
   "retired_definition": "pass_fail_enum",
   "retired_definition_absent": true,
