@@ -1,72 +1,466 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/commit_boundary_request.json",
+  "$id": "https://agcp.ai/schemas/commit_boundary_request.json",
   "title": "Commit Boundary Request",
-  "description": "Request schema for invoking AGCP Commit Boundary processing. Commit Boundary processing verifies that authoritative Execution Authorization, Canonical State, Authority Lineage, Governance Context, tenant/domain constraints, and governance configuration remain valid immediately before the governed Action may become operationally real.",
+  "description": "Canonical integrity-protected request for Commit Boundary processing. It presents the specific canonical proposal, decision, Execution Authorization, current Authority Re-Derivation, qualified state and evidence, Resulting-State Validation, Governance Binding Validation, composite-governance results when applicable, and complete DS-029 Enforcement Context to a specific Policy Enforcement Point.",
+  "$comment": "DS-018 carries the completed governance basis to the Commit Boundary. JSON Schema cannot compare arbitrary identifiers and digests across referenced objects; implementations must reject any semantic mismatch and fail closed.",
+  "x-agcp-ds-id": "DS-018",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Commit Boundary Invocation",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-203",
+      "ARM-210",
+      "ARM-211",
+      "ARM-212",
+      "ARM-213",
+      "ARM-216",
+      "ARM-217",
+      "ARM-401",
+      "ARM-702"
+    ],
+    "core_sections": [
+      "9.3",
+      "9.4",
+      "9.6",
+      "9.6A",
+      "9.6B",
+      "9.7"
+    ],
+    "normative_statements": [
+      "NS-9.3-01",
+      "NS-9.3-02",
+      "NS-9.4-01",
+      "NS-9.4-02",
+      "NS-9.6A-03",
+      "NS-9.6A-04",
+      "NS-9.6B-01"
+    ],
+    "conformance_requirements": [
+      "CR-019",
+      "CR-020",
+      "CR-021",
+      "CR-022",
+      "CR-024",
+      "CR-028",
+      "CR-032",
+      "CR-033",
+      "CR-048",
+      "CR-049",
+      "CR-067",
+      "CR-068",
+      "CR-084",
+      "CR-096",
+      "CR-102",
+      "CR-105",
+      "CR-106",
+      "CR-107",
+      "CR-108",
+      "CR-109",
+      "CR-119",
+      "CR-120",
+      "CR-121"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "commit_boundary_request_id": {
+      "$ref": "common.json#/$defs/evaluation_id"
+    },
+    "request_type": {
+      "const": "COMMIT_BOUNDARY_REQUEST"
+    },
+    "proposal_ref": {
+      "$ref": "governed_action_proposal.json#/$defs/governed_action_proposal_ref"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
     },
     "governance_domain_id": {
       "$ref": "common.json#/$defs/governance_domain_id"
     },
-    "proposal_id": {
-      "$ref": "common.json#/$defs/proposal_id"
-    },
-    "action_id": {
-      "$ref": "common.json#/$defs/action_id"
-    },
-    "execution_authorization_ref": {
-      "$ref": "common.json#/$defs/authorization_id",
-      "description": "Identifier of the authoritative Execution Authorization that must be bound to the Action at Commit Boundary processing."
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
     },
     "governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+    },
+    "execution_authorization_ref": {
+      "allOf": [
+        {
+          "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "Authorized for Commit Boundary Processing"
+            },
+            "consumption_state": {
+              "const": "AVAILABLE"
+            }
+          },
+          "required": [
+            "outcome",
+            "consumption_state"
+          ]
+        }
+      ]
+    },
+    "authority_rederivation_result_ref": {
+      "allOf": [
+        {
+          "$ref": "authority_rederivation_result.json#/$defs/authority_rederivation_result_ref"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "AUTHORITY_ESTABLISHED"
+            }
+          },
+          "required": [
+            "outcome"
+          ]
+        }
+      ]
+    },
+    "state_qualification_result_ref": {
+      "allOf": [
+        {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "QUALIFIED"
+            }
+          },
+          "required": [
+            "outcome"
+          ]
+        }
+      ]
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 512,
+      "uniqueItems": true
+    },
+    "resulting_state_validation_result_ref": {
+      "allOf": [
+        {
+          "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "VALID"
+            }
+          },
+          "required": [
+            "outcome"
+          ]
+        }
+      ]
+    },
+    "governance_binding_validation_result_ref": {
+      "allOf": [
+        {
+          "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "VALID"
+            }
+          },
+          "required": [
+            "outcome"
+          ]
+        }
+      ]
+    },
+    "transition_mode": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 256,
-      "description": "Reference to the Governance Decision Result that formed the basis for Execution Authorization."
+      "enum": [
+        "SINGLE_TRANSITION",
+        "COMPLETE_BIND_SET",
+        "APPROVED_EXECUTABLE_SUBSET"
+      ]
     },
-    "canonical_state_ref": {
-      "$ref": "common.json#/$defs/canonical_state_ref"
+    "bind_set_ref": {
+      "$ref": "bind_set.json#/$defs/bind_set_ref"
     },
-    "authority_lineage_ref": {
-      "$ref": "common.json#/$defs/authority_lineage_ref"
+    "dependency_graph_ref": {
+      "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
     },
-    "governance_context_ref": {
-      "$ref": "common.json#/$defs/governance_context_ref"
+    "deterministic_adjudication_result_ref": {
+      "$ref": "deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref"
     },
-    "governance_configuration_ref": {
-      "$ref": "common.json#/$defs/governance_configuration_ref"
+    "enforcement_context": {
+      "$ref": "enforcement_context.json"
     },
-    "execution_context": {
-      "type": "object",
-      "description": "Execution context to be validated against the authorized Governance Context and Action Representation before commit. This context SHALL NOT alter the qualified Action Representation.",
-      "additionalProperties": true
-    },
-    "action_representation_hash": {
-      "$ref": "common.json#/$defs/hash_hex",
-      "description": "Optional integrity hash of the qualified Action Representation used to detect mutation before Commit Boundary processing."
+    "action_representation_digest": {
+      "$ref": "common.json#/$defs/content_digest"
     },
     "request_timestamp": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
+    "policy_enforcement_point_id": {
+      "$ref": "common.json#/$defs/policy_enforcement_point_id"
+    },
+    "request_sequence": {
+      "$ref": "common.json#/$defs/sequence_number"
+    },
+    "request_attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "request_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
     "provenance": {
       "$ref": "common.json#/$defs/provenance"
     },
-    "metadata": {
+    "semantic_assertions": {
+      "$ref": "https://agcp.ai/schemas/commit_boundary_request.json#/$defs/semantic_assertions"
+    },
+    "extensions": {
       "type": "object",
-      "description": "Implementation-defined request metadata that SHALL NOT alter normative commit semantics.",
-      "additionalProperties": true
+      "description": "Namespaced implementation extensions that cannot alter canonical governance meaning.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]+:[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64
+    },
+    "continuation_integrity_result_ref": {
+      "$ref": "continuation_integrity_result.json#/$defs/continuation_integrity_result_ref"
     }
   },
   "required": [
-    "tenant_id",
-    "proposal_id",
+    "commit_boundary_request_id",
+    "request_type",
+    "proposal_ref",
     "action_id",
+    "tenant_id",
+    "governance_domain_id",
+    "target_ref",
+    "governance_decision_ref",
     "execution_authorization_ref",
-    "execution_context",
-    "provenance"
-  ]
+    "authority_rederivation_result_ref",
+    "state_qualification_result_ref",
+    "qualified_evidence_refs",
+    "resulting_state_validation_result_ref",
+    "governance_binding_validation_result_ref",
+    "transition_mode",
+    "enforcement_context",
+    "action_representation_digest",
+    "request_timestamp",
+    "policy_enforcement_point_id",
+    "request_sequence",
+    "request_attribution",
+    "request_digest",
+    "integrity_signature",
+    "provenance",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "transition_mode": {
+            "const": "SINGLE_TRANSITION"
+          }
+        },
+        "required": [
+          "transition_mode"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "bind_set_ref"
+              ]
+            },
+            {
+              "required": [
+                "dependency_graph_ref"
+              ]
+            },
+            {
+              "required": [
+                "deterministic_adjudication_result_ref"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition_mode": {
+            "const": "COMPLETE_BIND_SET"
+          }
+        },
+        "required": [
+          "transition_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "bind_set_ref",
+          "dependency_graph_ref"
+        ],
+        "not": {
+          "required": [
+            "deterministic_adjudication_result_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition_mode": {
+            "const": "APPROVED_EXECUTABLE_SUBSET"
+          }
+        },
+        "required": [
+          "transition_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "bind_set_ref",
+          "dependency_graph_ref",
+          "deterministic_adjudication_result_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "continuation_integrity_result_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "continuation_integrity_result_ref": {
+            "properties": {
+              "primary_outcome": {
+                "enum": [
+                  "PROPOSAL_REMAINS_AUTHORIZED",
+                  "PROPOSAL_REMAINS_VIABLE",
+                  "PROPOSAL_RESTORED_TO_ELIGIBLE_STATE"
+                ]
+              },
+              "resulting_lifecycle_state_ref": {
+                "properties": {
+                  "terminality": {
+                    "const": "NONTERMINAL"
+                  },
+                  "commitment_eligibility": {
+                    "const": "ELIGIBLE_FOR_COMMIT_BOUNDARY_PROCESSING"
+                  }
+                },
+                "required": [
+                  "terminality",
+                  "commitment_eligibility"
+                ]
+              }
+            },
+            "required": [
+              "primary_outcome",
+              "resulting_lifecycle_state_ref"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "commit_boundary_request_ref": {
+      "type": "object",
+      "description": "Stable integrity-bound reference to DS-018 Commit Boundary Request.",
+      "additionalProperties": false,
+      "properties": {
+        "commit_boundary_request_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "request_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "action_id": {
+          "$ref": "common.json#/$defs/action_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "policy_enforcement_point_id": {
+          "$ref": "common.json#/$defs/policy_enforcement_point_id"
+        },
+        "request_timestamp": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "commit_boundary_request_id",
+        "request_digest",
+        "policy_enforcement_point_id"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "all_references_are_bound_to_same_proposal": {
+          "const": true
+        },
+        "all_references_are_bound_to_same_target": {
+          "const": true
+        },
+        "all_references_are_bound_to_same_tenant": {
+          "const": true
+        },
+        "enforcement_context_matches_request": {
+          "const": true
+        },
+        "request_does_not_itself_commit_transition": {
+          "const": true
+        },
+        "mismatch_requires_fail_closed": {
+          "const": true
+        },
+        "continuation_integrity_preserved_until_bind_time": {
+          "const": true
+        }
+      },
+      "required": [
+        "all_references_are_bound_to_same_proposal",
+        "all_references_are_bound_to_same_target",
+        "all_references_are_bound_to_same_tenant",
+        "enforcement_context_matches_request",
+        "request_does_not_itself_commit_transition",
+        "mismatch_requires_fail_closed",
+        "continuation_integrity_preserved_until_bind_time"
+      ]
+    }
+  }
 }

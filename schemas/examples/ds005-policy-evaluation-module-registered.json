@@ -1,0 +1,237 @@
+{
+  "module_id": "PEM-TEST-001",
+  "module_version": "1.0.0",
+  "module_type": "POLICY_EVALUATOR",
+  "status": "Registered",
+  "tenant_id": "T1",
+  "governance_domain_id": "domain-primary",
+  "effective_scope": {
+    "tenant_id": "T1"
+  },
+  "module_uri": "https://agcp.example/test",
+  "media_type": "application/json",
+  "module_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "runtime_representation": {
+    "representation_format": "WASM",
+    "representation_uri": "https://agcp.example/test",
+    "representation_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "entrypoint": "TEST",
+    "target_runtime_profile": "TEST",
+    "network_access_prohibited": true,
+    "filesystem_mutation_prohibited": true,
+    "evaluation_side_effects_prohibited": true,
+    "hidden_mutable_state_prohibited": true,
+    "representation_version": "1.0.0"
+  },
+  "interface_contract": {
+    "contract_id": "A-TEST-001",
+    "contract_version": "1.0.0",
+    "contract_uri": "https://agcp.example/test",
+    "contract_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "supported_operations": [
+      "EVALUATE_POLICY"
+    ],
+    "schema_bindings": [
+      {
+        "schema_uri": "https://agcp.example/schemas/1.json",
+        "schema_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "schema_role": "INPUT",
+        "required": true
+      },
+      {
+        "schema_uri": "https://agcp.example/schemas/2.json",
+        "schema_digest": {
+          "algorithm": "SHA-256",
+          "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "schema_role": "OUTPUT",
+        "required": true
+      }
+    ],
+    "deterministic_evaluation_required": true,
+    "side_effect_free_evaluation_required": true,
+    "structural_refusal_distinct_from_transport_error": true,
+    "governance_receipt_not_generated_by_module": true,
+    "execution_authorization_not_generated_by_module": true
+  },
+  "supported_policy_refs": [
+    {
+      "policy_id": "POLICY-TEST-001",
+      "policy_version": "1.0.0",
+      "policy_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "artifact_uri": "https://agcp.example/test",
+      "tenant_id": "T1",
+      "governance_domain_id": "domain-primary",
+      "status": "Registered"
+    }
+  ],
+  "governance_configuration_binding": {
+    "governance_configuration_id": "CFG-TEST-001",
+    "configuration_version": "1.0.0",
+    "configuration_status": "VALIDATED",
+    "configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "tenant_id": "T1",
+    "governance_domain_id": "domain-primary"
+  },
+  "registry_bindings": {
+    "policy_registry": {
+      "registry_document_id": "REGDOC-POLICY-REGISTRY",
+      "registry_id": "REG-POLICY-REGISTRY",
+      "registry_name": "Policy Registry",
+      "registry_kind": "POLICY",
+      "release_id": "REG-POLICY-REGISTRY-v2.0.0",
+      "registry_release": "2.0.0",
+      "lifecycle_state": "ACTIVE",
+      "canonical_uri": "https://agcp.example/registries/policy_registry.json",
+      "document_digest": {
+        "algorithm": "SHA-256",
+        "value": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    "constraint_registry": {
+      "registry_document_id": "REGDOC-CONSTRAINT-REGISTRY",
+      "registry_id": "REG-CONSTRAINT-REGISTRY",
+      "registry_name": "Constraint Registry",
+      "registry_kind": "CONSTRAINT_TYPE",
+      "release_id": "REG-CONSTRAINT-REGISTRY-v2.0.0",
+      "registry_release": "2.0.0",
+      "lifecycle_state": "ACTIVE",
+      "canonical_uri": "https://agcp.example/registries/constraint_registry.json",
+      "document_digest": {
+        "algorithm": "SHA-256",
+        "value": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    "invariant_registry": {
+      "registry_document_id": "REGDOC-INVARIANT-REGISTRY",
+      "registry_id": "REG-INVARIANT-REGISTRY",
+      "registry_name": "Invariant Registry",
+      "registry_kind": "INVARIANT_TYPE",
+      "release_id": "REG-INVARIANT-REGISTRY-v2.0.0",
+      "registry_release": "2.0.0",
+      "lifecycle_state": "ACTIVE",
+      "canonical_uri": "https://agcp.example/registries/invariant_registry.json",
+      "document_digest": {
+        "algorithm": "SHA-256",
+        "value": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "rejection_code_registry": {
+      "registry_document_id": "REGDOC-REJECTION-CODE-REGISTRY",
+      "registry_id": "REG-REJECTION-CODE-REGISTRY",
+      "registry_name": "Rejection Code Registry",
+      "registry_kind": "REJECTION_CODE",
+      "release_id": "REG-REJECTION-CODE-REGISTRY-v2.0.0",
+      "registry_release": "2.0.0",
+      "lifecycle_state": "ACTIVE",
+      "canonical_uri": "https://agcp.example/registries/rejection_code_registry.json",
+      "document_digest": {
+        "algorithm": "SHA-256",
+        "value": "4444444444444444444444444444444444444444444444444444444444444444"
+      }
+    }
+  },
+  "governance_evidence_refs": [
+    {
+      "governance_evidence_id": "GE-TEST-001",
+      "evidence_digest": {
+        "algorithm": "SHA-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    }
+  ],
+  "created_at": "2026-07-31T10:00:00Z",
+  "attribution": {
+    "principal": {
+      "principal_id": "client:test",
+      "principal_type": "AGENT"
+    },
+    "attributed_at": "2026-07-31T10:00:00Z"
+  },
+  "provenance": {
+    "signer": "TEST",
+    "signature": {
+      "alg": "SHA-256",
+      "kid": "kid-test",
+      "sig": "SIG_VALID_123"
+    },
+    "signed_at": "2026-07-31T10:00:00Z"
+  },
+  "integrity_signature": {
+    "alg": "SHA-256",
+    "kid": "kid-test",
+    "sig": "SIG_VALID_123"
+  },
+  "replay_material": {
+    "module_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "interface_contract_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "governance_configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "registry_release_digests": [
+      {
+        "algorithm": "SHA-256",
+        "value": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "algorithm": "SHA-256",
+        "value": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      {
+        "algorithm": "SHA-256",
+        "value": "3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "algorithm": "SHA-256",
+        "value": "4444444444444444444444444444444444444444444444444444444444444444"
+      }
+    ],
+    "replay_profile": "TEST",
+    "equivalent_inputs_equivalent_outputs": true
+  },
+  "semantic_assertions": {
+    "machine_evaluable": true,
+    "deterministic_evaluation": true,
+    "equivalent_inputs_produce_equivalent_outputs": true,
+    "compilation_context_distinct_from_runtime_governance_context": true,
+    "source_lineage_complete": true,
+    "validated_dependencies_required": true,
+    "constitutional_validation_required_before_activation": true,
+    "governance_omission_analysis_required_before_activation": true,
+    "governance_self_protection_required_before_activation": true,
+    "controlled_activation_required_for_authoritative_use": true,
+    "authority_at_commitment_not_established": true,
+    "commit_bound_admissibility_not_determined": true,
+    "execution_not_authorized": true,
+    "activation_not_self_effectuating": true,
+    "arrival_timing_not_governance_basis": true,
+    "implementation_specific_behavior_not_governance_basis": true,
+    "hidden_state_not_governance_basis": true,
+    "evaluation_side_effects_prohibited": true
+  }
+}

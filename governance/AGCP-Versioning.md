@@ -358,16 +358,21 @@ Typical classifications include:
 Conformance artifacts SHALL remain traceable through the normative conformance model:
 
 ```text
-Normative Specification
-        ↓
-Normative Statement
-        ↓
-Conformance Requirement
-        ↓
-Test Case
-        ↓
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
+        |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
+        v
+Conformance Test Case (TC)
+        |
+        v
 Harness Check
-        ↓
+        |
+        v
 Harness Test Vector
 ```
 
@@ -639,7 +644,7 @@ It complements, but does not replace, the following specifications:
 
 All specifications within a repository release SHALL be interpreted as a coherent specification set.
 
-Where inconsistencies exist, the Core Specification governs architectural behavior unless another specification explicitly defines a more specialized normative requirement within its scope.
+Where inconsistencies exist, they SHALL be resolved using the Core-defined precedence order: published CRs; Core Specification; applicable normative Companion Specifications expressly adopted by the implementation profile; Implementation Profiles; Conformance Test Suite; and Reference Implementations. The ARM SHALL govern architectural terminology and concept meaning where an ARM-defined concept is used, without independently creating a conformance obligation. Normative Statements and the RTM support extraction and traceability and do not supersede the normative sources.
 
 ---
 

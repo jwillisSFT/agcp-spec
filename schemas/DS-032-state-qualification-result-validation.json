@@ -1,0 +1,149 @@
+{
+  "schema_id": "DS-032",
+  "schema_file": "state_qualification_result.json",
+  "checks": [
+    {
+      "name": "Draft 2020-12 structural validation",
+      "passed": true,
+      "detail": "29 implemented schemas validated"
+    },
+    {
+      "name": "Cross-schema references and fragments",
+      "passed": true,
+      "detail": "1207 references resolved"
+    },
+    {
+      "name": "Catalog counts",
+      "passed": true,
+      "detail": "29 implemented; 15 reserved"
+    },
+    {
+      "name": "DS-032 catalog active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog SHA-256 values",
+      "passed": true,
+      "detail": "29 hashes verified"
+    },
+    {
+      "name": "Catalog DS IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OpenAPI DS-032 components",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "RTM DS-032 mappings",
+      "passed": true,
+      "detail": "CR-048;CR-049;CR-050;CR-103"
+    },
+    {
+      "name": "RTM dataset version",
+      "passed": true,
+      "detail": "RTM-1.16 across all rows"
+    },
+    {
+      "name": "RTM formulas and formula errors",
+      "passed": true,
+      "detail": "0 formulas; 0 errors"
+    },
+    {
+      "name": "RTM formatting preservation",
+      "passed": true,
+      "detail": "dimensions, merges, widths, heights, and style IDs unchanged"
+    }
+  ],
+  "positive_tests": [
+    {
+      "name": "qualified state",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "not-qualified stale state",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "not-qualified unresolved source conflict",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "indeterminate missing input",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "DS-023 through external DS-032",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_tests": [
+    {
+      "name": "qualified result with stale dimension rejected",
+      "passed": true,
+      "error": "'QUALIFIED' was expected"
+    },
+    {
+      "name": "qualified result without Canonical State reference rejected",
+      "passed": true,
+      "error": "'canonical_state_ref' is a required property"
+    },
+    {
+      "name": "not-qualified result permitting admissibility rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "not-qualified result without failure reason rejected",
+      "passed": true,
+      "error": "'failure_reasons' is a required property"
+    },
+    {
+      "name": "indeterminate result without missing inputs rejected",
+      "passed": true,
+      "error": "'missing_input_refs' is a required property"
+    },
+    {
+      "name": "timestamp-only ordering accepted rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "non-authoritative observation override rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "unresolved conflict with selected source rejected",
+      "passed": true,
+      "error": "{'status': 'UNRESOLVED', 'candidate_source_count': 2, 'conflicting_source_refs': [{'source_id': 'source-1', 'source_type': 'IDENTITY_SYSTEM', 'source_version': '1.0.0', 'source_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}, 'resolved_at': '2026-07-29T15:59:00Z'}, {'source_id': 'source-2', 'source_type': 'ENTITLEMENT_SYSTEM', 'source_version': '1.0.0', 'source_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}, 'resolved_at': '2026-07-29T15:59:00Z'}], 'basis': 'Conflicting authoritative source facts could not be deterministically resolved.', 'selected_source_refs': [{'source_id': 'source-1', 'source_type': 'IDENTITY_SYSTEM', 'source_version': '1.0.0', 'source_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}, 'resolved_at': '2026-07-29T15:59:00Z'}]} should not be valid under {'required': ['selected_source_refs']}"
+    },
+    {
+      "name": "non-namespaced extension rejected",
+      "passed": true,
+      "error": "'bad' does not match '^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\\\.[A-Za-z0-9][A-Za-z0-9._-]*)$'"
+    },
+    {
+      "name": "DS-023 rejects non-qualified DS-032 result",
+      "passed": true,
+      "error": "'QUALIFIED' was expected"
+    }
+  ],
+  "summary": {
+    "result": "PASS",
+    "implemented_schema_count": 29,
+    "cross_schema_reference_count": 1207,
+    "catalog_version": "1.0.11",
+    "rtm_version": "RTM-1.16",
+    "positive_test_count": 5,
+    "negative_test_count": 10
+  }
+}

@@ -1,7 +1,9 @@
 # AGCP HTTP Interface Specification
 
 **Status:** Normative\
-**Series:** AGCP Core\
+**Interface Identifier:** IF-001\
+**Interface Version:** v2\
+**AGCP Specification Release:** v2.0.0\
 **Applies To:** All AGCP-conformant implementations
 
 ------------------------------------------------------------------------
@@ -16,8 +18,7 @@ bodies, response bodies, and schemas, is defined by:
 
 `api/AGCP-HTTP-Contract.yaml`
 
-The AGCP Core Specification remains the authoritative source for
-governance behavior, lifecycle semantics, and processing requirements.
+The published AGCP Runtime Governance Conformance Requirements (CRs) and the AGCP Core Specification establish the higher-precedence normative governance behavior, lifecycle semantics, and processing requirements. This Interface Specification is an applicable normative Companion Specification for IF-001 and SHALL remain consistent with those sources.
 
 ------------------------------------------------------------------------
 
@@ -54,8 +55,12 @@ The OpenAPI contract is the authoritative definition of:
 Implementations SHALL conform to both this specification and
 `api/AGCP-HTTP-Contract.yaml`.
 
-Where a conflict exists, the AGCP Core Specification governs behavioral
-requirements while the OpenAPI contract governs HTTP representation.
+Conflicts SHALL be resolved using the Core-defined precedence order: published CRs first, then the Core Specification, then this expressly adopted normative Interface Specification. Within IF-001, this specification governs HTTP protocol semantics and the OpenAPI contract governs the machine-readable HTTP representation; neither artifact may weaken or contradict a higher-precedence normative source.
+
+
+## 3.1 Interface and path versioning
+
+IF-001 uses the canonical path namespace `/agcp/v2`. The path major version is aligned with the version 2 HTTP interface contract for AGCP v2.0.0. It is not an independently maintained `/agcp/v1` transport version. This release defines no `/agcp/v1` compatibility routes, aliases, redirects, or fallback request representations.
 
 ------------------------------------------------------------------------
 
@@ -73,9 +78,60 @@ Implementations SHALL:
 
 # 5. Endpoint Semantics
 
+IF-001 defines the following ten mandatory HTTP operations. The method, path, and
+operation identifier set in this table SHALL remain synchronized with
+`api/AGCP-HTTP-Contract.yaml`.
+
+| Method | Path | OpenAPI operationId |
+|---|---|---|
+| `GET` | `/agcp/v2/meta` | `getMetadata` |
+| `POST` | `/agcp/v2/proposals/submit` | `submitProposal` |
+| `GET` | `/agcp/v2/proposals/{proposal_id}` | `getProposal` |
+| `POST` | `/agcp/v2/proposals/{proposal_id}/governance-approvals` | `submitGovernanceApproval` |
+| `GET` | `/agcp/v2/execution-authorizations/{authorization_id}` | `getExecutionAuthorization` |
+| `POST` | `/agcp/v2/commit-boundary/commit` | `commitBoundaryProcessing` |
+| `GET` | `/agcp/v2/governance-evidence/{evidence_id}` | `getGovernanceEvidence` |
+| `POST` | `/agcp/v2/governance-artifacts/policy-modules` | `registerPolicyEvaluationModule` |
+| `POST` | `/agcp/v2/governance-artifacts/policies` | `registerGovernancePolicy` |
+| `GET` | `/agcp/v2/governance-artifacts/{artifact_id}` | `getGovernanceArtifact` |
+
+## IF-001 Contract Parity Summary
+
+The following operation contract summary is normative for the human-readable IF-001
+specification and SHALL remain synchronized with `api/AGCP-HTTP-Contract.yaml`.
+Parameter notation is `location:name`. `none` means that the operation has no required
+parameter or JSON request body. Response-status sets include both success and
+non-success responses.
+
+| Method | Path | operationId | Required parameters | JSON request schema | Permitted response statuses |
+|---|---|---|---|---|---|
+| `GET` | `/agcp/v2/meta` | `getMetadata` | `none` | `none` | `200` |
+| `POST` | `/agcp/v2/proposals/submit` | `submitProposal` | `header:Idempotency-Key` | `ProposalSubmitRequest` | `200, 400, 403, 409, 422, 503` |
+| `GET` | `/agcp/v2/proposals/{proposal_id}` | `getProposal` | `path:proposal_id`, `query:tenant_id`, `query:governance_domain_id` | `none` | `200, 403, 404` |
+| `POST` | `/agcp/v2/proposals/{proposal_id}/governance-approvals` | `submitGovernanceApproval` | `path:proposal_id`, `header:Idempotency-Key` | `GovernanceApprovalRequest` | `200, 400, 403, 404, 409, 422` |
+| `GET` | `/agcp/v2/execution-authorizations/{authorization_id}` | `getExecutionAuthorization` | `path:authorization_id`, `query:tenant_id`, `query:governance_domain_id` | `none` | `200, 403, 404` |
+| `POST` | `/agcp/v2/commit-boundary/commit` | `commitBoundaryProcessing` | `header:Idempotency-Key` | `CommitBoundaryRequest` | `200, 400, 403, 404, 409, 422, 503` |
+| `GET` | `/agcp/v2/governance-evidence/{evidence_id}` | `getGovernanceEvidence` | `path:evidence_id`, `query:tenant_id`, `query:governance_domain_id` | `none` | `200, 403, 404, 422` |
+| `POST` | `/agcp/v2/governance-artifacts/policy-modules` | `registerPolicyEvaluationModule` | `header:Idempotency-Key` | `PolicyEvaluationModuleArtifact` | `200, 400, 403, 409, 422, 503` |
+| `POST` | `/agcp/v2/governance-artifacts/policies` | `registerGovernancePolicy` | `header:Idempotency-Key` | `GovernancePolicyArtifact` | `200, 400, 403, 409, 422, 503` |
+| `GET` | `/agcp/v2/governance-artifacts/{artifact_id}` | `getGovernanceArtifact` | `path:artifact_id`, `query:tenant_id`, `query:governance_domain_id` | `none` | `200, 403, 404` |
+
+For every operation requiring `tenant_id` and `governance_domain_id` query
+parameters, the pair SHALL identify the tenant and Governance Domain in which the
+resource is resolved. An implementation SHALL NOT infer, substitute, or broaden that
+scope from a path identifier, authenticated identity, or another request context.
+Existence and requester authority SHALL be evaluated within the supplied pair, and a
+scope or disclosure failure SHALL use the operation's declared `403` or `404` response
+as applicable.
+
+For every operation requiring `Idempotency-Key`, the key SHALL be scoped to the
+`tenant_id` carried by the canonical request body and to the endpoint. Equivalent reuse
+SHALL NOT create a duplicate governance-significant effect. Conflicting reuse SHALL
+produce the declared `409` response with rejection code `IDEMPOTENCY_CONFLICT`.
+
 ## 5.1 Metadata
 
-`GET /agcp/v1/meta`
+`GET /agcp/v2/meta`
 
 Returns implementation metadata and supported capabilities.
 
@@ -85,7 +141,7 @@ The response SHALL conform to `MetadataResponse`.
 
 ## 5.2 Proposal Submission
 
-`POST /agcp/v1/proposals/submit`
+`POST /agcp/v2/proposals/submit`
 
 Initiates the AGCP governance pipeline.
 
@@ -102,21 +158,33 @@ Clients SHALL provide an `Idempotency-Key` header.
 
 ## 5.3 Proposal Retrieval
 
-`GET /agcp/v1/proposals/{proposal_id}`
+`GET /agcp/v2/proposals/{proposal_id}`
 
 Returns the authoritative externally observable Proposal representation.
+
+The request SHALL provide `proposal_id` as a required path parameter and SHALL
+provide `tenant_id` and `governance_domain_id` as required query parameters. The
+query-parameter pair SHALL identify the tenant and Governance Domain in which the
+Proposal is resolved and SHALL be processed according to the scope semantics defined
+in the IF-001 Contract Parity Summary.
 
 Responses SHALL conform to `ProposalView`.
 
 ------------------------------------------------------------------------
 
-## 5.4 Human Review
+## 5.4 Governance Approval and Human Adjudication
 
-`POST /agcp/v1/proposals/{proposal_id}/human-review`
+`POST /agcp/v2/proposals/{proposal_id}/governance-approvals`
 
-Allows governed submission of human-review artifacts.
+Allows governed submission of a DS-026 Governance Approval Artifact for human adjudication, cosignature, risk acceptance, cancellation, withdrawal, or quorum participation. The operation uses Governance Approval terminology; it does not expose a legacy Human Review Artifact representation.
 
-Requests SHALL conform to `HumanReviewRequest`.
+Requests SHALL conform to `GovernanceApprovalRequest` and SHALL carry exactly one canonical `governance_approval_artifact`.
+
+Clients SHALL provide an `Idempotency-Key` header. The key SHALL be scoped to the
+`tenant_id` carried by `GovernanceApprovalRequest` and to this endpoint. Equivalent
+reuse SHALL NOT create duplicate approval, adjudication, cosignature, risk-acceptance,
+cancellation, withdrawal, or quorum effects; conflicting reuse SHALL produce `409`
+with rejection code `IDEMPOTENCY_CONFLICT`.
 
 Responses SHALL conform to `ProposalView`.
 
@@ -124,9 +192,15 @@ Responses SHALL conform to `ProposalView`.
 
 ## 5.5 Execution Authorization
 
-`GET /agcp/v1/execution-authorizations/{authorization_id}`
+`GET /agcp/v2/execution-authorizations/{authorization_id}`
 
 Returns the authoritative Execution Authorization representation.
+
+The request SHALL provide `authorization_id` as a required path parameter and SHALL
+provide `tenant_id` and `governance_domain_id` as required query parameters. The
+query-parameter pair SHALL identify the tenant and Governance Domain in which the
+Execution Authorization is resolved and SHALL be processed according to the scope
+semantics defined in the IF-001 Contract Parity Summary.
 
 Responses SHALL conform to `ExecutionAuthorizationView`.
 
@@ -134,36 +208,122 @@ Responses SHALL conform to `ExecutionAuthorizationView`.
 
 ## 5.6 Commit Boundary
 
-`POST /agcp/v1/commit-boundary/commit`
+`POST /agcp/v2/commit-boundary/commit`
 
 Performs Commit Boundary processing.
 
 Requests SHALL conform to `CommitBoundaryRequest`.
 
+Clients SHALL provide an `Idempotency-Key` header. The key SHALL be scoped to the
+`tenant_id` carried by `CommitBoundaryRequest` and to this endpoint. Equivalent reuse
+SHALL NOT produce a duplicate commitment or governed consequence; conflicting reuse
+SHALL produce `409` with rejection code `IDEMPOTENCY_CONFLICT`.
+
 Responses SHALL conform to `CommitBoundaryResult`.
 
-Commit Boundary SHALL NOT be attempted unless Proposal Qualification,
-Governance Decision Function processing, and Execution Authorization
-have completed successfully.
+Commit Boundary processing SHALL NOT be attempted unless Proposal Qualification,
+Governance Decision Function processing, Execution Authorization, and any applicable
+pre-commit Continuation Integrity obligations for the nonterminal Proposal have been
+successfully satisfied.
+
+At the Commit Boundary, the Governance Realization Function SHALL coordinate current
+Canonical State Resolution, State Qualification, Evidence Qualification, Authority
+Re-Derivation, Governance Binding Validation, Commit-Bound Admissibility, and enforcement
+through the applicable Policy Enforcement Point.
 
 ------------------------------------------------------------------------
 
 ## 5.7 Governance Evidence
 
-`GET /agcp/v1/governance-evidence/{evidence_id}`
+`GET /agcp/v2/governance-evidence/{evidence_id}`
 
 Returns Governance Evidence.
 
+The request SHALL provide `evidence_id` as a required path parameter and SHALL
+provide `tenant_id` and `governance_domain_id` as required query parameters. The
+query-parameter pair SHALL identify the tenant and Governance Domain in which the
+Governance Evidence is resolved and SHALL be processed according to the scope
+semantics defined in the IF-001 Contract Parity Summary.
+
 Responses SHALL conform to `GovernanceEvidenceView`.
+
+Governance Evidence is generated throughout applicable governance-significant processing as
+a cross-cutting supporting service. Placement of this retrieval operation after the Commit
+Boundary operation in this interface document SHALL NOT be interpreted as a sequential pipeline
+stage or as limiting evidence generation to post-commit processing.
 
 ------------------------------------------------------------------------
 
 ## 5.8 Governance Artifact Management
 
-Governance artifact endpoints SHALL use the schemas defined for
-governance artifacts in the OpenAPI contract.
+Governance artifact operations SHALL use the schemas, parameters, request bodies,
+responses, and error representations defined by the OpenAPI contract. Governance
+artifact registration SHALL remain distinct from controlled operational activation.
 
-Artifact registration SHALL NOT imply operational activation.
+### 5.8.1 Policy Evaluation Module Registration
+
+`POST /agcp/v2/governance-artifacts/policy-modules`
+
+Registers an integrity-bound, tenant-scoped, and governance-domain-scoped Policy
+Evaluation Module artifact.
+
+The request body SHALL conform to `PolicyEvaluationModuleArtifact`.
+
+The response SHALL conform to `GovernanceArtifactView`.
+
+Clients SHALL provide an `Idempotency-Key` header. Equivalent requests using the same
+key SHALL be processed according to the IF-001 idempotency rules; a conflicting reuse
+SHALL be rejected.
+
+Registration processing SHALL validate the artifact's structure, provenance, integrity,
+deterministic interface and behavior, policy and configuration bindings, registry and
+compilation bindings, lineage, validation status, authority, tenant, and governance-domain
+scope as applicable.
+
+Registration SHALL NOT make the Policy Evaluation Module operationally effective.
+Operational activation SHALL occur only after all applicable governance compilation,
+constitutional validation, omission-analysis, Governance Self-Protection, approval, and
+controlled-activation prerequisites have been satisfied.
+
+### 5.8.2 Governance Policy Registration
+
+`POST /agcp/v2/governance-artifacts/policies`
+
+Registers a tenant-scoped and governance-domain-scoped Governance Policy Artifact.
+
+The request body SHALL conform to `GovernancePolicyArtifact`.
+
+The response SHALL conform to `GovernanceArtifactView`.
+
+Clients SHALL provide an `Idempotency-Key` header. Equivalent requests using the same
+key SHALL be processed according to the IF-001 idempotency rules; a conflicting reuse
+SHALL be rejected.
+
+Registration processing SHALL validate the policy artifact's structure, provenance,
+integrity, authority, referenced Policy Evaluation Module, tenant and governance-domain
+scope, and applicable governance bindings.
+
+Policy registration and policy activation are distinct governance events. Registration
+SHALL NOT activate the policy. Operational activation SHALL occur only through the
+applicable Governance Self-Protection, validation, approval, compilation, and controlled-
+activation requirements.
+
+### 5.8.3 Governance Artifact Retrieval
+
+`GET /agcp/v2/governance-artifacts/{artifact_id}`
+
+Returns the authoritative externally observable Governance Artifact representation for
+the requested identifier.
+
+The request SHALL provide `artifact_id` as a path parameter and SHALL provide
+`tenant_id` and `governance_domain_id` as query parameters.
+
+The response SHALL conform to `GovernanceArtifactView`.
+
+Retrieval SHALL preserve tenant and governance-domain isolation. An implementation
+SHALL return the OpenAPI-defined forbidden or not-found response, as applicable, when
+the artifact does not exist or the requester is not permitted to access the applicable
+tenant or governance domain.
 
 ------------------------------------------------------------------------
 
@@ -221,6 +381,34 @@ An implementation claiming AGCP conformance SHALL:
 -   enforce tenant and governance-domain isolation;
 -   produce Governance Evidence consistent with the AGCP Core
     Specification.
+
+Executable IF-001 operation coverage SHALL include at least one schema-valid positive
+vector for each of the ten mandatory operations. For an operation introduced into the
+executable coverage set, the controlled coverage record SHALL also identify the
+applicable negative and tenant/Governance-Domain-isolation scenarios. Operations that
+require `Idempotency-Key` and are introduced into the coverage set SHALL include both
+equivalent-replay and conflicting-reuse scenarios unless an explicit controlled
+disposition states why those scenarios are not applicable.
+
+For the five operations added to close the previously absent operation coverage:
+
+-   Execution Authorization retrieval and governance-artifact retrieval include positive,
+    not-found, and cross-scope isolation vectors;
+-   Policy Evaluation Module and Governance Policy registration include positive,
+    malformed-request, cross-scope isolation, equivalent-replay, and conflicting-reuse
+    vectors; and
+-   metadata discovery includes a schema-valid positive vector only.
+
+`GET /agcp/v2/meta` is intentionally unauthenticated, has no tenant or Governance
+Domain parameter, has no idempotency key, and declares only a `200` response. Negative,
+isolation, and idempotency vectors are therefore not applicable to that operation unless
+IF-001 is revised to declare such behavior.
+
+The controlled executable coverage is defined by
+`conformance/AGCP-Conformance-Harness-Spec.yml`, mirrored in
+`conformance/AGCP-Conformance-Test-Vectors.md`, and traced through
+`conformance/test-mapping.json`. Harness coverage supports the Formal Test Cases and
+SHALL NOT independently establish conformance.
 
 ------------------------------------------------------------------------
 

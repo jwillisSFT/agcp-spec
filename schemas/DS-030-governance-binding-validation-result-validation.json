@@ -1,0 +1,100 @@
+{
+  "validation_status": "PASS",
+  "schema": "DS-030",
+  "schema_file": "governance_binding_validation_result.json",
+  "draft_2020_12_schema_count": 36,
+  "resolved_reference_count": 1735,
+  "semantic_tests": [
+    {
+      "name": "valid_single_transition_binding",
+      "expected_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "valid_complete_bind",
+      "expected_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "valid_partial_bind",
+      "expected_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "valid_invalid_result",
+      "expected_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "valid_reevaluation_result",
+      "expected_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "valid_indeterminate_result",
+      "expected_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "invalid_valid_outcome_with_mismatch",
+      "expected_valid": false,
+      "passed": true,
+      "errors": [
+        "'MISMATCHED' is not one of ['MATCHED', 'NOT_APPLICABLE']"
+      ]
+    },
+    {
+      "name": "invalid_permission_to_execute_claim",
+      "expected_valid": false,
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "name": "invalid_arrival_time_basis",
+      "expected_valid": false,
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "name": "invalid_strongly_coupled_partial_bind",
+      "expected_valid": false,
+      "passed": true,
+      "errors": [
+        "'STRONGLY_COUPLED' should not be valid under {'const': 'STRONGLY_COUPLED'}"
+      ]
+    },
+    {
+      "name": "invalid_unestablished_authority",
+      "expected_valid": false,
+      "passed": true,
+      "errors": [
+        "'AUTHORITY_ESTABLISHED' was expected"
+      ]
+    },
+    {
+      "name": "invalid_missing_state_qualification",
+      "expected_valid": false,
+      "passed": true,
+      "errors": [
+        "'state_qualification_result_ref' is a required property"
+      ]
+    }
+  ],
+  "catalog_hashes": "PASS",
+  "openapi_parse": "PASS",
+  "rtm_dataset_version": "RTM-1.23",
+  "rtm_rows_with_ds_assignments": 75,
+  "issues": [],
+  "common_definition_count": 96,
+  "unused_common_definitions": []
+}

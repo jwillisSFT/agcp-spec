@@ -1,0 +1,25 @@
+{
+  "schema_id": "DS-043",
+  "schema_file": "controlled_governance_activation.json",
+  "overall_status": "PASS",
+  "validated_schema_count": 40,
+  "resolved_schema_reference_count": 2307,
+  "catalog_version": "1.0.24",
+  "implemented_schema_count": 40,
+  "proposed_reserved_schema_count": 4,
+  "rtm_dataset_version": "RTM-1.28",
+  "rtm_formula_count": 0,
+  "checks": {
+    "draft_2020_12_metaschema": "PASS",
+    "all_schema_refs_and_fragments_resolve": "PASS",
+    "catalog_ids_and_hashes": "PASS",
+    "canonical_activation_integration": "PASS",
+    "openapi_parse_and_ds043_refs": "PASS",
+    "rtm_mapping_and_formula_validation": "PASS",
+    "rtm_format_preserved": "PASS",
+    "ds043_positive_and_negative_cases": "PASS",
+    "no_unused_common_definitions": "PASS",
+    "repository_zip_integrity": "PASS"
+  },
+  "issues": []
+}

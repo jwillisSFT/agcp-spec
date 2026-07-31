@@ -1,0 +1,133 @@
+{
+  "schema_id": "DS-010",
+  "filename": "governance_artifact_view.json",
+  "status": "PASS",
+  "schema_count": 40,
+  "reference_count": 2360,
+  "test_cases": [
+    {
+      "name": "registered_minimal",
+      "expected": "PASS",
+      "actual": "PASS",
+      "ok": true,
+      "error_count": 0,
+      "first_errors": []
+    },
+    {
+      "name": "active_complete",
+      "expected": "PASS",
+      "actual": "PASS",
+      "ok": true,
+      "error_count": 0,
+      "first_errors": []
+    },
+    {
+      "name": "active_missing_activation_projection",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "ok": true,
+      "error_count": 1,
+      "first_errors": [
+        "'activation_projection' is a required property"
+      ]
+    },
+    {
+      "name": "active_with_failed_activation",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "ok": true,
+      "error_count": 5,
+      "first_errors": [
+        "'failure_code' is a required property",
+        "'failure_reason' is a required property",
+        "False was expected"
+      ]
+    },
+    {
+      "name": "active_failed_constitutional_validation",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "ok": true,
+      "error_count": 3,
+      "first_errors": [
+        "[] should be non-empty",
+        "'PASSED' was expected",
+        "'PASSED' was expected"
+      ]
+    },
+    {
+      "name": "unconstrained_summary_rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "ok": true,
+      "error_count": 1,
+      "first_errors": [
+        "Additional properties are not allowed ('normative_override' was unexpected)"
+      ]
+    },
+    {
+      "name": "execution_authority_claim_rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "ok": true,
+      "error_count": 1,
+      "first_errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "reevaluation_without_basis_rejected",
+      "expected": "REJECT",
+      "actual": "REJECT",
+      "ok": true,
+      "error_count": 3,
+      "first_errors": [
+        "'governance_configuration_ref' is a required property",
+        "'compilation_projection' is a required property",
+        "'re_evaluation_basis' is a required property"
+      ]
+    }
+  ],
+  "issues": [],
+  "catalog_version": "1.0.25",
+  "rtm_version": "RTM-1.29",
+  "rtm_rows": [
+    {
+      "row": 111,
+      "cr_id": "CR-110",
+      "ds_id": "DS-042;DS-010",
+      "dataset_version": "RTM-1.29"
+    },
+    {
+      "row": 112,
+      "cr_id": "CR-111",
+      "ds_id": "DS-042;DS-043;DS-010",
+      "dataset_version": "RTM-1.29"
+    },
+    {
+      "row": 113,
+      "cr_id": "CR-112",
+      "ds_id": "DS-042;DS-043;DS-010",
+      "dataset_version": "RTM-1.29"
+    },
+    {
+      "row": 114,
+      "cr_id": "CR-113",
+      "ds_id": "DS-042;DS-043;DS-010",
+      "dataset_version": "RTM-1.29"
+    },
+    {
+      "row": 115,
+      "cr_id": "CR-114",
+      "ds_id": "DS-042;DS-043;DS-010",
+      "dataset_version": "RTM-1.29"
+    },
+    {
+      "row": 118,
+      "cr_id": "CR-117",
+      "ds_id": "DS-041;DS-043;DS-010",
+      "dataset_version": "RTM-1.29"
+    }
+  ],
+  "sha256": "02028326cf7e4c1be93822d0bab739187792d621f6e26d9efee006bb51e5549f"
+}

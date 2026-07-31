@@ -1,0 +1,72 @@
+{
+  "schema": "DS-027 governance_receipt.json",
+  "catalog_version": "1.0.9",
+  "rtm_version": "RTM-1.14",
+  "draft_2020_12_schema_count": 27,
+  "cross_schema_reference_count": 1102,
+  "cross_schema_reference_errors": [],
+  "positive_tests": {
+    "governance_decision": "passed",
+    "execution_authorization": "passed",
+    "approval": "passed",
+    "commit": "passed",
+    "lifecycle_transition": "passed"
+  },
+  "negative_tests": {
+    "missing_receipt_digest": {
+      "passed": true,
+      "message": "'receipt_digest' is a required property"
+    },
+    "refusal_classification_rejected": {
+      "passed": true,
+      "message": "'NON_REFUSAL' was expected"
+    },
+    "decision_receipt_missing_decision_ref": {
+      "passed": true,
+      "message": "'governance_decision_ref' is a required property"
+    },
+    "approval_receipt_missing_approval_artifact": {
+      "passed": true,
+      "message": "'approval_artifact_refs' is a required property"
+    },
+    "commit_receipt_missing_authorization_and_enforcement": {
+      "passed": true,
+      "message": "'execution_authorization_ref' is a required property"
+    },
+    "permission_to_execute_claim_rejected": {
+      "passed": true,
+      "message": "False was expected"
+    },
+    "unqualified_extension_rejected": {
+      "passed": true,
+      "message": "'metadata' does not match '^(x-|[A-Za-z][A-Za-z0-9.-]*:).+'"
+    }
+  },
+  "catalog_errors": [],
+  "rtm_mapped_cr_ids": [
+    "CR-062",
+    "CR-063",
+    "CR-064",
+    "CR-065",
+    "CR-066",
+    "CR-067",
+    "CR-068",
+    "CR-069",
+    "CR-086"
+  ],
+  "rtm_mapped_ids": [
+    "RTM-00062",
+    "RTM-00063",
+    "RTM-00064",
+    "RTM-00065",
+    "RTM-00066",
+    "RTM-00067",
+    "RTM-00068",
+    "RTM-00069",
+    "RTM-00086"
+  ],
+  "rtm_style_ids_preserved": true,
+  "rtm_dimensions_preserved": true,
+  "openapi_parsed": true,
+  "passed": true
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "validated_at": "2026-07-30",
+  "reference_count": 128,
+  "external_reference_count": 82,
+  "issues": [],
+  "required_components": [
+    "InvariantEvaluation",
+    "InvariantEvaluationRef"
+  ]
+}

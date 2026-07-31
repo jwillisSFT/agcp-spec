@@ -1,0 +1,345 @@
+{
+  "fixture_catalog_id": "AGCP-CONFORMANCE-FIXTURES-1.0",
+  "specification_version": "v2.0.0",
+  "interface_id": "IF-001",
+  "interface_version": "v2",
+  "schema_catalog": "schemas/catalog/schema-catalog.json",
+  "schema_catalog_version": "1.0.44",
+  "validation_rule": "Every example_file SHALL validate against the exact schema_file before harness execution. Fixture resolution SHALL occur before OpenAPI request validation.",
+  "fixture_count": 29,
+  "fixtures": [
+    {
+      "fixture_id": "FX-DS011-SATISFIED",
+      "ds_id": "DS-011",
+      "schema_file": "schemas/constraint_evaluation.json",
+      "example_file": "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+      "expected_validation": "VALID",
+      "purpose": "Constraint evaluation satisfied with qualified deterministic inputs.",
+      "harness_test_vectors": [
+        "TV-PROP-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS011-VIOLATED",
+      "ds_id": "DS-011",
+      "schema_file": "schemas/constraint_evaluation.json",
+      "example_file": "schemas/examples/ds011-constraint-evaluation-violated.json",
+      "expected_validation": "VALID",
+      "purpose": "Constraint violation producing Structural Refusal.",
+      "harness_test_vectors": [
+        "TV-PROP-004"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS012-PRESERVED",
+      "ds_id": "DS-012",
+      "schema_file": "schemas/invariant_evaluation.json",
+      "example_file": "schemas/examples/ds012-invariant-evaluation-preserved.json",
+      "expected_validation": "VALID",
+      "purpose": "Invariant preserved under qualified inputs.",
+      "harness_test_vectors": [
+        "TV-PROP-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS012-HARD-VIOLATION",
+      "ds_id": "DS-012",
+      "schema_file": "schemas/invariant_evaluation.json",
+      "example_file": "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+      "expected_validation": "VALID",
+      "purpose": "Hard invariant violation with explicit refusal and lifecycle effects.",
+      "harness_test_vectors": [
+        "TV-PROP-003"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS018-SINGLE-COMMIT",
+      "ds_id": "DS-018",
+      "schema_file": "schemas/commit_boundary_request.json",
+      "example_file": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "expected_validation": "VALID",
+      "purpose": "Current single-transition Commit Boundary request using canonical Enforcement Context.",
+      "harness_test_vectors": [
+        "TV-COMMIT-001",
+        "TV-COMMIT-002",
+        "TV-COMMIT-003",
+        "TV-COMMIT-004",
+        "TV-COMMIT-005",
+        "TV-XTEN-003"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS019-COMMIT-SUCCESS",
+      "ds_id": "DS-019",
+      "schema_file": "schemas/commit_boundary_result.json",
+      "example_file": "schemas/examples/ds019-commit-boundary-result-success.json",
+      "expected_validation": "VALID",
+      "purpose": "Successful Commit Boundary result.",
+      "harness_test_vectors": [
+        "TV-COMMIT-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS019-STRUCTURAL-REFUSAL",
+      "ds_id": "DS-019",
+      "schema_file": "schemas/commit_boundary_result.json",
+      "example_file": "schemas/examples/ds019-commit-boundary-result-refusal.json",
+      "expected_validation": "VALID",
+      "purpose": "Commit Boundary Structural Refusal result.",
+      "harness_test_vectors": [
+        "TV-COMMIT-003"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS026-PARTIAL-QUORUM",
+      "ds_id": "DS-026",
+      "schema_file": "schemas/governance_approval_artifact.json",
+      "example_file": "schemas/examples/ds026-governance-approval-partial-quorum.json",
+      "expected_validation": "VALID",
+      "purpose": "Governance Approval Artifact contributing to partial quorum.",
+      "harness_test_vectors": [
+        "TV-GAPP-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS026-COMPLETED-QUORUM",
+      "ds_id": "DS-026",
+      "schema_file": "schemas/governance_approval_artifact.json",
+      "example_file": "schemas/examples/ds026-governance-approval-completed-quorum.json",
+      "expected_validation": "VALID",
+      "purpose": "Governance Approval Artifact satisfying quorum.",
+      "harness_test_vectors": [
+        "TV-GAPP-002"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS029-ADMISSIBLE",
+      "ds_id": "DS-029",
+      "schema_file": "schemas/enforcement_context.json",
+      "example_file": "schemas/examples/ds029-enforcement-context-admissible.json",
+      "expected_validation": "VALID",
+      "purpose": "Enforcement Context permitting bind only when all current bindings match.",
+      "harness_test_vectors": [
+        "TV-COMMIT-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS029-PREVENT",
+      "ds_id": "DS-029",
+      "schema_file": "schemas/enforcement_context.json",
+      "example_file": "schemas/examples/ds029-enforcement-context-prevent.json",
+      "expected_validation": "VALID",
+      "purpose": "Enforcement Context directing prevention of bind.",
+      "harness_test_vectors": [
+        "TV-COMMIT-003"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS032-QUALIFIED",
+      "ds_id": "DS-032",
+      "schema_file": "schemas/state_qualification_result.json",
+      "example_file": "schemas/examples/ds032-state-qualification-qualified.json",
+      "expected_validation": "VALID",
+      "purpose": "Canonical State qualification succeeds.",
+      "harness_test_vectors": [
+        "TV-STATE-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS032-NOT-QUALIFIED",
+      "ds_id": "DS-032",
+      "schema_file": "schemas/state_qualification_result.json",
+      "example_file": "schemas/examples/ds032-state-qualification-not-qualified.json",
+      "expected_validation": "VALID",
+      "purpose": "Canonical State qualification fails.",
+      "harness_test_vectors": [
+        "TV-STATE-002"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS033-QUALIFIED",
+      "ds_id": "DS-033",
+      "schema_file": "schemas/evidence_qualification_result.json",
+      "example_file": "schemas/examples/ds033-evidence-qualification-qualified.json",
+      "expected_validation": "VALID",
+      "purpose": "Governance Evidence qualification succeeds.",
+      "harness_test_vectors": [
+        "TV-PROP-001",
+        "TV-COMMIT-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS033-NOT-QUALIFIED",
+      "ds_id": "DS-033",
+      "schema_file": "schemas/evidence_qualification_result.json",
+      "example_file": "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+      "expected_validation": "VALID",
+      "purpose": "Governance Evidence qualification fails.",
+      "harness_test_vectors": [
+        "TV-PROP-004"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS038-AUTHORIZED",
+      "ds_id": "DS-038",
+      "schema_file": "schemas/governance_lifecycle_record.json",
+      "example_file": "schemas/examples/ds038-governance-lifecycle-authorized.json",
+      "expected_validation": "VALID",
+      "purpose": "Ledger-derived lifecycle transition to Authorized.",
+      "harness_test_vectors": [
+        "TV-PROP-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS039-DEGRADED",
+      "ds_id": "DS-039",
+      "schema_file": "schemas/continuation_integrity_result.json",
+      "example_file": "schemas/examples/ds039-continuation-integrity-degraded.json",
+      "expected_validation": "VALID",
+      "purpose": "Continuation degradation requiring governed re-evaluation.",
+      "harness_test_vectors": [
+        "TV-COMMIT-002"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS039-RECOVERED",
+      "ds_id": "DS-039",
+      "schema_file": "schemas/continuation_integrity_result.json",
+      "example_file": "schemas/examples/ds039-continuation-integrity-recovered.json",
+      "expected_validation": "VALID",
+      "purpose": "Governed recovery restoring commitment eligibility.",
+      "harness_test_vectors": [
+        "TV-COMMIT-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS040-GENESIS",
+      "ds_id": "DS-040",
+      "schema_file": "schemas/governance_ledger_event.json",
+      "example_file": "schemas/examples/ds040-governance-ledger-event-genesis.json",
+      "expected_validation": "VALID",
+      "purpose": "Genesis ledger event with authoritative sequence position.",
+      "harness_test_vectors": [
+        "TV-STATE-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS040-SEQUENCED",
+      "ds_id": "DS-040",
+      "schema_file": "schemas/governance_ledger_event.json",
+      "example_file": "schemas/examples/ds040-governance-ledger-event-sequenced.json",
+      "expected_validation": "VALID",
+      "purpose": "Non-genesis ledger event with predecessor and chain digest.",
+      "harness_test_vectors": [
+        "TV-STATE-001",
+        "TV-STATE-002"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS041-ACTIVE",
+      "ds_id": "DS-041",
+      "schema_file": "schemas/governance_configuration.json",
+      "example_file": "schemas/examples/ds041-governance-configuration-active.json",
+      "expected_validation": "VALID",
+      "purpose": "Active Governance Configuration including risk-based re-evaluation controls.",
+      "harness_test_vectors": [
+        "TV-PROP-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS042-VALIDATED",
+      "ds_id": "DS-042",
+      "schema_file": "schemas/compiled_governance_artifact.json",
+      "example_file": "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+      "expected_validation": "VALID",
+      "purpose": "Compiled Governance Artifact passing constitutional validation and omission analysis.",
+      "harness_test_vectors": []
+    },
+    {
+      "fixture_id": "FX-DS043-ACTIVATED",
+      "ds_id": "DS-043",
+      "schema_file": "schemas/controlled_governance_activation.json",
+      "example_file": "schemas/examples/ds043-controlled-governance-activation-activated.json",
+      "expected_validation": "VALID",
+      "purpose": "Atomic controlled activation of a validated governance package.",
+      "harness_test_vectors": []
+    },
+    {
+      "fixture_id": "FX-DS044-REGISTRY",
+      "ds_id": "DS-044",
+      "schema_file": "schemas/registry_document.schema.json",
+      "example_file": "schemas/examples/ds044-registry-document-capability-example.json",
+      "expected_validation": "VALID",
+      "purpose": "Non-authoritative capability registry document validating DS-044.",
+      "harness_test_vectors": []
+    },
+    {
+      "fixture_id": "FX-DS005-REGISTERED",
+      "ds_id": "DS-005",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "example_file": "schemas/examples/ds005-policy-evaluation-module-registered.json",
+      "expected_validation": "VALID",
+      "purpose": "Registered, schema-valid Policy Evaluation Module Artifact used for IF-001 registration, isolation, and idempotency vectors.",
+      "harness_test_vectors": [
+        "TV-PEM-001",
+        "TV-PEM-002",
+        "TV-PEM-003",
+        "TV-PEM-004",
+        "TV-PEM-005",
+        "TV-GART-001",
+        "TV-GART-003"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS006-REGISTERED",
+      "ds_id": "DS-006",
+      "schema_file": "schemas/policy_artifact.json",
+      "example_file": "schemas/examples/ds006-governance-policy-registered.json",
+      "expected_validation": "VALID",
+      "purpose": "Registered, schema-valid Governance Policy Artifact used for IF-001 registration, isolation, and idempotency vectors.",
+      "harness_test_vectors": [
+        "TV-POL-001",
+        "TV-POL-002",
+        "TV-POL-003",
+        "TV-POL-004",
+        "TV-POL-005"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS010-REGISTERED",
+      "ds_id": "DS-010",
+      "schema_file": "schemas/governance_artifact_view.json",
+      "example_file": "schemas/examples/ds010-governance-artifact-view-registered.json",
+      "expected_validation": "VALID",
+      "purpose": "Schema-valid registered Governance Artifact View used to validate registration and retrieval responses.",
+      "harness_test_vectors": [
+        "TV-PEM-001",
+        "TV-POL-001",
+        "TV-GART-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS017-AUTHORIZED",
+      "ds_id": "DS-017",
+      "schema_file": "schemas/execution_authorization_view.json",
+      "example_file": "schemas/examples/ds017-execution-authorization-view-authorized.json",
+      "expected_validation": "VALID",
+      "purpose": "Schema-valid available Execution Authorization View used to validate retrieval behavior.",
+      "harness_test_vectors": [
+        "TV-EAUTH-001"
+      ]
+    },
+    {
+      "fixture_id": "FX-DS003-METADATA",
+      "ds_id": "DS-003",
+      "schema_file": "schemas/meta_response.json",
+      "example_file": "schemas/examples/ds003-implementation-metadata-response.json",
+      "expected_validation": "VALID",
+      "purpose": "Schema-valid IF-001 implementation metadata response used by the metadata positive vector.",
+      "harness_test_vectors": [
+        "TV-META-001"
+      ]
+    }
+  ],
+  "last_validated_date": "2026-07-30"
+}

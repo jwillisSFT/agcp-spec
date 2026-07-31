@@ -1,0 +1,1109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/evidence_qualification_result.json",
+  "title": "Evidence Qualification Result",
+  "description": "Canonical, independently identifiable and traceable result of determining whether the evidence required for a governance decision is sufficiently fresh, provenanced, integrity-verifiable, authoritative, resolvable, sufficient, and available for the specific proposal, action, target, tenant, policy, and evaluation horizon. Evidence that is not qualified cannot support admissibility or authority merely because an artifact or reference exists.",
+  "x-agcp-ds-id": "DS-033",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Qualification Result — Evidence Qualification",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-202",
+      "ARM-203",
+      "ARM-204",
+      "ARM-302",
+      "ARM-601",
+      "ARM-603",
+      "ARM-606",
+      "ARM-609",
+      "ARM-610"
+    ],
+    "core_sections": [
+      "6.4",
+      "7.6A",
+      "9.6A",
+      "10.1",
+      "10.2",
+      "10.5",
+      "10.6",
+      "10.8A"
+    ],
+    "normative_statements": [
+      "NS-6.4-02",
+      "NS-7.6A-01",
+      "NS-7.6A-02",
+      "NS-9.6A-01",
+      "NS-10.5-01",
+      "NS-10.5-02",
+      "NS-10.6-01",
+      "NS-10.6-02"
+    ],
+    "conformance_requirements": [
+      "CR-005",
+      "CR-041",
+      "CR-054",
+      "CR-064",
+      "CR-067",
+      "CR-068",
+      "CR-097"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "evaluation_id": {
+      "$ref": "common.json#/$defs/evaluation_id"
+    },
+    "result_type": {
+      "const": "EVIDENCE_QUALIFICATION_RESULT"
+    },
+    "proposal_id": {
+      "$ref": "common.json#/$defs/proposal_id"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "policy_ref": {
+      "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "evidence_set_binding": {
+      "$ref": "#/$defs/evidence_set_binding"
+    },
+    "dimensions": {
+      "$ref": "#/$defs/qualification_dimensions"
+    },
+    "outcome": {
+      "$ref": "common.json#/$defs/overall_qualification_outcome_enum"
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "SUITABLE_FOR_GOVERNANCE_USE",
+        "STRUCTURAL_REFUSAL_REQUIRED",
+        "EVALUATION_BLOCKED"
+      ]
+    },
+    "failure_reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/qualification_failure_reason"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "missing_input_refs": {
+      "type": "array",
+      "description": "Stable identifiers or resolvable references for inputs whose absence prevents a determinate qualification result.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "qualification_evidence_refs": {
+      "type": "array",
+      "description": "Evidence supporting the qualification process itself, distinct from the evidence set being qualified.",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "evaluated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "evaluator": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "qualification_basis_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "result_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "evaluation_id",
+    "result_type",
+    "proposal_id",
+    "tenant_id",
+    "governance_domain_id",
+    "target_ref",
+    "policy_ref",
+    "governance_version_ref",
+    "evaluation_horizon",
+    "evidence_set_binding",
+    "dimensions",
+    "outcome",
+    "disposition",
+    "evaluated_at",
+    "evaluator",
+    "qualification_basis_digest",
+    "result_digest",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "QUALIFIED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "failure_reasons"
+              ]
+            },
+            {
+              "required": [
+                "missing_input_refs"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "dimensions": {
+            "$ref": "#/$defs/qualified_dimensions"
+          },
+          "evidence_set_binding": {
+            "$ref": "#/$defs/fully_resolved_evidence_set_binding"
+          },
+          "disposition": {
+            "const": "SUITABLE_FOR_GOVERNANCE_USE"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "evidence_suitability_established": {
+                "const": true
+              },
+              "may_support_admissibility": {
+                "const": true
+              },
+              "may_support_authority": {
+                "const": true
+              },
+              "all_required_evidence_resolved": {
+                "const": true
+              },
+              "all_required_evidence_available": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "NOT_QUALIFIED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "failure_reasons"
+        ],
+        "properties": {
+          "dimensions": {
+            "$ref": "#/$defs/dimensions_with_not_qualified"
+          },
+          "disposition": {
+            "const": "STRUCTURAL_REFUSAL_REQUIRED"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "evidence_suitability_established": {
+                "const": false
+              },
+              "may_support_admissibility": {
+                "const": false
+              },
+              "may_support_authority": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "INDETERMINATE"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "missing_input_refs"
+        ],
+        "properties": {
+          "dimensions": {
+            "$ref": "#/$defs/dimensions_with_indeterminate"
+          },
+          "disposition": {
+            "const": "EVALUATION_BLOCKED"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "evidence_suitability_established": {
+                "const": false
+              },
+              "may_support_admissibility": {
+                "const": false
+              },
+              "may_support_authority": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidence_set_binding": {
+            "properties": {
+              "availability_status": {
+                "enum": [
+                  "PARTIALLY_AVAILABLE",
+                  "UNAVAILABLE"
+                ]
+              }
+            },
+            "required": [
+              "availability_status"
+            ]
+          }
+        },
+        "required": [
+          "evidence_set_binding"
+        ]
+      },
+      "then": {
+        "properties": {
+          "dimensions": {
+            "properties": {
+              "availability": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_QUALIFIED",
+                      "INDETERMINATE"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            },
+            "required": [
+              "availability"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidence_set_binding": {
+            "properties": {
+              "reference_resolution_status": {
+                "enum": [
+                  "PARTIALLY_RESOLVED",
+                  "UNRESOLVED"
+                ]
+              }
+            },
+            "required": [
+              "reference_resolution_status"
+            ]
+          }
+        },
+        "required": [
+          "evidence_set_binding"
+        ]
+      },
+      "then": {
+        "properties": {
+          "dimensions": {
+            "properties": {
+              "resolvability": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "NOT_QUALIFIED",
+                      "INDETERMINATE"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            },
+            "required": [
+              "resolvability"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "evidence_qualification_result_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-033 Evidence Qualification Result.",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "$ref": "common.json#/$defs/overall_qualification_outcome_enum"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "outcome",
+        "result_digest"
+      ]
+    },
+    "qualified_evidence_ref": {
+      "type": "object",
+      "description": "Evidence reference paired with the canonical DS-033 qualification result that permits the evidence to support governance evaluation or authority derivation.",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        },
+        "qualification_result_ref": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/evidence_qualification_result_ref"
+            },
+            {
+              "properties": {
+                "outcome": {
+                  "const": "QUALIFIED"
+                }
+              },
+              "required": [
+                "outcome"
+              ]
+            }
+          ]
+        },
+        "authority_basis_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        }
+      },
+      "required": [
+        "evidence_ref",
+        "qualification_result_ref"
+      ]
+    },
+    "evidence_set_binding": {
+      "type": "object",
+      "description": "Integrity binding for the complete required evidence set and the subset successfully resolved and available for qualification.",
+      "additionalProperties": false,
+      "properties": {
+        "required_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "resolved_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "expected_evidence_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "resolved_evidence_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "required_evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "resolved_evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "proposal_evidence_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "continuity_checkpoint_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "reference_resolution_status": {
+          "type": "string",
+          "enum": [
+            "RESOLVED",
+            "PARTIALLY_RESOLVED",
+            "UNRESOLVED"
+          ]
+        },
+        "availability_status": {
+          "type": "string",
+          "enum": [
+            "AVAILABLE",
+            "PARTIALLY_AVAILABLE",
+            "UNAVAILABLE"
+          ]
+        }
+      },
+      "required": [
+        "required_evidence_refs",
+        "expected_evidence_count",
+        "resolved_evidence_count",
+        "required_evidence_set_digest",
+        "proposal_evidence_binding_digest",
+        "reference_resolution_status",
+        "availability_status"
+      ]
+    },
+    "fully_resolved_evidence_set_binding": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/evidence_set_binding"
+        },
+        {
+          "required": [
+            "resolved_evidence_refs",
+            "resolved_evidence_set_digest"
+          ],
+          "properties": {
+            "reference_resolution_status": {
+              "const": "RESOLVED"
+            },
+            "availability_status": {
+              "const": "AVAILABLE"
+            }
+          }
+        }
+      ]
+    },
+    "qualification_dimension_status": {
+      "type": "string",
+      "enum": [
+        "QUALIFIED",
+        "NOT_QUALIFIED",
+        "INDETERMINATE"
+      ]
+    },
+    "qualification_dimension_result": {
+      "type": "object",
+      "description": "Attributable result for one required Evidence Qualification dimension.",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/qualification_dimension_status"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "assessed_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "assessed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "failure_codes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualification_failure_code"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "measurement": {
+          "type": "object",
+          "description": "Optional dimension-specific measured values that do not alter the canonical outcome.",
+          "additionalProperties": false,
+          "properties": {
+            "observed_at": {
+              "$ref": "common.json#/$defs/timestamp_rfc3339"
+            },
+            "age_seconds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "threshold_seconds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "verification_method": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "measurement_digest": {
+              "$ref": "common.json#/$defs/content_digest"
+            }
+          },
+          "minProperties": 1
+        }
+      },
+      "required": [
+        "status",
+        "basis",
+        "assessed_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "NOT_QUALIFIED",
+                  "INDETERMINATE"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "failure_codes"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "failure_codes"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "qualification_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "freshness": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "provenance": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "integrity": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "authority": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "resolvability": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "sufficiency": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "availability": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        }
+      },
+      "required": [
+        "freshness",
+        "provenance",
+        "integrity",
+        "authority",
+        "resolvability",
+        "sufficiency",
+        "availability"
+      ]
+    },
+    "qualified_dimensions": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/qualification_dimensions"
+        },
+        {
+          "properties": {
+            "freshness": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "provenance": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "integrity": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "authority": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "resolvability": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "sufficiency": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "availability": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "dimensions_with_not_qualified": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/qualification_dimensions"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "freshness": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "provenance": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "integrity": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "authority": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "resolvability": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "sufficiency": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "availability": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions_with_indeterminate": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/qualification_dimensions"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "freshness": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "provenance": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "integrity": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "authority": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "resolvability": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "sufficiency": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "availability": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "qualification_failure_code": {
+      "type": "string",
+      "enum": [
+        "EVIDENCE_STALE",
+        "PROVENANCE_UNVERIFIED",
+        "INTEGRITY_FAILURE",
+        "AUTHORITY_UNVERIFIED",
+        "EVIDENCE_UNRESOLVABLE",
+        "EVIDENCE_INSUFFICIENT",
+        "EVIDENCE_UNAVAILABLE",
+        "EVIDENCE_SET_CHANGED",
+        "QUALIFICATION_INPUT_MISSING",
+        "OTHER_EVIDENCE_QUALIFICATION_FAILURE"
+      ]
+    },
+    "qualification_failure_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/qualification_failure_code"
+        },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "FRESHNESS",
+            "PROVENANCE",
+            "INTEGRITY",
+            "AUTHORITY",
+            "RESOLVABILITY",
+            "SUFFICIENCY",
+            "AVAILABILITY",
+            "CROSS_DIMENSION"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "affected_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "rejection_code": {
+          "$ref": "common.json#/$defs/rejection_code"
+        }
+      },
+      "required": [
+        "code",
+        "dimension",
+        "summary"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "description": "Recorded or resolvable information sufficient to reproduce the Evidence Qualification result without re-executing the governed action.",
+      "additionalProperties": false,
+      "properties": {
+        "qualification_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "input_snapshot_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/uri"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "qualification_configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "required_evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "policy_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "historical_action_execution_required": {
+          "const": false
+        }
+      },
+      "required": [
+        "qualification_profile",
+        "input_snapshot_refs",
+        "qualification_configuration_digest",
+        "required_evidence_set_digest",
+        "policy_basis_digest",
+        "governance_version_ref",
+        "historical_action_execution_required"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "all_required_dimensions_evaluated": {
+          "const": true
+        },
+        "evidence_suitability_established": {
+          "type": "boolean"
+        },
+        "may_support_admissibility": {
+          "type": "boolean"
+        },
+        "may_support_authority": {
+          "type": "boolean"
+        },
+        "artifact_or_reference_existence_alone_treated_as_sufficient": {
+          "const": false
+        },
+        "all_required_evidence_resolved": {
+          "type": "boolean"
+        },
+        "all_required_evidence_available": {
+          "type": "boolean"
+        },
+        "proposal_target_tenant_policy_and_horizon_binding_verified": {
+          "const": true
+        },
+        "qualification_is_attributable": {
+          "const": true
+        },
+        "supports_deterministic_replay": {
+          "const": true
+        }
+      },
+      "required": [
+        "all_required_dimensions_evaluated",
+        "evidence_suitability_established",
+        "may_support_admissibility",
+        "may_support_authority",
+        "artifact_or_reference_existence_alone_treated_as_sufficient",
+        "all_required_evidence_resolved",
+        "all_required_evidence_available",
+        "proposal_target_tenant_policy_and_horizon_binding_verified",
+        "qualification_is_attributable",
+        "supports_deterministic_replay"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Profile-defined extensions that cannot alter the canonical meaning or outcome of Evidence Qualification.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    }
+  }
+}

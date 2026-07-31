@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "sheetnames_equal": true,
+  "sheets": {
+    "AGCP_RTM_Repository_ARM_Co": {
+      "dimensions_equal": true,
+      "merged_cells_equal": true,
+      "freeze_panes_equal": true,
+      "auto_filter_equal": true,
+      "column_widths_equal": true,
+      "row_heights_equal": true,
+      "style_ids_equal": true
+    },
+    "NS_CR_Relationships": {
+      "dimensions_equal": true,
+      "merged_cells_equal": true,
+      "freeze_panes_equal": true,
+      "auto_filter_equal": true,
+      "column_widths_equal": true,
+      "row_heights_equal": true,
+      "style_ids_equal": true
+    }
+  },
+  "formula_error_cells": [],
+  "changed_values": 188,
+  "styles_xml_equal": true,
+  "theme_xml_equal": true
+}

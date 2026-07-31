@@ -1,0 +1,604 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_receipt.json",
+  "title": "Governance Receipt",
+  "description": "Canonical attributable and integrity-protected record of a non-refusal AGCP governance result. A Governance Receipt binds a Governed Action Proposal and its qualified governance basis to the recorded decision, authorization, approval, deterministic adjudication, commitment, enforcement, execution outcome, lifecycle transition, continuation outcome, or governed re-evaluation result. It is governance evidence rather than a mere application response and does not itself create authority at commitment or permission to execute. Structural Refusal is documented through a Refusal Record, not this schema.",
+  "x-agcp-ds-id": "DS-027",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "governance_receipt_id": {
+      "$ref": "common.json#/$defs/governance_receipt_id"
+    },
+    "receipt_type": {
+      "$ref": "#/$defs/receipt_type_enum"
+    },
+    "receipt_classification": {
+      "const": "NON_REFUSAL",
+      "description": "A DS-027 receipt records only a non-refusal governance result. Structural Refusal requires DS-028 Refusal Record."
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "governance_result": {
+      "$ref": "#/$defs/recorded_governance_result"
+    },
+    "governance_basis": {
+      "$ref": "common.json#/$defs/governance_basis"
+    },
+    "governance_binding": {
+      "$ref": "governance_binding_validation_result.json#/$defs/governance_binding"
+    },
+    "governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+    },
+    "execution_authorization_ref": {
+      "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+    },
+    "approval_artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "enforcement_result": {
+      "$ref": "enforcement_context.json#/$defs/enforcement_result"
+    },
+    "resulting_state_validation_result_ref": {
+      "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+    },
+    "continuation_integrity_result_ref": {
+      "$ref": "continuation_integrity_result.json#/$defs/continuation_integrity_result_ref"
+    },
+    "risk_based_re_evaluation_result": {
+      "$ref": "common.json#/$defs/risk_based_re_evaluation_result"
+    },
+    "lifecycle_transition": {
+      "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+    },
+    "execution_outcome_ref": {
+      "$ref": "#/$defs/execution_outcome_ref"
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "evidence_continuity": {
+      "$ref": "#/$defs/evidence_continuity_record"
+    },
+    "ledger_event_ref": {
+      "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+    },
+    "related_receipt_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/governance_receipt_ref"
+      },
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "receipt_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_verification": {
+      "$ref": "#/$defs/replay_verification"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "deterministic_adjudication_result_ref": {
+      "$ref": "deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref"
+    },
+    "governance_binding_validation_result_ref": {
+      "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
+    },
+    "governance_lifecycle_record_ref": {
+      "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+    }
+  },
+  "required": [
+    "governance_receipt_id",
+    "receipt_type",
+    "receipt_classification",
+    "proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "target_ref",
+    "governance_version_ref",
+    "governance_result",
+    "governance_basis",
+    "governance_binding",
+    "governance_evidence_refs",
+    "evidence_continuity",
+    "ledger_event_ref",
+    "receipt_digest",
+    "attribution",
+    "integrity_signature",
+    "replay_verification",
+    "created_at",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "GOVERNANCE_DECISION"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "governance_decision_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "EXECUTION_AUTHORIZATION"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "execution_authorization_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "APPROVAL_OR_ADJUDICATION"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "approval_artifact_refs"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "DETERMINISTIC_ADJUDICATION"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "deterministic_adjudication_result_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "COMMIT"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "governance_decision_ref",
+          "execution_authorization_ref",
+          "enforcement_result"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "GOVERNANCE_BINDING_VALIDATION"
+          }
+        },
+        "required": [
+          "receipt_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "governance_binding_validation_result_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "ENFORCEMENT"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "enforcement_result"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "EXECUTION_OUTCOME"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "execution_outcome_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "LIFECYCLE_TRANSITION"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "lifecycle_transition",
+          "governance_lifecycle_record_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "CONTINUATION_INTEGRITY"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "continuation_integrity_result_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "receipt_type": {
+            "const": "RISK_BASED_RE_EVALUATION"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "risk_based_re_evaluation_result"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "receipt_type_enum": {
+      "type": "string",
+      "enum": [
+        "PROPOSAL_QUALIFICATION",
+        "GOVERNANCE_DECISION",
+        "EXECUTION_AUTHORIZATION",
+        "APPROVAL_OR_ADJUDICATION",
+        "DETERMINISTIC_ADJUDICATION",
+        "GOVERNANCE_BINDING_VALIDATION",
+        "COMMIT",
+        "ENFORCEMENT",
+        "EXECUTION_OUTCOME",
+        "LIFECYCLE_TRANSITION",
+        "CONTINUATION_INTEGRITY",
+        "RISK_BASED_RE_EVALUATION",
+        "OTHER_NON_REFUSAL"
+      ],
+      "description": "Classifies the non-refusal governance result documented by the receipt."
+    },
+    "recorded_governance_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "result_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "result_kind": {
+          "$ref": "#/$defs/receipt_type_enum"
+        },
+        "outcome": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "occurred_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "source_schema_ds_id": {
+          "type": "string",
+          "pattern": "^DS-[0-9]{3}$"
+        },
+        "source_artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "result_id",
+        "result_kind",
+        "outcome",
+        "occurred_at",
+        "result_digest"
+      ]
+    },
+    "execution_outcome_ref": {
+      "type": "object",
+      "description": "Reference to an observed post-commit execution outcome without re-executing the historical action during replay.",
+      "additionalProperties": false,
+      "properties": {
+        "execution_outcome_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "outcome": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "observed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "outcome_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "outcome_uri": {
+          "$ref": "common.json#/$defs/uri"
+        }
+      },
+      "required": [
+        "execution_outcome_id",
+        "outcome",
+        "observed_at",
+        "outcome_digest"
+      ]
+    },
+    "evidence_continuity_record": {
+      "type": "object",
+      "description": "Integrity evidence preserving the proposal-to-basis-to-result relationship across evaluation, enforcement, handoff, lifecycle transition, and outcome.",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_to_result_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evidence_chain_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "predecessor_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "handoff_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "continuity_verified": {
+          "const": true
+        },
+        "silent_substitution_detected": {
+          "const": false
+        }
+      },
+      "required": [
+        "proposal_to_result_binding_digest",
+        "governance_basis_digest",
+        "evidence_chain_digest",
+        "continuity_verified",
+        "silent_substitution_detected"
+      ]
+    },
+    "replay_verification": {
+      "type": "object",
+      "description": "Material required to independently verify the recorded governance result without re-executing the historical operational action.",
+      "additionalProperties": false,
+      "properties": {
+        "replay_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "proposal_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "expected_outcome": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "independent_verification_supported": {
+          "const": true
+        },
+        "historical_action_reexecution_required": {
+          "const": false
+        },
+        "verification_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "replay_profile",
+        "proposal_digest",
+        "governance_basis_digest",
+        "result_digest",
+        "expected_outcome",
+        "independent_verification_supported",
+        "historical_action_reexecution_required"
+      ]
+    },
+    "governance_receipt_ref": {
+      "type": "object",
+      "description": "Stable, integrity-protected reference to a DS-027 Governance Receipt.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_receipt_id": {
+          "$ref": "common.json#/$defs/governance_receipt_id"
+        },
+        "receipt_type": {
+          "$ref": "#/$defs/receipt_type_enum"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "receipt_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ledger_event_ref": {
+          "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+        },
+        "created_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "governance_receipt_id",
+        "receipt_digest"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Optional extension members. Extension names must be explicitly namespace-qualified and cannot alter canonical receipt semantics.",
+      "propertyNames": {
+        "pattern": "^(x-|[A-Za-z][A-Za-z0-9.-]*:).+"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "records_non_refusal_result": {
+          "const": true
+        },
+        "is_merely_application_response": {
+          "const": false
+        },
+        "constitutes_authority_at_commitment": {
+          "const": false
+        },
+        "constitutes_permission_to_execute": {
+          "const": false
+        },
+        "proposal_tenant_target_and_version_binding_verified": {
+          "const": true
+        },
+        "recorded_or_referenced_in_governance_ledger": {
+          "const": true
+        },
+        "supports_independent_replay_verification": {
+          "const": true
+        }
+      },
+      "required": [
+        "records_non_refusal_result",
+        "is_merely_application_response",
+        "constitutes_authority_at_commitment",
+        "constitutes_permission_to_execute",
+        "proposal_tenant_target_and_version_binding_verified",
+        "recorded_or_referenced_in_governance_ledger",
+        "supports_independent_replay_verification"
+      ]
+    }
+  }
+}

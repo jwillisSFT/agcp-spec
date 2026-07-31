@@ -1,1075 +1,805 @@
 openapi: 3.1.0
-
 info:
   title: AGCP HTTP Interface Contract
-  version: git-release
-  description: |
-    Machine-readable HTTP interface contract for AGCP-conformant implementations.
-
-    The authoritative release version for this contract is the GitHub release tag.
-    The OpenAPI info.version value is intentionally release-managed to avoid
-    embedding release numbers in specification contents.
-
-    This contract defines the exact HTTP surface for the AGCP HTTP interface:
-      - paths
-      - operations
-      - request bodies
-      - response bodies
-      - common schemas
-      - status-code mappings
-      - rejection-code references
-
-    Normative governance behavior is defined by the AGCP Core Specification.
-    This contract expresses the HTTP representation of that behavior.
-
-    The AGCP governance pipeline is:
-      1. Proposal Qualification
-      2. Governance Decision Function
-      3. Execution Authorization
-      4. Commit Boundary
-      5. Continuation Integrity, where applicable
-
+  version: 2.0.0
+  description: "Machine-readable HTTP interface contract for AGCP v2.0.0 conformant implementations.\n\
+    \nThis contract defines IF-001, the AGCP HTTP Interface version 2. Its canonical path namespace is
+    /agcp/v2. The path major version is aligned with the AGCP v2 interface contract and is not an independently
+    versioned v1 compatibility surface. No /agcp/v1 compatibility paths are part of this release.\n\n\
+    The contract defines paths, operations, parameters, request and response bodies, status-code mappings,
+    and references to authoritative AGCP schemas and registries. Normative governance behavior is defined
+    by the AGCP Core Specification.\n\nThe AGCP governance pipeline is: Proposal Qualification; Governance
+    Decision Function; Execution Authorization; Continuation Integrity for nonterminal proposals where
+    applicable; Governance Realization and Commit Boundary processing."
 servers:
-  - url: https://{host}
-    variables:
-      host:
-        default: api.example.com
-
+- url: https://{host}
+  variables:
+    host:
+      default: api.example.com
 tags:
-  - name: Metadata
-    description: Implementation metadata and capability discovery.
-  - name: Proposals
-    description: Proposal submission and Proposal retrieval.
-  - name: Human Review
-    description: Governed human-review artifact submission.
-  - name: Execution Authorization
-    description: Execution Authorization retrieval.
-  - name: Commit Boundary
-    description: Commit Boundary processing.
-  - name: Governance Evidence
-    description: Governance Evidence retrieval.
-  - name: Governance Artifacts
-    description: Tenant-scoped governance artifact registration and retrieval.
-
+- name: Metadata
+  description: Implementation metadata and capability discovery.
+- name: Proposals
+  description: Proposal submission and Proposal retrieval.
+- name: Governance Approval
+  description: Governed approval and adjudication artifact submission.
+- name: Execution Authorization
+  description: Execution Authorization retrieval.
+- name: Commit Boundary
+  description: Commit Boundary processing.
+- name: Governance Evidence
+  description: Governance Evidence retrieval.
+- name: Governance Artifacts
+  description: Tenant-scoped governance artifact registration and retrieval.
 security:
-  - bearerAuth: []
-
+- bearerAuth: []
 paths:
-  /agcp/v1/meta:
+  /agcp/v2/meta:
     get:
-      tags: [Metadata]
+      tags:
+      - Metadata
       operationId: getMetadata
       summary: Get AGCP implementation metadata.
-      description: |
-        Returns implementation metadata, supported conformance levels, supported
-        governance capabilities, and supported HTTP contract capabilities.
+      description: 'Returns the implementation release, supported AGCP specification releases, integrity-bound
+        schema set and registry releases, claimed implementation profile, conformance levels and scope,
+        supported governance capabilities, and implemented HTTP contract. This endpoint MAY be accessible
+        without tenant context.
 
-        This endpoint MAY be accessible without tenant context.
+        '
       security: []
       responses:
-        "200":
+        '200':
           description: Implementation metadata.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MetadataResponse"
-
-  /agcp/v1/proposals/submit:
+                $ref: '#/components/schemas/MetadataResponse'
+  /agcp/v2/proposals/submit:
     post:
-      tags: [Proposals]
+      tags:
+      - Proposals
       operationId: submitProposal
       summary: Submit a Proposal for AGCP governance processing.
-      description: |
-        Submits a governance-significant Proposal for Proposal Qualification and
-        Governance Decision Function processing.
-
-        The response SHALL reflect an authoritative externally observable governance
-        result. Transient internal processing states SHALL NOT be exposed as canonical
-        externally observable governance states.
-
-        Idempotency:
-          - If Idempotency-Key is reused with identical payload, the implementation
-            SHALL return the existing ProposalView.
-          - If Idempotency-Key is reused with a different payload, the implementation
-            SHALL return 409 with rejection_code IDEMPOTENCY_CONFLICT.
+      description: "Submits a governance-significant Proposal for Proposal Qualification and\nGovernance
+        Decision Function processing.\n\nThe response SHALL reflect an authoritative externally observable
+        governance\nresult. Transient internal processing states SHALL NOT be exposed as canonical\nexternally
+        observable governance states.\n\nIdempotency:\n  - If Idempotency-Key is reused with identical
+        payload, the implementation\n    SHALL return the existing ProposalView.\n  - If Idempotency-Key
+        is reused with a different payload, the implementation\n    SHALL return 409 with rejection_code
+        IDEMPOTENCY_CONFLICT.\n"
       parameters:
-        - name: Idempotency-Key
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Client-provided idempotency key scoped to tenant_id and endpoint.
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Client-provided idempotency key scoped to tenant_id and endpoint.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProposalSubmitRequest"
+              $ref: '#/components/schemas/ProposalSubmitRequest'
       responses:
-        "200":
+        '200':
           description: Authoritative post-governance Proposal view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ProposalView"
-        "400":
+                $ref: '#/components/schemas/ProposalView'
+        '400':
           description: Invalid request or Structural Refusal.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "403":
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
           description: Forbidden tenant, governance domain, or authority condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "409":
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
           description: Conflict, including idempotency conflict or invalid lifecycle transition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "422":
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
           description: Semantically invalid governance input.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "503":
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
           description: Required governance service unavailable.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/proposals/{proposal_id}:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/proposals/{proposal_id}:
     get:
-      tags: [Proposals]
+      tags:
+      - Proposals
       operationId: getProposal
       summary: Get a Proposal by identifier.
-      description: |
-        Returns the externally observable authoritative Proposal state and governance
+      description: 'Returns the externally observable authoritative Proposal state and governance
+
         outcome. Internal processing states SHALL NOT be exposed as canonical states.
+
+        '
       parameters:
-        - name: proposal_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: tenant_id
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: governance_domain_id
-          in: query
-          required: true
-          schema:
-            type: string
+      - name: proposal_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tenant_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: governance_domain_id
+        in: query
+        required: true
+        schema:
+          type: string
       responses:
-        "200":
+        '200':
           description: Authoritative Proposal view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ProposalView"
-        "403":
+                $ref: '#/components/schemas/ProposalView'
+        '403':
           description: Forbidden tenant or governance domain condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "404":
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
           description: Proposal not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/proposals/{proposal_id}/human-review:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/proposals/{proposal_id}/governance-approvals:
     post:
-      tags: [Human Review]
-      operationId: submitHumanReview
-      summary: Submit human-review evidence for a Proposal requiring human review.
-      description: |
-        Valid only when the current governance outcome is Pending Human Review or
-        Deferred and applicable governance policy permits human-review submission.
+      tags:
+      - Governance Approval
+      operationId: submitGovernanceApproval
+      summary: Submit a Governance Approval Artifact for governed adjudication or quorum.
+      description: 'Submits exactly one DS-026 Governance Approval Artifact for a proposal whose current
+        governance outcome or lifecycle state permits governed human adjudication, cosignature, risk acceptance,
+        cancellation, withdrawal, or quorum participation. The canonical `Pending Human Review` governance
+        outcome remains a Core-defined outcome; the HTTP operation and artifact model use Governance Approval
+        terminology exclusively.
 
-        Human-review evidence SHALL remain governed, attributable, tenant-scoped,
-        governance-domain-scoped, and associated with the Proposal and Governance Evidence.
+
+        The artifact SHALL remain attributable, cryptographically verifiable, tenant-scoped, governance-domain-scoped,
+        proposal-bound, lifecycle-bound, scope-bound, validity-bound, and associated with Governance Evidence.
+        Approval or quorum completion SHALL NOT itself constitute authority at commitment or permission
+        to execute.'
       parameters:
-        - name: proposal_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: Idempotency-Key
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Client-provided idempotency key scoped to tenant_id and endpoint.
+      - name: proposal_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Client-provided idempotency key scoped to tenant_id and endpoint.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/HumanReviewRequest"
+              $ref: '#/components/schemas/GovernanceApprovalRequest'
       responses:
-        "200":
+        '200':
           description: Updated Proposal view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ProposalView"
-        "400":
-          description: Invalid human-review evidence or request structure.
+                $ref: '#/components/schemas/ProposalView'
+        '400':
+          description: Invalid Governance Approval Artifact or request structure.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "403":
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
           description: Forbidden tenant, governance domain, or authority condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "409":
-          description: Invalid governance transition or replayed human-review artifact.
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Proposal not found or protected resource existence hidden by the selected cross-scope disclosure strategy.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "422":
-          description: Human-review artifact is not acceptable for the governed Proposal.
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Invalid governance transition or replayed Governance Approval Artifact.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/execution-authorizations/{authorization_id}:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Governance Approval Artifact is not acceptable for the governed Proposal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/execution-authorizations/{authorization_id}:
     get:
-      tags: [Execution Authorization]
+      tags:
+      - Execution Authorization
       operationId: getExecutionAuthorization
       summary: Get an Execution Authorization by identifier.
-      description: |
-        Returns the authoritative Execution Authorization record, where available.
+      description: 'Returns the authoritative Execution Authorization record, where available.
+
 
         Execution Authorization SHALL NOT itself perform execution.
+
+        '
       parameters:
-        - name: authorization_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: tenant_id
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: governance_domain_id
-          in: query
-          required: true
-          schema:
-            type: string
+      - name: authorization_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tenant_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: governance_domain_id
+        in: query
+        required: true
+        schema:
+          type: string
       responses:
-        "200":
+        '200':
           description: Execution Authorization view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExecutionAuthorizationView"
-        "403":
+                $ref: '#/components/schemas/ExecutionAuthorizationView'
+        '403':
           description: Forbidden tenant, governance domain, or authority condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "404":
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
           description: Execution Authorization not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/commit-boundary/commit:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/commit-boundary/commit:
     post:
-      tags: [Commit Boundary]
+      tags:
+      - Commit Boundary
       operationId: commitBoundaryProcessing
       summary: Perform Commit Boundary processing for an authorized Proposal.
-      description: |
-        Commit Boundary processing is valid only when:
-          - Proposal Qualification has successfully completed
-          - the Governance Decision Function produced an authoritative outcome permitting authorization
-          - Execution Authorization produced Authorized for Commit Boundary Processing
-          - execution_authorization_ref matches the authoritative Execution Authorization
-          - required authority remains valid
-          - tenant and governance-domain constraints remain satisfied
-          - governance configuration remains valid
-          - the qualified Action Representation and Governance Context remain valid
-
-        On success, Commit Boundary processing binds the authoritative Execution
-        Authorization to the governance-significant Action immediately before execution.
-
-        Replays or attempts using invalid, expired, revoked, consumed, or modified
-        authorization SHALL fail or require Governed Re-evaluation.
+      description: "Commit Boundary processing is valid only when:\n  - Proposal Qualification has successfully
+        completed\n  - the Governance Decision Function produced an authoritative outcome permitting authorization\n\
+        \  - Execution Authorization produced Authorized for Commit Boundary Processing\n  - execution_authorization_ref
+        matches the authoritative Execution Authorization\n  - required authority remains valid\n  - tenant
+        and governance-domain constraints remain satisfied\n  - governance configuration remains valid\n\
+        \  - the qualified Action Representation and Governance Context remain valid\n\nOn success, Commit
+        Boundary processing binds the authoritative Execution\nAuthorization to the governance-significant
+        Action immediately before execution.\n\nReplays or attempts using invalid, expired, revoked, consumed,
+        or modified\nauthorization SHALL fail or require Governed Re-evaluation.\n"
       parameters:
-        - name: Idempotency-Key
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Client-provided idempotency key scoped to tenant_id and endpoint.
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Client-provided idempotency key scoped to tenant_id and endpoint.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CommitBoundaryRequest"
+              $ref: '#/components/schemas/CommitBoundaryRequest'
       responses:
-        "200":
+        '200':
           description: Commit Boundary result.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CommitBoundaryResult"
-        "400":
+                $ref: '#/components/schemas/CommitBoundaryResult'
+        '400':
           description: Invalid commit request.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "403":
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
           description: Forbidden tenant, governance domain, authority, or configuration condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "409":
-          description: Conflict, including invalid authorization, invalid transition, replay, or required governed re-evaluation.
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Proposal or protected resource not found, or resource existence hidden by the selected cross-scope disclosure strategy.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "422":
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict, including invalid authorization, invalid transition, replay, or 
+            required governed re-evaluation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
           description: Commit prerequisites are not satisfied.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "503":
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
           description: Required governance service unavailable.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/governance-evidence/{evidence_id}:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/governance-evidence/{evidence_id}:
     get:
-      tags: [Governance Evidence]
+      tags:
+      - Governance Evidence
       operationId: getGovernanceEvidence
       summary: Get Governance Evidence by identifier.
-      description: |
-        Returns Governance Evidence sufficient to support audit, conformance assessment,
+      description: 'Returns Governance Evidence sufficient to support audit, conformance assessment,
+
         deterministic replay, and forensic reconstruction, subject to tenant and governance
+
         domain isolation.
+
+        '
       parameters:
-        - name: evidence_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: tenant_id
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: governance_domain_id
-          in: query
-          required: true
-          schema:
-            type: string
+      - name: evidence_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tenant_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: governance_domain_id
+        in: query
+        required: true
+        schema:
+          type: string
       responses:
-        "200":
+        '200':
           description: Governance Evidence view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GovernanceEvidenceView"
-        "403":
+                $ref: '#/components/schemas/GovernanceEvidenceView'
+        '403':
           description: Forbidden tenant or governance domain condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "404":
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
           description: Governance Evidence not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/governance-artifacts/policy-modules:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Governance Evidence is incomplete or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/governance-artifacts/policy-modules:
     post:
-      tags: [Governance Artifacts]
+      tags:
+      - Governance Artifacts
       operationId: registerPolicyEvaluationModule
       summary: Register a Policy Evaluation Module artifact.
-      description: |
-        Registers a tenant-scoped Policy Evaluation Module artifact.
+      description: 'Registers an integrity-bound, tenant- and governance-domain-scoped Policy Evaluation
+        Module artifact with deterministic interface, policy, configuration, registry, compilation, lineage,
+        validation, and activation bindings.
+
 
         Registration SHALL NOT make the artifact operationally effective unless all
-        applicable governance validation and activation prerequisites are satisfied.
+
+        applicable governance compilation, constitutional validation, omission-analysis, self-protection,
+        approval, and controlled-activation prerequisites are satisfied.
+
+        '
       parameters:
-        - name: Idempotency-Key
-          in: header
-          required: true
-          schema:
-            type: string
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PolicyEvaluationModuleArtifact"
+              $ref: '#/components/schemas/PolicyEvaluationModuleArtifact'
       responses:
-        "200":
+        '200':
           description: Governance artifact view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GovernanceArtifactView"
-        "400":
+                $ref: '#/components/schemas/GovernanceArtifactView'
+        '400':
           description: Invalid artifact structure.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "403":
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
           description: Forbidden tenant, governance domain, or authority condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "422":
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Idempotency conflict.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
           description: Artifact validation failed.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/governance-artifacts/policies:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Policy Evaluation Module unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/governance-artifacts/policies:
     post:
-      tags: [Governance Artifacts]
+      tags:
+      - Governance Artifacts
       operationId: registerGovernancePolicy
       summary: Register a governance policy artifact.
-      description: |
-        Registers a tenant-scoped and governance-domain-scoped policy artifact.
+      description: 'Registers a tenant-scoped and governance-domain-scoped policy artifact.
+
         Operational activation is governed by AGCP Governance Self-Protection and
+
         artifact validation requirements.
+
+        '
       parameters:
-        - name: Idempotency-Key
-          in: header
-          required: true
-          schema:
-            type: string
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GovernancePolicyArtifact"
+              $ref: '#/components/schemas/GovernancePolicyArtifact'
       responses:
-        "200":
+        '200':
           description: Governance artifact view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GovernanceArtifactView"
-        "400":
+                $ref: '#/components/schemas/GovernanceArtifactView'
+        '400':
           description: Invalid artifact structure.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "403":
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
           description: Forbidden tenant, governance domain, or authority condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "422":
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Idempotency conflict.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
           description: Artifact validation failed.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /agcp/v1/governance-artifacts/{artifact_id}:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Referenced Policy Evaluation Module unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agcp/v2/governance-artifacts/{artifact_id}:
     get:
-      tags: [Governance Artifacts]
+      tags:
+      - Governance Artifacts
       operationId: getGovernanceArtifact
       summary: Get a governance artifact by identifier.
       parameters:
-        - name: artifact_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: tenant_id
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: governance_domain_id
-          in: query
-          required: true
-          schema:
-            type: string
+      - name: artifact_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tenant_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: governance_domain_id
+        in: query
+        required: true
+        schema:
+          type: string
       responses:
-        "200":
+        '200':
           description: Governance artifact view.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GovernanceArtifactView"
-        "403":
+                $ref: '#/components/schemas/GovernanceArtifactView'
+        '403':
           description: Forbidden tenant or governance domain condition.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "404":
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
           description: Governance artifact not found.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-
   schemas:
     MetadataResponse:
-      type: object
-      additionalProperties: false
-      required:
-        - implementation_name
-        - supported_conformance_levels
-        - supported_capabilities
-      properties:
-        implementation_name:
-          type: string
-        implementation_release:
-          type: string
-          description: Implementation release identifier. The specification release is managed externally.
-        supported_conformance_levels:
-          type: array
-          items:
-            type: string
-            enum: [L1, L2, L3, L4]
-        supported_capabilities:
-          type: array
-          items:
-            type: string
-        http_contract:
-          type: string
-          description: Identifier for the implemented HTTP contract artifact.
-
+      $ref: ../schemas/meta_response.json
+    MetadataResponseRef:
+      $ref: ../schemas/meta_response.json#/$defs/metadata_response_ref
+    TenantGovernanceRecord:
+      $ref: ../schemas/tenant.json
+    TenantGovernanceRecordRef:
+      $ref: ../schemas/tenant.json#/$defs/tenant_record_ref
     GovernanceOutcome:
-      type: string
-      description: Authoritative governance outcome produced by the Governance Decision Function.
-      enum:
-        - Authorized
-        - Denied
-        - Structural Refusal
-        - Pending Human Review
-        - Deferred
-        - Governed Re-evaluation Required
-
+      $ref: ../schemas/common.json#/$defs/governance_outcome_enum
     QualificationOutcome:
-      type: string
-      description: Proposal Qualification outcome.
-      enum:
-        - Qualified Proposal
-        - Structural Refusal
-
+      $ref: ../schemas/common.json#/$defs/qualification_outcome_enum
     ExecutionAuthorizationOutcome:
-      type: string
-      description: Execution Authorization outcome.
-      enum:
-        - Authorized for Commit Boundary Processing
-        - Authorization Failure
-        - Governed Re-evaluation Required
-
+      $ref: ../schemas/common.json#/$defs/execution_authorization_outcome_enum
     CommitBoundaryOutcome:
-      type: string
-      description: Commit Boundary processing outcome.
-      enum:
-        - Commit Successful
-        - Commit Failed
-        - Governed Re-evaluation Required
-
+      $ref: ../schemas/common.json#/$defs/commit_boundary_outcome_enum
     ContinuationOutcome:
-      type: string
-      description: Continuation Integrity outcome.
-      enum:
-        - Continue Execution
-        - DEGRADED
-        - Suspend Execution
-        - Resume Execution
-        - Governed Termination
-
+      $ref: ../schemas/continuation_integrity_result.json#/$defs/continuation_integrity_outcome
     GovernanceArtifactStatus:
-      type: string
-      description: Externally observable governance artifact status.
-      enum:
-        - Registered
-        - Validation Pending
-        - Accepted
-        - Rejected
-        - Active
-        - Retired
-        - Governed Re-evaluation Required
-
+      $ref: ../schemas/common.json#/$defs/governance_artifact_status_enum
     GovernancePipelineStage:
-      type: string
-      description: AGCP governance processing stage or supporting governance service.
-      enum:
-        - Proposal Qualification
-        - Governance Decision Function
-        - Execution Authorization
-        - Commit Boundary
-        - Continuation Integrity
-        - Governance Evidence
-        - Tenant and Domain Isolation
-        - Delegation and Authority Lineage
-        - Cross-Domain Authority Isolation
-        - Governance Self-Protection
-        - Autonomous Coordination
-
+      $ref: ../schemas/common.json#/$defs/governance_pipeline_stage_enum
     RejectionCode:
-      type: string
-      description: |
-        Rejection and failure codes. Implementations MAY return additional codes defined
-        by an applicable AGCP registry, provided they do not weaken normative behavior.
-      enum:
-        - IDEMPOTENCY_CONFLICT
-        - PROPOSAL_STRUCTURAL_REFUSAL
-        - GOVERNANCE_DENIED
-        - PENDING_HUMAN_REVIEW
-        - GOVERNED_REEVALUATION_REQUIRED
-        - AUTHORIZATION_FAILURE
-        - EXECUTION_AUTHORIZATION_INVALID
-        - COMMIT_BOUNDARY_FAILED
-        - COMMIT_BOUNDARY_REQUIRED
-        - TENANT_STATE_INVALID
-        - TENANT_SCOPE_VIOLATION
-        - GOVERNANCE_DOMAIN_VIOLATION
-        - AUTHORITY_LINEAGE_INVALID
-        - AUTHORITY_REVOKED
-        - AUTHORITY_REPLAY_DETECTED
-        - CANONICAL_STATE_INVALID
-        - CANONICAL_STATE_UNAVAILABLE
-        - GOVERNANCE_CONTEXT_INVALID
-        - ACTION_REPRESENTATION_MUTATED
-        - POLICY_NOT_FOUND
-        - POLICY_EVALUATION_OUTPUT_INVALID
-        - POLICY_MODULE_UNAVAILABLE
-        - POLICY_MODULE_NONDETERMINISTIC
-        - HUMAN_REVIEW_INVALID
-        - HUMAN_REVIEW_EXPIRED
-        - GOVERNANCE_ARTIFACT_INVALID
-        - GOVERNANCE_ARTIFACT_UNAUTHORIZED
-        - GOVERNANCE_ARTIFACT_ACTIVATION_DENIED
-        - GOVERNANCE_EVIDENCE_INCOMPLETE
-        - GOVERNANCE_EVIDENCE_INVALID
-        - REPLAY_REJECTED
-
+      $ref: ../schemas/common.json#/$defs/rejection_code
     ErrorResponse:
-      type: object
-      additionalProperties: false
-      required: [error, rejection_code]
-      properties:
-        error:
-          type: string
-        rejection_code:
-          $ref: "#/components/schemas/RejectionCode"
-        detail:
-          type: string
-        proposal_id:
-          type: string
-        action_id:
-          type: string
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        retryable:
-          type: boolean
-        governance_evidence_ref:
-          type: string
-
+      $ref: ../schemas/error_response.json
     Provenance:
-      type: object
-      description: Provenance envelope for submitted governance-significant inputs.
-      additionalProperties: false
-      required: [signer, signature, signed_at]
-      properties:
-        signer:
-          type: string
-        signature:
-          type: string
-        signed_at:
-          type: string
-          format: date-time
-
+      $ref: ../schemas/common.json#/$defs/provenance
     PolicyRef:
-      type: object
-      description: Applicable governance policy reference.
-      additionalProperties: false
-      required: [policy_id]
-      properties:
-        policy_id:
-          type: string
-        policy_version:
-          type: string
-
+      $ref: ../schemas/policy_artifact.json#/$defs/policy_artifact_ref
     CanonicalStateRef:
-      type: object
-      description: Authoritative Canonical State reference used for governance evaluation.
-      additionalProperties: false
-      required: [canonical_state_id]
-      properties:
-        canonical_state_id:
-          type: string
-        canonical_state_hash:
-          type: string
-        resolved_at:
-          type: string
-          format: date-time
-
+      $ref: ../schemas/canonical_state.json#/$defs/canonical_state_ref
+    AuthorityLineage:
+      $ref: ../schemas/authority_lineage.json
     AuthorityLineageRef:
-      type: object
-      description: Authority Lineage reference used for governance processing.
-      additionalProperties: false
-      required: [authority_lineage_id]
-      properties:
-        authority_lineage_id:
-          type: string
-        authority_lineage_hash:
-          type: string
-
-    GovernanceContext:
-      type: object
-      description: Governance Context associated with the Proposal.
-      additionalProperties: true
-      required: [tenant_id, governance_domain_id]
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        request_context:
-          type: object
-          additionalProperties: true
-
+      $ref: ../schemas/authority_lineage.json#/$defs/authority_lineage_ref
+    GovernanceContextEnvelope:
+      $ref: ../schemas/governance_context_envelope.json
+    GovernanceConfiguration:
+      $ref: ../schemas/governance_configuration.json
+    GovernanceConfigurationRef:
+      $ref: ../schemas/governance_configuration.json#/$defs/governance_configuration_ref
     ActionRepresentation:
-      type: object
-      description: Canonical Action Representation submitted for governance processing.
-      additionalProperties: true
-
+      $ref: ../schemas/governed_action_proposal.json#/$defs/action_representation
+    GovernedActionProposal:
+      $ref: ../schemas/governed_action_proposal.json
     ProposalSubmitRequest:
+      $ref: ../schemas/proposal_submit_request.json
+    GovernanceApprovalArtifact:
+      $ref: ../schemas/governance_approval_artifact.json
+    GovernanceApprovalRequest:
       type: object
+      description: Canonical request wrapper for submission of one DS-026 Governance Approval 
+        Artifact.
       additionalProperties: false
       required:
-        - tenant_id
-        - governance_domain_id
-        - action_representation
-        - governance_context
-        - provenance
+      - tenant_id
+      - governance_domain_id
+      - governance_approval_artifact
+      - provenance
       properties:
         tenant_id:
-          type: string
+          $ref: ../schemas/common.json#/$defs/tenant_id
         governance_domain_id:
-          type: string
-        policy_ref:
-          $ref: "#/components/schemas/PolicyRef"
-        action_representation:
-          $ref: "#/components/schemas/ActionRepresentation"
-        governance_context:
-          $ref: "#/components/schemas/GovernanceContext"
+          $ref: ../schemas/common.json#/$defs/governance_domain_id
+        governance_approval_artifact:
+          $ref: ../schemas/governance_approval_artifact.json
         provenance:
-          $ref: "#/components/schemas/Provenance"
-
-    HumanReviewRequest:
-      type: object
-      additionalProperties: false
-      required: [tenant_id, governance_domain_id, human_review_artifact, provenance]
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        human_review_artifact:
-          type: object
-          additionalProperties: true
-        provenance:
-          $ref: "#/components/schemas/Provenance"
-
+          $ref: ../schemas/common.json#/$defs/provenance
     CommitBoundaryRequest:
-      type: object
-      additionalProperties: false
-      required:
-        - tenant_id
-        - governance_domain_id
-        - proposal_id
-        - action_id
-        - execution_authorization_ref
-        - execution_context
-        - provenance
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        proposal_id:
-          type: string
-        action_id:
-          type: string
-        execution_authorization_ref:
-          type: string
-          description: Must match the authoritative Execution Authorization for the Action.
-        execution_context:
-          type: object
-          additionalProperties: true
-        provenance:
-          $ref: "#/components/schemas/Provenance"
-
-    StageEvidenceRef:
-      type: object
-      additionalProperties: false
-      required: [stage, ref]
-      properties:
-        stage:
-          $ref: "#/components/schemas/GovernancePipelineStage"
-        ref:
-          type: string
-          description: Opaque Governance Evidence reference for the stage or service.
-
+      $ref: ../schemas/commit_boundary_request.json
     ProposalView:
-      type: object
-      additionalProperties: false
-      required:
-        - tenant_id
-        - governance_domain_id
-        - proposal_id
-        - governance_outcome
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        proposal_id:
-          type: string
-        action_id:
-          type: string
-        qualification_outcome:
-          $ref: "#/components/schemas/QualificationOutcome"
-        governance_outcome:
-          $ref: "#/components/schemas/GovernanceOutcome"
-        execution_authorization_ref:
-          type: string
-          description: Present when Execution Authorization has authorized Commit Boundary processing.
-        required_human_review_roles:
-          type: array
-          items:
-            type: string
-          description: Present when governance outcome is Pending Human Review.
-        canonical_state_ref:
-          $ref: "#/components/schemas/CanonicalStateRef"
-        policy_ref:
-          $ref: "#/components/schemas/PolicyRef"
-        authority_lineage_ref:
-          $ref: "#/components/schemas/AuthorityLineageRef"
-        governance_evidence_refs:
-          type: array
-          items:
-            $ref: "#/components/schemas/StageEvidenceRef"
-
+      $ref: ../schemas/proposal_view.json
     ExecutionAuthorizationView:
-      type: object
-      additionalProperties: false
-      required:
-        - tenant_id
-        - governance_domain_id
-        - proposal_id
-        - action_id
-        - authorization_id
-        - authorization_outcome
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        proposal_id:
-          type: string
-        action_id:
-          type: string
-        authorization_id:
-          type: string
-        authorization_outcome:
-          $ref: "#/components/schemas/ExecutionAuthorizationOutcome"
-        canonical_state_ref:
-          $ref: "#/components/schemas/CanonicalStateRef"
-        authority_lineage_ref:
-          $ref: "#/components/schemas/AuthorityLineageRef"
-        governance_evidence_refs:
-          type: array
-          items:
-            $ref: "#/components/schemas/StageEvidenceRef"
-
+      $ref: ../schemas/execution_authorization_view.json
     CommitBoundaryResult:
-      type: object
-      additionalProperties: false
-      required:
-        - tenant_id
-        - governance_domain_id
-        - proposal_id
-        - action_id
-        - commit_outcome
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        proposal_id:
-          type: string
-        action_id:
-          type: string
-        commit_outcome:
-          $ref: "#/components/schemas/CommitBoundaryOutcome"
-        commit_boundary_ref:
-          type: string
-        governance_evidence_refs:
-          type: array
-          items:
-            $ref: "#/components/schemas/StageEvidenceRef"
-
+      $ref: ../schemas/commit_boundary_result.json
     GovernanceEvidenceView:
-      type: object
-      additionalProperties: true
-      required:
-        - governance_evidence_id
-        - tenant_id
-        - governance_domain_id
-        - associated_object_id
-        - stage
-        - processing_outcome
-      properties:
-        governance_evidence_id:
-          type: string
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        associated_object_id:
-          type: string
-        stage:
-          $ref: "#/components/schemas/GovernancePipelineStage"
-        processing_outcome:
-          type: string
-        proposal_id:
-          type: string
-        action_id:
-          type: string
-        governance_decision:
-          $ref: "#/components/schemas/GovernanceOutcome"
-        execution_authorization_ref:
-          type: string
-        commit_boundary_ref:
-          type: string
-        lifecycle_transition:
-          type: string
-        canonical_state_ref:
-          $ref: "#/components/schemas/CanonicalStateRef"
-        policy_ref:
-          $ref: "#/components/schemas/PolicyRef"
-        authority_lineage_ref:
-          $ref: "#/components/schemas/AuthorityLineageRef"
-        processing_timestamp:
-          type: string
-          format: date-time
-
+      $ref: ../schemas/governance_evidence.json
     PolicyEvaluationModuleArtifact:
-      type: object
-      additionalProperties: true
-      required:
-        - tenant_id
-        - governance_domain_id
-        - artifact_id
-        - artifact_hash
-        - provenance
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        artifact_id:
-          type: string
-        artifact_hash:
-          type: string
-        artifact_uri:
-          type: string
-        artifact_payload:
-          type: string
-          description: Optional encoded artifact payload.
-        provenance:
-          $ref: "#/components/schemas/Provenance"
-
+      $ref: ../schemas/policy_evaluation_module_artifact.json
+    PolicyEvaluationModuleArtifactRef:
+      $ref: 
+        ../schemas/policy_evaluation_module_artifact.json#/$defs/policy_evaluation_module_artifact_ref
     GovernancePolicyArtifact:
-      type: object
-      additionalProperties: true
-      required:
-        - tenant_id
-        - governance_domain_id
-        - artifact_id
-        - policy_ref
-        - provenance
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        artifact_id:
-          type: string
-        policy_ref:
-          $ref: "#/components/schemas/PolicyRef"
-        provenance:
-          $ref: "#/components/schemas/Provenance"
-
+      $ref: ../schemas/policy_artifact.json
+    GovernancePolicyArtifactRef:
+      $ref: ../schemas/policy_artifact.json#/$defs/policy_artifact_ref
+    ConstraintArtifact:
+      $ref: ../schemas/constraint_artifact.json
+    ConstraintArtifactRef:
+      $ref: ../schemas/constraint_artifact.json#/$defs/constraint_artifact_ref
+    ConstraintEvaluation:
+      $ref: ../schemas/constraint_evaluation.json
+    ConstraintEvaluationRef:
+      $ref: ../schemas/constraint_evaluation.json#/$defs/constraint_evaluation_ref
+    InvariantDefinition:
+      $ref: ../schemas/invariant_definition.json
+    InvariantDefinitionRef:
+      $ref: ../schemas/invariant_definition.json#/$defs/invariant_definition_ref
+    InvariantEvaluation:
+      $ref: ../schemas/invariant_evaluation.json
+    InvariantEvaluationRef:
+      $ref: ../schemas/invariant_evaluation.json#/$defs/invariant_evaluation_ref
+    ExceptionArtifact:
+      $ref: ../schemas/exception_artifact.json
+    CompiledGovernanceArtifact:
+      $ref: ../schemas/compiled_governance_artifact.json
+    CompiledGovernanceArtifactRef:
+      $ref: ../schemas/compiled_governance_artifact.json#/$defs/compiled_governance_artifact_ref
     GovernanceArtifactView:
-      type: object
-      additionalProperties: false
-      required:
-        - tenant_id
-        - governance_domain_id
-        - artifact_id
-        - artifact_status
-      properties:
-        tenant_id:
-          type: string
-        governance_domain_id:
-          type: string
-        artifact_id:
-          type: string
-        artifact_status:
-          $ref: "#/components/schemas/GovernanceArtifactStatus"
-        governance_evidence_refs:
-          type: array
-          items:
-            $ref: "#/components/schemas/StageEvidenceRef"
+      $ref: ../schemas/governance_artifact_view.json
+    CanonicalState:
+      $ref: ../schemas/canonical_state.json
+    StateQualificationResult:
+      $ref: ../schemas/state_qualification_result.json
+    StateQualificationResultRef:
+      $ref: ../schemas/state_qualification_result.json#/$defs/state_qualification_result_ref
+    DelegationArtifact:
+      $ref: ../schemas/delegation_artifact.json
+    DelegationArtifactRef:
+      $ref: ../schemas/delegation_artifact.json#/$defs/delegation_artifact_ref
+    GovernanceReceipt:
+      $ref: ../schemas/governance_receipt.json
+    GovernanceReceiptRef:
+      $ref: ../schemas/governance_receipt.json#/$defs/governance_receipt_ref
+    RefusalRecord:
+      $ref: ../schemas/refusal_record.json
+    RefusalRecordRef:
+      $ref: ../schemas/refusal_record.json#/$defs/refusal_record_ref
+    EvidenceQualificationResult:
+      $ref: ../schemas/evidence_qualification_result.json
+    EvidenceQualificationResultRef:
+      $ref: ../schemas/evidence_qualification_result.json#/$defs/evidence_qualification_result_ref
+    QualifiedEvidenceRef:
+      $ref: ../schemas/evidence_qualification_result.json#/$defs/qualified_evidence_ref
+    AuthorityRederivationResult:
+      $ref: ../schemas/authority_rederivation_result.json
+    AuthorityRederivationResultRef:
+      $ref: ../schemas/authority_rederivation_result.json#/$defs/authority_rederivation_result_ref
+    BindSet:
+      $ref: ../schemas/bind_set.json
+    BindSetRef:
+      $ref: ../schemas/bind_set.json#/$defs/bind_set_ref
+    GovernanceDependencyGraph:
+      $ref: ../schemas/governance_dependency_graph.json
+    GovernanceDependencyGraphRef:
+      $ref: ../schemas/governance_dependency_graph.json#/$defs/governance_dependency_graph_ref
+    ResultingStateValidationResult:
+      $ref: ../schemas/resulting_state_validation_result.json
+    ResultingStateValidationResultRef:
+      $ref: 
+        ../schemas/resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref
+    DeterministicAdjudicationResult:
+      $ref: ../schemas/deterministic_adjudication_result.json
+    DeterministicAdjudicationResultRef:
+      $ref: 
+        ../schemas/deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref
+    GovernanceBindingValidationResult:
+      $ref: ../schemas/governance_binding_validation_result.json
+    GovernanceBindingValidationResultRef:
+      $ref: 
+        ../schemas/governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref
+    EnforcementContext:
+      $ref: ../schemas/enforcement_context.json
+    EnforcementContextRef:
+      $ref: ../schemas/enforcement_context.json#/$defs/enforcement_context_ref
+    EnforcementResult:
+      $ref: ../schemas/enforcement_context.json#/$defs/enforcement_result
+    ProposalViewRef:
+      $ref: ../schemas/proposal_view.json#/$defs/proposal_view_ref
+    GovernanceDecisionResult:
+      $ref: ../schemas/governance_decision_result.json
+    GovernanceDecisionResultRef:
+      $ref: ../schemas/governance_decision_result.json#/$defs/governance_decision_result_ref
+    ExecutionAuthorizationViewRef:
+      $ref: ../schemas/execution_authorization_view.json#/$defs/execution_authorization_view_ref
+    CommitBoundaryRequestRef:
+      $ref: ../schemas/commit_boundary_request.json#/$defs/commit_boundary_request_ref
+    CommitBoundaryResultRef:
+      $ref: ../schemas/commit_boundary_result.json#/$defs/commit_boundary_result_ref
+    GovernanceEvidence:
+      $ref: ../schemas/governance_evidence.json
+    GovernanceEvidenceRef:
+      $ref: ../schemas/governance_evidence.json#/$defs/governance_evidence_ref
+    ControlledGovernanceActivation:
+      $ref: ../schemas/controlled_governance_activation.json
+    ControlledGovernanceActivationRef:
+      $ref: 
+        ../schemas/controlled_governance_activation.json#/$defs/controlled_governance_activation_ref
+    ExceptionArtifactRef:
+      $ref: ../schemas/exception_artifact.json#/$defs/exception_artifact_ref
+    GovernanceLifecycleRecord:
+      $ref: ../schemas/governance_lifecycle_record.json
+    GovernanceLifecycleRecordRef:
+      $ref: ../schemas/governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref
+    LifecycleStateRef:
+      $ref: ../schemas/governance_lifecycle_record.json#/$defs/lifecycle_state_ref
+    LifecycleTransitionRef:
+      $ref: ../schemas/governance_lifecycle_record.json#/$defs/lifecycle_transition_ref
+    ContinuationIntegrityResult:
+      $ref: ../schemas/continuation_integrity_result.json
+    ContinuationIntegrityResultRef:
+      $ref: ../schemas/continuation_integrity_result.json#/$defs/continuation_integrity_result_ref
+    GovernanceLedgerEvent:
+      $ref: ../schemas/governance_ledger_event.json
+    GovernanceLedgerEventRef:
+      $ref: ../schemas/governance_ledger_event.json#/$defs/governance_ledger_event_ref
+    GovernanceLedgerPosition:
+      $ref: ../schemas/governance_ledger_event.json#/$defs/ledger_position
+    RegistryDocument:
+      $ref: ../schemas/registry_document.schema.json
+    RegistryDocumentRef:
+      $ref: ../schemas/registry_document.schema.json#/$defs/registry_document_ref
+x-agcp-interface-id: IF-001
+x-agcp-interface-version: v2
+x-agcp-specification-release: v2.0.0
+x-agcp-path-namespace: /agcp/v2
+x-agcp-v1-compatibility: false

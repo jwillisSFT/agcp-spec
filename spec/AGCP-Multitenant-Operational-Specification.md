@@ -58,7 +58,7 @@ Each tenant SHALL be uniquely identified by `tenant_id`.
 
 -   Governance artifacts may be managed
 -   Proposals may be submitted
--   Human Review may occur
+-   Governed human adjudication and Governance Approval may occur
 -   Execution Authorization and Commit Boundary processing are permitted
 
 ### SUSPENDED
@@ -89,7 +89,7 @@ Every governance artifact SHALL be tenant-scoped, including:
 -   Constraint Artifact
 -   Invariant Definition
 -   Exception Artifact
--   Human Review Artifact
+-   Governance Approval Artifact
 -   Execution Authorization
 -   Commit Boundary Result
 -   Governance Evidence

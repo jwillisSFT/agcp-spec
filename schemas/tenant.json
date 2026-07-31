@@ -1,11 +1,1042 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/tenant.json",
-  "title": "AGCP Tenant",
-  "description": "Tenant definition for AGCP governance. Specification versioning is managed by repository releases and is not embedded in this schema.",
+  "$id": "https://agcp.ai/schemas/tenant.json",
+  "title": "AGCP Tenant Governance Record",
+  "description": "Canonical, attributable, versioned, integrity-protected Tenant governance record. DS-004 records the authoritative Tenant operational state and state version, append-only state history and transition basis, active and historical Governance Configuration versions, Tenant Governance Evidence, explicit Tenant and Governance Domain Isolation controls, registry bindings, and complete record integrity. It does not itself establish authority at commitment, authorize execution, or override Canonical State.",
+  "$comment": "DS-004 implements the serialized Tenant and Governance Domain Isolation record required by Core Sections 7.4 and 11.1 through 11.7. JSON Schema validates structural and state-specific consistency. Implementations must additionally verify cross-record equality, ordered history continuity, current-state and current-configuration correspondence, ledger existence, signature validity, evidence availability, and effective isolation in the deployed enforcement scope.",
+  "x-agcp-ds-id": "DS-004",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Tenant Governance State, Configuration History, Evidence, and Isolation Record",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-202",
+      "ARM-204",
+      "ARM-305",
+      "ARM-401",
+      "ARM-406",
+      "ARM-703",
+      "ARM-704",
+      "ARM-706",
+      "ARM-801"
+    ],
+    "core_sections": [
+      "5.5",
+      "7.4",
+      "10.5",
+      "10.8A",
+      "10.9",
+      "11.1",
+      "11.2",
+      "11.3",
+      "11.4",
+      "11.5",
+      "11.6",
+      "11.7"
+    ],
+    "normative_statements": [
+      "NS-7.4-03",
+      "NS-10.5-01",
+      "NS-10.8A-01",
+      "NS-10.9-02",
+      "NS-11.1-01",
+      "NS-11.1-02",
+      "NS-11.2-01",
+      "NS-11.2-02",
+      "NS-11.3-01",
+      "NS-11.3-02",
+      "NS-11.4-01",
+      "NS-11.4-02",
+      "NS-11.5-01",
+      "NS-11.5-02",
+      "NS-11.5-03",
+      "NS-11.6-03",
+      "NS-11.6-04",
+      "NS-11.7-01",
+      "NS-11.7-02",
+      "NS-11.7-03"
+    ],
+    "conformance_requirements": [
+      "CR-006",
+      "CR-024",
+      "CR-025",
+      "CR-026",
+      "CR-027",
+      "CR-028",
+      "CR-029",
+      "CR-030"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
+  "$defs": {
+    "tenant_record_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^TENANT-RECORD-[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "description": "Stable identity for the versioned Tenant governance record."
+    },
+    "tenant_state": {
+      "type": "string",
+      "enum": [
+        "PROVISIONED",
+        "ACTIVE",
+        "INACTIVE",
+        "SUSPENDED",
+        "DECOMMISSIONED"
+      ],
+      "description": "Authoritative Tenant operational state. INACTIVE is distinct from SUSPENDED and DECOMMISSIONED."
+    },
+    "operational_eligibility": {
+      "type": "string",
+      "enum": [
+        "ELIGIBLE",
+        "INELIGIBLE"
+      ],
+      "description": "Whether the Tenant is operationally eligible for governance authorization and commitment. Only ACTIVE may be ELIGIBLE."
+    },
+    "state_transition_kind": {
+      "type": "string",
+      "enum": [
+        "INITIAL_PROVISIONING",
+        "ACTIVATION",
+        "DEACTIVATION",
+        "SUSPENSION",
+        "REACTIVATION",
+        "DECOMMISSIONING",
+        "GOVERNED_RECOVERY",
+        "GOVERNED_CORRECTION"
+      ]
+    },
+    "transition_basis_type": {
+      "type": "string",
+      "enum": [
+        "PROVISIONING_AUTHORITY",
+        "GOVERNANCE_DECISION",
+        "GOVERNANCE_ADMINISTRATION",
+        "POLICY_OR_CONFIGURATION_CHANGE",
+        "SECURITY_OR_ISOLATION_EVENT",
+        "RECOVERY_DECISION",
+        "DECOMMISSIONING_AUTHORITY",
+        "GOVERNED_CORRECTION"
+      ]
+    },
+    "integrity_bound_artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_type": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_DECISION",
+            "GOVERNANCE_APPROVAL",
+            "POLICY",
+            "GOVERNANCE_CONFIGURATION",
+            "CONTROLLED_ACTIVATION",
+            "SECURITY_EVENT",
+            "ISOLATION_VALIDATION",
+            "ADMINISTRATIVE_GOVERNANCE_RECORD",
+            "OTHER_GOVERNANCE_ARTIFACT"
+          ]
+        },
+        "artifact_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "artifact_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "artifact_type",
+        "artifact_id",
+        "artifact_digest"
+      ]
+    },
+    "state_transition_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "basis_type": {
+          "$ref": "#/$defs/transition_basis_type"
+        },
+        "reason_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Z][A-Z0-9_:-]*$"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "source_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/integrity_bound_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "approval_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "applicable_policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "transition_authorized": {
+          "const": true
+        },
+        "tenant_domain_binding_verified": {
+          "const": true
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "basis_type",
+        "reason_code",
+        "rationale",
+        "source_artifact_refs",
+        "transition_authorized",
+        "tenant_domain_binding_verified",
+        "basis_digest"
+      ]
+    },
+    "tenant_state_transition_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transition_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^TENANT-STATE-TRANSITION-[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "resulting_state": {
+          "$ref": "#/$defs/tenant_state"
+        },
+        "resulting_state_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "transition_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "effective_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "transition_id",
+        "resulting_state",
+        "resulting_state_version",
+        "transition_digest",
+        "effective_at"
+      ]
+    },
+    "tenant_state_history_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transition_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^TENANT-STATE-TRANSITION-[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "sequence": {
+          "$ref": "common.json#/$defs/sequence_number"
+        },
+        "transition_kind": {
+          "$ref": "#/$defs/state_transition_kind"
+        },
+        "prior_state": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/tenant_state"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prior_state_version": {
+          "oneOf": [
+            {
+              "$ref": "common.json#/$defs/version_string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resulting_state": {
+          "$ref": "#/$defs/tenant_state"
+        },
+        "resulting_state_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "transition_basis": {
+          "$ref": "#/$defs/state_transition_basis"
+        },
+        "effective_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "recorded_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "ledger_event_ref": {
+          "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "predecessor_transition_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "transition_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "transition_id",
+        "sequence",
+        "transition_kind",
+        "prior_state",
+        "prior_state_version",
+        "resulting_state",
+        "resulting_state_version",
+        "transition_basis",
+        "effective_at",
+        "recorded_at",
+        "ledger_event_ref",
+        "governance_evidence_refs",
+        "attribution",
+        "transition_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sequence": {
+                "const": 0
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          },
+          "then": {
+            "properties": {
+              "prior_state": {
+                "type": "null"
+              },
+              "prior_state_version": {
+                "type": "null"
+              }
+            },
+            "not": {
+              "required": [
+                "predecessor_transition_digest"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sequence": {
+                "minimum": 1
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          },
+          "then": {
+            "properties": {
+              "prior_state": {
+                "$ref": "#/$defs/tenant_state"
+              },
+              "prior_state_version": {
+                "$ref": "common.json#/$defs/version_string"
+              }
+            },
+            "required": [
+              "predecessor_transition_digest"
+            ]
+          }
+        }
+      ]
+    },
+    "history_integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "append_only": {
+          "const": true
+        },
+        "in_place_rewrite_prohibited": {
+          "const": true
+        },
+        "sequence_continuity_verified": {
+          "const": true
+        },
+        "predecessor_chain_verified": {
+          "const": true
+        },
+        "current_record_matches_latest_history_entry": {
+          "const": true
+        },
+        "history_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "append_only",
+        "in_place_rewrite_prohibited",
+        "sequence_continuity_verified",
+        "predecessor_chain_verified",
+        "current_record_matches_latest_history_entry",
+        "history_digest",
+        "verified_at"
+      ]
+    },
+    "configuration_history_status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUPERSEDED",
+        "RETIRED",
+        "ROLLED_BACK",
+        "ACTIVATION_FAILED"
+      ]
+    },
+    "configuration_version_history_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "history_entry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^TENANT-CONFIG-HISTORY-[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "governance_configuration_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "configuration_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "history_status": {
+          "$ref": "#/$defs/configuration_history_status"
+        },
+        "configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "entry_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "history_entry_id",
+        "governance_configuration_id",
+        "configuration_version",
+        "history_status",
+        "configuration_digest",
+        "entry_digest"
+      ]
+    },
+    "configuration_version_history_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "history_entry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^TENANT-CONFIG-HISTORY-[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "sequence": {
+          "$ref": "common.json#/$defs/sequence_number"
+        },
+        "governance_configuration_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "configuration_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "history_status": {
+          "$ref": "#/$defs/configuration_history_status"
+        },
+        "controlled_activation_ref": {
+          "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+        },
+        "effective_from": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "effective_until": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "ledger_event_ref": {
+          "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "predecessor_entry_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "entry_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "history_entry_id",
+        "sequence",
+        "governance_configuration_id",
+        "configuration_version",
+        "configuration_digest",
+        "governance_version_ref",
+        "history_status",
+        "controlled_activation_ref",
+        "effective_from",
+        "ledger_event_ref",
+        "governance_evidence_refs",
+        "entry_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sequence": {
+                "const": 0
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "predecessor_entry_digest"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sequence": {
+                "minimum": 1
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          },
+          "then": {
+            "required": [
+              "predecessor_entry_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "history_status": {
+                "const": "ACTIVE"
+              }
+            },
+            "required": [
+              "history_status"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "effective_until"
+              ]
+            },
+            "properties": {
+              "controlled_activation_ref": {
+                "allOf": [
+                  {
+                    "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "activation_status": {
+                        "const": "ACTIVATED"
+                      }
+                    },
+                    "required": [
+                      "activation_status"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "history_status": {
+                "enum": [
+                  "SUPERSEDED",
+                  "RETIRED",
+                  "ROLLED_BACK"
+                ]
+              }
+            },
+            "required": [
+              "history_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "effective_until"
+            ]
+          }
+        }
+      ]
+    },
+    "cross_domain_relationship_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "relationship_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "counterparty_tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "counterparty_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "permitted_interaction_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "VISIBILITY",
+              "APPROVAL",
+              "POLICY_REFERENCE",
+              "EVIDENCE_REFERENCE",
+              "AUTHORITY_DELEGATION",
+              "COMPOSITE_GOVERNANCE",
+              "LEDGER_REFERENCE"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "validation_status": {
+          "const": "GOVERNED_AND_VALIDATED"
+        },
+        "applicable_policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "authority_lineage_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        },
+        "validity": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "relationship_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "relationship_id",
+        "counterparty_tenant_id",
+        "counterparty_governance_domain_id",
+        "permitted_interaction_types",
+        "validation_status",
+        "applicable_policy_refs",
+        "validity",
+        "governance_evidence_refs",
+        "relationship_digest"
+      ]
+    },
+    "tenant_isolation_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "isolation_boundary_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "isolation_status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "FAILED_CLOSED"
+          ]
+        },
+        "tenant_isolation_enforced": {
+          "const": true
+        },
+        "governance_domain_isolation_enforced": {
+          "const": true
+        },
+        "governance_configuration_isolated": {
+          "const": true
+        },
+        "canonical_state_isolated": {
+          "const": true
+        },
+        "authority_lineage_isolated": {
+          "const": true
+        },
+        "governance_evidence_isolated": {
+          "const": true
+        },
+        "ledger_access_isolated": {
+          "const": true
+        },
+        "policy_resolution_isolated": {
+          "const": true
+        },
+        "cross_tenant_visibility_prohibited": {
+          "const": true
+        },
+        "cross_tenant_authority_propagation_prohibited": {
+          "const": true
+        },
+        "cross_tenant_execution_prohibited": {
+          "const": true
+        },
+        "cross_tenant_evidence_commingling_prohibited": {
+          "const": true
+        },
+        "cross_domain_interaction_mode": {
+          "type": "string",
+          "enum": [
+            "PROHIBITED",
+            "GOVERNED_ONLY"
+          ]
+        },
+        "authorized_cross_domain_relationship_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cross_domain_relationship_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "isolation_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "last_verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "isolation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "isolation_boundary_id",
+        "isolation_status",
+        "tenant_isolation_enforced",
+        "governance_domain_isolation_enforced",
+        "governance_configuration_isolated",
+        "canonical_state_isolated",
+        "authority_lineage_isolated",
+        "governance_evidence_isolated",
+        "ledger_access_isolated",
+        "policy_resolution_isolated",
+        "cross_tenant_visibility_prohibited",
+        "cross_tenant_authority_propagation_prohibited",
+        "cross_tenant_execution_prohibited",
+        "cross_tenant_evidence_commingling_prohibited",
+        "cross_domain_interaction_mode",
+        "isolation_evidence_refs",
+        "last_verified_at",
+        "isolation_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "cross_domain_interaction_mode": {
+                "const": "GOVERNED_ONLY"
+              }
+            },
+            "required": [
+              "cross_domain_interaction_mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "authorized_cross_domain_relationship_refs"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "cross_domain_interaction_mode": {
+                "const": "PROHIBITED"
+              }
+            },
+            "required": [
+              "cross_domain_interaction_mode"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "authorized_cross_domain_relationship_refs"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "tenant_replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tenant_record_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "state_history_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "configuration_history_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "isolation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "deterministic_reconstruction_supported": {
+          "const": true
+        },
+        "ledger_ordering_is_authoritative": {
+          "const": true
+        },
+        "timestamp_or_storage_order_not_authoritative": {
+          "const": true
+        },
+        "replay_reconstructs_governance_state_not_operational_side_effects": {
+          "const": true
+        }
+      },
+      "required": [
+        "tenant_record_digest",
+        "state_history_digest",
+        "configuration_history_digest",
+        "isolation_digest",
+        "governance_evidence_set_digest",
+        "deterministic_reconstruction_supported",
+        "ledger_ordering_is_authoritative",
+        "timestamp_or_storage_order_not_authoritative",
+        "replay_reconstructs_governance_state_not_operational_side_effects"
+      ]
+    },
+    "tenant_semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tenant_state_is_authoritative_and_versioned": {
+          "const": true
+        },
+        "state_history_is_attributable_append_only_and_replayable": {
+          "const": true
+        },
+        "current_state_matches_current_state_transition_reference": {
+          "const": true
+        },
+        "configuration_history_preserves_all_governance_significant_versions": {
+          "const": true
+        },
+        "active_configuration_matches_current_configuration_history_reference": {
+          "const": true
+        },
+        "tenant_and_governance_domain_binding_is_preserved": {
+          "const": true
+        },
+        "tenant_governance_evidence_is_logically_isolated": {
+          "const": true
+        },
+        "cross_domain_interaction_requires_explicit_governed_relationship": {
+          "const": true
+        },
+        "inactive_suspended_or_decommissioned_tenant_is_not_operationally_eligible": {
+          "const": true
+        },
+        "tenant_record_does_not_establish_authority_at_commitment": {
+          "const": true
+        },
+        "tenant_record_does_not_authorize_execution": {
+          "const": true
+        },
+        "tenant_record_does_not_override_canonical_state": {
+          "const": true
+        },
+        "extensions_cannot_alter_canonical_governance_meaning": {
+          "const": true
+        }
+      },
+      "required": [
+        "tenant_state_is_authoritative_and_versioned",
+        "state_history_is_attributable_append_only_and_replayable",
+        "current_state_matches_current_state_transition_reference",
+        "configuration_history_preserves_all_governance_significant_versions",
+        "active_configuration_matches_current_configuration_history_reference",
+        "tenant_and_governance_domain_binding_is_preserved",
+        "tenant_governance_evidence_is_logically_isolated",
+        "cross_domain_interaction_requires_explicit_governed_relationship",
+        "inactive_suspended_or_decommissioned_tenant_is_not_operationally_eligible",
+        "tenant_record_does_not_establish_authority_at_commitment",
+        "tenant_record_does_not_authorize_execution",
+        "tenant_record_does_not_override_canonical_state",
+        "extensions_cannot_alter_canonical_governance_meaning"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Namespaced non-normative implementation extensions. Extensions cannot alter Tenant state, isolation, evidence, configuration, integrity, authority, or execution semantics.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9]*(\\.[a-z0-9][a-z0-9-]*)+$"
+      },
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "array",
+          "object",
+          "null"
+        ]
+      },
+      "maxProperties": 64
+    },
+    "tenant_record_ref": {
+      "type": "object",
+      "description": "Integrity-bound reference to a canonical DS-004 Tenant governance record.",
+      "additionalProperties": false,
+      "properties": {
+        "tenant_record_id": {
+          "$ref": "#/$defs/tenant_record_id"
+        },
+        "tenant_record_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "state": {
+          "$ref": "#/$defs/tenant_state"
+        },
+        "tenant_state_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "record_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "record_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "last_updated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "tenant_record_id",
+        "tenant_record_version",
+        "tenant_id",
+        "governance_domain_id",
+        "state",
+        "tenant_state_version",
+        "record_digest",
+        "last_updated_at"
+      ]
+    }
+  },
   "properties": {
+    "tenant_record_id": {
+      "$ref": "#/$defs/tenant_record_id"
+    },
+    "tenant_record_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
     },
@@ -13,7 +1044,114 @@
       "$ref": "common.json#/$defs/governance_domain_id"
     },
     "state": {
-      "$ref": "common.json#/$defs/tenant_state_enum"
+      "$ref": "#/$defs/tenant_state"
+    },
+    "tenant_state_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "operational_eligibility": {
+      "$ref": "#/$defs/operational_eligibility"
+    },
+    "current_state_transition_ref": {
+      "$ref": "#/$defs/tenant_state_transition_ref"
+    },
+    "state_history": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tenant_state_history_entry"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "state_history_integrity": {
+      "$ref": "#/$defs/history_integrity"
+    },
+    "governance_configuration": {
+      "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+    },
+    "current_configuration_history_ref": {
+      "$ref": "#/$defs/configuration_version_history_ref"
+    },
+    "configuration_version_history": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/configuration_version_history_entry"
+      },
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "configuration_history_integrity": {
+      "$ref": "#/$defs/history_integrity"
+    },
+    "default_policy_registry": {
+      "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+    },
+    "default_constraint_registry": {
+      "allOf": [
+        {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "registry_kind": {
+              "const": "CONSTRAINT_TYPE"
+            }
+          },
+          "required": [
+            "registry_kind"
+          ]
+        }
+      ]
+    },
+    "default_invariant_registry": {
+      "allOf": [
+        {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "registry_kind": {
+              "const": "INVARIANT_TYPE"
+            }
+          },
+          "required": [
+            "registry_kind"
+          ]
+        }
+      ]
+    },
+    "rejection_code_registry": {
+      "allOf": [
+        {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "registry_kind": {
+              "const": "REJECTION_CODE"
+            }
+          },
+          "required": [
+            "registry_kind"
+          ]
+        }
+      ]
+    },
+    "isolation_profile": {
+      "$ref": "#/$defs/tenant_isolation_profile"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 1024,
+      "uniqueItems": true
     },
     "created_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
@@ -21,27 +1159,388 @@
     "last_updated_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "governance_configuration": {
-      "$ref": "common.json#/$defs/governance_configuration_ref"
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
     },
-    "default_policy_registry": {
-      "$ref": "common.json#/$defs/registry_ref"
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
     },
-    "default_constraint_registry": {
-      "$ref": "common.json#/$defs/registry_ref"
+    "record_digest": {
+      "$ref": "common.json#/$defs/content_digest"
     },
-    "default_invariant_registry": {
-      "$ref": "common.json#/$defs/registry_ref"
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
     },
-    "metadata": {
-      "type": "object",
-      "description": "Implementation-defined tenant metadata.",
-      "additionalProperties": true
+    "record_uri": {
+      "$ref": "common.json#/$defs/uri"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/tenant_replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/tenant_semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
     }
   },
   "required": [
+    "tenant_record_id",
+    "tenant_record_version",
     "tenant_id",
+    "governance_domain_id",
     "state",
-    "created_at"
+    "tenant_state_version",
+    "operational_eligibility",
+    "current_state_transition_ref",
+    "state_history",
+    "state_history_integrity",
+    "configuration_version_history",
+    "configuration_history_integrity",
+    "isolation_profile",
+    "governance_evidence_refs",
+    "created_at",
+    "last_updated_at",
+    "attribution",
+    "provenance",
+    "record_digest",
+    "integrity_signature",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "PROVISIONED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operational_eligibility": {
+            "const": "INELIGIBLE"
+          },
+          "current_state_transition_ref": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/tenant_state_transition_ref"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "resulting_state": {
+                    "const": "PROVISIONED"
+                  }
+                },
+                "required": [
+                  "resulting_state"
+                ]
+              }
+            ]
+          },
+          "state_history": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "resulting_state": {
+                  "const": "PROVISIONED"
+                }
+              },
+              "required": [
+                "resulting_state"
+              ]
+            },
+            "minContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "ACTIVE"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operational_eligibility": {
+            "const": "ELIGIBLE"
+          },
+          "current_state_transition_ref": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/tenant_state_transition_ref"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "resulting_state": {
+                    "const": "ACTIVE"
+                  }
+                },
+                "required": [
+                  "resulting_state"
+                ]
+              }
+            ]
+          },
+          "state_history": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "resulting_state": {
+                  "const": "ACTIVE"
+                }
+              },
+              "required": [
+                "resulting_state"
+              ]
+            },
+            "minContains": 1
+          },
+          "isolation_profile": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/tenant_isolation_profile"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "isolation_status": {
+                    "const": "VERIFIED"
+                  }
+                },
+                "required": [
+                  "isolation_status"
+                ]
+              }
+            ]
+          },
+          "configuration_version_history": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "history_status": {
+                  "const": "ACTIVE"
+                }
+              },
+              "required": [
+                "history_status"
+              ]
+            },
+            "minContains": 1
+          }
+        },
+        "required": [
+          "governance_configuration",
+          "current_configuration_history_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "INACTIVE"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operational_eligibility": {
+            "const": "INELIGIBLE"
+          },
+          "current_state_transition_ref": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/tenant_state_transition_ref"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "resulting_state": {
+                    "const": "INACTIVE"
+                  }
+                },
+                "required": [
+                  "resulting_state"
+                ]
+              }
+            ]
+          },
+          "state_history": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "resulting_state": {
+                  "const": "INACTIVE"
+                }
+              },
+              "required": [
+                "resulting_state"
+              ]
+            },
+            "minContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "SUSPENDED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operational_eligibility": {
+            "const": "INELIGIBLE"
+          },
+          "current_state_transition_ref": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/tenant_state_transition_ref"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "resulting_state": {
+                    "const": "SUSPENDED"
+                  }
+                },
+                "required": [
+                  "resulting_state"
+                ]
+              }
+            ]
+          },
+          "state_history": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "resulting_state": {
+                  "const": "SUSPENDED"
+                }
+              },
+              "required": [
+                "resulting_state"
+              ]
+            },
+            "minContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "DECOMMISSIONED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operational_eligibility": {
+            "const": "INELIGIBLE"
+          },
+          "current_state_transition_ref": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/tenant_state_transition_ref"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "resulting_state": {
+                    "const": "DECOMMISSIONED"
+                  }
+                },
+                "required": [
+                  "resulting_state"
+                ]
+              }
+            ]
+          },
+          "state_history": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "resulting_state": {
+                  "const": "DECOMMISSIONED"
+                }
+              },
+              "required": [
+                "resulting_state"
+              ]
+            },
+            "minContains": 1
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "governance_configuration"
+              ]
+            },
+            {
+              "required": [
+                "current_configuration_history_ref"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "governance_configuration"
+        ]
+      },
+      "then": {
+        "required": [
+          "current_configuration_history_ref"
+        ],
+        "properties": {
+          "configuration_version_history": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "history_status": {
+                  "const": "ACTIVE"
+                }
+              },
+              "required": [
+                "history_status"
+              ]
+            },
+            "minContains": 1
+          }
+        }
+      }
+    }
   ]
 }

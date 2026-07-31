@@ -1,77 +1,1309 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/meta_response.json",
-  "title": "AGCP Metadata Response",
-  "description": "Metadata response for AGCP HTTP interface capability discovery. Specification versioning is managed by repository release tags; this schema does not embed supported_spec_versions.",
+  "$id": "https://agcp.ai/schemas/meta_response.json",
+  "title": "AGCP Implementation Metadata Response",
+  "description": "Canonical, attributable, integrity-protected implementation-capability and release-advertisement response for AGCP interface discovery. DS-003 identifies the implementation release, supported AGCP specification releases, complete integrity-bound schema set, implementation profile, supported registry releases, claimed conformance levels and scope, supported governance capabilities, and implemented HTTP contract without expanding normative behavior, creating authority, or implying conformance beyond demonstrated evidence.",
+  "$comment": "DS-003 supports implementation and conformance discovery under Core Sections 17.1 through 17.10. JSON Schema validates structural completeness and claim-specific evidence requirements. Implementations must additionally verify that advertised releases, schema and registry digests, profile scope, capability support, conformance evidence, and interface behavior match the deployed implementation and controlled publication artifacts.",
+  "x-agcp-ds-id": "DS-003",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Interface Discovery — Implementation Release, Schema Set, Profile, Registry, Conformance, and Capability Advertisement",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-701",
+      "ARM-707",
+      "ARM-708"
+    ],
+    "core_sections": [
+      "3.6",
+      "3.7",
+      "17.1",
+      "17.2",
+      "17.3",
+      "17.4",
+      "17.5",
+      "17.6",
+      "17.7",
+      "17.8",
+      "17.9",
+      "17.10"
+    ],
+    "normative_statements": [
+      "NS-3.6-01",
+      "NS-3.6-02",
+      "NS-3.7-01",
+      "NS-17.1-01",
+      "NS-17.2-02",
+      "NS-17.2-03",
+      "NS-17.3-01",
+      "NS-17.4-01",
+      "NS-17.4-02",
+      "NS-17.5-01",
+      "NS-17.5-02",
+      "NS-17.5-03",
+      "NS-17.6-01",
+      "NS-17.6-02",
+      "NS-17.6-03",
+      "NS-17.7-01",
+      "NS-17.7-02",
+      "NS-17.7-03",
+      "NS-17.8-01",
+      "NS-17.8-02",
+      "NS-17.8-03",
+      "NS-17.9-01",
+      "NS-17.9-02",
+      "NS-17.10-01",
+      "NS-17.10-02"
+    ],
+    "conformance_requirements": [
+      "CR-089",
+      "CR-090"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
-  "properties": {
-    "implementation_name": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256
-    },
-    "implementation_release": {
+  "$defs": {
+    "metadata_response_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "description": "Implementation release identifier. This is not the AGCP specification version."
+      "pattern": "^META-[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "description": "Stable identity for one generated metadata response."
     },
-    "http_contract": {
+    "conformance_level": {
+      "type": "string",
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    "support_status": {
+      "type": "string",
+      "enum": [
+        "CURRENT",
+        "SUPPORTED",
+        "DEPRECATED",
+        "PROFILE_CONDITIONAL"
+      ]
+    },
+    "claim_status": {
+      "type": "string",
+      "enum": [
+        "CLAIMED",
+        "PARTIALLY_VERIFIED",
+        "VERIFIED",
+        "NOT_CLAIMED"
+      ]
+    },
+    "capability_support_status": {
+      "type": "string",
+      "enum": [
+        "IMPLEMENTED",
+        "VERIFIED",
+        "PROFILE_CONDITIONAL"
+      ]
+    },
+    "publication_status": {
+      "type": "string",
+      "enum": [
+        "WORKING_DRAFT",
+        "RELEASE_CANDIDATE",
+        "PUBLISHED",
+        "SUPERSEDED",
+        "RETIRED"
+      ]
+    },
+    "implementation_status": {
+      "type": "string",
+      "enum": [
+        "OPERATIONAL",
+        "DEGRADED",
+        "MAINTENANCE",
+        "NON_OPERATIONAL"
+      ]
+    },
+    "capability_id": {
+      "type": "string",
+      "enum": [
+        "PROPOSAL_QUALIFICATION",
+        "GOVERNANCE_DECISION_FUNCTION",
+        "EXECUTION_AUTHORIZATION",
+        "CONTINUATION_INTEGRITY",
+        "GOVERNANCE_REALIZATION",
+        "COMMIT_BOUNDARY",
+        "STATE_QUALIFICATION",
+        "EVIDENCE_QUALIFICATION",
+        "AUTHORITY_RE_DERIVATION",
+        "GOVERNANCE_BINDING_VALIDATION",
+        "RESULTING_STATE_VALIDATION",
+        "ADMISSIBLE_SET_DETERMINATION",
+        "DETERMINISTIC_ADJUDICATION",
+        "COMPOSITE_PROPOSAL_GOVERNANCE",
+        "GOVERNANCE_EVIDENCE",
+        "GOVERNANCE_LIFECYCLE",
+        "GOVERNANCE_LEDGER",
+        "TENANT_DOMAIN_ISOLATION",
+        "CROSS_DOMAIN_AUTHORITY_ISOLATION",
+        "GOVERNANCE_COMPILATION",
+        "CONSTITUTIONAL_VALIDATION",
+        "GOVERNANCE_SELF_PROTECTION",
+        "GOVERNANCE_OMISSION_ANALYSIS",
+        "CONTROLLED_GOVERNANCE_ACTIVATION",
+        "RISK_BASED_RE_EVALUATION",
+        "NON_BYPASSABLE_ENFORCEMENT",
+        "AUTONOMOUS_COORDINATION"
+      ]
+    },
+    "implementation_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "implementation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "implementation_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "implementation_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "implementation_build_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "implementation_status": {
+          "$ref": "#/$defs/implementation_status"
+        },
+        "deployed_instance_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "maintainer": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "product_uri": {
+          "$ref": "common.json#/$defs/uri"
+        }
+      },
+      "required": [
+        "implementation_id",
+        "implementation_name",
+        "implementation_release",
+        "implementation_build_digest",
+        "implementation_status",
+        "maintainer"
+      ]
+    },
+    "agcp_release_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "release_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^AGCP-[A-Za-z0-9][A-Za-z0-9._+-]*$"
+        },
+        "specification_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "support_status": {
+          "$ref": "#/$defs/support_status"
+        },
+        "publication_status": {
+          "$ref": "#/$defs/publication_status"
+        },
+        "release_manifest_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "release_manifest_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "core_specification_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "core_specification_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "normative_statement_set_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "conformance_requirement_set_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "published_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "release_id",
+        "specification_version",
+        "support_status",
+        "publication_status",
+        "release_manifest_uri",
+        "release_manifest_digest",
+        "core_specification_uri",
+        "core_specification_digest",
+        "normative_statement_set_id",
+        "conformance_requirement_set_id"
+      ]
+    },
+    "schema_release_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ds_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16,
+          "pattern": "^DS-[0-9]{3}$"
+        },
+        "filename": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*\\.json$"
+        },
+        "canonical_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "schema_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "lifecycle_state": {
+          "type": "string",
+          "enum": [
+            "Proposed",
+            "Accepted",
+            "Implemented",
+            "Verified",
+            "Deprecated",
+            "Retired"
+          ]
+        },
+        "content_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "ds_id",
+        "filename",
+        "canonical_uri",
+        "lifecycle_state",
+        "content_digest"
+      ]
+    },
+    "schema_set_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_set_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^DS-SET-[A-Za-z0-9][A-Za-z0-9._+-]*$"
+        },
+        "schema_catalog_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "catalog_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "agcp_specification_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "publication_status": {
+          "$ref": "#/$defs/publication_status"
+        },
+        "catalog_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "catalog_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "schema_manifest_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "schema_manifest_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "schema_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "schema_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "manifest_complete": {
+          "const": true
+        },
+        "schemas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/schema_release_advertisement"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_id",
+        "schema_catalog_id",
+        "catalog_version",
+        "agcp_specification_version",
+        "publication_status",
+        "catalog_uri",
+        "catalog_digest",
+        "schema_manifest_uri",
+        "schema_manifest_digest",
+        "schema_set_digest",
+        "schema_count",
+        "manifest_complete",
+        "schemas"
+      ]
+    },
+    "implementation_profile_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "profile_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profile_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "profile_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "profile_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "lifecycle_state": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "DEPRECATED",
+            "RETIRED"
+          ]
+        },
+        "deployment_constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "interface_mapping_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "mandatory_core_behavior_redefined": {
+          "const": false
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_name",
+        "profile_version",
+        "profile_uri",
+        "profile_digest",
+        "lifecycle_state",
+        "mandatory_core_behavior_redefined"
+      ]
+    },
+    "registry_release_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "registry_ref": {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        },
+        "support_status": {
+          "$ref": "#/$defs/support_status"
+        }
+      },
+      "required": [
+        "registry_ref",
+        "support_status"
+      ]
+    },
+    "companion_specification_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "specification_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "claim_applicability": {
+          "type": "string",
+          "enum": [
+            "APPLICABLE",
+            "NOT_APPLICABLE",
+            "OPTIONAL"
+          ]
+        }
+      },
+      "required": [
+        "specification_id",
+        "title",
+        "version",
+        "artifact_uri",
+        "artifact_digest",
+        "claim_applicability"
+      ]
+    },
+    "conformance_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^CLAIM-[A-Za-z0-9][A-Za-z0-9._:-]*$"
+        },
+        "conformance_level": {
+          "$ref": "#/$defs/conformance_level"
+        },
+        "claim_status": {
+          "$ref": "#/$defs/claim_status"
+        },
+        "implementation_profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "agcp_release_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^AGCP-[A-Za-z0-9][A-Za-z0-9._+-]*$"
+          },
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "claim_scope": {
+          "$ref": "#/$defs/conformance_claim_scope"
+        },
+        "applicable_companion_specifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/companion_specification_ref"
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "conformance_test_suite_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "assessment_status": {
+          "type": "string",
+          "enum": [
+            "NOT_ASSESSED",
+            "ASSESSMENT_PENDING",
+            "ASSESSED",
+            "ASSESSMENT_FAILED"
+          ]
+        },
+        "objective_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "claim_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "claimed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "verification_authority": {
+          "$ref": "common.json#/$defs/principal"
+        }
+      },
+      "required": [
+        "claim_id",
+        "conformance_level",
+        "claim_status",
+        "implementation_profile_id",
+        "agcp_release_ids",
+        "claim_scope",
+        "assessment_status",
+        "claim_digest",
+        "claimed_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "claim_status": {
+                "enum": [
+                  "CLAIMED",
+                  "PARTIALLY_VERIFIED",
+                  "VERIFIED"
+                ]
+              }
+            },
+            "required": [
+              "claim_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "objective_evidence_refs"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "claim_status": {
+                "const": "VERIFIED"
+              }
+            },
+            "required": [
+              "claim_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "assessment_status": {
+                "const": "ASSESSED"
+              }
+            },
+            "required": [
+              "verified_at",
+              "verification_authority",
+              "conformance_test_suite_release"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "claim_status": {
+                "const": "NOT_CLAIMED"
+              }
+            },
+            "required": [
+              "claim_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "assessment_status": {
+                "enum": [
+                  "NOT_ASSESSED",
+                  "ASSESSMENT_FAILED"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "supported_capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "capability_id": {
+          "$ref": "#/$defs/capability_id"
+        },
+        "support_status": {
+          "$ref": "#/$defs/capability_support_status"
+        },
+        "minimum_conformance_level": {
+          "$ref": "#/$defs/conformance_level"
+        },
+        "implementation_profile_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "applicable_ds_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16,
+            "pattern": "^DS-[0-9]{3}$"
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "interface_operation_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "objective_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "capability_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "capability_id",
+        "support_status",
+        "minimum_conformance_level",
+        "implementation_profile_ids",
+        "capability_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "support_status": {
+                "const": "VERIFIED"
+              }
+            },
+            "required": [
+              "support_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "objective_evidence_refs"
+            ]
+          }
+        }
+      ]
+    },
+    "http_contract_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "interface_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^IF-[0-9]{3,}$"
+        },
+        "contract_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "openapi_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^3\\.[01](\\.[0-9]+)?$"
+        },
+        "contract_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "contract_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "supported_path_versions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^/agcp/v[0-9]+$"
+          },
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "supported_media_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "transport_semantics_do_not_alter_governance": {
+          "const": true
+        }
+      },
+      "required": [
+        "contract_id",
+        "contract_version",
+        "openapi_version",
+        "contract_uri",
+        "contract_digest",
+        "supported_path_versions",
+        "supported_media_types",
+        "transport_semantics_do_not_alter_governance"
+      ]
+    },
+    "crypto_profile_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "profile_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "profile_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "profile_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_version",
+        "profile_uri",
+        "profile_digest"
+      ]
+    },
+    "metadata_semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported_agcp_releases_explicit": {
+          "const": true
+        },
+        "schema_set_identity_and_integrity_explicit": {
+          "const": true
+        },
+        "registry_releases_integrity_bound": {
+          "const": true
+        },
+        "implementation_profile_explicit": {
+          "const": true
+        },
+        "conformance_claim_scope_explicit": {
+          "const": true
+        },
+        "claimed_capabilities_do_not_exceed_demonstrated_scope": {
+          "const": true
+        },
+        "implementation_profile_does_not_redefine_mandatory_core_behavior": {
+          "const": true
+        },
+        "metadata_does_not_establish_authority_at_commitment": {
+          "const": true
+        },
+        "metadata_does_not_authorize_execution": {
+          "const": true
+        },
+        "metadata_is_not_canonical_state": {
+          "const": true
+        },
+        "extensions_cannot_change_canonical_governance_meaning": {
+          "const": true
+        }
+      },
+      "required": [
+        "supported_agcp_releases_explicit",
+        "schema_set_identity_and_integrity_explicit",
+        "registry_releases_integrity_bound",
+        "implementation_profile_explicit",
+        "conformance_claim_scope_explicit",
+        "claimed_capabilities_do_not_exceed_demonstrated_scope",
+        "implementation_profile_does_not_redefine_mandatory_core_behavior",
+        "metadata_does_not_establish_authority_at_commitment",
+        "metadata_does_not_authorize_execution",
+        "metadata_is_not_canonical_state",
+        "extensions_cannot_change_canonical_governance_meaning"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Namespaced non-normative implementation extensions. Extension content cannot alter canonical AGCP release, schema-set, registry, profile, conformance, capability, authority, or execution semantics.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9]*(\\.[a-z0-9][a-z0-9-]*)+$"
+      },
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "array",
+          "object",
+          "null"
+        ]
+      },
+      "maxProperties": 64
+    },
+    "metadata_response_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metadata_response_id": {
+          "$ref": "#/$defs/metadata_response_id"
+        },
+        "generated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "implementation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "implementation_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "default_agcp_release_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^AGCP-[A-Za-z0-9][A-Za-z0-9._+-]*$"
+        },
+        "schema_set_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^DS-SET-[A-Za-z0-9][A-Za-z0-9._+-]*$"
+        },
+        "response_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "metadata_uri": {
+          "$ref": "common.json#/$defs/uri"
+        }
+      },
+      "required": [
+        "metadata_response_id",
+        "generated_at",
+        "implementation_id",
+        "implementation_release",
+        "default_agcp_release_id",
+        "schema_set_id",
+        "response_digest"
+      ]
+    },
+    "conformance_claim_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope_type": {
+          "type": "string",
+          "enum": [
+            "IMPLEMENTATION",
+            "DEPLOYMENT",
+            "TENANT",
+            "GOVERNANCE_DOMAIN"
+          ]
+        },
+        "implementation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "deployment_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "included_capability_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/capability_id"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "excluded_capability_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/capability_id"
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "scope_type",
+        "implementation_id",
+        "included_capability_ids",
+        "scope_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "DEPLOYMENT"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "deployment_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "TENANT"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "tenant_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "GOVERNANCE_DOMAIN"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "tenant_id",
+              "governance_domain_id"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "metadata_response_id": {
+      "$ref": "#/$defs/metadata_response_id"
+    },
+    "response_type": {
+      "const": "AGCP_IMPLEMENTATION_METADATA"
+    },
+    "generated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "implementation": {
+      "$ref": "#/$defs/implementation_identity"
+    },
+    "supported_agcp_releases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/agcp_release_advertisement"
+      },
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true
+    },
+    "default_agcp_release_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 256,
-      "description": "Identifier or artifact reference for the implemented AGCP HTTP contract."
+      "maxLength": 128,
+      "pattern": "^AGCP-[A-Za-z0-9][A-Za-z0-9._+-]*$"
+    },
+    "schema_set": {
+      "$ref": "#/$defs/schema_set_advertisement"
+    },
+    "implementation_profile": {
+      "$ref": "#/$defs/implementation_profile_advertisement"
+    },
+    "registry_releases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/registry_release_advertisement"
+      },
+      "minItems": 3,
+      "maxItems": 128,
+      "uniqueItems": true
     },
     "supported_conformance_levels": {
       "type": "array",
       "items": {
-        "type": "string",
-        "enum": [
-          "L1",
-          "L2",
-          "L3",
-          "L4"
-        ]
+        "$ref": "#/$defs/conformance_level"
       },
       "minItems": 1,
-      "maxItems": 4,
+      "maxItems": 5,
       "uniqueItems": true
     },
-    "supported_capabilities": {
+    "conformance_claims": {
       "type": "array",
       "items": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 128
+        "$ref": "#/$defs/conformance_claim"
       },
-      "maxItems": 64,
-      "uniqueItems": true,
-      "description": "Implementation-supported AGCP capabilities, such as Proposal Qualification, Governance Decision Function, Execution Authorization, Commit Boundary, Continuation Integrity, Governance Evidence, Governance Self-Protection, or Autonomous Coordination."
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true
+    },
+    "supported_governance_capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/supported_capability"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "http_contract": {
+      "$ref": "#/$defs/http_contract_advertisement"
     },
     "crypto_profiles": {
       "type": "array",
       "items": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 32
-      },
-      "maxItems": 16,
-      "uniqueItems": true
-    },
-    "registry_refs": {
-      "type": "array",
-      "items": {
-        "$ref": "common.json#/$defs/registry_ref"
+        "$ref": "#/$defs/crypto_profile_ref"
       },
       "maxItems": 32,
-      "uniqueItems": true,
-      "description": "Optional references to AGCP registries implemented by this deployment."
+      "uniqueItems": true
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/metadata_semantic_assertions"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "response_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
     }
   },
   "required": [
-    "implementation_name",
+    "metadata_response_id",
+    "response_type",
+    "generated_at",
+    "implementation",
+    "supported_agcp_releases",
+    "default_agcp_release_id",
+    "schema_set",
+    "implementation_profile",
+    "registry_releases",
     "supported_conformance_levels",
-    "supported_capabilities"
+    "conformance_claims",
+    "supported_governance_capabilities",
+    "http_contract",
+    "semantic_assertions",
+    "attribution",
+    "provenance",
+    "response_digest",
+    "integrity_signature"
+  ],
+  "allOf": [
+    {
+      "properties": {
+        "registry_releases": {
+          "contains": {
+            "properties": {
+              "registry_ref": {
+                "properties": {
+                  "registry_kind": {
+                    "const": "CONSTRAINT_TYPE"
+                  }
+                },
+                "required": [
+                  "registry_kind"
+                ]
+              }
+            },
+            "required": [
+              "registry_ref"
+            ]
+          },
+          "minContains": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "registry_releases": {
+          "contains": {
+            "properties": {
+              "registry_ref": {
+                "properties": {
+                  "registry_kind": {
+                    "const": "INVARIANT_TYPE"
+                  }
+                },
+                "required": [
+                  "registry_kind"
+                ]
+              }
+            },
+            "required": [
+              "registry_ref"
+            ]
+          },
+          "minContains": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "registry_releases": {
+          "contains": {
+            "properties": {
+              "registry_ref": {
+                "properties": {
+                  "registry_kind": {
+                    "const": "REJECTION_CODE"
+                  }
+                },
+                "required": [
+                  "registry_kind"
+                ]
+              }
+            },
+            "required": [
+              "registry_ref"
+            ]
+          },
+          "minContains": 1
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "supported_conformance_levels": {
+            "contains": {
+              "const": "L5"
+            }
+          }
+        },
+        "required": [
+          "supported_conformance_levels"
+        ]
+      },
+      "then": {
+        "properties": {
+          "conformance_claims": {
+            "contains": {
+              "properties": {
+                "conformance_level": {
+                  "const": "L5"
+                },
+                "claim_status": {
+                  "enum": [
+                    "CLAIMED",
+                    "PARTIALLY_VERIFIED",
+                    "VERIFIED"
+                  ]
+                }
+              },
+              "required": [
+                "conformance_level",
+                "claim_status"
+              ]
+            },
+            "minContains": 1
+          }
+        }
+      }
+    }
   ]
 }

@@ -1,0 +1,1247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/bind_set.json",
+  "title": "Bind Set",
+  "description": "Canonical, independently identifiable and traceable complete candidate collection of governed sub-transitions evaluated as a coordinated governance unit. A Bind Set preserves parent and sub-transition identity, target, Tenant, governance domain, declared coupling semantics, Governance Dependency Graph binding, aggregate-effect basis, and partial-binding policy. It supplies the complete evaluation context for coordinated binding but does not itself establish authority, authorize execution, determine Partial-Bind Admissibility, or approve an executable subset.",
+  "$comment": "DS-035 is the authoritative Bind Set domain object. Cross-object equality and set-theoretic properties—including correspondence with the parent proposal, complete inclusion of declared sub-transitions, unique identities, exact node-set correspondence with DS-036, candidate-count equality, target and Tenant continuity, and subset membership—require semantic validation because standard JSON Schema cannot compare arbitrary values across object locations. The schema therefore requires attributable completeness and semantic assertions.",
+  "x-agcp-ds-id": "DS-035",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Composite Governance Candidate Collection",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-205",
+      "ARM-206",
+      "ARM-207",
+      "ARM-208",
+      "ARM-216",
+      "ARM-217"
+    ],
+    "core_sections": [
+      "9.6A",
+      "9.6B"
+    ],
+    "normative_statements": [
+      "NS-9.6B-01",
+      "NS-9.6B-02",
+      "NS-9.6B-03",
+      "NS-9.6B-05"
+    ],
+    "conformance_requirements": [
+      "CR-105",
+      "CR-108",
+      "CR-109"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "bind_set_id": {
+      "$ref": "common.json#/$defs/identifier"
+    },
+    "bind_set_type": {
+      "const": "BIND_SET"
+    },
+    "bind_set_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "bind_set_status": {
+      "type": "string",
+      "enum": [
+        "DECLARED",
+        "QUALIFIED",
+        "DEGRADED",
+        "INVALID",
+        "SUPERSEDED"
+      ]
+    },
+    "parent_proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "coupling_semantics": {
+      "$ref": "common.json#/$defs/composite_coupling_semantics_enum"
+    },
+    "candidate_sub_transitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/bind_candidate"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "description": "Complete declared candidate collection evaluated for coordinated binding. An approved executable subset, if any, is a separate Partial-Bind Admissibility result and is not represented as a replacement for this complete set."
+    },
+    "candidate_set_completeness": {
+      "$ref": "#/$defs/candidate_set_completeness"
+    },
+    "governance_dependency_graph_ref": {
+      "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+    },
+    "governance_domain_participation": {
+      "$ref": "#/$defs/governance_domain_participation"
+    },
+    "aggregate_effect_basis": {
+      "$ref": "#/$defs/aggregate_effect_basis"
+    },
+    "partial_binding_policy": {
+      "$ref": "#/$defs/partial_binding_policy"
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "bind_set_validation": {
+      "$ref": "#/$defs/bind_set_validation"
+    },
+    "latest_material_change": {
+      "$ref": "#/$defs/material_change_record"
+    },
+    "assembled_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "bind_set_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "superseded_by_ref": {
+      "$ref": "#/$defs/bind_set_ref"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "bind_set_id",
+    "bind_set_type",
+    "bind_set_version",
+    "bind_set_status",
+    "parent_proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "coupling_semantics",
+    "candidate_sub_transitions",
+    "candidate_set_completeness",
+    "governance_dependency_graph_ref",
+    "governance_domain_participation",
+    "aggregate_effect_basis",
+    "partial_binding_policy",
+    "evaluation_horizon",
+    "governance_version_ref",
+    "policy_refs",
+    "assembled_at",
+    "attribution",
+    "bind_set_digest",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "coupling_semantics": {
+            "const": "STRONGLY_COUPLED"
+          }
+        },
+        "required": [
+          "coupling_semantics"
+        ]
+      },
+      "then": {
+        "properties": {
+          "partial_binding_policy": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/partial_binding_policy"
+              },
+              {
+                "properties": {
+                  "consideration_permitted": {
+                    "const": false
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bind_set_status": {
+            "const": "QUALIFIED"
+          }
+        },
+        "required": [
+          "bind_set_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "bind_set_validation"
+        ],
+        "properties": {
+          "bind_set_validation": {
+            "$ref": "#/$defs/qualified_bind_set_validation"
+          },
+          "candidate_set_completeness": {
+            "$ref": "#/$defs/complete_candidate_set"
+          },
+          "latest_material_change": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/material_change_record"
+              },
+              {
+                "properties": {
+                  "material_change_detected": {
+                    "const": false
+                  },
+                  "re_evaluation_required": {
+                    "const": false
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bind_set_status": {
+            "const": "DEGRADED"
+          }
+        },
+        "required": [
+          "bind_set_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "bind_set_validation",
+          "latest_material_change"
+        ],
+        "properties": {
+          "bind_set_validation": {
+            "$ref": "#/$defs/degraded_bind_set_validation"
+          },
+          "latest_material_change": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/material_change_record"
+              },
+              {
+                "properties": {
+                  "material_change_detected": {
+                    "const": true
+                  },
+                  "re_evaluation_required": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "affected_sub_transition_ids"
+                ]
+              }
+            ]
+          }
+        },
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bind_set_status": {
+            "const": "INVALID"
+          }
+        },
+        "required": [
+          "bind_set_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "bind_set_validation"
+        ],
+        "properties": {
+          "bind_set_validation": {
+            "$ref": "#/$defs/invalid_bind_set_validation"
+          }
+        },
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bind_set_status": {
+            "const": "SUPERSEDED"
+          }
+        },
+        "required": [
+          "bind_set_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded_by_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bind_set_status": {
+            "const": "DECLARED"
+          }
+        },
+        "required": [
+          "bind_set_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "bind_set_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-035 Bind Set.",
+      "additionalProperties": false,
+      "properties": {
+        "bind_set_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "bind_set_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "bind_set_status": {
+          "type": "string",
+          "enum": [
+            "DECLARED",
+            "QUALIFIED",
+            "DEGRADED",
+            "INVALID",
+            "SUPERSEDED"
+          ]
+        },
+        "bind_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "parent_proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "coupling_semantics": {
+          "$ref": "common.json#/$defs/composite_coupling_semantics_enum"
+        },
+        "candidate_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "recorded_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "bind_set_id",
+        "bind_set_version",
+        "bind_set_digest",
+        "parent_proposal_id"
+      ]
+    },
+    "bind_candidate": {
+      "type": "object",
+      "description": "Governed sub-transition included in the complete candidate Bind Set.",
+      "additionalProperties": false,
+      "properties": {
+        "sub_transition_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "proposal_identity": {
+          "$ref": "common.json#/$defs/proposal_identity"
+        },
+        "action_id": {
+          "$ref": "common.json#/$defs/action_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "authority_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "candidate_role": {
+          "type": "string",
+          "enum": [
+            "REQUIRED",
+            "OPTIONAL",
+            "CONDITIONAL"
+          ]
+        },
+        "required_for_parent_admissibility": {
+          "type": "boolean"
+        },
+        "included_in_complete_candidate_set": {
+          "const": true
+        },
+        "condition_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "requested_effect_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "action_representation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "aggregate_state_contribution_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "candidate_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "sub_transition_id",
+        "proposal_identity",
+        "target_ref",
+        "tenant_id",
+        "governance_domain_id",
+        "authority_governance_domain_id",
+        "candidate_role",
+        "required_for_parent_admissibility",
+        "included_in_complete_candidate_set",
+        "requested_effect_digest",
+        "action_representation_digest",
+        "aggregate_state_contribution_digest",
+        "candidate_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "candidate_role": {
+                "const": "CONDITIONAL"
+              }
+            },
+            "required": [
+              "candidate_role"
+            ]
+          },
+          "then": {
+            "required": [
+              "condition_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "candidate_role": {
+                "const": "REQUIRED"
+              }
+            },
+            "required": [
+              "candidate_role"
+            ]
+          },
+          "then": {
+            "properties": {
+              "required_for_parent_admissibility": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "candidate_set_completeness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "declared_candidate_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "complete_set_declared": {
+          "type": "boolean"
+        },
+        "all_parent_sub_transitions_included": {
+          "type": "boolean"
+        },
+        "unique_sub_transition_identities": {
+          "type": "boolean"
+        },
+        "parent_identity_binding_verified": {
+          "type": "boolean"
+        },
+        "tenant_binding_verified": {
+          "type": "boolean"
+        },
+        "target_binding_verified": {
+          "type": "boolean"
+        },
+        "dependency_graph_node_set_matches": {
+          "type": "boolean"
+        },
+        "verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "validator_attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "assertion_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "declared_candidate_count",
+        "complete_set_declared",
+        "all_parent_sub_transitions_included",
+        "unique_sub_transition_identities",
+        "parent_identity_binding_verified",
+        "tenant_binding_verified",
+        "target_binding_verified",
+        "dependency_graph_node_set_matches",
+        "verified_at",
+        "validator_attribution",
+        "assertion_digest"
+      ]
+    },
+    "complete_candidate_set": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/candidate_set_completeness"
+        },
+        {
+          "properties": {
+            "complete_set_declared": {
+              "const": true
+            },
+            "all_parent_sub_transitions_included": {
+              "const": true
+            },
+            "unique_sub_transition_identities": {
+              "const": true
+            },
+            "parent_identity_binding_verified": {
+              "const": true
+            },
+            "tenant_binding_verified": {
+              "const": true
+            },
+            "target_binding_verified": {
+              "const": true
+            },
+            "dependency_graph_node_set_matches": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "governance_domain_participation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "participating_governance_domain_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/governance_domain_id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "cross_domain": {
+          "type": "boolean"
+        },
+        "cross_domain_coordination_policy_ref": {
+          "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+        },
+        "cross_domain_isolation_preserved": {
+          "type": "boolean"
+        },
+        "participation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "participating_governance_domain_ids",
+        "cross_domain",
+        "cross_domain_isolation_preserved",
+        "participation_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "cross_domain": {
+                "const": true
+              }
+            },
+            "required": [
+              "cross_domain"
+            ]
+          },
+          "then": {
+            "required": [
+              "cross_domain_coordination_policy_ref"
+            ],
+            "properties": {
+              "cross_domain_isolation_preserved": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "cross_domain": {
+                "const": false
+              }
+            },
+            "required": [
+              "cross_domain"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "cross_domain_coordination_policy_ref"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "aggregate_effect_basis": {
+      "type": "object",
+      "description": "Integrity-protected basis for evaluating the aggregate effects of the complete candidate Bind Set. This is not a Resulting-State Validation result.",
+      "additionalProperties": false,
+      "properties": {
+        "individual_effect_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 1,
+          "maxItems": 4096
+        },
+        "aggregate_effect_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "aggregate_resulting_state_projection_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "effect_interaction_classification": {
+          "type": "string",
+          "enum": [
+            "INDEPENDENT",
+            "ORDERED",
+            "COUPLED",
+            "CONDITIONAL",
+            "CONFLICTING"
+          ]
+        },
+        "projection_method_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "projection_method_version": {
+          "$ref": "common.json#/$defs/version_string"
+        }
+      },
+      "required": [
+        "individual_effect_digests",
+        "aggregate_effect_digest",
+        "aggregate_resulting_state_projection_digest",
+        "effect_interaction_classification",
+        "projection_method_id",
+        "projection_method_version"
+      ]
+    },
+    "partial_binding_policy": {
+      "type": "object",
+      "description": "Proposal- and policy-declared conditions under which partial binding may be considered. This object is not a Partial-Bind Admissibility determination and does not identify an approved executable subset.",
+      "additionalProperties": false,
+      "properties": {
+        "consideration_permitted": {
+          "type": "boolean"
+        },
+        "policy_ref": {
+          "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+        },
+        "required_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "prohibited_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "minimum_executable_subset_size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "subset_selection_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "conditions_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "approved_executable_subset_present": {
+          "const": false
+        }
+      },
+      "required": [
+        "consideration_permitted",
+        "approved_executable_subset_present"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "consideration_permitted": {
+                "const": true
+              }
+            },
+            "required": [
+              "consideration_permitted"
+            ]
+          },
+          "then": {
+            "required": [
+              "policy_ref",
+              "minimum_executable_subset_size",
+              "subset_selection_basis_digest",
+              "conditions_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "consideration_permitted": {
+                "const": false
+              }
+            },
+            "required": [
+              "consideration_permitted"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "required_sub_transition_ids"
+                  ]
+                },
+                {
+                  "required": [
+                    "prohibited_sub_transition_ids"
+                  ]
+                },
+                {
+                  "required": [
+                    "minimum_executable_subset_size"
+                  ]
+                },
+                {
+                  "required": [
+                    "subset_selection_basis_digest"
+                  ]
+                },
+                {
+                  "required": [
+                    "conditions_digest"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "validation_dimension": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "INDETERMINATE"
+      ]
+    },
+    "validation_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_completeness": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "identity_binding": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "target_binding": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "tenant_binding": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "dependency_graph_binding": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "coupling_semantics": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "aggregate_effect_basis": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "partial_binding_policy": {
+          "$ref": "#/$defs/validation_dimension"
+        },
+        "cross_domain_isolation": {
+          "$ref": "#/$defs/validation_dimension"
+        }
+      },
+      "required": [
+        "candidate_completeness",
+        "identity_binding",
+        "target_binding",
+        "tenant_binding",
+        "dependency_graph_binding",
+        "coupling_semantics",
+        "aggregate_effect_basis",
+        "partial_binding_policy",
+        "cross_domain_isolation"
+      ]
+    },
+    "bind_set_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "QUALIFIED",
+            "INVALID",
+            "RE_EVALUATION_REQUIRED",
+            "INDETERMINATE"
+          ]
+        },
+        "dimensions": {
+          "$ref": "#/$defs/validation_dimensions"
+        },
+        "approved_for_coordinated_evaluation": {
+          "type": "boolean"
+        },
+        "permission_to_execute": {
+          "const": false
+        },
+        "partial_bind_admissibility_established": {
+          "const": false
+        },
+        "failure_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "outcome",
+        "dimensions",
+        "approved_for_coordinated_evaluation",
+        "permission_to_execute",
+        "partial_bind_admissibility_established",
+        "evaluated_at",
+        "attribution",
+        "result_digest"
+      ]
+    },
+    "qualified_bind_set_validation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bind_set_validation"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "QUALIFIED"
+            },
+            "approved_for_coordinated_evaluation": {
+              "const": true
+            },
+            "dimensions": {
+              "properties": {
+                "candidate_completeness": {
+                  "const": "PASS"
+                },
+                "identity_binding": {
+                  "const": "PASS"
+                },
+                "target_binding": {
+                  "const": "PASS"
+                },
+                "tenant_binding": {
+                  "const": "PASS"
+                },
+                "dependency_graph_binding": {
+                  "const": "PASS"
+                },
+                "coupling_semantics": {
+                  "const": "PASS"
+                },
+                "aggregate_effect_basis": {
+                  "const": "PASS"
+                },
+                "partial_binding_policy": {
+                  "const": "PASS"
+                },
+                "cross_domain_isolation": {
+                  "const": "PASS"
+                }
+              }
+            }
+          },
+          "not": {
+            "required": [
+              "failure_reasons"
+            ]
+          }
+        }
+      ]
+    },
+    "degraded_bind_set_validation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bind_set_validation"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "RE_EVALUATION_REQUIRED"
+            },
+            "approved_for_coordinated_evaluation": {
+              "const": false
+            }
+          },
+          "required": [
+            "failure_reasons"
+          ]
+        }
+      ]
+    },
+    "invalid_bind_set_validation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bind_set_validation"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "enum": [
+                "INVALID",
+                "INDETERMINATE"
+              ]
+            },
+            "approved_for_coordinated_evaluation": {
+              "const": false
+            }
+          },
+          "required": [
+            "failure_reasons"
+          ]
+        }
+      ]
+    },
+    "material_change_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "change_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "material_change_detected": {
+          "type": "boolean"
+        },
+        "changed_dimensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CANDIDATE_MEMBERSHIP",
+              "DEPENDENCY",
+              "COUPLING",
+              "TARGET",
+              "TENANT",
+              "AUTHORITY_DOMAIN",
+              "POLICY",
+              "EVIDENCE",
+              "CANONICAL_STATE",
+              "VALIDITY",
+              "AGGREGATE_EFFECT"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "affected_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "re_evaluation_required": {
+          "type": "boolean"
+        },
+        "detected_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "change_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "change_id",
+        "material_change_detected",
+        "re_evaluation_required",
+        "detected_at",
+        "change_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "material_change_detected": {
+                "const": true
+              }
+            },
+            "required": [
+              "material_change_detected"
+            ]
+          },
+          "then": {
+            "required": [
+              "changed_dimensions",
+              "affected_sub_transition_ids"
+            ],
+            "properties": {
+              "re_evaluation_required": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "assembly_algorithm_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "assembly_algorithm_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "ordering_basis": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_LEDGER_ORDER",
+            "DEPENDENCY_GRAPH_ORDER",
+            "EXPLICIT_POLICY_ORDER",
+            "CANONICAL_SEQUENCE"
+          ]
+        },
+        "arrival_time_used_as_governance_basis": {
+          "const": false
+        },
+        "replay_instructions_ref": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 2048
+        },
+        "replay_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "input_digests",
+        "assembly_algorithm_id",
+        "assembly_algorithm_version",
+        "ordering_basis",
+        "arrival_time_used_as_governance_basis",
+        "replay_digest"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_collection_is_complete": {
+          "const": true
+        },
+        "parent_and_sub_transition_identity_preserved": {
+          "const": true
+        },
+        "targets_and_authority_domains_preserved": {
+          "const": true
+        },
+        "dependency_graph_matches_candidate_set": {
+          "const": true
+        },
+        "coupling_semantics_explicit": {
+          "const": true
+        },
+        "aggregate_effect_basis_preserved": {
+          "const": true
+        },
+        "arrival_time_is_not_governance_basis": {
+          "const": true
+        },
+        "bind_set_does_not_establish_authority": {
+          "const": true
+        },
+        "bind_set_does_not_authorize_execution": {
+          "const": true
+        },
+        "bind_set_does_not_establish_partial_bind_admissibility": {
+          "const": true
+        },
+        "approved_executable_subset_requires_separate_result": {
+          "const": true
+        },
+        "cross_object_equality_semantically_validated": {
+          "const": true
+        }
+      },
+      "required": [
+        "candidate_collection_is_complete",
+        "parent_and_sub_transition_identity_preserved",
+        "targets_and_authority_domains_preserved",
+        "dependency_graph_matches_candidate_set",
+        "coupling_semantics_explicit",
+        "aggregate_effect_basis_preserved",
+        "arrival_time_is_not_governance_basis",
+        "bind_set_does_not_establish_authority",
+        "bind_set_does_not_authorize_execution",
+        "bind_set_does_not_establish_partial_bind_admissibility",
+        "approved_executable_subset_requires_separate_result",
+        "cross_object_equality_semantically_validated"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Explicitly namespaced extension members that cannot alter canonical Bind Set semantics.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    }
+  }
+}

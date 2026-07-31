@@ -1,12 +1,283 @@
 {
-  "registry": "AGCP Constraint Type Registry",
-  "status": "Normative",
+  "$schema": "https://agcp.ai/schemas/registry_document.schema.json",
+  "registry_document_id": "REGDOC-CONSTRAINT-TYPE",
+  "registry_id": "REG-CONSTRAINT-TYPE",
+  "registry_name": "AGCP Constraint Type Registry",
+  "registry_kind": "CONSTRAINT_TYPE",
+  "normative_status": "NORMATIVE",
   "series": "AGCP Core",
-  "versioning": {
-    "authority": "repository release tag",
-    "embedded_version": false
-  },
   "description": "Authoritative registry of recognized AGCP constraint types used during Proposal Qualification, Governance Decision Function processing, Governance Self-Protection, Execution Authorization, Commit Boundary processing, and related conformance assessment.",
+  "release": {
+    "release_id": "REG-CONSTRAINT-TYPE-v2.0.0",
+    "registry_release": "v2.0.0",
+    "specification_version": "v2.0",
+    "publication_status": "CURRENT",
+    "published_at": "2026-07-30T12:26:00-04:00",
+    "authority": "AGCP controlled repository release",
+    "repository_path": "registries/constraint-type-registry.json",
+    "canonical_uri": "https://agcp.ai/registries/constraint-type-registry.json"
+  },
+  "lifecycle": {
+    "lifecycle_state": "ACTIVE",
+    "effective_from": "2026-07-30T09:27:00-04:00"
+  },
+  "integrity": {
+    "integrity_protected": true,
+    "digest_algorithm": "SHA-256",
+    "canonicalization": "JCS-RFC8785",
+    "entry_count": 26,
+    "entry_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "ca036987633b1443c0d86faa7dc99e1b4a1cb7860a44eaa6439e41d2c3de8fb8",
+      "canonicalization": "JCS-RFC8785"
+    },
+    "document_digest": {
+      "algorithm": "SHA-256",
+      "value": "8f43853a9069e9bd80e669b00375dc0502f8a71c27b0796bc2f3677f69f520e5",
+      "canonicalization": "JCS-RFC8785"
+    }
+  },
+  "traceability": {
+    "source_artifact_refs": [
+      "spec/AGCP-Core.docx",
+      "spec/Architecture Reference Model.docx",
+      "spec/AGCP Normative Statements.docx",
+      "spec/AGCP_Runtime_Governance_Requirements_CR-001_thru_CR-122.csv",
+      "registries/README.md"
+    ],
+    "schema_refs": [
+      "schemas/registry_document.schema.json",
+      "schemas/constraint_artifact.json",
+      "schemas/constraint_evaluation.json",
+      "schemas/compiled_governance_artifact.json"
+    ],
+    "requirement_refs": [
+      "CR-002",
+      "CR-004",
+      "CR-005",
+      "CR-006",
+      "CR-007",
+      "CR-008",
+      "CR-012",
+      "CR-013",
+      "CR-014",
+      "CR-015",
+      "CR-016",
+      "CR-017",
+      "CR-018",
+      "CR-019",
+      "CR-020",
+      "CR-021",
+      "CR-022",
+      "CR-023",
+      "CR-024",
+      "CR-025",
+      "CR-026",
+      "CR-027",
+      "CR-028",
+      "CR-029",
+      "CR-030",
+      "CR-036",
+      "CR-037",
+      "CR-038",
+      "CR-040",
+      "CR-041",
+      "CR-043",
+      "CR-044",
+      "CR-045",
+      "CR-046",
+      "CR-047",
+      "CR-048",
+      "CR-049",
+      "CR-050",
+      "CR-051",
+      "CR-052",
+      "CR-054",
+      "CR-056",
+      "CR-057",
+      "CR-058",
+      "CR-059",
+      "CR-060",
+      "CR-061",
+      "CR-062",
+      "CR-063",
+      "CR-064",
+      "CR-065",
+      "CR-066",
+      "CR-067",
+      "CR-068",
+      "CR-069",
+      "CR-070",
+      "CR-071",
+      "CR-072",
+      "CR-074",
+      "CR-075",
+      "CR-082",
+      "CR-084",
+      "CR-085",
+      "CR-086",
+      "CR-091",
+      "CR-092",
+      "CR-093",
+      "CR-096",
+      "CR-097",
+      "CR-098",
+      "CR-099",
+      "CR-100",
+      "CR-101",
+      "CR-103",
+      "CR-104",
+      "CR-110",
+      "CR-111",
+      "CR-112",
+      "CR-113",
+      "CR-114",
+      "CR-115",
+      "CR-116",
+      "CR-117",
+      "CR-118",
+      "CR-122"
+    ],
+    "entry_traceability_policy": "Every registry entry carries a permanent REG identifier and direct NS and CR references. Entry relationships are explicit and integrity-bound; release-level traceability does not substitute for entry-level traceability.",
+    "architecture_refs": [
+      "ARM-101",
+      "ARM-102",
+      "ARM-103",
+      "ARM-105",
+      "ARM-106",
+      "ARM-107",
+      "ARM-108",
+      "ARM-201",
+      "ARM-202",
+      "ARM-203",
+      "ARM-204",
+      "ARM-205",
+      "ARM-206",
+      "ARM-208",
+      "ARM-209",
+      "ARM-210",
+      "ARM-211",
+      "ARM-212",
+      "ARM-213",
+      "ARM-302",
+      "ARM-303",
+      "ARM-304",
+      "ARM-305",
+      "ARM-306",
+      "ARM-307",
+      "ARM-308",
+      "ARM-401",
+      "ARM-402",
+      "ARM-403",
+      "ARM-404",
+      "ARM-405",
+      "ARM-406",
+      "ARM-407",
+      "ARM-408",
+      "ARM-501",
+      "ARM-502",
+      "ARM-503",
+      "ARM-504",
+      "ARM-505",
+      "ARM-506",
+      "ARM-507",
+      "ARM-508",
+      "ARM-509",
+      "ARM-510",
+      "ARM-511",
+      "ARM-512",
+      "ARM-601",
+      "ARM-602",
+      "ARM-603",
+      "ARM-604",
+      "ARM-605",
+      "ARM-606",
+      "ARM-607",
+      "ARM-608",
+      "ARM-609",
+      "ARM-610",
+      "ARM-701",
+      "ARM-702",
+      "ARM-703",
+      "ARM-704",
+      "ARM-705",
+      "ARM-706",
+      "ARM-707",
+      "ARM-708",
+      "ARM-709",
+      "ARM-710",
+      "ARM-801",
+      "ARM-802",
+      "ARM-803",
+      "ARM-804",
+      "ARM-805",
+      "ARM-806",
+      "ARM-807",
+      "ARM-808",
+      "ARM-809"
+    ],
+    "normative_statement_refs": [
+      "NS-10.2-02",
+      "NS-10.4-01",
+      "NS-10.5-01",
+      "NS-10.5-02",
+      "NS-10.7-01",
+      "NS-10.7-02",
+      "NS-10.7-03",
+      "NS-10.8-01",
+      "NS-10.8A-03",
+      "NS-11.1-01",
+      "NS-11.4-01",
+      "NS-11.4-02",
+      "NS-11.5-01",
+      "NS-11.5-02",
+      "NS-12.1-01",
+      "NS-12.2-02",
+      "NS-12.4-01",
+      "NS-12.4-02",
+      "NS-12.4-03",
+      "NS-13.1-01",
+      "NS-13.2-02",
+      "NS-13.4-01",
+      "NS-13.4-03",
+      "NS-13.6B-01",
+      "NS-13.6B-02",
+      "NS-13.6B-03",
+      "NS-14.1-01",
+      "NS-14.4-01",
+      "NS-14.4-02",
+      "NS-15.1-01",
+      "NS-15.2-02",
+      "NS-15.3-02",
+      "NS-15.4-01",
+      "NS-15.4-02",
+      "NS-15.6A-04",
+      "NS-15.6B-02",
+      "NS-16.4-01",
+      "NS-16.6A-02",
+      "NS-16.7-02",
+      "NS-4.6-01",
+      "NS-4.6-02",
+      "NS-4.6-04",
+      "NS-5.2.1-01",
+      "NS-6.3-01",
+      "NS-6.3-02",
+      "NS-6.4-02",
+      "NS-6.6-01",
+      "NS-6.6A-02",
+      "NS-6.7-02",
+      "NS-7.3-02",
+      "NS-7.4-01",
+      "NS-7.4-03",
+      "NS-7.5-01",
+      "NS-8.4-01",
+      "NS-8.4-02",
+      "NS-8.5-02",
+      "NS-9.3-02",
+      "NS-9.4-01",
+      "NS-9.6A-01"
+    ]
+  },
   "registry_rules": {
     "stability": "Constraint type identifiers are stable registry keys and SHALL NOT be repurposed.",
     "extensibility": "Implementations MAY define extension constraint types in an implementation or profile-specific namespace, provided extension constraints do not weaken AGCP normative behavior.",
@@ -23,11 +294,26 @@
     "outcomes": "Permitted constraint evaluation outcomes.",
     "failure_behavior": "Required behavior when the constraint fails.",
     "governance_evidence": "Whether Governance Evidence is normally required.",
-    "description": "Normative description of the constraint type."
+    "description": "Normative description of the constraint type.",
+    "reg_id": "Permanent REG namespace identifier assigned to this registry entry.",
+    "ns_refs": "Normative Statement identifiers directly implemented or supported by the entry.",
+    "cr_refs": "Conformance Requirement identifiers directly implemented or supported by the entry."
   },
   "constraint_types": [
     {
+      "reg_id": "REG-001",
       "constraint_type": "STRUCTURAL_COMPLETENESS",
+      "ns_refs": [
+        "NS-6.3-01",
+        "NS-6.3-02",
+        "NS-6.4-02"
+      ],
+      "cr_refs": [
+        "CR-036",
+        "CR-037",
+        "CR-038",
+        "CR-043"
+      ],
       "category": "proposal_qualification",
       "default_stage": "Proposal Qualification",
       "applies_to": [
@@ -48,10 +334,25 @@
       ],
       "failure_behavior": "Structural Refusal",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that a Proposal contains the mandatory structure, identifiers, governed object references, Action Representation, and Governance Context required for Proposal Qualification."
+      "description": "Verifies that a Proposal contains the mandatory structure, identifiers, governed object references, Action Representation, and Governance Context required for Proposal Qualification.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "05218aec60d9d70a2f09dfe8dc9b071255712f96c1e81cb3c3a145257f808686",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-002",
       "constraint_type": "SCHEMA_CONFORMANCE",
+      "ns_refs": [
+        "NS-6.4-02",
+        "NS-6.7-02"
+      ],
+      "cr_refs": [
+        "CR-004"
+      ],
       "category": "proposal_qualification",
       "default_stage": "Proposal Qualification",
       "applies_to": [
@@ -72,16 +373,34 @@
       ],
       "failure_behavior": "Structural Refusal or artifact rejection",
       "governance_evidence": "conditional",
-      "description": "Verifies that the submitted object conforms to the applicable schema without requiring implementation-specific interpretation."
+      "description": "Verifies that the submitted object conforms to the applicable schema without requiring implementation-specific interpretation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "729ae32cc6531898511fe6affe60c9435a6eed24de48cb550c95ae02cee47953",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-003",
       "constraint_type": "PROVENANCE_VALIDITY",
+      "ns_refs": [
+        "NS-6.4-02",
+        "NS-10.5-01",
+        "NS-10.8A-03"
+      ],
+      "cr_refs": [
+        "CR-005",
+        "CR-045",
+        "CR-047"
+      ],
       "category": "proposal_qualification",
       "default_stage": "Proposal Qualification",
       "applies_to": [
         "Proposal",
         "Action Representation",
-        "human-review artifact",
+        "governance-approval artifact",
         "governance artifact"
       ],
       "required_inputs": [
@@ -97,10 +416,31 @@
       ],
       "failure_behavior": "Structural Refusal or artifact rejection",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that required provenance, signatures, attribution, and binding information are present, valid, and logically associated with the submitted governed object."
+      "description": "Verifies that required provenance, signatures, attribution, and binding information are present, valid, and logically associated with the submitted governed object.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "8c49f1c7858291c0895018a460521215fe2a044ed0e3f25da9f5275c68a42389",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-004",
       "constraint_type": "TENANT_SCOPE",
+      "ns_refs": [
+        "NS-11.4-01",
+        "NS-11.4-02",
+        "NS-11.5-01",
+        "NS-11.5-02"
+      ],
+      "cr_refs": [
+        "CR-026",
+        "CR-027",
+        "CR-028",
+        "CR-029",
+        "CR-030"
+      ],
       "category": "tenant_isolation",
       "default_stage": "Tenant and Domain Isolation",
       "applies_to": [
@@ -122,10 +462,27 @@
       ],
       "failure_behavior": "Refusal, denial, or forbidden access",
       "governance_evidence": "conditional",
-      "description": "Verifies that the request, resource, authority, evidence, and governance artifact remain within the authorized tenant scope."
+      "description": "Verifies that the request, resource, authority, evidence, and governance artifact remain within the authorized tenant scope.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "20787ea783f8a8dcf24df6f6df14a0a4526b12ddbd85b7254bcc40f1d36ef361",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-005",
       "constraint_type": "GOVERNANCE_DOMAIN_SCOPE",
+      "ns_refs": [
+        "NS-14.1-01",
+        "NS-14.4-01",
+        "NS-14.4-02"
+      ],
+      "cr_refs": [
+        "CR-072",
+        "CR-116"
+      ],
       "category": "domain_isolation",
       "default_stage": "Cross-Domain Authority Isolation",
       "applies_to": [
@@ -148,10 +505,27 @@
       ],
       "failure_behavior": "Refusal, denial, or governed re-evaluation",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that governance-domain boundaries, domain sovereignty, and governed cross-domain authority relationships are preserved."
+      "description": "Verifies that governance-domain boundaries, domain sovereignty, and governed cross-domain authority relationships are preserved.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "15be09713e546f72b8141481fb5c1b015f0c5a577d73af4938547274597841af",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-006",
       "constraint_type": "TENANT_STATE_ADMISSIBILITY",
+      "ns_refs": [
+        "NS-7.4-03",
+        "NS-11.1-01"
+      ],
+      "cr_refs": [
+        "CR-006",
+        "CR-024",
+        "CR-025"
+      ],
       "category": "tenant_isolation",
       "default_stage": "Tenant and Domain Isolation",
       "applies_to": [
@@ -171,10 +545,25 @@
       ],
       "failure_behavior": "Refusal or authorization failure",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that the tenant state permits the requested governance operation."
+      "description": "Verifies that the tenant state permits the requested governance operation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "30898bddc4668d810126a29144c910ef684486fad2047367a67f6c9df98d0f8e",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-007",
       "constraint_type": "CANONICAL_STATE_AVAILABILITY",
+      "ns_refs": [
+        "NS-4.6-01",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-048"
+      ],
       "category": "canonical_state",
       "default_stage": "Governance Decision Function",
       "applies_to": [
@@ -195,10 +584,32 @@
       ],
       "failure_behavior": "Governed Re-evaluation Required or refusal",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that authoritative Canonical State required for governance evaluation is available."
+      "description": "Verifies that authoritative Canonical State required for governance evaluation is available.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "98e76ff3a0eab44fd0168844503bda88878c536b33c6e09c16f3aa8b0ddbc39a",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-008",
       "constraint_type": "CANONICAL_STATE_INTEGRITY",
+      "ns_refs": [
+        "NS-4.6-01",
+        "NS-4.6-02",
+        "NS-4.6-04",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-049",
+        "CR-050",
+        "CR-051",
+        "CR-052",
+        "CR-103",
+        "CR-104"
+      ],
       "category": "canonical_state",
       "default_stage": "Governance Decision Function",
       "applies_to": [
@@ -220,10 +631,26 @@
       ],
       "failure_behavior": "Governed Re-evaluation Required, refusal, or authorization failure",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies Canonical State completeness, consistency, integrity, provenance, freshness, and suitability for the governed evaluation."
+      "description": "Verifies Canonical State completeness, consistency, integrity, provenance, freshness, and suitability for the governed evaluation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "467c2ecec4d45b1a9e439b9ffbdca7b5d3113260b49875365b7fb5cab0ebb2d5",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-009",
       "constraint_type": "POLICY_RESOLUTION_COMPLETENESS",
+      "ns_refs": [
+        "NS-7.3-02",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-007",
+        "CR-029"
+      ],
       "category": "policy",
       "default_stage": "Governance Decision Function",
       "applies_to": [
@@ -245,10 +672,28 @@
       ],
       "failure_behavior": "Governed Re-evaluation Required or denial",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that the complete applicable governance policy set has been resolved before governance decision processing proceeds."
+      "description": "Verifies that the complete applicable governance policy set has been resolved before governance decision processing proceeds.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "c328c2ded7a799a9731e2a987cf7b285c7aac772c9087f08c27a013261b39843",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-010",
       "constraint_type": "POLICY_MODULE_VALIDITY",
+      "ns_refs": [
+        "NS-5.2.1-01",
+        "NS-15.3-02",
+        "NS-15.4-01"
+      ],
+      "cr_refs": [
+        "CR-075",
+        "CR-110",
+        "CR-113"
+      ],
       "category": "policy",
       "default_stage": "Governance Self-Protection",
       "applies_to": [
@@ -268,16 +713,35 @@
       ],
       "failure_behavior": "Artifact rejection or activation denial",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that a Policy Evaluation Module is valid, deterministic, integrity-protected, and suitable for governed operational use."
+      "description": "Verifies that a Policy Evaluation Module is valid, deterministic, integrity-protected, and suitable for governed operational use.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "8fdefd8aee3049649a6ecb59ec7f13b59d605c486f745f88b571b5761fb48f31",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-011",
       "constraint_type": "AUTHORITY_LINEAGE_VALIDITY",
+      "ns_refs": [
+        "NS-12.1-01",
+        "NS-12.4-01",
+        "NS-12.4-03"
+      ],
+      "cr_refs": [
+        "CR-040",
+        "CR-044",
+        "CR-096",
+        "CR-115"
+      ],
       "category": "authority",
       "default_stage": "Delegation and Authority Lineage",
       "applies_to": [
         "Proposal",
         "Action",
-        "human-review artifact",
+        "governance-approval artifact",
         "governance artifact",
         "Commit Boundary request"
       ],
@@ -295,17 +759,37 @@
       ],
       "failure_behavior": "Refusal, denial, authorization failure, or activation denial",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that authority is established, attributable, valid, unexpired, unreplayed, and sufficient for the requested governed operation."
+      "description": "Verifies that authority is established, attributable, valid, unexpired, unreplayed, and sufficient for the requested governed operation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "34b966049f31765a33c1f82343e5737b034f9a0ab8901b98ad3784775c07008f",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-012",
       "constraint_type": "DELEGATION_CONSTRAINTS",
+      "ns_refs": [
+        "NS-12.2-02",
+        "NS-12.4-01",
+        "NS-12.4-02"
+      ],
+      "cr_refs": [
+        "CR-040",
+        "CR-044",
+        "CR-072",
+        "CR-115",
+        "CR-116"
+      ],
       "category": "authority",
       "default_stage": "Delegation and Authority Lineage",
       "applies_to": [
         "delegated authority",
         "Proposal",
         "Action",
-        "human-review artifact"
+        "governance-approval artifact"
       ],
       "required_inputs": [
         "delegation record",
@@ -321,23 +805,44 @@
       ],
       "failure_behavior": "Refusal, denial, authorization failure, or governed re-evaluation",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies delegated authority scope, constraints, lifetime, revocation status, and replay protection."
+      "description": "Verifies delegated authority scope, constraints, lifetime, revocation status, and replay protection.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "d4bcb0f58f379785a1f16b6deca4efda46293dce348edf9817307f311eee69ba",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
-      "constraint_type": "HUMAN_REVIEW_REQUIREMENT",
-      "category": "human_review",
+      "reg_id": "REG-013",
+      "constraint_type": "GOVERNANCE_APPROVAL_REQUIREMENT",
+      "ns_refs": [
+        "NS-7.5-01",
+        "NS-13.6B-01"
+      ],
+      "cr_refs": [
+        "CR-002",
+        "CR-014",
+        "CR-015",
+        "CR-016",
+        "CR-017",
+        "CR-018",
+        "CR-058"
+      ],
+      "category": "governance_approval",
       "default_stage": "Governance Decision Function",
       "applies_to": [
         "Proposal",
         "governance decision",
-        "human-review artifact"
+        "governance-approval artifact"
       ],
       "required_inputs": [
         "applicable policy",
         "Canonical State",
         "Governance Context",
         "Authority Lineage",
-        "human-review artifacts where present"
+        "governance-approval artifacts where present"
       ],
       "outcomes": [
         "PASS",
@@ -346,19 +851,38 @@
       ],
       "failure_behavior": "Pending Human Review, Deferred, or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Determines whether human review is required and whether submitted human-review artifacts satisfy the applicable governed requirement."
+      "description": "Determines whether governed human adjudication is required and whether submitted governance-approval artifacts satisfy the applicable governed requirement.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "4b02b3de03e08352a95f0db8dd4e225e5a943351712bc5dd86b5b11b94823d8a",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
-      "constraint_type": "HUMAN_REVIEW_QUORUM",
-      "category": "human_review",
+      "reg_id": "REG-014",
+      "constraint_type": "GOVERNANCE_APPROVAL_QUORUM",
+      "ns_refs": [
+        "NS-13.6B-02",
+        "NS-13.6B-03"
+      ],
+      "cr_refs": [
+        "CR-012",
+        "CR-013",
+        "CR-058",
+        "CR-059",
+        "CR-060"
+      ],
+      "category": "governance_approval",
       "default_stage": "Governance Decision Function",
       "applies_to": [
         "Proposal",
-        "human-review artifact"
+        "governance-approval artifact"
       ],
       "required_inputs": [
-        "required human-review roles",
-        "submitted human-review artifacts",
+        "required governance-approval roles",
+        "submitted governance-approval artifacts",
         "Authority Lineage",
         "applicable policy"
       ],
@@ -369,10 +893,28 @@
       ],
       "failure_behavior": "Pending Human Review or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that the required human-review roles, approvals, or cosignatures satisfy the applicable governed quorum requirement."
+      "description": "Verifies that the required governance-approval roles, approvals, or cosignatures satisfy the applicable governed quorum requirement.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "66c55d77bec52f563aa26153b1662fffb80d68b70b3b468da79c2d312562c91e",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-015",
       "constraint_type": "EXCEPTION_VALIDITY",
+      "ns_refs": [
+        "NS-15.2-02",
+        "NS-15.4-02",
+        "NS-15.6B-02"
+      ],
+      "cr_refs": [
+        "CR-112",
+        "CR-113",
+        "CR-117"
+      ],
       "category": "exception",
       "default_stage": "Governance Decision Function",
       "applies_to": [
@@ -394,10 +936,27 @@
       ],
       "failure_behavior": "Ignore exception or fail affected constraint",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that a governed exception is tenant-scoped, authority-backed, unexpired, applicable, and recorded in the decision basis."
+      "description": "Verifies that a governed exception is tenant-scoped, authority-backed, unexpired, applicable, and recorded in the decision basis.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "60c1417f0641eeaf0127cdc3b801381b459e41e4dd087f08f77917bb1e836803",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-016",
       "constraint_type": "ACTION_REPRESENTATION_IMMUTABILITY",
+      "ns_refs": [
+        "NS-6.6-01",
+        "NS-9.4-01"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-022",
+        "CR-074"
+      ],
       "category": "proposal_integrity",
       "default_stage": "Commit Boundary",
       "applies_to": [
@@ -418,10 +977,28 @@
       ],
       "failure_behavior": "Commit Boundary failure or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that the qualified Action Representation has not been mutated after qualification."
+      "description": "Verifies that the qualified Action Representation has not been mutated after qualification.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "1ec999a298d3e318ff5c4844e077fa3d6aeb064d29e405a5bcb7ccac9952c78c",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-017",
       "constraint_type": "GOVERNANCE_CONTEXT_VALIDITY",
+      "ns_refs": [
+        "NS-6.6-01",
+        "NS-6.6A-02",
+        "NS-9.4-01"
+      ],
+      "cr_refs": [
+        "CR-046",
+        "CR-070",
+        "CR-071"
+      ],
       "category": "proposal_integrity",
       "default_stage": "Commit Boundary",
       "applies_to": [
@@ -443,10 +1020,31 @@
       ],
       "failure_behavior": "Commit Boundary failure, authorization failure, or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that the Governance Context remains authoritative, valid, and suitable for continued governance processing."
+      "description": "Verifies that the Governance Context remains authoritative, valid, and suitable for continued governance processing.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "c2bcb02ece8f312e2ebdefc577a24473d36078846b105dd55f5de5291614a7e8",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-018",
       "constraint_type": "EXECUTION_AUTHORIZATION_VALIDITY",
+      "ns_refs": [
+        "NS-8.4-01",
+        "NS-8.4-02",
+        "NS-8.5-02"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-020",
+        "CR-021",
+        "CR-022",
+        "CR-023",
+        "CR-061"
+      ],
       "category": "execution_authorization",
       "default_stage": "Execution Authorization",
       "applies_to": [
@@ -469,10 +1067,31 @@
       ],
       "failure_behavior": "Authorization Failure or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that all prerequisites for producing or retaining Execution Authorization remain satisfied."
+      "description": "Verifies that all prerequisites for producing or retaining Execution Authorization remain satisfied.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "b77b5ee83772758026728a6cbeea914b466c4ae9db0cc6edb5ae11eca2700c3e",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-019",
       "constraint_type": "COMMIT_BOUNDARY_PREREQUISITES",
+      "ns_refs": [
+        "NS-9.3-02",
+        "NS-9.4-01",
+        "NS-9.6A-01"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-020",
+        "CR-021",
+        "CR-084",
+        "CR-096",
+        "CR-103"
+      ],
       "category": "commit_boundary",
       "default_stage": "Commit Boundary",
       "applies_to": [
@@ -496,35 +1115,91 @@
       ],
       "failure_behavior": "Commit Boundary failure or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that all prerequisites required immediately before execution are satisfied."
+      "description": "Verifies that all prerequisites required immediately before execution are satisfied.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "4b6181000e61bb4487dfd9697ed59d9b56bf5e3395f524ce84814e328c50ffa7",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-020",
       "constraint_type": "CONTINUATION_ADMISSIBILITY",
+      "ns_refs": [
+        "NS-13.1-01",
+        "NS-13.2-02",
+        "NS-13.4-01",
+        "NS-13.4-03"
+      ],
+      "cr_refs": [
+        "CR-091",
+        "CR-092",
+        "CR-093",
+        "CR-098",
+        "CR-099",
+        "CR-100",
+        "CR-101",
+        "CR-122"
+      ],
       "category": "continuation_integrity",
       "default_stage": "Continuation Integrity",
       "applies_to": [
-        "continuing Action",
-        "continuation object",
-        "governed execution"
+        "authorized or otherwise eligible nonterminal Proposal",
+        "Proposal Identity",
+        "pre-commit continuation interval",
+        "DEGRADED lifecycle state"
       ],
       "required_inputs": [
-        "continued execution authority",
+        "continued authority basis supporting potential commitment",
         "governance dependencies",
         "governance configuration",
         "Authority Lineage",
-        "Canonical State where required"
+        "Canonical State where applicable",
+        "Derived Lifecycle State",
+        "mandatory governance conditions"
       ],
       "outcomes": [
         "PASS",
         "FAIL",
         "NOT_APPLICABLE"
       ],
-      "failure_behavior": "DEGRADED, Suspend Execution, Governed Termination, or Governed Re-evaluation Required",
+      "failure_behavior": "Commitment Suspended, Governed Re-evaluation Required, transition to a policy-defined non-executable lifecycle state, or escalation, refusal, expiration, cancellation, or another governed terminal disposition.",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies whether governed execution may continue when continuation conditions are evaluated after Commit Boundary processing."
+      "description": "Verifies whether an authorized or otherwise eligible nonterminal Proposal retains a verified continuation basis and at least one admissible path toward binding throughout the pre-commit interval, including degradation, governed re-evaluation, recovery, and final Commit-Bound Admissibility.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "63798527a296f967949616068cee8ed931c99a99fc9048eb6aa9727fc045d0f5",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-021",
       "constraint_type": "GOVERNANCE_EVIDENCE_COMPLETENESS",
+      "ns_refs": [
+        "NS-10.2-02",
+        "NS-10.4-01",
+        "NS-10.8-01"
+      ],
+      "cr_refs": [
+        "CR-041",
+        "CR-054",
+        "CR-056",
+        "CR-062",
+        "CR-063",
+        "CR-064",
+        "CR-065",
+        "CR-066",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-085",
+        "CR-086",
+        "CR-097"
+      ],
       "category": "governance_evidence",
       "default_stage": "Governance Evidence",
       "applies_to": [
@@ -551,10 +1226,35 @@
       ],
       "failure_behavior": "Evidence rejection, replay rejection, or conformance failure",
       "governance_evidence": "not_required",
-      "description": "Verifies that Governance Evidence contains sufficient information to establish traceability, attribution, processing state, and replayability."
+      "description": "Verifies that Governance Evidence contains sufficient information to establish traceability, attribution, processing state, and replayability.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "fca31c5f10e5b3bc07e8b5ad9bc233f15ddb7efc3bfe559012d7abda58d3406a",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-022",
       "constraint_type": "GOVERNANCE_EVIDENCE_INTEGRITY",
+      "ns_refs": [
+        "NS-10.5-01",
+        "NS-10.5-02"
+      ],
+      "cr_refs": [
+        "CR-041",
+        "CR-056",
+        "CR-064",
+        "CR-065",
+        "CR-066",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-085",
+        "CR-086",
+        "CR-097"
+      ],
       "category": "governance_evidence",
       "default_stage": "Governance Evidence",
       "applies_to": [
@@ -576,10 +1276,31 @@
       ],
       "failure_behavior": "Evidence rejection, replay rejection, or conformance failure",
       "governance_evidence": "not_required",
-      "description": "Verifies authenticity, integrity, attribution, traceability, chronological ordering, and logical association with the governed object."
+      "description": "Verifies authenticity, integrity, attribution, traceability, chronological ordering, and logical association with the governed object.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "954eb7b35ac5396170e0c6e41949a8d902f86cb4cf0fbae8d17feb0fafd78546",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-023",
       "constraint_type": "DETERMINISTIC_REPLAY_ADMISSIBILITY",
+      "ns_refs": [
+        "NS-10.7-01",
+        "NS-10.7-02",
+        "NS-10.7-03"
+      ],
+      "cr_refs": [
+        "CR-008",
+        "CR-057",
+        "CR-066",
+        "CR-082",
+        "CR-085",
+        "CR-086"
+      ],
       "category": "deterministic_replay",
       "default_stage": "Governance Evidence",
       "applies_to": [
@@ -601,10 +1322,31 @@
       ],
       "failure_behavior": "Replay rejection or conformance failure",
       "governance_evidence": "conditional",
-      "description": "Verifies that authoritative evidence and referenced inputs are sufficient to deterministically reconstruct governance processing."
+      "description": "Verifies that authoritative evidence and referenced inputs are sufficient to deterministically reconstruct governance processing.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "67a6a2bd4f6c2fd79ec5ba8eef397b759f253ccc73b3b5ca663b7c325759ab25",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-024",
       "constraint_type": "GOVERNANCE_ARTIFACT_INTEGRITY",
+      "ns_refs": [
+        "NS-15.1-01",
+        "NS-15.4-01",
+        "NS-15.4-02"
+      ],
+      "cr_refs": [
+        "CR-110",
+        "CR-111",
+        "CR-112",
+        "CR-113",
+        "CR-114",
+        "CR-117"
+      ],
       "category": "governance_artifact",
       "default_stage": "Governance Self-Protection",
       "applies_to": [
@@ -627,10 +1369,32 @@
       ],
       "failure_behavior": "Artifact rejection or activation denial",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies integrity, provenance, authority, and suitability of governance-significant artifacts before operational use."
+      "description": "Verifies integrity, provenance, authority, and suitability of governance-significant artifacts before operational use.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "8ee64889c5bf03eafefe72502f3c2a4e11d385bde3857536d019f79b0f2661ff",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-025",
       "constraint_type": "GOVERNANCE_ARTIFACT_ACTIVATION_PREREQUISITES",
+      "ns_refs": [
+        "NS-15.3-02",
+        "NS-15.4-01",
+        "NS-15.4-02",
+        "NS-15.6A-04"
+      ],
+      "cr_refs": [
+        "CR-110",
+        "CR-111",
+        "CR-112",
+        "CR-113",
+        "CR-114",
+        "CR-117"
+      ],
       "category": "governance_artifact",
       "default_stage": "Governance Self-Protection",
       "applies_to": [
@@ -653,10 +1417,28 @@
       ],
       "failure_behavior": "Activation denial or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies that governance-significant artifacts become operationally effective only after all applicable validation and activation prerequisites are satisfied."
+      "description": "Verifies that governance-significant artifacts become operationally effective only after all applicable validation and activation prerequisites are satisfied.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "075b6e0abe0a5a4fd8ea2c961a3e85f501d52a3cb7660d65879c5de4259eaf31",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-026",
       "constraint_type": "COORDINATION_PARTICIPANT_AUTHORITY",
+      "ns_refs": [
+        "NS-16.4-01",
+        "NS-16.6A-02",
+        "NS-16.7-02"
+      ],
+      "cr_refs": [
+        "CR-115",
+        "CR-116",
+        "CR-118"
+      ],
       "category": "autonomous_coordination",
       "default_stage": "Autonomous Coordination",
       "applies_to": [
@@ -678,7 +1460,21 @@
       ],
       "failure_behavior": "Coordination refusal, suspension, or Governed Re-evaluation Required",
       "governance_evidence": "required_when_attributable",
-      "description": "Verifies participant authority, coordination constraints, participant independence, tenant/domain isolation, and prevention of unauthorized authority propagation."
+      "description": "Verifies participant authority, coordination constraints, participant independence, tenant/domain isolation, and prevention of unauthorized authority propagation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "5b5b9abb2762d1c58128f4b6e547ee51d67f3a7d3faec9405dc1579d16edd9b1",
+        "canonicalization": "JCS-RFC8785"
+      }
     }
-  ]
+  ],
+  "semantic_assertions": {
+    "identifiers_are_stable_and_not_repurposed": true,
+    "changes_are_release_governed": true,
+    "registry_does_not_independently_modify_core_requirements": true,
+    "integrity_is_verified_before_use": true,
+    "unknown_value_behavior_is_governed_by_applicable_specification": true
+  }
 }

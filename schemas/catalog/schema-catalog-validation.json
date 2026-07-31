@@ -1,0 +1,227 @@
+{
+  "status": "PASS",
+  "catalog_version": "1.0.44",
+  "active_schema_count": 43,
+  "retired_schema_count": 1,
+  "all_active_schemas_have_arm_ns": true,
+  "catalog_hashes_match": true,
+  "ds015_arm_ids": [
+    "ARM-201",
+    "ARM-202",
+    "ARM-203",
+    "ARM-205",
+    "ARM-206",
+    "ARM-401",
+    "ARM-601",
+    "ARM-701"
+  ],
+  "ds015_ns_ids": [
+    "NS-7.3-01",
+    "NS-7.4-01",
+    "NS-7.5-02",
+    "NS-7.6-03",
+    "NS-8.6-04"
+  ],
+  "rtm_metrics": {
+    "implemented_schema_count": 43,
+    "proposed_reserved_schema_count": 0,
+    "excluded_registry_payload_count": 0,
+    "rtm_rows_with_ds_assignments": 121,
+    "highest_assigned_ds_identifier": "DS-044",
+    "implemented_count": 43,
+    "proposed_reserved_count": 0,
+    "total_assigned_count": 44,
+    "retired_schema_count": 1,
+    "retired_count": 1,
+    "rtm_rows_with_explicit_ds_disposition": 122,
+    "rtm_rows_with_if_assignments": 70,
+    "rtm_rows_with_explicit_if_disposition": 122,
+    "rtm_rows_with_reg_assignments": 117,
+    "rtm_rows_with_explicit_reg_disposition": 122,
+    "interface_definition_count": 2,
+    "registry_entry_count": 92
+  },
+  "rtm_cr_mapping_validation": {
+    "authoritative_rtm": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
+    "rtm_dataset_version": "RTM-1.45",
+    "implemented_schema_count_checked": 43,
+    "catalog_entries_matching_authoritative_rtm": 43,
+    "mapping_mismatch_count": 0,
+    "all_catalog_rtm_cr_mappings_match_authoritative_rtm": true,
+    "corrected_entries": {
+      "DS-015": {
+        "added_rtm_ids": [
+          "RTM-00034"
+        ],
+        "added_cr_ids": [
+          "CR-034"
+        ],
+        "final_rtm_id_count": 24,
+        "final_cr_id_count": 24
+      },
+      "DS-017": {
+        "added_rtm_ids": [
+          "RTM-00010"
+        ],
+        "added_cr_ids": [
+          "CR-010"
+        ],
+        "final_rtm_id_count": 16,
+        "final_cr_id_count": 16
+      },
+      "DS-021": {
+        "added_rtm_ids": [
+          "RTM-00008",
+          "RTM-00009"
+        ],
+        "added_cr_ids": [
+          "CR-008",
+          "CR-009"
+        ],
+        "final_rtm_id_count": 20,
+        "final_cr_id_count": 20
+      },
+      "DS-028": {
+        "added_rtm_ids": [
+          "RTM-00009"
+        ],
+        "added_cr_ids": [
+          "CR-009"
+        ],
+        "final_rtm_id_count": 9,
+        "final_cr_id_count": 9
+      },
+      "DS-037": {
+        "added_rtm_ids": [
+          "RTM-00034"
+        ],
+        "added_cr_ids": [
+          "CR-034"
+        ],
+        "final_rtm_id_count": 3,
+        "final_cr_id_count": 3
+      },
+      "DS-040": {
+        "added_rtm_ids": [
+          "RTM-00008",
+          "RTM-00009",
+          "RTM-00034"
+        ],
+        "added_cr_ids": [
+          "CR-008",
+          "CR-009",
+          "CR-034"
+        ],
+        "final_rtm_id_count": 25,
+        "final_cr_id_count": 25
+      }
+    },
+    "remaining_missing_mappings": [],
+    "remaining_extra_mappings": []
+  },
+  "reverse_dependency_validation": {
+    "validation_basis": "Reverse dependent_schemas values were recomputed from every active entry schema_dependencies list.",
+    "implemented_schema_count_checked": 43,
+    "catalog_entries_matching_forward_dependency_graph": 43,
+    "reverse_dependency_mismatch_count": 0,
+    "all_reverse_dependencies_match_forward_dependency_graph": true,
+    "corrected_entry_count": 12,
+    "corrected_entries": {
+      "DS-001": {
+        "added_dependent_schemas": [
+          "DS-003"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 42
+      },
+      "DS-007": {
+        "added_dependent_schemas": [
+          "DS-011"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 11
+      },
+      "DS-020": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 35
+      },
+      "DS-021": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 12
+      },
+      "DS-023": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 8
+      },
+      "DS-024": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 17
+      },
+      "DS-026": {
+        "added_dependent_schemas": [
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 20
+      },
+      "DS-028": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 11
+      },
+      "DS-032": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 15
+      },
+      "DS-033": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 18
+      },
+      "DS-038": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 19
+      },
+      "DS-041": {
+        "added_dependent_schemas": [
+          "DS-011",
+          "DS-012"
+        ],
+        "removed_dependent_schemas": [],
+        "final_dependent_schema_count": 21
+      }
+    },
+    "remaining_missing_reverse_dependencies": [],
+    "remaining_extra_reverse_dependencies": []
+  }
+}

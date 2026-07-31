@@ -68,7 +68,7 @@ Please classify submissions using one of the following categories:
 - Conformance Clarification
 - Security Concern
 - Determinism Concern
-- Multitenant Isolation Concern
+- Multitenant Governance Isolation Concern
 
 Correct categorization helps reviewers prioritize issues.
 

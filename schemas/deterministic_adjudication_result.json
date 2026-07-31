@@ -1,0 +1,1413 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/deterministic_adjudication_result.json",
+  "title": "Deterministic Adjudication Result",
+  "description": "Canonical, independently identifiable and traceable result of resolving which candidate, if any, may proceed toward commitment when multiple currently admissible transitions contend within the same governance horizon. The result operates on a complete Admissible Set and applies explicit governance-significant ordering, conflict, dependency, resource, priority, state, and policy conditions rather than arrival timing or implementation-specific behavior. It may select one properly bound transition, a validated executable subset, no candidate, or an indeterminate outcome. It contributes to Governance Evidence and commitment processing but does not itself establish authority, authorize execution, validate Governance Binding, or commit a transition.",
+  "$comment": "DS-037 implements ARM-214 and ARM-215, Core Section 7.6A, NS-7.6A-03, CR-094, and CR-095. Equivalent qualified inputs, governance configuration, and Canonical State SHALL produce equivalent adjudication outcomes. Arrival order, transport timing, node-local behavior, and implementation-specific scheduling are prohibited as governance bases.",
+  "x-agcp-ds-id": "DS-037",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Composite-Governance Result",
+  "x-agcp-normative-basis": {
+    "arm_ids": [
+      "ARM-205",
+      "ARM-207",
+      "ARM-208",
+      "ARM-214",
+      "ARM-215",
+      "ARM-216",
+      "ARM-217"
+    ],
+    "ns_ids": [
+      "NS-7.6A-03"
+    ],
+    "cr_ids": [
+      "CR-094",
+      "CR-095"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "deterministic_adjudication_result_id": {
+      "$ref": "#/$defs/deterministic_adjudication_result_id"
+    },
+    "result_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/adjudication_outcome"
+    },
+    "disposition": {
+      "$ref": "#/$defs/adjudication_disposition"
+    },
+    "admissible_set": {
+      "$ref": "#/$defs/admissible_set"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/governance_domain_id"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "canonical_state_basis": {
+      "$ref": "#/$defs/qualified_canonical_state_basis"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "contention_summary": {
+      "$ref": "#/$defs/contention_summary"
+    },
+    "governance_significant_condition_assessments": {
+      "$ref": "#/$defs/governance_significant_condition_assessments"
+    },
+    "contention_conditions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/contention_condition"
+      },
+      "minItems": 1,
+      "maxItems": 4096
+    },
+    "adjudication_basis": {
+      "$ref": "#/$defs/adjudication_basis"
+    },
+    "selected_candidate": {
+      "$ref": "#/$defs/selected_candidate"
+    },
+    "selected_executable_subset": {
+      "$ref": "#/$defs/selected_executable_subset"
+    },
+    "no_selection_reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/outcome_reason"
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "indeterminate_reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/outcome_reason"
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "supporting_qualified_evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 512
+    },
+    "adjudicated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "result_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "deterministic_adjudication_result_id",
+    "result_version",
+    "outcome",
+    "disposition",
+    "admissible_set",
+    "tenant_id",
+    "governance_domain_ids",
+    "evaluation_horizon",
+    "canonical_state_basis",
+    "governance_version_ref",
+    "policy_refs",
+    "contention_summary",
+    "governance_significant_condition_assessments",
+    "contention_conditions",
+    "adjudication_basis",
+    "supporting_qualified_evidence",
+    "adjudicated_at",
+    "attribution",
+    "result_digest",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "CANDIDATE_SELECTED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "SELECTED_FOR_COMMIT_BOUND_PROCESSING"
+          }
+        },
+        "required": [
+          "selected_candidate"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "selected_executable_subset"
+              ]
+            },
+            {
+              "required": [
+                "no_selection_reasons"
+              ]
+            },
+            {
+              "required": [
+                "indeterminate_reasons"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "EXECUTABLE_SUBSET_SELECTED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "SELECTED_FOR_COMMIT_BOUND_PROCESSING"
+          }
+        },
+        "required": [
+          "selected_executable_subset"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "selected_candidate"
+              ]
+            },
+            {
+              "required": [
+                "no_selection_reasons"
+              ]
+            },
+            {
+              "required": [
+                "indeterminate_reasons"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "NO_CANDIDATE_SELECTED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "NO_CANDIDATE_MAY_BIND"
+          }
+        },
+        "required": [
+          "no_selection_reasons"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "selected_candidate"
+              ]
+            },
+            {
+              "required": [
+                "selected_executable_subset"
+              ]
+            },
+            {
+              "required": [
+                "indeterminate_reasons"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "INDETERMINATE"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "EVALUATION_BLOCKED"
+          }
+        },
+        "required": [
+          "indeterminate_reasons"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "selected_candidate"
+              ]
+            },
+            {
+              "required": [
+                "selected_executable_subset"
+              ]
+            },
+            {
+              "required": [
+                "no_selection_reasons"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "CANDIDATE_SELECTED",
+              "EXECUTABLE_SUBSET_SELECTED",
+              "NO_CANDIDATE_SELECTED"
+            ]
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contention_conditions": {
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/contention_condition"
+                },
+                {
+                  "properties": {
+                    "condition_state": {
+                      "enum": [
+                        "RESOLVED",
+                        "NOT_APPLICABLE"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "condition_state"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "deterministic_adjudication_result_id": {
+      "allOf": [
+        {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        {
+          "description": "Stable identifier of one deterministic adjudication result."
+        }
+      ]
+    },
+    "adjudication_outcome": {
+      "type": "string",
+      "enum": [
+        "CANDIDATE_SELECTED",
+        "EXECUTABLE_SUBSET_SELECTED",
+        "NO_CANDIDATE_SELECTED",
+        "INDETERMINATE"
+      ]
+    },
+    "adjudication_disposition": {
+      "type": "string",
+      "enum": [
+        "SELECTED_FOR_COMMIT_BOUND_PROCESSING",
+        "NO_CANDIDATE_MAY_BIND",
+        "EVALUATION_BLOCKED"
+      ]
+    },
+    "qualified_canonical_state_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "state_qualification_result_ref": {
+          "allOf": [
+            {
+              "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+            },
+            {
+              "properties": {
+                "outcome": {
+                  "const": "QUALIFIED"
+                }
+              },
+              "required": [
+                "outcome"
+              ]
+            }
+          ]
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "canonical_state_ref",
+        "state_qualification_result_ref",
+        "basis_digest"
+      ]
+    },
+    "admissible_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "candidate_kind": {
+          "type": "string",
+          "enum": [
+            "SIMPLE_TRANSITION",
+            "COMPLETE_BIND_SET",
+            "APPROVED_EXECUTABLE_SUBSET"
+          ]
+        },
+        "proposal_identity": {
+          "$ref": "common.json#/$defs/proposal_identity"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/target_ref"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "governance_decision_ref": {
+          "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+        },
+        "execution_authorization_ref": {
+          "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+        },
+        "authority_rederivation_result_ref": {
+          "allOf": [
+            {
+              "$ref": "authority_rederivation_result.json#/$defs/authority_rederivation_result_ref"
+            },
+            {
+              "properties": {
+                "outcome": {
+                  "const": "AUTHORITY_ESTABLISHED"
+                }
+              },
+              "required": [
+                "outcome"
+              ]
+            }
+          ]
+        },
+        "resulting_state_validation_result_ref": {
+          "allOf": [
+            {
+              "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+            },
+            {
+              "properties": {
+                "outcome": {
+                  "const": "VALID"
+                }
+              },
+              "required": [
+                "outcome"
+              ]
+            }
+          ]
+        },
+        "bind_set_ref": {
+          "$ref": "bind_set.json#/$defs/bind_set_ref"
+        },
+        "governance_dependency_graph_ref": {
+          "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+        },
+        "coupling_semantics": {
+          "$ref": "common.json#/$defs/composite_coupling_semantics_enum"
+        },
+        "approved_executable_subset": {
+          "$ref": "resulting_state_validation_result.json#/$defs/approved_executable_subset"
+        },
+        "currently_admissible": {
+          "const": true
+        },
+        "proposal_binding_preserved": {
+          "const": true
+        },
+        "candidate_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "candidate_kind",
+        "proposal_identity",
+        "tenant_id",
+        "governance_domain_id",
+        "target_refs",
+        "governance_decision_ref",
+        "execution_authorization_ref",
+        "authority_rederivation_result_ref",
+        "resulting_state_validation_result_ref",
+        "currently_admissible",
+        "proposal_binding_preserved",
+        "candidate_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "candidate_kind": {
+                "const": "SIMPLE_TRANSITION"
+              }
+            },
+            "required": [
+              "candidate_kind"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "bind_set_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "governance_dependency_graph_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "coupling_semantics"
+                  ]
+                },
+                {
+                  "required": [
+                    "approved_executable_subset"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "candidate_kind": {
+                "const": "COMPLETE_BIND_SET"
+              }
+            },
+            "required": [
+              "candidate_kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "bind_set_ref",
+              "governance_dependency_graph_ref",
+              "coupling_semantics"
+            ],
+            "not": {
+              "required": [
+                "approved_executable_subset"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "candidate_kind": {
+                "const": "APPROVED_EXECUTABLE_SUBSET"
+              }
+            },
+            "required": [
+              "candidate_kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "bind_set_ref",
+              "governance_dependency_graph_ref",
+              "coupling_semantics",
+              "approved_executable_subset"
+            ],
+            "properties": {
+              "coupling_semantics": {
+                "not": {
+                  "const": "STRONGLY_COUPLED"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "admissible_set": {
+      "type": "object",
+      "description": "Complete set of multiple currently admissible candidate futures evaluated for one governance horizon. The set is not itself a commitment decision.",
+      "additionalProperties": false,
+      "properties": {
+        "admissible_set_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "set_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "evaluation_horizon": {
+          "$ref": "common.json#/$defs/evaluation_horizon"
+        },
+        "candidate_count": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 4096
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/admissible_candidate"
+          },
+          "minItems": 2,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "complete_candidate_set_asserted": {
+          "const": true
+        },
+        "all_candidates_currently_admissible": {
+          "const": true
+        },
+        "admissibility_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "admissible_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "candidate_count_matches_array": {
+          "const": true
+        }
+      },
+      "required": [
+        "admissible_set_id",
+        "set_version",
+        "evaluation_horizon",
+        "candidate_count",
+        "candidates",
+        "complete_candidate_set_asserted",
+        "all_candidates_currently_admissible",
+        "admissibility_basis_digest",
+        "admissible_set_digest",
+        "candidate_count_matches_array"
+      ]
+    },
+    "contention_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "same_governance_horizon": {
+          "const": true
+        },
+        "multiple_admissible_candidates": {
+          "const": true
+        },
+        "contention_detected": {
+          "const": true
+        },
+        "contention_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ORDERING",
+              "CONFLICT",
+              "DEPENDENCY",
+              "RESOURCE",
+              "PRIORITY",
+              "STATE",
+              "POLICY"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 7,
+          "uniqueItems": true
+        },
+        "arrival_timing_is_irrelevant": {
+          "const": true
+        },
+        "contention_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "same_governance_horizon",
+        "multiple_admissible_candidates",
+        "contention_detected",
+        "contention_types",
+        "arrival_timing_is_irrelevant",
+        "contention_digest"
+      ]
+    },
+    "condition_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "applicable": {
+          "type": "boolean"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "RESOLVED",
+            "UNRESOLVED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "rule_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "assessment_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "applicable",
+        "outcome",
+        "assessment_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "applicable": {
+                "const": false
+              }
+            },
+            "required": [
+              "applicable"
+            ]
+          },
+          "then": {
+            "properties": {
+              "outcome": {
+                "const": "NOT_APPLICABLE"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "applicable": {
+                "const": true
+              }
+            },
+            "required": [
+              "applicable"
+            ]
+          },
+          "then": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "RESOLVED",
+                  "UNRESOLVED"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "governance_significant_condition_assessments": {
+      "type": "object",
+      "description": "Explicit assessment of every governance-significant condition class named by ARM-215 and NS-7.6A-03.",
+      "additionalProperties": false,
+      "properties": {
+        "ordering": {
+          "$ref": "#/$defs/condition_assessment"
+        },
+        "conflict": {
+          "$ref": "#/$defs/condition_assessment"
+        },
+        "dependency": {
+          "$ref": "#/$defs/condition_assessment"
+        },
+        "resource": {
+          "$ref": "#/$defs/condition_assessment"
+        },
+        "priority": {
+          "$ref": "#/$defs/condition_assessment"
+        },
+        "state": {
+          "$ref": "#/$defs/condition_assessment"
+        },
+        "policy": {
+          "$ref": "#/$defs/condition_assessment"
+        }
+      },
+      "required": [
+        "ordering",
+        "conflict",
+        "dependency",
+        "resource",
+        "priority",
+        "state",
+        "policy"
+      ]
+    },
+    "contention_condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "condition_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "condition_type": {
+          "type": "string",
+          "enum": [
+            "ORDERING",
+            "CONFLICT",
+            "DEPENDENCY",
+            "RESOURCE",
+            "PRIORITY",
+            "STATE",
+            "POLICY"
+          ]
+        },
+        "candidate_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "condition_state": {
+          "type": "string",
+          "enum": [
+            "RESOLVED",
+            "UNRESOLVED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "resolution_rule": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "governing_policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "dependency_graph_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "resulting_state_validation_refs": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+              },
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "VALID"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              }
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "condition_id",
+        "condition_type",
+        "candidate_ids",
+        "condition_state",
+        "resolution_rule",
+        "basis_digest"
+      ]
+    },
+    "adjudication_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "algorithm_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deterministic_input_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ordered_condition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "tie_break_policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "equivalent_inputs_equivalent_outcome": {
+          "const": true
+        },
+        "node_independent": {
+          "const": true
+        },
+        "transport_independent": {
+          "const": true
+        },
+        "arrival_time_used": {
+          "const": false
+        },
+        "wall_clock_arrival_order_used": {
+          "const": false
+        },
+        "implementation_specific_behavior_used": {
+          "const": false
+        },
+        "governance_significant_conditions_only": {
+          "const": true
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "algorithm_id",
+        "algorithm_version",
+        "deterministic_input_digest",
+        "ordered_condition_ids",
+        "equivalent_inputs_equivalent_outcome",
+        "node_independent",
+        "transport_independent",
+        "arrival_time_used",
+        "wall_clock_arrival_order_used",
+        "implementation_specific_behavior_used",
+        "governance_significant_conditions_only",
+        "basis_digest"
+      ]
+    },
+    "selected_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "candidate_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "selection_rank": {
+          "const": 1
+        },
+        "selection_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "remains_subject_to_governance_binding_validation": {
+          "const": true
+        },
+        "remains_subject_to_commit_boundary_enforcement": {
+          "const": true
+        }
+      },
+      "required": [
+        "candidate_id",
+        "candidate_digest",
+        "selection_rank",
+        "selection_basis_digest",
+        "remains_subject_to_governance_binding_validation",
+        "remains_subject_to_commit_boundary_enforcement"
+      ]
+    },
+    "partial_bind_admissibility_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "determination_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "outcome": {
+          "const": "ADMISSIBLE"
+        },
+        "parent_proposal_admissibility_preserved": {
+          "const": true
+        },
+        "required_dependencies_preserved": {
+          "const": true
+        },
+        "ordering_preserved": {
+          "const": true
+        },
+        "authority_preserved": {
+          "const": true
+        },
+        "evidence_preserved": {
+          "const": true
+        },
+        "canonical_state_preserved": {
+          "const": true
+        },
+        "policy_preserved": {
+          "const": true
+        },
+        "invariants_preserved": {
+          "const": true
+        },
+        "acceptable_resulting_state_preserved": {
+          "const": true
+        },
+        "resulting_state_validation_result_ref": {
+          "allOf": [
+            {
+              "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+            },
+            {
+              "properties": {
+                "outcome": {
+                  "const": "VALID"
+                }
+              },
+              "required": [
+                "outcome"
+              ]
+            }
+          ]
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "determination_id",
+        "outcome",
+        "parent_proposal_admissibility_preserved",
+        "required_dependencies_preserved",
+        "ordering_preserved",
+        "authority_preserved",
+        "evidence_preserved",
+        "canonical_state_preserved",
+        "policy_preserved",
+        "invariants_preserved",
+        "acceptable_resulting_state_preserved",
+        "resulting_state_validation_result_ref",
+        "result_digest",
+        "evaluated_at"
+      ]
+    },
+    "selected_executable_subset": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subset_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "source_candidate_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "bind_set_ref": {
+          "$ref": "bind_set.json#/$defs/bind_set_ref"
+        },
+        "governance_dependency_graph_ref": {
+          "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+        },
+        "coupling_semantics": {
+          "allOf": [
+            {
+              "$ref": "common.json#/$defs/composite_coupling_semantics_enum"
+            },
+            {
+              "not": {
+                "const": "STRONGLY_COUPLED"
+              }
+            }
+          ]
+        },
+        "selected_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "excluded_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "partial_bind_admissibility": {
+          "$ref": "#/$defs/partial_bind_admissibility_record"
+        },
+        "selection_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "subset_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "remains_subject_to_governance_binding_validation": {
+          "const": true
+        },
+        "remains_subject_to_commit_boundary_enforcement": {
+          "const": true
+        }
+      },
+      "required": [
+        "subset_id",
+        "source_candidate_id",
+        "bind_set_ref",
+        "governance_dependency_graph_ref",
+        "coupling_semantics",
+        "selected_sub_transition_ids",
+        "excluded_sub_transition_ids",
+        "partial_bind_admissibility",
+        "selection_basis_digest",
+        "subset_digest",
+        "remains_subject_to_governance_binding_validation",
+        "remains_subject_to_commit_boundary_enforcement"
+      ]
+    },
+    "outcome_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reason_code": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "reason_category": {
+          "type": "string",
+          "enum": [
+            "ORDERING",
+            "CONFLICT",
+            "DEPENDENCY",
+            "RESOURCE",
+            "PRIORITY",
+            "STATE",
+            "POLICY",
+            "INPUT_UNAVAILABLE",
+            "INPUT_CONFLICT",
+            "OTHER_GOVERNED_REASON"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "affected_candidate_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "reason_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "reason_code",
+        "reason_category",
+        "description",
+        "reason_digest"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "admissible_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "canonical_state_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ordered_condition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "algorithm_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "algorithm_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "decision_trace_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "replay_procedure_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "replayable": {
+          "const": true
+        }
+      },
+      "required": [
+        "admissible_set_digest",
+        "canonical_state_basis_digest",
+        "governance_version_digest",
+        "ordered_condition_ids",
+        "algorithm_id",
+        "algorithm_version",
+        "decision_trace_digest",
+        "replay_procedure_version",
+        "replayable"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "result_is_not_execution_authorization": {
+          "const": true
+        },
+        "result_is_not_authority_at_commitment": {
+          "const": true
+        },
+        "result_is_not_governance_binding_validation": {
+          "const": true
+        },
+        "result_does_not_commit_transition": {
+          "const": true
+        },
+        "arrival_timing_not_governance_basis": {
+          "const": true
+        },
+        "implementation_specific_behavior_not_governance_basis": {
+          "const": true
+        },
+        "equivalent_qualified_inputs_produce_equivalent_outcome": {
+          "const": true
+        },
+        "complete_admissible_set_preserved": {
+          "const": true
+        },
+        "selected_candidate_remains_subject_to_commit_controls": {
+          "const": true
+        },
+        "no_implicit_cross_domain_authority": {
+          "const": true
+        }
+      },
+      "required": [
+        "result_is_not_execution_authorization",
+        "result_is_not_authority_at_commitment",
+        "result_is_not_governance_binding_validation",
+        "result_does_not_commit_transition",
+        "arrival_timing_not_governance_basis",
+        "implementation_specific_behavior_not_governance_basis",
+        "equivalent_qualified_inputs_produce_equivalent_outcome",
+        "complete_admissible_set_preserved",
+        "selected_candidate_remains_subject_to_commit_controls",
+        "no_implicit_cross_domain_authority"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Implementation-specific extensions whose names are URI-like or reverse-domain namespaces and that cannot alter canonical adjudication semantics.",
+      "propertyNames": {
+        "pattern": "^(https?://|urn:|[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)+[:/]).+"
+      },
+      "additionalProperties": true
+    },
+    "deterministic_adjudication_result_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-037 Deterministic Adjudication Result.",
+      "additionalProperties": false,
+      "properties": {
+        "deterministic_adjudication_result_id": {
+          "$ref": "#/$defs/deterministic_adjudication_result_id"
+        },
+        "outcome": {
+          "$ref": "#/$defs/adjudication_outcome"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "admissible_set_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "adjudicated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "deterministic_adjudication_result_id",
+        "outcome",
+        "result_digest",
+        "admissible_set_id",
+        "adjudicated_at"
+      ]
+    }
+  }
+}

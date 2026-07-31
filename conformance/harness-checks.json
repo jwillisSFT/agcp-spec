@@ -6,14 +6,18 @@
     "model": "repository_release",
     "embedded_spec_version": false
   },
-  "generated_at": "2026-06-28T19:58:27Z",
+  "generated_at": "2026-07-31T11:30:00Z",
   "traceability_model": {
     "authoritative_chain": [
-      "Normative Specification",
-      "Normative Statement (NS)",
-      "Conformance Requirement (CR)",
-      "Test Case (TC)"
+      "Published AGCP Runtime Governance Conformance Requirements (CRs)",
+      "AGCP Core Specification",
+      "Applicable normative Companion Specifications expressly adopted by the implementation profile",
+      "Implementation Profiles",
+      "AGCP Conformance Test Suite",
+      "Reference Implementations"
     ],
+    "architectural_interpretation": "The Architecture Reference Model governs architectural terminology and concept meaning where an ARM-defined concept is used, but does not independently create conformance obligations.",
+    "extraction_and_traceability": "Normative Statements are atomic obligations extracted from the Core for stable identification and RTM traceability. They do not supersede the CRs, Core, or applicable adopted normative Companion Specifications.",
     "harness_layer": "Harness checks and test vectors provide executable realization of Test Cases and SHALL NOT introduce independent normative requirements."
   },
   "checks": [
@@ -26,13 +30,15 @@
           "Proposal Qualification"
         ],
         "schemas": [
-          "proposal_submit_request.json",
-          "proposal_view.json",
-          "error_response.json"
+          "schemas/proposal_submit_request.json",
+          "schemas/proposal_view.json",
+          "schemas/error_response.json"
         ],
         "test_vectors": [
           "TV-PROP-001",
-          "TV-PROP-002"
+          "TV-PROP-004",
+          "TV-PROP-005",
+          "TV-PROP-006"
         ]
       },
       "expected_behavior": [
@@ -57,21 +63,28 @@
           "Governance Decision Function"
         ],
         "schemas": [
-          "governance_decision_result.json",
-          "constraint_evaluation.json",
-          "invariant_evaluation.json",
-          "governance_evidence.json"
+          "schemas/governance_decision_result.json",
+          "schemas/constraint_evaluation.json",
+          "schemas/invariant_evaluation.json",
+          "schemas/deterministic_adjudication_result.json"
         ],
         "test_vectors": [
-          "TV-GOV-001",
-          "TV-GOV-002",
-          "TV-GOV-003"
+          "TV-PROP-001",
+          "TV-PROP-002",
+          "TV-PROP-003",
+          "TV-PROP-007"
+        ],
+        "fixtures": [
+          "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+          "schemas/examples/ds011-constraint-evaluation-violated.json",
+          "schemas/examples/ds012-invariant-evaluation-preserved.json",
+          "schemas/examples/ds012-invariant-evaluation-hard-violation.json"
         ]
       },
       "expected_behavior": [
         "Authorized decisions are produced only when applicable governance policy permits the Proposal.",
         "Denied decisions are produced when applicable governance policy rejects the Proposal.",
-        "Pending Human Review is produced when governance policy requires Human Review.",
+        "Pending human adjudication is produced when governance policy requires governed human adjudication or Governance Approval.",
         "Governance decisions are deterministic for identical authoritative inputs."
       ],
       "evidence_required": [
@@ -83,34 +96,43 @@
       ]
     },
     {
-      "check_id": "CHECK-HUMAN-REVIEW",
-      "validated_capability": "Human Review is enforced when required and cannot be bypassed before Execution Authorization.",
+      "check_id": "CHECK-GOVERNANCE-APPROVAL",
+      "validated_capability": "Human adjudication and Governance Approval Artifacts are enforced when required and cannot be bypassed before Commit-Bound Admissibility.",
       "severity": "MUST",
       "applies_to": {
         "pipeline_stages": [
-          "Human Review"
+          "Human Adjudication and Governance Approval"
         ],
         "schemas": [
-          "human_review_artifact.json",
-          "governance_evidence.json"
+          "schemas/governance_approval_artifact.json",
+          "schemas/governance_lifecycle_record.json",
+          "schemas/governance_evidence.json"
         ],
         "test_vectors": [
-          "TV-HR-001",
-          "TV-HR-002",
-          "TV-HR-003"
+          "TV-GAPP-001",
+          "TV-GAPP-002",
+          "TV-GAPP-003",
+          "TV-GAPP-004"
+        ],
+        "fixtures": [
+          "schemas/examples/ds026-governance-approval-partial-quorum.json",
+          "schemas/examples/ds026-governance-approval-completed-quorum.json"
         ]
       },
       "expected_behavior": [
-        "Partial Human Review does not satisfy quorum.",
-        "Valid Human Review satisfying required roles permits progression to Execution Authorization.",
-        "Invalid, expired, unauthorized, or replayed Human Review artifacts are rejected.",
-        "Human Review decisions are bound to the applicable Proposal, tenant, and Authority Lineage."
+        "Valid partial quorum is accumulated without being treated as completed quorum.",
+        "Completion of required quorum establishes eligibility for the applicable lifecycle transition, subject to all other governance conditions.",
+        "Approval or quorum completion does not itself constitute authority at commitment or permission to execute.",
+        "Invalid, expired, unauthorized, replayed, revoked, withdrawn, or superseded Governance Approval Artifacts do not support progression.",
+        "Governance Approval Artifacts are bound to the applicable Proposal Identity, lifecycle state, tenant, governance domain, target, scope, validity conditions, and Authority Lineage."
       ],
       "evidence_required": [
-        "Human Review Artifact",
-        "Reviewer identity",
+        "Governance Approval Artifact",
+        "Approver identity",
         "Authority Lineage reference",
-        "Quorum status",
+        "Lifecycle-state binding",
+        "Quorum contribution and status where applicable",
+        "Cryptographic verification evidence",
         "Governance Evidence reference"
       ]
     },
@@ -123,19 +145,23 @@
           "Execution Authorization"
         ],
         "schemas": [
-          "execution_authorization_view.json",
-          "governance_evidence.json"
+          "schemas/execution_authorization_view.json",
+          "schemas/governance_evidence.json"
         ],
         "test_vectors": [
-          "TV-AUTH-001",
-          "TV-AUTH-002"
+          "TV-PROP-001",
+          "TV-GAPP-002",
+          "TV-COMMIT-003",
+          "TV-EAUTH-001",
+          "TV-EAUTH-002",
+          "TV-EAUTH-003"
         ]
       },
       "expected_behavior": [
-        "Execution Authorization succeeds only after valid Governance Decision and required Human Review completion.",
+        "Execution Authorization succeeds only after valid Governance Decision and required governed approval or adjudication completion.",
         "Execution Authorization fails when required authority, Canonical State, governance configuration, tenant state, or Governance Domain conditions are not satisfied.",
         "Execution Authorization does not itself perform execution.",
-        "Execution Authorization produces Governance Evidence and an ordered ledger entry where required."
+        "Execution Authorization produces Governance Evidence and an ordered DS-040 Governance Ledger Event where required."
       ],
       "evidence_required": [
         "Execution Authorization artifact",
@@ -155,14 +181,29 @@
           "Commit Boundary"
         ],
         "schemas": [
-          "commit_boundary_request.json",
-          "commit_boundary_result.json",
-          "governance_evidence.json"
+          "schemas/commit_boundary_request.json",
+          "schemas/commit_boundary_result.json",
+          "schemas/enforcement_context.json",
+          "schemas/governance_binding_validation_result.json",
+          "schemas/resulting_state_validation_result.json",
+          "schemas/state_qualification_result.json",
+          "schemas/evidence_qualification_result.json",
+          "schemas/authority_rederivation_result.json",
+          "schemas/continuation_integrity_result.json"
         ],
         "test_vectors": [
-          "TV-CB-001",
-          "TV-CB-002",
-          "TV-CB-003"
+          "TV-COMMIT-001",
+          "TV-COMMIT-002",
+          "TV-COMMIT-003",
+          "TV-COMMIT-004",
+          "TV-COMMIT-005"
+        ],
+        "fixtures": [
+          "schemas/examples/ds018-commit-boundary-request-single.json",
+          "schemas/examples/ds019-commit-boundary-result-success.json",
+          "schemas/examples/ds019-commit-boundary-result-refusal.json",
+          "schemas/examples/ds029-enforcement-context-admissible.json",
+          "schemas/examples/ds029-enforcement-context-prevent.json"
         ]
       },
       "expected_behavior": [
@@ -178,7 +219,7 @@
         "Execution Authorization reference",
         "Canonical State reference",
         "Governance Evidence reference",
-        "Ledger entry reference"
+        "DS-040 Governance Ledger Event reference"
       ]
     },
     {
@@ -190,12 +231,12 @@
           "Governance Evidence"
         ],
         "schemas": [
-          "governance_evidence.json"
+          "schemas/governance_evidence.json"
         ],
         "test_vectors": [
-          "TV-LEDGER-001",
-          "TV-LEDGER-003",
-          "TV-META-003"
+          "TV-EVID-001",
+          "TV-PROP-001",
+          "TV-COMMIT-001"
         ]
       },
       "expected_behavior": [
@@ -216,66 +257,101 @@
     },
     {
       "check_id": "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
-      "validated_capability": "Append-Only Governance Ledger preserves immutable ordered governance history.",
+      "validated_capability": "DS-040 Governance Ledger Events preserve immutable, attributable, integrity-linked, and authoritatively ordered governance history.",
       "severity": "MUST",
       "applies_to": {
         "pipeline_stages": [
           "Append-Only Governance Ledger"
         ],
         "schemas": [
-          "governance_evidence.json"
+          "schemas/governance_ledger_event.json",
+          "schemas/governance_evidence.json"
         ],
         "test_vectors": [
-          "TV-LEDGER-001",
-          "TV-LEDGER-002",
-          "TV-LEDGER-003",
-          "TV-META-001"
+          "TV-PROP-001",
+          "TV-EVID-001",
+          "TV-STATE-001",
+          "TV-STATE-002"
+        ],
+        "fixtures": [
+          "schemas/examples/ds040-governance-ledger-event-genesis.json",
+          "schemas/examples/ds040-governance-ledger-event-sequenced.json"
         ]
       },
       "expected_behavior": [
-        "Governance-significant events are recorded in ledger sequence order.",
-        "Ledger entries are immutable and append-only.",
-        "Ledger sequence order is authoritative.",
-        "Timestamp ordering is not accepted as authoritative for Canonical State derivation.",
-        "Tampered, deleted, replaced, or reordered ledger histories are rejected or produce non-equivalent results."
+        "Every appended governance record validates against schemas/governance_ledger_event.json.",
+        "Governance Ledger Events are immutable and append-only after append.",
+        "Ordering is determined within the declared ordering_scope by ledger_position.sequence.",
+        "Genesis and non-genesis events satisfy DS-040 predecessor-binding conditions.",
+        "Event subject, typed artifact references, governance basis, evidence binding, causality, integrity protection, attribution, provenance, replay material, and semantic assertions are present and valid.",
+        "Timestamp, arrival, storage, node, transport, and implementation scheduling are not accepted as authoritative ordering bases.",
+        "Tampered, deleted, substituted, detached, or reordered event histories are rejected or produce non-equivalent ledger-derived results."
       ],
       "evidence_required": [
-        "ledger_entry_id",
-        "ledger_sequence_value",
-        "artifact_reference",
-        "governance_evidence_reference",
-        "previous_ledger_entry_hash where implemented"
+        "ledger_event_id",
+        "event_version",
+        "record_type",
+        "event_type",
+        "event_category",
+        "ledger_id",
+        "ordering_scope",
+        "ledger_position",
+        "tenant_id",
+        "governance_domain_id",
+        "event_subject",
+        "event_artifact_refs",
+        "governance_basis",
+        "evidence_binding",
+        "causality",
+        "event_time",
+        "append_status",
+        "append_only_controls",
+        "integrity_protection",
+        "attribution",
+        "provenance",
+        "replay_material",
+        "semantic_assertions",
+        "event_uri"
       ]
     },
     {
       "check_id": "CHECK-CANONICAL-STATE",
-      "validated_capability": "Canonical State is derived from ordered ledger history or a verifiable materialized state reproducible from that history.",
+      "validated_capability": "Canonical State is deterministically resolved from applicable qualified authoritative governance sources; incorporated Governance Ledger records use authoritative ledger ordering.",
       "severity": "MUST",
       "applies_to": {
         "pipeline_stages": [
-          "Canonical State Derivation",
+          "Canonical State Resolution",
           "Deterministic Replay"
         ],
         "schemas": [
-          "governance_evidence.json"
+          "schemas/canonical_state.json",
+          "schemas/state_qualification_result.json",
+          "schemas/governance_ledger_event.json",
+          "schemas/governance_evidence.json"
         ],
         "test_vectors": [
-          "TV-LEDGER-001",
-          "TV-LEDGER-002",
-          "TV-META-003"
+          "TV-STATE-001",
+          "TV-STATE-002",
+          "TV-COMMIT-001"
+        ],
+        "fixtures": [
+          "schemas/examples/ds032-state-qualification-qualified.json",
+          "schemas/examples/ds032-state-qualification-not-qualified.json"
         ]
       },
       "expected_behavior": [
-        "Canonical State is reproducible from ordered Append-Only Governance Ledger entries.",
-        "Materialized Canonical State views are verifiable against ordered ledger history.",
-        "Reordered ledger histories are rejected or produce a non-equivalent Canonical State.",
-        "Timestamp ordering is not accepted as a substitute for ledger sequence ordering."
+        "Canonical State is reproducible from the same complete set of qualified authoritative source versions used for the evaluation.",
+        "Incorporated Governance Ledger records and Derived Lifecycle State are interpreted using authoritative ledger ordering.",
+        "Materialized Canonical State views are verifiable against the applicable qualified authoritative sources and ordered Governance Ledger records.",
+        "Reordered ledger histories are rejected or produce non-equivalent ledger-derived event or lifecycle state.",
+        "Timestamp or implementation-specific storage ordering is not accepted as a substitute for authoritative ledger ordering."
       ],
       "evidence_required": [
         "Canonical State reference",
-        "Ordered ledger entries",
+        "Qualified authoritative source references and versions",
+        "Applicable ordered Governance Ledger records and ledger positions",
         "Governance Evidence references",
-        "Ledger reconstruction evidence"
+        "Canonical State resolution and replay evidence"
       ]
     },
     {
@@ -289,8 +365,15 @@
           "Append-Only Governance Ledger"
         ],
         "test_vectors": [
-          "TV-META-002"
-        ]
+          "TV-PROP-008",
+          "TV-PROP-009",
+          "TV-COMMIT-004",
+          "TV-PEM-004",
+          "TV-PEM-005",
+          "TV-POL-004",
+          "TV-POL-005"
+        ],
+        "schemas": []
       },
       "expected_behavior": [
         "Identical replay produces an equivalent response.",
@@ -302,7 +385,7 @@
         "Idempotency or replay-protection key",
         "Proposal reference",
         "Governance Evidence reference",
-        "Ledger entries before and after replay"
+        "DS-040 Governance Ledger Events before and after replay"
       ]
     },
     {
@@ -317,13 +400,11 @@
           "Commit Boundary"
         ],
         "schemas": [
-          "tenant.json"
+          "schemas/tenant.json"
         ],
         "test_vectors": [
-          "TV-PROP-001",
-          "TV-PROP-002",
-          "TV-AUTH-002",
-          "TV-CB-003"
+          "TV-PROP-006",
+          "TV-COMMIT-005"
         ]
       },
       "expected_behavior": [
@@ -351,7 +432,18 @@
         "test_vectors": [
           "TV-XTEN-001",
           "TV-XTEN-002",
-          "TV-XDOM-001"
+          "TV-XTEN-003",
+          "TV-XTEN-004",
+          "TV-EAUTH-003",
+          "TV-PEM-003",
+          "TV-POL-003",
+          "TV-GART-003"
+        ],
+        "schemas": [
+          "schemas/tenant.json",
+          "schemas/canonical_state.json",
+          "schemas/authority_lineage.json",
+          "schemas/governance_evidence.json"
         ]
       },
       "expected_behavior": [
@@ -376,19 +468,19 @@
       "applies_to": {
         "pipeline_stages": [
           "Proposal Qualification",
-          "Human Review",
+          "Governance Approval and Adjudication",
           "Execution Authorization",
           "Commit Boundary",
           "Governance Evidence"
         ],
         "schemas": [
-          "common.json",
-          "governance_evidence.json"
+          "schemas/common.json",
+          "schemas/governance_evidence.json"
         ],
         "test_vectors": [
           "TV-PROP-001",
-          "TV-PROP-002",
-          "TV-HR-003"
+          "TV-PROP-005",
+          "TV-GAPP-004"
         ]
       },
       "expected_behavior": [
@@ -414,28 +506,268 @@
           "Policy Evaluation Contract"
         ],
         "registries": [
-          "constraint-type-registry.json",
-          "invariant-type-registry.json",
-          "rejection-code-registry.json"
+          "registries/constraint-type-registry.json",
+          "registries/invariant-type-registry.json",
+          "registries/rejection-code-registry.json"
+        ],
+        "schemas": [
+          "schemas/registry_document.schema.json"
+        ],
+        "fixtures": [
+          "schemas/examples/ds044-registry-document-capability-example.json"
+        ],
+        "test_vectors": [
+          "TV-PROP-003",
+          "TV-PROP-004",
+          "TV-PEM-001",
+          "TV-PEM-002",
+          "TV-POL-001",
+          "TV-POL-002",
+          "TV-GART-001",
+          "TV-GART-002"
         ]
       },
       "expected_behavior": [
+        "Each authoritative registry payload validates against schemas/registry_document.schema.json and passes integrity verification.",
         "Unknown constraint types are rejected.",
         "Unknown invariant types are rejected.",
         "Referenced rejection codes exist in the rejection-code registry.",
         "Registry lookup is deterministic and tenant-scoped where applicable."
       ],
       "evidence_required": [
+        "DS-044 registry validation result",
         "Registry reference",
         "Registry lookup result",
         "Applicable rejection code"
+      ]
+    },
+    {
+      "check_id": "CHECK-QUALIFIED-GOVERNANCE-INPUTS",
+      "validated_capability": "Canonical State, Governance Evidence, and authority are independently qualified or re-derived before commitment.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "State Qualification",
+          "Evidence Qualification",
+          "Authority Re-Derivation"
+        ],
+        "schemas": [
+          "schemas/state_qualification_result.json",
+          "schemas/evidence_qualification_result.json",
+          "schemas/authority_rederivation_result.json"
+        ],
+        "fixtures": [
+          "schemas/examples/ds032-state-qualification-qualified.json",
+          "schemas/examples/ds032-state-qualification-not-qualified.json",
+          "schemas/examples/ds033-evidence-qualification-qualified.json",
+          "schemas/examples/ds033-evidence-qualification-not-qualified.json"
+        ],
+        "test_vectors": [
+          "TV-STATE-001",
+          "TV-STATE-002",
+          "TV-COMMIT-001"
+        ]
+      },
+      "expected_behavior": [
+        "Qualification results are attributable, integrity-protected, and proposal-specific where applicable.",
+        "Unqualified state or evidence cannot support admissibility.",
+        "Authority is re-derived from current qualified governance inputs before commitment."
+      ],
+      "evidence_required": [
+        "State Qualification Result",
+        "Evidence Qualification Result",
+        "Authority Re-Derivation Result",
+        "Governance Evidence references"
+      ]
+    },
+    {
+      "check_id": "CHECK-LIFECYCLE-AND-CONTINUATION",
+      "validated_capability": "Derived Lifecycle State and Continuation Integrity preserve governed nonterminal progression, degradation, re-evaluation, and recovery.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Derived Lifecycle State",
+          "Continuation Integrity",
+          "Risk-Based Re-Evaluation"
+        ],
+        "schemas": [
+          "schemas/governance_lifecycle_record.json",
+          "schemas/continuation_integrity_result.json",
+          "schemas/governance_ledger_event.json"
+        ],
+        "fixtures": [
+          "schemas/examples/ds038-governance-lifecycle-authorized.json",
+          "schemas/examples/ds039-continuation-integrity-degraded.json",
+          "schemas/examples/ds039-continuation-integrity-recovered.json"
+        ],
+        "test_vectors": [
+          "TV-PROP-001",
+          "TV-COMMIT-001",
+          "TV-COMMIT-002"
+        ]
+      },
+      "expected_behavior": [
+        "Lifecycle state is derived from ordered authoritative governance records.",
+        "Material governance changes deterministically degrade affected nonterminal proposals.",
+        "Governed recovery does not bypass renewed Commit-Bound Admissibility."
+      ],
+      "evidence_required": [
+        "Lifecycle record",
+        "Continuation Integrity result",
+        "Risk-based re-evaluation evidence",
+        "Governance Ledger event references"
+      ]
+    },
+    {
+      "check_id": "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+      "validated_capability": "Governance Configuration, deterministic compilation, constitutional validation, constitutional constraint preservation, omission analysis, governance self-protection, atomic Controlled Governance Activation, prior-version preservation, governed rollback, evidence, and lineage are executable and traceable.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Governance Configuration",
+          "Governance Compilation",
+          "Controlled Governance Activation"
+        ],
+        "schemas": [
+          "schemas/governance_configuration.json",
+          "schemas/compiled_governance_artifact.json",
+          "schemas/controlled_governance_activation.json",
+          "schemas/policy_evaluation_module_artifact.json",
+          "schemas/policy_artifact.json",
+          "schemas/governance_artifact_view.json"
+        ],
+        "fixtures": [
+          "schemas/examples/ds041-governance-configuration-active.json",
+          "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+          "schemas/examples/ds043-controlled-governance-activation-activated.json",
+          "schemas/examples/ds005-policy-evaluation-module-registered.json",
+          "schemas/examples/ds006-governance-policy-registered.json",
+          "schemas/examples/ds010-governance-artifact-view-registered.json"
+        ],
+        "test_vectors": [
+          "TV-GCFG-001",
+          "TV-GCOMP-001",
+          "TV-GCONST-001",
+          "TV-GCONST-002",
+          "TV-GOMIT-001",
+          "TV-GSELF-001",
+          "TV-GACT-001",
+          "TV-GACT-002",
+          "TV-GROLL-001"
+        ]
+      },
+      "expected_behavior": [
+        "Governance Configuration is explicit, versioned, attributable, externally approved for change, and requires compilation, validation, omission analysis, and controlled activation.",
+        "Equivalent qualified governance inputs compile to equivalent machine-evaluable artifacts with complete deterministic source-to-output lineage.",
+        "Constitutional validation preserves protected constraints and prevents weakened safeguards from becoming activation-eligible.",
+        "Governance Omission Analysis detects material omissions before activation eligibility.",
+        "Governed systems cannot directly modify active admissibility conditions or bypass external approval and controlled activation.",
+        "Only an approved and validated package becomes authoritative, and activation is atomic with no partial activation.",
+        "Activation failure preserves the prior authoritative Governance Version and records attributable evidence.",
+        "Governed rollback restores an approved prior Governance Version atomically while preserving evidence, lineage, ledger ordering, and deterministic replay."
+      ],
+      "evidence_required": [
+        "Governance Configuration",
+        "Compiled Governance Artifact",
+        "Constitutional Validation result",
+        "Governance Omission Analysis result",
+        "Governance Self-Protection assessment",
+        "Controlled Governance Activation",
+        "Rollback basis and outcome",
+        "Governance Evidence and Governance Ledger references",
+        "Source-to-output and activation lineage"
+      ]
+    },
+    {
+      "check_id": "CHECK-HTTP-INTERFACE-CONTRACT",
+      "validated_capability": "All ten mandatory IF-001 operations are executable with schema-valid positive coverage and applicable negative, tenant/domain-isolation, and idempotency coverage.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "HTTP Interface"
+        ],
+        "interface_ids": [
+          "IF-001"
+        ],
+        "schemas": [
+          "schemas/meta_response.json",
+          "schemas/proposal_submit_request.json",
+          "schemas/proposal_view.json",
+          "schemas/governance_approval_artifact.json",
+          "schemas/execution_authorization_view.json",
+          "schemas/commit_boundary_request.json",
+          "schemas/commit_boundary_result.json",
+          "schemas/governance_evidence.json",
+          "schemas/policy_evaluation_module_artifact.json",
+          "schemas/policy_artifact.json",
+          "schemas/governance_artifact_view.json",
+          "schemas/error_response.json"
+        ],
+        "test_vectors": [
+          "TV-META-001",
+          "TV-PROP-001",
+          "TV-PROP-004",
+          "TV-PROP-008",
+          "TV-PROP-009",
+          "TV-GET-001",
+          "TV-GET-002",
+          "TV-XTEN-001",
+          "TV-GAPP-001",
+          "TV-GAPP-003",
+          "TV-XTEN-002",
+          "TV-EAUTH-001",
+          "TV-EAUTH-002",
+          "TV-EAUTH-003",
+          "TV-COMMIT-001",
+          "TV-COMMIT-002",
+          "TV-COMMIT-004",
+          "TV-XTEN-003",
+          "TV-EVID-001",
+          "TV-XTEN-004",
+          "TV-PEM-001",
+          "TV-PEM-002",
+          "TV-PEM-003",
+          "TV-PEM-004",
+          "TV-PEM-005",
+          "TV-POL-001",
+          "TV-POL-002",
+          "TV-POL-003",
+          "TV-POL-004",
+          "TV-POL-005",
+          "TV-GART-001",
+          "TV-GART-002",
+          "TV-GART-003"
+        ]
+      },
+      "expected_behavior": [
+        "Every mandatory IF-001 operation has at least one executable schema-valid positive vector.",
+        "Each applicable declared negative response path is exercised without being preempted by missing request parameters or an invalid positive request.",
+        "Tenant-scoped retrieval and registration operations enforce tenant and Governance Domain isolation.",
+        "Operations requiring Idempotency-Key produce equivalent outcomes for equivalent replay and reject conflicting reuse.",
+        "Harness request parameters, request schemas, and expected statuses remain synchronized with the OpenAPI contract and human-readable Interface Specification."
+      ],
+      "evidence_required": [
+        "Matched IF-001 operationId",
+        "Request-parameter validation result",
+        "Request or response schema validation result",
+        "Expected and observed HTTP status",
+        "Rejection code where applicable",
+        "Tenant and Governance Domain scope result",
+        "Idempotency result where applicable"
       ]
     }
   ],
   "notes": [
     "This file replaces the legacy assertions.json model with executable harness checks.",
     "check_id values are harness-local identifiers and are not an independent normative traceability layer.",
-    "The authoritative traceability chain remains Normative Specification -> NS -> CR -> TC.",
+    "Normative precedence is CRs -> Core -> applicable adopted normative Companion Specifications -> Implementation Profiles -> Conformance Test Suite -> Reference Implementations.",
+    "The ARM governs architectural terminology and concept meaning; Core-derived Normative Statements and the RTM support extraction and traceability without changing normative precedence.",
     "Harness checks SHALL remain synchronized with the Requirements Traceability Matrix, conformance test cases, and conformance test vectors."
-  ]
+  ],
+  "agcp_release": "v2.0.0",
+  "interface_id": "IF-001",
+  "interface_version": "v2",
+  "schema_catalog": "schemas/catalog/schema-catalog.json",
+  "fixture_mapping": "conformance/fixture-mapping.json",
+  "check_count": 17
 }

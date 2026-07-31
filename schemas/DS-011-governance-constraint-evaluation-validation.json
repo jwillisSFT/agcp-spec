@@ -1,0 +1,154 @@
+{
+  "schema_id": "DS-011",
+  "filename": "constraint_evaluation.json",
+  "status": "PASS",
+  "validated_at": "2026-07-30",
+  "metaschema_validation": {
+    "status": "PASS",
+    "schema_count": 44,
+    "dialect": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "reference_validation": {
+    "status": "PASS",
+    "reference_count": 3313,
+    "issues": []
+  },
+  "positive_tests": {
+    "satisfied": [],
+    "violated_policy_denial": [],
+    "not_applicable": []
+  },
+  "negative_tests": {
+    "missing_evaluation_id": {
+      "rejected": true,
+      "errors": [
+        "'evaluation_id' is a required property"
+      ]
+    },
+    "unrestricted_metadata_rejected": {
+      "rejected": true,
+      "errors": [
+        "Additional properties are not allowed ('metadata' was unexpected)"
+      ]
+    },
+    "satisfied_with_unqualified_inputs": {
+      "rejected": true,
+      "errors": [
+        "True was expected"
+      ]
+    },
+    "violated_without_reason": {
+      "rejected": true,
+      "errors": [
+        "'reason' is a required property"
+      ]
+    },
+    "structural_refusal_without_record": {
+      "rejected": true,
+      "errors": [
+        "'rejection_code' is a required property",
+        "'refusal_record_ref' is a required property"
+      ]
+    },
+    "not_applicable_but_applicable_true": {
+      "rejected": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    "arrival_timing_used": {
+      "rejected": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    "execution_authority_claim": {
+      "rejected": true,
+      "errors": [
+        "Additional properties are not allowed ('authorized_for_execution' was unexpected)"
+      ]
+    },
+    "evidence_qualified_without_refs": {
+      "rejected": true,
+      "errors": [
+        "'qualified_evidence_refs' is a required property",
+        "'evidence_qualification_result_refs' is a required property",
+        "'evidence_set_digest' is a required property",
+        "'evidence_qualification_result_digests' is a required property"
+      ]
+    },
+    "unhashed_constraint_ref": {
+      "rejected": true,
+      "errors": [
+        "'constraint_digest' is a required property"
+      ]
+    },
+    "unversioned_policy_ref": {
+      "rejected": true,
+      "errors": [
+        "'policy_version' is a required property"
+      ]
+    }
+  },
+  "clean_migration": {
+    "retired_common_definition": "constraint_outcome_enum",
+    "retired_definition_absent": true,
+    "obsolete_references": 0,
+    "unrestricted_metadata_absent": true
+  },
+  "common_schema": {
+    "definition_count": 64,
+    "unused_definitions": []
+  },
+  "catalog": {
+    "catalog_version": "1.0.36",
+    "hash_issues": []
+  },
+  "openapi": {
+    "status": "PASS",
+    "error": null,
+    "components": [
+      "ConstraintEvaluation",
+      "ConstraintEvaluationRef"
+    ],
+    "external_reference_validation": {
+      "status": "PASS",
+      "reference_count": 126,
+      "external_reference_count": 80,
+      "issues": []
+    }
+  },
+  "rtm": {
+    "dataset_version": "RTM-1.39",
+    "ds_011_cr_rows": [
+      "CR-001",
+      "CR-063",
+      "CR-064",
+      "CR-065",
+      "CR-066",
+      "CR-075",
+      "CR-076",
+      "CR-078"
+    ],
+    "formula_count": 0,
+    "formula_errors": [],
+    "format_comparison": {
+      "status": "PASS",
+      "checks": {
+        "sheetnames_unchanged": true,
+        "dimensions_unchanged": true,
+        "freeze_panes_unchanged": true,
+        "merged_ranges_unchanged": true,
+        "column_widths_unchanged": true,
+        "row_heights_unchanged": true,
+        "style_ids_unchanged": true,
+        "auto_filter_unchanged": true,
+        "gridlines_unchanged": true,
+        "styles_xml_unchanged": true,
+        "theme_xml_unchanged": true
+      },
+      "before_sha256": "7816b7f01e0e474bd0a08437120a6ecb8f905f8e787d2e80fafc21613c7ef136",
+      "after_sha256": "f51392a980bd5bc0c2481228b87a539ea284c141b98d6950be85a912e8f4998a"
+    }
+  }
+}

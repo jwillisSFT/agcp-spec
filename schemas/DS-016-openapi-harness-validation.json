@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "openapi_reference_count": 130,
+  "openapi_reference_issues": [],
+  "harness_yaml_parsed": true,
+  "harness_parse_error": null,
+  "governance_approval_request_present": true,
+  "canonical_governance_approval_property_count": 5,
+  "compatibility_issues": {},
+  "validated_at": "2026-07-30"
+}

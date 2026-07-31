@@ -1,0 +1,732 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/refusal_record.json",
+  "title": "Refusal Record",
+  "description": "Canonical attributable, integrity-protected, ledger-recorded, and replay-verifiable record documenting Structural Refusal and the governance basis that prevented a proposed transition from becoming operationally real. A Refusal Record is distinct from a policy denial, authorization failure, commit failure, transport error, warning, score, recommendation, or audit note.",
+  "x-agcp-ds-id": "DS-028",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "refusal_record_id": {
+      "$ref": "common.json#/$defs/refusal_record_id"
+    },
+    "record_classification": {
+      "const": "STRUCTURAL_REFUSAL"
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "refusal_stage": {
+      "$ref": "#/$defs/refusal_stage_enum"
+    },
+    "refusal_reason": {
+      "$ref": "#/$defs/refusal_reason"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "governance_basis": {
+      "$ref": "common.json#/$defs/governance_basis"
+    },
+    "governance_binding": {
+      "$ref": "governance_binding_validation_result.json#/$defs/governance_binding"
+    },
+    "governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+    },
+    "approval_artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true,
+      "description": "Approval or adjudication artifacts relevant to an escalation resolved to Structural Refusal."
+    },
+    "state_qualification_result_ref": {
+      "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+    },
+    "evidence_qualification_result_ref": {
+      "$ref": "evidence_qualification_result.json#/$defs/evidence_qualification_result_ref"
+    },
+    "binding_validation_result": {
+      "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
+    },
+    "enforcement_result": {
+      "$ref": "enforcement_context.json#/$defs/enforcement_result"
+    },
+    "lifecycle_effect": {
+      "$ref": "#/$defs/refusal_lifecycle_effect"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "evidence_continuity": {
+      "$ref": "#/$defs/evidence_continuity_record"
+    },
+    "ledger_event_ref": {
+      "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+    },
+    "related_receipt_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_receipt.json#/$defs/governance_receipt_ref"
+      },
+      "maxItems": 256,
+      "uniqueItems": true,
+      "description": "Related non-refusal receipts, such as a receipt recording a Commit Failed result caused by the separately documented Structural Refusal."
+    },
+    "refusal_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_verification": {
+      "$ref": "#/$defs/replay_verification"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    }
+  },
+  "required": [
+    "refusal_record_id",
+    "record_classification",
+    "proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "target_ref",
+    "refusal_stage",
+    "refusal_reason",
+    "governance_version_ref",
+    "governance_basis",
+    "governance_binding",
+    "lifecycle_effect",
+    "governance_evidence_refs",
+    "evidence_continuity",
+    "ledger_event_ref",
+    "refusal_digest",
+    "attribution",
+    "integrity_signature",
+    "replay_verification",
+    "created_at",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "refusal_reason": {
+            "properties": {
+              "category": {
+                "const": "INVARIANT_VIOLATION"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "refusal_reason": {
+            "required": [
+              "violated_invariant_refs"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "refusal_reason": {
+            "properties": {
+              "category": {
+                "const": "INSUFFICIENT_EVIDENCE"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "evidence_qualification_result_ref"
+        ],
+        "properties": {
+          "refusal_reason": {
+            "required": [
+              "evidence_gaps"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "refusal_reason": {
+            "properties": {
+              "category": {
+                "const": "CANONICAL_STATE_CONFLICT"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "state_qualification_result_ref"
+        ],
+        "properties": {
+          "refusal_reason": {
+            "required": [
+              "canonical_state_failure"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "refusal_reason": {
+            "properties": {
+              "category": {
+                "const": "BINDING_FAILURE"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "binding_validation_result"
+        ],
+        "properties": {
+          "refusal_reason": {
+            "required": [
+              "binding_mismatches"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "refusal_stage": {
+            "enum": [
+              "Policy Enforcement Point",
+              "Commit Boundary",
+              "Commit-Bound Admissibility"
+            ]
+          }
+        },
+        "required": [
+          "refusal_stage"
+        ]
+      },
+      "then": {
+        "required": [
+          "enforcement_result"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "refusal_reason": {
+            "properties": {
+              "category": {
+                "const": "NEGATIVE_ADJUDICATION"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "approval_artifact_refs"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "refusal_stage_enum": {
+      "type": "string",
+      "enum": [
+        "Proposal Qualification",
+        "Governance Decision Function",
+        "Execution Authorization",
+        "Continuation Integrity",
+        "Governance Realization",
+        "Commit-Bound Admissibility",
+        "Commit Boundary",
+        "Policy Enforcement Point",
+        "Tenant and Domain Isolation",
+        "Delegation and Authority Lineage",
+        "Cross-Domain Authority Isolation",
+        "Governance Self-Protection",
+        "Autonomous Coordination"
+      ],
+      "description": "Governance stage or supporting service at which Structural Refusal became the enforceable outcome."
+    },
+    "refusal_category_enum": {
+      "type": "string",
+      "enum": [
+        "MALFORMED_OR_INCOMPLETE_PROPOSAL",
+        "UNAUTHORIZED",
+        "STALE_OR_EXPIRED",
+        "MISMATCHED_BINDING",
+        "INSUFFICIENT_EVIDENCE",
+        "INVARIANT_VIOLATION",
+        "CONSTRAINT_VIOLATION",
+        "CANONICAL_STATE_CONFLICT",
+        "BINDING_FAILURE",
+        "TENANT_OR_DOMAIN_VIOLATION",
+        "AUTHORITY_OR_DELEGATION_FAILURE",
+        "DEPENDENCY_FAILURE",
+        "RESULTING_STATE_VIOLATION",
+        "NEGATIVE_ADJUDICATION",
+        "GOVERNANCE_SELF_PROTECTION",
+        "OTHER_STRUCTURAL_REFUSAL"
+      ]
+    },
+    "evidence_gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_requirement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "gap_type": {
+          "type": "string",
+          "enum": [
+            "MISSING",
+            "STALE",
+            "UNVERIFIABLE",
+            "UNRESOLVABLE",
+            "INSUFFICIENT",
+            "UNAUTHORIZED",
+            "INTEGRITY_FAILURE"
+          ]
+        },
+        "evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        },
+        "qualification_result_ref": {
+          "$ref": "evidence_qualification_result.json#/$defs/evidence_qualification_result_ref"
+        }
+      },
+      "required": [
+        "evidence_requirement",
+        "gap_type"
+      ]
+    },
+    "canonical_state_failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "failure_type": {
+          "type": "string",
+          "enum": [
+            "UNAVAILABLE",
+            "STALE",
+            "CONFLICTING_SOURCES",
+            "INCOMPLETE",
+            "INCONSISTENT",
+            "INTEGRITY_FAILURE",
+            "ORDERING_UNSUITABLE",
+            "UNRESOLVED"
+          ]
+        },
+        "state_qualification_result_ref": {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "failure_type",
+        "state_qualification_result_ref"
+      ]
+    },
+    "refusal_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rejection_code": {
+          "$ref": "common.json#/$defs/rejection_code"
+        },
+        "category": {
+          "$ref": "#/$defs/refusal_category_enum"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "violated_constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "violated_invariant_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "invariant_definition.json#/$defs/invariant_definition_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "evidence_gaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence_gap"
+          },
+          "minItems": 1,
+          "maxItems": 256
+        },
+        "canonical_state_failure": {
+          "$ref": "#/$defs/canonical_state_failure"
+        },
+        "binding_mismatches": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "PROPOSAL",
+              "AUTHORITY",
+              "AUTHORIZATION",
+              "EVIDENCE",
+              "TARGET",
+              "TENANT",
+              "POLICY",
+              "CANONICAL_STATE",
+              "SCOPE",
+              "LIFECYCLE",
+              "VALIDITY",
+              "GOVERNANCE_VERSION",
+              "BIND_CONDITIONS"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "authority_failure_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "dependency_failure_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "resulting_state_failure_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "rejection_code",
+        "category",
+        "summary"
+      ]
+    },
+    "refusal_lifecycle_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "previous_state_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        },
+        "refused_state_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        },
+        "transition_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "terminal_refusal": {
+          "const": true
+        },
+        "operational_realization_prevented": {
+          "const": true
+        },
+        "execution_occurred": {
+          "const": false
+        },
+        "lifecycle_transition_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+        },
+        "governance_lifecycle_record_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+        }
+      },
+      "required": [
+        "refused_state_ref",
+        "transition_digest",
+        "terminal_refusal",
+        "operational_realization_prevented",
+        "execution_occurred",
+        "lifecycle_transition_ref",
+        "governance_lifecycle_record_ref"
+      ]
+    },
+    "evidence_continuity_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Integrity evidence preserving the proposal-to-basis-to-refusal relationship without silent substitution or lineage gaps.",
+      "properties": {
+        "proposal_to_refusal_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evidence_chain_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "predecessor_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "handoff_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "continuity_verified": {
+          "const": true
+        },
+        "silent_substitution_detected": {
+          "const": false
+        }
+      },
+      "required": [
+        "proposal_to_refusal_binding_digest",
+        "governance_basis_digest",
+        "evidence_chain_digest",
+        "continuity_verified",
+        "silent_substitution_detected"
+      ]
+    },
+    "replay_verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Material required to independently reconstruct and verify the Structural Refusal without executing the refused action.",
+      "properties": {
+        "replay_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "proposal_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "refusal_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "expected_outcome": {
+          "const": "STRUCTURAL_REFUSAL"
+        },
+        "independent_verification_supported": {
+          "const": true
+        },
+        "historical_action_execution_required": {
+          "const": false
+        },
+        "verification_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "replay_profile",
+        "proposal_digest",
+        "governance_basis_digest",
+        "refusal_digest",
+        "expected_outcome",
+        "independent_verification_supported",
+        "historical_action_execution_required"
+      ]
+    },
+    "refusal_record_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Stable, integrity-protected reference to a DS-028 Refusal Record.",
+      "properties": {
+        "refusal_record_id": {
+          "$ref": "common.json#/$defs/refusal_record_id"
+        },
+        "rejection_code": {
+          "$ref": "common.json#/$defs/rejection_code"
+        },
+        "refusal_stage": {
+          "$ref": "#/$defs/refusal_stage_enum"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "refusal_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ledger_event_ref": {
+          "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+        },
+        "created_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "refusal_record_id",
+        "rejection_code",
+        "refusal_digest"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(x-|[A-Za-z][A-Za-z0-9.-]*:).+"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64,
+      "description": "Namespace-qualified extensions that cannot alter canonical refusal semantics."
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "documents_structural_refusal": {
+          "const": true
+        },
+        "is_policy_denial": {
+          "const": false
+        },
+        "is_transport_error": {
+          "const": false
+        },
+        "is_warning_score_recommendation_or_audit_note": {
+          "const": false
+        },
+        "prevents_operational_realization": {
+          "const": true
+        },
+        "refused_action_executed": {
+          "const": false
+        },
+        "is_attributable_and_integrity_protected": {
+          "const": true
+        },
+        "recorded_or_referenced_in_governance_ledger": {
+          "const": true
+        },
+        "supports_independent_replay_verification": {
+          "const": true
+        }
+      },
+      "required": [
+        "documents_structural_refusal",
+        "is_policy_denial",
+        "is_transport_error",
+        "is_warning_score_recommendation_or_audit_note",
+        "prevents_operational_realization",
+        "refused_action_executed",
+        "is_attributable_and_integrity_protected",
+        "recorded_or_referenced_in_governance_ledger",
+        "supports_independent_replay_verification"
+      ]
+    }
+  }
+}

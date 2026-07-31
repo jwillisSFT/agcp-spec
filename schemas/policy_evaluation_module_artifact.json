@@ -1,69 +1,1432 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/policy_evaluation_module_artifact.json",
+  "$id": "https://agcp.ai/schemas/policy_evaluation_module_artifact.json",
   "title": "Policy Evaluation Module Artifact",
-  "description": "Schema for registration and lifecycle management of a Policy Evaluation Module (PEM) artifact.",
+  "description": "Canonical attributable, versioned, integrity-protected representation of a Policy Evaluation Module (PEM) artifact used to evaluate compiled governance policy semantics. DS-005 binds the module to source policies, Governance Configuration, deterministic Compilation Context, validated dependencies, Governance Artifact Lineage, Constitutional Validation, Governance Omission Analysis, Governance Self-Protection, Controlled Governance Activation, and Governance Version without itself establishing authority at commitment, determining Commit-Bound Admissibility, authorizing execution, activating governance, or committing a transition.",
+  "x-agcp-ds-id": "DS-005",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-traceability": {
+    "arm_ids": [
+      "ARM-501",
+      "ARM-502",
+      "ARM-503",
+      "ARM-506",
+      "ARM-507",
+      "ARM-508",
+      "ARM-509",
+      "ARM-510",
+      "ARM-511",
+      "ARM-512"
+    ],
+    "ns_ids": [
+      "NS-15.6A-01",
+      "NS-15.6A-02",
+      "NS-15.6A-03",
+      "NS-15.6A-04",
+      "NS-15.6B-02"
+    ],
+    "cr_ids": [
+      "CR-110",
+      "CR-111",
+      "CR-112",
+      "CR-113",
+      "CR-114",
+      "CR-117"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "module_id": {
+      "$ref": "#/$defs/policy_evaluation_module_artifact_id"
+    },
+    "module_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "module_type": {
+      "$ref": "#/$defs/module_type"
+    },
+    "status": {
+      "$ref": "common.json#/$defs/governance_artifact_status_enum"
+    },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
     },
     "governance_domain_id": {
       "$ref": "common.json#/$defs/governance_domain_id"
     },
-    "module_id": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128
+    "effective_scope": {
+      "$ref": "common.json#/$defs/governance_scope"
     },
-    "artifact_release": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128
-    },
-    "module_hash": {
-      "$ref": "common.json#/$defs/hash_hex"
-    },
-    "artifact_ref": {
+    "module_uri": {
       "$ref": "common.json#/$defs/uri"
     },
-    "integrity_signature": {
-      "$ref": "common.json#/$defs/signature"
+    "media_type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
     },
-    "policy_registry": {
-      "$ref": "common.json#/$defs/registry_ref"
+    "module_digest": {
+      "$ref": "common.json#/$defs/content_digest"
     },
-    "constraint_registry": {
-      "$ref": "common.json#/$defs/registry_ref"
+    "runtime_representation": {
+      "$ref": "#/$defs/runtime_representation"
     },
-    "invariant_registry": {
-      "$ref": "common.json#/$defs/registry_ref"
+    "interface_contract": {
+      "$ref": "#/$defs/interface_contract"
     },
-    "determinism_verified": {
-      "type": "boolean"
+    "supported_policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 2048,
+      "uniqueItems": true
     },
-    "status": {
-      "$ref": "common.json#/$defs/governance_artifact_status_enum"
+    "governance_configuration_binding": {
+      "oneOf": [
+        {
+          "$ref": "governance_configuration.json#/$defs/governance_configuration_candidate_ref"
+        },
+        {
+          "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+        }
+      ]
+    },
+    "registry_bindings": {
+      "$ref": "#/$defs/registry_bindings"
+    },
+    "compilation_projection": {
+      "$ref": "#/$defs/compilation_projection"
+    },
+    "controlled_governance_activation_ref": {
+      "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "effective_from": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "effective_until": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "supersedes_module_ref": {
+      "$ref": "#/$defs/policy_evaluation_module_artifact_ref"
+    },
+    "superseded_by_module_ref": {
+      "$ref": "#/$defs/policy_evaluation_module_artifact_ref"
+    },
+    "lifecycle_change_reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "governed_re_evaluation_basis": {
+      "$ref": "#/$defs/governed_re_evaluation_basis"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 512,
+      "uniqueItems": true
     },
     "created_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "activated_at": {
+    "last_modified_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "metadata": {
-      "type": "object",
-      "additionalProperties": true
+    "retired_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "display_summary": {
+      "$ref": "#/$defs/display_summary"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
     }
   },
   "required": [
-    "tenant_id",
     "module_id",
-    "artifact_ref",
-    "integrity_signature",
-    "determinism_verified",
+    "module_version",
+    "module_type",
     "status",
-    "created_at"
-  ]
+    "tenant_id",
+    "governance_domain_id",
+    "effective_scope",
+    "module_uri",
+    "media_type",
+    "module_digest",
+    "runtime_representation",
+    "interface_contract",
+    "supported_policy_refs",
+    "governance_configuration_binding",
+    "registry_bindings",
+    "governance_evidence_refs",
+    "created_at",
+    "attribution",
+    "provenance",
+    "integrity_signature",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Registered"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "compilation_projection"
+              ]
+            },
+            {
+              "required": [
+                "controlled_governance_activation_ref"
+              ]
+            },
+            {
+              "required": [
+                "governance_version_ref"
+              ]
+            },
+            {
+              "required": [
+                "effective_from"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Compiled"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection"
+        ],
+        "properties": {
+          "compilation_projection": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/compilation_projection"
+              },
+              {
+                "properties": {
+                  "compilation_status": {
+                    "enum": [
+                      "COMPILED",
+                      "VALIDATION_PENDING",
+                      "VALIDATED"
+                    ]
+                  }
+                },
+                "required": [
+                  "compilation_status"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Validation Pending"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection"
+        ],
+        "properties": {
+          "compilation_projection": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/compilation_projection"
+              },
+              {
+                "properties": {
+                  "compilation_status": {
+                    "const": "VALIDATION_PENDING"
+                  },
+                  "activation_eligibility": {
+                    "const": "NOT_EVALUATED"
+                  }
+                },
+                "required": [
+                  "compilation_status",
+                  "activation_eligibility"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "Validated",
+              "Accepted"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection"
+        ],
+        "properties": {
+          "compilation_projection": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/compilation_projection"
+              },
+              {
+                "properties": {
+                  "compilation_status": {
+                    "const": "VALIDATED"
+                  },
+                  "constitutional_validation_outcome": {
+                    "const": "PASSED"
+                  },
+                  "governance_omission_analysis_outcome": {
+                    "const": "PASSED"
+                  },
+                  "governance_self_protection_outcome": {
+                    "const": "PASSED"
+                  },
+                  "activation_eligibility": {
+                    "const": "ELIGIBLE"
+                  }
+                },
+                "required": [
+                  "compilation_status",
+                  "constitutional_validation_outcome",
+                  "governance_omission_analysis_outcome",
+                  "governance_self_protection_outcome",
+                  "activation_eligibility"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "Validation Failed",
+              "Rejected"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection",
+          "lifecycle_change_reason"
+        ],
+        "properties": {
+          "compilation_projection": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/compilation_projection"
+              },
+              {
+                "properties": {
+                  "compilation_status": {
+                    "const": "INVALID"
+                  },
+                  "activation_eligibility": {
+                    "const": "NOT_ELIGIBLE"
+                  }
+                },
+                "required": [
+                  "compilation_status",
+                  "activation_eligibility"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Activation Pending"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection",
+          "controlled_governance_activation_ref"
+        ],
+        "properties": {
+          "compilation_projection": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/compilation_projection"
+              },
+              {
+                "properties": {
+                  "compilation_status": {
+                    "const": "VALIDATED"
+                  },
+                  "activation_eligibility": {
+                    "const": "ELIGIBLE"
+                  }
+                },
+                "required": [
+                  "compilation_status",
+                  "activation_eligibility"
+                ]
+              }
+            ]
+          },
+          "controlled_governance_activation_ref": {
+            "allOf": [
+              {
+                "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+              },
+              {
+                "properties": {
+                  "activation_status": {
+                    "enum": [
+                      "PREPARED",
+                      "AUTHORIZED"
+                    ]
+                  }
+                },
+                "required": [
+                  "activation_status"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Active"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection",
+          "controlled_governance_activation_ref",
+          "governance_version_ref",
+          "effective_from"
+        ],
+        "properties": {
+          "governance_configuration_binding": {
+            "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+          },
+          "compilation_projection": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/compilation_projection"
+              },
+              {
+                "properties": {
+                  "compilation_status": {
+                    "const": "VALIDATED"
+                  },
+                  "activation_eligibility": {
+                    "const": "ELIGIBLE"
+                  }
+                },
+                "required": [
+                  "compilation_status",
+                  "activation_eligibility"
+                ]
+              }
+            ]
+          },
+          "controlled_governance_activation_ref": {
+            "allOf": [
+              {
+                "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+              },
+              {
+                "properties": {
+                  "activation_status": {
+                    "const": "ACTIVATED"
+                  }
+                },
+                "required": [
+                  "activation_status",
+                  "established_governance_version_ref",
+                  "completed_at"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Activation Failed"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection",
+          "controlled_governance_activation_ref",
+          "lifecycle_change_reason"
+        ],
+        "properties": {
+          "controlled_governance_activation_ref": {
+            "allOf": [
+              {
+                "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+              },
+              {
+                "properties": {
+                  "activation_status": {
+                    "const": "ACTIVATION_FAILED"
+                  }
+                },
+                "required": [
+                  "activation_status",
+                  "completed_at"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Superseded"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "compilation_projection",
+          "controlled_governance_activation_ref",
+          "superseded_by_module_ref",
+          "lifecycle_change_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "Deprecated",
+              "Retired"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "controlled_governance_activation_ref",
+          "lifecycle_change_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Retired"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "retired_at"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "Governed Re-evaluation Required"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "governed_re_evaluation_basis"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "policy_evaluation_module_artifact_id": {
+      "type": "string",
+      "pattern": "^PEM-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$",
+      "description": "Stable DS-005 Policy Evaluation Module Artifact identifier."
+    },
+    "module_type": {
+      "type": "string",
+      "enum": [
+        "POLICY_EVALUATOR",
+        "POLICY_BUNDLE_EVALUATOR",
+        "DOMAIN_POLICY_EVALUATOR",
+        "COMPOSITE_GOVERNANCE_EVALUATOR"
+      ]
+    },
+    "schema_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "schema_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "schema_role": {
+          "type": "string",
+          "enum": [
+            "INPUT",
+            "OUTPUT",
+            "ERROR",
+            "REFUSAL",
+            "EVIDENCE",
+            "CONTEXT"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_uri",
+        "schema_digest",
+        "schema_role",
+        "required"
+      ]
+    },
+    "runtime_representation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "representation_format": {
+          "type": "string",
+          "enum": [
+            "WASM",
+            "OCI_IMAGE",
+            "SIGNED_PACKAGE",
+            "NATIVE_LIBRARY",
+            "BYTECODE",
+            "DECLARATIVE_RULESET",
+            "OTHER_PROFILED_FORMAT"
+          ]
+        },
+        "representation_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "representation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "entrypoint": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "target_runtime_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sandbox_profile_ref": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "network_access_prohibited": {
+          "const": true
+        },
+        "filesystem_mutation_prohibited": {
+          "const": true
+        },
+        "evaluation_side_effects_prohibited": {
+          "const": true
+        },
+        "hidden_mutable_state_prohibited": {
+          "const": true
+        },
+        "representation_version": {
+          "$ref": "common.json#/$defs/version_string"
+        }
+      },
+      "required": [
+        "representation_format",
+        "representation_uri",
+        "representation_digest",
+        "entrypoint",
+        "target_runtime_profile",
+        "network_access_prohibited",
+        "filesystem_mutation_prohibited",
+        "evaluation_side_effects_prohibited",
+        "hidden_mutable_state_prohibited",
+        "representation_version"
+      ]
+    },
+    "interface_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "contract_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "contract_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "contract_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "supported_operations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "EVALUATE_POLICY",
+              "EVALUATE_CONSTRAINTS",
+              "EVALUATE_INVARIANTS",
+              "DETERMINE_REFUSAL_PATH",
+              "DETERMINE_ESCALATION_PATH",
+              "PRODUCE_DECISION_BASIS",
+              "PRODUCE_GOVERNANCE_EVIDENCE"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 7,
+          "uniqueItems": true
+        },
+        "schema_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/schema_binding"
+          },
+          "minItems": 2,
+          "maxItems": 64
+        },
+        "deterministic_evaluation_required": {
+          "const": true
+        },
+        "side_effect_free_evaluation_required": {
+          "const": true
+        },
+        "structural_refusal_distinct_from_transport_error": {
+          "const": true
+        },
+        "governance_receipt_not_generated_by_module": {
+          "const": true
+        },
+        "execution_authorization_not_generated_by_module": {
+          "const": true
+        }
+      },
+      "required": [
+        "contract_id",
+        "contract_version",
+        "contract_uri",
+        "contract_digest",
+        "supported_operations",
+        "schema_bindings",
+        "deterministic_evaluation_required",
+        "side_effect_free_evaluation_required",
+        "structural_refusal_distinct_from_transport_error",
+        "governance_receipt_not_generated_by_module",
+        "execution_authorization_not_generated_by_module"
+      ]
+    },
+    "registry_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_registry": {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        },
+        "constraint_registry": {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        },
+        "invariant_registry": {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        },
+        "rejection_code_registry": {
+          "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+        }
+      },
+      "required": [
+        "policy_registry",
+        "constraint_registry",
+        "invariant_registry",
+        "rejection_code_registry"
+      ]
+    },
+    "compilation_projection": {
+      "type": "object",
+      "description": "Integrity-bound projection of the authoritative DS-042 compilation record. This projection does not replace DS-042.",
+      "additionalProperties": false,
+      "properties": {
+        "compiled_governance_artifact_ref": {
+          "$ref": "compiled_governance_artifact.json#/$defs/compiled_governance_artifact_ref"
+        },
+        "compilation_status": {
+          "$ref": "compiled_governance_artifact.json#/$defs/compilation_status"
+        },
+        "compilation_context_id": {
+          "type": "string",
+          "pattern": "^CCX-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "compilation_context_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deterministic_build_id": {
+          "type": "string",
+          "pattern": "^BUILD-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "compiler_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "compiler_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "target_runtime_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "input_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "build_parameters_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "compilation_context_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "source_manifest_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "source_policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "validated_dependency_set_id": {
+          "type": "string",
+          "pattern": "^DEPSET-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "validated_dependency_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "all_dependencies_resolved": {
+          "const": true
+        },
+        "all_dependencies_integrity_verified": {
+          "const": true
+        },
+        "all_dependencies_schema_validated": {
+          "const": true
+        },
+        "version_conflicts_absent": {
+          "const": true
+        },
+        "governance_artifact_lineage_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "constitutional_validation_outcome": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "FAILED",
+            "INDETERMINATE"
+          ]
+        },
+        "governance_omission_analysis_outcome": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "MATERIAL_OMISSIONS_DETECTED",
+            "INDETERMINATE"
+          ]
+        },
+        "governance_self_protection_outcome": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "FAILED",
+            "INDETERMINATE"
+          ]
+        },
+        "activation_eligibility": {
+          "$ref": "compiled_governance_artifact.json#/$defs/activation_eligibility"
+        },
+        "projection_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "projection_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "compiled_governance_artifact_ref",
+        "compilation_status",
+        "compilation_context_id",
+        "compilation_context_version",
+        "deterministic_build_id",
+        "compiler_id",
+        "compiler_version",
+        "target_runtime_profile",
+        "input_set_digest",
+        "build_parameters_digest",
+        "compilation_context_digest",
+        "source_manifest_digest",
+        "source_policy_refs",
+        "validated_dependency_set_id",
+        "validated_dependency_set_digest",
+        "all_dependencies_resolved",
+        "all_dependencies_integrity_verified",
+        "all_dependencies_schema_validated",
+        "version_conflicts_absent",
+        "governance_artifact_lineage_digest",
+        "constitutional_validation_outcome",
+        "governance_omission_analysis_outcome",
+        "governance_self_protection_outcome",
+        "activation_eligibility",
+        "projection_evidence_refs",
+        "projection_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "compilation_status": {
+                "const": "VALIDATED"
+              }
+            },
+            "required": [
+              "compilation_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "constitutional_validation_outcome": {
+                "const": "PASSED"
+              },
+              "governance_omission_analysis_outcome": {
+                "const": "PASSED"
+              },
+              "governance_self_protection_outcome": {
+                "const": "PASSED"
+              },
+              "activation_eligibility": {
+                "const": "ELIGIBLE"
+              }
+            },
+            "required": [
+              "constitutional_validation_outcome",
+              "governance_omission_analysis_outcome",
+              "governance_self_protection_outcome",
+              "activation_eligibility"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "compilation_status": {
+                "const": "INVALID"
+              }
+            },
+            "required": [
+              "compilation_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "activation_eligibility": {
+                "const": "NOT_ELIGIBLE"
+              }
+            },
+            "anyOf": [
+              {
+                "properties": {
+                  "constitutional_validation_outcome": {
+                    "const": "FAILED"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "governance_omission_analysis_outcome": {
+                    "const": "MATERIAL_OMISSIONS_DETECTED"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "governance_self_protection_outcome": {
+                    "const": "FAILED"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "compilation_status": {
+                "enum": [
+                  "COMPILED",
+                  "VALIDATION_PENDING"
+                ]
+              }
+            },
+            "required": [
+              "compilation_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "activation_eligibility": {
+                "const": "NOT_EVALUATED"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "governed_re_evaluation_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "trigger_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "trigger_type": {
+          "type": "string",
+          "enum": [
+            "POLICY_CHANGE",
+            "CONFIGURATION_CHANGE",
+            "REGISTRY_CHANGE",
+            "COMPILER_CHANGE",
+            "DEPENDENCY_CHANGE",
+            "CONSTITUTIONAL_CHANGE",
+            "SECURITY_FINDING",
+            "RISK_CONFIGURATION_CHANGE"
+          ]
+        },
+        "affected_artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "required_re_evaluation_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/uri"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "detected_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "trigger_id",
+        "trigger_type",
+        "affected_artifact_digest",
+        "required_re_evaluation_refs",
+        "detected_at",
+        "governance_evidence_refs"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "module_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "interface_contract_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "compilation_projection_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "registry_release_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 4,
+          "maxItems": 64
+        },
+        "replay_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "equivalent_inputs_equivalent_outputs": {
+          "const": true
+        }
+      },
+      "required": [
+        "module_digest",
+        "interface_contract_digest",
+        "governance_configuration_digest",
+        "registry_release_digests",
+        "replay_profile",
+        "equivalent_inputs_equivalent_outputs"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "machine_evaluable": {
+          "const": true
+        },
+        "deterministic_evaluation": {
+          "const": true
+        },
+        "equivalent_inputs_produce_equivalent_outputs": {
+          "const": true
+        },
+        "compilation_context_distinct_from_runtime_governance_context": {
+          "const": true
+        },
+        "source_lineage_complete": {
+          "const": true
+        },
+        "validated_dependencies_required": {
+          "const": true
+        },
+        "constitutional_validation_required_before_activation": {
+          "const": true
+        },
+        "governance_omission_analysis_required_before_activation": {
+          "const": true
+        },
+        "governance_self_protection_required_before_activation": {
+          "const": true
+        },
+        "controlled_activation_required_for_authoritative_use": {
+          "const": true
+        },
+        "authority_at_commitment_not_established": {
+          "const": true
+        },
+        "commit_bound_admissibility_not_determined": {
+          "const": true
+        },
+        "execution_not_authorized": {
+          "const": true
+        },
+        "activation_not_self_effectuating": {
+          "const": true
+        },
+        "arrival_timing_not_governance_basis": {
+          "const": true
+        },
+        "implementation_specific_behavior_not_governance_basis": {
+          "const": true
+        },
+        "hidden_state_not_governance_basis": {
+          "const": true
+        },
+        "evaluation_side_effects_prohibited": {
+          "const": true
+        }
+      },
+      "required": [
+        "machine_evaluable",
+        "deterministic_evaluation",
+        "equivalent_inputs_produce_equivalent_outputs",
+        "compilation_context_distinct_from_runtime_governance_context",
+        "source_lineage_complete",
+        "validated_dependencies_required",
+        "constitutional_validation_required_before_activation",
+        "governance_omission_analysis_required_before_activation",
+        "governance_self_protection_required_before_activation",
+        "controlled_activation_required_for_authoritative_use",
+        "authority_at_commitment_not_established",
+        "commit_bound_admissibility_not_determined",
+        "execution_not_authorized",
+        "activation_not_self_effectuating",
+        "arrival_timing_not_governance_basis",
+        "implementation_specific_behavior_not_governance_basis",
+        "hidden_state_not_governance_basis",
+        "evaluation_side_effects_prohibited"
+      ]
+    },
+    "display_summary": {
+      "type": "object",
+      "description": "Non-normative display-only summary.",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 64,
+          "uniqueItems": true
+        }
+      }
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Explicitly namespaced extensions that cannot alter canonical governance meaning.",
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z0-9.-]*:[A-Za-z0-9._-]+$"
+      },
+      "additionalProperties": true
+    },
+    "policy_evaluation_module_artifact_ref": {
+      "type": "object",
+      "description": "Integrity-bound reference to a DS-005 Policy Evaluation Module Artifact.",
+      "additionalProperties": false,
+      "properties": {
+        "module_id": {
+          "$ref": "#/$defs/policy_evaluation_module_artifact_id"
+        },
+        "module_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "module_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "module_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "status": {
+          "$ref": "common.json#/$defs/governance_artifact_status_enum"
+        },
+        "interface_contract_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "deterministic_evaluation_required": {
+          "const": true
+        },
+        "compiled_governance_artifact_ref": {
+          "$ref": "compiled_governance_artifact.json#/$defs/compiled_governance_artifact_ref"
+        },
+        "controlled_governance_activation_ref": {
+          "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        }
+      },
+      "required": [
+        "module_id",
+        "module_version",
+        "module_uri",
+        "module_digest",
+        "tenant_id",
+        "governance_domain_id",
+        "status",
+        "interface_contract_digest",
+        "deterministic_evaluation_required"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "Active"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "compiled_governance_artifact_ref",
+              "controlled_governance_activation_ref",
+              "governance_version_ref"
+            ],
+            "properties": {
+              "compiled_governance_artifact_ref": {
+                "allOf": [
+                  {
+                    "$ref": "compiled_governance_artifact.json#/$defs/compiled_governance_artifact_ref"
+                  },
+                  {
+                    "properties": {
+                      "compilation_status": {
+                        "const": "VALIDATED"
+                      }
+                    },
+                    "required": [
+                      "compilation_status"
+                    ]
+                  }
+                ]
+              },
+              "controlled_governance_activation_ref": {
+                "allOf": [
+                  {
+                    "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+                  },
+                  {
+                    "properties": {
+                      "activation_status": {
+                        "const": "ACTIVATED"
+                      }
+                    },
+                    "required": [
+                      "activation_status",
+                      "established_governance_version_ref",
+                      "completed_at"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
 }

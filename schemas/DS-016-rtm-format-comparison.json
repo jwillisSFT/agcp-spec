@@ -1,0 +1,986 @@
+{
+  "status": "PASS",
+  "checks": {
+    "sheetnames": {
+      "passed": true,
+      "detail": {
+        "before": [
+          "AGCP_RTM_Repository_ARM_Co",
+          "NS_CR_Relationships"
+        ],
+        "after": [
+          "AGCP_RTM_Repository_ARM_Co",
+          "NS_CR_Relationships"
+        ]
+      }
+    },
+    "AGCP_RTM_Repository_ARM_Co_dimensions": {
+      "passed": true,
+      "detail": {
+        "before": [
+          123,
+          44
+        ],
+        "after": [
+          123,
+          44
+        ]
+      }
+    },
+    "AGCP_RTM_Repository_ARM_Co_merged": {
+      "passed": true,
+      "detail": null
+    },
+    "AGCP_RTM_Repository_ARM_Co_freeze": {
+      "passed": true,
+      "detail": {
+        "before": "None",
+        "after": "None"
+      }
+    },
+    "AGCP_RTM_Repository_ARM_Co_column_widths": {
+      "passed": true,
+      "detail": null
+    },
+    "AGCP_RTM_Repository_ARM_Co_row_heights": {
+      "passed": true,
+      "detail": null
+    },
+    "AGCP_RTM_Repository_ARM_Co_style_ids": {
+      "passed": true,
+      "detail": null
+    },
+    "AGCP_RTM_Repository_ARM_Co_formulas": {
+      "passed": true,
+      "detail": {
+        "before_count": 0,
+        "after_count": 0
+      }
+    },
+    "NS_CR_Relationships_dimensions": {
+      "passed": true,
+      "detail": {
+        "before": [
+          427,
+          23
+        ],
+        "after": [
+          427,
+          23
+        ]
+      }
+    },
+    "NS_CR_Relationships_merged": {
+      "passed": true,
+      "detail": null
+    },
+    "NS_CR_Relationships_freeze": {
+      "passed": true,
+      "detail": {
+        "before": "None",
+        "after": "None"
+      }
+    },
+    "NS_CR_Relationships_column_widths": {
+      "passed": true,
+      "detail": null
+    },
+    "NS_CR_Relationships_row_heights": {
+      "passed": true,
+      "detail": null
+    },
+    "NS_CR_Relationships_style_ids": {
+      "passed": true,
+      "detail": null
+    },
+    "NS_CR_Relationships_formulas": {
+      "passed": true,
+      "detail": {
+        "before_count": 0,
+        "after_count": 0
+      }
+    },
+    "xl_styles.xml": {
+      "passed": true,
+      "detail": {
+        "before_sha256": "add56562466224c4fd4f81b469c8796e0944fd5061996f7a89f1dbd4930a04c3",
+        "after_sha256": "add56562466224c4fd4f81b469c8796e0944fd5061996f7a89f1dbd4930a04c3"
+      }
+    },
+    "xl_theme_theme1.xml": {
+      "passed": true,
+      "detail": {
+        "before_sha256": "0da7b946b1f8e534b3fae377108abab1d3770d4b19ec3e38109cd62507f0529c",
+        "after_sha256": "0da7b946b1f8e534b3fae377108abab1d3770d4b19ec3e38109cd62507f0529c"
+      }
+    }
+  },
+  "differences": [],
+  "modified_cell_count": 144,
+  "modified_cells": [
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE2",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE3",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE4",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE5",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE6",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE7",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE8",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE9",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE10",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE11",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE12",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q13",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE13",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG13",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q14",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE14",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG14",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q15",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json;schemas/governance_lifecycle_record.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_lifecycle_record.json;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE15",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG15",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q16",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE16",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG16",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q17",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE17",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG17",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q18",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json;schemas/governance_lifecycle_record.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_lifecycle_record.json;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE18",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG18",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q19",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json;schemas/governance_lifecycle_record.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_lifecycle_record.json;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE19",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG19",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE20",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE21",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE22",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE23",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE24",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE25",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE26",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE27",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE28",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE29",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE30",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE31",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE32",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE33",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE34",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE35",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE36",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE37",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE38",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE39",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE40",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE41",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE42",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE43",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE44",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE45",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE46",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE47",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE48",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE49",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE50",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE51",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE52",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE53",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE54",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE55",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE56",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE57",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE58",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q59",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE59",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG59",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q60",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json;schemas/governance_lifecycle_record.json;schemas/governance_ledger_event.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/governance_lifecycle_record.json;schemas/governance_ledger_event.json;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE60",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG60",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q61",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json;schemas/refusal_record.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/refusal_record.json;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE61",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG61",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping. DS-028 provides the canonical Structural Refusal record.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-028 provides the canonical Structural Refusal record."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "Q62",
+      "before": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/human_review_artifact.json;schemas/execution_authorization_view.json",
+      "after": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;registries/rejection-code-registry.json;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Human-Review-Specification.md;schemas/execution_authorization_view.json;schemas/governance_approval_artifact.json"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE62",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AG62",
+      "before": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-026 supersedes deprecated DS-016 Human Review Artifact mapping. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation.",
+      "after": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation."
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE63",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE64",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE65",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE66",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE67",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE68",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE69",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE70",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE71",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE72",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE73",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE74",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE75",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE76",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE77",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE78",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE79",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE80",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE81",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE82",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE83",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE84",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE85",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE86",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE87",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE88",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE89",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE90",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE91",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE92",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE93",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE94",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE95",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE96",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE97",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE98",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE99",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE100",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE101",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE102",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE103",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE104",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE105",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE106",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE107",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE108",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE109",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE110",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE111",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE112",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE113",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE114",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE115",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE116",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE117",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE118",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE119",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE120",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE121",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE122",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    },
+    {
+      "sheet": "AGCP_RTM_Repository_ARM_Co",
+      "cell": "AE123",
+      "before": "RTM-1.42",
+      "after": "RTM-1.43"
+    }
+  ]
+}

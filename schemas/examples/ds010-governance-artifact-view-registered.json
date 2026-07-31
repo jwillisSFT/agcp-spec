@@ -1,0 +1,85 @@
+{
+  "governance_artifact_view_id": "GAV-TEST-001",
+  "view_version": "1.0.0",
+  "artifact_identity": {
+    "artifact_id": "ART-TEST-001",
+    "artifact_type": "POLICY_EVALUATION_MODULE",
+    "artifact_version": "1.0.0",
+    "artifact_uri": "https://agcp.example/test",
+    "schema_uri": "https://agcp.example/test",
+    "artifact_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "artifact_status": "Registered",
+  "tenant_id": "T1",
+  "governance_domain_id": "domain-primary",
+  "effective_scope": {
+    "tenant_id": "T1"
+  },
+  "governance_evidence_refs": [
+    {
+      "governance_evidence_id": "GE-TEST-001",
+      "evidence_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "lifecycle_history": [
+    {
+      "to_status": "Registered",
+      "occurred_at": "2026-07-31T10:00:00Z",
+      "basis_evidence_refs": [
+        {
+          "governance_evidence_id": "GE-TEST-001",
+          "evidence_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      ],
+      "transition_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "created_at": "2026-07-31T10:00:00Z",
+  "updated_at": "2026-07-31T10:00:00Z",
+  "attribution": {
+    "principal": {
+      "principal_id": "client:test",
+      "principal_type": "AGENT"
+    },
+    "attributed_at": "2026-07-31T10:00:00Z"
+  },
+  "provenance": {
+    "signer": "TEST",
+    "signature": {
+      "alg": "SHA-256",
+      "kid": "kid-test",
+      "sig": "SIG_VALID_123"
+    },
+    "signed_at": "2026-07-31T10:00:00Z"
+  },
+  "view_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "integrity_signature": {
+    "alg": "SHA-256",
+    "kid": "kid-test",
+    "sig": "SIG_VALID_123"
+  },
+  "semantic_assertions": {
+    "view_is_non_authoritative_read_model": true,
+    "referenced_canonical_records_remain_authoritative": true,
+    "projection_cannot_modify_governance_semantics": true,
+    "view_does_not_activate_governance": true,
+    "view_does_not_establish_authority_at_commitment": true,
+    "view_does_not_authorize_execution": true,
+    "extensions_cannot_alter_canonical_meaning": true
+  }
+}

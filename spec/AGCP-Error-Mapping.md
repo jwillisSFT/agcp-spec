@@ -13,7 +13,7 @@ This document defines the required mapping between HTTP status codes, AGCP rejec
 It is aligned with:
 
 - `api/AGCP-HTTP-Contract.yaml`
-- `spec/AGCP-HTTP-Interface.md`
+- `spec/AGCP-HTTP-Interface-Specification.md`
 - AGCP Core Specification
 - AGCP rejection-code registry
 
@@ -76,7 +76,7 @@ The selected strategy SHALL be applied uniformly across protected retrieval endp
 
 ---
 
-# 4. POST /agcp/v1/proposals/submit
+# 4. POST /agcp/v2/proposals/submit
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -91,7 +91,7 @@ The selected strategy SHALL be applied uniformly across protected retrieval endp
 | Authority Lineage invalid | 403 | AUTHORITY_LINEAGE_INVALID | YES |
 | Proposal structural refusal | 400 | PROPOSAL_STRUCTURAL_REFUSAL | YES |
 | Governance denial | 200 | GOVERNANCE_DENIED | YES |
-| Pending human review | 200 | PENDING_HUMAN_REVIEW | YES |
+| Governance Approval or human adjudication required (`Pending Human Review` outcome) | 200 | GOVERNANCE_APPROVAL_REQUIRED | YES |
 | Governed re-evaluation required | 200 or 409 | GOVERNED_REEVALUATION_REQUIRED | YES |
 | Policy module unavailable | 503 | POLICY_MODULE_UNAVAILABLE | YES |
 | Policy evaluation output invalid | 422 | POLICY_EVALUATION_OUTPUT_INVALID | YES |
@@ -107,7 +107,7 @@ Notes:
 
 ---
 
-# 5. GET /agcp/v1/proposals/{proposal_id}
+# 5. GET /agcp/v2/proposals/{proposal_id}
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -124,7 +124,7 @@ Notes:
 
 ---
 
-# 6. POST /agcp/v1/proposals/{proposal_id}/human-review
+# 6. POST /agcp/v2/proposals/{proposal_id}/governance-approvals
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -133,21 +133,21 @@ Notes:
 | Cross-tenant access, hide profile | 404 | RESOURCE_NOT_FOUND | NO |
 | Cross-tenant access, forbid profile | 403 | TENANT_SCOPE_VIOLATION | NO |
 | Governance-domain violation | 403 | GOVERNANCE_DOMAIN_VIOLATION | NO |
-| Human-review artifact invalid | 422 | HUMAN_REVIEW_INVALID | YES |
-| Human-review artifact expired | 409 | HUMAN_REVIEW_EXPIRED | YES |
+| Governance Approval Artifact invalid | 422 | GOVERNANCE_APPROVAL_INVALID | YES |
+| Governance Approval Artifact expired | 409 | GOVERNANCE_APPROVAL_EXPIRED | YES |
 | Proposal not in Pending Human Review or Deferred state | 409 | GOVERNED_REEVALUATION_REQUIRED | YES |
 | Authority Lineage invalid | 403 | AUTHORITY_LINEAGE_INVALID | YES |
 | Idempotency conflict | 409 | IDEMPOTENCY_CONFLICT | NO |
 
 Notes:
 
-- Human-review artifacts are governed inputs.
-- Human-review submission SHALL NOT itself perform execution.
-- If human-review processing causes the governance decision to become Authorized, subsequent Execution Authorization behavior SHALL be reflected in Governance Evidence.
+- DS-026 Governance Approval Artifacts are governed inputs.
+- Governance Approval Artifact submission SHALL NOT itself perform execution.
+- If Governance Approval processing causes the governance decision to become Authorized, subsequent Execution Authorization behavior SHALL be reflected in Governance Evidence.
 
 ---
 
-# 7. GET /agcp/v1/execution-authorizations/{authorization_id}
+# 7. GET /agcp/v2/execution-authorizations/{authorization_id}
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -164,7 +164,7 @@ Notes:
 
 ---
 
-# 8. POST /agcp/v1/commit-boundary/commit
+# 8. POST /agcp/v2/commit-boundary/commit
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -194,7 +194,7 @@ Notes:
 
 ---
 
-# 9. GET /agcp/v1/governance-evidence/{evidence_id}
+# 9. GET /agcp/v2/governance-evidence/{evidence_id}
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -212,7 +212,7 @@ Notes:
 
 ---
 
-# 10. POST /agcp/v1/governance-artifacts/policy-modules
+# 10. POST /agcp/v2/governance-artifacts/policy-modules
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -230,11 +230,11 @@ Notes:
 Notes:
 
 - Registration SHALL NOT imply operational activation.
-- Artifact validation failures are governance-significant and SHOULD produce Governance Evidence where attributable.
+- Policy Evaluation Module artifact validation failures are governance-significant and SHALL produce Governance Evidence where the implementation has sufficient context to associate the failure with a tenant, governed object, or governance artifact.
 
 ---
 
-# 11. POST /agcp/v1/governance-artifacts/policies
+# 11. POST /agcp/v2/governance-artifacts/policies
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|
@@ -252,10 +252,11 @@ Notes:
 
 - Policy registration and policy activation are distinct governance events.
 - Activation SHALL occur only after applicable governance validation succeeds.
+- Governance Policy artifact validation failures are governance-significant and SHALL produce Governance Evidence where the implementation has sufficient context to associate the failure with a tenant, governed object, or governance artifact.
 
 ---
 
-# 12. GET /agcp/v1/governance-artifacts/{artifact_id}
+# 12. GET /agcp/v2/governance-artifacts/{artifact_id}
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
 |---|---:|---|---|

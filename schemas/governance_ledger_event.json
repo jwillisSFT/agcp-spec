@@ -1,0 +1,2402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_ledger_event.json",
+  "title": "Governance Ledger Event",
+  "description": "Canonical attributable, append-only, integrity-linked, totally ordered Governance Ledger event. DS-040 records or references governance submissions, context and state records, evidence and qualification results, authority and approvals, decisions and authorizations, refusals, commitments, enforcement outcomes, lifecycle transitions, continuation events, governance compilation and activation, and associated evidence. It preserves authoritative event ordering within an explicit ledger stream, supports per-proposal and dependent-event reconstruction, Derived Lifecycle State, deterministic replay, audit reconstruction, tenant isolation, cryptographic integrity, correction by subsequent event rather than mutation, and long-term verification. Timestamps, arrival order, storage order, node identity, and transport behavior are never authoritative ordering bases. A Governance Ledger event records governance history; it does not itself establish authority at commitment, authorize execution, alter the referenced artifact, or replace qualified authoritative sources used to resolve Canonical State.",
+  "x-agcp-ds-id": "DS-040",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Append-Only Ordered Governance Ledger Event",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-101",
+      "ARM-102",
+      "ARM-105",
+      "ARM-106",
+      "ARM-108",
+      "ARM-202",
+      "ARM-203",
+      "ARM-204",
+      "ARM-205",
+      "ARM-206",
+      "ARM-207",
+      "ARM-208",
+      "ARM-209",
+      "ARM-210",
+      "ARM-211",
+      "ARM-216",
+      "ARM-217",
+      "ARM-401",
+      "ARM-408",
+      "ARM-601",
+      "ARM-602",
+      "ARM-603",
+      "ARM-604",
+      "ARM-605",
+      "ARM-606",
+      "ARM-607",
+      "ARM-608",
+      "ARM-609",
+      "ARM-610",
+      "ARM-801",
+      "ARM-806",
+      "ARM-807"
+    ],
+    "core_sections": [
+      "4.6",
+      "5.2.5",
+      "10.1",
+      "10.2",
+      "10.3",
+      "10.4",
+      "10.5",
+      "10.6",
+      "10.7",
+      "10.8",
+      "10.8A",
+      "10.9",
+      "11.1",
+      "11.2",
+      "13.6A"
+    ],
+    "normative_statements": [
+      "NS-4.6-03",
+      "NS-4.6-05",
+      "NS-5.2.5-01",
+      "NS-10.1-01",
+      "NS-10.1-02",
+      "NS-10.2-01",
+      "NS-10.2-02",
+      "NS-10.2-03",
+      "NS-10.3-01",
+      "NS-10.3-02",
+      "NS-10.4-01",
+      "NS-10.4-02",
+      "NS-10.5-01",
+      "NS-10.5-02",
+      "NS-10.6-01",
+      "NS-10.6-02",
+      "NS-10.7-01",
+      "NS-10.7-02",
+      "NS-10.7-03",
+      "NS-10.8-01",
+      "NS-10.8-02",
+      "NS-10.8-03",
+      "NS-10.8A-01",
+      "NS-10.8A-02",
+      "NS-10.8A-03",
+      "NS-10.9-01",
+      "NS-10.9-02",
+      "NS-10.9-03",
+      "NS-13.6A-01"
+    ],
+    "conformance_requirements": [
+      "CR-030",
+      "CR-041",
+      "CR-047",
+      "CR-056",
+      "CR-057",
+      "CR-059",
+      "CR-062",
+      "CR-063",
+      "CR-064",
+      "CR-065",
+      "CR-066",
+      "CR-067",
+      "CR-068",
+      "CR-069",
+      "CR-081",
+      "CR-082",
+      "CR-083",
+      "CR-084",
+      "CR-085",
+      "CR-086",
+      "CR-091",
+      "CR-098"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "governance_ledger_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^GL-[A-Za-z0-9][A-Za-z0-9._:/@+-]{1,124}$",
+      "description": "Stable identifier for a Governance Ledger."
+    },
+    "governance_ledger_event_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^GLE-[A-Za-z0-9][A-Za-z0-9._:/@+-]{1,123}$",
+      "description": "Stable identifier for a Governance Ledger event."
+    },
+    "governance_ledger_event_type": {
+      "type": "string",
+      "enum": [
+        "PROPOSAL_SUBMITTED",
+        "GOVERNANCE_CONTEXT_RECORDED",
+        "CANONICAL_STATE_RESOLVED",
+        "STATE_QUALIFICATION_RECORDED",
+        "GOVERNANCE_EVIDENCE_RECORDED",
+        "EVIDENCE_QUALIFICATION_RECORDED",
+        "AUTHORITY_LINEAGE_RECORDED",
+        "AUTHORITY_REDERIVATION_RECORDED",
+        "GOVERNANCE_APPROVAL_RECORDED",
+        "GOVERNANCE_DECISION_RECORDED",
+        "EXECUTION_AUTHORIZATION_RECORDED",
+        "GOVERNANCE_BINDING_VALIDATED",
+        "RESULTING_STATE_VALIDATED",
+        "DEPENDENCY_GRAPH_RECORDED",
+        "BIND_SET_RECORDED",
+        "DETERMINISTIC_ADJUDICATION_RECORDED",
+        "COMMIT_BOUNDARY_REQUESTED",
+        "COMMITMENT_RECORDED",
+        "ENFORCEMENT_OUTCOME_RECORDED",
+        "GOVERNANCE_RECEIPT_RECORDED",
+        "STRUCTURAL_REFUSAL_RECORDED",
+        "LIFECYCLE_TRANSITION_RECORDED",
+        "CONTINUATION_EVENT_RECORDED",
+        "GOVERNANCE_CONFIGURATION_RECORDED",
+        "GOVERNANCE_COMPILATION_RECORDED",
+        "CONTROLLED_GOVERNANCE_ACTIVATION_RECORDED",
+        "LEDGER_CORRECTION_RECORDED",
+        "LEDGER_RETENTION_EVENT_RECORDED"
+      ]
+    },
+    "governance_ledger_event_category": {
+      "type": "string",
+      "enum": [
+        "PROPOSAL",
+        "CONTEXT_AND_STATE",
+        "EVIDENCE",
+        "AUTHORITY_AND_APPROVAL",
+        "DECISION_AND_AUTHORIZATION",
+        "COMMITMENT_AND_ENFORCEMENT",
+        "LIFECYCLE_AND_CONTINUATION",
+        "GOVERNANCE_CONFIGURATION_AND_ACTIVATION",
+        "LEDGER_ADMINISTRATION"
+      ]
+    },
+    "ordering_scope_type": {
+      "type": "string",
+      "enum": [
+        "PROPOSAL_IDENTITY",
+        "TENANT_GOVERNANCE_DOMAIN",
+        "COMPOSITE_DEPENDENCY_SET",
+        "CONTROLLED_ACTIVATION_PACKAGE",
+        "GLOBAL_GOVERNANCE_ADMINISTRATION"
+      ]
+    },
+    "event_subject_type": {
+      "type": "string",
+      "enum": [
+        "GOVERNED_ACTION_PROPOSAL",
+        "GOVERNANCE_ARTIFACT",
+        "GOVERNANCE_OUTCOME",
+        "LIFECYCLE_TRANSITION",
+        "CONTINUATION_RESULT",
+        "ACTIVATION_PACKAGE",
+        "LEDGER_RECORD",
+        "TENANT_GOVERNANCE_DOMAIN"
+      ]
+    },
+    "ledger_position": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ledger_id": {
+          "$ref": "#/$defs/governance_ledger_id"
+        },
+        "stream_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "sequence": {
+          "$ref": "common.json#/$defs/sequence_number"
+        },
+        "event_id": {
+          "$ref": "#/$defs/governance_ledger_event_id"
+        },
+        "event_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "predecessor_event_id": {
+          "$ref": "#/$defs/governance_ledger_event_id"
+        },
+        "previous_event_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "chain_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "stream_head_after_append": {
+          "const": true
+        }
+      },
+      "description": "Authoritative position in an append-only totally ordered ledger stream. Timestamps are not an ordering basis.",
+      "required": [
+        "ledger_id",
+        "stream_id",
+        "sequence",
+        "event_id",
+        "event_digest",
+        "chain_digest",
+        "stream_head_after_append"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sequence": {
+                "const": 0
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "predecessor_event_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "previous_event_digest"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sequence": {
+                "minimum": 1
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          },
+          "then": {
+            "required": [
+              "predecessor_event_id",
+              "previous_event_digest"
+            ]
+          }
+        }
+      ]
+    },
+    "governance_ledger_event_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ledger_event_id": {
+          "$ref": "#/$defs/governance_ledger_event_id"
+        },
+        "event_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "event_type": {
+          "$ref": "#/$defs/governance_ledger_event_type"
+        },
+        "event_category": {
+          "$ref": "#/$defs/governance_ledger_event_category"
+        },
+        "ledger_position": {
+          "$ref": "#/$defs/ledger_position"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "event_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "event_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "appended_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "description": "Stable integrity-bound reference to a DS-040 Governance Ledger event.",
+      "required": [
+        "ledger_event_id",
+        "event_version",
+        "event_type",
+        "event_category",
+        "ledger_position",
+        "tenant_id",
+        "governance_domain_id",
+        "event_digest",
+        "appended_at"
+      ]
+    },
+    "ordering_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope_type": {
+          "$ref": "#/$defs/ordering_scope_type"
+        },
+        "ledger_id": {
+          "$ref": "#/$defs/governance_ledger_id"
+        },
+        "stream_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "dependency_graph_ref": {
+          "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+        },
+        "activation_package_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "total_order_within_scope": {
+          "const": true
+        },
+        "cross_stream_causality_explicit": {
+          "const": true
+        },
+        "ordering_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "description": "Explicit stream within which Governance Ledger events are totally ordered.",
+      "required": [
+        "scope_type",
+        "ledger_id",
+        "stream_id",
+        "tenant_id",
+        "governance_domain_id",
+        "total_order_within_scope",
+        "cross_stream_causality_explicit",
+        "ordering_scope_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "PROPOSAL_IDENTITY"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "proposal_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "COMPOSITE_DEPENDENCY_SET"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "proposal_id",
+              "dependency_graph_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "scope_type": {
+                "const": "CONTROLLED_ACTIVATION_PACKAGE"
+              }
+            },
+            "required": [
+              "scope_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "activation_package_id"
+            ]
+          }
+        }
+      ]
+    },
+    "event_subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subject_type": {
+          "$ref": "#/$defs/event_subject_type"
+        },
+        "proposal_identity": {
+          "$ref": "common.json#/$defs/proposal_identity"
+        },
+        "action_id": {
+          "$ref": "common.json#/$defs/action_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "governance_artifact_id": {
+          "$ref": "common.json#/$defs/artifact_id"
+        },
+        "activation_package_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "subject_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "description": "Identity-bound subject of the ledger event.",
+      "required": [
+        "subject_type",
+        "subject_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNED_ACTION_PROPOSAL"
+              }
+            },
+            "required": [
+              "subject_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "proposal_identity"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subject_type": {
+                "const": "LIFECYCLE_TRANSITION"
+              }
+            },
+            "required": [
+              "subject_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "proposal_identity"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subject_type": {
+                "const": "CONTINUATION_RESULT"
+              }
+            },
+            "required": [
+              "subject_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "proposal_identity"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subject_type": {
+                "const": "ACTIVATION_PACKAGE"
+              }
+            },
+            "required": [
+              "subject_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "activation_package_id"
+            ]
+          }
+        }
+      ]
+    },
+    "causality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "correlation_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "caused_by_event_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/governance_ledger_event_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "parent_event_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/governance_ledger_event_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "dependency_event_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/governance_ledger_event_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "causal_order_preserved": {
+          "const": true
+        },
+        "causality_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "description": "Explicit causal and dependent-event relationships independent of transport or arrival timing.",
+      "required": [
+        "caused_by_event_refs",
+        "parent_event_refs",
+        "dependency_event_refs",
+        "causal_order_preserved",
+        "causality_digest"
+      ]
+    },
+    "event_time": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "occurred_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "observed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "appended_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "timestamp_is_not_authoritative_ordering_basis": {
+          "const": true
+        },
+        "arrival_order_is_not_authoritative_ordering_basis": {
+          "const": true
+        },
+        "storage_order_is_not_authoritative_ordering_basis": {
+          "const": true
+        },
+        "implementation_schedule_is_not_authoritative_ordering_basis": {
+          "const": true
+        }
+      },
+      "required": [
+        "occurred_at",
+        "appended_at",
+        "timestamp_is_not_authoritative_ordering_basis",
+        "arrival_order_is_not_authoritative_ordering_basis",
+        "storage_order_is_not_authoritative_ordering_basis",
+        "implementation_schedule_is_not_authoritative_ordering_basis"
+      ]
+    },
+    "append_only_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "append_only": {
+          "const": true
+        },
+        "immutable_after_append": {
+          "const": true
+        },
+        "in_place_update_prohibited": {
+          "const": true
+        },
+        "deletion_prohibited_during_retention_period": {
+          "const": true
+        },
+        "sequence_reuse_prohibited": {
+          "const": true
+        },
+        "prior_event_preservation_required": {
+          "const": true
+        },
+        "correction_requires_subsequent_event": {
+          "const": true
+        },
+        "replacement_requires_explicit_superseding_event": {
+          "const": true
+        },
+        "unauthorized_reordering_prohibited": {
+          "const": true
+        }
+      },
+      "required": [
+        "append_only",
+        "immutable_after_append",
+        "in_place_update_prohibited",
+        "deletion_prohibited_during_retention_period",
+        "sequence_reuse_prohibited",
+        "prior_event_preservation_required",
+        "correction_requires_subsequent_event",
+        "replacement_requires_explicit_superseding_event",
+        "unauthorized_reordering_prohibited"
+      ]
+    },
+    "integrity_protection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "chain_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "signature": {
+          "$ref": "common.json#/$defs/signature"
+        },
+        "canonicalization_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "digest_covers_event_content": {
+          "const": true
+        },
+        "digest_covers_ledger_position": {
+          "const": true
+        },
+        "digest_covers_artifact_references": {
+          "const": true
+        },
+        "digest_covers_evidence_references": {
+          "const": true
+        },
+        "predecessor_binding_verified": {
+          "type": "boolean"
+        },
+        "tamper_detection_supported": {
+          "const": true
+        },
+        "substitution_detection_supported": {
+          "const": true
+        }
+      },
+      "required": [
+        "event_digest",
+        "chain_digest",
+        "signature",
+        "canonicalization_profile",
+        "digest_covers_event_content",
+        "digest_covers_ledger_position",
+        "digest_covers_artifact_references",
+        "digest_covers_evidence_references",
+        "predecessor_binding_verified",
+        "tamper_detection_supported",
+        "substitution_detection_supported"
+      ]
+    },
+    "governance_basis_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "governance_configuration_ref": {
+          "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "invariant_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "invariant_definition.json#/$defs/invariant_definition_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "canonical_state_ref": {
+          "$ref": "canonical_state.json#/$defs/canonical_state_ref"
+        },
+        "authority_lineage_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        },
+        "basis_complete_for_event_type": {
+          "const": true
+        },
+        "governance_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "description": "Versioned governance basis sufficient to reconstruct the governance meaning of the event.",
+      "required": [
+        "governance_version_ref",
+        "policy_refs",
+        "constraint_refs",
+        "invariant_refs",
+        "basis_complete_for_event_type",
+        "governance_basis_digest"
+      ]
+    },
+    "evidence_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "evidence_reference_status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "all_references_resolvable": {
+          "const": true
+        },
+        "all_references_integrity_verifiable": {
+          "const": true
+        },
+        "evidence_continuity_preserved": {
+          "const": true
+        },
+        "evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "governance_evidence_refs",
+        "evidence_reference_status",
+        "all_references_resolvable",
+        "all_references_integrity_verifiable",
+        "evidence_continuity_preserved",
+        "evidence_set_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evidence_reference_status": {
+                "const": "COMPLETE"
+              }
+            },
+            "required": [
+              "evidence_reference_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "governance_evidence_refs": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "evidence_reference_status": {
+                "const": "NOT_APPLICABLE"
+              }
+            },
+            "required": [
+              "evidence_reference_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "governance_evidence_refs": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "event_artifact_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primary_artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "primary_artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "proposal_ref": {
+          "$ref": "governed_action_proposal.json#/$defs/governed_action_proposal_ref"
+        },
+        "governance_context_ref": {
+          "$ref": "governance_context_envelope.json#/$defs/governance_context_envelope_ref"
+        },
+        "canonical_state_ref": {
+          "$ref": "canonical_state.json#/$defs/canonical_state_ref"
+        },
+        "state_qualification_result_ref": {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "evidence_qualification_result_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "evidence_qualification_result.json#/$defs/evidence_qualification_result_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "authority_lineage_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        },
+        "authority_rederivation_result_ref": {
+          "$ref": "authority_rederivation_result.json#/$defs/authority_rederivation_result_ref"
+        },
+        "governance_approval_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "governance_decision_result_ref": {
+          "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+        },
+        "execution_authorization_view_ref": {
+          "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+        },
+        "governance_binding_validation_result_ref": {
+          "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
+        },
+        "resulting_state_validation_result_ref": {
+          "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+        },
+        "governance_dependency_graph_ref": {
+          "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+        },
+        "bind_set_ref": {
+          "$ref": "bind_set.json#/$defs/bind_set_ref"
+        },
+        "deterministic_adjudication_result_ref": {
+          "$ref": "deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref"
+        },
+        "commit_boundary_request_ref": {
+          "$ref": "commit_boundary_request.json#/$defs/commit_boundary_request_ref"
+        },
+        "commit_boundary_result_ref": {
+          "$ref": "commit_boundary_result.json#/$defs/commit_boundary_result_ref"
+        },
+        "enforcement_context_ref": {
+          "$ref": "enforcement_context.json#/$defs/enforcement_context_ref"
+        },
+        "governance_receipt_ref": {
+          "$ref": "governance_receipt.json#/$defs/governance_receipt_ref"
+        },
+        "refusal_record_ref": {
+          "$ref": "refusal_record.json#/$defs/refusal_record_ref"
+        },
+        "governance_lifecycle_record_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+        },
+        "lifecycle_transition_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+        },
+        "continuation_integrity_result_ref": {
+          "$ref": "continuation_integrity_result.json#/$defs/continuation_integrity_result_ref"
+        },
+        "governance_configuration_ref": {
+          "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+        },
+        "compiled_governance_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "compiled_governance_artifact.json#/$defs/compiled_governance_artifact_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "controlled_governance_activation_ref": {
+          "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+        }
+      },
+      "description": "Canonical artifact and outcome references recorded by the event; no unrestricted generic payload is permitted.",
+      "required": [
+        "primary_artifact_uri",
+        "primary_artifact_digest"
+      ]
+    },
+    "correction_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "corrected_event_ref": {
+          "$ref": "#/$defs/governance_ledger_event_ref"
+        },
+        "correction_type": {
+          "type": "string",
+          "enum": [
+            "ANNOTATION",
+            "REFERENCE_CORRECTION",
+            "ATTRIBUTION_CORRECTION",
+            "INTEGRITY_REPAIR_REFERENCE",
+            "SUPERSEDING_GOVERNANCE_RECORD"
+          ]
+        },
+        "original_event_preserved": {
+          "const": true
+        },
+        "original_event_mutated": {
+          "const": false
+        },
+        "correction_reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "correction_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "corrected_event_ref",
+        "correction_type",
+        "original_event_preserved",
+        "original_event_mutated",
+        "correction_reason",
+        "correction_evidence_refs"
+      ]
+    },
+    "retention_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "retention_action": {
+          "type": "string",
+          "enum": [
+            "RETENTION_PERIOD_ESTABLISHED",
+            "LEGAL_HOLD_ESTABLISHED",
+            "ARCHIVAL_COPY_VERIFIED",
+            "RETENTION_PERIOD_EXTENDED",
+            "AUTHORIZED_DISPOSITION_RECORDED"
+          ]
+        },
+        "affected_event_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/governance_ledger_event_ref"
+          },
+          "maxItems": 10000,
+          "uniqueItems": true
+        },
+        "retention_policy_ref": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "retention_until": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "ledger_history_preserved": {
+          "const": true
+        },
+        "replayability_preserved": {
+          "const": true
+        },
+        "disposition_authorization_ref": {
+          "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+        }
+      },
+      "required": [
+        "retention_action",
+        "affected_event_refs",
+        "retention_policy_ref",
+        "ledger_history_preserved",
+        "replayability_preserved"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ordered_event_content_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "artifact_reference_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evidence_reference_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "causality_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ledger_chain_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "reconstruction_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "replay_reconstructs_governance_reasoning_not_operational_action": {
+          "const": true
+        },
+        "implementation_node_independent": {
+          "const": true
+        },
+        "transport_independent": {
+          "const": true
+        }
+      },
+      "required": [
+        "ordered_event_content_digest",
+        "governance_basis_digest",
+        "artifact_reference_set_digest",
+        "evidence_reference_set_digest",
+        "causality_digest",
+        "ledger_chain_digest",
+        "reconstruction_profile",
+        "replay_reconstructs_governance_reasoning_not_operational_action",
+        "implementation_node_independent",
+        "transport_independent"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ledger_is_append_only": {
+          "const": true
+        },
+        "event_order_is_authoritative_within_declared_scope": {
+          "const": true
+        },
+        "derived_lifecycle_state_may_be_reconstructed_from_ordered_events": {
+          "const": true
+        },
+        "tenant_and_domain_isolation_preserved": {
+          "const": true
+        },
+        "event_references_are_resolvable_and_verifiable": {
+          "const": true
+        },
+        "provenance_chain_continuity_preserved": {
+          "const": true
+        },
+        "event_does_not_replace_canonical_state_authoritative_sources": {
+          "const": true
+        },
+        "event_does_not_establish_authority_at_commitment": {
+          "const": true
+        },
+        "event_does_not_authorize_execution": {
+          "const": true
+        },
+        "event_does_not_commit_referenced_transition_by_reference_alone": {
+          "const": true
+        },
+        "timestamps_not_used_as_governance_order": {
+          "const": true
+        },
+        "corrections_preserve_original_events": {
+          "const": true
+        },
+        "event_is_governance_record_not_general_application_log": {
+          "const": true
+        }
+      },
+      "required": [
+        "ledger_is_append_only",
+        "event_is_governance_record_not_general_application_log",
+        "event_order_is_authoritative_within_declared_scope",
+        "derived_lifecycle_state_may_be_reconstructed_from_ordered_events",
+        "tenant_and_domain_isolation_preserved",
+        "event_references_are_resolvable_and_verifiable",
+        "provenance_chain_continuity_preserved",
+        "event_does_not_replace_canonical_state_authoritative_sources",
+        "event_does_not_establish_authority_at_commitment",
+        "event_does_not_authorize_execution",
+        "event_does_not_commit_referenced_transition_by_reference_alone",
+        "timestamps_not_used_as_governance_order",
+        "corrections_preserve_original_events"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z0-9.-]{1,63}:[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+      },
+      "additionalProperties": true,
+      "description": "Namespaced non-normative extensions that cannot alter ordering, integrity, append-only, authority, or lifecycle semantics."
+    }
+  },
+  "properties": {
+    "ledger_event_id": {
+      "$ref": "#/$defs/governance_ledger_event_id"
+    },
+    "event_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "record_type": {
+      "const": "GOVERNANCE_LEDGER_EVENT"
+    },
+    "event_type": {
+      "$ref": "#/$defs/governance_ledger_event_type"
+    },
+    "event_category": {
+      "$ref": "#/$defs/governance_ledger_event_category"
+    },
+    "ledger_id": {
+      "$ref": "#/$defs/governance_ledger_id"
+    },
+    "ordering_scope": {
+      "$ref": "#/$defs/ordering_scope"
+    },
+    "ledger_position": {
+      "$ref": "#/$defs/ledger_position"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "event_subject": {
+      "$ref": "#/$defs/event_subject"
+    },
+    "event_artifact_refs": {
+      "$ref": "#/$defs/event_artifact_refs"
+    },
+    "governance_basis": {
+      "$ref": "#/$defs/governance_basis_snapshot"
+    },
+    "evidence_binding": {
+      "$ref": "#/$defs/evidence_binding"
+    },
+    "causality": {
+      "$ref": "#/$defs/causality"
+    },
+    "event_time": {
+      "$ref": "#/$defs/event_time"
+    },
+    "append_only_controls": {
+      "$ref": "#/$defs/append_only_controls"
+    },
+    "integrity_protection": {
+      "$ref": "#/$defs/integrity_protection"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "correction_record": {
+      "$ref": "#/$defs/correction_record"
+    },
+    "retention_record": {
+      "$ref": "#/$defs/retention_record"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "event_uri": {
+      "$ref": "common.json#/$defs/uri"
+    },
+    "namespaced_extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    },
+    "append_status": {
+      "const": "APPENDED"
+    }
+  },
+  "required": [
+    "ledger_event_id",
+    "event_version",
+    "record_type",
+    "event_type",
+    "event_category",
+    "ledger_id",
+    "ordering_scope",
+    "ledger_position",
+    "tenant_id",
+    "governance_domain_id",
+    "event_subject",
+    "event_artifact_refs",
+    "governance_basis",
+    "evidence_binding",
+    "causality",
+    "event_time",
+    "append_status",
+    "append_only_controls",
+    "integrity_protection",
+    "attribution",
+    "provenance",
+    "replay_material",
+    "semantic_assertions",
+    "event_uri"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "PROPOSAL_SUBMITTED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "PROPOSAL"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNED_ACTION_PROPOSAL"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "proposal_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_CONTEXT_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "CONTEXT_AND_STATE"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNED_ACTION_PROPOSAL"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_context_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "CANONICAL_STATE_RESOLVED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "CONTEXT_AND_STATE"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNED_ACTION_PROPOSAL"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "canonical_state_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "STATE_QUALIFICATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "CONTEXT_AND_STATE"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "state_qualification_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_EVIDENCE_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "EVIDENCE"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_evidence_refs"
+            ],
+            "properties": {
+              "governance_evidence_refs": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "EVIDENCE_QUALIFICATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "EVIDENCE"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "evidence_qualification_result_refs"
+            ],
+            "properties": {
+              "evidence_qualification_result_refs": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "AUTHORITY_LINEAGE_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "AUTHORITY_AND_APPROVAL"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "authority_lineage_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "AUTHORITY_REDERIVATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "AUTHORITY_AND_APPROVAL"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "authority_rederivation_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_APPROVAL_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "AUTHORITY_AND_APPROVAL"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_approval_artifact_refs"
+            ],
+            "properties": {
+              "governance_approval_artifact_refs": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_DECISION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "DECISION_AND_AUTHORIZATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_decision_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "EXECUTION_AUTHORIZATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "DECISION_AND_AUTHORIZATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "execution_authorization_view_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_BINDING_VALIDATED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "DECISION_AND_AUTHORIZATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_binding_validation_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "RESULTING_STATE_VALIDATED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "DECISION_AND_AUTHORIZATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "resulting_state_validation_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "DEPENDENCY_GRAPH_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "DECISION_AND_AUTHORIZATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_ARTIFACT"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_dependency_graph_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "BIND_SET_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "DECISION_AND_AUTHORIZATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "bind_set_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "DETERMINISTIC_ADJUDICATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "DECISION_AND_AUTHORIZATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "deterministic_adjudication_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "COMMIT_BOUNDARY_REQUESTED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "COMMITMENT_AND_ENFORCEMENT"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "commit_boundary_request_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "COMMITMENT_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "COMMITMENT_AND_ENFORCEMENT"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "commit_boundary_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "ENFORCEMENT_OUTCOME_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "COMMITMENT_AND_ENFORCEMENT"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "enforcement_context_ref",
+              "commit_boundary_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_RECEIPT_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "COMMITMENT_AND_ENFORCEMENT"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_receipt_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "STRUCTURAL_REFUSAL_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "COMMITMENT_AND_ENFORCEMENT"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_OUTCOME"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "refusal_record_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "LIFECYCLE_TRANSITION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "LIFECYCLE_AND_CONTINUATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "LIFECYCLE_TRANSITION"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_lifecycle_record_ref",
+              "lifecycle_transition_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "CONTINUATION_EVENT_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "LIFECYCLE_AND_CONTINUATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "CONTINUATION_RESULT"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "continuation_integrity_result_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_CONFIGURATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "GOVERNANCE_CONFIGURATION_AND_ACTIVATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_ARTIFACT"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "governance_configuration_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "GOVERNANCE_COMPILATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "GOVERNANCE_CONFIGURATION_AND_ACTIVATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "GOVERNANCE_ARTIFACT"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "compiled_governance_artifact_refs"
+            ],
+            "properties": {
+              "compiled_governance_artifact_refs": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "CONTROLLED_GOVERNANCE_ACTIVATION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "GOVERNANCE_CONFIGURATION_AND_ACTIVATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "ACTIVATION_PACKAGE"
+              }
+            }
+          },
+          "event_artifact_refs": {
+            "required": [
+              "controlled_governance_activation_ref"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "LEDGER_CORRECTION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "LEDGER_ADMINISTRATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "LEDGER_RECORD"
+              }
+            }
+          }
+        },
+        "required": [
+          "correction_record"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "LEDGER_RETENTION_EVENT_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_category": {
+            "const": "LEDGER_ADMINISTRATION"
+          },
+          "event_subject": {
+            "properties": {
+              "subject_type": {
+                "const": "LEDGER_RECORD"
+              }
+            }
+          }
+        },
+        "required": [
+          "retention_record"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "PROPOSAL_SUBMITTED",
+              "GOVERNANCE_CONTEXT_RECORDED",
+              "CANONICAL_STATE_RESOLVED",
+              "STATE_QUALIFICATION_RECORDED",
+              "GOVERNANCE_EVIDENCE_RECORDED",
+              "EVIDENCE_QUALIFICATION_RECORDED",
+              "AUTHORITY_LINEAGE_RECORDED",
+              "AUTHORITY_REDERIVATION_RECORDED",
+              "GOVERNANCE_DECISION_RECORDED",
+              "EXECUTION_AUTHORIZATION_RECORDED",
+              "GOVERNANCE_BINDING_VALIDATED",
+              "RESULTING_STATE_VALIDATED",
+              "DEPENDENCY_GRAPH_RECORDED",
+              "BIND_SET_RECORDED",
+              "DETERMINISTIC_ADJUDICATION_RECORDED",
+              "COMMIT_BOUNDARY_REQUESTED",
+              "COMMITMENT_RECORDED",
+              "ENFORCEMENT_OUTCOME_RECORDED",
+              "GOVERNANCE_RECEIPT_RECORDED",
+              "STRUCTURAL_REFUSAL_RECORDED",
+              "LIFECYCLE_TRANSITION_RECORDED",
+              "CONTINUATION_EVENT_RECORDED"
+            ]
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_subject": {
+            "required": [
+              "proposal_identity"
+            ]
+          },
+          "ordering_scope": {
+            "properties": {
+              "scope_type": {
+                "enum": [
+                  "PROPOSAL_IDENTITY",
+                  "COMPOSITE_DEPENDENCY_SET"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ledger_position": {
+            "properties": {
+              "sequence": {
+                "const": 0
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "required": [
+          "ledger_position"
+        ]
+      },
+      "then": {
+        "properties": {
+          "integrity_protection": {
+            "properties": {
+              "predecessor_binding_verified": {
+                "const": true
+              }
+            }
+          },
+          "causality": {
+            "properties": {
+              "caused_by_event_refs": {
+                "maxItems": 0
+              },
+              "parent_event_refs": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ledger_position": {
+            "properties": {
+              "sequence": {
+                "minimum": 1
+              }
+            },
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        "required": [
+          "ledger_position"
+        ]
+      },
+      "then": {
+        "properties": {
+          "integrity_protection": {
+            "properties": {
+              "predecessor_binding_verified": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "LEDGER_CORRECTION_RECORDED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "evidence_binding": {
+            "properties": {
+              "evidence_reference_status": {
+                "const": "COMPLETE"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "not": {
+              "const": "LEDGER_RETENTION_EVENT_RECORDED"
+            }
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "evidence_binding": {
+            "properties": {
+              "evidence_reference_status": {
+                "const": "COMPLETE"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

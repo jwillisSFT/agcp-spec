@@ -1,0 +1,65 @@
+{
+  "artifact": "DS-005 policy_evaluation_module_artifact.json update",
+  "overall": "PASS",
+  "checks": {
+    "schema_count": 40,
+    "reference_count": 2522,
+    "registered_module": "PASS",
+    "validated_module": "PASS",
+    "active_module": "PASS",
+    "failed_validation_module": "PASS",
+    "active_without_activation": "PASS",
+    "active_failed_constitutional_validation": "PASS",
+    "execution_authority_claim": "PASS",
+    "network_access_enabled": "PASS",
+    "nondeterministic_interface": "PASS",
+    "arbitrary_metadata": "PASS",
+    "registered_with_compilation": "PASS",
+    "active_with_inactive_configuration": "PASS",
+    "overall": "PASS",
+    "issues": [],
+    "common_definition_count": 85,
+    "unused_common_definitions": [],
+    "rtm_format_preservation": {
+      "sheetnames_equal": true,
+      "sheets": {
+        "AGCP_RTM_Repository_ARM_Co": {
+          "dimensions_before": [
+            123,
+            44
+          ],
+          "dimensions_after": [
+            123,
+            44
+          ],
+          "merged_equal": true,
+          "style_ids_equal": true,
+          "freeze_panes_equal": true,
+          "auto_filter_equal": true,
+          "column_widths_equal": true,
+          "row_heights_equal": true
+        },
+        "NS_CR_Relationships": {
+          "dimensions_before": [
+            427,
+            23
+          ],
+          "dimensions_after": [
+            427,
+            23
+          ],
+          "merged_equal": true,
+          "style_ids_equal": true,
+          "freeze_panes_equal": true,
+          "auto_filter_equal": true,
+          "column_widths_equal": true,
+          "row_heights_equal": true
+        }
+      },
+      "formula_count_before": 0,
+      "formula_count_after": 0
+    },
+    "catalog_validation": "PASS",
+    "missing_common_definition_references": []
+  }
+}

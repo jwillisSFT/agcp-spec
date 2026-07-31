@@ -1,0 +1,42 @@
+{
+  "schema": "DS-037 deterministic_adjudication_result.json",
+  "status": "PASS",
+  "validated_at": "2026-07-29",
+  "draft_2020_12_schema_count": 35,
+  "cross_schema_reference_count": 1650,
+  "positive_tests": {
+    "candidate_selected": true,
+    "executable_subset_selected": true,
+    "no_candidate_selected": true,
+    "indeterminate": true
+  },
+  "negative_tests": {
+    "arrival_time_used": true,
+    "implementation_behavior_used": true,
+    "single_candidate_admissible_set": true,
+    "unqualified_authority": true,
+    "invalid_resulting_state": true,
+    "unqualified_state": true,
+    "selected_with_no_selection_reason": true,
+    "no_selection_without_reason": true,
+    "strongly_coupled_subset": true,
+    "execution_authority_claim": true,
+    "commit_claim": true,
+    "applicable_condition_not_applicable": true
+  },
+  "catalog_hashes_match": true,
+  "openapi_reference_present": true,
+  "rtm_version": "RTM-1.22",
+  "rtm_mapped_cr_ids": [
+    "CR-094",
+    "CR-095"
+  ],
+  "rtm_style_preserved": true,
+  "formula_errors": [],
+  "common_definition_count": 100,
+  "removed_common_definitions": [
+    "partial_bind_result_ref",
+    "partial_bind_result_id",
+    "admissibility_outcome_enum"
+  ]
+}

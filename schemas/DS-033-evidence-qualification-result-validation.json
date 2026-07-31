@@ -1,0 +1,151 @@
+{
+  "schema_id": "DS-033",
+  "schema_file": "evidence_qualification_result.json",
+  "checks": [
+    {
+      "name": "Draft 2020-12 structural validation",
+      "passed": true,
+      "detail": "30 implemented schemas validated"
+    },
+    {
+      "name": "Cross-schema references and fragments",
+      "passed": true,
+      "detail": "1272 references resolved"
+    },
+    {
+      "name": "Catalog counts",
+      "passed": true,
+      "detail": "30 implemented; 14 reserved"
+    },
+    {
+      "name": "DS-033 catalog active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog SHA-256 values",
+      "passed": true,
+      "detail": "30 hashes verified"
+    },
+    {
+      "name": "Catalog DS IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OpenAPI DS-033 components",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "RTM DS-033 mappings",
+      "passed": true,
+      "detail": "CR-005;CR-041;CR-054;CR-064;CR-067;CR-068;CR-097"
+    },
+    {
+      "name": "RTM dataset version",
+      "passed": true,
+      "detail": "RTM-1.17 across all rows"
+    },
+    {
+      "name": "RTM formulas and formula errors",
+      "passed": true,
+      "detail": "0 formulas; 0 errors"
+    },
+    {
+      "name": "Active Evidence Qualification references migrated",
+      "passed": true,
+      "detail": "DS-022, DS-023, DS-026, DS-027, and DS-028 use DS-033 references"
+    },
+    {
+      "name": "RTM formatting preservation",
+      "passed": true,
+      "detail": "dimensions, merges, widths, styles, workbook theme, and workbook metadata unchanged"
+    },
+    {
+      "name": "Repository ZIP integrity",
+      "passed": true,
+      "detail": "No errors detected"
+    }
+  ],
+  "positive_tests": [
+    {
+      "name": "qualified evidence set",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "not-qualified stale evidence",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "not-qualified unavailable evidence",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "indeterminate unresolved evidence",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "qualified_evidence_ref accepts qualified result",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_tests": [
+    {
+      "name": "qualified result with unavailable dimension rejected",
+      "passed": true,
+      "error": "'QUALIFIED' was expected"
+    },
+    {
+      "name": "qualified result with partial availability rejected",
+      "passed": true,
+      "error": "'AVAILABLE' was expected"
+    },
+    {
+      "name": "not-qualified result without failure reason rejected",
+      "passed": true,
+      "error": "'failure_reasons' is a required property"
+    },
+    {
+      "name": "indeterminate result without missing input rejected",
+      "passed": true,
+      "error": "'missing_input_refs' is a required property"
+    },
+    {
+      "name": "artifact existence treated as sufficient rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "qualified result that cannot support authority rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "non-namespaced extension rejected",
+      "passed": true,
+      "error": "'bad' does not match '^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\\\.[A-Za-z0-9][A-Za-z0-9._-]*)$'"
+    },
+    {
+      "name": "qualified_evidence_ref rejects non-qualified result",
+      "passed": true,
+      "error": "'QUALIFIED' was expected"
+    }
+  ],
+  "reference_errors": [],
+  "metaschema_errors": [],
+  "summary": {
+    "result": "PASS",
+    "implemented_schema_count": 30,
+    "cross_schema_reference_count": 1272,
+    "catalog_version": "1.0.12",
+    "rtm_version": "RTM-1.17",
+    "positive_test_count": 5,
+    "negative_test_count": 8
+  }
+}

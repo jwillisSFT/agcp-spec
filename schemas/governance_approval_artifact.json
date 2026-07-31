@@ -1,0 +1,1013 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_approval_artifact.json",
+  "title": "Governance Approval Artifact",
+  "description": "Canonical domain schema for an attributable, cryptographically verifiable governance artifact recording human or governed approval, cosignature, positive or negative adjudication, risk acceptance, cancellation, withdrawal, or participation in partial or completed quorum. The artifact is proposal-, lifecycle-, scope-, tenant-, target-, policy-, governance-version-, and validity-bound evidence. It may support lifecycle progression, Authority Re-Derivation, and Commit-Bound Admissibility, but does not itself constitute authority at commitment or permission to execute.",
+  "$comment": "DS-026 is the authoritative Governance Approval Artifact. Eligibility, principal authority, current lifecycle state, validity, revocation, quorum arithmetic, cross-object binding equality, and commit-time sufficiency require semantic verification where JSON Schema cannot compare arbitrary values or current authoritative state. Completion of approval or quorum creates eligibility evidence only; current qualified governance inputs must still be re-evaluated before commitment.",
+  "x-agcp-ds-id": "DS-026",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Governance Object — Governance Approval Artifact",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-107",
+      "ARM-202",
+      "ARM-302",
+      "ARM-304",
+      "ARM-305",
+      "ARM-308",
+      "ARM-601",
+      "ARM-603",
+      "ARM-609",
+      "ARM-610",
+      "ARM-804",
+      "ARM-805"
+    ],
+    "core_sections": [
+      "8.6A",
+      "10.8A",
+      "13.6B"
+    ],
+    "normative_statements": [
+      "NS-8.6A-01",
+      "NS-8.6A-02",
+      "NS-8.6A-03",
+      "NS-10.8A-03",
+      "NS-13.6B-01",
+      "NS-13.6B-02",
+      "NS-13.6B-03",
+      "NS-13.6B-04",
+      "NS-13.6B-05",
+      "NS-13.6B-06"
+    ],
+    "conformance_requirements": [
+      "CR-012",
+      "CR-013",
+      "CR-014",
+      "CR-015",
+      "CR-016",
+      "CR-017",
+      "CR-018",
+      "CR-058",
+      "CR-059",
+      "CR-060",
+      "CR-061"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "approval_artifact_id": {
+      "$ref": "common.json#/$defs/approval_artifact_id"
+    },
+    "artifact_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "artifact_role": {
+      "const": "APPROVAL_EVIDENCE_NOT_EXECUTION_AUTHORITY",
+      "description": "Fixed role preventing approval evidence from being interpreted as authority at commitment or permission to execute."
+    },
+    "approval_kind": {
+      "$ref": "#/$defs/approval_kind_enum"
+    },
+    "decision": {
+      "$ref": "#/$defs/approval_decision_enum"
+    },
+    "status": {
+      "$ref": "#/$defs/approval_status_enum"
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "lifecycle_state_binding": {
+      "$ref": "#/$defs/lifecycle_state_binding"
+    },
+    "scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "validity_window": {
+      "$ref": "common.json#/$defs/validity_window"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "canonical_state_ref_at_adjudication": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "approver": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "approver_eligibility": {
+      "$ref": "#/$defs/approver_eligibility"
+    },
+    "authority_lineage_ref": {
+      "$ref": "common.json#/$defs/authority_lineage_ref"
+    },
+    "decision_reason": {
+      "$ref": "#/$defs/decision_reason"
+    },
+    "quorum_contribution": {
+      "$ref": "#/$defs/quorum_contribution"
+    },
+    "related_approval_artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/governance_approval_artifact_ref"
+      },
+      "uniqueItems": true
+    },
+    "governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "uniqueItems": true
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "issued_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "cryptographic_verification": {
+      "$ref": "#/$defs/cryptographic_verification"
+    },
+    "replay_protection": {
+      "$ref": "#/$defs/replay_protection"
+    },
+    "artifact_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "supersedes_approval_artifact_ref": {
+      "$ref": "#/$defs/governance_approval_artifact_ref"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    },
+    "lifecycle_effect": {
+      "$ref": "#/$defs/lifecycle_effect"
+    },
+    "artifact_termination": {
+      "$ref": "#/$defs/artifact_termination_record"
+    },
+    "superseded_by_approval_artifact_ref": {
+      "$ref": "#/$defs/governance_approval_artifact_ref"
+    }
+  },
+  "required": [
+    "approval_artifact_id",
+    "artifact_version",
+    "artifact_role",
+    "approval_kind",
+    "decision",
+    "status",
+    "proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "target",
+    "lifecycle_state_binding",
+    "scope",
+    "validity_window",
+    "policy_refs",
+    "governance_version_ref",
+    "canonical_state_ref_at_adjudication",
+    "approver",
+    "approver_eligibility",
+    "authority_lineage_ref",
+    "lifecycle_effect",
+    "governance_evidence_refs",
+    "issued_at",
+    "attribution",
+    "cryptographic_verification",
+    "replay_protection",
+    "artifact_digest",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "enum": [
+              "COSIGNATURE",
+              "QUORUM_PARTICIPATION"
+            ]
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "quorum_contribution"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "const": "RISK_ACCEPTANCE"
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "RISK_ACCEPTANCE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "const": "CANCELLATION"
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "CANCEL"
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "PROPOSAL_CANCELLED"
+              }
+            }
+          }
+        },
+        "required": [
+          "decision_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "const": "WITHDRAWAL"
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "WITHDRAW"
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "PROPOSAL_WITHDRAWN"
+              }
+            }
+          }
+        },
+        "required": [
+          "decision_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "enum": [
+              "REJECT",
+              "REQUEST_MODIFICATION",
+              "CANCEL",
+              "WITHDRAW"
+            ]
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "required": [
+          "decision_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "EXPIRED",
+              "CANCELLED",
+              "WITHDRAWN",
+              "REVOKED",
+              "SUPERSEDED"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "artifact_termination"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ACTIVE"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "artifact_termination"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "EXPIRED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_termination": {
+            "properties": {
+              "termination_type": {
+                "const": "EXPIRED"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "CANCELLED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_termination": {
+            "properties": {
+              "termination_type": {
+                "const": "CANCELLED"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "WITHDRAWN"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_termination": {
+            "properties": {
+              "termination_type": {
+                "const": "WITHDRAWN"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "REVOKED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_termination": {
+            "properties": {
+              "termination_type": {
+                "const": "REVOKED"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "SUPERSEDED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_termination": {
+            "properties": {
+              "termination_type": {
+                "const": "SUPERSEDED"
+              }
+            }
+          }
+        },
+        "required": [
+          "superseded_by_approval_artifact_ref"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "approval_kind_enum": {
+      "type": "string",
+      "enum": [
+        "HUMAN_APPROVAL",
+        "GOVERNED_APPROVAL",
+        "COSIGNATURE",
+        "ADJUDICATION",
+        "RISK_ACCEPTANCE",
+        "QUORUM_PARTICIPATION",
+        "CANCELLATION",
+        "WITHDRAWAL"
+      ],
+      "description": "Governed approval or adjudication function represented by the artifact."
+    },
+    "approval_decision_enum": {
+      "type": "string",
+      "enum": [
+        "APPROVE",
+        "REJECT",
+        "ABSTAIN",
+        "RISK_ACCEPTANCE",
+        "REQUEST_MODIFICATION",
+        "CANCEL",
+        "WITHDRAW"
+      ],
+      "description": "Positive, negative, neutral, risk-acceptance, cancellation, or withdrawal adjudication."
+    },
+    "approval_status_enum": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "EXPIRED",
+        "CANCELLED",
+        "WITHDRAWN",
+        "REVOKED",
+        "SUPERSEDED"
+      ],
+      "description": "Current artifact eligibility status. Only ACTIVE artifacts may contribute to current approval or quorum evaluation, subject to all other governance conditions."
+    },
+    "lifecycle_state_binding": {
+      "type": "object",
+      "description": "Binding to an authoritative eligible Derived Lifecycle State at the time the artifact is accepted for governance use.",
+      "additionalProperties": false,
+      "properties": {
+        "lifecycle_state_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        },
+        "eligible_states": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_lifecycle_record.json#/$defs/derived_lifecycle_state"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "eligibility_verified": {
+          "const": true
+        },
+        "verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "verification_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        }
+      },
+      "required": [
+        "lifecycle_state_ref",
+        "eligible_states",
+        "eligibility_verified",
+        "verified_at",
+        "verification_evidence_ref"
+      ]
+    },
+    "approver_eligibility": {
+      "type": "object",
+      "description": "Attributable verification that the approver is eligible under current governance policy, role, authority, tenant, domain, scope, and subject-status conditions.",
+      "additionalProperties": false,
+      "properties": {
+        "eligibility_outcome": {
+          "const": "ELIGIBLE"
+        },
+        "required_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "satisfied_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "uniqueItems": true
+        },
+        "subject_status_verified": {
+          "const": true
+        },
+        "tenant_binding_verified": {
+          "const": true
+        },
+        "domain_binding_verified": {
+          "const": true
+        },
+        "scope_binding_verified": {
+          "const": true
+        },
+        "authority_verified": {
+          "const": true
+        },
+        "verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "verifier": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "qualification_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "eligibility_outcome",
+        "required_roles",
+        "subject_status_verified",
+        "tenant_binding_verified",
+        "domain_binding_verified",
+        "scope_binding_verified",
+        "authority_verified",
+        "verified_at",
+        "verifier",
+        "qualification_evidence_refs"
+      ]
+    },
+    "decision_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reason_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "uniqueItems": true
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "uniqueItems": true
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "reason_code",
+        "reason"
+      ]
+    },
+    "quorum_contribution": {
+      "type": "object",
+      "description": "Attributable participation in a governed partial or completed quorum. Count and threshold comparisons require deterministic semantic evaluation.",
+      "additionalProperties": false,
+      "properties": {
+        "quorum_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "quorum_requirement": {
+          "$ref": "common.json#/$defs/quorum_requirement"
+        },
+        "contribution_sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "contribution_weight": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
+        "counted": {
+          "type": "boolean"
+        },
+        "accumulated_count_after": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status_after": {
+          "$ref": "common.json#/$defs/quorum_status_enum"
+        },
+        "prior_approval_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/governance_approval_artifact_ref"
+          },
+          "uniqueItems": true
+        },
+        "duplicate_principal_check_passed": {
+          "const": true
+        },
+        "eligibility_check_passed": {
+          "const": true
+        },
+        "validity_check_passed": {
+          "const": true
+        },
+        "signature_check_passed": {
+          "const": true
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evaluation_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        }
+      },
+      "required": [
+        "quorum_id",
+        "quorum_requirement",
+        "contribution_sequence",
+        "contribution_weight",
+        "counted",
+        "accumulated_count_after",
+        "status_after",
+        "duplicate_principal_check_passed",
+        "eligibility_check_passed",
+        "validity_check_passed",
+        "signature_check_passed",
+        "evaluated_at",
+        "evaluation_evidence_ref"
+      ]
+    },
+    "cryptographic_verification": {
+      "type": "object",
+      "description": "Cryptographic attribution and verification result for the canonical approval artifact content.",
+      "additionalProperties": false,
+      "properties": {
+        "signature": {
+          "$ref": "common.json#/$defs/signature"
+        },
+        "canonicalization_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "verification_outcome": {
+          "const": "VERIFIED"
+        },
+        "verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "verifier": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "verification_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        }
+      },
+      "required": [
+        "signature",
+        "canonicalization_method",
+        "verification_outcome",
+        "verified_at",
+        "verifier",
+        "verification_evidence_ref"
+      ]
+    },
+    "replay_protection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nonce": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256
+        },
+        "replay_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "uniqueness_verified": {
+          "const": true
+        },
+        "verified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "verification_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        }
+      },
+      "required": [
+        "nonce",
+        "replay_scope_digest",
+        "uniqueness_verified",
+        "verified_at",
+        "verification_evidence_ref"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_binding_verified": {
+          "const": true
+        },
+        "lifecycle_eligibility_verified": {
+          "const": true
+        },
+        "scope_binding_verified": {
+          "const": true
+        },
+        "tenant_binding_verified": {
+          "const": true
+        },
+        "target_binding_verified": {
+          "const": true
+        },
+        "validity_verified_at_issuance": {
+          "const": true
+        },
+        "evidence_only_not_authority_at_commitment": {
+          "const": true
+        },
+        "does_not_authorize_execution": {
+          "const": true
+        },
+        "current_state_re_evaluation_required_before_commitment": {
+          "const": true
+        }
+      },
+      "required": [
+        "proposal_binding_verified",
+        "lifecycle_eligibility_verified",
+        "scope_binding_verified",
+        "tenant_binding_verified",
+        "target_binding_verified",
+        "validity_verified_at_issuance",
+        "evidence_only_not_authority_at_commitment",
+        "does_not_authorize_execution",
+        "current_state_re_evaluation_required_before_commitment"
+      ]
+    },
+    "governance_approval_artifact_ref": {
+      "type": "object",
+      "description": "Stable, integrity-protected reference to a DS-026 Governance Approval Artifact.",
+      "additionalProperties": false,
+      "properties": {
+        "approval_artifact_id": {
+          "$ref": "common.json#/$defs/approval_artifact_id"
+        },
+        "decision": {
+          "$ref": "#/$defs/approval_decision_enum"
+        },
+        "status": {
+          "$ref": "#/$defs/approval_status_enum"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_id": {
+          "$ref": "common.json#/$defs/target_id"
+        },
+        "artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "signature": {
+          "$ref": "common.json#/$defs/signature"
+        }
+      },
+      "required": [
+        "approval_artifact_id",
+        "artifact_digest"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    },
+    "lifecycle_effect": {
+      "type": "object",
+      "description": "Governed lifecycle effect supported by the artifact. The effect records eligibility or adjudication consequences and remains distinct from the artifact’s own active, expired, revoked, or superseded status.",
+      "additionalProperties": false,
+      "properties": {
+        "effect_type": {
+          "type": "string",
+          "enum": [
+            "NO_TRANSITION",
+            "PARTIAL_QUORUM_ACCUMULATED",
+            "ELIGIBLE_FOR_AUTHORIZATION_TRANSITION",
+            "NEGATIVE_ADJUDICATION",
+            "PROPOSAL_CANCELLED",
+            "PROPOSAL_WITHDRAWN",
+            "RE_EVALUATION_REQUIRED"
+          ]
+        },
+        "resulting_lifecycle_state_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        },
+        "eligibility_only_not_authority": {
+          "const": true
+        },
+        "effect_recorded_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "effect_type",
+        "eligibility_only_not_authority",
+        "effect_recorded_at",
+        "governance_evidence_refs"
+      ]
+    },
+    "artifact_termination_record": {
+      "type": "object",
+      "description": "Attributable expiration, cancellation, withdrawal, revocation, or supersession of the approval artifact itself. This remains distinct from a cancellation or withdrawal decision affecting the governed Proposal.",
+      "additionalProperties": false,
+      "properties": {
+        "termination_type": {
+          "type": "string",
+          "enum": [
+            "EXPIRED",
+            "CANCELLED",
+            "WITHDRAWN",
+            "REVOKED",
+            "SUPERSEDED"
+          ]
+        },
+        "effective_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "reason_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "terminated_by": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "termination_authority_lineage_ref": {
+          "$ref": "common.json#/$defs/authority_lineage_ref"
+        },
+        "lifecycle_state_ref_after": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "termination_type",
+        "effective_at",
+        "reason_code",
+        "reason",
+        "terminated_by",
+        "termination_authority_lineage_ref",
+        "governance_evidence_refs"
+      ]
+    }
+  }
+}

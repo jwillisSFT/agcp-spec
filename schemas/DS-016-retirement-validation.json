@@ -1,0 +1,806 @@
+{
+  "report_id": "DS-016-RETIREMENT-VALIDATION",
+  "status": "PASS",
+  "validated_at": "2026-07-30",
+  "active_schema_count": 43,
+  "retired_identifier_count": 1,
+  "resolved_reference_count": 3579,
+  "checks": [
+    {
+      "check": "active_count_43",
+      "passed": true,
+      "detail": "43"
+    },
+    {
+      "check": "retired_count_1",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "check": "ds016_not_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "ds016_retired",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "ds016_file_removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "ds026_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "exists_DS-001",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/common.json"
+    },
+    {
+      "check": "metaschema_DS-001",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-001",
+      "passed": true,
+      "detail": "1ea4c1a609c6587222eeafc09d6b1eab8bf293e7d66d3775cfa7d13b165a56b5 != 1ea4c1a609c6587222eeafc09d6b1eab8bf293e7d66d3775cfa7d13b165a56b5"
+    },
+    {
+      "check": "exists_DS-002",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/error_response.json"
+    },
+    {
+      "check": "metaschema_DS-002",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-002",
+      "passed": true,
+      "detail": "bf37ad9726e98b4fd4bbdec99bea2f5de2020bd448a276f2cf9d14b766594cfd != bf37ad9726e98b4fd4bbdec99bea2f5de2020bd448a276f2cf9d14b766594cfd"
+    },
+    {
+      "check": "exists_DS-003",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/meta_response.json"
+    },
+    {
+      "check": "metaschema_DS-003",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-003",
+      "passed": true,
+      "detail": "e30b271db64b339ec1777bbc8f184f2294a0c70f03c418d1224784dff1dbd40e != e30b271db64b339ec1777bbc8f184f2294a0c70f03c418d1224784dff1dbd40e"
+    },
+    {
+      "check": "exists_DS-004",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/tenant.json"
+    },
+    {
+      "check": "metaschema_DS-004",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-004",
+      "passed": true,
+      "detail": "c2c3b62db212ef9405a56ed0bc7164214278a4d1e0d8265ceb82173a122f3137 != c2c3b62db212ef9405a56ed0bc7164214278a4d1e0d8265ceb82173a122f3137"
+    },
+    {
+      "check": "exists_DS-005",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/policy_evaluation_module_artifact.json"
+    },
+    {
+      "check": "metaschema_DS-005",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-005",
+      "passed": true,
+      "detail": "391efa65a1364fe83f8ab8f73c1e6cb594820216fde6768c2ae89a2fb574b502 != 391efa65a1364fe83f8ab8f73c1e6cb594820216fde6768c2ae89a2fb574b502"
+    },
+    {
+      "check": "exists_DS-006",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/policy_artifact.json"
+    },
+    {
+      "check": "metaschema_DS-006",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-006",
+      "passed": true,
+      "detail": "48aba64b03d02280cfdc4cc377440bb63bcb3089884697440c00df99ee95de93 != 48aba64b03d02280cfdc4cc377440bb63bcb3089884697440c00df99ee95de93"
+    },
+    {
+      "check": "exists_DS-007",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/constraint_artifact.json"
+    },
+    {
+      "check": "metaschema_DS-007",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-007",
+      "passed": true,
+      "detail": "0b8fc440dd6e4fd204d29f27f8c5e04cfd0bfa75bf951d6d61dc0da5d29e763b != 0b8fc440dd6e4fd204d29f27f8c5e04cfd0bfa75bf951d6d61dc0da5d29e763b"
+    },
+    {
+      "check": "exists_DS-008",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/invariant_definition.json"
+    },
+    {
+      "check": "metaschema_DS-008",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-008",
+      "passed": true,
+      "detail": "5a099ae3b21f7094fc2bdc8c4dcc3318733d0ef42b9c267faf6428a78d90bcac != 5a099ae3b21f7094fc2bdc8c4dcc3318733d0ef42b9c267faf6428a78d90bcac"
+    },
+    {
+      "check": "exists_DS-009",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/exception_artifact.json"
+    },
+    {
+      "check": "metaschema_DS-009",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-009",
+      "passed": true,
+      "detail": "f456adcaddcda034e75a22272a63f1457fee079a6c7db63c3ee4dd8a58c031cc != f456adcaddcda034e75a22272a63f1457fee079a6c7db63c3ee4dd8a58c031cc"
+    },
+    {
+      "check": "exists_DS-010",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_artifact_view.json"
+    },
+    {
+      "check": "metaschema_DS-010",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-010",
+      "passed": true,
+      "detail": "b5632c0bce77a7dd7e94f42850844ae086ac360c7546d55ebf038424b0316f0d != b5632c0bce77a7dd7e94f42850844ae086ac360c7546d55ebf038424b0316f0d"
+    },
+    {
+      "check": "exists_DS-011",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/constraint_evaluation.json"
+    },
+    {
+      "check": "metaschema_DS-011",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-011",
+      "passed": true,
+      "detail": "f3981f98af3fb57ba010d6e66713e05895be355b021e08608a3071b611af36e7 != f3981f98af3fb57ba010d6e66713e05895be355b021e08608a3071b611af36e7"
+    },
+    {
+      "check": "exists_DS-012",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/invariant_evaluation.json"
+    },
+    {
+      "check": "metaschema_DS-012",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-012",
+      "passed": true,
+      "detail": "da1d3c850a79e66f50e88e4193528cbc669bd411973513a43c6b24f2920acafa != da1d3c850a79e66f50e88e4193528cbc669bd411973513a43c6b24f2920acafa"
+    },
+    {
+      "check": "exists_DS-013",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/proposal_submit_request.json"
+    },
+    {
+      "check": "metaschema_DS-013",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-013",
+      "passed": true,
+      "detail": "1b38a25ccaa93ed1a276dbdd64fae59da573488c78509e32ed73cd91008dc279 != 1b38a25ccaa93ed1a276dbdd64fae59da573488c78509e32ed73cd91008dc279"
+    },
+    {
+      "check": "exists_DS-014",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/proposal_view.json"
+    },
+    {
+      "check": "metaschema_DS-014",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-014",
+      "passed": true,
+      "detail": "0c5598297d3bcd233289054add5b8da2430e3b23e342a3dc38ffc6f36902baa8 != 0c5598297d3bcd233289054add5b8da2430e3b23e342a3dc38ffc6f36902baa8"
+    },
+    {
+      "check": "exists_DS-015",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_decision_result.json"
+    },
+    {
+      "check": "metaschema_DS-015",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-015",
+      "passed": true,
+      "detail": "a1f8fd07f742e89a73aee4d682eb79b4ced48ef0a500b76d112011a7a5bc1347 != a1f8fd07f742e89a73aee4d682eb79b4ced48ef0a500b76d112011a7a5bc1347"
+    },
+    {
+      "check": "exists_DS-017",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/execution_authorization_view.json"
+    },
+    {
+      "check": "metaschema_DS-017",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-017",
+      "passed": true,
+      "detail": "f7d8b21bfb28d2ce28fd1fcb3feada1e4b92a7494f9a1bbdfddafe0faa3e0485 != f7d8b21bfb28d2ce28fd1fcb3feada1e4b92a7494f9a1bbdfddafe0faa3e0485"
+    },
+    {
+      "check": "exists_DS-018",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/commit_boundary_request.json"
+    },
+    {
+      "check": "metaschema_DS-018",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-018",
+      "passed": true,
+      "detail": "8f50e407cb15729f0845b4cf4ca6aa923a5f071c0522d39c4553d830ca273394 != 8f50e407cb15729f0845b4cf4ca6aa923a5f071c0522d39c4553d830ca273394"
+    },
+    {
+      "check": "exists_DS-019",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/commit_boundary_result.json"
+    },
+    {
+      "check": "metaschema_DS-019",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-019",
+      "passed": true,
+      "detail": "94cfc5dc8f6b3a8170e638a191abc7f46e0924a44d15c816a7be095660a24c30 != 94cfc5dc8f6b3a8170e638a191abc7f46e0924a44d15c816a7be095660a24c30"
+    },
+    {
+      "check": "exists_DS-020",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_evidence.json"
+    },
+    {
+      "check": "metaschema_DS-020",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-020",
+      "passed": true,
+      "detail": "fa73a433fa0135b3ac804086fd591617f6789aa8b4843e95429ff05de31b5aa3 != fa73a433fa0135b3ac804086fd591617f6789aa8b4843e95429ff05de31b5aa3"
+    },
+    {
+      "check": "exists_DS-021",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governed_action_proposal.json"
+    },
+    {
+      "check": "metaschema_DS-021",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-021",
+      "passed": true,
+      "detail": "d141c8e3bf9dceb1456afec8f4cd3fc214d8c07c0160d676d54c1471be30101d != d141c8e3bf9dceb1456afec8f4cd3fc214d8c07c0160d676d54c1471be30101d"
+    },
+    {
+      "check": "exists_DS-022",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_context_envelope.json"
+    },
+    {
+      "check": "metaschema_DS-022",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-022",
+      "passed": true,
+      "detail": "1bd353d10c578a338e793ea86388372d922872eedbd3670628173b444164c1a0 != 1bd353d10c578a338e793ea86388372d922872eedbd3670628173b444164c1a0"
+    },
+    {
+      "check": "exists_DS-023",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/canonical_state.json"
+    },
+    {
+      "check": "metaschema_DS-023",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-023",
+      "passed": true,
+      "detail": "677d84bbef278287b75a995f221c60c8bbeb7aabafce19b764cefa1ca5c62380 != 677d84bbef278287b75a995f221c60c8bbeb7aabafce19b764cefa1ca5c62380"
+    },
+    {
+      "check": "exists_DS-024",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/authority_lineage.json"
+    },
+    {
+      "check": "metaschema_DS-024",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-024",
+      "passed": true,
+      "detail": "f4a898d138d19785057ececfef9e6bab438539300724c43bd2ef96e5bea0b72f != f4a898d138d19785057ececfef9e6bab438539300724c43bd2ef96e5bea0b72f"
+    },
+    {
+      "check": "exists_DS-025",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/delegation_artifact.json"
+    },
+    {
+      "check": "metaschema_DS-025",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-025",
+      "passed": true,
+      "detail": "7ebf7aea68f1b81afd018cbcc0eae09f6820e4faa989977c57ea3142ad372998 != 7ebf7aea68f1b81afd018cbcc0eae09f6820e4faa989977c57ea3142ad372998"
+    },
+    {
+      "check": "exists_DS-026",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_approval_artifact.json"
+    },
+    {
+      "check": "metaschema_DS-026",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-026",
+      "passed": true,
+      "detail": "8f8ef63cea20b8ef352fab5dc1049c8883c8f7ec7b190caf9d1d682a2dafab8f != 8f8ef63cea20b8ef352fab5dc1049c8883c8f7ec7b190caf9d1d682a2dafab8f"
+    },
+    {
+      "check": "exists_DS-027",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_receipt.json"
+    },
+    {
+      "check": "metaschema_DS-027",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-027",
+      "passed": true,
+      "detail": "3b39c50b75140a36992ff7962b094d91dd12e05b71dbd0ae307a8fb861f3142f != 3b39c50b75140a36992ff7962b094d91dd12e05b71dbd0ae307a8fb861f3142f"
+    },
+    {
+      "check": "exists_DS-028",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/refusal_record.json"
+    },
+    {
+      "check": "metaschema_DS-028",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-028",
+      "passed": true,
+      "detail": "69b7336d93976190c134b1c9459dd8ba5964ce2f40062095831707607177d991 != 69b7336d93976190c134b1c9459dd8ba5964ce2f40062095831707607177d991"
+    },
+    {
+      "check": "exists_DS-029",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/enforcement_context.json"
+    },
+    {
+      "check": "metaschema_DS-029",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-029",
+      "passed": true,
+      "detail": "ec6b2f9711c9aeb46750fc156051297040d61b30bccb3641933f1482da338cca != ec6b2f9711c9aeb46750fc156051297040d61b30bccb3641933f1482da338cca"
+    },
+    {
+      "check": "exists_DS-030",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_binding_validation_result.json"
+    },
+    {
+      "check": "metaschema_DS-030",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-030",
+      "passed": true,
+      "detail": "59d34233ad865a0194be6f8c559c62f27aae8c56c5f4cd38621ffffb9b1e499f != 59d34233ad865a0194be6f8c559c62f27aae8c56c5f4cd38621ffffb9b1e499f"
+    },
+    {
+      "check": "exists_DS-031",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/resulting_state_validation_result.json"
+    },
+    {
+      "check": "metaschema_DS-031",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-031",
+      "passed": true,
+      "detail": "058523ee4755b94e94b8a243dc2a8ca8003b7a0e4c58121af01daffe7245df6d != 058523ee4755b94e94b8a243dc2a8ca8003b7a0e4c58121af01daffe7245df6d"
+    },
+    {
+      "check": "exists_DS-032",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/state_qualification_result.json"
+    },
+    {
+      "check": "metaschema_DS-032",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-032",
+      "passed": true,
+      "detail": "2a540ebc37c18dc65f769daad00a8cb62a4325f4099c92250feae489d4316e17 != 2a540ebc37c18dc65f769daad00a8cb62a4325f4099c92250feae489d4316e17"
+    },
+    {
+      "check": "exists_DS-033",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/evidence_qualification_result.json"
+    },
+    {
+      "check": "metaschema_DS-033",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-033",
+      "passed": true,
+      "detail": "848bf6eb2cdbb78a33b5a4c0f3ae4d6f4d4acbc23fc15b0ada338cc55d536ce3 != 848bf6eb2cdbb78a33b5a4c0f3ae4d6f4d4acbc23fc15b0ada338cc55d536ce3"
+    },
+    {
+      "check": "exists_DS-034",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/authority_rederivation_result.json"
+    },
+    {
+      "check": "metaschema_DS-034",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-034",
+      "passed": true,
+      "detail": "ad4db7436967a7c8c1e510eddd7f4bea4745b8b1575fd5a53745d3c00b2a23f8 != ad4db7436967a7c8c1e510eddd7f4bea4745b8b1575fd5a53745d3c00b2a23f8"
+    },
+    {
+      "check": "exists_DS-035",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/bind_set.json"
+    },
+    {
+      "check": "metaschema_DS-035",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-035",
+      "passed": true,
+      "detail": "d98a575bec9588c47b03438e7b93316e0eba18a11edf41cafe943ca14be55eac != d98a575bec9588c47b03438e7b93316e0eba18a11edf41cafe943ca14be55eac"
+    },
+    {
+      "check": "exists_DS-036",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_dependency_graph.json"
+    },
+    {
+      "check": "metaschema_DS-036",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-036",
+      "passed": true,
+      "detail": "439c23ff76174ffa848605e5f5345bd49f4b5b4ce72319e2d41cf26dc516be20 != 439c23ff76174ffa848605e5f5345bd49f4b5b4ce72319e2d41cf26dc516be20"
+    },
+    {
+      "check": "exists_DS-037",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/deterministic_adjudication_result.json"
+    },
+    {
+      "check": "metaschema_DS-037",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-037",
+      "passed": true,
+      "detail": "38262da8d98899480706d43653a5dc7a65b4145b437532afbaeb5dde2b85eb3a != 38262da8d98899480706d43653a5dc7a65b4145b437532afbaeb5dde2b85eb3a"
+    },
+    {
+      "check": "exists_DS-038",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_lifecycle_record.json"
+    },
+    {
+      "check": "metaschema_DS-038",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-038",
+      "passed": true,
+      "detail": "c53495168585e86d15eb0f4adefb88b82a09ad8cdd96e44c05b227fddde0aff8 != c53495168585e86d15eb0f4adefb88b82a09ad8cdd96e44c05b227fddde0aff8"
+    },
+    {
+      "check": "exists_DS-039",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/continuation_integrity_result.json"
+    },
+    {
+      "check": "metaschema_DS-039",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-039",
+      "passed": true,
+      "detail": "f4b3aefb86b45f8479635b058dff0a26d8367e8d4b1eb013a18ddd336e335b62 != f4b3aefb86b45f8479635b058dff0a26d8367e8d4b1eb013a18ddd336e335b62"
+    },
+    {
+      "check": "exists_DS-040",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_ledger_event.json"
+    },
+    {
+      "check": "metaschema_DS-040",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-040",
+      "passed": true,
+      "detail": "97e1d8d857365e1ab3a4d6884949cea2d4d0c528367c7625bc51e4b4ef0bf063 != 97e1d8d857365e1ab3a4d6884949cea2d4d0c528367c7625bc51e4b4ef0bf063"
+    },
+    {
+      "check": "exists_DS-041",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/governance_configuration.json"
+    },
+    {
+      "check": "metaschema_DS-041",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-041",
+      "passed": true,
+      "detail": "1af7552f0e9c8b8f379a157c9680d0f11c5f59abb6e07757fae2e82b4fb1ad03 != 1af7552f0e9c8b8f379a157c9680d0f11c5f59abb6e07757fae2e82b4fb1ad03"
+    },
+    {
+      "check": "exists_DS-042",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/compiled_governance_artifact.json"
+    },
+    {
+      "check": "metaschema_DS-042",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-042",
+      "passed": true,
+      "detail": "5da50676019e44e7a90b73ac383cf1d021601d115321881f8f29e03f2c9d68bc != 5da50676019e44e7a90b73ac383cf1d021601d115321881f8f29e03f2c9d68bc"
+    },
+    {
+      "check": "exists_DS-043",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/controlled_governance_activation.json"
+    },
+    {
+      "check": "metaschema_DS-043",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-043",
+      "passed": true,
+      "detail": "02840dea425e77a6be5b30e8185b8ec31ef08e72b2991441990e14badaea1adc != 02840dea425e77a6be5b30e8185b8ec31ef08e72b2991441990e14badaea1adc"
+    },
+    {
+      "check": "exists_DS-044",
+      "passed": true,
+      "detail": "/mnt/data/ds016_retirement_work/agcp-spec-main/schemas/registry_document.schema.json"
+    },
+    {
+      "check": "metaschema_DS-044",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "hash_DS-044",
+      "passed": true,
+      "detail": "b7409d9314e95278e79ec17bedc1b671f73150c79ebe71bb84e2a2176b7d5e82 != b7409d9314e95278e79ec17bedc1b671f73150c79ebe71bb84e2a2176b7d5e82"
+    },
+    {
+      "check": "all_local_refs_resolve",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_ref_to_retired_file",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "openapi_yaml_parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "openapi_no_ds016_compatibility",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "openapi_canonical_request",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "harness_yaml_parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "harness_no_compatibility_property",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "harness_uses_governance_approval_artifact",
+      "passed": true,
+      "detail": "5"
+    },
+    {
+      "check": "reference_no_fallback",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "reference_requires_canonical_property",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "human_review_spec_canonical_only",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "human_review_spec_ds026",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "http_spec_no_compatibility",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "http_spec_canonical_request",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "harness_checks_no_retired_schema",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "rtm_no_retired_schema_path",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "rtm_ds016_only_historical_notes",
+      "passed": true,
+      "detail": "[('AGCP_RTM_Repository_ARM_Co', 'AG13', 'Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping.'), ('AGCP_RTM_Repository_ARM_Co', 'AG14', 'Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping.'), ('AGCP_RTM_Repository_ARM_Co', 'AG15', 'Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state.'), ('AGCP_RTM_Repository_ARM_Co', 'AG16', 'Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping.'), ('AGCP_RTM_Repository_ARM_Co', 'AG17', 'Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping.')]"
+    },
+    {
+      "check": "rtm_dataset_version",
+      "passed": true,
+      "detail": "{'RTM-1.43'}"
+    },
+    {
+      "check": "catalog_version",
+      "passed": true,
+      "detail": "1.0.40"
+    },
+    {
+      "check": "catalog_summary_counts",
+      "passed": true,
+      "detail": "{'implemented_schema_count': 43, 'proposed_reserved_schema_count': 0, 'excluded_registry_payload_count': 0, 'rtm_rows_with_ds_assignments': 118, 'highest_assigned_ds_identifier': 'DS-044', 'implemented_count': 43, 'proposed_reserved_count': 0, 'total_assigned_count': 44, 'retired_schema_count': 1, 'retired_count': 1}"
+    },
+    {
+      "check": "catalog_csv_44_rows",
+      "passed": true,
+      "detail": "44"
+    },
+    {
+      "check": "catalog_csv_ds016_retired",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "active_ds_unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "active_filenames_unique",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "issues": []
+}

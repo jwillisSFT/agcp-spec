@@ -1,0 +1,653 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_context_envelope.json",
+  "title": "Governance Context Envelope",
+  "description": "Canonical domain schema for the attributable, versioned governance-relevant context associated with a Governed Action Proposal. The envelope preserves identity, tenant, policy, evidence, delegation, authority, lineage, target, lifecycle, risk, handoff, coordination, and outcome relationships needed for governance evaluation and continuity. Context may inform governance but is not authoritative Canonical State and cannot override it.",
+  "$comment": "DS-022 is the authoritative Governance Context Envelope domain object. The envelope is proposal-bound and continuity-preserving. Values that must match the containing DS-021 proposal—Proposal Identity, Tenant, governance domain, target, and related bindings—are semantic Proposal Qualification obligations because standard JSON Schema cannot compare arbitrary values across object locations. Inline Canonical State is intentionally prohibited; only a qualified Canonical State reference may be carried. Delegation references resolve to the canonical DS-025 Delegation Artifact reference definition.",
+  "x-agcp-ds-id": "DS-022",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Governance Object — Governance Context Envelope",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-101",
+      "ARM-102",
+      "ARM-103",
+      "ARM-106",
+      "ARM-308",
+      "ARM-603",
+      "ARM-604",
+      "ARM-606",
+      "ARM-610",
+      "ARM-703",
+      "ARM-709",
+      "ARM-710",
+      "ARM-801",
+      "ARM-807"
+    ],
+    "core_sections": [
+      "4.12",
+      "6.3",
+      "6.6",
+      "6.6A",
+      "7.2",
+      "7.3",
+      "7.6A",
+      "9.3",
+      "9.6A",
+      "10.8A",
+      "11.3",
+      "12.3",
+      "16.6A"
+    ],
+    "normative_statements": [
+      "NS-6.3-01",
+      "NS-6.6-01",
+      "NS-6.6A-02",
+      "NS-7.2-02",
+      "NS-7.3-01",
+      "NS-7.6A-01",
+      "NS-7.6A-02",
+      "NS-9.3-01",
+      "NS-9.6A-03",
+      "NS-10.8A-03",
+      "NS-16.6A-01",
+      "NS-16.6A-02",
+      "NS-16.6A-03"
+    ],
+    "conformance_requirements": [
+      "CR-040",
+      "CR-041",
+      "CR-042",
+      "CR-043",
+      "CR-044",
+      "CR-045",
+      "CR-046",
+      "CR-047",
+      "CR-069",
+      "CR-070",
+      "CR-071",
+      "CR-118"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Implementation- or domain-specific extension members. Extension names SHALL be namespace-qualified and SHALL NOT alter, replace, weaken, or assert authority over canonical AGCP context semantics or Canonical State.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    },
+    "context_entry": {
+      "type": "object",
+      "description": "A typed, attributable, integrity-protected non-authoritative context entry. Context entries may inform governance but SHALL NOT be interpreted as Canonical State unless independently resolved and qualified through the Canonical State process.",
+      "additionalProperties": false,
+      "properties": {
+        "context_entry_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "context_class": {
+          "type": "string",
+          "enum": [
+            "REQUEST",
+            "RISK",
+            "RUNTIME_OBSERVATION",
+            "EXECUTION",
+            "ENVIRONMENTAL",
+            "COORDINATION",
+            "CUSTOM"
+          ]
+        },
+        "context_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "authority_classification": {
+          "const": "NON_AUTHORITATIVE_CONTEXT",
+          "description": "Fixed classification preventing a context entry from asserting Canonical State authority."
+        },
+        "schema_ref": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "payload": {
+          "description": "Canonical context payload. Null is prohibited.",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "payload_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "source_attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "observed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "context_entry_id",
+        "context_class",
+        "context_type",
+        "authority_classification",
+        "payload",
+        "payload_digest",
+        "source_attribution"
+      ]
+    },
+    "context_qualification": {
+      "type": "object",
+      "description": "Attributable result establishing whether this context version is qualified for governance use. An absent qualification object means the envelope has not itself asserted qualification and must be qualified before use where required.",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "$ref": "common.json#/$defs/overall_qualification_outcome_enum"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "qualifier": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "qualification_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "outcome",
+        "evaluated_at",
+        "qualifier",
+        "qualification_evidence_ref"
+      ]
+    },
+    "context_update": {
+      "type": "object",
+      "description": "Attributable version transition from a predecessor Governance Context Envelope.",
+      "additionalProperties": false,
+      "properties": {
+        "previous_context_ref": {
+          "$ref": "common.json#/$defs/governance_context_ref"
+        },
+        "update_sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "updated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "update_attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "change_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "change_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "changed_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "update_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        }
+      },
+      "required": [
+        "previous_context_ref",
+        "update_sequence",
+        "updated_at",
+        "update_attribution",
+        "change_digest"
+      ]
+    },
+    "handoff_record": {
+      "type": "object",
+      "description": "Attributable handoff preserving context continuity between accountable principals, agents, systems, workloads, or domains.",
+      "additionalProperties": false,
+      "properties": {
+        "handoff_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "from_principal": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "to_principal": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "handed_off_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "predecessor_context_ref": {
+          "$ref": "common.json#/$defs/governance_context_ref"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "handoff_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        },
+        "handoff_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "handoff_id",
+        "from_principal",
+        "to_principal",
+        "handed_off_at",
+        "predecessor_context_ref",
+        "handoff_digest"
+      ]
+    },
+    "context_lineage": {
+      "type": "object",
+      "description": "Operational and governance lineage required to preserve context relationships across proposal generation, handoff, recursion, workflow progression, and distributed coordination.",
+      "additionalProperties": false,
+      "properties": {
+        "root_context_ref": {
+          "$ref": "common.json#/$defs/governance_context_ref"
+        },
+        "predecessor_context_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/governance_context_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "mission_task_lineage_ref": {
+          "$ref": "common.json#/$defs/mission_task_lineage_ref"
+        },
+        "handoffs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/handoff_record"
+          },
+          "minItems": 1
+        },
+        "lineage_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "lineage_digest"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "root_context_ref"
+          ]
+        },
+        {
+          "required": [
+            "predecessor_context_refs"
+          ]
+        },
+        {
+          "required": [
+            "mission_task_lineage_ref"
+          ]
+        },
+        {
+          "required": [
+            "handoffs"
+          ]
+        }
+      ]
+    },
+    "coordination_context": {
+      "type": "object",
+      "description": "Structured context for bounded handoff, multi-agent, workflow, cross-system, cross-domain, recursive, or autonomous coordination.",
+      "additionalProperties": false,
+      "properties": {
+        "coordination_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "coordination_type": {
+          "type": "string",
+          "enum": [
+            "HANDOFF",
+            "MULTI_AGENT",
+            "WORKFLOW",
+            "CROSS_SYSTEM",
+            "CROSS_DOMAIN",
+            "RECURSIVE_GENERATION",
+            "AUTONOMOUS_AGENT_COORDINATION"
+          ]
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/principal"
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "autonomous_coordination_bounds_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/uri"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "dependency_graph_ref": {
+          "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+        },
+        "sequence_constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "coordination_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true
+        },
+        "coordination_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "coordination_id",
+        "coordination_type",
+        "participants",
+        "coordination_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "coordination_type": {
+                "const": "AUTONOMOUS_AGENT_COORDINATION"
+              }
+            },
+            "required": [
+              "coordination_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "autonomous_coordination_bounds_refs"
+            ]
+          }
+        }
+      ]
+    },
+    "governance_outcome_refs": {
+      "type": "object",
+      "description": "References preserving governance outcome and lifecycle relationships when the envelope evolves after initial proposal formation.",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "governance_decision_ref": {
+          "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+        },
+        "execution_authorization_ref": {
+          "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+        },
+        "governance_receipt_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/governance_receipt_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "refusal_record_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "refusal_record.json#/$defs/refusal_record_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "lifecycle_record_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "deterministic_adjudication_result_ref": {
+          "$ref": "deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref"
+        },
+        "governance_binding_validation_result_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    },
+    "governance_context_envelope_ref": {
+      "type": "object",
+      "description": "Stable integrity-bound reference to the canonical DS-022 Governance Context Envelope.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_context_id": {
+          "$ref": "common.json#/$defs/governance_context_id"
+        },
+        "governance_context_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "context_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "created_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "governance_context_id",
+        "governance_context_version",
+        "context_digest"
+      ]
+    }
+  },
+  "properties": {
+    "governance_context_id": {
+      "$ref": "common.json#/$defs/governance_context_id"
+    },
+    "governance_context_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity",
+      "description": "Proposal Identity to which this context version is bound. It SHALL match the containing or referenced Governed Action Proposal."
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id",
+      "description": "Originating Tenant. It SHALL match Proposal Identity and the associated proposal."
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id",
+      "description": "Originating governance domain. It SHALL match applicable proposal and identity bindings."
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "context_digest": {
+      "$ref": "common.json#/$defs/content_digest",
+      "description": "Digest of the canonical governance-significant content of this envelope version."
+    },
+    "qualification": {
+      "$ref": "#/$defs/context_qualification"
+    },
+    "context_update": {
+      "$ref": "#/$defs/context_update"
+    },
+    "context_lineage": {
+      "$ref": "#/$defs/context_lineage"
+    },
+    "identity_context": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/principal"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref",
+      "description": "Reference only. Context SHALL NOT carry inline authoritative Canonical State or supersede the referenced state."
+    },
+    "authority_lineage_ref": {
+      "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+    },
+    "delegation_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "delegation_artifact.json#/$defs/delegation_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "governance_configuration_ref": {
+      "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "approval_artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "mission_task_lineage_ref": {
+      "$ref": "common.json#/$defs/mission_task_lineage_ref"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "lifecycle_state_ref": {
+      "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    "dependency_graph_ref": {
+      "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+    },
+    "context_entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/context_entry"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "coordination_context": {
+      "$ref": "#/$defs/coordination_context"
+    },
+    "outcome_refs": {
+      "$ref": "#/$defs/governance_outcome_refs"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "governance_context_id",
+    "governance_context_version",
+    "proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "attribution",
+    "created_at",
+    "context_digest"
+  ]
+}

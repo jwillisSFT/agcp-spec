@@ -1,0 +1,1052 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/state_qualification_result.json",
+  "title": "State Qualification Result",
+  "description": "Canonical, independently identifiable and traceable result of evaluating whether governance-relevant information is suitable for inclusion in or use as Canonical State for a defined evaluation horizon. The result records freshness, provenance, completeness, consistency, integrity, availability, conflict resolution, and ordering suitability; distinguishes qualified, not-qualified, and indeterminate outcomes; and prevents admissibility from proceeding when Canonical State suitability is not established.",
+  "x-agcp-ds-id": "DS-032",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Qualification Result — State Qualification",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-103",
+      "ARM-402",
+      "ARM-403",
+      "ARM-404",
+      "ARM-405",
+      "ARM-406",
+      "ARM-408"
+    ],
+    "core_sections": [
+      "4.6",
+      "5.6",
+      "7.4",
+      "7.6",
+      "9.6A"
+    ],
+    "normative_statements": [
+      "NS-4.6-01",
+      "NS-4.6-02",
+      "NS-7.4-01",
+      "NS-7.6A-01",
+      "NS-9.6A-01"
+    ],
+    "conformance_requirements": [
+      "CR-048",
+      "CR-049",
+      "CR-050",
+      "CR-103"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "evaluation_id": {
+      "$ref": "common.json#/$defs/evaluation_id"
+    },
+    "result_type": {
+      "const": "STATE_QUALIFICATION_RESULT"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref",
+      "description": "Reference to the qualified Canonical State when suitability is established. It is prohibited for a not-qualified or indeterminate result."
+    },
+    "candidate_state_binding": {
+      "$ref": "#/$defs/candidate_state_binding"
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "dimensions": {
+      "$ref": "#/$defs/qualification_dimensions"
+    },
+    "conflict_resolution": {
+      "$ref": "#/$defs/conflict_resolution_result"
+    },
+    "outcome": {
+      "$ref": "common.json#/$defs/overall_qualification_outcome_enum"
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "SUITABLE_FOR_CANONICAL_STATE_USE",
+        "STRUCTURAL_REFUSAL_REQUIRED",
+        "EVALUATION_BLOCKED"
+      ]
+    },
+    "failure_reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/qualification_failure_reason"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "missing_input_refs": {
+      "type": "array",
+      "description": "Stable identifiers or resolvable references for inputs whose absence prevents a determinate qualification result.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "supporting_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "evaluated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "evaluator": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "qualification_basis_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "result_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "evaluation_id",
+    "result_type",
+    "tenant_id",
+    "governance_domain_id",
+    "candidate_state_binding",
+    "evaluation_horizon",
+    "dimensions",
+    "conflict_resolution",
+    "outcome",
+    "disposition",
+    "evaluated_at",
+    "evaluator",
+    "qualification_basis_digest",
+    "result_digest",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "QUALIFIED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "canonical_state_ref"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "failure_reasons"
+              ]
+            },
+            {
+              "required": [
+                "missing_input_refs"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "dimensions": {
+            "$ref": "#/$defs/qualified_dimensions"
+          },
+          "conflict_resolution": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "NO_CONFLICT",
+                  "RESOLVED"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "disposition": {
+            "const": "SUITABLE_FOR_CANONICAL_STATE_USE"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "canonical_state_suitability_established": {
+                "const": true
+              },
+              "admissibility_may_proceed": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "NOT_QUALIFIED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "failure_reasons"
+        ],
+        "not": {
+          "required": [
+            "canonical_state_ref"
+          ]
+        },
+        "properties": {
+          "disposition": {
+            "const": "STRUCTURAL_REFUSAL_REQUIRED"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "canonical_state_suitability_established": {
+                "const": false
+              },
+              "admissibility_may_proceed": {
+                "const": false
+              }
+            }
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "dimensions": {
+                "$ref": "#/$defs/dimensions_with_not_qualified"
+              }
+            }
+          },
+          {
+            "properties": {
+              "conflict_resolution": {
+                "properties": {
+                  "status": {
+                    "const": "UNRESOLVED"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "INDETERMINATE"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "missing_input_refs"
+        ],
+        "not": {
+          "required": [
+            "canonical_state_ref"
+          ]
+        },
+        "properties": {
+          "disposition": {
+            "const": "EVALUATION_BLOCKED"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "canonical_state_suitability_established": {
+                "const": false
+              },
+              "admissibility_may_proceed": {
+                "const": false
+              }
+            }
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "dimensions": {
+                "$ref": "#/$defs/dimensions_with_indeterminate"
+              }
+            }
+          },
+          {
+            "properties": {
+              "conflict_resolution": {
+                "properties": {
+                  "status": {
+                    "const": "INDETERMINATE"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "state_qualification_result_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-032 State Qualification Result.",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "$ref": "common.json#/$defs/overall_qualification_outcome_enum"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "outcome",
+        "result_digest"
+      ]
+    },
+    "candidate_state_binding": {
+      "type": "object",
+      "description": "Integrity binding for the authoritative source set and candidate state evaluated by State Qualification.",
+      "additionalProperties": false,
+      "properties": {
+        "authoritative_source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/authoritative_source_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "source_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "source_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "candidate_state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "resolution_inputs_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ordering_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "resolution_status": {
+          "type": "string",
+          "enum": [
+            "RESOLVED",
+            "UNRESOLVED",
+            "INDETERMINATE"
+          ]
+        }
+      },
+      "required": [
+        "authoritative_source_refs",
+        "source_count",
+        "source_set_digest",
+        "candidate_state_digest",
+        "resolution_inputs_digest",
+        "ordering_basis_digest",
+        "resolution_status"
+      ]
+    },
+    "qualification_dimension_status": {
+      "type": "string",
+      "enum": [
+        "QUALIFIED",
+        "NOT_QUALIFIED",
+        "INDETERMINATE"
+      ]
+    },
+    "qualification_dimension_result": {
+      "type": "object",
+      "description": "Attributable result for one required State Qualification dimension.",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/qualification_dimension_status"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "assessed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "failure_codes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualification_failure_code"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "status",
+        "basis",
+        "assessed_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "NOT_QUALIFIED",
+                  "INDETERMINATE"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "failure_codes"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "failure_codes"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "qualification_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "freshness": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "provenance": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "completeness": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "consistency": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "integrity": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "availability": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        },
+        "ordering_suitability": {
+          "$ref": "#/$defs/qualification_dimension_result"
+        }
+      },
+      "required": [
+        "freshness",
+        "provenance",
+        "completeness",
+        "consistency",
+        "integrity",
+        "availability",
+        "ordering_suitability"
+      ]
+    },
+    "qualified_dimensions": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/qualification_dimensions"
+        },
+        {
+          "properties": {
+            "freshness": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "provenance": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "completeness": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "consistency": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "integrity": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "availability": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            },
+            "ordering_suitability": {
+              "properties": {
+                "status": {
+                  "const": "QUALIFIED"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "dimensions_with_not_qualified": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/qualification_dimensions"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "freshness": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "provenance": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "completeness": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "consistency": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "integrity": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "availability": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "ordering_suitability": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_QUALIFIED"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dimensions_with_indeterminate": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/qualification_dimensions"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "freshness": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "provenance": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "completeness": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "consistency": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "integrity": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "availability": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "ordering_suitability": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "conflict_resolution_result": {
+      "type": "object",
+      "description": "Explicit result for conflicts among candidate authoritative governance sources.",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "NO_CONFLICT",
+            "RESOLVED",
+            "UNRESOLVED",
+            "INDETERMINATE"
+          ]
+        },
+        "candidate_source_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "conflicting_source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/authoritative_source_ref"
+          },
+          "minItems": 2,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "selected_source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/authoritative_source_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "resolution_rule_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "resolution_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "status",
+        "candidate_source_count",
+        "basis"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "NO_CONFLICT"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "conflicting_source_refs"
+                  ]
+                },
+                {
+                  "required": [
+                    "selected_source_refs"
+                  ]
+                },
+                {
+                  "required": [
+                    "resolution_rule_ref"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "RESOLVED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "conflicting_source_refs",
+              "selected_source_refs",
+              "resolution_rule_ref",
+              "resolution_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "UNRESOLVED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "conflicting_source_refs"
+            ],
+            "not": {
+              "required": [
+                "selected_source_refs"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "qualification_failure_code": {
+      "type": "string",
+      "enum": [
+        "STATE_UNAVAILABLE",
+        "STATE_STALE",
+        "PROVENANCE_UNVERIFIED",
+        "STATE_INCOMPLETE",
+        "SOURCE_CONFLICT",
+        "STATE_INCONSISTENT",
+        "INTEGRITY_FAILURE",
+        "ORDERING_UNSUITABLE",
+        "SOURCE_UNRESOLVABLE",
+        "QUALIFICATION_INPUT_MISSING",
+        "OTHER_STATE_QUALIFICATION_FAILURE"
+      ]
+    },
+    "qualification_failure_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/qualification_failure_code"
+        },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "FRESHNESS",
+            "PROVENANCE",
+            "COMPLETENESS",
+            "CONSISTENCY",
+            "INTEGRITY",
+            "AVAILABILITY",
+            "CONFLICT_RESOLUTION",
+            "ORDERING_SUITABILITY",
+            "CROSS_DIMENSION"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "code",
+        "dimension",
+        "summary"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "description": "Recorded or resolvable information sufficient to reproduce the State Qualification result without inferring event order from timestamps.",
+      "additionalProperties": false,
+      "properties": {
+        "qualification_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "input_snapshot_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/uri"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "qualification_configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "qualified_inputs_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ordering_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "historical_action_execution_required": {
+          "const": false
+        }
+      },
+      "required": [
+        "qualification_profile",
+        "input_snapshot_refs",
+        "qualification_configuration_digest",
+        "qualified_inputs_digest",
+        "ordering_basis_digest",
+        "historical_action_execution_required"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "all_required_dimensions_evaluated": {
+          "const": true
+        },
+        "canonical_state_suitability_established": {
+          "type": "boolean"
+        },
+        "admissibility_may_proceed": {
+          "type": "boolean"
+        },
+        "timestamp_only_ordering_accepted": {
+          "const": false
+        },
+        "non_authoritative_observation_overrode_state": {
+          "const": false
+        },
+        "qualification_is_attributable": {
+          "const": true
+        },
+        "supports_deterministic_replay": {
+          "const": true
+        }
+      },
+      "required": [
+        "all_required_dimensions_evaluated",
+        "canonical_state_suitability_established",
+        "admissibility_may_proceed",
+        "timestamp_only_ordering_accepted",
+        "non_authoritative_observation_overrode_state",
+        "qualification_is_attributable",
+        "supports_deterministic_replay"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Profile-defined extensions that cannot alter the canonical meaning or outcome of State Qualification.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    }
+  }
+}

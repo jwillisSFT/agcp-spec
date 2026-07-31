@@ -1,0 +1,1020 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_configuration.json",
+  "title": "Governance Configuration",
+  "description": "Canonical, independently identifiable, attributable, versioned, integrity-protected, and evaluation-available representation of all governance-significant configuration applicable to a defined Tenant, governance domain, scope, and Governance Version. It makes runtime governance settings explicit, prohibits hidden or implicit configuration from influencing governance decisions, preserves controlled change and activation requirements, and includes the active deterministic risk-based re-evaluation configuration used to identify affected nonterminal proposals when material governance conditions change. Governance Configuration does not itself establish authority at commitment, authorize execution, or activate compiled governance.",
+  "$comment": "DS-041 implements ARM-704 and supports ARM-209, ARM-501, ARM-503, ARM-506, ARM-507, ARM-512, and ARM-705; Core Sections 13.2 through 13.7 and 15.6A through 15.6B; NS-13.2-04, NS-13.3-01, NS-13.4-01, NS-13.4-03 through NS-13.4-05, NS-13.7-02, NS-15.6A-04, NS-15.6B-01, and NS-15.6B-02; and CR-117 and CR-122. JSON Schema validates structural transparency, controlled-change assertions, and risk-based configuration completeness. Implementations must additionally verify semantic completeness, temporal comparisons, cross-object identity equality, approval authority, compilation and activation status, and deterministic selector behavior.",
+  "x-agcp-ds-id": "DS-041",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Governance Compilation Object — Governance Configuration",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-209",
+      "ARM-501",
+      "ARM-503",
+      "ARM-506",
+      "ARM-507",
+      "ARM-512",
+      "ARM-704",
+      "ARM-705",
+      "ARM-706",
+      "ARM-709"
+    ],
+    "core_sections": [
+      "13.2",
+      "13.3",
+      "13.4",
+      "13.7",
+      "15.6A",
+      "15.6B",
+      "15.7"
+    ],
+    "normative_statements": [
+      "NS-13.2-04",
+      "NS-13.3-01",
+      "NS-13.4-01",
+      "NS-13.4-03",
+      "NS-13.4-04",
+      "NS-13.4-05",
+      "NS-13.7-02",
+      "NS-15.6A-04",
+      "NS-15.6B-01",
+      "NS-15.6B-02",
+      "NS-15.7-02"
+    ],
+    "conformance_requirements": [
+      "CR-117",
+      "CR-122"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "governance_configuration_id": {
+      "$ref": "#/$defs/governance_configuration_id"
+    },
+    "configuration_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "configuration_type": {
+      "const": "GOVERNANCE_CONFIGURATION"
+    },
+    "configuration_status": {
+      "$ref": "#/$defs/configuration_status"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "effective_scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "applicable_policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "source_governance_intent_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/governance_intent_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "configuration_manifest": {
+      "$ref": "#/$defs/configuration_manifest"
+    },
+    "risk_based_re_evaluation_configuration": {
+      "$ref": "#/$defs/risk_based_re_evaluation_configuration"
+    },
+    "protected_configuration_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)+$",
+        "maxLength": 512
+      },
+      "minItems": 1,
+      "maxItems": 512,
+      "uniqueItems": true
+    },
+    "configuration_availability": {
+      "$ref": "#/$defs/configuration_availability"
+    },
+    "change_control": {
+      "$ref": "#/$defs/change_control"
+    },
+    "previous_configuration_ref": {
+      "$ref": "#/$defs/governance_configuration_ref"
+    },
+    "superseded_by_configuration_ref": {
+      "$ref": "#/$defs/governance_configuration_ref"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "created_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "last_modified_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "effective_from": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "effective_until": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "configuration_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    },
+    "controlled_governance_activation_ref": {
+      "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+    }
+  },
+  "required": [
+    "governance_configuration_id",
+    "configuration_version",
+    "configuration_type",
+    "configuration_status",
+    "tenant_id",
+    "governance_domain_id",
+    "effective_scope",
+    "applicable_policy_refs",
+    "source_governance_intent_refs",
+    "configuration_manifest",
+    "risk_based_re_evaluation_configuration",
+    "protected_configuration_paths",
+    "configuration_availability",
+    "change_control",
+    "governance_evidence_refs",
+    "created_at",
+    "attribution",
+    "provenance",
+    "configuration_digest",
+    "integrity_signature",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "configuration_status": {
+            "const": "ACTIVE"
+          }
+        },
+        "required": [
+          "configuration_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "governance_version_ref",
+          "controlled_governance_activation_ref",
+          "effective_from"
+        ],
+        "properties": {
+          "change_control": {
+            "required": [
+              "external_approval_artifact_refs"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "configuration_status": {
+            "enum": [
+              "SUPERSEDED",
+              "RETIRED"
+            ]
+          }
+        },
+        "required": [
+          "configuration_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "effective_until"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "configuration_status": {
+            "const": "SUPERSEDED"
+          }
+        },
+        "required": [
+          "configuration_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded_by_configuration_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "change_control": {
+            "properties": {
+              "change_origin": {
+                "const": "GOVERNED_SYSTEM_PROPOSAL"
+              }
+            },
+            "required": [
+              "change_origin"
+            ]
+          }
+        },
+        "required": [
+          "change_control"
+        ]
+      },
+      "then": {
+        "properties": {
+          "change_control": {
+            "required": [
+              "external_approval_artifact_refs"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "configuration_status": {
+            "const": "APPROVED"
+          }
+        },
+        "required": [
+          "configuration_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "change_control": {
+            "required": [
+              "external_approval_artifact_refs"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "governance_configuration_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for Governance Configuration."
+    },
+    "configuration_status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "VALIDATED",
+        "APPROVED",
+        "ACTIVE",
+        "SUPERSEDED",
+        "RETIRED",
+        "REJECTED"
+      ]
+    },
+    "governance_configuration_ref": {
+      "type": "object",
+      "description": "Integrity-bound reference to an active canonical DS-041 Governance Configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_configuration_id": {
+          "$ref": "#/$defs/governance_configuration_id"
+        },
+        "configuration_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "configuration_status": {
+          "const": "ACTIVE"
+        },
+        "configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "effective_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        }
+      },
+      "required": [
+        "governance_configuration_id",
+        "configuration_version",
+        "configuration_status",
+        "configuration_digest",
+        "governance_version_ref",
+        "tenant_id",
+        "governance_domain_id",
+        "effective_at"
+      ]
+    },
+    "governance_intent_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "intent_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "intent_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "intent_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "intent_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "originating_authority": {
+          "$ref": "common.json#/$defs/principal"
+        }
+      },
+      "required": [
+        "intent_id",
+        "intent_version",
+        "intent_digest",
+        "originating_authority"
+      ]
+    },
+    "setting_value": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "maxLength": 1024
+              }
+            ]
+          },
+          "maxItems": 512
+        }
+      ]
+    },
+    "configuration_setting": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "setting_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "setting_path": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)+$",
+          "maxLength": 512
+        },
+        "setting_type": {
+          "type": "string",
+          "enum": [
+            "BOOLEAN",
+            "INTEGER",
+            "NUMBER",
+            "STRING",
+            "STRING_SET",
+            "NUMBER_SET",
+            "IDENTIFIER_SET"
+          ]
+        },
+        "setting_value": {
+          "$ref": "#/$defs/setting_value"
+        },
+        "governance_significance": {
+          "type": "string",
+          "enum": [
+            "ADMISSIBILITY",
+            "AUTHORITY",
+            "EVIDENCE",
+            "STATE",
+            "LIFECYCLE",
+            "VALIDITY",
+            "SCOPE",
+            "POLICY",
+            "COMPOSITE",
+            "ENFORCEMENT",
+            "CONTINUATION",
+            "ACTIVATION",
+            "AUDIT_REPLAY"
+          ]
+        },
+        "protection_class": {
+          "type": "string",
+          "enum": [
+            "ORDINARY",
+            "PROTECTED",
+            "CONSTITUTIONAL"
+          ]
+        },
+        "runtime_mutability": {
+          "const": "CONTROLLED_ACTIVATION_ONLY"
+        },
+        "effective_scope": {
+          "$ref": "common.json#/$defs/governance_scope"
+        },
+        "source_intent_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/governance_intent_ref"
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "setting_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "setting_id",
+        "setting_path",
+        "setting_type",
+        "setting_value",
+        "governance_significance",
+        "protection_class",
+        "runtime_mutability",
+        "source_intent_refs",
+        "setting_digest"
+      ]
+    },
+    "configuration_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "manifest_complete": {
+          "const": true
+        },
+        "hidden_configuration_present": {
+          "const": false
+        },
+        "implicit_configuration_influences_decisions": {
+          "const": false
+        },
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/configuration_setting"
+          },
+          "minItems": 1,
+          "maxItems": 2048
+        },
+        "manifest_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "manifest_complete",
+        "hidden_configuration_present",
+        "implicit_configuration_influences_decisions",
+        "settings",
+        "manifest_digest"
+      ]
+    },
+    "material_change_class": {
+      "type": "string",
+      "enum": [
+        "AUTHORITY",
+        "DELEGATION",
+        "APPROVAL",
+        "REVOCATION",
+        "EVIDENCE",
+        "CANONICAL_STATE",
+        "TENANT_STATUS",
+        "GOVERNANCE_DOMAIN_STATUS",
+        "TARGET_STATUS",
+        "POLICY",
+        "GOVERNANCE_CONFIGURATION",
+        "GOVERNANCE_VERSION",
+        "LIFECYCLE",
+        "VALIDITY",
+        "SCOPE",
+        "DEPENDENCY",
+        "COUPLING",
+        "CONFLICT",
+        "RESOURCE",
+        "EXTERNAL_GOVERNANCE_CONDITION"
+      ]
+    },
+    "proposal_selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selector_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "selector_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "selector_policy_ref": {
+          "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+        },
+        "nonterminal_lifecycle_states": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_lifecycle_record.json#/$defs/derived_lifecycle_state"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "selection_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "PROPOSAL_IDENTITY",
+              "TENANT",
+              "GOVERNANCE_DOMAIN",
+              "TARGET",
+              "AUTHORITY",
+              "EVIDENCE",
+              "CANONICAL_STATE",
+              "POLICY",
+              "GOVERNANCE_VERSION",
+              "LIFECYCLE",
+              "VALIDITY",
+              "SCOPE",
+              "DEPENDENCY_GRAPH",
+              "BIND_SET",
+              "RISK_CLASS"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "preserves_unaffected_proposals": {
+          "const": true
+        },
+        "unnecessary_re_evaluation_prohibited": {
+          "const": true
+        },
+        "selector_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "selector_id",
+        "selector_version",
+        "selector_policy_ref",
+        "nonterminal_lifecycle_states",
+        "selection_inputs",
+        "preserves_unaffected_proposals",
+        "unnecessary_re_evaluation_prohibited",
+        "selector_digest"
+      ]
+    },
+    "material_change_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "risk_class": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MODERATE",
+            "HIGH",
+            "CRITICAL"
+          ]
+        },
+        "change_classes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/material_change_class"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "materiality_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "affected_proposal_selector": {
+          "$ref": "#/$defs/proposal_selector"
+        },
+        "required_disposition": {
+          "type": "string",
+          "enum": [
+            "RE_EVALUATE_BEFORE_COMMIT",
+            "DEGRADE_AND_RE_EVALUATE",
+            "BLOCK_PENDING_RE_EVALUATION",
+            "ESCALATE_FOR_GOVERNED_REVIEW"
+          ]
+        },
+        "re_evaluation_stage": {
+          "type": "string",
+          "enum": [
+            "CONTINUATION_INTEGRITY",
+            "BEFORE_EXECUTION_AUTHORIZATION_RETENTION",
+            "BEFORE_COMMIT_BOUND_ADMISSIBILITY"
+          ]
+        },
+        "rule_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "rule_id",
+        "risk_class",
+        "change_classes",
+        "materiality_criteria",
+        "affected_proposal_selector",
+        "required_disposition",
+        "re_evaluation_stage",
+        "rule_digest"
+      ]
+    },
+    "risk_based_re_evaluation_configuration": {
+      "type": "object",
+      "description": "Active deterministic configuration required by CR-122 to identify and re-evaluate only affected nonterminal proposals when material governance conditions change.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "const": true
+        },
+        "configuration_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "material_change_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/material_change_rule"
+          },
+          "minItems": 1,
+          "maxItems": 256
+        },
+        "change_detection_ordering_basis": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_LEDGER_ORDER",
+            "AUTHORITATIVE_SOURCE_VERSION",
+            "EXPLICIT_GOVERNANCE_SEQUENCE"
+          ]
+        },
+        "arrival_timing_used_as_governance_basis": {
+          "const": false
+        },
+        "default_unmatched_change_disposition": {
+          "const": "GOVERNED_ESCALATION"
+        },
+        "requires_current_state_qualification": {
+          "const": true
+        },
+        "requires_current_evidence_qualification": {
+          "const": true
+        },
+        "requires_authority_rederivation_where_applicable": {
+          "const": true
+        },
+        "requires_attributable_outcome_evidence": {
+          "const": true
+        },
+        "configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "enabled",
+        "configuration_version",
+        "material_change_rules",
+        "change_detection_ordering_basis",
+        "arrival_timing_used_as_governance_basis",
+        "default_unmatched_change_disposition",
+        "requires_current_state_qualification",
+        "requires_current_evidence_qualification",
+        "requires_authority_rederivation_where_applicable",
+        "requires_attributable_outcome_evidence",
+        "configuration_digest"
+      ]
+    },
+    "configuration_availability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "available_for_governance_evaluation": {
+          "const": true
+        },
+        "externally_retrievable": {
+          "const": true
+        },
+        "authoritative_artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "resolution_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "availability_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+        }
+      },
+      "required": [
+        "available_for_governance_evaluation",
+        "externally_retrievable",
+        "authoritative_artifact_uri",
+        "resolution_profile",
+        "availability_evidence_ref"
+      ]
+    },
+    "change_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "change_origin": {
+          "type": "string",
+          "enum": [
+            "EXTERNAL_GOVERNANCE_AUTHORITY",
+            "GOVERNED_SYSTEM_PROPOSAL"
+          ]
+        },
+        "change_request_ref": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "external_approval_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "governance_compilation_required": {
+          "const": true
+        },
+        "constitutional_validation_required": {
+          "const": true
+        },
+        "governance_omission_analysis_required": {
+          "const": true
+        },
+        "controlled_activation_required": {
+          "const": true
+        },
+        "direct_self_modification_prohibited": {
+          "const": true
+        },
+        "prior_authoritative_version_preserved_on_failure": {
+          "const": true
+        }
+      },
+      "required": [
+        "change_origin",
+        "change_request_ref",
+        "governance_compilation_required",
+        "constitutional_validation_required",
+        "governance_omission_analysis_required",
+        "controlled_activation_required",
+        "direct_self_modification_prohibited",
+        "prior_authoritative_version_preserved_on_failure"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_configuration_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "source_intent_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 1,
+          "maxItems": 256
+        },
+        "policy_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 1,
+          "maxItems": 256
+        },
+        "configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "canonicalization_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "deterministic_replay_supported": {
+          "const": true
+        }
+      },
+      "required": [
+        "canonical_configuration_uri",
+        "source_intent_digests",
+        "policy_digests",
+        "configuration_digest",
+        "canonicalization_profile",
+        "deterministic_replay_supported"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "all_governance_significant_configuration_explicit": {
+          "const": true
+        },
+        "configuration_attributable": {
+          "const": true
+        },
+        "configuration_versioned": {
+          "const": true
+        },
+        "configuration_available_for_evaluation": {
+          "const": true
+        },
+        "hidden_configuration_influences_decisions": {
+          "const": false
+        },
+        "implicit_configuration_influences_decisions": {
+          "const": false
+        },
+        "governed_system_can_directly_modify_admissibility_conditions": {
+          "const": false
+        },
+        "external_approval_compilation_validation_and_activation_required_for_change": {
+          "const": true
+        },
+        "risk_based_re_evaluation_deterministic": {
+          "const": true
+        },
+        "unaffected_nonterminal_proposals_preserved": {
+          "const": true
+        },
+        "configuration_establishes_authority_at_commitment": {
+          "const": false
+        },
+        "configuration_authorizes_execution": {
+          "const": false
+        },
+        "configuration_activates_itself": {
+          "const": false
+        },
+        "deterministic_replay_supported": {
+          "const": true
+        }
+      },
+      "required": [
+        "all_governance_significant_configuration_explicit",
+        "configuration_attributable",
+        "configuration_versioned",
+        "configuration_available_for_evaluation",
+        "hidden_configuration_influences_decisions",
+        "implicit_configuration_influences_decisions",
+        "governed_system_can_directly_modify_admissibility_conditions",
+        "external_approval_compilation_validation_and_activation_required_for_change",
+        "risk_based_re_evaluation_deterministic",
+        "unaffected_nonterminal_proposals_preserved",
+        "configuration_establishes_authority_at_commitment",
+        "configuration_authorizes_execution",
+        "configuration_activates_itself",
+        "deterministic_replay_supported"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Namespaced non-normative extensions that cannot alter canonical governance meaning.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9-]*(\\.[a-z][a-z0-9-]*)+$"
+      },
+      "additionalProperties": true
+    },
+    "governance_configuration_candidate_ref": {
+      "type": "object",
+      "description": "Integrity-bound reference to a validated or externally approved DS-041 Governance Configuration candidate included in a DS-043 activation package.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_configuration_id": {
+          "$ref": "#/$defs/governance_configuration_id"
+        },
+        "configuration_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "configuration_status": {
+          "type": "string",
+          "enum": [
+            "VALIDATED",
+            "APPROVED"
+          ]
+        },
+        "configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        }
+      },
+      "required": [
+        "governance_configuration_id",
+        "configuration_version",
+        "configuration_status",
+        "configuration_digest",
+        "tenant_id",
+        "governance_domain_id"
+      ]
+    }
+  }
+}

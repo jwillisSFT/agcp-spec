@@ -1,0 +1,104 @@
+{
+  "status": "PASS",
+  "schema": "DS-004",
+  "filename": "tenant.json",
+  "validated_at": "2026-07-30",
+  "draft_2020_12_schema_count": 44,
+  "metaschema_issues": [],
+  "resolved_reference_count": 3581,
+  "reference_issues": [],
+  "positive_cases": [
+    {
+      "name": "active_tenant",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "inactive_tenant",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "decommissioned_tenant",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_cases": [
+    {
+      "name": "missing_tenant_state_version",
+      "rejected": true,
+      "sample_error": "'tenant_state_version' is a required property"
+    },
+    {
+      "name": "unrestricted_metadata_rejected",
+      "rejected": true,
+      "sample_error": "Additional properties are not allowed ('metadata' was unexpected)"
+    },
+    {
+      "name": "active_without_configuration",
+      "rejected": true,
+      "sample_error": "'governance_configuration' is a required property"
+    },
+    {
+      "name": "active_with_failed_isolation",
+      "rejected": true,
+      "sample_error": "'VERIFIED' was expected"
+    },
+    {
+      "name": "inactive_marked_eligible",
+      "rejected": true,
+      "sample_error": "'INELIGIBLE' was expected"
+    },
+    {
+      "name": "state_history_without_evidence",
+      "rejected": true,
+      "sample_error": "'governance_evidence_refs' is a required property"
+    },
+    {
+      "name": "unauthorized_transition_basis",
+      "rejected": true,
+      "sample_error": "True was expected"
+    },
+    {
+      "name": "configuration_without_active_history",
+      "rejected": true,
+      "sample_error": "'effective_until' is a required property"
+    },
+    {
+      "name": "decommissioned_with_active_configuration",
+      "rejected": true,
+      "sample_error": "[{'transition_id': 'TENANT-STATE-TRANSITION-000', 'sequence': 0, 'transition_kind': 'INITIAL_PROVISIONING', 'prior_state': None, 'prior_state_version': None, 'resulting_state': 'PROVISIONED', 'resulting_state_version': '1.0.0', 'transition_basis': {'basis_type': 'PROVISIONING_AUTHORITY', 'reason_code': 'TENANT_PROVISIONED', 'rationale': 'Tenant governance record created.', 'source_artifact_refs': [{'artifact_type': 'ADMINISTRATIVE_GOVERNANCE_RECORD', 'artifact_id': 'ADMIN-000', 'artifact_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS-RFC8785'}}], 'transition_authorized': True, 'tenant_domain_binding_verified': True, 'basis_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS-RFC8785'}}, 'effective_at': '2026-07-30T08:00:00-04:00', 'recorded_at': '2026-07-30T08:00:00-04:00', 'ledger_event_ref': {'ledger_event_id': 'GLE-TENANT-0', 'event_version': '1.0.0', 'event_type': 'GOVERNANCE_EVIDENCE_RECORDED', 'event_category': 'EVIDENCE', 'ledger_position': {'ledger_id': 'GL-TENANT-1', 'stream_id': 'TENANT-1', 'sequence': 0, 'event_id': 'GLE-TENANT-0', 'event_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS-RFC8785'}, 'chain_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS-RFC8785'}, 'stream_head_after_append': True}, 'tenant_id': 'TENANT-1', 'governance_domain_id': 'DOMAIN-1', 'event_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS-RFC8785'}, 'appended_at': '2026-07-30T09:00:00-04:00'}, 'governance_evidence_refs': [{'governance_evidence_id': 'GE-TENANT-0', 'governance_stage': 'Tenant and Domain Isolation', 'evidence_digest': {'algorithm': 'SHA-256', 'value': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'canonicalization': 'JCS-RFC8785'}, 'created_at': '2026-07-30T12:00:00-04:00', 'tenant_id': 'TENANT-1', 'governance_domain_id': 'DOMAIN-1'}], 'attribution': {'principal': {'principal_id': 'tenant-admin', 'principal_type': 'GOVERNANCE_AUTHORITY', 'tenant_id': 'TENANT-1', 'governance_domain_id': 'DOMAIN-1'}, 'attributed_at': '2026-07-30T08:00:00-04:00'}, 'transition_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS-RFC8785'}}, {'transition_id': 'TENANT-STATE-TRANSITION-001', 'sequence': 1, 'transition_kind': 'ACTIVATION', 'prior_state': 'PROVISIONED', 'prior_state_version': '1.0.0', 'resulting_state': 'ACTIVE', 'resulting_state_version': '1.1.0', 'transition_basis': {'basis_type': 'GOVERNANCE_ADMINISTRATION', 'reason_code': 'TENANT_ACTIVATED', 'rationale': 'Tenant approved for governed operation.', 'source_artifact_refs': [{'artifact_type': 'ADMINISTRATIVE_GOVERNANCE_RECORD', 'artifact_id': 'ADMIN-001', 'artifact_version': '1.0.0', 'artifact_uri': 'https://agcp.ai/admin/ADMIN-001', 'artifact_digest': {'algorithm': 'SHA-256', 'value': 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 'canonicalization': 'JCS-RFC8785'}}], 'transition_authorized': True, 'tenant_domain_binding_verified': True, 'basis_digest': {'algorithm': 'SHA-256', 'value': 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 'canonicalization': 'JCS-RFC8785'}}, 'effective_at': '2026-07-30T09:00:00-04:00', 'recorded_at': '2026-07-30T09:00:00-04:00', 'ledger_event_ref': {'ledger_event_id': 'GLE-TENANT-1', 'event_version': '1.0.0', 'event_type': 'CONTROLLED_GOVERNANCE_ACTIVATION_RECORDED', 'event_category': 'GOVERNANCE_CONFIGURATION_AND_ACTIVATION', 'ledger_position': {'ledger_id': 'GL-TENANT-1', 'stream_id': 'TENANT-1', 'sequence': 1, 'event_id': 'GLE-TENANT-1', 'event_digest': {'algorithm': 'SHA-256', 'value': '2222222222222222222222222222222222222222222222222222222222222222', 'canonicalization': 'JCS-RFC8785'}, 'chain_digest': {'algorithm': 'SHA-256', 'value': '2222222222222222222222222222222222222222222222222222222222222222', 'canonicalization': 'JCS-RFC8785'}, 'stream_head_after_append': True, 'predecessor_event_id': 'GLE-TENANT-0', 'previous_event_digest': {'algorithm': 'SHA-256', 'value': '0000000000000000000000000000000000000000000000000000000000000000', 'canonicalization': 'JCS-RFC8785'}}, 'tenant_id': 'TENANT-1', 'governance_domain_id': 'DOMAIN-1', 'event_digest': {'algorithm': 'SHA-256', 'value': '2222222222222222222222222222222222222222222222222222222222222222', 'canonicalization': 'JCS-RFC8785'}, 'appended_at': '2026-07-30T09:00:00-04:00'}, 'governance_evidence_refs': [{'governance_evidence_id': 'GE-TENANT-1', 'governance_stage': 'Tenant and Domain Isolation', 'evidence_digest': {'algorithm': 'SHA-256', 'value': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'canonicalization': 'JCS-RFC8785'}, 'created_at': '2026-07-30T12:00:00-04:00', 'tenant_id': 'TENANT-1', 'governance_domain_id': 'DOMAIN-1'}], 'attribution': {'principal': {'principal_id': 'tenant-admin', 'principal_type': 'GOVERNANCE_AUTHORITY', 'tenant_id': 'TENANT-1', 'governance_domain_id': 'DOMAIN-1'}, 'attributed_at': '2026-07-30T09:00:00-04:00'}, 'predecessor_transition_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS-RFC8785'}, 'transition_digest': {'algorithm': 'SHA-256', 'value': '2222222222222222222222222222222222222222222222222222222222222222', 'canonicalization': 'JCS-RFC8785'}}] does not contain items matching the given schema"
+    },
+    {
+      "name": "missing_record_integrity",
+      "rejected": true,
+      "sample_error": "'integrity_signature' is a required property"
+    },
+    {
+      "name": "cross_domain_governed_without_relationship",
+      "rejected": true,
+      "sample_error": "'authorized_cross_domain_relationship_refs' is a required property"
+    },
+    {
+      "name": "non_genesis_history_without_predecessor",
+      "rejected": true,
+      "sample_error": "'predecessor_transition_digest' is a required property"
+    },
+    {
+      "name": "execution_authority_claim",
+      "rejected": true,
+      "sample_error": "Additional properties are not allowed ('authorized_for_execution' was unexpected)"
+    }
+  ],
+  "catalog_version": "1.0.39",
+  "rtm_dataset_version": "RTM-1.42",
+  "rtm_rows_with_ds_assignments": 118,
+  "common_definition_count": 62,
+  "unused_common_definitions": [],
+  "openapi_reference_count": 132,
+  "openapi_issues": [],
+  "rtm_formula_count": 0,
+  "rtm_formula_errors": [],
+  "rtm_format_preserved": true
+}

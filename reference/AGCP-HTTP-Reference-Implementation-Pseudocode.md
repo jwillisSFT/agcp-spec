@@ -31,20 +31,21 @@ The reference implementation assumes the following externally observable governa
 
 1. Proposal Qualification
 2. Governance Decision Function
-3. Execution Authorization
-4. Commit Boundary
-5. Continuation Integrity, where applicable
-6. Governance Evidence production
+3. Execution Authorization or another eligible nonterminal state
+4. Continuation Integrity, where applicable while the Proposal remains nonterminal and until final Commit-Bound Admissibility is resolved
+5. Governance Realization and Commit Boundary processing
+
+Governance Evidence is a cross-cutting supporting service generated during each applicable governance-significant stage; it is not a final sequential stage.
 
 The reference implementation assumes the following HTTP endpoints from `api/AGCP-HTTP-Contract.yaml`:
 
-- `GET /agcp/v1/meta`
-- `POST /agcp/v1/proposals/submit`
-- `GET /agcp/v1/proposals/{proposal_id}`
-- `POST /agcp/v1/proposals/{proposal_id}/human-review`
-- `GET /agcp/v1/execution-authorizations/{authorization_id}`
-- `POST /agcp/v1/commit-boundary/commit`
-- `GET /agcp/v1/governance-evidence/{evidence_id}`
+- `GET /agcp/v2/meta`
+- `POST /agcp/v2/proposals/submit`
+- `GET /agcp/v2/proposals/{proposal_id}`
+- `POST /agcp/v2/proposals/{proposal_id}/governance-approvals`
+- `GET /agcp/v2/execution-authorizations/{authorization_id}`
+- `POST /agcp/v2/commit-boundary/commit`
+- `GET /agcp/v2/governance-evidence/{evidence_id}`
 - governance artifact registration and retrieval endpoints
 
 ---
@@ -164,12 +165,17 @@ Governed Re-evaluation Required
 ## 4.5 ContinuationOutcome
 
 ```text
-Continue Execution
+PROPOSAL_REMAINS_AUTHORIZED
+PROPOSAL_REMAINS_VIABLE
+GOVERNED_RE_EVALUATION_REQUIRED
 DEGRADED
-Suspend Execution
-Resume Execution
-Governed Termination
+COMMITMENT_SUSPENDED
+PROPOSAL_RESTORED_TO_ELIGIBLE_STATE
+PROPOSAL_TRANSITIONED_TO_NON_EXECUTABLE_LIFECYCLE_STATE
+GOVERNED_TERMINAL_OUTCOME
 ```
+
+These outcomes apply only while a Proposal remains nonterminal before commitment. Separately defined post-commit operational controls are outside Continuation Integrity.
 
 ---
 
@@ -308,7 +314,7 @@ function record_evidence(stage, associated_object_id, processing_outcome, contex
 Endpoint:
 
 ```text
-POST /agcp/v1/proposals/submit
+POST /agcp/v2/proposals/submit
 ```
 
 Reference pseudocode:
@@ -316,7 +322,7 @@ Reference pseudocode:
 ```text
 function submit_proposal(request, idempotency_key):
 
-    endpoint_id = "POST /agcp/v1/proposals/submit"
+    endpoint_id = "POST /agcp/v2/proposals/submit"
 
     validate_schema(request, ProposalSubmitRequest)
 
@@ -422,7 +428,7 @@ Expected externally observable behavior:
 Endpoint:
 
 ```text
-GET /agcp/v1/proposals/{proposal_id}
+GET /agcp/v2/proposals/{proposal_id}
 ```
 
 Reference pseudocode:
@@ -452,20 +458,20 @@ The response conforms to `ProposalView` in `api/AGCP-HTTP-Contract.yaml`.
 
 ---
 
-# 9. Human Review Reference Flow
+# 9. Governance Approval and Human Adjudication Reference Flow
 
 Endpoint:
 
 ```text
-POST /agcp/v1/proposals/{proposal_id}/human-review
+POST /agcp/v2/proposals/{proposal_id}/governance-approvals
 ```
 
 Reference pseudocode:
 
 ```text
-function submit_human_review(proposal_id, request, idempotency_key):
+function submit_governance_approval(proposal_id, request, idempotency_key):
 
-    validate_schema(request, HumanReviewRequest)
+    validate_schema(request, GovernanceApprovalRequest)
 
     require_tenant_and_domain_valid(
         request.tenant_id,
@@ -486,14 +492,17 @@ function submit_human_review(proposal_id, request, idempotency_key):
 
     verify_provenance(request.provenance)
 
-    validate_human_review_artifact(
+    require request.governance_approval_artifact is present
+    approval_artifact = request.governance_approval_artifact
+
+    validate_governance_approval_artifact(
         proposal,
-        request.human_review_artifact
+        approval_artifact
     )
 
     updated_decision = run_governed_reevaluation(
         proposal,
-        request.human_review_artifact
+        approval_artifact
     )
 
     record_evidence(
@@ -503,6 +512,9 @@ function submit_human_review(proposal_id, request, idempotency_key):
         proposal.context
     )
 
+    # Approval or quorum completion is evidence and eligibility only.
+    # Progress only if governed re-evaluation establishes an Authorized outcome
+    # under current qualified governance inputs.
     if updated_decision.outcome == "Authorized":
         authorization = run_execution_authorization(
             proposal,
@@ -523,7 +535,7 @@ function submit_human_review(proposal_id, request, idempotency_key):
     return response(200, view)
 ```
 
-Human-review artifacts are governed inputs. They do not themselves execute the Action.
+Governance Approval Artifacts are governed inputs. They do not themselves execute the Action or establish authority at commitment.
 
 ---
 
@@ -532,7 +544,7 @@ Human-review artifacts are governed inputs. They do not themselves execute the A
 Endpoint:
 
 ```text
-GET /agcp/v1/execution-authorizations/{authorization_id}
+GET /agcp/v2/execution-authorizations/{authorization_id}
 ```
 
 Reference pseudocode:
@@ -562,32 +574,88 @@ Execution Authorization retrieval does not execute or commit the Action.
 
 ---
 
-# 11. Commit Boundary Reference Flow
+# 11. Continuation Integrity Reference Flow
+
+Continuation Integrity is a pre-commit governance service for authorized or otherwise eligible nonterminal Proposals. It does not govern an Action after successful commitment.
+
+Reference pseudocode:
+
+```text
+function maintain_continuation_integrity(proposal_identity, evaluation_horizon):
+    proposal = proposal_get_by_identity(proposal_identity)
+
+    if proposal does not exist:
+        return error_response(404, PROPOSAL_NOT_FOUND)
+
+    if proposal.lifecycle_state is terminal:
+        return build_continuation_result(
+            proposal_identity,
+            "PROPOSAL_TRANSITIONED_TO_NON_EXECUTABLE_LIFECYCLE_STATE"
+        )
+
+    if proposal.commit_boundary_outcome == "Commit Successful":
+        return error_response(409, CONTINUATION_INTEGRITY_NOT_APPLICABLE_POST_COMMIT)
+
+    changes = detect_material_governance_condition_changes(
+        proposal,
+        evaluation_horizon,
+        active_risk_based_governance_configuration()
+    )
+
+    if changes affect proposal:
+        result = deterministically_re_evaluate_nonterminal_proposal(
+            proposal,
+            changes,
+            evaluation_horizon
+        )
+    else:
+        result = verify_continuation_basis_and_admissible_path_viability(
+            proposal,
+            evaluation_horizon
+        )
+
+    if result.continuation_basis cannot be established:
+        result = apply_policy_defined_pre_commit_disposition(
+            proposal,
+            result
+        )
+
+    record_evidence(
+        "Continuation Integrity",
+        proposal_identity.proposal_id,
+        result.outcome,
+        result.governance_basis
+    )
+
+    return build_continuation_integrity_result(result)
+```
+
+A Proposal may proceed toward Governance Realization and Commit Boundary processing only when its continuation result permits progression and all final Commit-Bound Admissibility conditions are satisfied.
+
+---
+
+# 12. Commit Boundary Reference Flow
 
 Endpoint:
 
 ```text
-POST /agcp/v1/commit-boundary/commit
+POST /agcp/v2/commit-boundary/commit
 ```
 
 Reference pseudocode:
 
 ```text
 function commit_boundary(request, idempotency_key):
-
-    validate_schema(request, CommitBoundaryRequest)
-
-    require_tenant_and_domain_valid(
-        request.tenant_id,
-        request.governance_domain_id
-    )
-
+    validate_schema(request, "commit_boundary_request.json")
+    require_interface_version("IF-001", "v2")
+    verify_idempotency(idempotency_key, request.request_digest)
     verify_provenance(request.provenance)
 
+    proposal_identity = request.proposal_ref.proposal_identity
     proposal = proposal_get(
         request.tenant_id,
         request.governance_domain_id,
-        request.proposal_id
+        proposal_identity.proposal_id
     )
 
     if proposal does not exist:
@@ -596,7 +664,7 @@ function commit_boundary(request, idempotency_key):
     authorization = authorization_get(
         request.tenant_id,
         request.governance_domain_id,
-        request.execution_authorization_ref
+        request.execution_authorization_ref.authorization_id
     )
 
     if authorization does not exist:
@@ -608,21 +676,17 @@ function commit_boundary(request, idempotency_key):
     if authorization.outcome != "Authorized for Commit Boundary Processing":
         return error_response(409, ACTION_NOT_AUTHORIZED)
 
-    verify_authority_remains_valid(authorization.authority_lineage_ref)
-
-    verify_canonical_state_still_suitable(
-        proposal,
-        authorization.canonical_state_ref
-    )
-
-    verify_governance_context_still_valid(proposal.governance_context)
-
-    verify_action_representation_unchanged(proposal.action_representation)
+    verify_state_qualification(request.state_qualification_result_ref)
+    verify_evidence_qualification(request.qualified_evidence_refs)
+    verify_authority_rederivation(request.authority_rederivation_result_ref)
+    verify_governance_binding(request.governance_binding_validation_result_ref)
+    verify_resulting_state(request.resulting_state_validation_result_ref)
+    verify_continuation_integrity(request.enforcement_context.continuation_integrity_result_ref)
 
     commit_result = perform_commit_boundary_binding(
         proposal,
         authorization,
-        request.execution_context
+        request.enforcement_context
     )
 
     if commit_result.outcome == "Commit Successful":
@@ -630,24 +694,24 @@ function commit_boundary(request, idempotency_key):
 
     record_evidence(
         "Commit Boundary",
-        proposal.proposal_id,
+        proposal_identity.proposal_id,
         commit_result.outcome,
-        proposal.context
+        request.enforcement_context
     )
 
     return response(200, build_commit_boundary_result(commit_result))
 ```
 
-Commit Boundary processing is the only illustrated point at which authorized execution may become operationally real.
+The DS-018 Commit Boundary Request supplies the canonical current governance basis, including Enforcement Context. Transitional commit-request fields are not accepted. Commit Boundary processing is the only illustrated point at which authorized execution may become operationally real.
 
 ---
 
-# 12. Governance Evidence Retrieval Reference Flow
+# 13. Governance Evidence Retrieval Reference Flow
 
 Endpoint:
 
 ```text
-GET /agcp/v1/governance-evidence/{evidence_id}
+GET /agcp/v2/governance-evidence/{evidence_id}
 ```
 
 Reference pseudocode:
@@ -677,12 +741,12 @@ Governance Evidence retrieval is tenant-scoped and governance-domain-scoped.
 
 ---
 
-# 13. Governance Artifact Registration Reference Flow
+# 14. Governance Artifact Registration Reference Flow
 
 Example endpoint:
 
 ```text
-POST /agcp/v1/governance-artifacts/policy-modules
+POST /agcp/v2/governance-artifacts/policy-modules
 ```
 
 Reference pseudocode:
@@ -739,7 +803,7 @@ Artifact registration does not necessarily imply operational activation.
 
 ---
 
-# 14. Deterministic Replay Reference Flow
+# 15. Deterministic Replay Reference Flow
 
 ```text
 function deterministic_replay(proposal_id, evidence_refs):
@@ -781,24 +845,25 @@ Replay is successful only when the governance interpretation is reproduced from 
 
 ---
 
-# 15. Determinism Requirements Illustrated
+# 16. Determinism Requirements Illustrated
 
 A conformant implementation should ensure that:
 
 1. Proposal Qualification occurs before Governance Decision Function processing.
 2. Governance Decision Function processing occurs before Execution Authorization.
-3. Execution Authorization occurs before Commit Boundary processing.
-4. Commit Boundary processing occurs before execution becomes operationally real.
-5. Governance Evidence is produced for applicable governance-significant processing.
-6. Canonical State is authoritative over runtime observation.
-7. Authority Lineage is preserved and validated.
-8. Tenant and governance-domain isolation are enforced.
-9. Idempotency prevents duplicate or conflicting request processing.
-10. Deterministic replay reproduces governance interpretation from Governance Evidence.
+3. Continuation Integrity applies, where required, only while the Proposal remains nonterminal before commitment.
+4. A Proposal lacking a verified continuation basis or viable admissible path cannot proceed to commitment.
+5. Governance Realization and Commit Boundary processing occur after applicable pre-commit Continuation Integrity and before execution becomes operationally real.
+6. Governance Evidence is produced for applicable governance-significant processing as a cross-cutting supporting service.
+7. Canonical State is authoritative over runtime observation.
+8. Authority Lineage is preserved and validated.
+9. Tenant and governance-domain isolation are enforced.
+10. Idempotency prevents duplicate or conflicting request processing.
+11. Deterministic replay reproduces governance interpretation from Governance Evidence.
 
 ---
 
-# 16. Relationship to Normative Specifications
+# 17. Relationship to Normative Specifications
 
 This document illustrates one possible deterministic reference implementation approach.
 

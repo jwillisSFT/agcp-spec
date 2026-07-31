@@ -4,29 +4,42 @@
 
 The AGCP Conformance Test Suite defines the normative conformance methodology used to verify implementations of the Artificial Intelligence Governance Control Plane (AGCP).
 
-This document specifies how conformance tests are organized, traced, executed, and evaluated. Detailed test procedures are maintained as individual test case documents under the `tests/` directory.
+This document specifies how conformance tests are organized, traced, executed, and evaluated. Detailed test procedures are maintained in controlled Test Case batch documents under the `tests/` directory. The governing relationship among requirements, the RTM, Formal Test Cases, Harness Checks, Harness Test Vectors, execution evidence, and conformance determinations is defined in `AGCP-Conformance-Traceability-and-Automation-Model.md`.
 
 ## Scope
 
-The Conformance Test Suite verifies implementation conformance to the AGCP Core Specification through objective testing of the associated Runtime Governance Requirements (CRs) and Normative Statements (NSs).
+The Conformance Test Suite verifies implementation conformance to the published CRs, the AGCP Core Specification, and any applicable normative Companion Specifications expressly adopted by the implementation profile. Core-derived Normative Statement identifiers support traceability and test construction but do not supersede those normative sources.
 
 ## Conformance Model
 
-The AGCP conformance model is based on the following traceability chain:
+The AGCP conformance model separates the authoritative assessment procedure from supporting automation:
 
 ```text
-Runtime Governance Requirement (CR)
-            ↓
-Conformance Test Case (TC)
-            ↓
-Normative Statement(s) (NS)
-            ↓
-Assertions
-            ↓
-Objective Evidence
-            ↓
-Conformance Result
+Published Runtime Governance Conformance Requirement (CR)
+            +
+Applicable AGCP Core behavior and adopted Companion obligations
+            |
+            | mapped in the RTM using Core-derived NS identifiers
+            v
+Formal Test Case (TC)
+       /                         \
+      v                           v
+Non-automated evidence       Harness Checks
+                                  |
+                                  v
+                           Harness Test Vectors
+                                  |
+                                  v
+                           Execution evidence
+       \                         /
+        v                       v
+           Objective TC Evidence
+                    |
+                    v
+        PASS / FAIL / NOT APPLICABLE
 ```
+
+Harness Checks and Harness Test Vectors automate portions of Formal Test Cases. They do not replace Formal Test Cases, create independent normative requirements, or independently establish conformance.
 
 ## CR-to-TC Mapping Rule
 
@@ -40,17 +53,20 @@ A Test Case MAY contain multiple assertions where necessary to verify all mapped
 
 ```text
 conformance/
-│
-├── AGCP Conformance Test Suite.md
-├── README.md
-├── tests/
-│   ├── TC-001.md
-│   ├── TC-002.md
-│   ├── ...
-│   └── TC-121.md
-├── AGCP-Assertion-Registry.json
-├── AGCP-Test-Mapping.json
-└── AGCP-Conformance-Harness-Spec.yml
+├── AGCP-Conformance-Traceability-and-Automation-Model.md
+├── AGCP-Conformance.md
+├── Conformance Test Suite.md
+├── AGCP-Test-Matrix.md
+├── AGCP Harness Check Registry.md
+├── harness-checks.json
+├── AGCP-Conformance-Harness-Spec.yml
+├── AGCP-Conformance-Test-Vectors.md
+├── test-mapping.json
+├── fixture-mapping.json
+└── tests/
+    ├── TC001-TC010.md
+    ├── ...
+    └── TC121-TC122.md
 ```
 
 ## Test Case Structure
@@ -74,11 +90,12 @@ Each Test Case SHALL include:
 
 Each successful conformance test SHALL produce objective evidence sufficient to demonstrate:
 
-- Proposal processing
-- Governance Decision Function outcome
-- Execution Authorization outcome (where applicable)
-- Commit Boundary behavior (where applicable)
-- Governance Evidence generation
+- Proposal Qualification and Governance Decision Function outcomes
+- Execution Authorization outcome where applicable
+- applicable pre-commit Continuation Integrity outcome for a nonterminal Proposal
+- Governance Realization and final Commit-Bound Admissibility outcome where applicable
+- Policy Enforcement Point and Commit Boundary behavior where applicable
+- Governance Evidence generated and bound throughout every applicable governance-significant stage as a cross-cutting supporting service
 - Lifecycle outcome
 - Applicable tenant and governance domain context
 
@@ -104,10 +121,8 @@ The Conformance Test Suite SHALL remain synchronized with the RTM.
 
 This document defines the conformance methodology.
 
-Detailed execution procedures are maintained in the individual Test Case documents located in the `tests/` directory.
+Detailed execution procedures are maintained in the controlled Test Case batch documents located in the `tests/` directory. Each TC remains individually identified and assessed even when several TCs are stored in one Markdown file.
 
 ## Versioning
 
-This document is versioned through GitHub Releases.
-
-The authoritative released version of the Conformance Test Suite is identified by the corresponding GitHub Release and archived through Zenodo.
+This document is governed by the AGCP repository release. The authoritative Test Suite is the version included in the controlled repository release and SHALL remain synchronized with the RTM, Formal Test Cases, relationship model, and machine-readable conformance mappings.

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "validated_at": "2026-07-30",
+  "reference_count": 132,
+  "issues": [],
+  "required_components": [
+    "TenantGovernanceRecord",
+    "TenantGovernanceRecordRef"
+  ]
+}

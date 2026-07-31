@@ -1,0 +1,203 @@
+{
+  "schema_id": "DS-036",
+  "schema_file": "governance_dependency_graph.json",
+  "checks": [
+    {
+      "name": "Draft 2020-12 structural validation",
+      "passed": true,
+      "detail": "32 implemented schemas validated"
+    },
+    {
+      "name": "Cross-schema references and fragments",
+      "passed": true,
+      "detail": "1365 references resolved"
+    },
+    {
+      "name": "DS-021 transitional graph extracted",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog counts",
+      "passed": true,
+      "detail": "32 implemented; 12 reserved"
+    },
+    {
+      "name": "DS-036 catalog active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog hashes",
+      "passed": true,
+      "detail": "32 hashes verified"
+    },
+    {
+      "name": "Catalog DS IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OpenAPI DS-036 components",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "RTM DS-036 mappings",
+      "passed": true,
+      "detail": "CR-106;CR-107"
+    },
+    {
+      "name": "RTM dataset version",
+      "passed": true,
+      "detail": "{'RTM-1.19'}"
+    },
+    {
+      "name": "RTM formulas and errors",
+      "passed": true,
+      "detail": "0 formulas; 0 errors"
+    },
+    {
+      "name": "RTM formatting preservation",
+      "passed": true,
+      "detail": "dimensions, merges, widths, heights, style IDs, styles, theme, and workbook structure preserved"
+    }
+  ],
+  "positive_tests": [
+    {
+      "name": "declared prerequisite graph",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "qualified ordering graph",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "qualified authority graph",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "qualified synchronization graph",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "qualified consistency graph",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "qualified execution graph",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "degraded graph triggers re-evaluation",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "superseded graph",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "governance_dependency_graph_ref valid",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "DS-021 composite proposal validates through DS-036",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_tests": [
+    {
+      "name": "single-node graph rejected",
+      "passed": true,
+      "error": "[{'sub_transition_id': 'SUB-001', 'proposal_identity': {'proposal_id': 'PROP-SUB-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'canonical_content_digest': {'algorithm': 'SHA-256', 'value': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'canonicalization': 'JCS'}, 'originator': {'principal_id': 'ORIGINATOR', 'principal_type': 'GOVERNANCE_AUTHORITY', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}}, 'target_ref': {'target_id': 'TARGET-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}, 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'node_role': 'REQUIRED', 'required_for_parent_admissibility': True, 'node_digest': {'algorithm': 'SHA-256', 'value': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'canonicalization': 'JCS'}}] is too short"
+    },
+    {
+      "name": "typed dependency without relationship-specific rule rejected",
+      "passed": true,
+      "error": "'prerequisite_rule' is a required property"
+    },
+    {
+      "name": "dependency carrying conflicting rule objects rejected",
+      "passed": true,
+      "error": "{'dependency_id': 'DEP-001', 'relationship_type': 'PREREQUISITE', 'source_sub_transition_id': 'SUB-001', 'target_sub_transition_id': 'SUB-002', 'source_governance_domain_id': 'DOMAIN-001', 'target_governance_domain_id': 'DOMAIN-001', 'directionality': 'DIRECTED', 'mandatory': True, 'source_target_distinct': True, 'failure_effect': 'BLOCK_TARGET', 'change_materiality': 'MATERIAL', 're_evaluation_required_on_material_change': True, 'dependency_digest': {'algorithm': 'SHA-256', 'value': 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 'canonicalization': 'JCS'}, 'prerequisite_rule': {'satisfaction_mode': 'TARGET_REQUIRES_SOURCE', 'required_lifecycle_state': 'AUTHORIZED', 'basis_digest': {'algorithm': 'SHA-256', 'value': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'canonicalization': 'JCS'}}, 'ordering_rule': {'ordering_mode': 'SOURCE_BEFORE_TARGET', 'ordering_basis': 'GOVERNANCE_LEDGER_ORDER', 'arrival_time_is_ordering_basis': False, 'basis_digest': {'algorithm': 'SHA-256', 'value': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'canonicalization': 'JCS'}}} should not be valid under {'anyOf': [{'required': ['ordering_rule']}, {'required': ['authority_rule']}, {'required': ['synchronization_rule']}, {'required': ['consistency_rule']}, {'required': ['execution_rule']}, {'required': ['resource_rule']}, {'required': ['policy_rule']}, {'required': ['evidence_rule']}, {'required': ['state_rule']}]}"
+    },
+    {
+      "name": "qualified graph with invalid validation rejected",
+      "passed": true,
+      "error": "'VALID' was expected"
+    },
+    {
+      "name": "material dependency change without re-evaluation rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "change policy disabling re-evaluation rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "arrival time used as governance ordering basis rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "self-dependency assertion rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "graph claiming to establish authority rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "graph claiming to authorize execution rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "graph claiming partial-bind determination rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "non-namespaced extension rejected",
+      "passed": true,
+      "error": "'bad' does not match '^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\\\.[A-Za-z0-9][A-Za-z0-9._-]*)$'"
+    },
+    {
+      "name": "graph reference without digest rejected",
+      "passed": true,
+      "error": "'graph_digest' is a required property"
+    }
+  ],
+  "extraction_checks": {
+    "ds021_transitional_definition_removed": true,
+    "ds021_composite_uses_ds036": true,
+    "ds022_top_level_ref_uses_ds036": true,
+    "ds022_coordination_ref_uses_ds036": true,
+    "common_dependency_edge_removed": true,
+    "common_dependency_type_enum_removed": true
+  },
+  "reference_errors": [],
+  "summary": {
+    "result": "PASS",
+    "implemented_schema_count": 32,
+    "cross_schema_reference_count": 1365,
+    "catalog_version": "1.0.15",
+    "rtm_version": "RTM-1.19",
+    "positive_test_count": 10,
+    "negative_test_count": 13
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://agcp.ai/schemas/registry_document.schema.json",
+  "registry_document_id": "REGDOC-CAPABILITY-EXAMPLE",
+  "registry_id": "REG-CAPABILITY-EXAMPLE",
+  "registry_name": "AGCP Capability Registry Validation Example",
+  "registry_kind": "CAPABILITY",
+  "normative_status": "INFORMATIVE",
+  "series": "AGCP-EXAMPLE",
+  "description": "Non-authoritative example validating the common DS-044 controlled-registry document contract.",
+  "release": {
+    "release_id": "REG-CAPABILITY-EXAMPLE-v2.0.0",
+    "registry_release": "2.0.0",
+    "specification_version": "2.0.0",
+    "publication_status": "CURRENT",
+    "published_at": "2026-07-30T16:00:00Z",
+    "authority": "AGCP Example Fixture Generator",
+    "repository_path": "registries/capability-example-registry.json",
+    "canonical_uri": "https://agcp.ai/examples/registries/capability-example-registry.json"
+  },
+  "lifecycle": {
+    "lifecycle_state": "ACTIVE",
+    "effective_from": "2026-07-30T16:00:00Z"
+  },
+  "integrity": {
+    "integrity_protected": true,
+    "digest_algorithm": "SHA-256",
+    "canonicalization": "JCS-RFC8785",
+    "entry_count": 1,
+    "entry_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "7fb124b6bfbe1ab369e986d474587874ab2e411c1feda6b2f1d7bfaefa68e62b",
+      "canonicalization": "JCS-RFC8785"
+    },
+    "document_digest": {
+      "algorithm": "SHA-256",
+      "value": "b34dc849f1dad550baa84dddc798469ac5b4c9e6cf2f9dba31d634a5839341bd",
+      "canonicalization": "JCS-RFC8785"
+    }
+  },
+  "traceability": {
+    "source_artifact_refs": [
+      "AGCP Core Specification v2.0.0"
+    ],
+    "schema_refs": [
+      "schemas/registry_document.schema.json"
+    ],
+    "requirement_refs": [
+      "CR-089"
+    ],
+    "entry_traceability_policy": "Each example entry carries explicit REG, NS, and CR traceability.",
+    "architecture_refs": [
+      "ARM-701"
+    ],
+    "normative_statement_refs": [
+      "NS-17.5-03"
+    ]
+  },
+  "registry_rules": {
+    "example_only": "This registry document is a non-authoritative validation fixture and shall not be used as a normative registry."
+  },
+  "fields": {
+    "entry_id": "Stable example entry identifier.",
+    "entry_payload": "Namespaced example capability payload."
+  },
+  "entries": [
+    {
+      "reg_id": "REG-901",
+      "entry_id": "CAPABILITY.EXAMPLE.VALIDATION",
+      "ns_refs": [
+        "NS-17.5-03"
+      ],
+      "cr_refs": [
+        "CR-089"
+      ],
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "2.0.0",
+      "description": "Example capability registry entry used only to validate DS-044 fixture processing.",
+      "entry_payload": {
+        "capability": "SCHEMA_FIXTURE_VALIDATION",
+        "normative": false
+      },
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "37e867fe14c2f72f08916f2da7a2b885fc3350060c60c5f9065f4be1be7e097c",
+        "canonicalization": "JCS-RFC8785"
+      }
+    }
+  ],
+  "semantic_assertions": {
+    "identifiers_are_stable_and_not_repurposed": true,
+    "changes_are_release_governed": true,
+    "registry_does_not_independently_modify_core_requirements": true,
+    "integrity_is_verified_before_use": true,
+    "unknown_value_behavior_is_governed_by_applicable_specification": true
+  }
+}

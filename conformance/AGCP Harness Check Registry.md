@@ -1,219 +1,48 @@
 # AGCP Harness Check Registry
 
 **Status:** Informational  
-**Repository Versioning:** Repository Release Governed  
-**Canonical Machine-Readable Source:** `/conformance/harness-checks.json` (or `assertions.json` until renamed)
+**Applicable release:** AGCP v2.0.0  
+**Interface:** IF-001 `/agcp/v2`  
+**Canonical machine-readable source:** [`harness-checks.json`](harness-checks.json)  
+**Fixture mapping:** [`fixture-mapping.json`](fixture-mapping.json)
 
----
+> **Relationship model:** Harness Checks are reusable executable capability checks that support portions of Formal Test Cases. They are not independent normative requirements or assessment authorities. See `AGCP-Conformance-Traceability-and-Automation-Model.md`.
 
-# 1. Purpose
+## Purpose
 
-This document provides a human-readable registry of the executable Harness Checks used by the AGCP Conformance Harness.
+Harness Checks are executable realizations of portions of published Formal Test Cases. They do not create an independent normative layer. The controlled traceability relationship is CR ↔ Core-derived NS identifiers ↔ TC. The RTM controls the CR/Core-derived-NS/TC relationships, and `test-mapping.json` extends the TC relationship to Harness Checks and Test Vectors. These traceability relationships do not alter normative precedence. The governing specifications define implementation obligations, and the Formal Test Cases control assessment procedures.
 
-Harness Checks define the executable verification behavior used to realize published Conformance Test Cases (TCs). They are **not** an independent normative layer.
+## Registry
 
-The authoritative normative traceability chain is:
+| Harness Check ID | Validated capability |
+|---|---|
+| `CHECK-PROPOSAL-QUALIFICATION` | Proposal Qualification accepts valid proposals and refuses malformed or inadmissible proposals. |
+| `CHECK-GOVERNANCE-DECISION` | Governance Decision Function produces deterministic governance outcomes from qualified proposals and authoritative inputs. |
+| `CHECK-GOVERNANCE-APPROVAL` | Human adjudication and Governance Approval Artifacts are enforced when required and cannot be bypassed before Commit-Bound Admissibility. |
+| `CHECK-EXECUTION-AUTHORIZATION` | Execution Authorization is produced only after required governance prerequisites are satisfied. |
+| `CHECK-COMMIT-BOUNDARY` | Commit Boundary processing gates governance-significant execution and validates current governance conditions immediately before commit. |
+| `CHECK-GOVERNANCE-EVIDENCE` | Governance Evidence is produced, linked, attributable, integrity-protected, and sufficient for audit and deterministic replay. |
+| `CHECK-APPEND-ONLY-GOVERNANCE-LEDGER` | DS-040 Governance Ledger Events preserve immutable, attributable, integrity-linked, and authoritatively ordered governance history. |
+| `CHECK-CANONICAL-STATE` | Canonical State is deterministically resolved from applicable qualified authoritative governance sources; incorporated Governance Ledger records use authoritative ledger ordering, and materialized views are reproducible from those sources. |
+| `CHECK-IDEMPOTENCY` | Repeated proposal submission with the same idempotency key or replay-protection mechanism does not create conflicting governance state. |
+| `CHECK-TENANT-STATE-GATING` | Tenant lifecycle state gates proposal submission, Execution Authorization, and Commit Boundary processing. |
+| `CHECK-TENANT-AND-DOMAIN-ISOLATION` | Tenant and Governance Domain isolation prevent unauthorized cross-boundary governance operations. |
+| `CHECK-PROVENANCE` | Governance-significant requests and artifacts include valid provenance and reject invalid provenance. |
+| `CHECK-REGISTRIES` | Governance processing uses published registries and rejects unknown registered values. |
+| `CHECK-QUALIFIED-GOVERNANCE-INPUTS` | Canonical State, Governance Evidence, and authority are independently qualified or re-derived before commitment. |
+| `CHECK-LIFECYCLE-AND-CONTINUATION` | Derived Lifecycle State and Continuation Integrity preserve governed nonterminal progression, degradation, re-evaluation, and recovery. |
+| `CHECK-GOVERNANCE-COMPILATION-ACTIVATION` | Governance Configuration, deterministic compilation, constitutional validation and constraint preservation, omission analysis, self-protection, atomic controlled activation, prior-version preservation, governed rollback, evidence, and lineage are executable and traceable. |
+| `CHECK-HTTP-INTERFACE-CONTRACT` | All ten mandatory IF-001 operations have executable positive coverage and applicable negative, isolation, and idempotency coverage. |
 
-```text
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
-```
+## Synchronization rules
 
-Harness Checks and Harness Test Vectors provide the executable realization of Test Cases and SHALL remain synchronized with the Requirements Traceability Matrix (RTM).
+- Schema references use exact current repository paths.
+- Fixture references resolve through `fixture-mapping.json` and validate before harness execution.
+- Governance Approval Artifact terminology is used exclusively; DS-016 compatibility handling is absent.
+- Commit Boundary fixtures use the current DS-018 Enforcement Context representation.
+- `/agcp/v2` is the only active HTTP namespace for IF-001.
+- Every mandatory IF-001 operation has at least one schema-valid positive vector; applicable negative, isolation, and idempotency behavior is also executable.
+- Every `MUST` Harness Check SHALL reference at least one substantive executable vector. `CHECK-GOVERNANCE-COMPILATION-ACTIVATION` is realized by `TV-GCFG-001`, `TV-GCOMP-001`, `TV-GCONST-001`, `TV-GCONST-002`, `TV-GOMIT-001`, `TV-GSELF-001`, `TV-GACT-001`, `TV-GACT-002`, and `TV-GROLL-001`.
+- Check identifiers remain stable, but obsolete compatibility behavior is not retained.
 
-The canonical machine-readable registry is maintained in:
-
-```text
-/conformance/harness-checks.json
-```
-
-(or `assertions.json` until the repository rename is completed.)
-
----
-
-# 2. Harness Check Model
-
-Harness Checks verify that an implementation exhibits the behaviors required by the published specifications.
-
-Each Harness Check defines:
-
-- Harness Check identifier
-- Validated capability
-- Applicable pipeline stages
-- Applicable schemas and registries
-- Expected behavior
-- Required evidence
-- Representative Harness Test Vectors
-
-Harness Checks SHALL NOT introduce independent normative requirements.
-
----
-
-# 3. Harness Check Registry
-
-| Harness Check ID | Validated Capability |
-|------------------|----------------------|
-| CHECK-PROPOSAL-QUALIFICATION | Proposal Qualification validation and refusal behavior |
-| CHECK-GOVERNANCE-DECISION | Deterministic Governance Decision Function behavior |
-| CHECK-HUMAN-REVIEW | Human Review quorum, authorization, replay protection, and validation |
-| CHECK-EXECUTION-AUTHORIZATION | Execution Authorization generation and validation |
-| CHECK-COMMIT-BOUNDARY | Commit Boundary authorization and governance revalidation |
-| CHECK-GOVERNANCE-EVIDENCE | Governance Evidence generation, linkage, integrity, and auditability |
-| CHECK-APPEND-ONLY-GOVERNANCE-LEDGER | Ordered Append-Only Governance Ledger behavior |
-| CHECK-CANONICAL-STATE | Canonical State reconstruction from ordered ledger history |
-| CHECK-IDEMPOTENCY | Idempotent proposal replay behavior |
-| CHECK-TENANT-STATE-GATING | Tenant lifecycle state enforcement |
-| CHECK-TENANT-AND-DOMAIN-ISOLATION | Tenant and Governance Domain isolation |
-| CHECK-PROVENANCE | Provenance verification and replay protection |
-| CHECK-REGISTRIES | Registry validation for published governance registries |
-
----
-
-# 4. Conformance Relationship
-
-Harness Checks are executed as part of the AGCP Conformance Harness.
-
-The complete relationship is:
-
-```text
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
-        ↓
-Harness Check
-        ↓
-Harness Test Vector
-```
-
-The authoritative NS→CR→TC mappings are maintained by the Requirements Traceability Matrix and `test-mapping.json`.
-
----
-
-# 5. Scope of Verification
-
-Collectively, the Harness Checks verify:
-
-- Proposal Qualification
-- Governance Decision Function
-- Human Review
-- Execution Authorization
-- Commit Boundary
-- Governance Evidence
-- Ordered Append-Only Governance Ledger
-- Canonical State derivation
-- Deterministic replay
-- Idempotency
-- Provenance validation
-- Tenant lifecycle enforcement
-- Tenant and Governance Domain isolation
-- Published governance registries
-
----
-
-# 6. Relationship to Test Cases
-
-Each Harness Check is exercised through one or more representative Harness Test Vectors.
-
-Representative examples include:
-
-| Harness Check | Representative Harness Test Vectors |
-|---------------|-------------------------------------|
-| CHECK-PROPOSAL-QUALIFICATION | TV-PROP-001, TV-PROP-002 |
-| CHECK-GOVERNANCE-DECISION | TV-GOV-001, TV-GOV-002, TV-GOV-003 |
-| CHECK-HUMAN-REVIEW | TV-HR-001, TV-HR-002, TV-HR-003 |
-| CHECK-EXECUTION-AUTHORIZATION | TV-AUTH-001, TV-AUTH-002 |
-| CHECK-COMMIT-BOUNDARY | TV-CB-001, TV-CB-002, TV-CB-003 |
-| CHECK-APPEND-ONLY-GOVERNANCE-LEDGER | TV-LEDGER-001, TV-LEDGER-002, TV-LEDGER-003 |
-| CHECK-CANONICAL-STATE | TV-LEDGER-001, TV-LEDGER-002, TV-META-003 |
-
----
-
-# 7. Canonical Registry
-
-The canonical machine-readable Harness Check Registry contains, for each Harness Check:
-
-- identifier
-- validated capability
-- applicable pipeline stages
-- applicable schemas
-- applicable registries (where applicable)
-- expected behavior
-- required evidence
-- representative Harness Test Vectors
-
-The Markdown registry exists solely as a human-readable companion to the machine-readable registry.
-
----
-
-# 8. Change Control
-
-Harness Check identifiers SHOULD remain stable across repository releases.
-
-New Harness Checks SHOULD be additive.
-
-Harness Checks SHALL remain synchronized with:
-
-- Requirements Traceability Matrix
-- Conformance Test Cases
-- Harness Test Vectors
-- Published specifications
-
----
-
-# 9. Conformance Claims
-
-An implementation may claim AGCP Conformance only when:
-
-1. Applicable Normative Statements are satisfied.
-2. Applicable Conformance Requirements are satisfied.
-3. Applicable Test Cases pass.
-4. Applicable Harness Checks pass.
-5. Applicable Harness Test Vectors execute successfully.
-
----
-
-# 10. Guidance for Reviewers
-
-When reviewing AGCP conformance:
-
-- Review normative behavior in the published specifications.
-- Confirm NS→CR→TC traceability.
-- Verify Harness Checks correctly implement published Test Cases.
-- Confirm Harness Test Vectors exercise each applicable Harness Check.
-- Verify Canonical State reconstruction from the ordered Append-Only Governance Ledger.
-
----
-
-# 11. Future Expansion
-
-Future repository releases may introduce additional Harness Check domains including:
-
-- Distributed replay verification
-- Multi-ledger federation
-- Cross-jurisdiction governance
-- Distributed Canonical State validation
-- Advanced governance analytics
-
-Future additions SHOULD preserve backward compatibility and remain synchronized with the Requirements Traceability Matrix.
-
----
-
-# Relationship to Other Artifacts
-
-| Artifact | Purpose |
-|----------|---------|
-| Requirements Traceability Matrix | Authoritative NS → CR → TC mapping |
-| Harness Check Registry (JSON) | Machine-readable executable harness definitions |
-| AGCP Conformance Test Matrix | Human-readable capability mapping |
-| AGCP Conformance Test Vectors | Representative executable scenarios |
-| AGCP Conformance Harness Specification | Harness execution behavior |
 

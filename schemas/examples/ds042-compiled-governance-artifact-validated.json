@@ -1,0 +1,526 @@
+{
+  "compiled_governance_artifact_id": "CGA-EXAMPLE-1",
+  "artifact_version": "1.0.0",
+  "artifact_type": "COMPILED_GOVERNANCE_ARTIFACT",
+  "compilation_status": "VALIDATED",
+  "tenant_id": "tenant-1",
+  "governance_domain_id": "domain-1",
+  "effective_scope": {
+    "tenant_id": "tenant-id-1"
+  },
+  "governance_configuration_ref": {
+    "governance_configuration_id": "config-1",
+    "configuration_version": "2.0.0",
+    "configuration_status": "ACTIVE",
+    "configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "governance_version_ref": {
+      "governance_version_id": "gv-2.0.0"
+    },
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "effective_at": "2026-07-30T16:00:00Z"
+  },
+  "source_governance_intent_refs": [
+    {
+      "intent_id": "intent-id-1",
+      "intent_version": "1.0.0",
+      "intent_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "originating_authority": {
+        "principal_id": "principal-id-1",
+        "principal_type": "AGENT"
+      }
+    }
+  ],
+  "compilation_context": {
+    "compilation_context_id": "CCX-EXAMPLE-1",
+    "context_version": "1.0.0",
+    "compiler_id": "compiler-id-1",
+    "compiler_version": "1.0.0",
+    "deterministic_build_id": "BUILD-EXAMPLE-1",
+    "target_runtime_profile": "target-1",
+    "governance_configuration_ref": {
+      "governance_configuration_id": "config-1",
+      "configuration_version": "2.0.0",
+      "configuration_status": "ACTIVE",
+      "configuration_digest": {
+        "algorithm": "SHA-256",
+        "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "governance_version_ref": {
+        "governance_version_id": "gv-2.0.0"
+      },
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
+      "effective_at": "2026-07-30T16:00:00Z"
+    },
+    "input_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "build_parameters_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "deterministic_compilation": true,
+    "reproducible_compilation": true,
+    "created_at": "2026-07-30T16:00:00Z",
+    "attribution": {
+      "principal": {
+        "principal_id": "principal-id-1",
+        "principal_type": "AGENT"
+      },
+      "attributed_at": "2026-07-30T16:00:00Z"
+    },
+    "context_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "source_manifest": [
+    {
+      "source_artifact_id": "intent-1",
+      "source_artifact_type": "GOVERNANCE_INTENT",
+      "source_version": "1.0.0",
+      "artifact_uri": "https://agcp.ai/example/artifact-uri",
+      "artifact_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "required_for_semantics": true,
+      "protected_source": true
+    },
+    {
+      "source_artifact_id": "config-1",
+      "source_artifact_type": "GOVERNANCE_CONFIGURATION",
+      "source_version": "1.0.0",
+      "artifact_uri": "https://agcp.ai/example/config/config-1",
+      "artifact_digest": {
+        "algorithm": "SHA-256",
+        "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "required_for_semantics": true,
+      "protected_source": true
+    }
+  ],
+  "validated_dependency_set": {
+    "dependency_set_id": "DEPSET-EXAMPLE-1",
+    "dependency_refs": [
+      {
+        "source_artifact_id": "intent-1",
+        "source_artifact_type": "GOVERNANCE_INTENT",
+        "source_version": "1.0.0",
+        "artifact_uri": "https://agcp.ai/example/artifact-uri",
+        "artifact_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "required_for_semantics": true,
+        "protected_source": true
+      },
+      {
+        "source_artifact_id": "config-1",
+        "source_artifact_type": "GOVERNANCE_CONFIGURATION",
+        "source_version": "1.0.0",
+        "artifact_uri": "https://agcp.ai/example/config/config-1",
+        "artifact_digest": {
+          "algorithm": "SHA-256",
+          "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "required_for_semantics": true,
+        "protected_source": true
+      }
+    ],
+    "dependency_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "all_dependencies_resolved": true,
+    "all_dependencies_integrity_verified": true,
+    "all_dependencies_schema_validated": true,
+    "version_conflicts_absent": true,
+    "validation_evidence_refs": [
+      {
+        "governance_evidence_id": "governance-evidence-id-1",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ]
+  },
+  "machine_evaluable_representation": {
+    "representation_format": "JSON_LOGIC",
+    "media_type": "example",
+    "artifact_uri": "https://agcp.ai/example/artifact-uri",
+    "entrypoint": "example",
+    "representation_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "deterministic_runtime_profile": "example",
+    "machine_evaluable": true,
+    "immutable_representation": true
+  },
+  "domain_constraint_sets": [
+    {
+      "domain_constraint_set_id": "DCS-EXAMPLE-1",
+      "governance_domain_id": "governance-domain-id-1",
+      "effective_scope": {
+        "tenant_id": "tenant-id-1"
+      },
+      "constraint_refs": [
+        {
+          "constraint_id": "CONSTRAINT-EXAMPLE-1",
+          "constraint_version": "1.0.0",
+          "constraint_type": "EXAMPLE_VALUE",
+          "constraint_classification": "ORDINARY",
+          "constraint_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "artifact_uri": "https://agcp.ai/example/artifact-uri",
+          "tenant_id": "tenant-id-1",
+          "governance_domain_id": "governance-domain-id-1",
+          "status": "Registered"
+        }
+      ],
+      "invariant_refs": [
+        {
+          "invariant_id": "INVARIANT-EXAMPLE-1",
+          "invariant_version": "1.0.0",
+          "invariant_type": "EXAMPLE_VALUE",
+          "invariant_classification": "ORDINARY",
+          "invariant_scope_classification": "GLOBAL_SYSTEM",
+          "enforcement_level": "Hard",
+          "invariant_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "artifact_uri": "https://agcp.ai/example/artifact-uri",
+          "tenant_id": "tenant-id-1",
+          "governance_domain_id": "governance-domain-id-1",
+          "status": "Registered"
+        }
+      ],
+      "refusal_rule_ids": [
+        "refusal-rule-id-1"
+      ],
+      "evidence_requirement_ids": [
+        "evidence-requirement-id-1"
+      ],
+      "authority_rule_ids": [
+        "authority-rule-id-1"
+      ],
+      "commit_rule_ids": [
+        "commit-rule-id-1"
+      ],
+      "set_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "execution_constraint_sets": [
+    {
+      "execution_constraint_set_id": "ECS-EXAMPLE-1",
+      "derived_from_domain_constraint_set_id": "DCS-EXAMPLE-1",
+      "applicable_action_types": [
+        "example"
+      ],
+      "constraint_refs": [
+        {
+          "constraint_id": "CONSTRAINT-EXAMPLE-1",
+          "constraint_version": "1.0.0",
+          "constraint_type": "EXAMPLE_VALUE",
+          "constraint_classification": "ORDINARY",
+          "constraint_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "artifact_uri": "https://agcp.ai/example/artifact-uri",
+          "tenant_id": "tenant-id-1",
+          "governance_domain_id": "governance-domain-id-1",
+          "status": "Registered"
+        }
+      ],
+      "invariant_refs": [
+        {
+          "invariant_id": "INVARIANT-EXAMPLE-1",
+          "invariant_version": "1.0.0",
+          "invariant_type": "EXAMPLE_VALUE",
+          "invariant_classification": "ORDINARY",
+          "invariant_scope_classification": "GLOBAL_SYSTEM",
+          "enforcement_level": "Hard",
+          "invariant_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "artifact_uri": "https://agcp.ai/example/artifact-uri",
+          "tenant_id": "tenant-id-1",
+          "governance_domain_id": "governance-domain-id-1",
+          "status": "Registered"
+        }
+      ],
+      "evidence_requirement_ids": [
+        "evidence-requirement-id-1"
+      ],
+      "authority_rule_ids": [
+        "authority-rule-id-1"
+      ],
+      "commit_rule_ids": [
+        "commit-rule-id-1"
+      ],
+      "deterministic": true,
+      "set_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "semantic_preservation": {
+    "governance_intent_preserved": true,
+    "constraints_preserved": true,
+    "invariants_preserved": true,
+    "refusal_paths_preserved": true,
+    "escalation_semantics_preserved": true,
+    "evidence_requirements_preserved": true,
+    "authority_rules_preserved": true,
+    "commit_meaning_preserved": true,
+    "protected_constraints_non_derogable": true,
+    "coverage_manifest_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "governance_artifact_lineage": {
+    "lineage_id": "lineage-id-1",
+    "root_governance_intent_refs": [
+      {
+        "intent_id": "intent-id-1",
+        "intent_version": "1.0.0",
+        "intent_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "originating_authority": {
+          "principal_id": "principal-id-1",
+          "principal_type": "AGENT"
+        }
+      }
+    ],
+    "compilation_context_id": "CCX-EXAMPLE-1",
+    "derivation_steps": [
+      {
+        "step_id": "step-id-1",
+        "step_type": "PARSE",
+        "input_digests": [
+          {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "output_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "tool_id": "tool-id-1",
+        "tool_version": "1.0.0",
+        "performed_at": "2026-07-30T16:00:00Z",
+        "attribution": {
+          "principal": {
+            "principal_id": "principal-id-1",
+            "principal_type": "AGENT"
+          },
+          "attributed_at": "2026-07-30T16:00:00Z"
+        }
+      }
+    ],
+    "source_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "output_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "lineage_complete": true,
+    "lineage_replayable": true,
+    "governance_evidence_refs": [
+      {
+        "governance_evidence_id": "governance-evidence-id-1",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ]
+  },
+  "constitutional_validation_result": {
+    "validation_id": "validation-id-1",
+    "outcome": "PASSED",
+    "protected_safeguard_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "findings": [],
+    "evaluated_at": "2026-07-30T16:00:00Z",
+    "evaluator_attribution": {
+      "principal": {
+        "principal_id": "constitutional-validator",
+        "principal_type": "SYSTEM"
+      },
+      "attributed_at": "2026-07-30T16:00:00Z"
+    },
+    "governance_evidence_refs": [
+      {
+        "governance_evidence_id": "evidence-constitutional-validation",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      }
+    ],
+    "result_digest": {
+      "algorithm": "SHA-256",
+      "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  },
+  "governance_omission_analysis_result": {
+    "analysis_id": "analysis-id-1",
+    "outcome": "PASSED",
+    "coverage_categories": [
+      "POLICY",
+      "CONSTRAINT",
+      "INVARIANT",
+      "REFUSAL_PATH",
+      "ESCALATION_SEMANTICS",
+      "EVIDENCE_REQUIREMENT",
+      "AUTHORITY_RULE",
+      "COMMIT_RULE",
+      "PROTECTED_SAFEGUARD"
+    ],
+    "traceability_coverage_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "omission_findings": [],
+    "analyzed_at": "2026-07-30T16:00:00Z",
+    "analyst_attribution": {
+      "principal": {
+        "principal_id": "omission-analysis-validator",
+        "principal_type": "SYSTEM"
+      },
+      "attributed_at": "2026-07-30T16:00:00Z"
+    },
+    "governance_evidence_refs": [
+      {
+        "governance_evidence_id": "evidence-omission-analysis",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      }
+    ],
+    "result_digest": {
+      "algorithm": "SHA-256",
+      "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    }
+  },
+  "governance_self_protection_assessment": {
+    "assessment_complete": true,
+    "constitutional_constraints_preserved": true,
+    "protected_safeguards_not_weakened": true,
+    "governance_bypass_not_introduced": true,
+    "required_safeguards_not_disabled": true,
+    "material_governance_omissions_absent": true,
+    "self_modification_isolation_preserved": true,
+    "assessment_evidence_refs": [
+      {
+        "governance_evidence_id": "governance-evidence-id-1",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ],
+    "assessment_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "activation_eligibility": "ELIGIBLE",
+  "governance_evidence_refs": [
+    {
+      "governance_evidence_id": "evidence-9",
+      "evidence_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "compiled_at": "2026-07-30T16:00:00Z",
+  "attribution": {
+    "principal": {
+      "principal_id": "principal-id-1",
+      "principal_type": "AGENT"
+    },
+    "attributed_at": "2026-07-30T16:00:00Z"
+  },
+  "provenance": {
+    "signer": "example",
+    "signature": {
+      "alg": "SHA-256",
+      "kid": "key-1",
+      "sig": "signature-value"
+    },
+    "signed_at": "2026-07-30T16:00:00Z"
+  },
+  "artifact_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "integrity_signature": {
+    "alg": "SHA-256",
+    "kid": "key-1",
+    "sig": "signature-value"
+  },
+  "replay_material": {
+    "source_manifest_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "compilation_context_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "validated_dependency_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "compiler_id": "compiler-id-1",
+    "compiler_version": "1.0.0",
+    "deterministic_build_id": "BUILD-EXAMPLE-1",
+    "replay_instructions_uri": "https://agcp.ai/example/replay-instructions-uri",
+    "equivalent_inputs_produce_equivalent_output": true
+  },
+  "semantic_assertions": {
+    "machine_evaluable_output_of_governance_compilation": true,
+    "does_not_establish_authority_at_commitment": true,
+    "does_not_determine_commit_bound_admissibility": true,
+    "does_not_authorize_execution": true,
+    "does_not_activate_itself": true,
+    "remains_subject_to_commit_bound_evaluation": true,
+    "controlled_activation_required_before_authoritative_use": true,
+    "partial_activation_not_permitted": true
+  },
+  "validated_at": "2026-07-30T16:00:00Z",
+  "governance_version_candidate_ref": {
+    "governance_version_id": "gv-2.0.1-candidate"
+  }
+}

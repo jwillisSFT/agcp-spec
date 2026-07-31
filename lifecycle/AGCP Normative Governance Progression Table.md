@@ -1,6 +1,6 @@
 # AGCP Normative Governance Progression Table
 
-**Status:** Informational (Normative Companion)  
+**Status:** Informational Companion  
 **Repository Versioning:** Repository Release Governed
 
 ---
@@ -11,7 +11,7 @@ This document provides a concise, tabular representation of the normative govern
 
 Rather than defining an application state machine, it summarizes the governance stages, decision points, governance evidence, ledger interactions, and progression conditions that together constitute the AGCP governance lifecycle.
 
-Normative implementation behavior is defined by the AGCP specifications. This document is intended to improve readability and implementation consistency.
+Normative implementation behavior is established by the published CRs, the AGCP Core Specification, and any applicable normative Companion Specifications expressly adopted by the implementation profile. The ARM governs architectural terminology and concept meaning. This document summarizes that behavior for readability and implementation consistency and does not create or supersede normative obligations.
 
 ---
 
@@ -22,9 +22,10 @@ Normative implementation behavior is defined by the AGCP specifications. This do
 | Proposal Qualification | Proposal received | Validate schema, provenance, tenant, Governance Domain, replay protection, idempotency | Qualified or Structurally Refused | Proposal Qualification Evidence | Yes, where required | Governance Decision Function |
 | Governance Decision Function | Qualified Proposal | Evaluate policies, constraints, invariants, exceptions, Authority Lineage | Authorized, Denied, Pending Human Review, or Governed Re-evaluation Required | Governance Decision Evidence | Yes | Human Review or Execution Authorization |
 | Human Review | Human Review required | Validate reviewers, roles, quorum, provenance | Satisfied or Failed | Human Review Evidence | Yes | Execution Authorization |
-| Execution Authorization | Governance prerequisites satisfied | Verify authorization prerequisites using current authoritative governance information | Authorized, Authorization Failure, or Governed Re-evaluation Required | Execution Authorization Evidence | Yes | Commit Boundary |
-| Commit Boundary | Valid Execution Authorization | Determine current Canonical State and validate authorization remains applicable | Commit Allowed, Commit Rejected, or Governed Re-evaluation Required | Commit Boundary Evidence | Yes | Governed Execution |
-| Governed Execution | Successful Commit Boundary | Perform governed execution and record governance-significant outcomes | Execution Complete or Execution Failure | Execution Evidence | Yes, where applicable | Complete |
+| Execution Authorization | Governance prerequisites satisfied | Verify authorization prerequisites using current authoritative governance information | Authorized, Authorization Failure, or Governed Re-evaluation Required | Execution Authorization Evidence | Yes | Continuation Integrity where applicable, otherwise Governance Realization and Commit Boundary |
+| Continuation Integrity | Authorized or otherwise eligible nonterminal Proposal before commitment | Preserve or re-establish the continuation basis; detect material governance-condition changes; evaluate admissible-path viability; perform governed re-evaluation or recovery where required | Proposal Remains Authorized or Viable, Governed Re-evaluation Required, Degraded, Commitment Suspended, Proposal Restored to Eligible State, Non-Executable Lifecycle State, or Governed Terminal Outcome | Continuation Integrity Evidence | Yes | Governance Realization and Commit Boundary, renewed governance processing, recovery, or policy-defined terminal disposition |
+| Governance Realization and Commit Boundary | Valid current governance basis and eligible nonterminal Proposal | Resolve current Canonical State, re-derive authority, qualify evidence and state, validate governance binding and resulting state, resolve final Commit-Bound Admissibility, and enforce the result | Commit Successful, Commit Failed, or Governed Re-evaluation Required | Governance Realization and Commit Boundary Evidence | Yes | Governed Execution or renewed governance processing |
+| Governed Execution | Successful Commit Boundary | Perform governed execution and record governance-significant outcomes | Execution Complete or Execution Failure | Execution Evidence | Yes, where applicable | Complete or separately defined post-commit operational controls |
 
 ---
 
@@ -49,12 +50,19 @@ Governance Decision Function
     |    Human Review
     |          |
     v          v
-Execution Authorization
+Execution Authorization / Eligible Nonterminal State
+    |
+    +--> Continuation Integrity, where applicable before commitment
+    |          |
+    |          +--> Re-evaluation / Degraded / Recovery / Terminal Disposition
+    |          |
+    |          v
+    |     Remains Eligible
     |
     v
-Commit Boundary
+Governance Realization and Commit Boundary
     |
-    +--> Commit Rejected
+    +--> Commit Rejected or Governed Re-evaluation Required
     |
     v
 Governed Execution
@@ -78,19 +86,21 @@ Governed Execution
 
 # 5. Canonical State
 
-Canonical State SHALL be derived from the ordered Append-Only Governance Ledger, or from a verifiable materialized state whose derivation from the ordered Append-Only Governance Ledger can be deterministically reproduced.
+Canonical State SHALL be deterministically resolved from one or more qualified authoritative governance sources.
 
-Ledger sequence order is authoritative.
+The ordered Append-Only Governance Ledger SHALL be authoritative for recorded governance events, event ordering, and Derived Lifecycle State. Where Canonical State incorporates those elements, ledger sequence order SHALL be authoritative.
 
-Timestamp ordering SHALL NOT determine Canonical State.
+Timestamp ordering and implementation-specific storage ordering SHALL NOT substitute for authoritative ledger ordering.
+
+Materialized Canonical State views SHALL remain reproducible from the applicable qualified authoritative source versions and ordered Governance Ledger records and SHALL NOT supersede those sources.
 
 ---
 
 # 6. Governance Evidence
 
-Each governance stage SHOULD generate Governance Evidence appropriate to that stage.
+Each governance-significant processing stage SHALL generate Governance Evidence appropriate to that stage and sufficient to satisfy the applicable requirements of Core Section 10.
 
-Governance Evidence documents governance events.
+Governance Evidence SHALL accurately represent the governance processing that occurred and SHALL preserve the attributable, integrity-protected basis required for audit, conformance assessment, assurance assessment, forensic analysis, and deterministic replay.
 
 The Append-Only Governance Ledger establishes their authoritative ordering and persistence.
 
@@ -101,16 +111,16 @@ The Append-Only Governance Ledger establishes their authoritative ordering and p
 The governance progression summarized in this document is verified through the AGCP Conformance framework using the authoritative traceability model:
 
 ```text
-Normative Specification
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
         |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
         v
-Normative Statement (NS)
-        |
-        v
-Conformance Requirement (CR)
-        |
-        v
-Test Case (TC)
+Conformance Test Case (TC)
         |
         v
 Harness Check

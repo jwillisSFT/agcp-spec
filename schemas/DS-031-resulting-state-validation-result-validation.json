@@ -1,0 +1,57 @@
+{
+  "schema_id": "DS-031",
+  "schema_file": "schemas/resulting_state_validation_result.json",
+  "validation_status": "PASS",
+  "validated_at": "2026-07-29",
+  "summary": {
+    "draft_2020_12_schemas_validated": 34,
+    "cross_schema_references_resolved": 1543,
+    "implemented_catalog_hashes_verified": 34,
+    "common_definitions_retained": 103,
+    "unused_common_definitions": 0,
+    "positive_instance_tests_passed": 5,
+    "negative_instance_tests_passed": 8,
+    "rtm_formula_errors": 0,
+    "rtm_format_preserved": true,
+    "openapi_parse_passed": true,
+    "zip_integrity_passed": true
+  },
+  "positive_tests": [
+    "single-transition VALID projected state",
+    "complete Bind Set VALID projected aggregate state",
+    "approved executable subset VALID projected state",
+    "INVALID projected state with violated invariant",
+    "INDETERMINATE projected state with unresolved input"
+  ],
+  "negative_tests": [
+    "claim that DS-031 authorizes execution",
+    "arrival time used as governance ordering basis",
+    "VALID result containing a violated aggregate condition",
+    "unqualified Canonical State basis",
+    "unqualified supporting evidence",
+    "strongly coupled proposal represented as partial executable subset",
+    "INVALID result without a violated determination",
+    "INDETERMINATE result without an indeterminate determination"
+  ],
+  "integration_checks": {
+    "common_aliases_removed": [
+      "resulting_state_validation_id",
+      "resulting_state_validation_outcome_enum",
+      "resulting_state_validation_result_ref"
+    ],
+    "governance_receipt_reference": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref",
+    "openapi_components": [
+      "ResultingStateValidationResult",
+      "ResultingStateValidationResultRef"
+    ],
+    "rtm_version": "RTM-1.21",
+    "rtm_mappings": [
+      "RTM-00102",
+      "RTM-00109"
+    ],
+    "catalog_version": "1.0.17",
+    "implemented_schemas": 34,
+    "proposed_reserved_schemas": 10,
+    "rtm_rows_with_ds_assignments": 73
+  }
+}

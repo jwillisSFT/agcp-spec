@@ -6,15 +6,35 @@ meta:
   suite_id: agcp_conformance_harness
   status: normative-harness-specification
   versioning: repository_release
-  description: Deterministic AGCP conformance harness vectors aligned with Proposal, Governance Evidence, Append-Only Governance Ledger, Human Review, Execution Authorization, Commit Boundary, and ledger-derived Canonical State semantics.
+  description: Deterministic AGCP conformance harness vectors covering all ten mandatory IF-001 operations, Proposal, 
+    Governance Evidence, Append-Only Governance Ledger, Governance Approval Artifacts, Execution Authorization, 
+    Governance Artifact registration and retrieval, Governance Configuration, deterministic Governance Compilation, constitutional validation, omission analysis, atomic Controlled Governance Activation, governed rollback, Commit Boundary, Canonical State source resolution, and authoritative ledger-ordering semantics.
   assumptions:
     append_only_governance_ledger_required: true
-    canonical_state_derived_from_ordered_ledger: true
-    materialized_canonical_state_must_be_reproducible_from_ordered_ledger: true
-    ledger_sequence_order_is_authoritative: true
-    timestamp_order_is_not_authoritative_for_state_derivation: true
+    canonical_state_resolved_from_qualified_authoritative_sources: true
+    governance_ledger_authoritative_for_recorded_events_ordering_and_derived_lifecycle_state: true
+    materialized_canonical_state_must_be_reproducible_from_applicable_authoritative_sources: true
+    ledger_sequence_order_is_authoritative_for_recorded_events_and_derived_lifecycle_state: true
+    timestamp_or_storage_order_is_not_authoritative_for_ledger_ordering: true
     submitted_state_is_not_externally_observable: true
     governance_evidence_required_for_governance_significant_processing: true
+    governance_approval_request_schema_validation_precedes_semantic_cryptographic_verification: true
+    submitted_governance_approval_artifacts_independently_cryptographically_reverified: true
+  agcp_release: v2.0.0
+  interface_id: IF-001
+  interface_version: v2
+  fixture_resolution: Resolve $fixture repository paths and apply $overrides before request-schema and OpenAPI 
+    validation.
+  vector_catalog:
+    authoritative_source: conformance/AGCP-Conformance-Harness-Spec.yml
+    human_readable_mirror: conformance/AGCP-Conformance-Test-Vectors.md
+    required_id_set_equality: true
+    expected_vector_count: 54
+  request_parameter_validation:
+    authoritative_contract: api/AGCP-HTTP-Contract.yaml
+    controlled_record: conformance/AGCP-harness-request-parameter-validation.json
+    scope: Every primary request and every HTTP setup prestep.
+    expected_request_count: 52
 globals:
   base_url: https://api.example.com
   tenants:
@@ -31,39 +51,39 @@ globals:
       scheme: bearer
       token: TEST_TOKEN_FOR_T2
   policy_ref:
-    valid: &id001
+    valid:
       policy_id: P1
       policy_release: repo-release-test
       policy_hash: abcdef0123456789
-    missing: &id008
+    missing:
       policy_id: P_MISSING
       policy_release: missing-release
   canonical_state_ref:
-    valid: &id003
+    valid:
       canonical_state_id: CS1
       canonical_state_hash: 0123456789abcdef
       resolved_at: '2026-02-25T12:00:00Z'
   governance_context_ref:
-    valid: &id002
+    valid:
       governance_context_id: GCX1
       governance_context_hash: abcdefabcdef1234
   authority_lineage_ref:
-    valid: &id004
+    valid:
       authority_lineage_id: AL1
       authority_lineage_hash: 1234567890abcdef
   governance_configuration_ref:
-    valid: &id005
+    valid:
       governance_configuration_id: CFG1
       governance_configuration_hash: fedcba0987654321
   provenance:
-    valid: &id006
+    valid: &id001
       signer: client:test
       signature:
         alg: Ed25519
         kid: kid-test
         sig: SIG_VALID
       signed_at: '2026-02-25T12:00:00Z'
-    invalid: &id007
+    invalid:
       signer: client:test
       signature:
         alg: Ed25519
@@ -79,18 +99,80 @@ hooks:
     P_MISSING: not_found
   pec:
     constraints_outcome: PASS
-    constraints_rejection_code: CONSTRAINT_FAIL
+    constraints_rejection_code: GOVERNANCE_DENIED
     invariants_hard_fail: false
-    invariants_rejection_code: INVARIANT_HARD_FAIL
-    human_review_required: false
-    required_review_roles:
+    invariants_rejection_code: GOVERNANCE_DENIED
+    governance_approval_required: false
+    required_approval_roles:
     - RISK_OFFICER
     - SECURITY_LEAD
+  cryptographic_verifier:
+    governance_approval_artifact:
+      independent_verification_required: true
+      verify_signature: true
+      verify_key_binding: true
+      verify_artifact_digest_binding: true
+      default_outcome: PASS
+  governance_compilation:
+    supported_harness_operations:
+    - validate_governance_configuration
+    - compile_governance_configuration
+    - compile_and_validate_governance_change
+    - validate_compiled_governance_artifact
+    - perform_governance_omission_analysis
+    - attempt_direct_governance_self_modification
+    deterministic_compilation_required: true
+    schema_validation_required: true
+    source_to_output_lineage_required: true
+    constitutional_validation_required_before_activation_eligibility: true
+    governance_omission_analysis_required_before_activation_eligibility: true
+    governance_self_protection_required: true
+  controlled_activation:
+    supported_harness_operations:
+    - activate_governance_package
+    - rollback_governance_activation
+    external_approval_required: true
+    validated_package_required: true
+    atomic_transaction_required: true
+    partial_activation_prohibited: true
+    prior_authoritative_version_preserved_on_failure: true
+    governed_rollback_required: true
+    evidence_lineage_and_ledger_recording_required: true
+    deterministic_replay_required: true
+    fault_injection_supported:
+    - ACTIVATE_PACKAGE_MEMBER
+    - AUTHORITATIVE_STORE_WRITE_FAILED
   ledger:
     append_only: true
-    assign_sequence_value: true
-    include_ledger_entry_id: true
-    include_previous_ledger_entry_hash: true
+    event_schema: governance_ledger_event.json
+    assign_ledger_position_sequence: true
+    include_ledger_event_id: true
+    include_predecessor_event_binding_for_non_genesis: true
+    required_event_fields:
+    - ledger_event_id
+    - event_version
+    - record_type
+    - event_type
+    - event_category
+    - ledger_id
+    - ordering_scope
+    - ledger_position
+    - tenant_id
+    - governance_domain_id
+    - event_subject
+    - event_artifact_refs
+    - governance_basis
+    - evidence_binding
+    - causality
+    - event_time
+    - append_status
+    - append_only_controls
+    - integrity_protection
+    - attribution
+    - provenance
+    - replay_material
+    - semantic_assertions
+    - event_uri
 assertions:
 - id: HARNESS-NO-SUBMITTED-STATE
   description: Externally observable Proposal views SHALL NOT expose SUBMITTED or other transient pre-decision states.
@@ -99,29 +181,43 @@ assertions:
     - SUBMITTED
     - SUBMITTED_TRANSIENT
 - id: HARNESS-PIPELINE-ORDER
-  description: When ledger_append is expected, governance pipeline event ordering SHALL match expected sequence order.
+  description: When ledger_append is expected, DS-040 Governance Ledger Event ordering SHALL match the expected sequence
+    within the declared ordering scope.
   apply_to_ledger:
     enforce_exact_order_on_expected_append: true
-    ordering_key: ledger_sequence_value
+    ordering_key: ledger_position.sequence
+    ordering_scope_key: ordering_scope
 - id: HARNESS-LEDGER-IMMUTABILITY
-  description: Ledger entries SHALL be append-only and immutable.
+  description: DS-040 Governance Ledger Events SHALL be append-only and immutable after append.
   apply_to_ledger:
     forbid_update: true
     forbid_delete: true
     forbid_reorder: true
+    validate_append_only_controls: true
+    validate_integrity_protection: true
 - id: HARNESS-CANONICAL-STATE-DERIVATION
-  description: Canonical State SHALL be reproducible from ordered Append-Only Governance Ledger entries or from a verifiable materialized state derived from them.
+  description: Canonical State SHALL be reproducible from the applicable qualified authoritative governance sources; 
+    incorporated Governance Ledger records and Derived Lifecycle State SHALL use authoritative ledger ordering.
   apply_to_responses:
-    require_canonical_state_matches_ordered_ledger: true
-    reject_reordered_ledger_as_equivalent: true
-    timestamp_order_is_not_authoritative: true
+    require_canonical_state_resolved_from_qualified_sources: true
+    require_ledger_records_use_authoritative_ordering: true
+    require_materialized_state_reproducible_from_applicable_sources: true
+    reject_reordered_ledger_as_equivalent_for_ledger_derived_state: true
+    timestamp_or_storage_order_is_not_authoritative: true
 - id: HARNESS-GOVERNANCE-EVIDENCE-LINKAGE
-  description: Governance Evidence SHALL reference the associated ledger entry and include ledger ordering metadata.
+  description: Governance Evidence SHALL reference associated DS-040 Governance Ledger Events through ledger_event_refs.
   apply_to_governance_evidence:
-    require_ledger_reference: true
-    required_ledger_reference_fields:
-    - ledger_entry_id
-    - ledger_sequence_value
+    require_ledger_event_refs: true
+    required_ledger_event_ref_fields:
+    - ledger_event_id
+    - event_version
+    - event_type
+    - event_category
+    - ledger_position
+    - tenant_id
+    - governance_domain_id
+    - event_digest
+    - appended_at
 tests:
 - id: TV-PROP-001
   name: Submit qualified proposal -> Authorized for Commit Boundary Processing
@@ -147,26 +243,136 @@ tests:
       pec:
         constraints_outcome: PASS
         invariants_hard_fail: false
-        human_review_required: false
+        governance_approval_required: false
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_001
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: do_something
-        parameters:
-          amount: 10
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-PROP-001
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: do_something
+          statement: Test governed action do_something.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: do_something
+          effect_representation:
+            action_type: do_something
+            parameters:
+              amount: 10
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: do_something
+            parameters:
+              amount: 10
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-PROP-001
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-PROP-001
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-PROP-001
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-001
+      extensions:
+        x-agcp.test-vector: P-PROP-001
   capture:
     save_proposal_id_as: P_PROP_001
     save_authorization_id_as: EA_PROP_001
@@ -182,33 +388,73 @@ tests:
     - stage: Proposal Qualification
       match:
         outcome: Qualified Proposal
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     - stage: Governance Decision Function
       match:
         outcome: Authorized
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     - stage: Execution Authorization
       match:
         outcome: Authorized for Commit Boundary Processing
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     governance_evidence:
       required: true
       schema: governance_evidence.json
       requires_ledger_reference: true
+    schema: proposal_view.json
 - id: TV-PROP-002
-  name: Submit proposal requiring Human Review -> Pending Human Review
+  name: Submit proposal requiring governed human adjudication -> Pending Human Review outcome
   arrange:
     auth_as: T1
     hooks:
@@ -219,27 +465,136 @@ tests:
       pec:
         constraints_outcome: PASS
         invariants_hard_fail: false
-        human_review_required: true
-        required_review_roles:
+        governance_approval_required: true
+        required_approval_roles:
         - RISK_OFFICER
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_002
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: needs_review
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-PROP-002
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: needs_review
+          statement: Test governed action needs_review.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: needs_review
+          effect_representation:
+            action_type: needs_review
+            parameters: {}
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: needs_review
+            parameters: {}
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-PROP-002
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-PROP-002
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-PROP-002
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-002
+      extensions:
+        x-agcp.test-vector: P-PROP-002
   capture:
     save_proposal_id_as: P_PROP_002
     save_governance_decision_ref_as: GD_PROP_002
@@ -249,25 +604,51 @@ tests:
       body:
         qualification_outcome: Qualified Proposal
         governance_decision: Pending Human Review
-        required_review_roles:
+        required_approval_roles:
         - RISK_OFFICER
     ledger_append:
     - stage: Proposal Qualification
       match:
         outcome: Qualified Proposal
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     - stage: Governance Decision Function
       match:
         outcome: Pending Human Review
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     governance_evidence:
       required: true
       requires_ledger_reference: true
@@ -283,26 +664,135 @@ tests:
       pec:
         constraints_outcome: PASS
         invariants_hard_fail: true
-        invariants_rejection_code: INVARIANT_HARD_FAIL
-        human_review_required: false
+        invariants_rejection_code: GOVERNANCE_DENIED
+        governance_approval_required: false
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_003
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: violates_hard_invariant
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-PROP-003
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: violates_hard_invariant
+          statement: Test governed action violates_hard_invariant.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: violates_hard_invariant
+          effect_representation:
+            action_type: violates_hard_invariant
+            parameters: {}
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: violates_hard_invariant
+            parameters: {}
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-PROP-003
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-PROP-003
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-PROP-003
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-003
+      extensions:
+        x-agcp.test-vector: P-PROP-003
   capture:
     save_proposal_id_as: P_PROP_003
   expected:
@@ -311,40 +801,70 @@ tests:
       body:
         qualification_outcome: Qualified Proposal
         governance_decision: Denied
-        rejection_code: INVARIANT_HARD_FAIL
+        rejection_code: GOVERNANCE_DENIED
     ledger_append:
     - stage: Proposal Qualification
       match:
         outcome: Qualified Proposal
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     - stage: Governance Decision Function
       match:
         outcome: Denied
-        rejection_code: INVARIANT_HARD_FAIL
-      ledger_reference:
+        rejection_code: GOVERNANCE_DENIED
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     governance_evidence:
       required: true
       requires_ledger_reference: true
 - id: TV-PROP-004
-  name: Malformed proposal -> Structural Refusal / schema rejection
+  name: DS-013 wrapper with malformed DS-021 proposal -> Structural Refusal / schema rejection
   arrange:
     auth_as: T1
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_004
     body:
-      bogus: true
-      provenance: *id006
+      proposal:
+        bogus: true
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-004
+      extensions:
+        x-agcp.test-vector: TV-PROP-004
   expected:
     http:
       status: 400
@@ -355,33 +875,155 @@ tests:
       match:
         outcome: Structural Refusal
         rejection_code: SCHEMA_VALIDATION_FAILED
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
 - id: TV-PROP-005
   name: Invalid provenance -> PROVENANCE_INVALID
   arrange:
     auth_as: T1
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_005
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: x
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id007
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-PROP-005
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: x
+          statement: Test governed action x.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: x
+          effect_representation:
+            action_type: x
+            parameters: {}
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: x
+            parameters: {}
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-PROP-005
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-PROP-005
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-PROP-005
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_INVALID
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-005
+      extensions:
+        x-agcp.test-vector: P-PROP-005
   expected:
     http:
       status: 400
@@ -392,11 +1034,24 @@ tests:
       match:
         outcome: Structural Refusal
         rejection_code: PROVENANCE_INVALID
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
 - id: TV-PROP-006
   name: Tenant not ACTIVE -> TENANT_STATE_INVALID
   arrange:
@@ -406,22 +1061,131 @@ tests:
         T1: SUSPENDED
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_006
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: x
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-PROP-006
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: x
+          statement: Test governed action x.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: x
+          effect_representation:
+            action_type: x
+            parameters: {}
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: x
+            parameters: {}
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-PROP-006
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-PROP-006
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-PROP-006
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-006
+      extensions:
+        x-agcp.test-vector: P-PROP-006
   expected:
     http:
       status: 403
@@ -432,11 +1196,24 @@ tests:
       match:
         outcome: Structural Refusal
         rejection_code: TENANT_STATE_INVALID
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
 - id: TV-PROP-007
   name: Policy not found -> POLICY_NOT_FOUND
   arrange:
@@ -448,88 +1225,441 @@ tests:
         P_MISSING: not_found
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_007
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id008
-      action_representation:
-        action_type: x
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-PROP-007
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: x
+          statement: Test governed action x.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: x
+          effect_representation:
+            action_type: x
+            parameters: {}
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P_MISSING
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+          artifact_uri: https://agcp.example/policies/P_MISSING
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: x
+            parameters: {}
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-PROP-007
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-PROP-007
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-PROP-007
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-007
+      extensions:
+        x-agcp.test-vector: P-PROP-007
   expected:
     http:
-      status: 400
+      status: 422
       body:
         rejection_code: POLICY_NOT_FOUND
     ledger_append:
     - stage: Proposal Qualification
       match:
         outcome: Qualified Proposal
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     - stage: Governance Decision Function
       match:
         outcome: Structural Refusal
         rejection_code: POLICY_NOT_FOUND
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
 - id: TV-PROP-008
-  name: Idempotent replay with identical proposal payload -> same Proposal View and no new ledger entries
+  name: Idempotent replay with identical proposal payload -> same Proposal View and no new Governance Ledger Events
   arrange:
     auth_as: T1
     presteps:
     - method: POST
-      path: /agcp/v1/proposals/submit
+      path: /agcp/v2/proposals/submit
       headers:
         Idempotency-Key: K_PROP_008
       body:
-        tenant_id: T1
-        governance_domain_id: domain-primary
-        proposal_id: ${AUTO_PROPOSAL_ID}
-        policy_ref: *id001
-        action_representation:
-          action_type: idem_ok
-          parameters: {}
-        governance_context_ref: *id002
-        canonical_state_ref: *id003
-        authority_lineage_ref: *id004
-        governance_configuration_ref: *id005
-        provenance: *id006
+        proposal:
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          proposal_identity:
+            proposal_id: P-IDEM-008
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          proposal_kind: SIMPLE
+          operational_intent:
+            intent_type: idem_ok
+            statement: Test governed action idem_ok.
+          target:
+            target_id: target-primary
+            target_type: TEST_RESOURCE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          requested_effect:
+            effect_type: idem_ok
+            effect_representation:
+              action_type: idem_ok
+              parameters: {}
+            effect_digest:
+              algorithm: SHA-256
+              value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+          policy_refs:
+          - policy_id: P1
+            policy_version: 1.0.0
+            policy_digest:
+              algorithm: SHA-256
+              value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+            artifact_uri: https://agcp.example/policies/P1
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            status: Active
+          action_representation:
+            representation_type: agcp.test.action
+            representation_version: 1.0.0
+            content_type: application/json
+            canonicalization: JCS
+            payload:
+              action_type: idem_ok
+              parameters: {}
+            payload_digest:
+              algorithm: SHA-256
+              value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+          governance_context:
+            governance_context_id: GCX-P-IDEM-008
+            governance_context_version: 1.0.0
+            proposal_identity:
+              proposal_id: P-IDEM-008
+              tenant_id: T1
+              governance_domain_id: domain-primary
+              canonical_content_digest:
+                algorithm: SHA-256
+                value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              originator:
+                principal_id: client:test
+                principal_type: SERVICE
+                tenant_id: T1
+                governance_domain_id: domain-primary
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            attribution:
+              principal:
+                principal_id: client:test
+                principal_type: SERVICE
+                tenant_id: T1
+                governance_domain_id: domain-primary
+              attributed_at: '2026-07-30T16:00:00Z'
+            created_at: '2026-07-30T16:00:00Z'
+            context_digest:
+              algorithm: SHA-256
+              value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            canonical_state_ref:
+              canonical_state_id: CS1
+              canonical_state_version: 1.0.0
+              canonical_state_digest:
+                algorithm: SHA-256
+                value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+              resolved_at: '2026-07-30T16:00:00Z'
+            authority_lineage_ref:
+              authority_lineage_id: AL1
+              lineage_version: 1.0.0
+              lineage_digest:
+                algorithm: SHA-256
+                value: '1111111111111111111111111111111111111111111111111111111111111111'
+              proposal_id: P-IDEM-008
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            governance_configuration_ref:
+              governance_configuration_id: CFG1
+              configuration_version: 1.0.0
+              configuration_status: ACTIVE
+              configuration_digest:
+                algorithm: SHA-256
+                value: '2222222222222222222222222222222222222222222222222222222222222222'
+              governance_version_ref:
+                governance_version_id: GV1
+                version: 1.0.0
+              tenant_id: T1
+              governance_domain_id: domain-primary
+              effective_at: '2026-07-30T16:00:00Z'
+          provenance:
+            signer: client:test
+            signature:
+              alg: Ed25519
+              kid: kid-test
+              sig: SIG_VALID_123
+            signed_at: '2026-07-30T16:00:00Z'
+        submitted_at: '2026-07-30T16:00:00Z'
+        client_request_id: CR-TV-PROP-008
+        extensions:
+          x-agcp.test-vector: P-IDEM-008
       expect_status: 200
       capture:
         save_proposal_id_as: P_IDEM_008
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_008
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: idem_ok
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-IDEM-008
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: idem_ok
+          statement: Test governed action idem_ok.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: idem_ok
+          effect_representation:
+            action_type: idem_ok
+            parameters: {}
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: idem_ok
+            parameters: {}
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-IDEM-008
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-IDEM-008
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-IDEM-008
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-PROP-008
+      extensions:
+        x-agcp.test-vector: P-IDEM-008
   expected:
     http:
       status: 200
@@ -542,43 +1672,261 @@ tests:
     auth_as: T1
     presteps:
     - method: POST
-      path: /agcp/v1/proposals/submit
+      path: /agcp/v2/proposals/submit
       headers:
         Idempotency-Key: K_PROP_009
       body:
-        tenant_id: T1
-        governance_domain_id: domain-primary
-        proposal_id: ${AUTO_PROPOSAL_ID}
-        policy_ref: *id001
-        action_representation:
-          action_type: idem_conflict_v1
-          parameters: {}
-        governance_context_ref: *id002
-        canonical_state_ref: *id003
-        authority_lineage_ref: *id004
-        governance_configuration_ref: *id005
-        provenance: *id006
+        proposal:
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          proposal_identity:
+            proposal_id: P-IDEM-009
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          proposal_kind: SIMPLE
+          operational_intent:
+            intent_type: idem_conflict_v1
+            statement: Test governed action idem_conflict_v1.
+          target:
+            target_id: target-primary
+            target_type: TEST_RESOURCE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          requested_effect:
+            effect_type: idem_conflict_v1
+            effect_representation:
+              action_type: idem_conflict_v1
+              parameters: {}
+            effect_digest:
+              algorithm: SHA-256
+              value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+          policy_refs:
+          - policy_id: P1
+            policy_version: 1.0.0
+            policy_digest:
+              algorithm: SHA-256
+              value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+            artifact_uri: https://agcp.example/policies/P1
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            status: Active
+          action_representation:
+            representation_type: agcp.test.action
+            representation_version: 1.0.0
+            content_type: application/json
+            canonicalization: JCS
+            payload:
+              action_type: idem_conflict_v1
+              parameters: {}
+            payload_digest:
+              algorithm: SHA-256
+              value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+          governance_context:
+            governance_context_id: GCX-P-IDEM-009
+            governance_context_version: 1.0.0
+            proposal_identity:
+              proposal_id: P-IDEM-009
+              tenant_id: T1
+              governance_domain_id: domain-primary
+              canonical_content_digest:
+                algorithm: SHA-256
+                value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              originator:
+                principal_id: client:test
+                principal_type: SERVICE
+                tenant_id: T1
+                governance_domain_id: domain-primary
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            attribution:
+              principal:
+                principal_id: client:test
+                principal_type: SERVICE
+                tenant_id: T1
+                governance_domain_id: domain-primary
+              attributed_at: '2026-07-30T16:00:00Z'
+            created_at: '2026-07-30T16:00:00Z'
+            context_digest:
+              algorithm: SHA-256
+              value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            canonical_state_ref:
+              canonical_state_id: CS1
+              canonical_state_version: 1.0.0
+              canonical_state_digest:
+                algorithm: SHA-256
+                value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+              resolved_at: '2026-07-30T16:00:00Z'
+            authority_lineage_ref:
+              authority_lineage_id: AL1
+              lineage_version: 1.0.0
+              lineage_digest:
+                algorithm: SHA-256
+                value: '1111111111111111111111111111111111111111111111111111111111111111'
+              proposal_id: P-IDEM-009
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            governance_configuration_ref:
+              governance_configuration_id: CFG1
+              configuration_version: 1.0.0
+              configuration_status: ACTIVE
+              configuration_digest:
+                algorithm: SHA-256
+                value: '2222222222222222222222222222222222222222222222222222222222222222'
+              governance_version_ref:
+                governance_version_id: GV1
+                version: 1.0.0
+              tenant_id: T1
+              governance_domain_id: domain-primary
+              effective_at: '2026-07-30T16:00:00Z'
+          provenance:
+            signer: client:test
+            signature:
+              alg: Ed25519
+              kid: kid-test
+              sig: SIG_VALID_123
+            signed_at: '2026-07-30T16:00:00Z'
+        submitted_at: '2026-07-30T16:00:00Z'
+        client_request_id: CR-PROP-009-A
+        extensions:
+          x-agcp.test-vector: P-IDEM-009
       expect_status: 200
       capture:
         save_proposal_id_as: P_IDEM_009
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_PROP_009
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: idem_conflict_v2
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_identity:
+          proposal_id: P-IDEM-009
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: idem_conflict_v2
+          statement: Test governed action idem_conflict_v2.
+        target:
+          target_id: target-primary
+          target_type: TEST_RESOURCE
+          tenant_id: T1
+          governance_domain_id: domain-primary
+        requested_effect:
+          effect_type: idem_conflict_v2
+          effect_representation:
+            action_type: idem_conflict_v2
+            parameters: {}
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: idem_conflict_v2
+            parameters: {}
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-IDEM-009
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-IDEM-009
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-IDEM-009
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-PROP-009-B
+      extensions:
+        x-agcp.test-vector: P-IDEM-009
   expected:
     http:
       status: 409
@@ -592,7 +1940,10 @@ tests:
     use_proposal_id: P_PROP_001
   request:
     method: GET
-    path: /agcp/v1/proposals/${P_PROP_001}
+    path: /agcp/v2/proposals/${P_PROP_001}
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
   expected:
     http:
       status: 200
@@ -601,6 +1952,7 @@ tests:
         governance_decision: Authorized
         execution_authorization: Authorized for Commit Boundary Processing
     ledger_no_append: true
+    schema: proposal_view.json
 - id: TV-GET-002
   name: Pre-decision proposal state is not externally observable
   arrange:
@@ -615,60 +1967,179 @@ tests:
             started: true
   request:
     method: GET
-    path: /agcp/v1/proposals/P_TRANSIENT_002
+    path: /agcp/v2/proposals/P_TRANSIENT_002
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
   expected:
     http:
       status: 404
       body:
-        rejection_code: ACTION_NOT_AUTHORIZED
+        rejection_code: RESOURCE_NOT_FOUND
     ledger_no_append: true
-- id: TV-HREV-001
-  name: Valid Human Review without quorum -> remains Pending Human Review
+- id: TV-GAPP-001
+  name: Partial Governance Approval quorum -> Pending Human Review outcome remains
   arrange:
     auth_as: T1
     presteps:
     - method: POST
-      path: /agcp/v1/proposals/submit
+      path: /agcp/v2/proposals/submit
       headers:
-        Idempotency-Key: K_HREV_001
+        Idempotency-Key: K_GAPP_001
       body:
-        tenant_id: T1
-        governance_domain_id: domain-primary
-        proposal_id: ${AUTO_PROPOSAL_ID}
-        policy_ref: *id001
-        action_representation:
-          action_type: human_review_two_roles
-          parameters: {}
-        governance_context_ref: *id002
-        canonical_state_ref: *id003
-        authority_lineage_ref: *id004
-        governance_configuration_ref: *id005
-        provenance: *id006
+        proposal:
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          proposal_identity:
+            proposal_id: P-GAPP-001
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: '3333333333333333333333333333333333333333333333333333333333333333'
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T1
+              governance_domain_id: domain-primary
+          proposal_kind: SIMPLE
+          operational_intent:
+            intent_type: governance_approval_two_roles
+            statement: Test governed action requiring Risk Officer and Security Lead approval.
+          target:
+            target_id: target-primary
+            target_type: TEST_RESOURCE
+            tenant_id: T1
+            governance_domain_id: domain-primary
+          requested_effect:
+            effect_type: governance_approval_two_roles
+            effect_representation:
+              action_type: governance_approval_two_roles
+              parameters: {}
+            effect_digest:
+              algorithm: SHA-256
+              value: '4444444444444444444444444444444444444444444444444444444444444444'
+          policy_refs:
+          - policy_id: P1
+            policy_version: 1.0.0
+            policy_digest:
+              algorithm: SHA-256
+              value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+            artifact_uri: https://agcp.example/policies/P1
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            status: Active
+          action_representation:
+            representation_type: agcp.test.action
+            representation_version: 1.0.0
+            content_type: application/json
+            canonicalization: JCS
+            payload:
+              action_type: governance_approval_two_roles
+              parameters: {}
+            payload_digest:
+              algorithm: SHA-256
+              value: '5555555555555555555555555555555555555555555555555555555555555555'
+          governance_context:
+            governance_context_id: GCX-P-GAPP-001
+            governance_context_version: 1.0.0
+            proposal_identity:
+              proposal_id: P-GAPP-001
+              tenant_id: T1
+              governance_domain_id: domain-primary
+              canonical_content_digest:
+                algorithm: SHA-256
+                value: '3333333333333333333333333333333333333333333333333333333333333333'
+              originator:
+                principal_id: client:test
+                principal_type: SERVICE
+                tenant_id: T1
+                governance_domain_id: domain-primary
+            tenant_id: T1
+            governance_domain_id: domain-primary
+            attribution:
+              principal:
+                principal_id: client:test
+                principal_type: SERVICE
+                tenant_id: T1
+                governance_domain_id: domain-primary
+              attributed_at: '2026-07-30T16:00:00Z'
+            created_at: '2026-07-30T16:00:00Z'
+            context_digest:
+              algorithm: SHA-256
+              value: '6666666666666666666666666666666666666666666666666666666666666666'
+            canonical_state_ref:
+              canonical_state_id: CS1
+              canonical_state_version: 1.0.0
+              canonical_state_digest:
+                algorithm: SHA-256
+                value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+              resolved_at: '2026-07-30T16:00:00Z'
+            authority_lineage_ref:
+              authority_lineage_id: AL1
+              lineage_version: 1.0.0
+              lineage_digest:
+                algorithm: SHA-256
+                value: '1111111111111111111111111111111111111111111111111111111111111111'
+              proposal_id: P-GAPP-001
+              tenant_id: T1
+              governance_domain_id: domain-primary
+            governance_configuration_ref:
+              governance_configuration_id: CFG1
+              configuration_version: 1.0.0
+              configuration_status: ACTIVE
+              configuration_digest:
+                algorithm: SHA-256
+                value: '2222222222222222222222222222222222222222222222222222222222222222'
+              governance_version_ref:
+                governance_version_id: GV1
+                version: 1.0.0
+              tenant_id: T1
+              governance_domain_id: domain-primary
+              effective_at: '2026-07-30T16:00:00Z'
+          provenance:
+            signer: client:test
+            signature:
+              alg: Ed25519
+              kid: kid-test
+              sig: SIG_VALID_123
+            signed_at: '2026-07-30T16:00:00Z'
+        submitted_at: '2026-07-30T16:00:00Z'
+        client_request_id: CR-TV-GAPP-001
+        extensions:
+          x-agcp.test-vector: P-GAPP-001
       hooks:
         pec:
           constraints_outcome: PASS
           invariants_hard_fail: false
-          human_review_required: true
-          required_review_roles:
+          governance_approval_required: true
+          required_approval_roles:
           - RISK_OFFICER
           - SECURITY_LEAD
       expect_status: 200
       expect_body:
         governance_decision: Pending Human Review
       capture:
-        save_proposal_id_as: P_HREV_001
+        save_proposal_id_as: P_GAPP_001
   request:
     method: POST
-    path: /agcp/v1/proposals/${P_HREV_001}/human-review
+    path: /agcp/v2/proposals/${P_GAPP_001}/governance-approvals
+    headers:
+      Idempotency-Key: K_GAPP_001_APPROVAL
     body:
       tenant_id: T1
-      reviewer:
-        principal_id: risk-1
-        principal_type: USER
-      decision: Approve
-      role: RISK_OFFICER
-      nonce: N_HREV_001
-      provenance: *id006
+      governance_domain_id: domain-primary
+      provenance: *id001
+      governance_approval_artifact:
+        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
+        $overrides:
+          proposal_identity.proposal_id: ${P_GAPP_001}
+          proposal_identity.tenant_id: T1
+          proposal_identity.governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          target.tenant_id: T1
+          target.governance_domain_id: domain-primary
   expected:
     http:
       status: 200
@@ -678,34 +2149,55 @@ tests:
     ledger_append:
     - stage: Governance Decision Function
       match:
-        human_review_recorded: true
-      ledger_reference:
+        governance_approval_recorded: true
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     governance_evidence:
       required: true
       requires_ledger_reference: true
-- id: TV-HREV-002
-  name: Valid Human Review completes quorum -> Execution Authorization available
+    schema: proposal_view.json
+- id: TV-GAPP-002
+  name: Valid Governance Approval Artifact completes quorum -> Execution Authorization available
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_002
   request:
     method: POST
-    path: /agcp/v1/proposals/${P_PROP_002}/human-review
+    path: /agcp/v2/proposals/${P_PROP_002}/governance-approvals
+    headers:
+      Idempotency-Key: K_GAPP_002
     body:
       tenant_id: T1
-      reviewer:
-        principal_id: risk-1
-        principal_type: USER
-      decision: Approve
-      role: RISK_OFFICER
-      nonce: N_HREV_002
-      provenance: *id006
+      governance_domain_id: domain-primary
+      provenance: *id001
+      governance_approval_artifact:
+        $fixture: ../schemas/examples/ds026-governance-approval-completed-quorum.json
+        $overrides:
+          proposal_identity.proposal_id: ${P_PROP_002}
+          proposal_identity.tenant_id: T1
+          proposal_identity.governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          target.tenant_id: T1
+          target.governance_domain_id: domain-primary
   capture:
-    save_authorization_id_as: EA_HREV_002
+    save_authorization_id_as: EA_GAPP_002
   expected:
     http:
       status: 200
@@ -715,55 +2207,152 @@ tests:
     ledger_append:
     - stage: Governance Decision Function
       match:
-        human_review_quorum_satisfied: true
-      ledger_reference:
+        governance_approval_quorum_satisfied: true
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     - stage: Execution Authorization
       match:
         outcome: Authorized for Commit Boundary Processing
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
-- id: TV-HREV-003
-  name: Expired Human Review artifact -> HUMAN_REVIEW_EXPIRED
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
+    schema: proposal_view.json
+- id: TV-GAPP-003
+  name: Expired Governance Approval Artifact -> GOVERNANCE_APPROVAL_EXPIRED
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_002
   request:
     method: POST
-    path: /agcp/v1/proposals/${P_PROP_002}/human-review
+    path: /agcp/v2/proposals/${P_PROP_002}/governance-approvals
+    headers:
+      Idempotency-Key: K_GAPP_003
     body:
       tenant_id: T1
-      review_artifact: HREV_EXPIRED
-      provenance: *id006
+      governance_domain_id: domain-primary
+      provenance: *id001
+      governance_approval_artifact:
+        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
+        $overrides:
+          proposal_identity.proposal_id: ${P_PROP_002}
+          proposal_identity.tenant_id: T1
+          proposal_identity.governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          target.tenant_id: T1
+          target.governance_domain_id: domain-primary
+          status: EXPIRED
+          artifact_termination:
+            termination_type: EXPIRED
+            effective_at: '2026-07-30T16:00:00Z'
+            reason_code: VALIDITY_WINDOW_EXPIRED
+            reason: The Governance Approval Artifact validity window expired before use.
+            terminated_by:
+              principal:
+                principal_id: approval-lifecycle-service
+                principal_type: SYSTEM
+              attributed_at: '2026-07-30T16:00:00Z'
+            termination_authority_lineage_ref:
+              authority_lineage_id: authority-lineage-1
+              authority_lineage_digest:
+                algorithm: SHA-256
+                value: '3333333333333333333333333333333333333333333333333333333333333333'
+              lineage_version: 2.0.0
+              evaluated_at: '2026-07-30T16:00:00Z'
+            governance_evidence_refs:
+            - governance_evidence_id: evidence-expiration-1
+              evidence_digest:
+                algorithm: SHA-256
+                value: '9999999999999999999999999999999999999999999999999999999999999999'
   expected:
     http:
       status: 409
       body:
-        rejection_code: HUMAN_REVIEW_EXPIRED
+        rejection_code: GOVERNANCE_APPROVAL_EXPIRED
     ledger_no_append: true
-- id: TV-HREV-004
-  name: Invalid Human Review artifact -> HUMAN_REVIEW_INVALID
+- id: TV-GAPP-004
+  name: Schema-valid Governance Approval Artifact with invalid signature material -> GOVERNANCE_APPROVAL_INVALID
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_002
+    hooks:
+      cryptographic_verifier:
+        governance_approval_artifact:
+          independent_verification_required: true
+          target_artifact_id: approval-partial-1
+          signature_valid: false
+          key_binding_valid: false
+          artifact_digest_binding_valid: false
+          failure_reason: INVALID_SIGNATURE_AND_KEY_BINDING
+          rejection_code: GOVERNANCE_APPROVAL_INVALID
   request:
     method: POST
-    path: /agcp/v1/proposals/${P_PROP_002}/human-review
+    path: /agcp/v2/proposals/${P_PROP_002}/governance-approvals
+    headers:
+      Idempotency-Key: K_GAPP_004
     body:
       tenant_id: T1
-      review_artifact: HREV_INVALID
-      provenance: *id006
+      governance_domain_id: domain-primary
+      provenance: *id001
+      governance_approval_artifact:
+        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
+        $overrides:
+          proposal_identity.proposal_id: ${P_PROP_002}
+          proposal_identity.tenant_id: T1
+          proposal_identity.governance_domain_id: domain-primary
+          tenant_id: T1
+          governance_domain_id: domain-primary
+          target.tenant_id: T1
+          target.governance_domain_id: domain-primary
+          cryptographic_verification.verification_outcome: VERIFIED
+          cryptographic_verification.signature.kid: key-unbound-tv-gapp-004
+          cryptographic_verification.signature.sig: SIG_INVALID_FOR_ARTIFACT_DIGEST
   expected:
+    request_validation:
+      governance_approval_request: PASS
+      governance_approval_artifact_ds026: PASS
+    semantic_verification:
+      cryptographic_verifier_invoked: true
+      signature_valid: false
+      key_binding_valid: false
+      artifact_digest_binding_valid: false
+      outcome: FAILED
+      rejection_code: GOVERNANCE_APPROVAL_INVALID
     http:
-      status: 409
+      status: 422
       body:
-        rejection_code: HUMAN_REVIEW_INVALID
+        rejection_code: GOVERNANCE_APPROVAL_INVALID
     ledger_no_append: true
 - id: TV-COMMIT-001
   name: Commit Boundary succeeds with valid Execution Authorization
@@ -778,20 +2367,30 @@ tests:
       save_as: EA_VIEW_001
   request:
     method: POST
-    path: /agcp/v1/commit-boundary/commit
+    path: /agcp/v2/commit-boundary/commit
+    headers:
+      Idempotency-Key: K_COMMIT_001
     body:
-      tenant_id: T1
-      proposal_id: ${P_PROP_001}
-      action_id: A_PROP_001
-      execution_authorization_ref: ${EA_PROP_001}
-      governance_decision_ref: GD_PROP_001
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_context_ref: *id002
-      governance_configuration_ref: *id005
-      execution_context:
-        target: test-adapter
-      provenance: *id006
+      $fixture: ../schemas/examples/ds018-commit-boundary-request-single.json
+      $overrides:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_ref.proposal_identity.proposal_id: ${P_PROP_001}
+        proposal_ref.proposal_identity.tenant_id: T1
+        proposal_ref.proposal_identity.governance_domain_id: domain-primary
+        proposal_ref.target_ref.tenant_id: T1
+        proposal_ref.target_ref.governance_domain_id: domain-primary
+        action_id: A_PROP_001
+        governance_decision_ref.governance_decision_id: GD_PROP_001
+        execution_authorization_ref.authorization_id: ${EA_PROP_001}
+        enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
+        enforcement_context.proposal_identity.tenant_id: T1
+        enforcement_context.proposal_identity.governance_domain_id: domain-primary
+        enforcement_context.action_id: A_PROP_001
+        enforcement_context.tenant_id: T1
+        enforcement_context.governance_domain_id: domain-primary
+        enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
+        enforcement_context.execution_authorization_ref.authorization_id: ${EA_PROP_001}
   capture:
     save_commit_boundary_ref_as: CB_COMMIT_001
     save_governance_evidence_refs_as: EV_COMMIT_001
@@ -804,30 +2403,60 @@ tests:
     - stage: Commit Boundary
       match:
         outcome: Commit Successful
-      ledger_reference:
+      ledger_event:
         required: true
-        fields:
-        - ledger_entry_id
-        - ledger_sequence_value
+        schema: governance_ledger_event.json
+        validate_required_structures:
+        - ordering_scope
+        - ledger_position
+        - event_subject
+        - event_artifact_refs
+        - governance_basis
+        - evidence_binding
+        - causality
+        - event_time
+        - append_only_controls
+        - integrity_protection
+        - attribution
+        - provenance
+        - replay_material
+        - semantic_assertions
     governance_evidence:
       required: true
       requires_ledger_reference: true
+    schema_fixture: ../schemas/examples/ds019-commit-boundary-result-success.json
+    schema: commit_boundary_result.json
 - id: TV-COMMIT-002
-  name: Commit Boundary when Pending Human Review -> ACTION_NOT_AUTHORIZED
+  name: Commit Boundary while governed approval remains incomplete -> ACTION_NOT_AUTHORIZED
   arrange:
     auth_as: T1
-    use_proposal_id: P_HREV_001
+    use_proposal_id: P_GAPP_001
   request:
     method: POST
-    path: /agcp/v1/commit-boundary/commit
+    path: /agcp/v2/commit-boundary/commit
+    headers:
+      Idempotency-Key: K_COMMIT_002
     body:
-      tenant_id: T1
-      proposal_id: ${P_HREV_001}
-      action_id: A_PENDING
-      execution_authorization_ref: EA_SHOULD_NOT_EXIST
-      execution_context:
-        target: test-adapter
-      provenance: *id006
+      $fixture: ../schemas/examples/ds018-commit-boundary-request-single.json
+      $overrides:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_ref.proposal_identity.proposal_id: ${P_GAPP_001}
+        proposal_ref.proposal_identity.tenant_id: T1
+        proposal_ref.proposal_identity.governance_domain_id: domain-primary
+        proposal_ref.target_ref.tenant_id: T1
+        proposal_ref.target_ref.governance_domain_id: domain-primary
+        action_id: A_PENDING
+        governance_decision_ref.governance_decision_id: governance-decision-pending
+        execution_authorization_ref.authorization_id: EA_SHOULD_NOT_EXIST
+        enforcement_context.proposal_identity.proposal_id: ${P_GAPP_001}
+        enforcement_context.proposal_identity.tenant_id: T1
+        enforcement_context.proposal_identity.governance_domain_id: domain-primary
+        enforcement_context.action_id: A_PENDING
+        enforcement_context.tenant_id: T1
+        enforcement_context.governance_domain_id: domain-primary
+        enforcement_context.governance_decision_ref.governance_decision_id: governance-decision-pending
+        enforcement_context.execution_authorization_ref.authorization_id: EA_SHOULD_NOT_EXIST
   expected:
     http:
       status: 409
@@ -841,21 +2470,37 @@ tests:
     use_proposal_id: P_PROP_001
   request:
     method: POST
-    path: /agcp/v1/commit-boundary/commit
+    path: /agcp/v2/commit-boundary/commit
+    headers:
+      Idempotency-Key: K_COMMIT_003
     body:
-      tenant_id: T1
-      proposal_id: ${P_PROP_001}
-      action_id: A_PROP_001
-      execution_authorization_ref: EA_BAD
-      execution_context:
-        target: test-adapter
-      provenance: *id006
+      $fixture: ../schemas/examples/ds018-commit-boundary-request-single.json
+      $overrides:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_ref.proposal_identity.proposal_id: ${P_PROP_001}
+        proposal_ref.proposal_identity.tenant_id: T1
+        proposal_ref.proposal_identity.governance_domain_id: domain-primary
+        proposal_ref.target_ref.tenant_id: T1
+        proposal_ref.target_ref.governance_domain_id: domain-primary
+        action_id: A_PROP_001
+        governance_decision_ref.governance_decision_id: GD_PROP_001
+        execution_authorization_ref.authorization_id: EA_BAD
+        enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
+        enforcement_context.proposal_identity.tenant_id: T1
+        enforcement_context.proposal_identity.governance_domain_id: domain-primary
+        enforcement_context.action_id: A_PROP_001
+        enforcement_context.tenant_id: T1
+        enforcement_context.governance_domain_id: domain-primary
+        enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
+        enforcement_context.execution_authorization_ref.authorization_id: EA_BAD
   expected:
     http:
       status: 409
       body:
         rejection_code: ACTION_NOT_AUTHORIZED
     ledger_no_append: true
+    governance_refusal_fixture: ../schemas/examples/ds019-commit-boundary-result-refusal.json
 - id: TV-COMMIT-004
   name: Commit replay after Commit Successful -> ACTION_NOT_AUTHORIZED
   arrange:
@@ -864,15 +2509,30 @@ tests:
     ensure_commit_boundary_outcome: Commit Successful
   request:
     method: POST
-    path: /agcp/v1/commit-boundary/commit
+    path: /agcp/v2/commit-boundary/commit
+    headers:
+      Idempotency-Key: K_COMMIT_004
     body:
-      tenant_id: T1
-      proposal_id: ${P_PROP_001}
-      action_id: A_PROP_001
-      execution_authorization_ref: ${EA_PROP_001}
-      execution_context:
-        target: test-adapter
-      provenance: *id006
+      $fixture: ../schemas/examples/ds018-commit-boundary-request-single.json
+      $overrides:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_ref.proposal_identity.proposal_id: ${P_PROP_001}
+        proposal_ref.proposal_identity.tenant_id: T1
+        proposal_ref.proposal_identity.governance_domain_id: domain-primary
+        proposal_ref.target_ref.tenant_id: T1
+        proposal_ref.target_ref.governance_domain_id: domain-primary
+        action_id: A_PROP_001
+        governance_decision_ref.governance_decision_id: GD_PROP_001
+        execution_authorization_ref.authorization_id: ${EA_PROP_001}
+        enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
+        enforcement_context.proposal_identity.tenant_id: T1
+        enforcement_context.proposal_identity.governance_domain_id: domain-primary
+        enforcement_context.action_id: A_PROP_001
+        enforcement_context.tenant_id: T1
+        enforcement_context.governance_domain_id: domain-primary
+        enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
+        enforcement_context.execution_authorization_ref.authorization_id: ${EA_PROP_001}
   expected:
     http:
       status: 409
@@ -889,15 +2549,30 @@ tests:
         T1: SUSPENDED
   request:
     method: POST
-    path: /agcp/v1/commit-boundary/commit
+    path: /agcp/v2/commit-boundary/commit
+    headers:
+      Idempotency-Key: K_COMMIT_005
     body:
-      tenant_id: T1
-      proposal_id: ${P_PROP_001}
-      action_id: A_PROP_001
-      execution_authorization_ref: ${EA_PROP_001}
-      execution_context:
-        target: test-adapter
-      provenance: *id006
+      $fixture: ../schemas/examples/ds018-commit-boundary-request-single.json
+      $overrides:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_ref.proposal_identity.proposal_id: ${P_PROP_001}
+        proposal_ref.proposal_identity.tenant_id: T1
+        proposal_ref.proposal_identity.governance_domain_id: domain-primary
+        proposal_ref.target_ref.tenant_id: T1
+        proposal_ref.target_ref.governance_domain_id: domain-primary
+        action_id: A_PROP_001
+        governance_decision_ref.governance_decision_id: GD_PROP_001
+        execution_authorization_ref.authorization_id: ${EA_PROP_001}
+        enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
+        enforcement_context.proposal_identity.tenant_id: T1
+        enforcement_context.proposal_identity.governance_domain_id: domain-primary
+        enforcement_context.action_id: A_PROP_001
+        enforcement_context.tenant_id: T1
+        enforcement_context.governance_domain_id: domain-primary
+        enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
+        enforcement_context.execution_authorization_ref.authorization_id: ${EA_PROP_001}
   expected:
     http:
       status: 403
@@ -905,84 +2580,245 @@ tests:
         rejection_code: TENANT_STATE_INVALID
     ledger_no_append: true
 - id: TV-EVID-001
-  name: Governance Evidence view validates ledger reference fields
+  name: Governance Evidence view validates DS-040 Governance Ledger Event references
   arrange:
     auth_as: T1
     use_governance_evidence_ref: ${EV_PROP_001[0]}
   request:
     method: GET
-    path: /agcp/v1/governance-evidence/${EV_PROP_001[0]}
+    path: /agcp/v2/governance-evidence/${EV_PROP_001[0]}
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
   expected:
     http:
       status: 200
       body:
         governance_evidence_id: ${EV_PROP_001[0]}
-        ledger_reference:
-          ledger_entry_id: __PRESENT__
-          ledger_sequence_value: __PRESENT__
+        ledger_event_refs:
+        - ledger_event_id: __PRESENT__
+          event_version: __PRESENT__
+          event_type: __PRESENT__
+          event_category: __PRESENT__
+          ledger_position:
+            ledger_id: __PRESENT__
+            stream_id: __PRESENT__
+            sequence: __PRESENT__
+            event_id: __PRESENT__
+            event_digest: __PRESENT__
+            chain_digest: __PRESENT__
+            stream_head_after_append: true
+          tenant_id: __PRESENT__
+          governance_domain_id: __PRESENT__
+          event_digest: __PRESENT__
+          appended_at: __PRESENT__
     schema: governance_evidence.json
     ledger_no_append: true
 - id: TV-STATE-001
-  name: Canonical State reconstruction from ordered ledger succeeds
+  name: Canonical State resolution from qualified authoritative sources succeeds
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_001
     fixtures:
+      qualified_authoritative_sources_for: ${P_PROP_001}
       ordered_ledger_history_for: ${P_PROP_001}
   request:
-    harness_operation: reconstruct_canonical_state
-    source: ordered_append_only_governance_ledger
+    harness_operation: resolve_canonical_state
+    source_set: qualified_authoritative_governance_sources
     proposal_id: ${P_PROP_001}
   expected:
     canonical_state:
       matches: ${canonical_state_ref.valid}
-      derived_from_ordered_ledger: true
+      resolved_from_qualified_authoritative_sources: true
+      incorporated_ledger_records_use_authoritative_ordering: true
     governance_evidence:
       integrity_verified: true
+    source_provenance:
+      verified: true
 - id: TV-STATE-002
-  name: Canonical State reconstruction rejects reordered ledger history
+  name: Canonical State resolution rejects reordered incorporated ledger history
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_001
     fixtures:
+      qualified_authoritative_sources_for: ${P_PROP_001}
       reordered_same_ledger_entries_for: ${P_PROP_001}
   request:
-    harness_operation: reconstruct_canonical_state
-    source: reordered_ledger_history
+    harness_operation: resolve_canonical_state
+    source_set: qualified_authoritative_sources_with_reordered_ledger_component
     proposal_id: ${P_PROP_001}
   expected:
     result:
-      accepted_as_equivalent: false
-    must_reject_or_produce_non_equivalent_state: true
-    timestamp_order_must_not_override_sequence_order: true
+      ledger_derived_state_accepted_as_equivalent: false
+    must_reject_or_produce_non_equivalent_ledger_derived_state: true
+    timestamp_or_storage_order_must_not_override_sequence_order: true
 - id: TV-XTEN-SETUP
   name: Setup tenant T2 proposal for cross-tenant tests
+  maps_to:
+    profiles:
+    - L1
+    - L2
+    - L3
+    - L4
+    concepts:
+    - Proposal Qualification
+    - Tenant and Governance Domain Isolation
+    - Execution Authorization
   arrange:
     auth_as: T2
+    hooks:
+      tenant_state:
+        T2: ACTIVE
+      policy_resolution:
+        P1: found
+      pec:
+        constraints_outcome: PASS
+        invariants_hard_fail: false
+        governance_approval_required: false
   request:
     method: POST
-    path: /agcp/v1/proposals/submit
+    path: /agcp/v2/proposals/submit
     headers:
       Idempotency-Key: K_XTEN_SETUP
     body:
-      tenant_id: T2
-      governance_domain_id: domain-secondary
-      proposal_id: ${AUTO_PROPOSAL_ID}
-      policy_ref: *id001
-      action_representation:
-        action_type: belongs_to_T2
-        parameters: {}
-      governance_context_ref: *id002
-      canonical_state_ref: *id003
-      authority_lineage_ref: *id004
-      governance_configuration_ref: *id005
-      provenance: *id006
+      proposal:
+        tenant_id: T2
+        governance_domain_id: domain-secondary
+        proposal_identity:
+          proposal_id: P-XTEN-SETUP
+          tenant_id: T2
+          governance_domain_id: domain-secondary
+          canonical_content_digest:
+            algorithm: SHA-256
+            value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          originator:
+            principal_id: client:test
+            principal_type: SERVICE
+            tenant_id: T2
+            governance_domain_id: domain-secondary
+        proposal_kind: SIMPLE
+        operational_intent:
+          intent_type: belongs_to_T2
+          statement: Test governed action belongs_to_T2.
+        target:
+          target_id: target-secondary
+          target_type: TEST_RESOURCE
+          tenant_id: T2
+          governance_domain_id: domain-secondary
+        requested_effect:
+          effect_type: belongs_to_T2
+          effect_representation:
+            action_type: belongs_to_T2
+            parameters:
+              tenant_marker: T2
+          effect_digest:
+            algorithm: SHA-256
+            value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+        policy_refs:
+        - policy_id: P1
+          policy_version: 1.0.0
+          policy_digest:
+            algorithm: SHA-256
+            value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+          artifact_uri: https://agcp.example/policies/P1
+          tenant_id: T2
+          governance_domain_id: domain-secondary
+          status: Active
+        action_representation:
+          representation_type: agcp.test.action
+          representation_version: 1.0.0
+          content_type: application/json
+          canonicalization: JCS
+          payload:
+            action_type: belongs_to_T2
+            parameters:
+              tenant_marker: T2
+          payload_digest:
+            algorithm: SHA-256
+            value: dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        governance_context:
+          governance_context_id: GCX-P-XTEN-SETUP
+          governance_context_version: 1.0.0
+          proposal_identity:
+            proposal_id: P-XTEN-SETUP
+            tenant_id: T2
+            governance_domain_id: domain-secondary
+            canonical_content_digest:
+              algorithm: SHA-256
+              value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            originator:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T2
+              governance_domain_id: domain-secondary
+          tenant_id: T2
+          governance_domain_id: domain-secondary
+          attribution:
+            principal:
+              principal_id: client:test
+              principal_type: SERVICE
+              tenant_id: T2
+              governance_domain_id: domain-secondary
+            attributed_at: '2026-07-30T16:00:00Z'
+          created_at: '2026-07-30T16:00:00Z'
+          context_digest:
+            algorithm: SHA-256
+            value: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+          canonical_state_ref:
+            canonical_state_id: CS1
+            canonical_state_version: 1.0.0
+            canonical_state_digest:
+              algorithm: SHA-256
+              value: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+            resolved_at: '2026-07-30T16:00:00Z'
+          authority_lineage_ref:
+            authority_lineage_id: AL1
+            lineage_version: 1.0.0
+            lineage_digest:
+              algorithm: SHA-256
+              value: '1111111111111111111111111111111111111111111111111111111111111111'
+            proposal_id: P-XTEN-SETUP
+            tenant_id: T2
+            governance_domain_id: domain-secondary
+          governance_configuration_ref:
+            governance_configuration_id: CFG1
+            configuration_version: 1.0.0
+            configuration_status: ACTIVE
+            configuration_digest:
+              algorithm: SHA-256
+              value: '2222222222222222222222222222222222222222222222222222222222222222'
+            governance_version_ref:
+              governance_version_id: GV1
+              version: 1.0.0
+            tenant_id: T2
+            governance_domain_id: domain-secondary
+            effective_at: '2026-07-30T16:00:00Z'
+        provenance:
+          signer: client:test
+          signature:
+            alg: Ed25519
+            kid: kid-test
+            sig: SIG_VALID_123
+          signed_at: '2026-07-30T16:00:00Z'
+      submitted_at: '2026-07-30T16:00:00Z'
+      client_request_id: CR-TV-XTEN-SETUP
+      extensions:
+        x-agcp.test-vector: TV-XTEN-SETUP
   capture:
     save_proposal_id_as: P_T2_001
     save_authorization_id_as: EA_T2_001
+    save_governance_evidence_refs_as: EV_T2_001
   expected:
     http:
       status: 200
+      body:
+        qualification_outcome: Qualified Proposal
+        governance_decision: Authorized
+        execution_authorization: Authorized for Commit Boundary Processing
+    governance_evidence:
+      required: true
+      schema: governance_evidence.json
+      requires_ledger_reference: true
 - id: TV-XTEN-001
   name: Cross-tenant Proposal View access is forbidden or hidden
   arrange:
@@ -990,7 +2826,10 @@ tests:
     use_proposal_id: P_T2_001
   request:
     method: GET
-    path: /agcp/v1/proposals/${P_T2_001}
+    path: /agcp/v2/proposals/${P_T2_001}
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
   expected:
     http:
       status_by_strategy:
@@ -1001,20 +2840,32 @@ tests:
         HIDE_404:
           status: 404
           body:
-            rejection_code: ACTION_NOT_AUTHORIZED
+            rejection_code: RESOURCE_NOT_FOUND
     ledger_no_append: true
 - id: TV-XTEN-002
-  name: Cross-tenant Human Review is forbidden or hidden
+  name: Cross-tenant Governance Approval Artifact submission is forbidden or hidden
   arrange:
     auth_as: T1
     use_proposal_id: P_T2_001
   request:
     method: POST
-    path: /agcp/v1/proposals/${P_T2_001}/human-review
+    path: /agcp/v2/proposals/${P_T2_001}/governance-approvals
+    headers:
+      Idempotency-Key: K_XTEN_002
     body:
       tenant_id: T1
-      review_artifact: HREV_ANY
-      provenance: *id006
+      governance_domain_id: domain-primary
+      provenance: *id001
+      governance_approval_artifact:
+        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
+        $overrides:
+          proposal_identity.proposal_id: ${P_T2_001}
+          proposal_identity.tenant_id: T2
+          proposal_identity.governance_domain_id: domain-secondary
+          tenant_id: T2
+          governance_domain_id: domain-secondary
+          target.tenant_id: T2
+          target.governance_domain_id: domain-secondary
   expected:
     http:
       status_by_strategy:
@@ -1025,7 +2876,7 @@ tests:
         HIDE_404:
           status: 404
           body:
-            rejection_code: ACTION_NOT_AUTHORIZED
+            rejection_code: RESOURCE_NOT_FOUND
     ledger_no_append: true
 - id: TV-XTEN-003
   name: Cross-tenant Commit Boundary is forbidden or hidden
@@ -1034,15 +2885,30 @@ tests:
     use_proposal_id: P_T2_001
   request:
     method: POST
-    path: /agcp/v1/commit-boundary/commit
+    path: /agcp/v2/commit-boundary/commit
+    headers:
+      Idempotency-Key: K_XTEN_003
     body:
-      tenant_id: T1
-      proposal_id: ${P_T2_001}
-      action_id: A_T2_001
-      execution_authorization_ref: ${EA_T2_001}
-      execution_context:
-        target: test-adapter
-      provenance: *id006
+      $fixture: ../schemas/examples/ds018-commit-boundary-request-single.json
+      $overrides:
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        proposal_ref.proposal_identity.proposal_id: ${P_T2_001}
+        proposal_ref.proposal_identity.tenant_id: T2
+        proposal_ref.proposal_identity.governance_domain_id: domain-secondary
+        proposal_ref.target_ref.tenant_id: T2
+        proposal_ref.target_ref.governance_domain_id: domain-secondary
+        action_id: A_T2_001
+        governance_decision_ref.governance_decision_id: GD_T2_001
+        execution_authorization_ref.authorization_id: ${EA_T2_001}
+        enforcement_context.proposal_identity.proposal_id: ${P_T2_001}
+        enforcement_context.proposal_identity.tenant_id: T2
+        enforcement_context.proposal_identity.governance_domain_id: domain-secondary
+        enforcement_context.action_id: A_T2_001
+        enforcement_context.tenant_id: T2
+        enforcement_context.governance_domain_id: domain-secondary
+        enforcement_context.governance_decision_ref.governance_decision_id: GD_T2_001
+        enforcement_context.execution_authorization_ref.authorization_id: ${EA_T2_001}
   expected:
     http:
       status_by_strategy:
@@ -1053,7 +2919,7 @@ tests:
         HIDE_404:
           status: 404
           body:
-            rejection_code: ACTION_NOT_AUTHORIZED
+            rejection_code: RESOURCE_NOT_FOUND
     ledger_no_append: true
 - id: TV-XTEN-004
   name: Cross-tenant Governance Evidence access is forbidden or hidden
@@ -1062,7 +2928,10 @@ tests:
     use_governance_evidence_ref: EV_T2_001
   request:
     method: GET
-    path: /agcp/v1/governance-evidence/EV_T2_001
+    path: /agcp/v2/governance-evidence/EV_T2_001
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
   expected:
     http:
       status_by_strategy:
@@ -1073,6 +2942,1009 @@ tests:
         HIDE_404:
           status: 404
           body:
-            rejection_code: ACTION_NOT_AUTHORIZED
+            rejection_code: RESOURCE_NOT_FOUND
     ledger_no_append: true
+- id: TV-META-001
+  name: Implementation metadata advertises the controlled IF-001 and conformance surface
+  maps_to:
+    profiles:
+    - L1
+    concepts:
+    - Implementation Metadata
+    - HTTP Interface Contract
+    - Conformance Discovery
+  arrange: {}
+  request:
+    method: GET
+    path: /agcp/v2/meta
+  expected:
+    http:
+      status: 200
+      body:
+        response_type: AGCP_IMPLEMENTATION_METADATA
+        default_agcp_release_id: AGCP-v2.0.0
+        http_contract:
+          supported_path_versions:
+          - /agcp/v2
+    schema: meta_response.json
+    ledger_no_append: true
+    schema_fixture: ../schemas/examples/ds003-implementation-metadata-response.json
+- id: TV-EAUTH-001
+  name: Retrieve an available Execution Authorization view
+  maps_to:
+    profiles:
+    - L1
+    - L4
+    concepts:
+    - Execution Authorization
+    - External Governance-State Retrieval
+  arrange:
+    auth_as: T1
+    use_authorization_id: EA_PROP_001
+  request:
+    method: GET
+    path: /agcp/v2/execution-authorizations/${EA_PROP_001}
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
+  expected:
+    http:
+      status: 200
+      body:
+        authorization_id: ${EA_PROP_001}
+        authorized_for_commit_boundary: true
+        consumption_state: AVAILABLE
+    schema: execution_authorization_view.json
+    ledger_no_append: true
+    schema_fixture: ../schemas/examples/ds017-execution-authorization-view-authorized.json
+- id: TV-EAUTH-002
+  name: Unknown Execution Authorization is not found
+  arrange:
+    auth_as: T1
+  request:
+    method: GET
+    path: /agcp/v2/execution-authorizations/EA-NOT-FOUND
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
+  expected:
+    http:
+      status: 404
+      body:
+        rejection_code: RESOURCE_NOT_FOUND
+    ledger_no_append: true
+- id: TV-EAUTH-003
+  name: Cross-tenant Execution Authorization access is forbidden or hidden
+  arrange:
+    auth_as: T1
+    use_authorization_id: EA_T2_001
+  request:
+    method: GET
+    path: /agcp/v2/execution-authorizations/${EA_T2_001}
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
+  expected:
+    http:
+      status_by_strategy:
+        FORBID_403:
+          status: 403
+          body:
+            rejection_code: TENANT_SCOPE_VIOLATION
+        HIDE_404:
+          status: 404
+          body:
+            rejection_code: RESOURCE_NOT_FOUND
+    ledger_no_append: true
+- id: TV-PEM-001
+  name: Register a schema-valid Policy Evaluation Module without activating it
+  arrange:
+    auth_as: T1
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policy-modules
+    headers:
+      Idempotency-Key: K_PEM_001
+    body:
+      $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+      $overrides:
+        module_id: PEM-TV-001
+        tenant_id: T1
+        governance_domain_id: domain-primary
+  expected:
+    request_validation:
+      policy_evaluation_module_artifact: PASS
+    http:
+      status: 200
+      body:
+        artifact_identity:
+          artifact_type: POLICY_EVALUATION_MODULE
+        artifact_status: Registered
+        tenant_id: T1
+        governance_domain_id: domain-primary
+    schema: governance_artifact_view.json
+    capture:
+      save_governance_artifact_id_as: GART_PEM_001
+    governance_activation_occurred: false
+    schema_fixture: ../schemas/examples/ds010-governance-artifact-view-registered.json
+- id: TV-PEM-002
+  name: Malformed Policy Evaluation Module registration is rejected before governance processing
+  arrange:
+    auth_as: T1
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policy-modules
+    headers:
+      Idempotency-Key: K_PEM_002
+    body:
+      $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+      $overrides:
+        module_id: ''
+  expected:
+    request_validation:
+      policy_evaluation_module_artifact: FAIL
+    http:
+      status: 400
+      body:
+        rejection_code: SCHEMA_VALIDATION_FAILED
+    ledger_no_append: true
+- id: TV-PEM-003
+  name: Cross-tenant Policy Evaluation Module registration is forbidden
+  arrange:
+    auth_as: T1
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policy-modules
+    headers:
+      Idempotency-Key: K_PEM_003
+    body:
+      $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+      $overrides:
+        module_id: PEM-TV-T2-003
+        tenant_id: T2
+        governance_domain_id: domain-secondary
+        effective_scope.tenant_id: T2
+        governance_configuration_binding.tenant_id: T2
+        governance_configuration_binding.governance_domain_id: domain-secondary
+        supported_policy_refs[0].tenant_id: T2
+        supported_policy_refs[0].governance_domain_id: domain-secondary
+  expected:
+    request_validation:
+      policy_evaluation_module_artifact: PASS
+    http:
+      status: 403
+      body:
+        rejection_code: TENANT_SCOPE_VIOLATION
+    ledger_no_append: true
+- id: TV-PEM-004
+  name: Equivalent Policy Evaluation Module registration replay is idempotent
+  arrange:
+    auth_as: T1
+    presteps:
+    - method: POST
+      path: /agcp/v2/governance-artifacts/policy-modules
+      headers:
+        Idempotency-Key: K_PEM_004
+      body:
+        $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+        $overrides:
+          module_id: PEM-TV-004
+      expect_status: 200
+      capture:
+        save_governance_artifact_id_as: GART_PEM_004
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policy-modules
+    headers:
+      Idempotency-Key: K_PEM_004
+    body:
+      $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+      $overrides:
+        module_id: PEM-TV-004
+  expected:
+    request_validation:
+      policy_evaluation_module_artifact: PASS
+    http:
+      status: 200
+      body:
+        artifact_identity:
+          artifact_id: ${GART_PEM_004}
+    ledger_no_append: true
+    equivalent_to_prestep_response: true
+- id: TV-PEM-005
+  name: Conflicting Policy Evaluation Module registration replay is rejected
+  arrange:
+    auth_as: T1
+    presteps:
+    - method: POST
+      path: /agcp/v2/governance-artifacts/policy-modules
+      headers:
+        Idempotency-Key: K_PEM_005
+      body:
+        $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+        $overrides:
+          module_id: PEM-TV-005
+          module_version: 1.0.0
+      expect_status: 200
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policy-modules
+    headers:
+      Idempotency-Key: K_PEM_005
+    body:
+      $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+      $overrides:
+        module_id: PEM-TV-005
+        module_version: 1.0.1
+        module_digest.value: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  expected:
+    request_validation:
+      policy_evaluation_module_artifact: PASS
+    http:
+      status: 409
+      body:
+        rejection_code: IDEMPOTENCY_CONFLICT
+    ledger_no_append: true
+- id: TV-POL-001
+  name: Register a schema-valid Governance Policy without activating it
+  arrange:
+    auth_as: T1
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policies
+    headers:
+      Idempotency-Key: K_POL_001
+    body:
+      $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+      $overrides:
+        policy_id: POLICY-TV-001
+        tenant_id: T1
+        governance_domain_id: domain-primary
+  expected:
+    request_validation:
+      governance_policy_artifact: PASS
+    http:
+      status: 200
+      body:
+        artifact_identity:
+          artifact_type: GOVERNANCE_POLICY
+        artifact_status: Registered
+        tenant_id: T1
+        governance_domain_id: domain-primary
+    schema: governance_artifact_view.json
+    capture:
+      save_governance_artifact_id_as: GART_POL_001
+    governance_activation_occurred: false
+    schema_fixture: ../schemas/examples/ds010-governance-artifact-view-registered.json
+- id: TV-POL-002
+  name: Malformed Governance Policy registration is rejected before governance processing
+  arrange:
+    auth_as: T1
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policies
+    headers:
+      Idempotency-Key: K_POL_002
+    body:
+      $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+      $overrides:
+        policy_id: ''
+  expected:
+    request_validation:
+      governance_policy_artifact: FAIL
+    http:
+      status: 400
+      body:
+        rejection_code: SCHEMA_VALIDATION_FAILED
+    ledger_no_append: true
+- id: TV-POL-003
+  name: Cross-tenant Governance Policy registration is forbidden
+  arrange:
+    auth_as: T1
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policies
+    headers:
+      Idempotency-Key: K_POL_003
+    body:
+      $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+      $overrides:
+        policy_id: POLICY-TV-T2-003
+        tenant_id: T2
+        governance_domain_id: domain-secondary
+        effective_scope.tenant_id: T2
+        governance_configuration_binding.tenant_id: T2
+        governance_configuration_binding.governance_domain_id: domain-secondary
+  expected:
+    request_validation:
+      governance_policy_artifact: PASS
+    http:
+      status: 403
+      body:
+        rejection_code: TENANT_SCOPE_VIOLATION
+    ledger_no_append: true
+- id: TV-POL-004
+  name: Equivalent Governance Policy registration replay is idempotent
+  arrange:
+    auth_as: T1
+    presteps:
+    - method: POST
+      path: /agcp/v2/governance-artifacts/policies
+      headers:
+        Idempotency-Key: K_POL_004
+      body:
+        $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+        $overrides:
+          policy_id: POLICY-TV-004
+      expect_status: 200
+      capture:
+        save_governance_artifact_id_as: GART_POL_004
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policies
+    headers:
+      Idempotency-Key: K_POL_004
+    body:
+      $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+      $overrides:
+        policy_id: POLICY-TV-004
+  expected:
+    request_validation:
+      governance_policy_artifact: PASS
+    http:
+      status: 200
+      body:
+        artifact_identity:
+          artifact_id: ${GART_POL_004}
+    ledger_no_append: true
+    equivalent_to_prestep_response: true
+- id: TV-POL-005
+  name: Conflicting Governance Policy registration replay is rejected
+  arrange:
+    auth_as: T1
+    presteps:
+    - method: POST
+      path: /agcp/v2/governance-artifacts/policies
+      headers:
+        Idempotency-Key: K_POL_005
+      body:
+        $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+        $overrides:
+          policy_id: POLICY-TV-005
+          policy_version: 1.0.0
+      expect_status: 200
+  request:
+    method: POST
+    path: /agcp/v2/governance-artifacts/policies
+    headers:
+      Idempotency-Key: K_POL_005
+    body:
+      $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+      $overrides:
+        policy_id: POLICY-TV-005
+        policy_version: 1.0.1
+        policy_digest.value: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+  expected:
+    request_validation:
+      governance_policy_artifact: PASS
+    http:
+      status: 409
+      body:
+        rejection_code: IDEMPOTENCY_CONFLICT
+    ledger_no_append: true
+- id: TV-GART-001
+  name: Retrieve a registered Governance Artifact view
+  arrange:
+    auth_as: T1
+    presteps:
+    - method: POST
+      path: /agcp/v2/governance-artifacts/policy-modules
+      headers:
+        Idempotency-Key: K_GART_001_SETUP
+      body:
+        $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+        $overrides:
+          module_id: PEM-GART-001
+      expect_status: 200
+      capture:
+        save_governance_artifact_id_as: GART_001
+  request:
+    method: GET
+    path: /agcp/v2/governance-artifacts/${GART_001}
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
+  expected:
+    http:
+      status: 200
+      body:
+        governance_artifact_view_id: __PRESENT__
+        artifact_status: Registered
+        tenant_id: T1
+        governance_domain_id: domain-primary
+    schema: governance_artifact_view.json
+    ledger_no_append: true
+    schema_fixture: ../schemas/examples/ds010-governance-artifact-view-registered.json
+- id: TV-GART-002
+  name: Unknown Governance Artifact is not found
+  arrange:
+    auth_as: T1
+  request:
+    method: GET
+    path: /agcp/v2/governance-artifacts/ART-NOT-FOUND
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
+  expected:
+    http:
+      status: 404
+      body:
+        rejection_code: RESOURCE_NOT_FOUND
+    ledger_no_append: true
+- id: TV-GART-003
+  name: Cross-tenant Governance Artifact access is forbidden or hidden
+  arrange:
+    auth_as: T1
+    presteps:
+    - auth_as: T2
+      method: POST
+      path: /agcp/v2/governance-artifacts/policy-modules
+      headers:
+        Idempotency-Key: K_GART_003_SETUP
+      body:
+        $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+        $overrides:
+          module_id: PEM-GART-T2-003
+          tenant_id: T2
+          governance_domain_id: domain-secondary
+          effective_scope.tenant_id: T2
+          governance_configuration_binding.tenant_id: T2
+          governance_configuration_binding.governance_domain_id: domain-secondary
+          supported_policy_refs[0].tenant_id: T2
+          supported_policy_refs[0].governance_domain_id: domain-secondary
+      expect_status: 200
+      capture:
+        save_governance_artifact_id_as: GART_T2_003
+  request:
+    method: GET
+    path: /agcp/v2/governance-artifacts/${GART_T2_003}
+    query:
+      tenant_id: T1
+      governance_domain_id: domain-primary
+  expected:
+    http:
+      status_by_strategy:
+        FORBID_403:
+          status: 403
+          body:
+            rejection_code: TENANT_SCOPE_VIOLATION
+        HIDE_404:
+          status: 404
+          body:
+            rejection_code: RESOURCE_NOT_FOUND
+    ledger_no_append: true
+- id: TV-GCFG-001
+  name: Validate active Governance Configuration, controlled change requirements, and risk-based re-evaluation configuration
+  maps_to:
+    profiles:
+    - L2
+    - L3
+    - L4
+    - L5
+    concepts:
+    - Governance Configuration
+    - Governance Self-Modification Isolation
+    - Risk-Based Re-Evaluation
+    - Governance Evidence
+  arrange:
+    fixtures:
+      governance_configuration: ../schemas/examples/ds041-governance-configuration-active.json
+    authoritative_active_governance_version: gv-2.0.0
+  request:
+    harness_operation: validate_governance_configuration
+    artifact:
+      $fixture: ../schemas/examples/ds041-governance-configuration-active.json
+    validation_scope:
+    - SCHEMA
+    - CONFIGURATION_MANIFEST
+    - CHANGE_CONTROL
+    - RISK_BASED_RE_EVALUATION
+    - SELF_MODIFICATION_ISOLATION
+  expected:
+    schema_validation:
+      governance_configuration.json: PASS
+    configuration_status: ACTIVE
+    configuration_manifest:
+      manifest_complete: true
+      hidden_configuration_present: false
+      implicit_configuration_influences_decisions: false
+    change_control:
+      governance_compilation_required: true
+      constitutional_validation_required: true
+      governance_omission_analysis_required: true
+      controlled_activation_required: true
+      direct_self_modification_prohibited: true
+      prior_authoritative_version_preserved_on_failure: true
+      external_approval_artifact_refs: __NON_EMPTY__
+    risk_based_re_evaluation_configuration:
+      enabled: true
+      deterministic_selection_required: true
+      preserves_unaffected_proposals: true
+      arrival_timing_used_as_governance_basis: false
+      requires_attributable_outcome_evidence: true
+    semantic_assertions:
+      configuration_establishes_authority_at_commitment: false
+      configuration_authorizes_execution: false
+      configuration_activates_itself: false
+      governed_system_can_directly_modify_admissibility_conditions: false
+    governance_evidence_refs: __NON_EMPTY__
+- id: TV-GCOMP-001
+  name: Equivalent qualified governance inputs compile deterministically to the same machine-evaluable artifact and lineage
+  maps_to:
+    profiles:
+    - L2
+    - L3
+    concepts:
+    - Governance Compilation
+    - Deterministic Governance
+    - Governance Artifact Lineage
+    - Governance Evidence
+  arrange:
+    fixtures:
+      governance_configuration: ../schemas/examples/ds041-governance-configuration-active.json
+      policy_evaluation_module: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+      governance_policy: ../schemas/examples/ds006-governance-policy-registered.json
+    compiler:
+      compiler_id: compiler-id-1
+      compiler_version: 1.0.0
+      deterministic_build_id: BUILD-F09-001
+    repeat_count: 2
+  request:
+    harness_operation: compile_governance_configuration
+    governance_configuration:
+      $fixture: ../schemas/examples/ds041-governance-configuration-active.json
+    source_artifacts:
+    - $fixture: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+    - $fixture: ../schemas/examples/ds006-governance-policy-registered.json
+    compilation_mode: DETERMINISTIC_REPLAY
+  expected:
+    compilation_runs: 2
+    each_output_schema_validation:
+      compiled_governance_artifact.json: PASS
+    outputs_semantically_equivalent: true
+    artifact_digest_equal: true
+    machine_evaluable_representation_digest_equal: true
+    deterministic_build_id_equal: true
+    source_manifest_complete: true
+    validated_dependency_set_complete: true
+    governance_artifact_lineage:
+      lineage_complete: true
+      lineage_replayable: true
+      source_to_output_traceability_complete: true
+    semantic_preservation:
+      governance_intent_preserved: true
+      constraints_preserved: true
+      invariants_preserved: true
+      refusal_paths_preserved: true
+      evidence_requirements_preserved: true
+      authority_rules_preserved: true
+      commit_meaning_preserved: true
+    activation_eligibility: ELIGIBLE
+    does_not_establish_authority_or_activate: true
+    schema_fixture: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+- id: TV-GCONST-001
+  name: Constitutional validation preserves protected constraints and permits activation eligibility
+  maps_to:
+    profiles:
+    - L3
+    - L4
+    concepts:
+    - Constitutional Validation
+    - Constitutional Constraint Preservation
+    - Governance Self-Protection
+  arrange:
+    fixtures:
+      compiled_governance_artifact: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+  request:
+    harness_operation: validate_compiled_governance_artifact
+    artifact:
+      $fixture: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+    validation_scope:
+    - CONSTITUTIONAL_VALIDATION
+    - SEMANTIC_PRESERVATION
+    - GOVERNANCE_SELF_PROTECTION
+  expected:
+    schema_validation:
+      compiled_governance_artifact.json: PASS
+    constitutional_validation_result:
+      outcome: PASS
+      findings: []
+    semantic_preservation:
+      protected_constraints_non_derogable: true
+      constraints_preserved: true
+      invariants_preserved: true
+      refusal_paths_preserved: true
+      commit_meaning_preserved: true
+    governance_self_protection_assessment:
+      constitutional_constraints_preserved: true
+      protected_safeguards_not_weakened: true
+      governance_bypass_not_introduced: true
+      required_safeguards_not_disabled: true
+    activation_eligibility: ELIGIBLE
+    governance_evidence_refs: __NON_EMPTY__
+- id: TV-GCONST-002
+  name: Attempted weakening of a protected constitutional constraint fails validation and cannot become activation-eligible
+  maps_to:
+    profiles:
+    - L3
+    - L4
+    concepts:
+    - Constitutional Validation
+    - Constitutional Constraint Preservation
+    - Governance Self-Protection
+    - Structural Refusal
+  arrange:
+    baseline_artifact:
+      $fixture: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+    authoritative_active_governance_version: gv-2.0.0
+  request:
+    harness_operation: compile_and_validate_governance_change
+    baseline:
+      $fixture: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+    proposed_change:
+      protected_semantic: COMMIT_BOUNDARY_NON_BYPASSABILITY
+      mutation: WEAKEN
+      requested_value: false
+  expected:
+    constitutional_validation_result:
+      outcome: FAIL
+      finding_class: PROTECTED_CONSTRAINT_WEAKENED
+    semantic_preservation:
+      protected_constraints_non_derogable: false
+    governance_self_protection_assessment:
+      protected_safeguards_not_weakened: false
+    activation_eligibility: INELIGIBLE
+    compiled_artifact_published_as_validated: false
+    controlled_activation_attempted: false
+    authoritative_governance_version: gv-2.0.0
+    governance_evidence:
+      finding_recorded: true
+      source_lineage_preserved: true
+- id: TV-GOMIT-001
+  name: Material governance omission is detected before activation eligibility
+  maps_to:
+    profiles:
+    - L3
+    - L4
+    concepts:
+    - Governance Omission Analysis
+    - Constitutional Validation
+    - Governance Self-Protection
+  arrange:
+    baseline_artifact:
+      $fixture: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+    authoritative_active_governance_version: gv-2.0.0
+  request:
+    harness_operation: perform_governance_omission_analysis
+    baseline:
+      $fixture: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+    omission_injection:
+      category: COMMIT_RULES
+      required_source_artifact_id: intent-1
+      omitted_semantic: COMMIT_BOUNDARY_ENFORCEMENT
+  expected:
+    governance_omission_analysis_result:
+      outcome: FAIL
+      material_omission_detected: true
+      omission_category: COMMIT_RULES
+    traceability_coverage_complete: false
+    governance_self_protection_assessment:
+      material_governance_omissions_absent: false
+    activation_eligibility: INELIGIBLE
+    controlled_activation_attempted: false
+    authoritative_governance_version: gv-2.0.0
+    governance_evidence:
+      omission_finding_recorded: true
+      source_lineage_preserved: true
+- id: TV-GSELF-001
+  name: A governed system cannot directly modify its active admissibility conditions
+  maps_to:
+    profiles:
+    - L4
+    concepts:
+    - Governance Self-Protection
+    - Governance Self-Modification Isolation
+    - Controlled Governance Activation
+    - Structural Refusal
+  arrange:
+    active_configuration:
+      $fixture: ../schemas/examples/ds041-governance-configuration-active.json
+    authoritative_active_governance_version: gv-2.0.0
+    actor_class: GOVERNED_SYSTEM
+  request:
+    harness_operation: attempt_direct_governance_self_modification
+    target_setting_path: runtime.commit_boundary.enabled
+    requested_value: false
+    external_approval_artifact: null
+    compiled_governance_artifact: null
+    controlled_activation_record: null
+  expected:
+    modification_permitted: false
+    structural_refusal: true
+    active_configuration_unchanged: true
+    authoritative_governance_version: gv-2.0.0
+    bypass_path_created: false
+    change_control:
+      external_approval_required: true
+      governance_compilation_required: true
+      constitutional_validation_required: true
+      controlled_activation_required: true
+    governance_evidence:
+      attempt_attributed: true
+      target_setting_recorded: true
+      refusal_recorded: true
+- id: TV-GACT-001
+  name: Approved and validated governance package activates atomically with evidence, lineage, and Governance Version establishment
+  maps_to:
+    profiles:
+    - L2
+    - L3
+    - L4
+    concepts:
+    - Controlled Governance Activation
+    - Atomic Governance Activation
+    - Governance Version
+    - Governance Evidence
+    - Governance Artifact Lineage
+  arrange:
+    activation_record:
+      $fixture: ../schemas/examples/ds043-controlled-governance-activation-activated.json
+    prior_authoritative_governance_version: gv-1.9.0
+  request:
+    harness_operation: activate_governance_package
+    activation:
+      $fixture: ../schemas/examples/ds043-controlled-governance-activation-activated.json
+    fault_injection: NONE
+  expected:
+    schema_validation:
+      controlled_governance_activation.json: PASS
+    approval_basis:
+      external_approval_verified: true
+      scope_covers_entire_package: true
+      approval_current: true
+    validation_basis:
+      all_compiled_artifacts_validated: true
+      constitutional_validation_passed: true
+      governance_omission_analysis_passed: true
+      governance_self_protection_passed: true
+      package_dependency_closure_valid: true
+    activation_atomicity:
+      atomic_activation: true
+      partial_activation_prohibited: true
+      partial_activation_occurred: false
+      interdependent_artifacts_activated_together: true
+      member_count_consistent: true
+    activation_result:
+      outcome: ACTIVATED
+      disposition: AUTHORITATIVE_FOR_RUNTIME_EVALUATION
+      authoritative_version_changed: true
+    governance_version_establishment:
+      version_established: true
+      package_digest_matches_version: true
+      activation_record_bound: true
+      version_immutable: true
+      historical_replay_supported: true
+    governance_evidence_refs: __NON_EMPTY__
+    governance_ledger_event_ref: __PRESENT__
+    replay_material:
+      deterministic_replay_supported: true
+    schema_fixture: ../schemas/examples/ds043-controlled-governance-activation-activated.json
+- id: TV-GACT-002
+  name: Injected member-activation failure prevents partial activation and preserves the prior authoritative version
+  maps_to:
+    profiles:
+    - L3
+    - L4
+    concepts:
+    - Atomic Governance Activation
+    - Governance Self-Protection
+    - Prior-Version Preservation
+    - Structural Refusal
+  arrange:
+    activation_record:
+      $fixture: ../schemas/examples/ds043-controlled-governance-activation-activated.json
+    prior_authoritative_governance_version: gv-1.9.0
+  request:
+    harness_operation: activate_governance_package
+    activation:
+      $fixture: ../schemas/examples/ds043-controlled-governance-activation-activated.json
+    fault_injection:
+      stage: ACTIVATE_PACKAGE_MEMBER
+      member_index: 2
+      failure: AUTHORITATIVE_STORE_WRITE_FAILED
+  expected:
+    activation_result:
+      outcome: FAILED
+      authoritative_version_changed: false
+    activation_atomicity:
+      atomic_activation: true
+      partial_activation_prohibited: true
+      partial_activation_occurred: false
+    prior_authoritative_governance_version: gv-1.9.0
+    candidate_governance_version_established: false
+    authoritative_store_partial_update: false
+    rollback_basis:
+      rollback_supported: true
+      prior_version_restorable: true
+    governance_evidence:
+      failure_attributed: true
+      failed_member_recorded: true
+      transaction_digest_recorded: true
+    governance_ledger_event:
+      activation_failure_recorded: true
+- id: TV-GROLL-001
+  name: Governed rollback restores the prior Governance Version atomically and preserves evidence and lineage
+  maps_to:
+    profiles:
+    - L3
+    - L4
+    concepts:
+    - Governed Rollback
+    - Atomic Governance Activation
+    - Governance Version
+    - Governance Evidence
+    - Governance Artifact Lineage
+  arrange:
+    completed_activation:
+      $fixture: ../schemas/examples/ds043-controlled-governance-activation-activated.json
+    current_governance_version: gv-2.0.0
+    rollback_target_governance_version: gv-1.9.0
+  request:
+    harness_operation: rollback_governance_activation
+    activation_ref: CGA-ACTIVATION-1
+    rollback_target_governance_version: gv-1.9.0
+    rollback_trigger: POST_ACTIVATION_ASSURANCE_FAILURE
+    require_external_approval: true
+  expected:
+    rollback_authorized: true
+    rollback_executed: true
+    rollback_atomic: true
+    partial_rollback_occurred: false
+    authoritative_governance_version: gv-1.9.0
+    superseded_version_preserved_for_history: true
+    rollback_basis:
+      rollback_supported: true
+      prior_version_restorable: true
+      rollback_evidence_refs: __NON_EMPTY__
+    governance_evidence:
+      approval_basis_recorded: true
+      rollback_trigger_recorded: true
+      before_and_after_store_digests_recorded: true
+      lineage_preserved: true
+    governance_ledger_event:
+      rollback_recorded: true
+      authoritative_ordering_preserved: true
+    deterministic_replay_supported: true
 cross_tenant_strategy: HIDE_404
+fixture_catalog:
+  mapping_file: fixture-mapping.json
+  schema_examples_directory: ../schemas/examples
+  validation_mode: DRAFT_2020_12_WITH_CROSS_SCHEMA_REFERENCES
+  all_fixtures_must_validate: true
+schema_fixture_validation:
+- fixture_id: FX-DS011-SATISFIED
+  schema_file: ../schemas/constraint_evaluation.json
+  example_file: ../schemas/examples/ds011-constraint-evaluation-satisfied.json
+  expected: VALID
+- fixture_id: FX-DS011-VIOLATED
+  schema_file: ../schemas/constraint_evaluation.json
+  example_file: ../schemas/examples/ds011-constraint-evaluation-violated.json
+  expected: VALID
+- fixture_id: FX-DS012-PRESERVED
+  schema_file: ../schemas/invariant_evaluation.json
+  example_file: ../schemas/examples/ds012-invariant-evaluation-preserved.json
+  expected: VALID
+- fixture_id: FX-DS012-HARD-VIOLATION
+  schema_file: ../schemas/invariant_evaluation.json
+  example_file: ../schemas/examples/ds012-invariant-evaluation-hard-violation.json
+  expected: VALID
+- fixture_id: FX-DS018-SINGLE-COMMIT
+  schema_file: ../schemas/commit_boundary_request.json
+  example_file: ../schemas/examples/ds018-commit-boundary-request-single.json
+  expected: VALID
+- fixture_id: FX-DS019-COMMIT-SUCCESS
+  schema_file: ../schemas/commit_boundary_result.json
+  example_file: ../schemas/examples/ds019-commit-boundary-result-success.json
+  expected: VALID
+- fixture_id: FX-DS019-STRUCTURAL-REFUSAL
+  schema_file: ../schemas/commit_boundary_result.json
+  example_file: ../schemas/examples/ds019-commit-boundary-result-refusal.json
+  expected: VALID
+- fixture_id: FX-DS026-PARTIAL-QUORUM
+  schema_file: ../schemas/governance_approval_artifact.json
+  example_file: ../schemas/examples/ds026-governance-approval-partial-quorum.json
+  expected: VALID
+- fixture_id: FX-DS026-COMPLETED-QUORUM
+  schema_file: ../schemas/governance_approval_artifact.json
+  example_file: ../schemas/examples/ds026-governance-approval-completed-quorum.json
+  expected: VALID
+- fixture_id: FX-DS029-ADMISSIBLE
+  schema_file: ../schemas/enforcement_context.json
+  example_file: ../schemas/examples/ds029-enforcement-context-admissible.json
+  expected: VALID
+- fixture_id: FX-DS029-PREVENT
+  schema_file: ../schemas/enforcement_context.json
+  example_file: ../schemas/examples/ds029-enforcement-context-prevent.json
+  expected: VALID
+- fixture_id: FX-DS032-QUALIFIED
+  schema_file: ../schemas/state_qualification_result.json
+  example_file: ../schemas/examples/ds032-state-qualification-qualified.json
+  expected: VALID
+- fixture_id: FX-DS032-NOT-QUALIFIED
+  schema_file: ../schemas/state_qualification_result.json
+  example_file: ../schemas/examples/ds032-state-qualification-not-qualified.json
+  expected: VALID
+- fixture_id: FX-DS033-QUALIFIED
+  schema_file: ../schemas/evidence_qualification_result.json
+  example_file: ../schemas/examples/ds033-evidence-qualification-qualified.json
+  expected: VALID
+- fixture_id: FX-DS033-NOT-QUALIFIED
+  schema_file: ../schemas/evidence_qualification_result.json
+  example_file: ../schemas/examples/ds033-evidence-qualification-not-qualified.json
+  expected: VALID
+- fixture_id: FX-DS038-AUTHORIZED
+  schema_file: ../schemas/governance_lifecycle_record.json
+  example_file: ../schemas/examples/ds038-governance-lifecycle-authorized.json
+  expected: VALID
+- fixture_id: FX-DS039-DEGRADED
+  schema_file: ../schemas/continuation_integrity_result.json
+  example_file: ../schemas/examples/ds039-continuation-integrity-degraded.json
+  expected: VALID
+- fixture_id: FX-DS039-RECOVERED
+  schema_file: ../schemas/continuation_integrity_result.json
+  example_file: ../schemas/examples/ds039-continuation-integrity-recovered.json
+  expected: VALID
+- fixture_id: FX-DS040-GENESIS
+  schema_file: ../schemas/governance_ledger_event.json
+  example_file: ../schemas/examples/ds040-governance-ledger-event-genesis.json
+  expected: VALID
+- fixture_id: FX-DS040-SEQUENCED
+  schema_file: ../schemas/governance_ledger_event.json
+  example_file: ../schemas/examples/ds040-governance-ledger-event-sequenced.json
+  expected: VALID
+- fixture_id: FX-DS041-ACTIVE
+  schema_file: ../schemas/governance_configuration.json
+  example_file: ../schemas/examples/ds041-governance-configuration-active.json
+  expected: VALID
+- fixture_id: FX-DS042-VALIDATED
+  schema_file: ../schemas/compiled_governance_artifact.json
+  example_file: ../schemas/examples/ds042-compiled-governance-artifact-validated.json
+  expected: VALID
+- fixture_id: FX-DS043-ACTIVATED
+  schema_file: ../schemas/controlled_governance_activation.json
+  example_file: ../schemas/examples/ds043-controlled-governance-activation-activated.json
+  expected: VALID
+- fixture_id: FX-DS044-REGISTRY
+  schema_file: ../schemas/registry_document.schema.json
+  example_file: ../schemas/examples/ds044-registry-document-capability-example.json
+  expected: VALID
+- fixture_id: FX-DS005-REGISTERED
+  schema_file: ../schemas/policy_evaluation_module_artifact.json
+  example_file: ../schemas/examples/ds005-policy-evaluation-module-registered.json
+  expected: VALID
+- fixture_id: FX-DS006-REGISTERED
+  schema_file: ../schemas/policy_artifact.json
+  example_file: ../schemas/examples/ds006-governance-policy-registered.json
+  expected: VALID
+- fixture_id: FX-DS010-REGISTERED
+  schema_file: ../schemas/governance_artifact_view.json
+  example_file: ../schemas/examples/ds010-governance-artifact-view-registered.json
+  expected: VALID
+- fixture_id: FX-DS017-AUTHORIZED
+  schema_file: ../schemas/execution_authorization_view.json
+  example_file: ../schemas/examples/ds017-execution-authorization-view-authorized.json
+  expected: VALID
+- fixture_id: FX-DS003-METADATA
+  schema_file: ../schemas/meta_response.json
+  example_file: ../schemas/examples/ds003-implementation-metadata-response.json
+  expected: VALID

@@ -1,81 +1,87 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/proposal_submit_request.json",
+  "$id": "https://agcp.ai/schemas/proposal_submit_request.json",
   "title": "Proposal Submit Request",
-  "description": "Schema for submitting a governance-significant Proposal to an AGCP-conformant implementation. Proposal submission initiates Proposal Qualification and subsequent governance processing.",
+  "description": "Normative transport wrapper for submitting one canonical Governed Action Proposal to an AGCP-conformant implementation. The wrapper supplies transport correlation and namespace-qualified extension data only; all governance-domain content is carried in proposal and validated by DS-021. Submission is not execution and does not confer authority at commitment.",
+  "$comment": "DS-013 is intentionally limited to transport-envelope concerns. The authoritative proposal domain object is DS-021 governed_action_proposal.json. Implementations migrating from the former flattened DS-013 representation SHALL wrap the canonical proposal under proposal. The obsolete top-level metadata compatibility member is not permitted; namespace-qualified extension data SHALL use extensions.",
+  "x-agcp-ds-id": "DS-013",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Governed Action Proposal Submission Transport Wrapper",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-101",
+      "ARM-106"
+    ],
+    "core_sections": [
+      "4.3",
+      "4.15",
+      "6.3",
+      "6.4",
+      "6.6A"
+    ],
+    "normative_statements": [
+      "NS-4.3-01",
+      "NS-4.15-01",
+      "NS-6.3-01",
+      "NS-6.3-02",
+      "NS-6.4-01",
+      "NS-6.4-02",
+      "NS-6.6A-01"
+    ],
+    "conformance_requirements": [
+      "CR-004",
+      "CR-036",
+      "CR-037",
+      "CR-038",
+      "CR-039",
+      "CR-040",
+      "CR-041",
+      "CR-042",
+      "CR-043",
+      "CR-044",
+      "CR-045",
+      "CR-046",
+      "CR-047",
+      "CR-105",
+      "CR-106",
+      "CR-107",
+      "CR-108",
+      "CR-109"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
-  "properties": {
-    "tenant_id": {
-      "$ref": "common.json#/$defs/tenant_id"
-    },
-    "governance_domain_id": {
-      "$ref": "common.json#/$defs/governance_domain_id"
-    },
-    "proposal_id": {
-      "$ref": "common.json#/$defs/proposal_id",
-      "description": "Client-supplied or caller-visible Proposal identifier. Implementations MAY assign this if omitted, provided deterministic idempotency behavior is preserved."
-    },
-    "action_id": {
-      "$ref": "common.json#/$defs/action_id",
-      "description": "Identifier for the governance-significant Action proposed by this request. Implementations MAY assign this if omitted, provided deterministic idempotency behavior is preserved."
-    },
-    "policy_ref": {
-      "$ref": "common.json#/$defs/policy_ref"
-    },
-    "action_representation": {
+  "$defs": {
+    "namespaced_extensions": {
       "type": "object",
-      "description": "Canonical Action Representation submitted for governance processing. This object is intentionally domain-specific and SHALL be evaluated only through applicable AGCP governance processing.",
+      "description": "Namespace-qualified transport or implementation extension members. Extensions SHALL NOT alter, replace, or weaken the canonical Governed Action Proposal carried in proposal.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
       "additionalProperties": true
-    },
-    "governance_context": {
-      "type": "object",
-      "description": "Governance Context associated with the Proposal. It SHALL include all context required by applicable policy, Canonical State resolution, authority evaluation, and conformance assessment.",
-      "additionalProperties": true,
-      "properties": {
-        "tenant_id": {
-          "$ref": "common.json#/$defs/tenant_id"
-        },
-        "governance_domain_id": {
-          "$ref": "common.json#/$defs/governance_domain_id"
-        },
-        "canonical_state_ref": {
-          "$ref": "common.json#/$defs/canonical_state_ref"
-        },
-        "authority_lineage_ref": {
-          "$ref": "common.json#/$defs/authority_lineage_ref"
-        },
-        "governance_configuration_ref": {
-          "$ref": "common.json#/$defs/governance_configuration_ref"
-        },
-        "request_context": {
-          "type": "object",
-          "additionalProperties": true
-        }
-      }
-    },
-    "provenance": {
-      "$ref": "common.json#/$defs/provenance"
+    }
+  },
+  "properties": {
+    "proposal": {
+      "$ref": "governed_action_proposal.json",
+      "description": "The canonical Governed Action Proposal domain object defined by DS-021."
     },
     "submitted_at": {
-      "$ref": "common.json#/$defs/timestamp_rfc3339"
+      "$ref": "common.json#/$defs/timestamp_rfc3339",
+      "description": "Optional client-declared submission time. This value is transport metadata and does not replace authoritative receipt, ordering, or Governance Ledger timestamps."
     },
     "client_request_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 256,
-      "description": "Optional client-side request correlation identifier. This is not a substitute for HTTP Idempotency-Key semantics."
+      "description": "Optional client-side correlation identifier. This is not a substitute for transport-level Idempotency-Key requirements or Proposal Identity."
     },
-    "metadata": {
-      "type": "object",
-      "description": "Implementation-defined metadata that SHALL NOT alter normative governance semantics.",
-      "additionalProperties": true
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
     }
   },
   "required": [
-    "tenant_id",
-    "action_representation",
-    "governance_context",
-    "provenance"
+    "proposal"
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "registry_entry_count": 92,
+  "identifier_range": [
+    "REG-001",
+    "REG-092"
+  ],
+  "constraint_entry_count": 26,
+  "invariant_entry_count": 26,
+  "rejection_code_entry_count": 40,
+  "all_entries_have_reg_id": true,
+  "release_level_architecture_traceability_present": true,
+  "all_entries_have_ns_refs": true,
+  "all_entries_have_cr_refs": true,
+  "rtm_assigned_cr_count": 117,
+  "rtm_na_crs": [
+    "CR-031",
+    "CR-033",
+    "CR-039",
+    "CR-094",
+    "CR-095"
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "evaluation_id": "state-qualification-stale-1",
+  "result_type": "STATE_QUALIFICATION_RESULT",
+  "tenant_id": "tenant-1",
+  "governance_domain_id": "domain-1",
+  "candidate_state_binding": {
+    "authoritative_source_refs": [
+      {
+        "source_id": "source-id-1",
+        "source_type": "GOVERNANCE_LEDGER"
+      }
+    ],
+    "source_count": 1,
+    "source_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "candidate_state_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "resolution_inputs_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "ordering_basis_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "resolution_status": "RESOLVED"
+  },
+  "evaluation_horizon": {
+    "horizon_id": "horizon-id-1",
+    "evaluated_at": "2026-07-30T16:00:00Z"
+  },
+  "dimensions": {
+    "freshness": {
+      "status": "NOT_QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z",
+      "failure_codes": [
+        "STATE_STALE"
+      ]
+    },
+    "provenance": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "completeness": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "consistency": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "integrity": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "availability": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "ordering_suitability": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    }
+  },
+  "conflict_resolution": {
+    "status": "NO_CONFLICT",
+    "candidate_source_count": 1,
+    "basis": "example"
+  },
+  "outcome": "NOT_QUALIFIED",
+  "disposition": "STRUCTURAL_REFUSAL_REQUIRED",
+  "evaluated_at": "2026-07-30T16:00:00Z",
+  "evaluator": {
+    "principal": {
+      "principal_id": "governance-service-1",
+      "principal_type": "SERVICE"
+    },
+    "attributed_at": "2026-07-30T16:00:00Z"
+  },
+  "qualification_basis_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "result_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "replay_material": {
+    "qualification_profile": "example",
+    "input_snapshot_refs": [
+      "https://agcp.ai/example/input-snapshot-ref"
+    ],
+    "qualification_configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "qualified_inputs_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "ordering_basis_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "historical_action_execution_required": false
+  },
+  "semantic_assertions": {
+    "all_required_dimensions_evaluated": true,
+    "canonical_state_suitability_established": false,
+    "admissibility_may_proceed": false,
+    "timestamp_only_ordering_accepted": false,
+    "non_authoritative_observation_overrode_state": false,
+    "qualification_is_attributable": true,
+    "supports_deterministic_replay": true
+  },
+  "failure_reasons": [
+    {
+      "code": "STATE_STALE",
+      "dimension": "FRESHNESS",
+      "summary": "Canonical State is stale for the evaluation horizon."
+    }
+  ]
+}

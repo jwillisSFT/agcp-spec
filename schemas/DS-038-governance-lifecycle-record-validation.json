@@ -1,0 +1,322 @@
+{
+  "overall_result": "PASS",
+  "schema_id": "DS-038",
+  "validated_at": "2026-07-30",
+  "checks": [
+    {
+      "name": "json_parse",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "name": "draft_2020_12_metaschema_validation",
+      "status": "PASS",
+      "details": {
+        "schema_count": 41,
+        "issues": []
+      }
+    },
+    {
+      "name": "cross_schema_reference_resolution",
+      "status": "PASS",
+      "details": {
+        "reference_count": 2972,
+        "missing": []
+      }
+    },
+    {
+      "name": "clean_migration_retired_lifecycle_definitions",
+      "status": "PASS",
+      "details": {
+        "residual_references": [],
+        "remaining_common_defs": []
+      }
+    },
+    {
+      "name": "common_definition_reachability",
+      "status": "PASS",
+      "details": {
+        "definition_count": 75,
+        "used_count": 435,
+        "unused": []
+      }
+    },
+    {
+      "name": "submitted_nonterminal_record_valid",
+      "status": "PASS",
+      "details": {
+        "expected": "valid",
+        "error_count": 0,
+        "errors": []
+      }
+    },
+    {
+      "name": "degraded_nonterminal_record_valid",
+      "status": "PASS",
+      "details": {
+        "expected": "valid",
+        "error_count": 0,
+        "errors": []
+      }
+    },
+    {
+      "name": "executed_terminal_record_valid",
+      "status": "PASS",
+      "details": {
+        "expected": "valid",
+        "error_count": 0,
+        "errors": []
+      }
+    },
+    {
+      "name": "transient_uncontrolled_state_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 3,
+        "errors": [
+          "'PROCESSING' is not valid under any of the given schemas",
+          "'PROCESSING' is not valid under any of the given schemas",
+          "'SUBMITTED' was expected"
+        ]
+      }
+    },
+    {
+      "name": "degraded_terminality_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 3,
+        "errors": [
+          "'NONTERMINAL' was expected",
+          "'NONTERMINAL' was expected",
+          "'NONTERMINAL' was expected"
+        ]
+      }
+    },
+    {
+      "name": "executed_nonterminal_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 2,
+        "errors": [
+          "'TERMINAL' was expected",
+          "'TERMINAL' was expected"
+        ]
+      }
+    },
+    {
+      "name": "timestamp_ordering_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "False was expected"
+        ]
+      }
+    },
+    {
+      "name": "transition_from_terminal_state_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "'NONTERMINAL' was expected"
+        ]
+      }
+    },
+    {
+      "name": "transition_without_evidence_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "'governance_evidence_refs' is a required property"
+        ]
+      }
+    },
+    {
+      "name": "lifecycle_record_execution_authority_claim_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "False was expected"
+        ]
+      }
+    },
+    {
+      "name": "arbitrary_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "Additional properties are not allowed ('metadata' was unexpected)"
+        ]
+      }
+    },
+    {
+      "name": "submitted_semantics",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "name": "degraded_semantics",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "name": "executed_semantics",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "name": "event_count_mismatch_detected",
+      "status": "PASS",
+      "details": [
+        "ledger event_count mismatch"
+      ]
+    },
+    {
+      "name": "current_state_history_mismatch_detected",
+      "status": "PASS",
+      "details": [
+        "current state state_digest does not match final transition"
+      ]
+    },
+    {
+      "name": "integration:proposal_view.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+    },
+    {
+      "name": "integration:governance_context_envelope.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    {
+      "name": "integration:canonical_state.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+    },
+    {
+      "name": "integration:governance_approval_artifact.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    {
+      "name": "integration:authority_rederivation_result.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    {
+      "name": "integration:execution_authorization_view.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    {
+      "name": "integration:governance_binding_validation_result.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    {
+      "name": "integration:enforcement_context.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    {
+      "name": "integration:commit_boundary_result.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+    },
+    {
+      "name": "integration:governance_receipt.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+    },
+    {
+      "name": "integration:refusal_record.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+    },
+    {
+      "name": "integration:governance_evidence.json",
+      "status": "PASS",
+      "details": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+    },
+    {
+      "name": "openapi_components",
+      "status": "PASS",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "catalog_ds038_implemented",
+      "status": "PASS",
+      "details": {
+        "implemented": true,
+        "reserved": false,
+        "version": "1.0.31",
+        "summary": {
+          "implemented_schema_count": 41,
+          "proposed_reserved_schema_count": 3,
+          "excluded_registry_payload_count": 3,
+          "rtm_rows_with_ds_assignments": 108,
+          "highest_assigned_ds_identifier": "DS-044"
+        }
+      }
+    },
+    {
+      "name": "catalog_hash_consistency",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "name": "rtm_mapping_consistency",
+      "status": "PASS",
+      "details": {
+        "mapped": [
+          "CR-010",
+          "CR-011",
+          "CR-014",
+          "CR-017",
+          "CR-018",
+          "CR-023",
+          "CR-047",
+          "CR-059",
+          "CR-081",
+          "CR-091",
+          "CR-092",
+          "CR-093"
+        ],
+        "versions": [
+          "RTM-1.35"
+        ]
+      }
+    },
+    {
+      "name": "rtm_formula_error_scan",
+      "status": "PASS",
+      "details": {
+        "formula_count": 0,
+        "errors": []
+      }
+    },
+    {
+      "name": "rtm_format_preservation",
+      "status": "PASS",
+      "details": {
+        "format_differences": [],
+        "xml_differences": []
+      }
+    }
+  ],
+  "issues": []
+}

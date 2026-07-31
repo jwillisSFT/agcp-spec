@@ -1,0 +1,104 @@
+{
+  "status": "PASS",
+  "schema": "DS-003",
+  "filename": "meta_response.json",
+  "validated_at": "2026-07-30",
+  "draft_2020_12_schema_count": 44,
+  "metaschema_issues": [],
+  "resolved_reference_count": 3477,
+  "reference_issues": [],
+  "positive_cases": [
+    {
+      "name": "complete_v2_metadata_response",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_cases": [
+    {
+      "name": "missing_supported_agcp_releases",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "'supported_agcp_releases' is a required property"
+    },
+    {
+      "name": "schema_entry_without_hash",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "'content_digest' is a required property"
+    },
+    {
+      "name": "missing_rejection_code_registry",
+      "rejected": true,
+      "error_count": 2,
+      "sample_error": "[{'registry_ref': {'registry_document_id': 'REGDOC-CONSTRAINT-TYPE', 'registry_id': 'REG-CONSTRAINT-TYPE', 'registry_name': 'AGCP Constraint Type Registry', 'registry_kind': 'CONSTRAINT_TYPE', 'release_id': 'REG-CONSTRAINT-TYPE-v2.0.0', 'registry_release': 'v2.0.0', 'lifecycle_state': 'ACTIVE', 'canonical_uri': 'https://agcp.ai/registries/constraint-type-registry.json', 'document_digest': {'algorithm': 'SHA-256', 'value': '8eb3429e9483423200ef83e1974bbcd613c9f7d200960e755a7f05851e223427', 'canonicalization': 'JCS-RFC8785'}}, 'support_status': 'CURRENT'}, {'registry_ref': {'registry_document_id': 'REGDOC-INVARIANT-TYPE', 'registry_id': 'REG-INVARIANT-TYPE', 'registry_name': 'AGCP Invariant Type Registry', 'registry_kind': 'INVARIANT_TYPE', 'release_id': 'REG-INVARIANT-TYPE-v2.0.0', 'registry_release': 'v2.0.0', 'lifecycle_state': 'ACTIVE', 'canonical_uri': 'https://agcp.ai/registries/invariant-type-registry.json', 'document_digest': {'algorithm': 'SHA-256', 'value': 'ae1c4088be50649902dda72d9a37370dc948f6d178a06419399b4e7c29ed371f', 'canonicalization': 'JCS-RFC8785'}}, 'support_status': 'CURRENT'}] is too short"
+    },
+    {
+      "name": "verified_claim_without_evidence",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "'objective_evidence_refs' is a required property"
+    },
+    {
+      "name": "verified_capability_without_evidence",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "'objective_evidence_refs' is a required property"
+    },
+    {
+      "name": "l5_support_without_l5_claim",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "[{'claim_id': 'CLAIM-AGCP-REFERENCE-L5', 'conformance_level': 'L4', 'claim_status': 'VERIFIED', 'implementation_profile_id': 'PROF-AGCP-REFERENCE-2.0', 'agcp_release_ids': ['AGCP-v2.0.0'], 'claim_scope': {'scope_type': 'IMPLEMENTATION', 'implementation_id': 'AGCP-REFERENCE-IMPLEMENTATION', 'included_capability_ids': ['PROPOSAL_QUALIFICATION', 'GOVERNANCE_DECISION_FUNCTION', 'EXECUTION_AUTHORIZATION', 'CONTINUATION_INTEGRITY', 'GOVERNANCE_REALIZATION', 'COMMIT_BOUNDARY', 'GOVERNANCE_EVIDENCE', 'GOVERNANCE_LIFECYCLE', 'GOVERNANCE_LEDGER', 'TENANT_DOMAIN_ISOLATION', 'GOVERNANCE_COMPILATION', 'CONTROLLED_GOVERNANCE_ACTIVATION', 'NON_BYPASSABLE_ENFORCEMENT'], 'scope_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS-RFC8785'}}, 'applicable_companion_specifications': [], 'conformance_test_suite_release': 'CTS-v2.0.0', 'assessment_status': 'ASSESSED', 'objective_evidence_refs': [{'governance_evidence_id': 'GE-META-1', 'evidence_digest': {'algorithm': 'SHA-256', 'value': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'canonicalization': 'JCS-RFC8785'}}], 'claim_digest': {'algorithm': 'SHA-256', 'value': '5555555555555555555555555555555555555555555555555555555555555555', 'canonicalization': 'JCS-RFC8785'}, 'claimed_at': '2026-07-30T10:00:00-04:00', 'verified_at': '2026-07-30T11:00:00-04:00', 'verification_authority': {'principal_id': 'AGCP-ASSESSOR', 'principal_type': 'GOVERNANCE_AUTHORITY'}}] does not contain items matching the given schema"
+    },
+    {
+      "name": "profile_redefines_core",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "False was expected"
+    },
+    {
+      "name": "arbitrary_metadata",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "Additional properties are not allowed ('metadata' was unexpected)"
+    },
+    {
+      "name": "missing_integrity_signature",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "'integrity_signature' is a required property"
+    },
+    {
+      "name": "missing_registry_integrity_digest",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "'document_digest' is a required property"
+    },
+    {
+      "name": "release_without_manifest_digest",
+      "rejected": true,
+      "error_count": 1,
+      "sample_error": "'release_manifest_digest' is a required property"
+    }
+  ],
+  "required_advertisements": [
+    "supported AGCP releases",
+    "schema-set identity and per-schema hashes",
+    "implementation profile",
+    "registry releases",
+    "L1-L5 conformance levels and claims",
+    "supported governance capabilities",
+    "HTTP contract"
+  ],
+  "catalog_version": "1.0.38",
+  "rtm_dataset_version": "RTM-1.41",
+  "rtm_rows_with_ds_assignments": 115,
+  "common_definition_count": 63,
+  "unused_common_definitions": [],
+  "openapi_reference_count": 130,
+  "openapi_issues": [],
+  "rtm_formula_count": 0,
+  "rtm_formula_errors": [],
+  "rtm_format_preserved": true
+}

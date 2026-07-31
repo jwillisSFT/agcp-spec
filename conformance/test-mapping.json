@@ -1,5 +1,5 @@
 {
-  "source_workbook": "AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
+  "source_workbook": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
   "test_count": 122,
   "tests": [
     {
@@ -19,7 +19,42 @@
         "NS-7.4-02",
         "NS-7.6-02"
       ],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-011",
+        "DS-012",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/constraint_evaluation.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-028",
+        "REG-041"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-001"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-002",
@@ -31,7 +66,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-013",
+        "REG-028",
+        "REG-041",
+        "REG-044",
+        "REG-070"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-002"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-003",
@@ -45,7 +108,40 @@
         "NS-5.5-01",
         "NS-5.5-02"
       ],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-008",
+        "DS-012",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/invariant_definition.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-028",
+        "REG-041",
+        "REG-068",
+        "REG-069"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-REGISTRIES"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-003"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-004",
@@ -72,7 +168,38 @@
         "NS-6.7-01",
         "NS-6.7-03"
       ],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-002",
+        "DS-013",
+        "DS-021",
+        "DS-044"
+      ],
+      "schema_files": [
+        "schemas/error_response.json",
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/registry_document.schema.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-002",
+        "REG-054"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds044-registry-document-capability-example.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-REGISTRIES"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-004"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-005",
@@ -84,7 +211,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-033",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/evidence_qualification_result.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-003",
+        "REG-055"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+        "schemas/examples/ds033-evidence-qualification-qualified.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-PROVENANCE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-005"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-006",
@@ -95,7 +250,31 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-004"
+      ],
+      "schema_files": [
+        "schemas/tenant.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-006",
+        "REG-056"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-TENANT-STATE-GATING",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-006"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-007",
@@ -108,7 +287,35 @@
       "contextual_ns_ids": [
         "NS-7.2-02"
       ],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-006",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/policy_artifact.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-009",
+        "REG-064",
+        "REG-065"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-REGISTRIES"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-007"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-008",
@@ -120,7 +327,36 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-021",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-023",
+        "REG-027",
+        "REG-091"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-IDEMPOTENCY",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-008",
+        "TV-PEM-004",
+        "TV-POL-004"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-009",
@@ -131,7 +367,36 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-021",
+        "DS-028",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governed_action_proposal.json",
+        "schemas/refusal_record.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-053"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-IDEMPOTENCY",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PROP-009",
+        "TV-PEM-005",
+        "TV-POL-005"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-010",
@@ -142,7 +407,45 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC001-TC010.md"
+      "file": "TC001-TC010.md",
+      "ds_ids": [
+        "DS-014",
+        "DS-017",
+        "DS-038"
+      ],
+      "schema_files": [
+        "schemas/proposal_view.json",
+        "schemas/execution_authorization_view.json",
+        "schemas/governance_lifecycle_record.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-059",
+        "REG-060"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds038-governance-lifecycle-authorized.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-LIFECYCLE-AND-CONTINUATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT",
+        "CHECK-EXECUTION-AUTHORIZATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GET-001",
+        "TV-EAUTH-001",
+        "TV-GART-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-EAUTH-002",
+        "TV-GART-002"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-011",
@@ -153,7 +456,34 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-014",
+        "DS-038"
+      ],
+      "schema_files": [
+        "schemas/proposal_view.json",
+        "schemas/governance_lifecycle_record.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-041",
+        "REG-042"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds038-governance-lifecycle-authorized.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GET-002"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-012",
@@ -164,7 +494,33 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-026"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-014",
+        "REG-044",
+        "REG-070"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GAPP-001"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-013",
@@ -175,7 +531,33 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-026"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-014",
+        "REG-044"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-EXECUTION-AUTHORIZATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GAPP-002"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-014",
@@ -186,7 +568,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-026",
+        "DS-038"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_lifecycle_record.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-013",
+        "REG-044",
+        "REG-084"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json",
+        "schemas/examples/ds038-governance-lifecycle-authorized.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-015",
@@ -198,7 +608,33 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-026"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-013",
+        "REG-044",
+        "REG-085"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GAPP-003"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-016",
@@ -209,7 +645,34 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-026"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-013",
+        "REG-044",
+        "REG-084"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-PROVENANCE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GAPP-004"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-017",
@@ -220,7 +683,36 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-026",
+        "DS-038"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_lifecycle_record.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-013",
+        "REG-042",
+        "REG-044",
+        "REG-085"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json",
+        "schemas/examples/ds038-governance-lifecycle-authorized.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-018",
@@ -231,27 +723,98 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-026",
+        "DS-038"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_lifecycle_record.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-013",
+        "REG-042",
+        "REG-044"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json",
+        "schemas/examples/ds038-governance-lifecycle-authorized.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
-	  "tc_id": "TC-019",
-	  "cr_id": "CR-019",
-	  "title": "Commit Authorized Action",
-	  "direct_ns_ids": [
-		"NS-5.1-01",
-		"NS-8.6-02",
-		"NS-9.2-01",
-		"NS-9.5-01",
-		"NS-9.6-01"
-	  ],
-	  "conditional_ns_ids": [],
-	  "contextual_ns_ids": [
-		"NS-8.1-01",
-		"NS-9.2-02",
-		"NS-9.6-03",
-		"NS-5.2.3-01"
-	  ],
-	  "file": "TC011-TC020.md"
+      "tc_id": "TC-019",
+      "cr_id": "CR-019",
+      "title": "Commit Authorized Action",
+      "direct_ns_ids": [
+        "NS-5.1-01",
+        "NS-8.6-02",
+        "NS-9.2-01",
+        "NS-9.5-01",
+        "NS-9.6-01"
+      ],
+      "conditional_ns_ids": [],
+      "contextual_ns_ids": [
+        "NS-8.1-01",
+        "NS-9.2-02",
+        "NS-9.6-03",
+        "NS-5.2.3-01"
+      ],
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-016",
+        "REG-018",
+        "REG-019",
+        "REG-029",
+        "REG-030",
+        "REG-041",
+        "REG-045",
+        "REG-050",
+        "REG-075",
+        "REG-076"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-020",
@@ -262,7 +825,47 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC011-TC020.md"
+      "file": "TC011-TC020.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-018",
+        "REG-019",
+        "REG-029",
+        "REG-030",
+        "REG-041",
+        "REG-050",
+        "REG-072",
+        "REG-074",
+        "REG-076"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-COMMIT-002"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-021",
@@ -273,7 +876,44 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-018",
+        "REG-019",
+        "REG-029",
+        "REG-030",
+        "REG-041",
+        "REG-050",
+        "REG-072",
+        "REG-074",
+        "REG-076"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-022",
@@ -284,7 +924,48 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-016",
+        "REG-018",
+        "REG-029",
+        "REG-030",
+        "REG-043",
+        "REG-045",
+        "REG-061",
+        "REG-073",
+        "REG-076",
+        "REG-077"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-COMMIT-003"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-023",
@@ -295,7 +976,47 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-019",
+        "DS-038"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/governance_lifecycle_record.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-018",
+        "REG-029",
+        "REG-030",
+        "REG-042",
+        "REG-045",
+        "REG-073",
+        "REG-076",
+        "REG-083"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json",
+        "schemas/examples/ds038-governance-lifecycle-authorized.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-IDEMPOTENCY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-COMMIT-004"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-024",
@@ -306,7 +1027,49 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-004",
+        "DS-017",
+        "DS-018",
+        "DS-019",
+        "DS-034"
+      ],
+      "schema_files": [
+        "schemas/tenant.json",
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/authority_rederivation_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-006",
+        "REG-030",
+        "REG-056",
+        "REG-076",
+        "REG-082"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-TENANT-STATE-GATING",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-COMMIT-005"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-025",
@@ -317,7 +1080,40 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-004",
+        "DS-017",
+        "DS-034"
+      ],
+      "schema_files": [
+        "schemas/tenant.json",
+        "schemas/execution_authorization_view.json",
+        "schemas/authority_rederivation_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-006",
+        "REG-030",
+        "REG-056",
+        "REG-076",
+        "REG-082"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-TENANT-STATE-GATING",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-026",
@@ -341,7 +1137,39 @@
         "NS-11.7-01",
         "NS-11.7-03"
       ],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-004"
+      ],
+      "schema_files": [
+        "schemas/tenant.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-004",
+        "REG-037",
+        "REG-057",
+        "REG-059",
+        "REG-060"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-XTEN-001",
+        "TV-EAUTH-003",
+        "TV-GART-003"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-XTEN-SETUP"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-027",
@@ -352,7 +1180,36 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-004"
+      ],
+      "schema_files": [
+        "schemas/tenant.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-004",
+        "REG-036",
+        "REG-037",
+        "REG-057"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-XTEN-002"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-XTEN-SETUP"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-028",
@@ -363,7 +1220,44 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-004",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/tenant.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-004",
+        "REG-036",
+        "REG-037",
+        "REG-057"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-XTEN-003"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-XTEN-SETUP"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-029",
@@ -374,7 +1268,40 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-004"
+      ],
+      "schema_files": [
+        "schemas/tenant.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-004",
+        "REG-009",
+        "REG-036",
+        "REG-037",
+        "REG-057",
+        "REG-064"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT",
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-PEM-003",
+        "TV-POL-003",
+        "TV-GART-003"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-030",
@@ -387,7 +1314,41 @@
       "contextual_ns_ids": [
         "NS-11.6-03"
       ],
-      "file": "TC021-TC030.md"
+      "file": "TC021-TC030.md",
+      "ds_ids": [
+        "DS-004",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/tenant.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-004",
+        "REG-037",
+        "REG-057"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-XTEN-004"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-XTEN-SETUP"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-031",
@@ -418,7 +1379,32 @@
         "NS-8.7-03",
         "NS-13.6-06"
       ],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-034",
+        "DS-017"
+      ],
+      "schema_files": [
+        "schemas/authority_rederivation_result.json",
+        "schemas/execution_authorization_view.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-IDEMPOTENCY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-032",
@@ -429,7 +1415,41 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-034",
+        "DS-017",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/authority_rederivation_result.json",
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-045",
+        "REG-073"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-033",
@@ -440,7 +1460,38 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-034",
+        "DS-017",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/authority_rederivation_result.json",
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-034",
@@ -451,7 +1502,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-015",
+        "DS-037",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_decision_result.json",
+        "schemas/deterministic_adjudication_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-027"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-IDEMPOTENCY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-035",
@@ -462,7 +1541,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-017"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-043",
+        "REG-046",
+        "REG-071"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-STATE-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-036",
@@ -475,7 +1582,31 @@
       "contextual_ns_ids": [
         "NS-4.3-01"
       ],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-001",
+        "REG-068"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-037",
@@ -488,7 +1619,31 @@
       "contextual_ns_ids": [
         "NS-4.3-01"
       ],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-001",
+        "REG-068"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-038",
@@ -501,7 +1656,31 @@
       "contextual_ns_ids": [
         "NS-4.3-01"
       ],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-001",
+        "REG-068"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-039",
@@ -512,7 +1691,28 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-040",
@@ -528,7 +1728,40 @@
         "NS-12.3-01",
         "NS-12.7-01"
       ],
-      "file": "TC031-TC040.md"
+      "file": "TC031-TC040.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021",
+        "DS-022",
+        "DS-024",
+        "DS-025"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/authority_lineage.json",
+        "schemas/delegation_artifact.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-011",
+        "REG-012",
+        "REG-035",
+        "REG-081"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-041",
@@ -539,7 +1772,51 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-020",
+        "DS-021",
+        "DS-022",
+        "DS-033",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governance_evidence.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/evidence_qualification_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-034",
+        "REG-062",
+        "REG-089",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+        "schemas/examples/ds033-evidence-qualification-qualified.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-042",
@@ -552,7 +1829,38 @@
       "contextual_ns_ids": [
         "NS-10.5-01"
       ],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021",
+        "DS-022",
+        "DS-024",
+        "DS-025"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/authority_lineage.json",
+        "schemas/delegation_artifact.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-031",
+        "REG-079"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-CANONICAL-STATE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-043",
@@ -563,7 +1871,37 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021",
+        "DS-022",
+        "DS-024"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/authority_lineage.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-001",
+        "REG-068"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-PROVENANCE",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-044",
@@ -580,7 +1918,41 @@
         "NS-14.6-02",
         "NS-16.6-03"
       ],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021",
+        "DS-022",
+        "DS-024",
+        "DS-025"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/authority_lineage.json",
+        "schemas/delegation_artifact.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-011",
+        "REG-012",
+        "REG-035",
+        "REG-081",
+        "REG-083"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-045",
@@ -593,7 +1965,37 @@
       "contextual_ns_ids": [
         "NS-6.6A-02"
       ],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021",
+        "DS-022",
+        "DS-024",
+        "DS-025"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/authority_lineage.json",
+        "schemas/delegation_artifact.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-003"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-PROVENANCE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-046",
@@ -604,7 +2006,36 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-021",
+        "DS-022"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-017",
+        "REG-032",
+        "REG-043",
+        "REG-078"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-CANONICAL-STATE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-047",
@@ -615,7 +2046,50 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-020",
+        "DS-021",
+        "DS-022",
+        "DS-024",
+        "DS-025",
+        "DS-038",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/governance_evidence.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/authority_lineage.json",
+        "schemas/delegation_artifact.json",
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-003",
+        "REG-033",
+        "REG-055"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds038-governance-lifecycle-authorized.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-PROVENANCE",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-048",
@@ -626,7 +2100,42 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-023",
+        "DS-032",
+        "DS-018"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/canonical_state.json",
+        "schemas/state_qualification_result.json",
+        "schemas/commit_boundary_request.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-007",
+        "REG-031",
+        "REG-080"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds032-state-qualification-not-qualified.json",
+        "schemas/examples/ds032-state-qualification-qualified.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-STATE-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-049",
@@ -639,7 +2148,42 @@
       "contextual_ns_ids": [
         "NS-7.4-01"
       ],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-023",
+        "DS-032",
+        "DS-018"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/canonical_state.json",
+        "schemas/state_qualification_result.json",
+        "schemas/commit_boundary_request.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-008",
+        "REG-031",
+        "REG-079"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds032-state-qualification-not-qualified.json",
+        "schemas/examples/ds032-state-qualification-qualified.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-STATE-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-050",
@@ -650,7 +2194,40 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC041-TC050.md"
+      "file": "TC041-TC050.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-023",
+        "DS-032"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/canonical_state.json",
+        "schemas/state_qualification_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-008",
+        "REG-031",
+        "REG-079"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds032-state-qualification-not-qualified.json",
+        "schemas/examples/ds032-state-qualification-qualified.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-STATE-001",
+        "TV-STATE-002"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-051",
@@ -661,7 +2238,32 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-023"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/canonical_state.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-008",
+        "REG-031",
+        "REG-032",
+        "REG-079"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-CANONICAL-STATE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-052",
@@ -672,7 +2274,29 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-020"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-008",
+        "REG-031",
+        "REG-079"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-CANONICAL-STATE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-053",
@@ -686,7 +2310,37 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-008",
+        "DS-012",
+        "DS-015",
+        "DS-028"
+      ],
+      "schema_files": [
+        "schemas/invariant_definition.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json",
+        "schemas/refusal_record.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-028",
+        "REG-069"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-054",
@@ -697,7 +2351,39 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-028",
+        "DS-033",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/refusal_record.json",
+        "schemas/evidence_qualification_result.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-028",
+        "REG-034",
+        "REG-069",
+        "REG-089"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+        "schemas/examples/ds033-evidence-qualification-qualified.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-055",
@@ -708,7 +2394,31 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-028",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/refusal_record.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-028",
+        "REG-069",
+        "REG-079"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-CANONICAL-STATE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-056",
@@ -719,7 +2429,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-028",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/refusal_record.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-PROVENANCE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-057",
@@ -732,7 +2470,37 @@
       "contextual_ns_ids": [
         "NS-10.7-01"
       ],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-028",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/refusal_record.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-023",
+        "REG-091"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-CANONICAL-STATE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-EVID-001",
+        "TV-STATE-002"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-058",
@@ -743,7 +2511,38 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-012",
+        "DS-026"
+      ],
+      "schema_files": [
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_approval_artifact.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-013",
+        "REG-014",
+        "REG-044",
+        "REG-070",
+        "REG-084"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json",
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-059",
@@ -754,7 +2553,40 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-026",
+        "DS-038",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-014",
+        "REG-044"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json",
+        "schemas/examples/ds038-governance-lifecycle-authorized.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-060",
@@ -765,7 +2597,34 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC051-TC060.md"
+      "file": "TC051-TC060.md",
+      "ds_ids": [
+        "DS-026",
+        "DS-028"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json",
+        "schemas/refusal_record.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-014",
+        "REG-044"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-061",
@@ -776,7 +2635,39 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-026",
+        "DS-017"
+      ],
+      "schema_files": [
+        "schemas/governance_approval_artifact.json",
+        "schemas/execution_authorization_view.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-018",
+        "REG-029",
+        "REG-042",
+        "REG-044",
+        "REG-046",
+        "REG-072",
+        "REG-085"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds026-governance-approval-completed-quorum.json",
+        "schemas/examples/ds026-governance-approval-partial-quorum.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-062",
@@ -789,7 +2680,40 @@
       "contextual_ns_ids": [
         "NS-10.4-02"
       ],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-015",
+        "DS-020",
+        "DS-027",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_decision_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_receipt.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-031",
+        "REG-034",
+        "REG-089"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-063",
@@ -802,7 +2726,54 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-007",
+        "DS-008",
+        "DS-011",
+        "DS-012",
+        "DS-015",
+        "DS-020",
+        "DS-027",
+        "DS-040",
+        "DS-044"
+      ],
+      "schema_files": [
+        "schemas/constraint_artifact.json",
+        "schemas/invariant_definition.json",
+        "schemas/constraint_evaluation.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_receipt.json",
+        "schemas/governance_ledger_event.json",
+        "schemas/registry_document.schema.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-034",
+        "REG-089"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json",
+        "schemas/examples/ds044-registry-document-capability-example.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-REGISTRIES"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-064",
@@ -815,7 +2786,50 @@
       "contextual_ns_ids": [
         "NS-10.5-01"
       ],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-011",
+        "DS-015",
+        "DS-020",
+        "DS-027",
+        "DS-033",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/constraint_evaluation.json",
+        "schemas/governance_decision_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_receipt.json",
+        "schemas/evidence_qualification_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-034",
+        "REG-089",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+        "schemas/examples/ds033-evidence-qualification-qualified.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-PROVENANCE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-065",
@@ -828,7 +2842,48 @@
       "contextual_ns_ids": [
         "NS-12.6-04"
       ],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-011",
+        "DS-015",
+        "DS-020",
+        "DS-027",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/constraint_evaluation.json",
+        "schemas/governance_decision_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_receipt.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-034",
+        "REG-035",
+        "REG-081",
+        "REG-089",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-PROVENANCE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-066",
@@ -839,7 +2894,48 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-011",
+        "DS-015",
+        "DS-020",
+        "DS-027",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/constraint_evaluation.json",
+        "schemas/governance_decision_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_receipt.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-023",
+        "REG-033",
+        "REG-034",
+        "REG-089",
+        "REG-090",
+        "REG-091"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-PROVENANCE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-067",
@@ -866,7 +2962,53 @@
         "NS-10.9-03",
         "NS-13.6-03"
       ],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-018",
+        "DS-020",
+        "DS-027",
+        "DS-033",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/commit_boundary_request.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_receipt.json",
+        "schemas/evidence_qualification_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-034",
+        "REG-043",
+        "REG-046",
+        "REG-089",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+        "schemas/examples/ds033-evidence-qualification-qualified.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-PROVENANCE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001",
+        "TV-EVID-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-068",
@@ -881,7 +3023,52 @@
         "NS-10.6-01",
         "NS-10.6-02"
       ],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-018",
+        "DS-020",
+        "DS-027",
+        "DS-033",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/commit_boundary_request.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_receipt.json",
+        "schemas/evidence_qualification_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-034",
+        "REG-046",
+        "REG-062",
+        "REG-089",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+        "schemas/examples/ds033-evidence-qualification-qualified.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001",
+        "TV-EVID-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-069",
@@ -892,7 +3079,43 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-022",
+        "DS-027",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/governance_receipt.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-034",
+        "REG-046",
+        "REG-089",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-PROVENANCE",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-070",
@@ -903,7 +3126,30 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC061-TC070.md"
+      "file": "TC061-TC070.md",
+      "ds_ids": [
+        "DS-022"
+      ],
+      "schema_files": [
+        "schemas/governance_context_envelope.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-017",
+        "REG-043",
+        "REG-046",
+        "REG-078"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROVENANCE",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-071",
@@ -914,7 +3160,30 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-022"
+      ],
+      "schema_files": [
+        "schemas/governance_context_envelope.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-017",
+        "REG-043",
+        "REG-046",
+        "REG-078"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROVENANCE",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-072",
@@ -925,7 +3194,34 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-025"
+      ],
+      "schema_files": [
+        "schemas/delegation_artifact.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-005",
+        "REG-012",
+        "REG-035",
+        "REG-036",
+        "REG-038",
+        "REG-044",
+        "REG-058"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-073",
@@ -936,7 +3232,27 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [],
+      "schema_files": [],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-027",
+        "REG-040",
+        "REG-092"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-074",
@@ -947,7 +3263,31 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-016",
+        "REG-027",
+        "REG-043",
+        "REG-077"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-075",
@@ -960,7 +3300,43 @@
       "contextual_ns_ids": [
         "NS-5.9-02"
       ],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-011",
+        "DS-012",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/constraint_evaluation.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-010",
+        "REG-027",
+        "REG-028",
+        "REG-040",
+        "REG-065",
+        "REG-066",
+        "REG-067"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-076",
@@ -975,7 +3351,46 @@
         "NS-7.7-01",
         "NS-7.7-03"
       ],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-008",
+        "DS-011",
+        "DS-012",
+        "DS-015",
+        "DS-044"
+      ],
+      "schema_files": [
+        "schemas/invariant_definition.json",
+        "schemas/constraint_evaluation.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json",
+        "schemas/registry_document.schema.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-027",
+        "REG-028",
+        "REG-066",
+        "REG-067"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json",
+        "schemas/examples/ds044-registry-document-capability-example.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-REGISTRIES"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-077",
@@ -986,7 +3401,29 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-027",
+        "REG-040"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-078",
@@ -997,7 +3434,39 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-011",
+        "DS-012",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/constraint_evaluation.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-027",
+        "REG-040",
+        "REG-066"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+        "schemas/examples/ds011-constraint-evaluation-violated.json",
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-079",
@@ -1008,7 +3477,36 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-030",
+        "REG-050",
+        "REG-075"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-080",
@@ -1020,7 +3518,37 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC071-TC080.md"
+      "file": "TC071-TC080.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-030",
+        "REG-050",
+        "REG-074",
+        "REG-075",
+        "REG-076"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-081",
@@ -1031,7 +3559,39 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-038",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-041",
+        "REG-042"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds038-governance-lifecycle-authorized.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-STATE-001",
+        "TV-STATE-002"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-082",
@@ -1048,7 +3608,37 @@
         "NS-5.2.5-01",
         "NS-5.2.5-02"
       ],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-023",
+        "REG-042",
+        "REG-091"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-STATE-002"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-083",
@@ -1059,7 +3649,39 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-015",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_decision_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-028",
+        "REG-031",
+        "REG-032"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-STATE-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-084",
@@ -1073,7 +3695,50 @@
       "contextual_ns_ids": [
         "NS-13.6-07"
       ],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-017",
+        "DS-018",
+        "DS-019",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/execution_authorization_view.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-019",
+        "REG-030",
+        "REG-031",
+        "REG-032",
+        "REG-045",
+        "REG-076"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001",
+        "TV-STATE-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-085",
@@ -1087,7 +3752,42 @@
         "NS-10.7-01",
         "NS-10.7-02"
       ],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-015",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_decision_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-023",
+        "REG-033",
+        "REG-034",
+        "REG-091"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-CANONICAL-STATE"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-EVID-001"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-086",
@@ -1098,7 +3798,41 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-027",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_receipt.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-023",
+        "REG-033",
+        "REG-034",
+        "REG-091"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-EVID-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-087",
@@ -1111,7 +3845,41 @@
       "contextual_ns_ids": [
         "NS-7.4-01"
       ],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-012",
+        "DS-015",
+        "DS-019",
+        "DS-028"
+      ],
+      "schema_files": [
+        "schemas/invariant_evaluation.json",
+        "schemas/governance_decision_result.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/refusal_record.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-068",
+        "REG-069"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+        "schemas/examples/ds012-invariant-evaluation-preserved.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-088",
@@ -1122,7 +3890,36 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-028",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/refusal_record.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-030",
+        "REG-050",
+        "REG-074",
+        "REG-076"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-089",
@@ -1192,7 +3989,101 @@
         "NS-17.7-03",
         "NS-17.8-03"
       ],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-003"
+      ],
+      "schema_files": [
+        "schemas/meta_response.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-027",
+        "REG-040"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-GOVERNANCE-APPROVAL",
+        "CHECK-EXECUTION-AUTHORIZATION",
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-APPEND-ONLY-GOVERNANCE-LEDGER",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-IDEMPOTENCY",
+        "CHECK-TENANT-STATE-GATING",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+        "CHECK-PROVENANCE",
+        "CHECK-REGISTRIES",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS",
+        "CHECK-LIFECYCLE-AND-CONTINUATION",
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "AGGREGATE_SUITE",
+      "test_vector_ids": [
+        "TV-PROP-001",
+        "TV-PROP-002",
+        "TV-PROP-003",
+        "TV-PROP-004",
+        "TV-PROP-005",
+        "TV-PROP-006",
+        "TV-PROP-007",
+        "TV-PROP-008",
+        "TV-PROP-009",
+        "TV-GET-001",
+        "TV-GET-002",
+        "TV-GAPP-001",
+        "TV-GAPP-002",
+        "TV-GAPP-003",
+        "TV-GAPP-004",
+        "TV-COMMIT-001",
+        "TV-COMMIT-002",
+        "TV-COMMIT-003",
+        "TV-COMMIT-004",
+        "TV-COMMIT-005",
+        "TV-EVID-001",
+        "TV-STATE-001",
+        "TV-STATE-002",
+        "TV-XTEN-SETUP",
+        "TV-XTEN-001",
+        "TV-XTEN-002",
+        "TV-XTEN-003",
+        "TV-XTEN-004",
+        "TV-META-001",
+        "TV-EAUTH-001",
+        "TV-EAUTH-002",
+        "TV-EAUTH-003",
+        "TV-PEM-001",
+        "TV-PEM-002",
+        "TV-PEM-003",
+        "TV-PEM-004",
+        "TV-PEM-005",
+        "TV-POL-001",
+        "TV-POL-002",
+        "TV-POL-003",
+        "TV-POL-004",
+        "TV-POL-005",
+        "TV-GART-001",
+        "TV-GART-002",
+        "TV-GART-003",
+        "TV-GCFG-001",
+        "TV-GCOMP-001",
+        "TV-GCONST-001",
+        "TV-GCONST-002",
+        "TV-GOMIT-001",
+        "TV-GSELF-001",
+        "TV-GACT-001",
+        "TV-GACT-002",
+        "TV-GROLL-001"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "AGGREGATE_SUITE",
+      "test_vector_disposition": "The complete current executable vector catalog supports the aggregate conformance-suite TC; formal TC evidence and assessment procedures remain authoritative."
     },
     {
       "tc_id": "TC-090",
@@ -1205,7 +4096,40 @@
       "contextual_ns_ids": [
         "NS-5.9-02"
       ],
-      "file": "TC081-TC090.md"
+      "file": "TC081-TC090.md",
+      "ds_ids": [
+        "DS-003",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/meta_response.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-027",
+        "REG-040",
+        "REG-092"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-META-001",
+        "TV-EAUTH-001",
+        "TV-PEM-001",
+        "TV-POL-001",
+        "TV-GART-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "Current executable vectors provide supporting evidence for portions of the formal TC; the complete TC procedure remains authoritative."
     },
     {
       "tc_id": "TC-091",
@@ -1216,7 +4140,43 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-038",
+        "DS-039",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/governance_lifecycle_record.json",
+        "schemas/continuation_integrity_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-020",
+        "REG-039",
+        "REG-042",
+        "REG-046",
+        "REG-047"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds038-governance-lifecycle-authorized.json",
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-002"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-092",
@@ -1227,7 +4187,39 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-038",
+        "DS-039"
+      ],
+      "schema_files": [
+        "schemas/governance_lifecycle_record.json",
+        "schemas/continuation_integrity_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-020",
+        "REG-039",
+        "REG-042",
+        "REG-046",
+        "REG-047"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds038-governance-lifecycle-authorized.json",
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-002"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-093",
@@ -1240,7 +4232,40 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-038",
+        "DS-039"
+      ],
+      "schema_files": [
+        "schemas/governance_lifecycle_record.json",
+        "schemas/continuation_integrity_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-020",
+        "REG-039",
+        "REG-042",
+        "REG-046",
+        "REG-047",
+        "REG-071"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds038-governance-lifecycle-authorized.json",
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-002"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-094",
@@ -1251,7 +4276,27 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-037"
+      ],
+      "schema_files": [
+        "schemas/deterministic_adjudication_result.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-095",
@@ -1262,7 +4307,27 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-037"
+      ],
+      "schema_files": [
+        "schemas/deterministic_adjudication_result.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-096",
@@ -1285,7 +4350,42 @@
         "NS-8.6-05",
         "NS-13.6-01"
       ],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-034",
+        "DS-018"
+      ],
+      "schema_files": [
+        "schemas/authority_rederivation_result.json",
+        "schemas/commit_boundary_request.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-011",
+        "REG-019",
+        "REG-029",
+        "REG-035",
+        "REG-045",
+        "REG-073",
+        "REG-081",
+        "REG-082"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-097",
@@ -1296,7 +4396,41 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-033"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/evidence_qualification_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-021",
+        "REG-022",
+        "REG-033",
+        "REG-034",
+        "REG-089",
+        "REG-090"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds033-evidence-qualification-not-qualified.json",
+        "schemas/examples/ds033-evidence-qualification-qualified.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-GOVERNANCE-EVIDENCE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001",
+        "TV-EVID-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-098",
@@ -1317,7 +4451,38 @@
         "NS-13.7-01",
         "NS-13.7-03"
       ],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-039",
+        "DS-040"
+      ],
+      "schema_files": [
+        "schemas/continuation_integrity_result.json",
+        "schemas/governance_ledger_event.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-020",
+        "REG-042",
+        "REG-046"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json",
+        "schemas/examples/ds040-governance-ledger-event-genesis.json",
+        "schemas/examples/ds040-governance-ledger-event-sequenced.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-099",
@@ -1332,7 +4497,34 @@
         "NS-13.6C-03",
         "NS-13.7-02"
       ],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-039"
+      ],
+      "schema_files": [
+        "schemas/continuation_integrity_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-020",
+        "REG-042",
+        "REG-046"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-100",
@@ -1346,7 +4538,35 @@
       "contextual_ns_ids": [
         "NS-13.4-01"
       ],
-      "file": "TC091-TC100.md"
+      "file": "TC091-TC100.md",
+      "ds_ids": [
+        "DS-039"
+      ],
+      "schema_files": [
+        "schemas/continuation_integrity_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-020",
+        "REG-042",
+        "REG-046",
+        "REG-047"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-002"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-101",
@@ -1358,7 +4578,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-039"
+      ],
+      "schema_files": [
+        "schemas/continuation_integrity_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-020",
+        "REG-042",
+        "REG-046",
+        "REG-047"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-102",
@@ -1374,7 +4622,41 @@
         "NS-5.2.2-02",
         "NS-5.2.4-01"
       ],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-031",
+        "DS-030",
+        "DS-018",
+        "DS-019"
+      ],
+      "schema_files": [
+        "schemas/resulting_state_validation_result.json",
+        "schemas/governance_binding_validation_result.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json"
+      ],
+      "if_ids": [
+        "IF-001"
+      ],
+      "registry_ids": [
+        "REG-050",
+        "REG-075"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-103",
@@ -1389,7 +4671,41 @@
         "NS-4.6-02",
         "NS-5.2.5-03"
       ],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-023",
+        "DS-032"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/canonical_state.json",
+        "schemas/state_qualification_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-008",
+        "REG-019",
+        "REG-031",
+        "REG-032",
+        "REG-079"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds032-state-qualification-not-qualified.json",
+        "schemas/examples/ds032-state-qualification-qualified.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-STATE-001"
+      ],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
     },
     {
       "tc_id": "TC-104",
@@ -1400,7 +4716,35 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-020",
+        "DS-015"
+      ],
+      "schema_files": [
+        "schemas/governance_evidence.json",
+        "schemas/governance_decision_result.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-008",
+        "REG-028",
+        "REG-031",
+        "REG-032",
+        "REG-067",
+        "REG-079"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-CANONICAL-STATE",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-105",
@@ -1411,7 +4755,44 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-018",
+        "DS-019",
+        "DS-020",
+        "DS-021",
+        "DS-035"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/bind_set.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-051",
+        "REG-052"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-106",
@@ -1422,7 +4803,44 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-018",
+        "DS-019",
+        "DS-020",
+        "DS-021",
+        "DS-036"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_dependency_graph.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-051",
+        "REG-052"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-107",
@@ -1433,7 +4851,52 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-018",
+        "DS-019",
+        "DS-020",
+        "DS-021",
+        "DS-030",
+        "DS-036",
+        "DS-039"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/governance_binding_validation_result.json",
+        "schemas/governance_dependency_graph.json",
+        "schemas/continuation_integrity_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-051",
+        "REG-052",
+        "REG-071"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json",
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-108",
@@ -1444,7 +4907,44 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-018",
+        "DS-019",
+        "DS-020",
+        "DS-021",
+        "DS-035"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/bind_set.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-051",
+        "REG-052"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-PROPOSAL-QUALIFICATION",
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-109",
@@ -1456,7 +4956,47 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-013",
+        "DS-018",
+        "DS-019",
+        "DS-020",
+        "DS-021",
+        "DS-031",
+        "DS-035",
+        "DS-030"
+      ],
+      "schema_files": [
+        "schemas/proposal_submit_request.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/governance_evidence.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/resulting_state_validation_result.json",
+        "schemas/bind_set.json",
+        "schemas/governance_binding_validation_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-051",
+        "REG-052"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-110",
@@ -1469,7 +5009,65 @@
       "contextual_ns_ids": [
         "NS-15.6A-01"
       ],
-      "file": "TC101-TC110.md"
+      "file": "TC101-TC110.md",
+      "ds_ids": [
+        "DS-005",
+        "DS-006",
+        "DS-007",
+        "DS-008",
+        "DS-010",
+        "DS-042",
+        "DS-009",
+        "DS-044"
+      ],
+      "schema_files": [
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/policy_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/invariant_definition.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/compiled_governance_artifact.json",
+        "schemas/exception_artifact.json",
+        "schemas/registry_document.schema.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-010",
+        "REG-024",
+        "REG-025",
+        "REG-039",
+        "REG-048",
+        "REG-063",
+        "REG-066",
+        "REG-086",
+        "REG-088"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+        "schemas/examples/ds044-registry-document-capability-example.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-REGISTRIES",
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GCOMP-001",
+        "TV-GACT-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-PEM-001",
+        "TV-PEM-002",
+        "TV-POL-001",
+        "TV-POL-002",
+        "TV-GART-001",
+        "TV-GART-002"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     },
     {
       "tc_id": "TC-111",
@@ -1483,7 +5081,59 @@
       "contextual_ns_ids": [
         "NS-15.2-03"
       ],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-005",
+        "DS-006",
+        "DS-007",
+        "DS-008",
+        "DS-010",
+        "DS-042",
+        "DS-043",
+        "DS-009"
+      ],
+      "schema_files": [
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/policy_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/invariant_definition.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/compiled_governance_artifact.json",
+        "schemas/controlled_governance_activation.json",
+        "schemas/exception_artifact.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-024",
+        "REG-025",
+        "REG-048",
+        "REG-049",
+        "REG-086",
+        "REG-088"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+        "schemas/examples/ds043-controlled-governance-activation-activated.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GCONST-001",
+        "TV-GCONST-002",
+        "TV-GACT-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-PEM-001",
+        "TV-POL-001",
+        "TV-GART-001"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     },
     {
       "tc_id": "TC-112",
@@ -1496,7 +5146,60 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-005",
+        "DS-006",
+        "DS-007",
+        "DS-008",
+        "DS-010",
+        "DS-042",
+        "DS-043",
+        "DS-009"
+      ],
+      "schema_files": [
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/policy_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/invariant_definition.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/compiled_governance_artifact.json",
+        "schemas/controlled_governance_activation.json",
+        "schemas/exception_artifact.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-015",
+        "REG-024",
+        "REG-025",
+        "REG-048",
+        "REG-049",
+        "REG-086",
+        "REG-088"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+        "schemas/examples/ds043-controlled-governance-activation-activated.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GCONST-001",
+        "TV-GCONST-002",
+        "TV-GACT-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-PEM-001",
+        "TV-POL-001",
+        "TV-GART-001"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     },
     {
       "tc_id": "TC-113",
@@ -1523,7 +5226,69 @@
         "NS-15.7-01",
         "NS-15.7-03"
       ],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-005",
+        "DS-006",
+        "DS-007",
+        "DS-008",
+        "DS-010",
+        "DS-042",
+        "DS-043",
+        "DS-009"
+      ],
+      "schema_files": [
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/policy_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/invariant_definition.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/compiled_governance_artifact.json",
+        "schemas/controlled_governance_activation.json",
+        "schemas/exception_artifact.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-010",
+        "REG-015",
+        "REG-024",
+        "REG-025",
+        "REG-039",
+        "REG-048",
+        "REG-049",
+        "REG-050",
+        "REG-063",
+        "REG-066",
+        "REG-086",
+        "REG-087",
+        "REG-088"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+        "schemas/examples/ds043-controlled-governance-activation-activated.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GCONST-002",
+        "TV-GSELF-001",
+        "TV-GACT-001",
+        "TV-GACT-002",
+        "TV-GROLL-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-PEM-002",
+        "TV-PEM-003",
+        "TV-POL-002",
+        "TV-POL-003"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     },
     {
       "tc_id": "TC-114",
@@ -1534,7 +5299,57 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-005",
+        "DS-006",
+        "DS-007",
+        "DS-008",
+        "DS-010",
+        "DS-042",
+        "DS-043",
+        "DS-009"
+      ],
+      "schema_files": [
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/policy_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/invariant_definition.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/compiled_governance_artifact.json",
+        "schemas/controlled_governance_activation.json",
+        "schemas/exception_artifact.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-024",
+        "REG-025",
+        "REG-048",
+        "REG-049",
+        "REG-086",
+        "REG-088"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+        "schemas/examples/ds043-controlled-governance-activation-activated.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GOMIT-001",
+        "TV-GACT-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-PEM-002",
+        "TV-POL-002"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     },
     {
       "tc_id": "TC-115",
@@ -1548,7 +5363,40 @@
       "contextual_ns_ids": [
         "NS-12.7-03"
       ],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-024",
+        "DS-025",
+        "DS-034"
+      ],
+      "schema_files": [
+        "schemas/authority_lineage.json",
+        "schemas/delegation_artifact.json",
+        "schemas/authority_rederivation_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-011",
+        "REG-012",
+        "REG-026",
+        "REG-035",
+        "REG-036",
+        "REG-051",
+        "REG-081",
+        "REG-083"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-116",
@@ -1580,7 +5428,40 @@
         "NS-14.7-03",
         "NS-16.6-04"
       ],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-024",
+        "DS-034"
+      ],
+      "schema_files": [
+        "schemas/authority_lineage.json",
+        "schemas/authority_rederivation_result.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-005",
+        "REG-012",
+        "REG-026",
+        "REG-035",
+        "REG-036",
+        "REG-038",
+        "REG-051",
+        "REG-058",
+        "REG-081"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-TENANT-AND-DOMAIN-ISOLATION",
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-117",
@@ -1592,7 +5473,63 @@
       ],
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-005",
+        "DS-006",
+        "DS-007",
+        "DS-008",
+        "DS-010",
+        "DS-041",
+        "DS-043",
+        "DS-009"
+      ],
+      "schema_files": [
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/policy_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/invariant_definition.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/governance_configuration.json",
+        "schemas/controlled_governance_activation.json",
+        "schemas/exception_artifact.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-015",
+        "REG-024",
+        "REG-025",
+        "REG-039",
+        "REG-048",
+        "REG-049",
+        "REG-087",
+        "REG-088"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds041-governance-configuration-active.json",
+        "schemas/examples/ds043-controlled-governance-activation-activated.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+        "CHECK-HTTP-INTERFACE-CONTRACT"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GCFG-001",
+        "TV-GSELF-001",
+        "TV-GACT-001",
+        "TV-GACT-002",
+        "TV-GROLL-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-PEM-003",
+        "TV-POL-003",
+        "TV-GART-003"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     },
     {
       "tc_id": "TC-118",
@@ -1622,7 +5559,32 @@
         "NS-16.7-01",
         "NS-16.7-03"
       ],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-022"
+      ],
+      "schema_files": [
+        "schemas/governance_context_envelope.json"
+      ],
+      "if_ids": [],
+      "registry_ids": [
+        "REG-026",
+        "REG-036",
+        "REG-038",
+        "REG-051",
+        "REG-052"
+      ],
+      "fixture_files": [],
+      "harness_check_ids": [
+        "CHECK-GOVERNANCE-DECISION",
+        "CHECK-COMMIT-BOUNDARY",
+        "CHECK-LIFECYCLE-AND-CONTINUATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [],
+      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
     },
     {
       "tc_id": "TC-119",
@@ -1636,7 +5598,42 @@
         "NS-9.3-01",
         "NS-9.3-02"
       ],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-018",
+        "DS-019",
+        "DS-029"
+      ],
+      "schema_files": [
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/enforcement_context.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-030",
+        "REG-050"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json",
+        "schemas/examples/ds029-enforcement-context-admissible.json",
+        "schemas/examples/ds029-enforcement-context-prevent.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-120",
@@ -1652,7 +5649,45 @@
       "contextual_ns_ids": [
         "NS-9.4-03"
       ],
-      "file": "TC111-TC120.md"
+      "file": "TC111-TC120.md",
+      "ds_ids": [
+        "DS-018",
+        "DS-019",
+        "DS-029"
+      ],
+      "schema_files": [
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/enforcement_context.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-028",
+        "REG-029",
+        "REG-030",
+        "REG-045",
+        "REG-050"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json",
+        "schemas/examples/ds029-enforcement-context-admissible.json",
+        "schemas/examples/ds029-enforcement-context-prevent.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-121",
@@ -1672,7 +5707,44 @@
         "NS-9.7-02",
         "NS-9.7-03"
       ],
-      "file": "TC121-TC122.md"
+      "file": "TC121-TC122.md",
+      "ds_ids": [
+        "DS-018",
+        "DS-019",
+        "DS-029"
+      ],
+      "schema_files": [
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/enforcement_context.json"
+      ],
+      "if_ids": [
+        "IF-001",
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-029",
+        "REG-030",
+        "REG-045",
+        "REG-050"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds018-commit-boundary-request-single.json",
+        "schemas/examples/ds019-commit-boundary-result-refusal.json",
+        "schemas/examples/ds019-commit-boundary-result-success.json",
+        "schemas/examples/ds029-enforcement-context-admissible.json",
+        "schemas/examples/ds029-enforcement-context-prevent.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-COMMIT-BOUNDARY"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-001"
+      ],
+      "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
     },
     {
       "tc_id": "TC-122",
@@ -1692,7 +5764,73 @@
         "NS-13.3-02",
         "NS-13.7-03"
       ],
-      "file": "TC121-TC122.md"
+      "file": "TC121-TC122.md",
+      "ds_ids": [
+        "DS-039",
+        "DS-041"
+      ],
+      "schema_files": [
+        "schemas/continuation_integrity_result.json",
+        "schemas/governance_configuration.json"
+      ],
+      "if_ids": [
+        "IF-002"
+      ],
+      "registry_ids": [
+        "REG-020",
+        "REG-039",
+        "REG-042",
+        "REG-046",
+        "REG-047",
+        "REG-071"
+      ],
+      "fixture_files": [
+        "schemas/examples/ds039-continuation-integrity-degraded.json",
+        "schemas/examples/ds039-continuation-integrity-recovered.json",
+        "schemas/examples/ds041-governance-configuration-active.json"
+      ],
+      "harness_check_ids": [
+        "CHECK-QUALIFIED-GOVERNANCE-INPUTS",
+        "CHECK-LIFECYCLE-AND-CONTINUATION",
+        "CHECK-GOVERNANCE-COMPILATION-ACTIVATION"
+      ],
+      "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
+      "test_vector_ids": [
+        "TV-GCFG-001"
+      ],
+      "supporting_test_vector_ids": [
+        "TV-COMMIT-002",
+        "TV-STATE-001"
+      ],
+      "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     }
-  ]
+  ],
+  "rtm_dataset_version": "RTM-1.45",
+  "schema_catalog": "schemas/catalog/schema-catalog.json",
+  "schema_catalog_version": "1.0.44",
+  "fixture_mapping": "conformance/fixture-mapping.json",
+  "interface_id": "IF-001",
+  "interface_version": "v2",
+  "last_validated_date": "2026-07-31",
+  "validation_status": "PASS",
+  "interface_catalog": "api/interface-catalog.json",
+  "registry_entry_catalog": "registries/registry-entry-catalog.json",
+  "harness_check_registry": "conformance/harness-checks.json",
+  "harness_check_count": 17,
+  "test_vector_catalog": "conformance/AGCP-Conformance-Harness-Spec.yml",
+  "test_vector_mirror": "conformance/AGCP-Conformance-Test-Vectors.md",
+  "test_vector_count": 54,
+  "tc_harness_check_mapping_policy": "Every TC identifies one or more applicable Harness Check identifiers. Applicable checks are executable capability checks and do not replace the formal TC procedure.",
+  "tc_test_vector_mapping_policy": "Every TC identifies direct and supporting Harness Test Vector identifiers or explicitly records that no dedicated executable vector exists. A missing dedicated vector does not invalidate the formal TC.",
+  "tc_harness_check_mapping_complete": true,
+  "tc_test_vector_mapping_complete_or_dispositioned": true,
+  "test_vector_mapping_status_counts": {
+    "DIRECT_EXECUTABLE_SCENARIO": 35,
+    "NO_DEDICATED_EXECUTABLE_VECTOR": 61,
+    "SUPPORTING_EXECUTABLE_COVERAGE": 25,
+    "AGGREGATE_SUITE": 1
+  },
+  "unreferenced_harness_check_ids": [],
+  "unreferenced_test_vector_ids": []
 }

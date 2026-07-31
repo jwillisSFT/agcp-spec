@@ -19,7 +19,7 @@ containing a `provenance` object, including:
 
 -   Proposal submission requests
 -   Commit Boundary requests
--   Human Review artifacts
+-   Governance Approval Artifacts
 -   Governance artifacts
 -   Governance Evidence
 
@@ -49,7 +49,7 @@ Implementations SHALL support at least:
 Additional scopes MAY include:
 
 -   `agcp.proposal`
--   `agcp.human-review`
+-   `agcp.governance-approval`
 -   `agcp.commit-boundary`
 -   `agcp.governance-evidence`
 

@@ -1,0 +1,155 @@
+{
+  "schema_id": "DS-012",
+  "filename": "invariant_evaluation.json",
+  "status": "PASS",
+  "validated_at": "2026-07-30",
+  "metaschema_validation": {
+    "status": "PASS",
+    "schema_count": 44,
+    "dialect": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "reference_validation": {
+    "status": "PASS",
+    "reference_count": 3396,
+    "issues": []
+  },
+  "positive_tests": {
+    "preserved": [],
+    "hard_violation_structural_refusal": [],
+    "soft_violation_escalation": [],
+    "indeterminate_re_evaluation": [],
+    "not_applicable": []
+  },
+  "negative_tests": {
+    "missing_evaluation_id": {
+      "rejected": true,
+      "errors": [
+        "'evaluation_id' is a required property"
+      ]
+    },
+    "unrestricted_metadata_rejected": {
+      "rejected": true,
+      "errors": [
+        "Additional properties are not allowed ('metadata' was unexpected)"
+      ]
+    },
+    "preserved_with_unqualified_inputs": {
+      "rejected": true,
+      "errors": [
+        "True was expected"
+      ]
+    },
+    "hard_violation_without_refusal": {
+      "rejected": true,
+      "errors": [
+        "'TERMINAL_STRUCTURAL_REFUSAL' was expected",
+        "True was expected"
+      ]
+    },
+    "escalation_not_explicit": {
+      "rejected": true,
+      "errors": [
+        "'PENDING_ESCALATION' was expected",
+        "True was expected"
+      ]
+    },
+    "missing_governance_evidence": {
+      "rejected": true,
+      "errors": [
+        "'governance_evidence_refs' is a required property"
+      ]
+    },
+    "lifecycle_effect_mismatch": {
+      "rejected": true,
+      "errors": [
+        "'NO_CHANGE' was expected"
+      ]
+    },
+    "arrival_timing_used": {
+      "rejected": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    "execution_authority_claim": {
+      "rejected": true,
+      "errors": [
+        "Additional properties are not allowed ('authorized_for_execution' was unexpected)"
+      ]
+    },
+    "unhashed_invariant_ref": {
+      "rejected": true,
+      "errors": [
+        "'invariant_digest' is a required property"
+      ]
+    }
+  },
+  "explicit_result_effects": {
+    "structural_refusal": true,
+    "escalation": true,
+    "lifecycle_effect": true,
+    "governance_evidence": true
+  },
+  "clean_migration": {
+    "retired_common_definition": "pass_fail_enum",
+    "retired_definition_absent": true,
+    "obsolete_references": [],
+    "unrestricted_metadata_absent": true
+  },
+  "common_schema": {
+    "definition_count": 63,
+    "unused_definitions": []
+  },
+  "catalog": {
+    "catalog_version": "1.0.37",
+    "hash_issues": []
+  },
+  "openapi": {
+    "status": "PASS",
+    "error": null,
+    "components": [
+      "InvariantEvaluation",
+      "InvariantEvaluationRef"
+    ],
+    "external_reference_validation": {
+      "status": "PASS",
+      "reference_count": 128,
+      "external_reference_count": 82,
+      "issues": []
+    }
+  },
+  "rtm": {
+    "dataset_version": "RTM-1.40",
+    "ds_012_cr_rows": [
+      "CR-001",
+      "CR-003",
+      "CR-053",
+      "CR-058",
+      "CR-063",
+      "CR-075",
+      "CR-076",
+      "CR-078",
+      "CR-087"
+    ],
+    "formula_count": 0,
+    "formula_errors": [],
+    "format_comparison": {
+      "status": "PASS",
+      "checks": {
+        "sheetnames_unchanged": true,
+        "dimensions_unchanged": true,
+        "freeze_panes_unchanged": true,
+        "merged_ranges_unchanged": true,
+        "column_widths_unchanged": true,
+        "row_heights_unchanged": true,
+        "style_ids_unchanged": true,
+        "auto_filter_unchanged": true,
+        "gridlines_unchanged": true,
+        "styles_xml_unchanged": true,
+        "theme_xml_unchanged": true
+      },
+      "before_sha256": "f51392a980bd5bc0c2481228b87a539ea284c141b98d6950be85a912e8f4998a",
+      "after_sha256": "c3934204972d1484d39fff1383830953e200669cbbf0a279b68438a0a1b60fb0"
+    }
+  }
+}

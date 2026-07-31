@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "schema": "DS-040 governance_ledger_event.json",
+  "date": "2026-07-30",
+  "draft_2020_12_schemas_validated": 43,
+  "resolved_schema_references": 3202,
+  "reference_issues": 0,
+  "implemented_schema_count": 43,
+  "proposed_reserved_count": 1,
+  "common_definition_count": 67,
+  "unused_common_definitions": [],
+  "retired_common_ledger_reference_hits": [],
+  "tests": [
+    {
+      "name": "proposal submission genesis event",
+      "expected": "PASS",
+      "actual": "PASS",
+      "errors": []
+    },
+    {
+      "name": "retention non-genesis event",
+      "expected": "PASS",
+      "actual": "PASS",
+      "errors": []
+    },
+    {
+      "name": "non append-only event rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "timestamp ordering rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "missing predecessor rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "'predecessor_event_id' is a required property",
+        "'previous_event_digest' is a required property"
+      ]
+    },
+    {
+      "name": "event category mismatch rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "'PROPOSAL' was expected"
+      ]
+    },
+    {
+      "name": "missing typed proposal reference rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "'proposal_ref' is a required property"
+      ]
+    },
+    {
+      "name": "execution authority claim rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "missing proposal identity rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "'proposal_identity' is a required property",
+        "'proposal_identity' is a required property"
+      ]
+    },
+    {
+      "name": "retention history loss rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "arbitrary metadata rejected",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "errors": [
+        "Additional properties are not allowed ('unexpected_metadata' was unexpected)"
+      ]
+    }
+  ]
+}

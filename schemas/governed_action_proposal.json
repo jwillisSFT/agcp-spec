@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governed_action_proposal.json",
+  "title": "Governed Action Proposal",
+  "description": "Canonical domain schema for a governance-significant proposed transition submitted to AGCP runtime-governance evaluation. The object declares stable Proposal Identity, operational intent, target, requested effect, canonical Action Representation, associated Governance Context, provenance, temporal validity, and applicable composite-governance semantics through the canonical DS-035 Bind Set and DS-036 Governance Dependency Graph. A Governed Action Proposal is not execution and does not confer authority at commitment.",
+  "$comment": "DS-021 is the authoritative Governed Action Proposal domain object. DS-022 is the authoritative Governance Context Envelope and DS-035 is the authoritative Bind Set and DS-036 is the authoritative Governance Dependency Graph. Cross-object equality requirements—such as Tenant, governance-domain, Proposal Identity, target, parent/sub-transition binding, graph-node membership, and dependency endpoint resolution—are semantic Proposal Qualification obligations because standard JSON Schema cannot compare arbitrary values across object locations.",
+  "x-agcp-ds-id": "DS-021",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Governance Object — Governed Action Proposal",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-101",
+      "ARM-102",
+      "ARM-106",
+      "ARM-206",
+      "ARM-207",
+      "ARM-208",
+      "ARM-216",
+      "ARM-217",
+      "ARM-308",
+      "ARM-604"
+    ],
+    "core_sections": [
+      "4.3",
+      "4.15",
+      "6.3",
+      "6.4",
+      "6.6",
+      "6.6A",
+      "7.4",
+      "9.6B",
+      "10.8A",
+      "16.6A"
+    ],
+    "normative_statements": [
+      "NS-4.3-01",
+      "NS-4.15-01",
+      "NS-6.3-01",
+      "NS-6.3-02",
+      "NS-6.4-01",
+      "NS-6.4-02",
+      "NS-6.6-01",
+      "NS-6.6A-01",
+      "NS-6.6A-02",
+      "NS-7.4-04",
+      "NS-9.6B-02",
+      "NS-9.6B-03",
+      "NS-9.6B-04",
+      "NS-9.6B-05",
+      "NS-10.8A-03",
+      "NS-16.6A-02"
+    ],
+    "conformance_requirements": [
+      "CR-004",
+      "CR-036",
+      "CR-037",
+      "CR-038",
+      "CR-039",
+      "CR-040",
+      "CR-041",
+      "CR-042",
+      "CR-043",
+      "CR-044",
+      "CR-045",
+      "CR-046",
+      "CR-047",
+      "CR-105",
+      "CR-106",
+      "CR-107",
+      "CR-108",
+      "CR-109"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Implementation- or domain-specific extension members. Extension members SHALL be namespace-qualified and SHALL NOT alter, replace, or weaken canonical AGCP proposal semantics.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    },
+    "operational_intent": {
+      "type": "object",
+      "description": "Declared operational intent of the proposed transition. Intent is descriptive governance input and is not authority to execute.",
+      "additionalProperties": false,
+      "properties": {
+        "intent_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Stable type or classification of the operational intent."
+        },
+        "intent_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Optional controlled-vocabulary intent code."
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "description": "Human-readable statement of the intended operation."
+        },
+        "parameters_digest": {
+          "$ref": "common.json#/$defs/content_digest",
+          "description": "Digest of governance-significant intent parameters when parameters are carried in the Action Representation or an extension payload."
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "intent_type"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "intent_code"
+          ]
+        },
+        {
+          "required": [
+            "statement"
+          ]
+        }
+      ]
+    },
+    "requested_effect": {
+      "type": "object",
+      "description": "Declared operational effect the proposal requests. The requested effect is evaluated rather than presumed admissible.",
+      "additionalProperties": false,
+      "properties": {
+        "effect_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Stable effect classification."
+        },
+        "effect_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Optional controlled-vocabulary effect code."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "effect_representation": {
+          "description": "Canonical domain-specific representation of the requested effect. Null is prohibited because an absent effect is not a declared effect.",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "effect_digest": {
+          "$ref": "common.json#/$defs/content_digest",
+          "description": "Digest of the canonical requested-effect representation."
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "effect_type",
+        "effect_representation",
+        "effect_digest"
+      ]
+    },
+    "action_representation": {
+      "type": "object",
+      "description": "Canonical Governed Action Proposal Representation content used during Proposal Qualification. The representation SHALL contain all governance-significant action information and remain immutable after successful qualification unless governed re-qualification occurs.",
+      "additionalProperties": false,
+      "properties": {
+        "representation_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "representation_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "schema_ref": {
+          "$ref": "common.json#/$defs/uri",
+          "description": "URI identifying the domain schema used to validate the action payload, when applicable."
+        },
+        "content_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "canonicalization": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Canonicalization method used before calculating payload_digest."
+        },
+        "payload": {
+          "description": "Canonical domain-specific action payload. Null is prohibited.",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "payload_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "representation_type",
+        "representation_version",
+        "payload",
+        "payload_digest"
+      ]
+    },
+    "sub_transition": {
+      "type": "object",
+      "description": "Governed sub-transition within a composite proposal. Each sub-transition preserves its own identity, target, requested effect, representation, domain, and validity information while remaining linked to the parent proposal.",
+      "additionalProperties": false,
+      "properties": {
+        "sub_transition_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "proposal_identity": {
+          "$ref": "common.json#/$defs/proposal_identity"
+        },
+        "action_id": {
+          "$ref": "common.json#/$defs/action_id"
+        },
+        "operational_intent": {
+          "$ref": "#/$defs/operational_intent"
+        },
+        "target": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "requested_effect": {
+          "$ref": "#/$defs/requested_effect"
+        },
+        "action_representation": {
+          "$ref": "#/$defs/action_representation"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "authority_lineage_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "sub_transition_id",
+        "proposal_identity",
+        "operational_intent",
+        "target",
+        "requested_effect",
+        "action_representation"
+      ]
+    },
+    "composite_proposal": {
+      "type": "object",
+      "description": "Composite-proposal structure preserving governed sub-transition identities, dependencies, coupling semantics, authority domains, targets, and aggregate proposal relationships.",
+      "additionalProperties": false,
+      "properties": {
+        "coupling_semantics": {
+          "$ref": "common.json#/$defs/composite_coupling_semantics_enum"
+        },
+        "sub_transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sub_transition"
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "dependency_graph": {
+          "$ref": "governance_dependency_graph.json",
+          "description": "Canonical DS-036 Governance Dependency Graph for the governed sub-transitions in this composite proposal. Parent Proposal Identity, Tenant, governance domain, node set, and sub-transition identities SHALL remain consistent with this proposal."
+        },
+        "candidate_bind_set_ref": {
+          "$ref": "bind_set.json#/$defs/bind_set_ref"
+        },
+        "partial_binding_policy": {
+          "$ref": "bind_set.json#/$defs/partial_binding_policy"
+        },
+        "aggregate_effect_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "coupling_semantics",
+        "sub_transitions",
+        "dependency_graph",
+        "partial_binding_policy",
+        "aggregate_effect_digest"
+      ]
+    },
+    "governed_action_proposal_ref": {
+      "type": "object",
+      "description": "Stable integrity-bound reference to the canonical DS-021 Governed Action Proposal.",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_identity": {
+          "$ref": "common.json#/$defs/proposal_identity"
+        },
+        "action_id": {
+          "$ref": "common.json#/$defs/action_id"
+        },
+        "proposal_kind": {
+          "type": "string",
+          "enum": [
+            "SINGLE_TRANSITION",
+            "COMPOSITE_TRANSITION"
+          ]
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "proposal_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "proposal_identity",
+        "target_ref",
+        "proposal_digest"
+      ]
+    }
+  },
+  "properties": {
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id",
+      "description": "Originating Tenant. This value SHALL match the Tenant encoded in Proposal Identity and the associated Governance Context Envelope."
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id",
+      "description": "Originating governance domain. This value SHALL match corresponding values in Proposal Identity and the associated Governance Context Envelope where present."
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id",
+      "description": "Optional stable identifier for the governance-significant Action represented by this proposal."
+    },
+    "proposal_kind": {
+      "type": "string",
+      "enum": [
+        "SIMPLE",
+        "COMPOSITE"
+      ],
+      "description": "Classifies whether the proposal represents one governed transition or multiple governed sub-transitions."
+    },
+    "operational_intent": {
+      "$ref": "#/$defs/operational_intent"
+    },
+    "target": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "requested_effect": {
+      "$ref": "#/$defs/requested_effect"
+    },
+    "validity_window": {
+      "$ref": "common.json#/$defs/validity_window",
+      "description": "Applicable proposal not-before and/or expiration conditions. If no window is supplied, the applicable implementation profile and governance policy determine temporal validity."
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Optional policy references supplied as governance input. They do not prevent the governance system from resolving other applicable policy."
+    },
+    "action_representation": {
+      "$ref": "#/$defs/action_representation"
+    },
+    "governance_context": {
+      "$ref": "governance_context_envelope.json",
+      "description": "The canonical Governance Context Envelope defined by DS-022. Its Proposal Identity, Tenant, governance domain, target, and other applicable bindings SHALL remain consistent with this proposal."
+    },
+    "composite": {
+      "$ref": "#/$defs/composite_proposal"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "governance_domain_id",
+    "proposal_identity",
+    "proposal_kind",
+    "operational_intent",
+    "target",
+    "requested_effect",
+    "action_representation",
+    "governance_context",
+    "provenance"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "proposal_kind": {
+            "const": "COMPOSITE"
+          }
+        },
+        "required": [
+          "proposal_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "composite"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "proposal_kind": {
+            "const": "SIMPLE"
+          }
+        },
+        "required": [
+          "proposal_kind"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "composite"
+          ]
+        }
+      }
+    }
+  ]
+}

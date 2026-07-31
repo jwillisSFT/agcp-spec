@@ -1,0 +1,792 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/canonical_state.json",
+  "title": "Canonical State",
+  "description": "Canonical domain schema for the single qualified and authoritative governance representation of operational reality used for a defined evaluation horizon. Canonical State is resolved deterministically from qualified authoritative governance sources; is distinct from Governance Context, runtime observations, telemetry, local state, and agent belief; and provides the current state basis for admissibility, authority re-derivation, governance binding, continuation, replay, receipts, and refusal. State suitability is established by an integrity-bound reference to the independently traceable DS-032 State Qualification Result. The Governance Ledger is authoritative for recorded governance events, event ordering, and Derived Lifecycle State, but need not originate every governance-relevant fact incorporated into Canonical State.",
+  "x-agcp-ds-id": "DS-023",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Governance Object — Canonical State",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-103",
+      "ARM-401",
+      "ARM-402",
+      "ARM-403",
+      "ARM-404",
+      "ARM-405",
+      "ARM-406",
+      "ARM-407",
+      "ARM-408"
+    ],
+    "core_sections": [
+      "4.6",
+      "5.2.5",
+      "7.2",
+      "7.3",
+      "7.4",
+      "7.6",
+      "7.6A",
+      "8.6A",
+      "9.6A",
+      "10.4",
+      "10.8A",
+      "11.4",
+      "13.4",
+      "13.6A",
+      "16.6A"
+    ],
+    "normative_statements": [
+      "NS-4.6-01",
+      "NS-4.6-02",
+      "NS-4.6-03",
+      "NS-4.6-04",
+      "NS-5.2.5-01",
+      "NS-5.2.5-03",
+      "NS-6.6A-02",
+      "NS-7.2-02",
+      "NS-7.3-01",
+      "NS-7.4-01",
+      "NS-7.6-04",
+      "NS-7.6A-01",
+      "NS-7.7-02",
+      "NS-8.6A-03",
+      "NS-9.6A-01",
+      "NS-9.6A-02",
+      "NS-10.4-01",
+      "NS-10.8A-02",
+      "NS-11.4-01",
+      "NS-13.4-04",
+      "NS-13.6A-01",
+      "NS-16.6A-03"
+    ],
+    "conformance_requirements": [
+      "CR-048",
+      "CR-049",
+      "CR-050",
+      "CR-051",
+      "CR-103"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_state_id": {
+      "$ref": "common.json#/$defs/canonical_state_id"
+    },
+    "canonical_state_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "resolved_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "authoritative_source_observations": {
+      "type": "array",
+      "description": "Qualified observations from authoritative governance sources incorporated into the resolved Canonical State.",
+      "items": {
+        "$ref": "#/$defs/authoritative_source_observation"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "resolution": {
+      "$ref": "#/$defs/canonical_state_resolution"
+    },
+    "state_components": {
+      "type": "array",
+      "description": "Typed governance-state components composing the resolved authoritative representation.",
+      "items": {
+        "$ref": "#/$defs/state_component"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "state_payload": {
+      "type": "object",
+      "description": "Optional profile-defined materialized aggregate representation. Its meaning is subordinate to the typed state components and protected by state_digest.",
+      "minProperties": 1,
+      "additionalProperties": true
+    },
+    "qualification_result": {
+      "allOf": [
+        {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "outcome": {
+              "const": "QUALIFIED"
+            }
+          },
+          "required": [
+            "outcome"
+          ]
+        }
+      ],
+      "description": "Integrity-bound reference to the independently traceable DS-032 State Qualification Result. Canonical State may reference only a QUALIFIED result."
+    },
+    "ordering_basis": {
+      "$ref": "#/$defs/ordering_basis"
+    },
+    "governance_ledger_position": {
+      "$ref": "governance_ledger_event.json#/$defs/ledger_position"
+    },
+    "derived_lifecycle_state_ref": {
+      "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "uniqueItems": true
+    },
+    "non_authoritative_observations_considered": {
+      "type": "array",
+      "description": "Runtime observations, telemetry, context, or agent belief considered during qualification but never treated as authoritative Canonical State.",
+      "items": {
+        "$ref": "#/$defs/non_authoritative_observation_ref"
+      },
+      "uniqueItems": true
+    },
+    "previous_canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "state_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "replay_support": {
+      "$ref": "#/$defs/replay_support"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "canonical_state_id",
+    "canonical_state_version",
+    "tenant_id",
+    "governance_domain_id",
+    "evaluation_horizon",
+    "resolved_at",
+    "authoritative_source_observations",
+    "resolution",
+    "state_components",
+    "qualification_result",
+    "ordering_basis",
+    "state_digest",
+    "attribution",
+    "replay_support"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "derived_lifecycle_state_ref"
+        ]
+      },
+      "then": {
+        "required": [
+          "governance_ledger_position"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "authoritative_source_observation": {
+      "type": "object",
+      "description": "A qualified, attributable observation from one authoritative governance source incorporated into Canonical State.",
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "source_ref": {
+          "$ref": "common.json#/$defs/authoritative_source_ref"
+        },
+        "observed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "effective_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "source_state_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "source_state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "source_ordering_basis": {
+          "$ref": "#/$defs/source_ordering_basis"
+        },
+        "qualification": {
+          "$ref": "#/$defs/source_observation_qualification"
+        },
+        "contribution_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "observation_id",
+        "source_ref",
+        "observed_at",
+        "source_ordering_basis",
+        "qualification",
+        "contribution_digest"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "source_state_version"
+          ]
+        },
+        {
+          "required": [
+            "source_state_digest"
+          ]
+        }
+      ]
+    },
+    "source_observation_qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "const": "QUALIFIED"
+        },
+        "dimensions": {
+          "$ref": "state_qualification_result.json#/$defs/qualified_dimensions"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evaluator": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "outcome",
+        "dimensions",
+        "evaluated_at",
+        "evaluator",
+        "result_digest"
+      ],
+      "description": "Qualification of one authoritative source observation incorporated into Canonical State. All required State Qualification dimensions must be qualified."
+    },
+    "source_ordering_basis": {
+      "type": "object",
+      "description": "Source-native or Governance Ledger ordering evidence. Timestamps alone are not an authoritative ordering basis.",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_LEDGER_POSITION",
+            "SOURCE_NATIVE_SEQUENCE",
+            "DETERMINISTIC_SOURCE_VERSION",
+            "PROFILE_DEFINED_DETERMINISTIC_ORDER"
+          ]
+        },
+        "ledger_position": {
+          "$ref": "governance_ledger_event.json#/$defs/ledger_position"
+        },
+        "sequence": {
+          "$ref": "common.json#/$defs/sequence_number"
+        },
+        "version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "method",
+        "basis_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "const": "GOVERNANCE_LEDGER_POSITION"
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "required": [
+              "ledger_position"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "const": "SOURCE_NATIVE_SEQUENCE"
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "required": [
+              "sequence"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "const": "DETERMINISTIC_SOURCE_VERSION"
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "required": [
+              "version"
+            ]
+          }
+        }
+      ]
+    },
+    "canonical_state_resolution": {
+      "type": "object",
+      "description": "Deterministic construction of one authoritative governance representation from one or more qualified sources.",
+      "additionalProperties": false,
+      "properties": {
+        "resolution_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "status": {
+          "const": "RESOLVED"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "SINGLE_SOURCE",
+            "MULTI_SOURCE_DETERMINISTIC_MERGE",
+            "AUTHORITY_PRECEDENCE",
+            "POLICY_DIRECTED_RESOLUTION",
+            "LEDGER_DERIVED_LIFECYCLE",
+            "PROFILE_DEFINED_DETERMINISTIC"
+          ]
+        },
+        "candidate_source_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "selected_source_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "conflict_status": {
+          "type": "string",
+          "enum": [
+            "NO_CONFLICT",
+            "RESOLVED_CONFLICT"
+          ]
+        },
+        "conflict_resolutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/conflict_resolution_record"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "resolution_rule_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "deterministic_inputs_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "resolved_by": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "resolved_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "resolution_id",
+        "status",
+        "method",
+        "candidate_source_count",
+        "selected_source_count",
+        "conflict_status",
+        "deterministic_inputs_digest",
+        "resolved_by",
+        "resolved_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "conflict_status": {
+                "const": "RESOLVED_CONFLICT"
+              }
+            },
+            "required": [
+              "conflict_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "conflict_resolutions"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "conflict_status": {
+                "const": "NO_CONFLICT"
+              }
+            },
+            "required": [
+              "conflict_status"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "conflict_resolutions"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "conflict_resolution_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "conflict_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "candidate_observation_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "selected_observation_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "resolution_basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "resolution_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "conflict_id",
+        "candidate_observation_ids",
+        "selected_observation_ids",
+        "resolution_basis",
+        "resolution_digest"
+      ]
+    },
+    "state_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "component_type": {
+          "type": "string",
+          "enum": [
+            "TENANT",
+            "IDENTITY",
+            "SUBJECT_STATUS",
+            "DELEGATION",
+            "APPROVAL",
+            "POLICY",
+            "EVIDENCE",
+            "RESOURCE",
+            "TARGET",
+            "LIFECYCLE",
+            "GOVERNANCE_CONFIGURATION",
+            "AUTHORITY",
+            "OTHER_GOVERNANCE_STATE"
+          ]
+        },
+        "source_observation_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "value": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": true
+        },
+        "component_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "component_id",
+        "component_type",
+        "source_observation_ids",
+        "value",
+        "component_digest"
+      ]
+    },
+    "ordering_basis": {
+      "type": "object",
+      "description": "Ordering basis for the resolved state as a whole. Timestamp ordering is intentionally not permitted.",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_LEDGER_POSITION",
+            "DETERMINISTIC_SOURCE_ORDER",
+            "DETERMINISTIC_MERGE_ORDER",
+            "PROFILE_DEFINED_DETERMINISTIC_ORDER"
+          ]
+        },
+        "governance_ledger_position": {
+          "$ref": "governance_ledger_event.json#/$defs/ledger_position"
+        },
+        "ordered_observation_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "ordering_rule_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "ordering_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "method",
+        "ordered_observation_ids",
+        "ordering_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "const": "GOVERNANCE_LEDGER_POSITION"
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "required": [
+              "governance_ledger_position"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "enum": [
+                  "DETERMINISTIC_SOURCE_ORDER",
+                  "DETERMINISTIC_MERGE_ORDER",
+                  "PROFILE_DEFINED_DETERMINISTIC_ORDER"
+                ]
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "required": [
+              "ordering_rule_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "non_authoritative_observation_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "observation_type": {
+          "type": "string",
+          "enum": [
+            "RUNTIME_OBSERVATION",
+            "TELEMETRY",
+            "GOVERNANCE_CONTEXT",
+            "LOCAL_APPLICATION_STATE",
+            "AGENT_BELIEF",
+            "INFERRED_STATE",
+            "OTHER_NON_AUTHORITATIVE"
+          ]
+        },
+        "authority_classification": {
+          "const": "NON_AUTHORITATIVE_OBSERVATION"
+        },
+        "observed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "observation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "CONSISTENT_WITH_CANONICAL_STATE",
+            "CONFLICTED_AND_DID_NOT_OVERRIDE",
+            "INFORMED_QUALIFICATION_ONLY",
+            "EXCLUDED"
+          ]
+        }
+      },
+      "required": [
+        "observation_id",
+        "observation_type",
+        "authority_classification",
+        "observed_at",
+        "observation_digest",
+        "disposition"
+      ]
+    },
+    "replay_support": {
+      "type": "object",
+      "description": "Recorded or resolvable material sufficient to reconstruct the Canonical State resolution and qualification without treating timestamps as event order.",
+      "additionalProperties": false,
+      "properties": {
+        "source_snapshot_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/uri"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true
+        },
+        "resolution_configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "canonicalization_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "replay_inputs_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "source_snapshot_refs",
+        "resolution_configuration_digest",
+        "canonicalization_method",
+        "replay_inputs_digest"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Profile-defined extensions. Extension content cannot alter the canonical meaning, authority, qualification, or ordering of the object.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    },
+    "canonical_state_ref": {
+      "type": "object",
+      "description": "Stable integrity-bound reference to canonical DS-023 Canonical State.",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_state_id": {
+          "$ref": "common.json#/$defs/canonical_state_id"
+        },
+        "canonical_state_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "evaluation_horizon": {
+          "$ref": "common.json#/$defs/evaluation_horizon"
+        },
+        "state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "resolved_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "canonical_state_id",
+        "canonical_state_version",
+        "state_digest"
+      ]
+    }
+  }
+}

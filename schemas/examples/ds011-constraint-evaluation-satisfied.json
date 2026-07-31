@@ -1,0 +1,393 @@
+{
+  "evaluation_id": "evaluation-id-1",
+  "result_type": "CONSTRAINT_EVALUATION_RESULT",
+  "constraint_ref": {
+    "constraint_id": "CONSTRAINT-EXAMPLE-1",
+    "constraint_version": "1.0.0",
+    "constraint_type": "EXAMPLE_VALUE",
+    "constraint_classification": "ORDINARY",
+    "constraint_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "artifact_uri": "https://agcp.ai/example/artifact-uri",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "status": "Validated"
+  },
+  "proposal_ref": {
+    "proposal_identity": {
+      "proposal_id": "proposal-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
+      "canonical_content_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "originator": {
+        "principal_id": "agent-1",
+        "principal_type": "AGENT"
+      }
+    },
+    "target_ref": {
+      "target_id": "target-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1"
+    },
+    "proposal_digest": {
+      "algorithm": "SHA-256",
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  "tenant_id": "tenant-1",
+  "governance_domain_id": "domain-1",
+  "target_ref": {
+    "target_id": "target-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1"
+  },
+  "governance_stage": "Governance Decision Function",
+  "evaluation_horizon": {
+    "horizon_id": "horizon-1",
+    "evaluated_at": "2026-07-30T16:00:00Z"
+  },
+  "governance_version_ref": {
+    "governance_version_id": "gv-2.0.0"
+  },
+  "governance_configuration_ref": {
+    "governance_configuration_id": "config-1",
+    "configuration_version": "2.0.0",
+    "configuration_status": "ACTIVE",
+    "configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "governance_version_ref": {
+      "governance_version_id": "gv-2.0.0"
+    },
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "effective_at": "2026-07-30T16:00:00Z"
+  },
+  "policy_refs": [
+    {
+      "policy_id": "policy-1",
+      "policy_version": "2.0.0",
+      "policy_digest": {
+        "algorithm": "SHA-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "artifact_uri": "https://agcp.ai/example/policies/policy-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
+      "status": "Active"
+    }
+  ],
+  "input_qualification": {
+    "proposal": "QUALIFIED",
+    "tenant_domain": "QUALIFIED",
+    "target": "QUALIFIED",
+    "constraint": "QUALIFIED",
+    "policy": "QUALIFIED",
+    "governance_configuration": "QUALIFIED",
+    "governance_version": "QUALIFIED",
+    "canonical_state": "QUALIFIED",
+    "evidence": "QUALIFIED",
+    "authority": "QUALIFIED",
+    "lifecycle": "QUALIFIED",
+    "all_required_inputs_qualified": true,
+    "unqualified_required_dimensions": []
+  },
+  "qualified_input_hashes": {
+    "proposal_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "constraint_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "target_binding_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "policy_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "governance_configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "governance_version_package_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "evaluation_input_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "canonical_state_digest": {
+      "algorithm": "SHA-256",
+      "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "state_qualification_result_digest": {
+      "algorithm": "SHA-256",
+      "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    "evidence_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "evidence_qualification_result_digests": [
+      {
+        "algorithm": "SHA-256",
+        "value": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    ],
+    "authority_lineage_digest": {
+      "algorithm": "SHA-256",
+      "value": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "lifecycle_state_digest": {
+      "algorithm": "SHA-256",
+      "value": "7777777777777777777777777777777777777777777777777777777777777777"
+    }
+  },
+  "applicability": {
+    "applicable": true,
+    "evaluated_applicability_condition_ids": [
+      "evaluated-applicability-condition-id-1"
+    ],
+    "matched_applicability_condition_ids": [
+      "matched-applicability-condition-id-1"
+    ],
+    "determination_basis_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "evaluated_conditions": [
+    {
+      "condition_id": "condition-id-1",
+      "condition_outcome": "SATISFIED",
+      "input_paths": [
+        "/proposal/requested_effect"
+      ],
+      "input_subset_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "ordering_basis": {
+    "basis_type": "EXPLICIT_POLICY_ORDER",
+    "evaluation_ordinal": 0,
+    "basis_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "arrival_timing_used": false,
+    "implementation_scheduling_used": false
+  },
+  "outcome": "SATISFIED",
+  "disposition": "CONTINUE_EVALUATION",
+  "governance_evidence_refs": [
+    {
+      "governance_evidence_id": "evidence-2",
+      "evidence_digest": {
+        "algorithm": "SHA-256",
+        "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      },
+      "governance_stage": "Governance Decision Function"
+    }
+  ],
+  "evaluated_at": "2026-07-30T16:00:00Z",
+  "evaluation_attribution": {
+    "principal": {
+      "principal_id": "governance-service-1",
+      "principal_type": "SERVICE"
+    },
+    "attributed_at": "2026-07-30T16:00:00Z"
+  },
+  "provenance": {
+    "signer": "governance-service-1",
+    "signature": {
+      "alg": "Ed25519",
+      "kid": "key-example",
+      "sig": "signature-example"
+    },
+    "signed_at": "2026-07-30T16:00:00Z"
+  },
+  "evaluation_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "integrity_signature": {
+    "alg": "SHA-256",
+    "kid": "key-1",
+    "sig": "signature-value"
+  },
+  "replay_material": {
+    "canonical_input_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "constraint_semantics_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "evaluator_profile_ref": {
+      "profile_uri": "https://agcp.ai/example/profile-uri",
+      "profile_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "ordering_basis_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "deterministic_evaluation": true,
+    "equivalent_inputs_equivalent_result": true,
+    "arrival_timing_used": false,
+    "implementation_specific_behavior_used": false,
+    "replay_produces_governance_verification_not_operational_reexecution": true
+  },
+  "semantic_assertions": {
+    "result_is_proposal_specific": true,
+    "result_is_constraint_specific": true,
+    "result_is_tenant_domain_target_bound": true,
+    "unqualified_inputs_do_not_support_satisfied_outcome": true,
+    "result_does_not_establish_authority_at_commitment": true,
+    "result_does_not_authorize_execution": true,
+    "result_does_not_commit_transition": true,
+    "extensions_cannot_alter_canonical_governance_meaning": true
+  },
+  "canonical_state_ref": {
+    "canonical_state_id": "canonical-state-1",
+    "canonical_state_version": "2.0.0",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "evaluation_horizon": {
+      "horizon_id": "horizon-1",
+      "evaluated_at": "2026-07-30T16:00:00Z"
+    },
+    "state_digest": {
+      "algorithm": "SHA-256",
+      "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "resolved_at": "2026-07-30T16:00:00Z"
+  },
+  "state_qualification_result_ref": {
+    "evaluation_id": "state-qualification-1",
+    "outcome": "QUALIFIED",
+    "result_digest": {
+      "algorithm": "SHA-256",
+      "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    "evaluated_at": "2026-07-30T16:00:00Z",
+    "canonical_state_ref": {
+      "canonical_state_id": "canonical-state-1",
+      "canonical_state_version": "2.0.0",
+      "canonical_state_digest": {
+        "algorithm": "SHA-256",
+        "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      "resolved_at": "2026-07-30T16:00:00Z"
+    }
+  },
+  "qualified_evidence_refs": [
+    {
+      "evidence_ref": {
+        "governance_evidence_id": "evidence-1",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      },
+      "qualification_result_ref": {
+        "evaluation_id": "evidence-qualification-1",
+        "outcome": "QUALIFIED",
+        "result_digest": {
+          "algorithm": "SHA-256",
+          "value": "1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "evaluated_at": "2026-07-30T16:00:00Z",
+        "proposal_id": "proposal-1",
+        "evidence_set_digest": {
+          "algorithm": "SHA-256",
+          "value": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      }
+    }
+  ],
+  "evidence_qualification_result_refs": [
+    {
+      "evaluation_id": "evidence-qualification-1",
+      "outcome": "QUALIFIED",
+      "result_digest": {
+        "algorithm": "SHA-256",
+        "value": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "evaluated_at": "2026-07-30T16:00:00Z",
+      "proposal_id": "proposal-1",
+      "evidence_set_digest": {
+        "algorithm": "SHA-256",
+        "value": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    }
+  ],
+  "authority_lineage_ref": {
+    "authority_lineage_id": "authority-lineage-1",
+    "lineage_version": "2.0.0",
+    "lineage_uri": "https://agcp.ai/example/authority/authority-lineage-1",
+    "lineage_digest": {
+      "algorithm": "SHA-256",
+      "value": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    "proposal_id": "proposal-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "evaluated_at": "2026-07-30T16:00:00Z",
+    "scope": {
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
+      "target_ids": [
+        "target-1"
+      ]
+    }
+  },
+  "lifecycle_state_ref": {
+    "lifecycle_record_id": "GLR-EXAMPLE-1",
+    "proposal_id": "proposal-1",
+    "derived_lifecycle_state": "AUTHORIZED",
+    "terminality": "NONTERMINAL",
+    "commitment_eligibility": "ELIGIBLE_FOR_COMMIT_BOUNDARY_PROCESSING",
+    "ledger_position": {
+      "ledger_id": "GL-EXAMPLE-1",
+      "stream_id": "proposal-1",
+      "sequence": 1,
+      "event_id": "GLE-EXAMPLE-0001",
+      "event_digest": {
+        "algorithm": "SHA-256",
+        "value": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      "chain_digest": {
+        "algorithm": "SHA-256",
+        "value": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      "stream_head_after_append": true,
+      "predecessor_event_id": "GLE-EXAMPLE-0000",
+      "previous_event_digest": {
+        "algorithm": "SHA-256",
+        "value": "6666666666666666666666666666666666666666666666666666666666666666"
+      }
+    },
+    "state_digest": {
+      "algorithm": "SHA-256",
+      "value": "7777777777777777777777777777777777777777777777777777777777777777"
+    },
+    "derived_at": "2026-07-30T16:00:00Z"
+  }
+}

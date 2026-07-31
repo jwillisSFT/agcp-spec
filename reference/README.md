@@ -14,8 +14,7 @@ implementation strategies, and provide educational guidance. They are
 **not normative** and do not create additional implementation
 requirements.
 
-Where any reference artifact differs from a normative specification, the
-normative specification always takes precedence.
+Where a reference artifact differs from another AGCP source, the conflict SHALL be resolved using the Core-defined precedence order: published CRs; Core Specification; applicable adopted normative Companion Specifications; Implementation Profiles; Conformance Test Suite; and Reference Implementations. The ARM governs architectural terminology and concept meaning. Normative Statements are Core-derived extraction and traceability artifacts rather than an independently superior source.
 
 ------------------------------------------------------------------------
 
@@ -41,12 +40,7 @@ releases without changing normative behavior.
 
 # Relationship to the AGCP Specifications
 
-The authoritative AGCP requirements are defined by the specifications
-contained in:
-
-``` text
-/spec/
-```
+The authoritative normative requirements are established first by the published CRs and then by the Core Specification, together with any applicable normative Companion Specifications expressly adopted by an implementation profile. The ARM provides the authoritative architectural vocabulary and conceptual reference. The `/spec/` directory contains the Core, ARM, Normative Statements, and Companion Specifications, while the controlled CR dataset and RTM provide normative capability requirements and authoritative traceability respectively.
 
 Reference artifacts are intended to help explain or implement those
 specifications but SHALL NOT:
@@ -93,14 +87,15 @@ This includes, where applicable:
 -   deterministic governance evaluation;
 -   deterministic Proposal Qualification;
 -   deterministic Governance Decision behavior;
--   Human Review enforcement;
+-   Governance Approval enforcement;
 -   Execution Authorization semantics;
 -   Commit Boundary enforcement;
 -   Governance Evidence generation;
 -   provenance verification;
 -   ordered Append-Only Governance Ledger behavior;
--   Canonical State derivation from ordered ledger history (or a
-    verifiable materialized state reproducible from that history);
+-   Canonical State resolution from qualified authoritative governance
+    sources, including authoritative ledger ordering for incorporated
+    governance events and Derived Lifecycle State;
 -   deterministic replay behavior; and
 -   tenant and Governance Domain isolation.
 
@@ -112,10 +107,11 @@ observable behaviors.
 # Canonical State
 
 Reference implementations and examples SHOULD reflect the AGCP
-architectural principle that Canonical State is derived from the ordered
-Append-Only Governance Ledger, or from a verifiable materialized state
-whose derivation can be deterministically reproduced from ordered ledger
-entries.
+architectural principle that Canonical State is deterministically resolved
+from one or more qualified authoritative governance sources. The ordered
+Append-Only Governance Ledger is authoritative for recorded governance
+events, event ordering, and Derived Lifecycle State, but need not originate
+every governance-relevant fact incorporated into Canonical State.
 
 Reference artifacts SHOULD NOT illustrate architectures that derive
 authoritative state from timestamp ordering or other non-authoritative
@@ -131,13 +127,16 @@ evaluation.
 Conformance is established through the authoritative traceability chain:
 
 ``` text
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
+        |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
+        v
+Conformance Test Case (TC)
 ```
 
 Executable Harness Checks and Harness Test Vectors verify implementation

@@ -1,69 +1,239 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/common.json",
+  "$id": "https://agcp.ai/schemas/common.json",
   "title": "AGCP Common Types",
-  "description": "Shared JSON Schema definitions for AGCP-conformant schemas. Specification release versioning is managed by repository release tags; this schema intentionally does not embed a schema_version field.",
-  "type": "object",
-  "additionalProperties": false,
+  "description": "Shared JSON Schema definitions actively required by the AGCP v2.0 schema set. Canonical domain objects and result/reference definitions are owned by their assigned DS schemas; backward-compatibility aliases are not retained.",
+  "$comment": "DS-001 contains only shared definitions reachable from the active AGCP v2.0 schema set. Governance Ledger identifiers, positions, event types, and event references are owned by DS-040.",
+  "x-agcp-ds-id": "DS-001",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Shared Definitions Library",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-101 through ARM-108",
+      "ARM-201 through ARM-217",
+      "ARM-301 through ARM-308",
+      "ARM-401 through ARM-406",
+      "ARM-601 through ARM-606",
+      "ARM-701 through ARM-704",
+      "ARM-801 through ARM-804"
+    ],
+    "core_sections": [
+      "4",
+      "6.6A",
+      "7.6A",
+      "8.6A",
+      "9.6A",
+      "9.6B",
+      "10.8A",
+      "13.6A",
+      "13.6B",
+      "13.6C",
+      "15.6A",
+      "15.6B",
+      "16.6A"
+    ],
+    "conformance_requirement_relationship": "Shared vocabulary only; direct CR-to-DS mappings are assigned through dependent schemas and authoritative RTM records."
+  },
   "$defs": {
-    "uuid_like": {
+    "identifier": {
       "type": "string",
-      "minLength": 8,
-      "maxLength": 128
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable implementation-independent identifier within its authoritative namespace."
     },
     "tenant_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 128
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable Tenant identifier."
     },
     "governance_domain_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 128
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable Governance Domain identifier."
     },
     "proposal_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 128
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable Proposal Identity value for a Governed Action Proposal."
     },
     "action_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 128
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a governance-significant Action."
     },
     "authorization_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 128
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for an Execution Authorization artifact or outcome."
+    },
+    "governance_decision_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for an authoritative Governance Decision."
     },
     "governance_evidence_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 128
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for Governance Evidence."
     },
     "artifact_id": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 128
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a governance-significant artifact."
+    },
+    "governance_context_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a Governance Context Envelope."
+    },
+    "canonical_state_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a Canonical State representation."
+    },
+    "authority_lineage_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for Authority Lineage."
+    },
+    "governance_version_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for an activated Governance Version."
+    },
+    "governance_receipt_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a Governance Receipt."
+    },
+    "refusal_record_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a Refusal Record."
+    },
+    "approval_artifact_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a Governance Approval Artifact."
+    },
+    "enforcement_context_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for Enforcement Context."
+    },
+    "risk_re_evaluation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a Risk-Based Re-Evaluation result."
+    },
+    "evaluation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a deterministic governance evaluation."
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for an execution target or governed resource."
+    },
+    "policy_enforcement_point_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a Policy Enforcement Point."
+    },
+    "lineage_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for an operational, mission, task, or governance lineage."
     },
     "timestamp_rfc3339": {
       "type": "string",
-      "format": "date-time"
-    },
-    "hash_hex": {
-      "type": "string",
-      "pattern": "^[a-fA-F0-9]{16,128}$"
+      "format": "date-time",
+      "description": "RFC 3339 timestamp with timezone information."
     },
     "uri": {
       "type": "string",
       "format": "uri"
+    },
+    "version_string": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$",
+      "description": "Stable release, artifact, configuration, or governance version value."
+    },
+    "sequence_number": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonically ordered sequence number within the declared ordering scope."
+    },
+    "hash_hex": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{16,128}$",
+      "description": "Legacy hexadecimal digest representation. New schemas SHOULD use content_digest when the algorithm must be explicit."
+    },
+    "hash_algorithm_enum": {
+      "type": "string",
+      "enum": [
+        "SHA-256",
+        "SHA-384",
+        "SHA-512",
+        "BLAKE2B-256",
+        "BLAKE2B-512"
+      ],
+      "description": "Supported content-digest algorithms. Profiles may further restrict this set."
     },
     "qualification_outcome_enum": {
       "type": "string",
       "enum": [
         "Qualified Proposal",
         "Structural Refusal"
-      ]
+      ],
+      "description": "Proposal Qualification outcome."
     },
     "governance_outcome_enum": {
       "type": "string",
@@ -74,7 +244,8 @@
         "Pending Human Review",
         "Deferred",
         "Governed Re-evaluation Required"
-      ]
+      ],
+      "description": "Authoritative Governance Decision Function outcome."
     },
     "execution_authorization_outcome_enum": {
       "type": "string",
@@ -82,7 +253,8 @@
         "Authorized for Commit Boundary Processing",
         "Authorization Failure",
         "Governed Re-evaluation Required"
-      ]
+      ],
+      "description": "Execution Authorization outcome. Authorization is not authority at commitment or permission to execute."
     },
     "commit_boundary_outcome_enum": {
       "type": "string",
@@ -90,60 +262,28 @@
         "Commit Successful",
         "Commit Failed",
         "Governed Re-evaluation Required"
-      ]
-    },
-    "continuation_outcome_enum": {
-      "type": "string",
-      "enum": [
-        "Continue Execution",
-        "DEGRADED",
-        "Suspend Execution",
-        "Resume Execution",
-        "Governed Termination"
-      ]
-    },
-    "constraint_outcome_enum": {
-      "type": "string",
-      "enum": [
-        "PASS",
-        "FAIL",
-        "NOT_APPLICABLE"
-      ]
-    },
-    "invariant_enforcement_enum": {
-      "type": "string",
-      "enum": [
-        "Hard",
-        "Soft"
-      ]
-    },
-    "pass_fail_enum": {
-      "type": "string",
-      "enum": [
-        "PASS",
-        "FAIL"
-      ]
-    },
-    "tenant_state_enum": {
-      "type": "string",
-      "enum": [
-        "PROVISIONED",
-        "ACTIVE",
-        "SUSPENDED",
-        "DECOMMISSIONED"
-      ]
+      ],
+      "description": "Commit Boundary outcome."
     },
     "governance_artifact_status_enum": {
       "type": "string",
       "enum": [
         "Registered",
         "Validation Pending",
+        "Validated",
+        "Validation Failed",
+        "Compiled",
+        "Activation Pending",
         "Accepted",
         "Rejected",
         "Active",
+        "Superseded",
+        "Deprecated",
         "Retired",
+        "Activation Failed",
         "Governed Re-evaluation Required"
-      ]
+      ],
+      "description": "Governance artifact lifecycle or operational status."
     },
     "governance_pipeline_stage_enum": {
       "type": "string",
@@ -151,24 +291,91 @@
         "Proposal Qualification",
         "Governance Decision Function",
         "Execution Authorization",
-        "Commit Boundary",
         "Continuation Integrity",
+        "Governance Realization",
+        "Commit-Bound Admissibility",
+        "Commit Boundary",
+        "Policy Enforcement Point",
         "Governance Evidence",
         "Tenant and Domain Isolation",
         "Delegation and Authority Lineage",
         "Cross-Domain Authority Isolation",
         "Governance Self-Protection",
+        "Governance Compilation",
+        "Controlled Governance Activation",
         "Autonomous Coordination"
-      ]
+      ],
+      "description": "Governance pipeline stage or supporting governance service. Continuation Integrity applies before final Commit-Bound Admissibility while a proposal remains nonterminal."
     },
-    "rejection_code": {
+    "overall_qualification_outcome_enum": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "description": "A rejection code registered in registries/rejection-code-registry.json."
+      "enum": [
+        "QUALIFIED",
+        "NOT_QUALIFIED",
+        "INDETERMINATE"
+      ],
+      "description": "Overall State Qualification or Evidence Qualification outcome."
+    },
+    "quorum_status_enum": {
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "PARTIAL",
+        "SATISFIED",
+        "FAILED",
+        "EXPIRED",
+        "CANCELLED"
+      ],
+      "description": "Governance quorum accumulation status."
+    },
+    "composite_coupling_semantics_enum": {
+      "type": "string",
+      "enum": [
+        "WEAKLY_COUPLED",
+        "STRONGLY_COUPLED",
+        "EXPLICITLY_GOVERNED"
+      ],
+      "description": "Declared coupling semantics for governed sub-transitions."
+    },
+    "risk_re_evaluation_disposition_enum": {
+      "type": "string",
+      "enum": [
+        "AFFECTED_RE_EVALUATED",
+        "UNAFFECTED_NOT_RE_EVALUATED",
+        "RESTORED",
+        "DEGRADED",
+        "NON_EXECUTABLE",
+        "TERMINAL_OUTCOME"
+      ],
+      "description": "Risk-Based Re-Evaluation disposition."
+    },
+    "content_digest": {
+      "type": "object",
+      "description": "Algorithm-explicit content digest for integrity, binding, and replay verification.",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "$ref": "#/$defs/hash_algorithm_enum"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{32,128}$"
+        },
+        "canonicalization": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Canonicalization method applied before digest calculation, when applicable."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ]
     },
     "signature": {
       "type": "object",
+      "description": "Cryptographic signature or equivalent integrity proof. Profiles define permitted algorithms and verification rules.",
       "additionalProperties": false,
       "properties": {
         "alg": {
@@ -188,6 +395,20 @@
         },
         "payload_hash": {
           "$ref": "#/$defs/hash_hex"
+        },
+        "payload_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "signer_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "signed_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "verification_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
         }
       },
       "required": [
@@ -198,6 +419,7 @@
     },
     "principal": {
       "type": "object",
+      "description": "Accountable actor, agent, service, workload, system, organization, or governance authority.",
       "additionalProperties": false,
       "properties": {
         "principal_id": {
@@ -211,12 +433,27 @@
             "AGENT",
             "SERVICE",
             "USER",
-            "SYSTEM"
-          ]
+            "SYSTEM",
+            "WORKLOAD",
+            "ORGANIZATION",
+            "GOVERNANCE_AUTHORITY"
+          ],
+          "description": "Type of accountable principal."
         },
         "display_name": {
           "type": "string",
           "maxLength": 256
+        },
+        "tenant_id": {
+          "$ref": "#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "#/$defs/governance_domain_id"
+        },
+        "credential_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
         }
       },
       "required": [
@@ -224,9 +461,32 @@
         "principal_type"
       ]
     },
+    "attribution": {
+      "type": "object",
+      "description": "Attribution of a governance-significant artifact or outcome to an accountable principal.",
+      "additionalProperties": false,
+      "properties": {
+        "principal": {
+          "$ref": "#/$defs/principal"
+        },
+        "attributed_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "authority_lineage_ref": {
+          "$ref": "#/$defs/authority_lineage_ref"
+        },
+        "signature": {
+          "$ref": "#/$defs/signature"
+        }
+      },
+      "required": [
+        "principal",
+        "attributed_at"
+      ]
+    },
     "provenance": {
       "type": "object",
-      "description": "Provenance envelope for governance-significant submitted inputs.",
+      "description": "Provenance envelope for governance-significant submitted inputs and derived artifacts.",
       "additionalProperties": false,
       "properties": {
         "signer": {
@@ -239,6 +499,26 @@
         },
         "signed_at": {
           "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "source_system": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "source_artifact_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "payload_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "predecessor_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true
         }
       },
       "required": [
@@ -247,43 +527,275 @@
         "signed_at"
       ]
     },
-    "policy_ref": {
+    "validity_window": {
       "type": "object",
+      "description": "Temporal validity conditions. When both values are present, not_before must precede expires_at; semantic comparison is performed by the implementation.",
       "additionalProperties": false,
       "properties": {
-        "policy_id": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+        "not_before": {
+          "$ref": "#/$defs/timestamp_rfc3339"
         },
-        "policy_release": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+        "expires_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        }
+      },
+      "minProperties": 1
+    },
+    "evaluation_horizon": {
+      "type": "object",
+      "description": "Defined governance horizon for which qualified inputs and an outcome apply.",
+      "additionalProperties": false,
+      "properties": {
+        "horizon_id": {
+          "$ref": "#/$defs/identifier"
         },
-        "policy_hash": {
-          "$ref": "#/$defs/hash_hex"
+        "evaluated_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "validity_window": {
+          "$ref": "#/$defs/validity_window"
+        },
+        "ordering_cutoff": {
+          "$ref": "governance_ledger_event.json#/$defs/ledger_position"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 1024
         }
       },
       "required": [
-        "policy_id"
+        "horizon_id",
+        "evaluated_at"
+      ]
+    },
+    "governance_scope": {
+      "type": "object",
+      "description": "Bounded governance scope for authority, approval, configuration, or activation.",
+      "additionalProperties": false,
+      "properties": {
+        "tenant_id": {
+          "$ref": "#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "#/$defs/governance_domain_id"
+        },
+        "target_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/target_id"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "action_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "uniqueItems": true
+        },
+        "resource_uris": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uri"
+          },
+          "uniqueItems": true
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "tenant_id"
+      ]
+    },
+    "target_ref": {
+      "type": "object",
+      "description": "Reference to the specific target or governed resource to which a proposal or decision is bound.",
+      "additionalProperties": false,
+      "properties": {
+        "target_id": {
+          "$ref": "#/$defs/target_id"
+        },
+        "target_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "resource_uri": {
+          "$ref": "#/$defs/uri"
+        },
+        "tenant_id": {
+          "$ref": "#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "#/$defs/governance_domain_id"
+        },
+        "target_version": {
+          "$ref": "#/$defs/version_string"
+        },
+        "target_digest": {
+          "$ref": "#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "target_id"
+      ]
+    },
+    "authoritative_source_ref": {
+      "type": "object",
+      "description": "Qualified authoritative source contributing to Canonical State or another governance basis.",
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_LEDGER",
+            "IDENTITY_SYSTEM",
+            "ENTITLEMENT_SYSTEM",
+            "POLICY_REGISTRY",
+            "ASSET_REPOSITORY",
+            "APPLICATION_SYSTEM_OF_RECORD",
+            "EVIDENCE_REPOSITORY",
+            "LIFECYCLE_REGISTRY",
+            "OTHER_QUALIFIED_SOURCE"
+          ],
+          "description": "Qualified authoritative governance source type."
+        },
+        "source_version": {
+          "$ref": "#/$defs/version_string"
+        },
+        "source_uri": {
+          "$ref": "#/$defs/uri"
+        },
+        "source_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "resolved_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_type"
+      ]
+    },
+    "governance_version_ref": {
+      "type": "object",
+      "description": "Reference to the active versioned governance package applicable to an evaluation or commitment.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_version_id": {
+          "$ref": "#/$defs/governance_version_id"
+        },
+        "version": {
+          "$ref": "#/$defs/version_string"
+        },
+        "package_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "activated_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "controlled_governance_activation_ref": {
+          "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+        }
+      },
+      "required": [
+        "governance_version_id"
+      ]
+    },
+    "state_qualification_result_ref": {
+      "type": "object",
+      "description": "Reference to a State Qualification result.",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "$ref": "#/$defs/overall_qualification_outcome_enum"
+        },
+        "result_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "evaluated_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "outcome"
+      ]
+    },
+    "evidence_qualification_result_ref": {
+      "type": "object",
+      "description": "Reference to an Evidence Qualification result.",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "$ref": "#/$defs/overall_qualification_outcome_enum"
+        },
+        "result_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "evaluated_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "outcome"
       ]
     },
     "canonical_state_ref": {
       "type": "object",
-      "description": "Reference to authoritative Canonical State used for governance processing.",
+      "description": "Reference to qualified authoritative Canonical State. The Governance Ledger is authoritative for recorded governance events, event ordering, and Derived Lifecycle State, but need not originate every governance-relevant fact.",
       "additionalProperties": false,
       "properties": {
         "canonical_state_id": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+          "$ref": "#/$defs/canonical_state_id"
+        },
+        "canonical_state_version": {
+          "$ref": "#/$defs/version_string"
         },
         "canonical_state_hash": {
           "$ref": "#/$defs/hash_hex"
         },
+        "canonical_state_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
         "resolved_at": {
           "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "evaluation_horizon": {
+          "$ref": "#/$defs/evaluation_horizon"
+        },
+        "authoritative_sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/authoritative_source_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "state_qualification_result_ref": {
+          "$ref": "#/$defs/state_qualification_result_ref"
+        },
+        "ledger_position": {
+          "$ref": "governance_ledger_event.json#/$defs/ledger_position"
         }
       },
       "required": [
@@ -292,16 +804,26 @@
     },
     "authority_lineage_ref": {
       "type": "object",
-      "description": "Reference to Authority Lineage used for governance processing.",
+      "description": "Reference to complete attributable Authority Lineage.",
       "additionalProperties": false,
       "properties": {
         "authority_lineage_id": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+          "$ref": "#/$defs/authority_lineage_id"
         },
         "authority_lineage_hash": {
           "$ref": "#/$defs/hash_hex"
+        },
+        "authority_lineage_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "lineage_version": {
+          "$ref": "#/$defs/version_string"
+        },
+        "evaluated_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "scope": {
+          "$ref": "#/$defs/governance_scope"
         }
       },
       "required": [
@@ -310,79 +832,306 @@
     },
     "governance_context_ref": {
       "type": "object",
-      "description": "Reference to Governance Context associated with a Proposal.",
+      "description": "Reference to an attributable, versioned Governance Context Envelope. Context may inform evaluation but cannot override Canonical State.",
       "additionalProperties": false,
       "properties": {
         "governance_context_id": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+          "$ref": "#/$defs/governance_context_id"
+        },
+        "governance_context_version": {
+          "$ref": "#/$defs/version_string"
         },
         "governance_context_hash": {
           "$ref": "#/$defs/hash_hex"
+        },
+        "governance_context_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "qualified_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "qualification_evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
         }
       },
       "required": [
         "governance_context_id"
       ]
     },
-    "governance_configuration_ref": {
+    "qualified_evidence_ref": {
       "type": "object",
-      "description": "Reference to applicable governance configuration.",
+      "description": "Evidence reference together with the qualification result that permits it to support governance evaluation.",
       "additionalProperties": false,
       "properties": {
-        "governance_configuration_id": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
+        "evidence_ref": {
+          "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
         },
-        "governance_configuration_hash": {
-          "$ref": "#/$defs/hash_hex"
+        "qualification_result_ref": {
+          "$ref": "#/$defs/evidence_qualification_result_ref"
+        },
+        "authority_basis_ref": {
+          "$ref": "#/$defs/authority_lineage_ref"
         }
       },
       "required": [
-        "governance_configuration_id"
+        "evidence_ref",
+        "qualification_result_ref"
       ]
     },
-    "stage_evidence_ref": {
+    "governance_receipt_ref": {
       "type": "object",
+      "description": "Reference to an attributable, integrity-protected non-refusal Governance Receipt.",
       "additionalProperties": false,
       "properties": {
-        "stage": {
-          "$ref": "#/$defs/governance_pipeline_stage_enum"
+        "governance_receipt_id": {
+          "$ref": "#/$defs/governance_receipt_id"
         },
-        "ref": {
+        "receipt_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "ledger_event_ref": {
+          "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+        },
+        "created_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "proposal_id": {
+          "$ref": "#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "#/$defs/tenant_id"
+        },
+        "target_ref": {
+          "$ref": "#/$defs/target_ref"
+        },
+        "governance_version_ref": {
+          "$ref": "#/$defs/governance_version_ref"
+        }
+      },
+      "required": [
+        "governance_receipt_id"
+      ]
+    },
+    "rejection_code": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Z][A-Z0-9_.:-]*$",
+      "description": "A refusal or rejection code registered in registries/rejection-code-registry.json."
+    },
+    "proposal_identity": {
+      "type": "object",
+      "description": "Stable Proposal Identity attributable to canonical proposal content and governing identity context. Equivalent transport representations retain this identity; non-equivalent proposals do not.",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_id": {
+          "$ref": "#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "#/$defs/governance_domain_id"
+        },
+        "canonical_content_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "originator": {
+          "$ref": "#/$defs/principal"
+        },
+        "identity_scope": {
+          "$ref": "#/$defs/governance_scope"
+        },
+        "idempotency_key": {
           "type": "string",
           "minLength": 1,
           "maxLength": 256
         }
       },
       "required": [
-        "stage",
-        "ref"
+        "proposal_id",
+        "tenant_id",
+        "canonical_content_digest",
+        "originator"
       ]
     },
-    "registry_ref": {
+    "mission_task_lineage_ref": {
       "type": "object",
+      "description": "Reference preserving mission, task, workflow, handoff, recursive-generation, or coordination lineage.",
       "additionalProperties": false,
       "properties": {
-        "name": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 256
+        "lineage_id": {
+          "$ref": "#/$defs/lineage_id"
         },
-        "release": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128,
-          "description": "Repository release tag or registry release identifier."
+        "parent_proposal_id": {
+          "$ref": "#/$defs/proposal_id"
         },
-        "hash": {
-          "$ref": "#/$defs/hash_hex"
+        "root_proposal_id": {
+          "$ref": "#/$defs/proposal_id"
+        },
+        "lineage_digest": {
+          "$ref": "#/$defs/content_digest"
+        },
+        "lineage_type": {
+          "type": "string",
+          "enum": [
+            "MISSION",
+            "TASK",
+            "WORKFLOW",
+            "HANDOFF",
+            "RECURSIVE_GENERATION",
+            "COORDINATION"
+          ],
+          "description": "Operational or governance lineage type."
         }
       },
       "required": [
-        "name"
+        "lineage_id"
+      ]
+    },
+    "quorum_requirement": {
+      "type": "object",
+      "description": "Governance quorum requirement. The threshold must be satisfied by valid attributable approval artifacts.",
+      "additionalProperties": false,
+      "properties": {
+        "threshold": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "eligible_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "uniqueItems": true
+        },
+        "eligible_principal_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "uniqueItems": true
+        },
+        "distinct_principals_required": {
+          "type": "boolean",
+          "default": true
+        },
+        "validity_window": {
+          "$ref": "#/$defs/validity_window"
+        }
+      },
+      "required": [
+        "threshold"
+      ]
+    },
+    "governance_basis": {
+      "type": "object",
+      "description": "Qualified governance basis supporting a decision, authorization, admissibility determination, receipt, or refusal.",
+      "additionalProperties": false,
+      "properties": {
+        "governance_version_ref": {
+          "$ref": "#/$defs/governance_version_ref"
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "canonical_state_ref": {
+          "$ref": "#/$defs/canonical_state_ref"
+        },
+        "state_qualification_result_ref": {
+          "$ref": "#/$defs/state_qualification_result_ref"
+        },
+        "authority_lineage_ref": {
+          "$ref": "#/$defs/authority_lineage_ref"
+        },
+        "governance_configuration_ref": {
+          "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+        },
+        "qualified_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualified_evidence_ref"
+          },
+          "uniqueItems": true
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "uniqueItems": true
+        },
+        "invariant_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "invariant_definition.json#/$defs/invariant_definition_ref"
+          },
+          "uniqueItems": true
+        },
+        "evaluation_horizon": {
+          "$ref": "#/$defs/evaluation_horizon"
+        }
+      },
+      "minProperties": 1
+    },
+    "risk_based_re_evaluation_result": {
+      "type": "object",
+      "description": "Deterministic identification and re-evaluation disposition of affected nonterminal proposals under active risk-based governance configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "risk_re_evaluation_id": {
+          "$ref": "#/$defs/risk_re_evaluation_id"
+        },
+        "material_change_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "affected_proposal_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proposal_id"
+          },
+          "uniqueItems": true
+        },
+        "unaffected_proposal_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/proposal_id"
+          },
+          "uniqueItems": true
+        },
+        "dispositions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/risk_re_evaluation_disposition_enum"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "governance_configuration_ref": {
+          "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+        },
+        "evaluated_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "result_digest": {
+          "$ref": "#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "risk_re_evaluation_id",
+        "material_change_ref",
+        "dispositions",
+        "governance_configuration_ref",
+        "evaluated_at"
       ]
     }
   }

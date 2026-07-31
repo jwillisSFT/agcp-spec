@@ -1,13 +1,70 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/execution_authorization_view.json",
+  "$id": "https://agcp.ai/schemas/execution_authorization_view.json",
   "title": "Execution Authorization View",
-  "description": "Externally observable view of an AGCP Execution Authorization. Execution Authorization validates whether an authorized governance decision remains eligible for Commit Boundary processing; it does not itself execute the Action.",
+  "description": "Canonical externally observable representation of an AGCP Execution Authorization. It binds an authorization outcome to the canonical proposal, Governance Decision Result, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified evidence, Authority Lineage, lifecycle, scope, and validity conditions. Execution Authorization is eligibility evidence for Commit Boundary processing; it is neither authority at commitment nor permission to execute.",
+  "$comment": "DS-017 validates the structure and internal consistency of Execution Authorization. Current authority must still be re-derived at commitment through DS-034 and all bindings must be revalidated through DS-030.",
+  "x-agcp-ds-id": "DS-017",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Execution Authorization Outcome",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-201",
+      "ARM-203",
+      "ARM-205",
+      "ARM-207",
+      "ARM-210",
+      "ARM-401",
+      "ARM-601",
+      "ARM-702"
+    ],
+    "core_sections": [
+      "8.6",
+      "9.1",
+      "9.2",
+      "9.3",
+      "9.4"
+    ],
+    "normative_statements": [
+      "NS-9.1-02",
+      "NS-9.3-01",
+      "NS-9.3-02",
+      "NS-9.4-01",
+      "NS-9.4-02"
+    ],
+    "conformance_requirements": [
+      "CR-019",
+      "CR-020",
+      "CR-021",
+      "CR-022",
+      "CR-023",
+      "CR-024",
+      "CR-025",
+      "CR-031",
+      "CR-032",
+      "CR-033",
+      "CR-035",
+      "CR-061",
+      "CR-079",
+      "CR-080",
+      "CR-084"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "authorization_id": {
       "$ref": "common.json#/$defs/authorization_id"
+    },
+    "view_type": {
+      "const": "EXECUTION_AUTHORIZATION"
+    },
+    "proposal_ref": {
+      "$ref": "governed_action_proposal.json#/$defs/governed_action_proposal_ref"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
     },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
@@ -15,80 +72,538 @@
     "governance_domain_id": {
       "$ref": "common.json#/$defs/governance_domain_id"
     },
-    "proposal_id": {
-      "$ref": "common.json#/$defs/proposal_id"
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
     },
-    "action_id": {
-      "$ref": "common.json#/$defs/action_id"
+    "governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
     },
     "authorization_outcome": {
       "$ref": "common.json#/$defs/execution_authorization_outcome_enum"
     },
     "authorized_for_commit_boundary": {
-      "type": "boolean",
-      "description": "True only when authorization_outcome is Authorized for Commit Boundary Processing."
+      "type": "boolean"
     },
-    "governance_decision_ref": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256,
-      "description": "Reference to the Governance Decision Result that forms the basis for this Execution Authorization."
-    },
-    "policy_ref": {
-      "$ref": "common.json#/$defs/policy_ref"
-    },
-    "canonical_state_ref": {
-      "$ref": "common.json#/$defs/canonical_state_ref"
-    },
-    "authority_lineage_ref": {
-      "$ref": "common.json#/$defs/authority_lineage_ref"
-    },
-    "governance_context_ref": {
-      "$ref": "common.json#/$defs/governance_context_ref"
-    },
-    "governance_configuration_ref": {
-      "$ref": "common.json#/$defs/governance_configuration_ref"
-    },
-    "authorization_timestamp": {
+    "issued_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "expires_at": {
-      "$ref": "common.json#/$defs/timestamp_rfc3339",
-      "description": "Optional expiration time after which this authorization SHALL NOT be used for Commit Boundary processing."
+    "validity_window": {
+      "$ref": "common.json#/$defs/validity_window"
+    },
+    "lifecycle_binding": {
+      "$ref": "#/$defs/lifecycle_binding"
+    },
+    "scope_binding": {
+      "$ref": "#/$defs/scope_binding"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "governance_context_ref": {
+      "$ref": "governance_context_envelope.json#/$defs/governance_context_envelope_ref"
+    },
+    "canonical_state_ref": {
+      "$ref": "canonical_state.json#/$defs/canonical_state_ref"
+    },
+    "state_qualification_result_ref": {
+      "allOf": [
+        {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "QUALIFIED"
+            }
+          },
+          "required": [
+            "outcome"
+          ]
+        }
+      ]
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 512,
+      "uniqueItems": true
+    },
+    "authority_lineage_ref": {
+      "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+    },
+    "approval_artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "authorization_basis": {
+      "$ref": "#/$defs/authorization_basis"
+    },
+    "consumption_state": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "CONSUMED",
+        "EXPIRED",
+        "REVOKED",
+        "SUPERSEDED",
+        "NOT_APPLICABLE"
+      ]
     },
     "consumed_at": {
-      "$ref": "common.json#/$defs/timestamp_rfc3339",
-      "description": "Timestamp at which this authorization was consumed by successful Commit Boundary processing, if applicable."
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "consumed_by_commit_result_ref": {
+      "$ref": "commit_boundary_result.json#/$defs/commit_boundary_result_ref"
     },
     "rejection_code": {
       "$ref": "common.json#/$defs/rejection_code"
     },
+    "re_evaluation_triggers": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_decision_result.json#/$defs/re_evaluation_trigger"
+      },
+      "minItems": 1,
+      "maxItems": 128
+    },
     "governance_evidence_refs": {
       "type": "array",
       "items": {
-        "$ref": "common.json#/$defs/stage_evidence_ref"
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
       },
-      "uniqueItems": true,
-      "maxItems": 64
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
     },
-    "authorization_basis": {
-      "type": "object",
-      "description": "Implementation-independent basis for the authorization outcome.",
-      "additionalProperties": true
+    "governance_receipt_ref": {
+      "$ref": "governance_receipt.json#/$defs/governance_receipt_ref"
     },
-    "metadata": {
+    "authorization_attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "authorization_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
       "type": "object",
-      "description": "Implementation-defined metadata that SHALL NOT alter normative authorization semantics.",
-      "additionalProperties": true
+      "description": "Namespaced implementation extensions that cannot alter canonical governance meaning.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]+:[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64
     }
   },
   "required": [
     "authorization_id",
+    "view_type",
+    "proposal_ref",
     "tenant_id",
-    "proposal_id",
+    "governance_domain_id",
+    "target_ref",
+    "governance_decision_ref",
     "authorization_outcome",
     "authorized_for_commit_boundary",
-    "authorization_timestamp",
-    "governance_evidence_refs"
-  ]
+    "issued_at",
+    "validity_window",
+    "lifecycle_binding",
+    "scope_binding",
+    "governance_version_ref",
+    "governance_configuration_ref",
+    "policy_refs",
+    "governance_context_ref",
+    "canonical_state_ref",
+    "state_qualification_result_ref",
+    "qualified_evidence_refs",
+    "authority_lineage_ref",
+    "authorization_basis",
+    "consumption_state",
+    "governance_evidence_refs",
+    "governance_receipt_ref",
+    "authorization_attribution",
+    "authorization_digest",
+    "integrity_signature",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authorization_outcome": {
+            "const": "Authorized for Commit Boundary Processing"
+          }
+        },
+        "required": [
+          "authorization_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authorized_for_commit_boundary": {
+            "const": true
+          },
+          "authorization_basis": {
+            "$ref": "#/$defs/satisfied_authorization_basis"
+          },
+          "consumption_state": {
+            "enum": [
+              "AVAILABLE",
+              "CONSUMED"
+            ]
+          }
+        },
+        "not": {
+          "required": [
+            "rejection_code"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authorization_outcome": {
+            "const": "Authorization Failure"
+          }
+        },
+        "required": [
+          "authorization_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authorized_for_commit_boundary": {
+            "const": false
+          },
+          "consumption_state": {
+            "enum": [
+              "NOT_APPLICABLE",
+              "EXPIRED",
+              "REVOKED",
+              "SUPERSEDED"
+            ]
+          }
+        },
+        "required": [
+          "rejection_code"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authorization_outcome": {
+            "const": "Governed Re-evaluation Required"
+          }
+        },
+        "required": [
+          "authorization_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authorized_for_commit_boundary": {
+            "const": false
+          }
+        },
+        "required": [
+          "re_evaluation_triggers"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "consumption_state": {
+            "const": "CONSUMED"
+          }
+        },
+        "required": [
+          "consumption_state"
+        ]
+      },
+      "then": {
+        "required": [
+          "consumed_at",
+          "consumed_by_commit_result_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "consumption_state": {
+            "not": {
+              "const": "CONSUMED"
+            }
+          }
+        },
+        "required": [
+          "consumption_state"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "consumed_at"
+              ]
+            },
+            {
+              "required": [
+                "consumed_by_commit_result_ref"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "execution_authorization_view_ref": {
+      "type": "object",
+      "description": "Stable integrity-bound reference to DS-017 Execution Authorization.",
+      "additionalProperties": false,
+      "properties": {
+        "authorization_id": {
+          "$ref": "common.json#/$defs/authorization_id"
+        },
+        "outcome": {
+          "$ref": "common.json#/$defs/execution_authorization_outcome_enum"
+        },
+        "authorization_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "issued_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "consumption_state": {
+          "type": "string",
+          "enum": [
+            "AVAILABLE",
+            "CONSUMED",
+            "EXPIRED",
+            "REVOKED",
+            "SUPERSEDED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        }
+      },
+      "required": [
+        "authorization_id",
+        "outcome",
+        "authorization_digest"
+      ]
+    },
+    "lifecycle_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eligible_lifecycle_states": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_lifecycle_record.json#/$defs/derived_lifecycle_state"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "authorized_lifecycle_state": {
+          "$ref": "governance_lifecycle_record.json#/$defs/derived_lifecycle_state"
+        },
+        "lifecycle_state_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        }
+      },
+      "required": [
+        "eligible_lifecycle_states",
+        "authorized_lifecycle_state"
+      ]
+    },
+    "scope_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authorized_scope": {
+          "$ref": "common.json#/$defs/governance_scope"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "authorized_scope",
+        "target_ref",
+        "scope_digest"
+      ]
+    },
+    "authorization_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "decision_current": {
+          "type": "boolean"
+        },
+        "state_current": {
+          "type": "boolean"
+        },
+        "evidence_current": {
+          "type": "boolean"
+        },
+        "authority_basis_valid": {
+          "type": "boolean"
+        },
+        "scope_satisfied": {
+          "type": "boolean"
+        },
+        "lifecycle_eligible": {
+          "type": "boolean"
+        },
+        "tenant_active": {
+          "type": "boolean"
+        },
+        "governance_domain_active": {
+          "type": "boolean"
+        },
+        "target_bound": {
+          "type": "boolean"
+        },
+        "policy_current": {
+          "type": "boolean"
+        },
+        "validity_current": {
+          "type": "boolean"
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "decision_current",
+        "state_current",
+        "evidence_current",
+        "authority_basis_valid",
+        "scope_satisfied",
+        "lifecycle_eligible",
+        "tenant_active",
+        "governance_domain_active",
+        "target_bound",
+        "policy_current",
+        "validity_current",
+        "basis_digest"
+      ]
+    },
+    "satisfied_authorization_basis": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/authorization_basis"
+        },
+        {
+          "properties": {
+            "decision_current": {
+              "const": true
+            },
+            "state_current": {
+              "const": true
+            },
+            "evidence_current": {
+              "const": true
+            },
+            "authority_basis_valid": {
+              "const": true
+            },
+            "scope_satisfied": {
+              "const": true
+            },
+            "lifecycle_eligible": {
+              "const": true
+            },
+            "tenant_active": {
+              "const": true
+            },
+            "governance_domain_active": {
+              "const": true
+            },
+            "target_bound": {
+              "const": true
+            },
+            "policy_current": {
+              "const": true
+            },
+            "validity_current": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authorization_is_not_authority_at_commitment": {
+          "const": true
+        },
+        "authorization_is_not_permission_to_execute": {
+          "const": true
+        },
+        "authorization_requires_commit_time_rederivation": {
+          "const": true
+        },
+        "authorization_may_only_be_consumed_once": {
+          "const": true
+        }
+      },
+      "required": [
+        "authorization_is_not_authority_at_commitment",
+        "authorization_is_not_permission_to_execute",
+        "authorization_requires_commit_time_rederivation",
+        "authorization_may_only_be_consumed_once"
+      ]
+    }
+  }
 }

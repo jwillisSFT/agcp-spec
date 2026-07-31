@@ -1,0 +1,240 @@
+{
+  "metadata_response_id": "META-TEST-001",
+  "response_type": "AGCP_IMPLEMENTATION_METADATA",
+  "generated_at": "2026-07-31T10:00:00Z",
+  "implementation": {
+    "implementation_id": "AGCP-TEST",
+    "implementation_name": "AGCP Test Implementation",
+    "implementation_release": "2.0.0",
+    "implementation_build_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "implementation_status": "OPERATIONAL",
+    "maintainer": {
+      "principal_id": "client:test",
+      "principal_type": "AGENT"
+    }
+  },
+  "supported_agcp_releases": [
+    {
+      "release_id": "AGCP-v2.0.0",
+      "specification_version": "1.0.0",
+      "support_status": "CURRENT",
+      "publication_status": "WORKING_DRAFT",
+      "release_manifest_uri": "https://agcp.example/test",
+      "release_manifest_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "core_specification_uri": "https://agcp.example/test",
+      "core_specification_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "normative_statement_set_id": "TEST",
+      "conformance_requirement_set_id": "TEST"
+    }
+  ],
+  "default_agcp_release_id": "AGCP-v2.0.0",
+  "schema_set": {
+    "schema_set_id": "DS-SET-TEST",
+    "schema_catalog_id": "AGCP-SCHEMA-CATALOG",
+    "catalog_version": "1.0.0",
+    "agcp_specification_version": "1.0.0",
+    "publication_status": "WORKING_DRAFT",
+    "catalog_uri": "https://agcp.example/test",
+    "catalog_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "schema_manifest_uri": "https://agcp.example/test",
+    "schema_manifest_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "schema_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "schema_count": 1,
+    "manifest_complete": true,
+    "schemas": [
+      {
+        "ds_id": "DS-003",
+        "filename": "test.json",
+        "canonical_uri": "https://agcp.example/test",
+        "lifecycle_state": "Proposed",
+        "content_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ]
+  },
+  "implementation_profile": {
+    "profile_id": "PROF-TEST-001",
+    "profile_name": "Test Profile",
+    "profile_version": "1.0.0",
+    "profile_uri": "https://agcp.example/test",
+    "profile_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "lifecycle_state": "ACTIVE",
+    "mandatory_core_behavior_redefined": false
+  },
+  "registry_releases": [
+    {
+      "registry_ref": {
+        "registry_document_id": "REGDOC-CONSTRAINT-TYPE",
+        "registry_id": "REG-CONSTRAINT-TYPE",
+        "registry_name": "AGCP Constraint Type Registry",
+        "registry_kind": "CONSTRAINT_TYPE",
+        "release_id": "REG-CONSTRAINT-TYPE-v2.0.0",
+        "registry_release": "2.0.0",
+        "lifecycle_state": "ACTIVE",
+        "canonical_uri": "https://agcp.example/registries/constraint-type.json",
+        "document_digest": {
+          "algorithm": "SHA-256",
+          "value": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      },
+      "support_status": "CURRENT"
+    },
+    {
+      "registry_ref": {
+        "registry_document_id": "REGDOC-INVARIANT-TYPE",
+        "registry_id": "REG-INVARIANT-TYPE",
+        "registry_name": "AGCP Invariant Type Registry",
+        "registry_kind": "INVARIANT_TYPE",
+        "release_id": "REG-INVARIANT-TYPE-v2.0.0",
+        "registry_release": "2.0.0",
+        "lifecycle_state": "ACTIVE",
+        "canonical_uri": "https://agcp.example/registries/invariant-type.json",
+        "document_digest": {
+          "algorithm": "SHA-256",
+          "value": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      },
+      "support_status": "CURRENT"
+    },
+    {
+      "registry_ref": {
+        "registry_document_id": "REGDOC-REJECTION-CODE",
+        "registry_id": "REG-REJECTION-CODE",
+        "registry_name": "AGCP Rejection Code Registry",
+        "registry_kind": "REJECTION_CODE",
+        "release_id": "REG-REJECTION-CODE-v2.0.0",
+        "registry_release": "2.0.0",
+        "lifecycle_state": "ACTIVE",
+        "canonical_uri": "https://agcp.example/registries/rejection-code.json",
+        "document_digest": {
+          "algorithm": "SHA-256",
+          "value": "3333333333333333333333333333333333333333333333333333333333333333"
+        }
+      },
+      "support_status": "CURRENT"
+    }
+  ],
+  "supported_conformance_levels": [
+    "L1"
+  ],
+  "conformance_claims": [
+    {
+      "claim_id": "CLAIM-TEST",
+      "conformance_level": "L1",
+      "claim_status": "NOT_CLAIMED",
+      "implementation_profile_id": "PROF-TEST-001",
+      "agcp_release_ids": [
+        "AGCP-v2.0.0"
+      ],
+      "claim_scope": {
+        "scope_type": "IMPLEMENTATION",
+        "implementation_id": "AGCP-TEST",
+        "included_capability_ids": [
+          "PROPOSAL_QUALIFICATION"
+        ],
+        "scope_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "assessment_status": "NOT_ASSESSED",
+      "claim_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "claimed_at": "2026-07-31T10:00:00Z"
+    }
+  ],
+  "supported_governance_capabilities": [
+    {
+      "capability_id": "PROPOSAL_QUALIFICATION",
+      "support_status": "IMPLEMENTED",
+      "minimum_conformance_level": "L1",
+      "implementation_profile_ids": [
+        "PROF-TEST-001"
+      ],
+      "capability_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "http_contract": {
+    "contract_id": "TEST",
+    "contract_version": "1.0.0",
+    "openapi_version": "3.1.0",
+    "contract_uri": "https://agcp.example/test",
+    "contract_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "supported_path_versions": [
+      "/agcp/v2"
+    ],
+    "supported_media_types": [
+      "application/json"
+    ],
+    "transport_semantics_do_not_alter_governance": true
+  },
+  "semantic_assertions": {
+    "supported_agcp_releases_explicit": true,
+    "schema_set_identity_and_integrity_explicit": true,
+    "registry_releases_integrity_bound": true,
+    "implementation_profile_explicit": true,
+    "conformance_claim_scope_explicit": true,
+    "claimed_capabilities_do_not_exceed_demonstrated_scope": true,
+    "implementation_profile_does_not_redefine_mandatory_core_behavior": true,
+    "metadata_does_not_establish_authority_at_commitment": true,
+    "metadata_does_not_authorize_execution": true,
+    "metadata_is_not_canonical_state": true,
+    "extensions_cannot_change_canonical_governance_meaning": true
+  },
+  "attribution": {
+    "principal": {
+      "principal_id": "client:test",
+      "principal_type": "AGENT"
+    },
+    "attributed_at": "2026-07-31T10:00:00Z"
+  },
+  "provenance": {
+    "signer": "TEST",
+    "signature": {
+      "alg": "SHA-256",
+      "kid": "kid-test",
+      "sig": "SIG_VALID_123"
+    },
+    "signed_at": "2026-07-31T10:00:00Z"
+  },
+  "response_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "integrity_signature": {
+    "alg": "SHA-256",
+    "kid": "kid-test",
+    "sig": "SIG_VALID_123"
+  }
+}

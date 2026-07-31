@@ -1,0 +1,43 @@
+{
+  "schema_id": "DS-029",
+  "filename": "enforcement_context.json",
+  "status": "PASS",
+  "checks": {
+    "draft_2020_12_schema_validation": "PASS",
+    "all_schema_metaschema_validation": "PASS (37 schemas)",
+    "cross_schema_reference_resolution": "PASS (1822 references)",
+    "admissible_context": "PASS",
+    "prevent_context": "PASS",
+    "invalid_binding_rejected": "PASS",
+    "permit_with_failed_authorization_rejected": "PASS",
+    "arrival_time_ordering_rejected": "PASS",
+    "authority_claim_rejected": "PASS",
+    "commit_boundary_request_integration": "PASS",
+    "common_unused_definition_check": "PASS (92 active definitions)",
+    "catalog_hash_validation": "PASS",
+    "openapi_parse": "PASS",
+    "rtm_formula_validation": "PASS",
+    "zip_integrity": "PASS",
+    "rtm_format_preservation": "PASS (dimensions, merges, widths, heights, style IDs, styles.xml, and theme preserved)",
+    "openapi_external_reference_integration": "PASS",
+    "clean_migration_common_definitions": "PASS (superseded Enforcement Context definitions removed; 93 active definitions remain)"
+  },
+  "rtm_mappings": [
+    "RTM-00119 / CR-119",
+    "RTM-00120 / CR-120",
+    "RTM-00121 / CR-121"
+  ],
+  "changed_schema_files": [
+    "enforcement_context.json",
+    "common.json",
+    "commit_boundary_request.json",
+    "commit_boundary_result.json",
+    "governance_evidence.json",
+    "governance_receipt.json",
+    "refusal_record.json"
+  ],
+  "resolved_reference_count": 1822,
+  "implemented_schema_count": 37,
+  "catalog_version": "1.0.20",
+  "rtm_version": "RTM-1.24"
+}

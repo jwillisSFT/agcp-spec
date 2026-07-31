@@ -4,7 +4,7 @@
 
 This document provides a high-level overview of the Artificial Intelligence Governance Control Plane (AGCP) architecture and explains how the specification artifacts within this repository relate to one another.
 
-Normative requirements are defined exclusively by the **AGCP Core Specification**. This document is informative and introduces no additional normative requirements.
+Normative behavior is established first by the published **AGCP Runtime Governance Conformance Requirements (CRs)** and then by the **AGCP Core Specification**. Applicable normative Companion Specifications may add profile-specific obligations only where expressly adopted. The Architecture Reference Model (ARM) governs architectural terminology and concept meaning without independently creating conformance obligations. Normative Statements, the RTM, tests, assessments, and reference artifacts support extraction, traceability, verification, and implementation and do not supersede the normative sources. This document is informative and introduces no additional normative requirements.
 
 ---
 
@@ -32,19 +32,20 @@ Proposal Qualification
 Governance Decision Function
     │
     ▼
-Execution Authorization
+Execution Authorization / Eligible Nonterminal State
+    │
+    ├── Continuation Integrity, where applicable while nonterminal
     │
     ▼
-Commit Boundary
+Governance Realization and Commit Boundary
     │
     ▼
 Governed Execution
-    │
-    ▼
-Governance Evidence
 ```
 
-Each stage is described normatively in the AGCP Core Specification.
+Governance Evidence is a cross-cutting supporting service generated during applicable governance-significant processing; it is not a final sequential stage. Continuation Integrity applies only before commitment while the Proposal remains nonterminal. Separately defined post-commit operational controls are distinct from Continuation Integrity.
+
+Each governance stage and supporting service is governed by the applicable CRs and the AGCP Core Specification, together with any expressly adopted normative Companion Specification obligations.
 
 ---
 
@@ -72,51 +73,60 @@ The AGCP specification is organized into complementary artifacts.
 
 | Artifact                               | Purpose                                                                                           |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| AGCP Core Specification                | Normative execution governance requirements                                                       |
-| Architecture Reference Model (ARM)     | Informative architectural explanations and rationale                                              |
-| Normative Statements                   | Individually traceable normative requirements derived from the Core                               |
-| Runtime Governance Requirements        | Requirements catalog                                                                              |
-| Requirements Traceability Matrix (RTM) | Traceability across requirements, specifications, normative statements, and conformance artifacts |
-| Conformance Test Suite                 | Verification of normative behavior                                                                |
-| Companion Specifications               | Protocols, schemas, APIs, operational profiles, and related implementation specifications         |
+| Runtime Governance Conformance Requirements (CRs) | Highest-precedence controlled normative capability requirements                                   |
+| AGCP Core Specification                | Normative runtime behavior                                                                         |
+| Applicable normative Companion Specifications | Profile-specific normative obligations when expressly adopted                               |
+| Architecture Reference Model (ARM)     | Authoritative architectural vocabulary and conceptual reference; non-normative                     |
+| Normative Statements                   | Extracted atomic Core obligations used for stable identification and traceability                  |
+| Requirements Traceability Matrix (RTM) | Authoritative traceability across architecture, normative sources, implementation, and verification artifacts |
+| Implementation Profiles                | Applied conformance scope below adopted normative Companion Specifications                         |
+| Conformance Test Suite                 | Verification artifact below the normative sources                                                  |
+| Reference Implementations              | Lowest-precedence illustrative implementation artifacts                                            |
 
 ---
 
 # Repository Organization
 
-The repository is organized into the following major areas:
+The repository is organized into the following current directories:
 
-```
+```text
 spec/
+    Runtime Governance Requirements
     Core Specification
     Architecture Reference Model
     Normative Statements
-    Companion Specifications
+    Requirements Traceability Matrix and traceability process documents
+    Normative Companion Specifications
 
-requirements/
-    Runtime Governance Requirements
-
-rtm/
-    Requirements Traceability Matrix
+lifecycle/
+    Governance lifecycle, progression, and implementation guidance
 
 schemas/
-    JSON Schemas
+    Active JSON Schemas, examples, and Schema Catalog
 
 api/
-    HTTP and API Specifications
+    OpenAPI contract and interface catalog
 
 registries/
-    Registry Definitions
+    Controlled registry documents and registry-entry catalog
 
 conformance/
-    Conformance Specifications
-    Test Artifacts
+    Conformance Specification, traceability and automation relationship model, Harness Checks, Test Vectors, mappings, fixtures, and Test Cases
 
-assessment/
-    Assessment Frameworks
+governance/
+    Versioning, change history, contribution guidance, and release-validation records
+
+implementer/
+    Implementation decision-record template
 
 reference/
-    Reference Material
+    Reference implementation pseudocode and supporting material
+
+diagrams/
+    Canonical architecture diagrams
+
+research/
+    Historical and explanatory publications
 ```
 
 ---
@@ -127,13 +137,13 @@ The repository contains three categories of artifacts.
 
 ## Normative
 
-Normative artifacts define required behavior.
+Normative sources define required behavior in the following order of precedence:
 
-Examples include:
+1. Published AGCP Runtime Governance Conformance Requirements (CRs)
+2. AGCP Core Specification
+3. Applicable normative Companion Specifications expressly adopted by the implementation profile
 
-* AGCP Core Specification
-* Normative Statements
-* Companion Specifications
+Implementation Profiles, the Conformance Test Suite, and Reference Implementations are lower-precedence application and verification artifacts. Normative Statements are extracted atomic obligations from the Core used for identification and traceability; they are not an independently superior normative source.
 
 ## Informative
 
@@ -161,9 +171,11 @@ Examples include:
 
 # Conformance
 
-Conformance is determined by satisfying the normative requirements defined in the Core Specification.
+Conformance is determined by satisfying the applicable CRs, Core requirements, expressly adopted normative Companion Specification obligations, and implementation-profile requirements in the precedence order established by the Core Specification.
 
-Traceability between requirements, normative statements, implementation artifacts, and conformance tests is maintained through the Requirements Traceability Matrix (RTM).
+The ARM governs architectural terminology and concept meaning. Core obligations are assigned stable Normative Statement identifiers for extraction and traceability, and the RTM maintains the authoritative mappings among normative sources, implementation artifacts, and conformance tests.
+
+The relationship among Formal Test Cases, Harness Checks, Harness Test Vectors, execution evidence, and profile-level conformance determinations is governed by `conformance/AGCP-Conformance-Traceability-and-Automation-Model.md`. Harness artifacts automate portions of Formal Test Cases and do not independently establish conformance.
 
 ---
 

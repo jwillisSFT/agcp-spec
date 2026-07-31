@@ -1,19 +1,85 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/commit_boundary_result.json",
+  "$id": "https://agcp.ai/schemas/commit_boundary_result.json",
   "title": "Commit Boundary Result",
-  "description": "Canonical result produced by AGCP Commit Boundary processing. This schema records the authoritative outcome of final governance validation immediately before operational commitment and references the resulting Governance Evidence.",
+  "description": "Canonical attributable and integrity-protected result of Commit Boundary and Policy Enforcement Point processing. It records the exact request, proposal, decision, authorization, current authority, Governance Binding Validation, Resulting-State Validation, Enforcement Context, PEP outcome, executed transition set, lifecycle effect, Governance Evidence, Governance Receipt, and any Structural Refusal.",
+  "$comment": "DS-019 records final bind-time governance realization. A successful result requires PEP permission and an executed governed transition set; failed or re-evaluation outcomes cannot claim execution.",
+  "x-agcp-ds-id": "DS-019",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Commit Boundary Outcome",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-203",
+      "ARM-210",
+      "ARM-211",
+      "ARM-212",
+      "ARM-213",
+      "ARM-216",
+      "ARM-217",
+      "ARM-401",
+      "ARM-601",
+      "ARM-702"
+    ],
+    "core_sections": [
+      "9.6",
+      "9.6A",
+      "9.6B",
+      "9.7",
+      "10.1"
+    ],
+    "normative_statements": [
+      "NS-9.6-02",
+      "NS-9.6-04",
+      "NS-9.6A-03",
+      "NS-9.6A-04",
+      "NS-9.6B-01",
+      "NS-9.6B-04",
+      "NS-9.6B-05"
+    ],
+    "conformance_requirements": [
+      "CR-019",
+      "CR-020",
+      "CR-021",
+      "CR-022",
+      "CR-023",
+      "CR-024",
+      "CR-028",
+      "CR-032",
+      "CR-033",
+      "CR-079",
+      "CR-080",
+      "CR-084",
+      "CR-087",
+      "CR-088",
+      "CR-102",
+      "CR-105",
+      "CR-106",
+      "CR-107",
+      "CR-108",
+      "CR-109",
+      "CR-119",
+      "CR-120",
+      "CR-121"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "proposal_id": {
-      "$ref": "common.json#/$defs/proposal_id"
+    "commit_boundary_result_id": {
+      "$ref": "common.json#/$defs/identifier"
+    },
+    "result_type": {
+      "const": "COMMIT_BOUNDARY_RESULT"
+    },
+    "commit_boundary_request_ref": {
+      "$ref": "commit_boundary_request.json#/$defs/commit_boundary_request_ref"
+    },
+    "proposal_ref": {
+      "$ref": "governed_action_proposal.json#/$defs/governed_action_proposal_ref"
     },
     "action_id": {
       "$ref": "common.json#/$defs/action_id"
-    },
-    "authorization_id": {
-      "$ref": "common.json#/$defs/authorization_id"
     },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
@@ -21,62 +87,530 @@
     "governance_domain_id": {
       "$ref": "common.json#/$defs/governance_domain_id"
     },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+    },
+    "execution_authorization_ref": {
+      "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+    },
+    "authority_rederivation_result_ref": {
+      "$ref": "authority_rederivation_result.json#/$defs/authority_rederivation_result_ref"
+    },
+    "governance_binding_validation_result_ref": {
+      "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
+    },
+    "resulting_state_validation_result_ref": {
+      "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+    },
+    "transition_mode": {
+      "type": "string",
+      "enum": [
+        "SINGLE_TRANSITION",
+        "COMPLETE_BIND_SET",
+        "APPROVED_EXECUTABLE_SUBSET"
+      ]
+    },
+    "bind_set_ref": {
+      "$ref": "bind_set.json#/$defs/bind_set_ref"
+    },
+    "dependency_graph_ref": {
+      "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+    },
+    "deterministic_adjudication_result_ref": {
+      "$ref": "deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref"
+    },
+    "enforcement_context_ref": {
+      "$ref": "enforcement_context.json#/$defs/enforcement_context_ref"
+    },
+    "enforcement_result": {
+      "$ref": "enforcement_context.json#/$defs/enforcement_result"
+    },
     "commit_boundary_outcome": {
       "$ref": "common.json#/$defs/commit_boundary_outcome_enum"
     },
     "commit_timestamp": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "policy_ref": {
-      "$ref": "common.json#/$defs/policy_ref"
-    },
-    "canonical_state_ref": {
-      "$ref": "common.json#/$defs/canonical_state_ref"
-    },
-    "authority_lineage_ref": {
-      "$ref": "common.json#/$defs/authority_lineage_ref"
-    },
-    "governance_context_ref": {
-      "$ref": "common.json#/$defs/governance_context_ref"
-    },
-    "governance_configuration_ref": {
-      "$ref": "common.json#/$defs/governance_configuration_ref"
+    "structural_refusal_applied": {
+      "type": "boolean"
     },
     "rejection_code": {
       "$ref": "common.json#/$defs/rejection_code"
     },
+    "executed_transition_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/action_id"
+      },
+      "minItems": 1,
+      "maxItems": 1024,
+      "uniqueItems": true
+    },
+    "committed_state_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "execution_result_ref": {
+      "$ref": "#/$defs/execution_result_ref"
+    },
+    "lifecycle_effect": {
+      "$ref": "#/$defs/lifecycle_effect"
+    },
     "governance_evidence_refs": {
       "type": "array",
       "items": {
-        "$ref": "common.json#/$defs/stage_evidence_ref"
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
       },
-      "maxItems": 64,
+      "minItems": 1,
+      "maxItems": 512,
       "uniqueItems": true
     },
-    "commit_basis": {
-      "type": "object",
-      "description": "Implementation-independent explanation of the authoritative basis for the Commit Boundary outcome.",
-      "additionalProperties": true
+    "governance_receipt_ref": {
+      "$ref": "governance_receipt.json#/$defs/governance_receipt_ref"
     },
-    "execution_result_ref": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256,
-      "description": "Optional reference to an execution record created after a successful commit."
+    "refusal_record_ref": {
+      "$ref": "refusal_record.json#/$defs/refusal_record_ref"
     },
-    "metadata": {
+    "result_attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "result_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "extensions": {
       "type": "object",
-      "description": "Implementation-defined metadata that SHALL NOT alter normative commit semantics.",
-      "additionalProperties": true
+      "description": "Namespaced implementation extensions that cannot alter canonical governance meaning.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]+:[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64
     }
   },
   "required": [
-    "proposal_id",
+    "commit_boundary_result_id",
+    "result_type",
+    "commit_boundary_request_ref",
+    "proposal_ref",
     "action_id",
-    "authorization_id",
     "tenant_id",
+    "governance_domain_id",
+    "target_ref",
+    "governance_decision_ref",
+    "execution_authorization_ref",
+    "authority_rederivation_result_ref",
+    "governance_binding_validation_result_ref",
+    "resulting_state_validation_result_ref",
+    "transition_mode",
+    "enforcement_context_ref",
+    "enforcement_result",
     "commit_boundary_outcome",
     "commit_timestamp",
-    "governance_evidence_refs"
-  ]
+    "structural_refusal_applied",
+    "lifecycle_effect",
+    "governance_evidence_refs",
+    "governance_receipt_ref",
+    "result_attribution",
+    "result_digest",
+    "integrity_signature",
+    "replay_material"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "commit_boundary_outcome": {
+            "const": "Commit Successful"
+          }
+        },
+        "required": [
+          "commit_boundary_outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "executed_transition_ids",
+          "committed_state_digest",
+          "execution_result_ref"
+        ],
+        "properties": {
+          "structural_refusal_applied": {
+            "const": false
+          },
+          "enforcement_result": {
+            "properties": {
+              "outcome": {
+                "const": "PERMITTED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "terminal": {
+                "const": true
+              }
+            },
+            "required": [
+              "terminal"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "rejection_code"
+              ]
+            },
+            {
+              "required": [
+                "refusal_record_ref"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "commit_boundary_outcome": {
+            "const": "Commit Failed"
+          }
+        },
+        "required": [
+          "commit_boundary_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "enforcement_result": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "PREVENTED",
+                  "FAILED_CLOSED"
+                ]
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          }
+        },
+        "required": [
+          "rejection_code"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "executed_transition_ids"
+              ]
+            },
+            {
+              "required": [
+                "committed_state_digest"
+              ]
+            },
+            {
+              "required": [
+                "execution_result_ref"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "commit_boundary_outcome": {
+            "const": "Governed Re-evaluation Required"
+          }
+        },
+        "required": [
+          "commit_boundary_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "enforcement_result": {
+            "properties": {
+              "outcome": {
+                "const": "RE_EVALUATION_REQUIRED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "structural_refusal_applied": {
+            "const": false
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "terminal": {
+                "const": false
+              }
+            },
+            "required": [
+              "terminal"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "executed_transition_ids"
+              ]
+            },
+            {
+              "required": [
+                "committed_state_digest"
+              ]
+            },
+            {
+              "required": [
+                "execution_result_ref"
+              ]
+            },
+            {
+              "required": [
+                "refusal_record_ref"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "structural_refusal_applied": {
+            "const": true
+          }
+        },
+        "required": [
+          "structural_refusal_applied"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commit_boundary_outcome": {
+            "const": "Commit Failed"
+          }
+        },
+        "required": [
+          "refusal_record_ref"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "refusal_record_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition_mode": {
+            "const": "SINGLE_TRANSITION"
+          }
+        },
+        "required": [
+          "transition_mode"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "bind_set_ref"
+              ]
+            },
+            {
+              "required": [
+                "dependency_graph_ref"
+              ]
+            },
+            {
+              "required": [
+                "deterministic_adjudication_result_ref"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition_mode": {
+            "const": "COMPLETE_BIND_SET"
+          }
+        },
+        "required": [
+          "transition_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "bind_set_ref",
+          "dependency_graph_ref"
+        ],
+        "not": {
+          "required": [
+            "deterministic_adjudication_result_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition_mode": {
+            "const": "APPROVED_EXECUTABLE_SUBSET"
+          }
+        },
+        "required": [
+          "transition_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "bind_set_ref",
+          "dependency_graph_ref",
+          "deterministic_adjudication_result_ref"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "commit_boundary_result_ref": {
+      "type": "object",
+      "description": "Stable integrity-bound reference to DS-019 Commit Boundary Result.",
+      "additionalProperties": false,
+      "properties": {
+        "commit_boundary_result_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "outcome": {
+          "$ref": "common.json#/$defs/commit_boundary_outcome_enum"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "commit_timestamp": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "action_id": {
+          "$ref": "common.json#/$defs/action_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        }
+      },
+      "required": [
+        "commit_boundary_result_id",
+        "outcome",
+        "result_digest"
+      ]
+    },
+    "execution_result_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "execution_record_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "execution_record_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "execution_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "recorded_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "execution_record_id",
+        "execution_digest"
+      ]
+    },
+    "lifecycle_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lifecycle_transition_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+        },
+        "governance_lifecycle_record_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+        },
+        "terminal": {
+          "type": "boolean"
+        },
+        "transition_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "description": "Canonical lifecycle effect produced by Commit Boundary processing.",
+      "required": [
+        "lifecycle_transition_ref",
+        "governance_lifecycle_record_ref",
+        "terminal",
+        "transition_basis_digest"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "request_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "enforcement_context_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "input_evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "replay_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "request_digest",
+        "enforcement_context_digest",
+        "input_evidence_set_digest",
+        "result_digest",
+        "replay_profile"
+      ]
+    }
+  }
 }

@@ -1,0 +1,160 @@
+{
+  "overall_result": "PASS",
+  "checks": [
+    {
+      "name": "draft_2020_12_metaschema_validation",
+      "status": "PASS",
+      "details": {
+        "schema_count": 40
+      }
+    },
+    {
+      "name": "cross_schema_reference_resolution",
+      "status": "PASS",
+      "details": {
+        "reference_count": 2851,
+        "missing": []
+      }
+    },
+    {
+      "name": "registered_exception_valid",
+      "status": "PASS",
+      "details": {
+        "expected": "valid",
+        "error_count": 0,
+        "errors": []
+      }
+    },
+    {
+      "name": "active_exception_valid",
+      "status": "PASS",
+      "details": {
+        "expected": "valid",
+        "error_count": 0,
+        "errors": []
+      }
+    },
+    {
+      "name": "protected_constraint_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "'ORDINARY' was expected"
+        ]
+      }
+    },
+    {
+      "name": "unbounded_exception_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "'expires_at' is a required property"
+        ]
+      }
+    },
+    {
+      "name": "missing_external_approval_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "True was expected"
+        ]
+      }
+    },
+    {
+      "name": "bypass_capability_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "True was expected"
+        ]
+      }
+    },
+    {
+      "name": "execution_authority_claim_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "True was expected"
+        ]
+      }
+    },
+    {
+      "name": "active_with_failed_activation_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "'ACTIVATED' was expected"
+        ]
+      }
+    },
+    {
+      "name": "arbitrary_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "expected": "invalid",
+        "error_count": 1,
+        "errors": [
+          "Additional properties are not allowed ('metadata' was unexpected)"
+        ]
+      }
+    },
+    {
+      "name": "integration:governance_decision_result.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "integration:governance_evidence.json",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "openapi_components",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "catalog_hash_consistency",
+      "status": "PASS",
+      "details": {
+        "mismatches": []
+      }
+    },
+    {
+      "name": "rtm_mapping_consistency",
+      "status": "PASS",
+      "details": {
+        "mapped": [
+          "CR-110",
+          "CR-111",
+          "CR-112",
+          "CR-113",
+          "CR-114",
+          "CR-117"
+        ],
+        "versions": [
+          "RTM-1.34"
+        ]
+      }
+    },
+    {
+      "name": "rtm_formula_error_scan",
+      "status": "PASS",
+      "details": []
+    }
+  ],
+  "issues": []
+}

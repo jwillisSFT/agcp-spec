@@ -1,0 +1,284 @@
+{
+  "schema_id": "DS-035",
+  "schema_file": "bind_set.json",
+  "checks": [
+    {
+      "name": "Draft 2020-12 structural validation",
+      "passed": true,
+      "detail": "33 implemented schemas validated"
+    },
+    {
+      "name": "Cross-schema references and fragments",
+      "passed": true,
+      "detail": "1453 references resolved"
+    },
+    {
+      "name": "ds021 uses ds035 ref",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ds021 uses ds035 partial policy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ds021 local partial policy removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ds036 uses ds035 ref",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "common uses ds035 ref",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "common local bind set ref removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "common local bind set id removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog version",
+      "passed": true,
+      "detail": "1.0.16"
+    },
+    {
+      "name": "Catalog counts",
+      "passed": true,
+      "detail": "33 implemented; 11 reserved"
+    },
+    {
+      "name": "Catalog DS IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "DS-035 catalog active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog hashes",
+      "passed": true,
+      "detail": "33 hashes verified"
+    },
+    {
+      "name": "OpenAPI DS-035 components",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "RTM DS-035 mappings",
+      "passed": true,
+      "detail": "CR-105;CR-108;CR-109"
+    },
+    {
+      "name": "RTM DS-035 file mappings",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "RTM dataset version",
+      "passed": true,
+      "detail": "{'RTM-1.20'}"
+    },
+    {
+      "name": "RTM intended cell changes only",
+      "passed": true,
+      "detail": "0 unexpected changes"
+    },
+    {
+      "name": "RTM formulas and errors",
+      "passed": true,
+      "detail": "0 formulas; 0 errors"
+    },
+    {
+      "name": "RTM formatting preservation",
+      "passed": true,
+      "detail": "dimensions, merges, widths, heights, style IDs, and workbook structure preserved"
+    },
+    {
+      "name": "DS-035 semantic tests",
+      "passed": true,
+      "detail": "9 positive; 14 negative"
+    }
+  ],
+  "positive_tests": [
+    {
+      "name": "declared weakly coupled bind set",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "declared strongly coupled atomic bind set",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "qualified bind set",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "degraded bind set requires reevaluation",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "invalid bind set",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "superseded bind set",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "bind_set_ref valid",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "partial binding consideration policy valid",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "DS-021 composite proposal validates through DS-035 and DS-036",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_tests": [
+    {
+      "name": "empty candidate set rejected",
+      "passed": true,
+      "errors": [
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "name": "strong coupling cannot permit partial binding",
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "name": "qualified set requires validation",
+      "passed": true,
+      "errors": [
+        "'bind_set_validation' is a required property"
+      ]
+    },
+    {
+      "name": "qualified set rejects failed dimension",
+      "passed": true,
+      "errors": [
+        "'PASS' was expected"
+      ]
+    },
+    {
+      "name": "qualified set rejects incomplete candidate assertion",
+      "passed": true,
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "candidate excluded from complete set rejected",
+      "passed": true,
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "partial consideration missing governing basis rejected",
+      "passed": true,
+      "errors": [
+        "'policy_ref' is a required property",
+        "'minimum_executable_subset_size' is a required property",
+        "'subset_selection_basis_digest' is a required property"
+      ]
+    },
+    {
+      "name": "bind set cannot carry approved executable subset",
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "name": "arrival time governance basis rejected",
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "name": "execution authorization claim rejected",
+      "passed": true,
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "partial bind determination claim rejected",
+      "passed": true,
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "name": "cross-domain set missing policy rejected",
+      "passed": true,
+      "errors": [
+        "'cross_domain_coordination_policy_ref' is a required property"
+      ]
+    },
+    {
+      "name": "superseded set missing successor rejected",
+      "passed": true,
+      "errors": [
+        "'superseded_by_ref' is a required property"
+      ]
+    },
+    {
+      "name": "bind_set_ref without digest rejected",
+      "passed": true,
+      "errors": [
+        "'bind_set_digest' is a required property"
+      ]
+    }
+  ],
+  "extraction_checks": {
+    "ds021_uses_ds035_ref": true,
+    "ds021_uses_ds035_partial_policy": true,
+    "ds021_local_partial_policy_removed": true,
+    "ds036_uses_ds035_ref": true,
+    "common_uses_ds035_ref": true,
+    "common_local_bind_set_ref_removed": true,
+    "common_local_bind_set_id_removed": true
+  },
+  "reference_errors": [],
+  "summary": {
+    "result": "PASS",
+    "implemented_schema_count": 33,
+    "cross_schema_reference_count": 1453,
+    "catalog_version": "1.0.16",
+    "rtm_version": "RTM-1.20",
+    "positive_test_count": 9,
+    "negative_test_count": 14
+  }
+}

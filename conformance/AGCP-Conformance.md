@@ -14,11 +14,11 @@
 1. [Purpose](#1-purpose)  
 2. [Conformance Model Overview](#2-conformance-model-overview)  
 3. [Conformance Profiles](#3-conformance-profiles)  
-   - [L1 — Interface & Schema Conformance](#31-level-l1--interface--schema-conformance)  
-   - [L2 — Governance Pipeline Conformance](#32-level-l2--governance-pipeline-conformance)  
+   - [L1 — Schema & Envelope Validation](#31-level-l1--schema--envelope-validation)  
+   - [L2 — Ordered Governance Mediation](#32-level-l2--ordered-governance-mediation)  
    - [L3 — Deterministic Governance](#33-level-l3--deterministic-governance)  
-   - [L4 — Human Review, Execution Authorization & Commit Boundary](#34-level-l4--human-review-execution-authorization--commit-boundary)  
-   - [L5 — Multitenant & Governance Domain Isolation](#35-level-l5--multitenant--governance-domain-isolation)  
+   - [L4 — Execution Authorization Control](#34-level-l4--execution-authorization-control)  
+   - [L5 — Multitenant Governance Isolation](#35-level-l5--multitenant-governance-isolation)  
 4. [Assertion Model](#4-assertion-model)  
 5. [Required Assertions](#5-required-assertions-core-set)  
 6. [Test Requirements](#6-test-requirements)  
@@ -45,9 +45,11 @@ It specifies:
 - Governance Evidence validation
 - Append-Only Governance Ledger validation
 - Canonical State validation
-- Human Review validation
+- Governance Approval Artifact validation
 - Execution Authorization validation
-- Commit Boundary validation
+- applicable pre-commit Continuation Integrity validation
+- Governance Realization and Commit-Bound Admissibility validation
+- Policy Enforcement Point and Commit Boundary validation
 - Multitenant and Governance Domain isolation validation
 - Conformance declaration format
 
@@ -58,13 +60,15 @@ Conformance ensures that AGCP implementations:
 - Implement deterministic governance behavior
 - Produce interoperable externally observable behavior
 - Preserve Canonical State integrity
-- Derive Canonical State from the ordered Append-Only Governance Ledger, or from a verifiable materialized state whose derivation can be deterministically reproduced
+- Resolve Canonical State deterministically from the applicable qualified authoritative governance sources, using authoritative Governance Ledger ordering for incorporated governance events and Derived Lifecycle State
 - Preserve Governance Evidence
 - Preserve ordered Append-Only Governance Ledger integrity
 - Enforce governance policy before execution
-- Enforce Human Review where required
+- Enforce governed approval and human adjudication where required
 - Enforce Execution Authorization
-- Enforce Commit Boundary requirements
+- preserve applicable pre-commit Continuation Integrity for nonterminal Proposals
+- enforce Governance Realization and final Commit-Bound Admissibility
+- enforce Policy Enforcement Point and Commit Boundary requirements
 - Preserve multitenant and Governance Domain isolation
 - Maintain interoperability within the same AGCP repository release
 
@@ -77,35 +81,35 @@ AGCP conformance is defined through the combination of:
 - Normative specification requirements expressed using RFC 2119 / RFC 8174 terminology
 - Assertion identifiers (`AGCP-A-XXXX`)
 - Conformance profiles (L1–L5)
-- Frozen Requirements → Normative Statement → Test Case traceability
+- Frozen CR-to-Core-derived-NS-to-TC traceability maintained by the RTM
 - Required conformance test coverage
 - Deterministic replay verification
 - Governance Evidence validation
 - Append-Only Governance Ledger validation
 - Canonical State validation
 
-The authoritative normative hierarchy is:
+The authoritative normative precedence is:
 
+```text
+1. Published AGCP Runtime Governance Conformance Requirements (CRs)
+2. AGCP Core Specification
+3. Applicable normative Companion Specifications expressly adopted by the implementation profile
+4. Implementation Profiles
+5. AGCP Conformance Test Suite
+6. Reference Implementations
 ```
 
-Normative Specification
-↓
-Normative Statement (NS)
-↓
-Conformance Requirement (CR)
-↓
-Test Case (TC)
+The ARM governs architectural terminology and concept meaning where an ARM-defined concept is used, but it does not independently create conformance obligations. Normative Statements are extracted atomic obligations from the Core used for stable identification and traceability; they are not an independently superior normative source.
 
-```
+Assertion identifiers (`AGCP-A-XXXX`) provide an implementation-facing conformance abstraction for harness execution, reporting, and certification activities. They are derived from the applicable normative sources and SHALL NOT supersede the CR-to-Core-derived-NS-to-TC mappings maintained by the RTM.
 
-Assertion identifiers (`AGCP-A-XXXX`) provide an implementation-facing conformance abstraction for harness execution, reporting, and certification activities. They are derived from the authoritative normative specifications and SHALL NOT supersede the frozen Requirements → Normative Statement → Test Case traceability model.
+The relationship semantics among CRs, NS identifiers, the RTM, Formal Test Cases, Harness Checks, Harness Test Vectors, execution evidence, and conformance determinations are defined in `AGCP-Conformance-Traceability-and-Automation-Model.md`. Harness artifacts automate portions of Formal Test Cases and do not independently establish conformance.
 
 A conformant implementation SHALL satisfy every applicable normative requirement for the conformance profile it claims.
 
 Implementations MAY exceed the requirements of a profile, but SHALL NOT claim conformance to a profile unless every mandatory requirement for that profile is satisfied.
 
 Externally observable behavior SHALL take precedence over implementation architecture. Implementations MAY differ internally provided that they produce equivalent externally observable governance behavior and satisfy all applicable normative requirements.
-```
 
 # 3. Conformance Profiles
 
@@ -119,17 +123,17 @@ The conformance profiles are:
 
 | Profile | Scope |
 |---------|-------|
-| L1 | Interface & Schema Conformance |
-| L2 | Governance Pipeline Conformance |
+| L1 | Schema & Envelope Validation |
+| L2 | Ordered Governance Mediation |
 | L3 | Deterministic Governance |
-| L4 | Human Review, Execution Authorization & Commit Boundary |
-| L5 | Multitenant & Governance Domain Isolation |
+| L4 | Execution Authorization Control |
+| L5 | Multitenant Governance Isolation |
 
 Implementations MAY implement functionality beyond a claimed profile. Additional functionality SHALL NOT invalidate a conformance claim provided that all mandatory requirements remain satisfied.
 
 ---
 
-## 3.1 Level L1 — Interface & Schema Conformance
+## 3.1 Level L1 — Schema & Envelope Validation
 
 L1 establishes baseline interoperability.
 
@@ -147,7 +151,7 @@ L1 verifies interoperability of the public interface rather than internal implem
 
 ---
 
-## 3.2 Level L2 — Governance Pipeline Conformance
+## 3.2 Level L2 — Ordered Governance Mediation
 
 L2 verifies correct execution of the normative governance pipeline.
 
@@ -157,7 +161,10 @@ An implementation claiming L2 conformance SHALL:
 - Evaluate the Governance Decision Function.
 - Apply Policy Evaluation Contract (PEC) processing where required.
 - Produce deterministic Governance Decision Results.
-- Produce Governance Evidence for governance-significant processing.
+- Preserve applicable pre-commit Continuation Integrity while a Proposal remains nonterminal.
+- Perform Governance Realization and resolve final Commit-Bound Admissibility before permitting a governed consequence.
+- Apply the governance decision through the Policy Enforcement Point at or immediately adjacent to the Commit Boundary.
+- Produce Governance Evidence throughout every applicable governance-significant stage as a cross-cutting supporting service.
 - Record governance-significant events in the Append-Only Governance Ledger.
 - Preserve ordering of governance events.
 - Reject proposals that fail mandatory governance requirements.
@@ -175,40 +182,43 @@ L3 verifies deterministic governance behavior.
 An implementation claiming L3 conformance SHALL:
 
 - Produce identical governance outcomes for identical authoritative inputs.
-- Derive Canonical State from the ordered Append-Only Governance Ledger, or from a verifiable materialized state whose derivation from the ordered ledger can be deterministically reproduced.
+- Resolve Canonical State deterministically from the complete set of applicable qualified authoritative governance sources.
+- Interpret incorporated Governance Ledger records using authoritative ledger ordering.
 - Support deterministic replay.
 - Preserve Governance Evidence sufficient for deterministic replay.
 - Preserve ordered governance history.
 - Detect non-deterministic governance behavior.
 
-The ordered Append-Only Governance Ledger SHALL be authoritative for Canonical State derivation.
+The ordered Append-Only Governance Ledger SHALL be authoritative for recorded governance events, event ordering, and Derived Lifecycle State. It need not originate every governance-relevant fact incorporated into Canonical State.
 
-Timestamp ordering SHALL NOT determine Canonical State.
+Timestamp ordering SHALL NOT substitute for authoritative ledger ordering of recorded governance events.
 
-Materialized state views MAY be used for performance provided they remain reproducible from the ordered ledger.
+Materialized state views MAY be used for performance provided they remain reproducible from the applicable qualified authoritative governance sources, including ordered Governance Ledger records where applicable.
 
 ---
 
-## 3.4 Level L4 — Human Review, Execution Authorization & Commit Boundary
+## 3.4 Level L4 — Execution Authorization Control
 
 L4 verifies governance controls that directly authorize execution.
 
 An implementation claiming L4 conformance SHALL:
 
-- Support Human Review where required by governance policy.
-- Validate Human Review artifacts.
-- Enforce Human Review completion before execution authorization.
+- Support governed human adjudication and Governance Approval where required by governance policy.
+- Validate Governance Approval Artifacts.
+- Enforce required governed approval or adjudication completion before Execution Authorization.
 - Produce Execution Authorization artifacts.
-- Enforce Commit Boundary processing.
-- Prevent execution without valid authorization.
-- Record Human Review, Execution Authorization, Commit Boundary processing, and associated Governance Evidence in the Append-Only Governance Ledger.
+- Preserve applicable pre-commit Continuation Integrity while an authorized or otherwise eligible Proposal remains nonterminal.
+- Perform Governance Realization and resolve current Commit-Bound Admissibility immediately before commitment.
+- Enforce the resulting decision through the Policy Enforcement Point at or immediately adjacent to the Commit Boundary.
+- Prevent execution without valid authorization, applicable continuation integrity, final admissibility, and enforcement binding.
+- Record Governance Approval, Execution Authorization, applicable Continuation Integrity events, Governance Realization and Commit Boundary processing, and associated Governance Evidence in the Append-Only Governance Ledger.
 - Reject attempts to bypass required governance controls.
 
 Execution SHALL occur only after successful completion of the required governance pipeline.
 
 ---
 
-## 3.5 Level L5 — Multitenant & Governance Domain Isolation
+## 3.5 Level L5 — Multitenant Governance Isolation
 
 L5 verifies isolation across tenants and governance domains.
 
@@ -242,27 +252,31 @@ Assertion identifiers are stable across compatible repository releases unless th
 
 ## 4.2 Relationship to the Normative Specifications
 
-The authoritative source of all AGCP requirements is the normative specification suite.
+AGCP normative requirements are established according to the Core-defined precedence order: published CRs, Core Specification, and applicable adopted normative Companion Specifications, followed by the lower-precedence profiles, Test Suite, and reference implementations.
 
 Assertions SHALL be derived from the authoritative specifications and SHALL NOT introduce new normative requirements.
 
 The authoritative traceability model is:
 
-```
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
-        ↓
+```text
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
+        |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
+        v
+Conformance Test Case (TC)
+        |
+        v
 Derived Assertion(s)
 ```
 
 Assertions support implementation and certification activities but SHALL NOT supersede the authoritative CR → NS → TC mappings.
 
-If a conflict exists between an assertion and a normative specification, the normative specification SHALL take precedence.
+If a conflict exists between an assertion and another AGCP source, it SHALL be resolved using the Core-defined precedence order. An assertion, Normative Statement, Test Case, harness check, or vector SHALL NOT weaken or supersede a higher-precedence normative source.
 
 ---
 
@@ -297,9 +311,9 @@ Recommended categories include:
 | INTERFACE | HTTP interface, schemas, media types |
 | GOVERNANCE | Proposal Qualification and Governance Decision Function |
 | POLICY | Policy Evaluation Contract (PEC) processing |
-| HUMAN_REVIEW | Human Review processing |
-| EXECUTION | Execution Authorization and Commit Boundary processing |
-| EVIDENCE | Governance Evidence generation and validation |
+| GOVERNANCE_APPROVAL | Governance Approval and human-adjudication processing |
+| EXECUTION | Execution Authorization, applicable pre-commit Continuation Integrity, Governance Realization, Commit-Bound Admissibility, Policy Enforcement Point, and Commit Boundary processing |
+| EVIDENCE | Cross-cutting Governance Evidence generation and validation throughout applicable governance-significant processing |
 | LEDGER | Append-Only Governance Ledger behavior |
 | CANONICAL_STATE | Canonical State derivation and deterministic replay |
 | MULTITENANCY | Tenant and Governance Domain isolation |
@@ -336,12 +350,12 @@ Observable behavior MAY include:
 - governance outcomes
 - Proposal Views
 - Governance Decision Results
-- Human Review artifacts
+- Governance Approval Artifacts
 - Execution Authorization artifacts
 - Commit Boundary results
 - Governance Evidence
 - Append-Only Governance Ledger behavior
-- Canonical State reconstruction
+- Canonical State resolution and, for replay, reproduction of Canonical State resolution from recorded qualified source versions and applicable ordered Governance Ledger records
 - rejection codes
 - conformance reports
 
@@ -358,14 +372,16 @@ Where applicable, deterministic evaluation SHALL verify:
 - Proposal Qualification
 - Governance Decision Function
 - Policy Evaluation Contract processing
-- Human Review processing
+- Governance Approval and human-adjudication processing
 - Execution Authorization
-- Commit Boundary processing
-- Governance Evidence
+- applicable pre-commit Continuation Integrity
+- Governance Realization and Commit-Bound Admissibility
+- Policy Enforcement Point and Commit Boundary processing
+- cross-cutting Governance Evidence generation and binding
 - Append-Only Governance Ledger ordering
 - Canonical State derivation
 
-Deterministic replay SHALL reproduce the same Canonical State when evaluated using the ordered Append-Only Governance Ledger or a verifiable materialized state deterministically derived from that ledger.
+Deterministic replay SHALL reproduce the same Canonical State when evaluated using the same qualified authoritative source versions, applicable Governance Ledger records in authoritative order, governance configuration, and policy artifacts.
 
 Timestamp ordering SHALL NOT substitute for ledger sequence ordering.
 
@@ -379,14 +395,14 @@ Examples include:
 
 - acceptance of malformed requests
 - unauthorized execution
-- bypass of Human Review
+- bypass of required Governance Approval or human adjudication
 - invalid Execution Authorization
 - invalid Commit Boundary processing
 - invalid provenance
 - cross-tenant access
 - cross-domain access
 - ledger modification
-- Canonical State derivation from reordered ledger history
+- acceptance of reordered Governance Ledger history as equivalent for ledger-derived events or Derived Lifecycle State
 - acceptance of Governance Evidence with invalid integrity
 
 Negative assertions SHALL verify that implementations reject prohibited behavior using the appropriate rejection codes and externally observable behavior.
@@ -427,23 +443,26 @@ Repository release documentation SHOULD identify retired and replacement asserti
 
 The following conformance assertions define the minimum observable behaviors that every AGCP implementation SHALL satisfy.
 
-These assertions are derived from the authoritative Normative Statements (NS), Conformance Requirements (CR), and Test Cases (TC).
+These assertions are derived from the applicable CRs and Core behavior through the Core-derived Normative Statement mappings and Test Cases maintained in the RTM.
 
 This specification does not introduce an independent assertion identifier system. The authoritative conformance traceability model remains:
 
-```
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
+```text
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
+        |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
+        v
+Conformance Test Case (TC)
 ```
 
 ---
 
-## 5.1 Interface & Schema Conformance
+## 5.1 Schema & Envelope Validation
 
 An implementation SHALL:
 
@@ -454,16 +473,19 @@ An implementation SHALL:
 
 ---
 
-## 5.2 Governance Pipeline Conformance
+## 5.2 Ordered Governance Mediation
 
 An implementation SHALL:
 
 - Execute Proposal Qualification before Governance Decision evaluation.
 - Execute Policy Evaluation Contract (PEC) processing where required.
 - Evaluate constraints before invariants.
-- Complete invariant evaluation before determining Human Review requirements.
-- Complete Execution Authorization before Commit Boundary processing.
-- Produce Governance Evidence for governance-significant processing.
+- Complete invariant evaluation before determining Governance Approval requirements.
+- Complete Execution Authorization before final commit-time processing.
+- Preserve applicable pre-commit Continuation Integrity while a Proposal remains nonterminal.
+- Perform Governance Realization and resolve final Commit-Bound Admissibility before commitment.
+- Apply the decision through the Policy Enforcement Point at or immediately adjacent to the Commit Boundary.
+- Produce Governance Evidence throughout governance-significant processing as a cross-cutting supporting service.
 - Record governance-significant events in the Append-Only Governance Ledger.
 
 ---
@@ -475,30 +497,32 @@ An implementation SHALL:
 - Produce identical governance outcomes for identical authoritative inputs.
 - Produce deterministic Governance Decision Results.
 - Reject non-deterministic governance behavior.
-- Derive Canonical State from the ordered Append-Only Governance Ledger, or from a verifiable materialized state whose derivation from the ordered ledger can be deterministically reproduced.
+- Resolve Canonical State deterministically from the applicable qualified authoritative governance sources and preserve authoritative Governance Ledger ordering for incorporated governance events and Derived Lifecycle State.
 - Preserve deterministic replay capability.
 
 ---
 
-## 5.4 Human Review
+## 5.4 Governance Approval and Human Adjudication
 
-Where Human Review is required by governance policy, an implementation SHALL:
+Where governed approval or human adjudication is required by governance policy, an implementation SHALL:
 
-- Validate Human Review artifacts.
+- Validate Governance Approval Artifacts.
 - Enforce required approvals.
 - Reject expired or invalid review artifacts.
-- Prevent Execution Authorization until required Human Review has successfully completed.
+- Prevent Execution Authorization until required Governance Approval or human adjudication has successfully completed.
 
 ---
 
-## 5.5 Execution Authorization & Commit Boundary
+## 5.5 Execution Authorization, Continuation Integrity & Governance Realization/Commit Boundary
 
 An implementation SHALL:
 
 - Prevent execution without valid Execution Authorization.
-- Validate Commit Boundary requirements.
-- Produce Governance Evidence for Commit Boundary processing.
-- Record successful Commit Boundary processing in the Append-Only Governance Ledger.
+- Preserve applicable pre-commit Continuation Integrity for nonterminal Proposals.
+- Perform Governance Realization using current qualified governance inputs.
+- Validate final Commit-Bound Admissibility, Governance Enforcement Binding, and Policy Enforcement Point requirements.
+- Produce Governance Evidence during each applicable stage, including Continuation Integrity, Governance Realization, enforcement, and Commit Boundary processing.
+- Record successful commitment and associated governance-significant processing in the Append-Only Governance Ledger.
 
 ---
 
@@ -510,12 +534,12 @@ An implementation SHALL:
 - Preserve immutable Governance Evidence.
 - Preserve an Append-Only Governance Ledger.
 - Preserve deterministic ledger ordering.
-- Use ledger sequence, not timestamps, as the authoritative ordering for Canonical State derivation.
-- Support deterministic Canonical State reconstruction from the ordered ledger.
+- Use ledger sequence, not timestamps or implementation-specific storage order, as the authoritative ordering for recorded governance events and Derived Lifecycle State.
+- Support deterministic reproduction of the Canonical State evaluation basis from the applicable qualified authoritative source versions and ordered Governance Ledger records.
 
 ---
 
-## 5.7 Multitenant & Governance Domain Isolation
+## 5.7 Multitenant Governance Isolation
 
 An implementation SHALL:
 
@@ -544,7 +568,9 @@ An implementation SHALL:
 
 Conformance testing SHALL verify externally observable behavior rather than implementation-specific architecture.
 
-The complete normative traceability model is defined by the Requirements Traceability Matrix (RTM), Normative Statements, and Conformance Test Suite.
+The RTM is the authoritative traceability artifact. It maps the applicable CRs, Core-derived Normative Statement identifiers, adopted Companion Specification obligations, implementation artifacts, and Conformance Test Cases without changing normative precedence.
+
+Formal Test Cases remain the authoritative assessment procedures. Harness Checks and Harness Test Vectors MAY provide executable evidence for mapped TC criteria, subject to `AGCP-Conformance-Traceability-and-Automation-Model.md`; a harness result alone does not establish Test Case or profile conformance.
 
 ---
 
@@ -554,10 +580,12 @@ Positive tests SHALL verify:
 
 - successful Proposal Qualification
 - successful Governance Decision evaluation
-- successful Human Review processing where required
+- successful Governance Approval and human-adjudication processing where required
 - successful Execution Authorization
-- successful Commit Boundary processing
-- successful Governance Evidence generation
+- successful applicable pre-commit Continuation Integrity where the Proposal remains nonterminal
+- successful Governance Realization and final Commit-Bound Admissibility
+- successful Policy Enforcement Point and Commit Boundary processing
+- successful cross-cutting Governance Evidence generation and binding
 - successful Append-Only Governance Ledger recording
 - successful Canonical State derivation
 
@@ -571,14 +599,14 @@ Negative tests SHALL verify rejection of:
 - invalid provenance
 - invalid tenant state
 - governance policy rejection
-- failed Human Review
+- failed Governance Approval or human adjudication
 - unauthorized execution
 - invalid Commit Boundary processing
 - unauthorized cross-tenant access
 - unauthorized Governance Domain access
 - invalid Governance Evidence
 - ledger integrity violations
-- invalid Canonical State reconstruction
+- invalid Canonical State resolution or invalid replay reproduction from recorded qualified source versions and applicable ordered Governance Ledger records
 
 ---
 
@@ -593,24 +621,25 @@ Testing SHALL include:
 3. Repetition of the evaluation.
 4. Comparison of the externally observable governance results.
 
-Canonical State SHALL be reproducible from the ordered Append-Only Governance Ledger, or from a verifiable materialized state deterministically derived from that ledger.
+Canonical State SHALL be reproducible from the same complete set of qualified authoritative source versions and applicable Governance Ledger records used for the original evaluation.
 
 Timestamp ordering SHALL NOT substitute for ledger sequence ordering.
 
 ---
 
-## 6.4 Canonical State Reconstruction Tests (L3+)
+## 6.4 Canonical State Resolution and Replay Reproduction Tests (L3+)
 
 Testing SHALL verify:
 
-1. Deterministic reconstruction using the ordered Append-Only Governance Ledger.
-2. Deterministic reconstruction using a verifiable materialized state, where implemented.
-3. Rejection or non-equivalence of reordered ledger histories.
-4. Preservation of Governance Evidence integrity throughout reconstruction.
+1. Deterministic Canonical State resolution using the same complete set of qualified authoritative source versions used for the original evaluation.
+2. Authoritative ledger ordering for any incorporated Governance Ledger records and Derived Lifecycle State.
+3. Deterministic reproduction of a materialized Canonical State view from the applicable qualified authoritative sources, where such a view is implemented.
+4. Rejection or non-equivalence of reordered ledger histories for ledger-derived governance events or Derived Lifecycle State.
+5. Preservation of source provenance, source-version references, Governance Evidence integrity, and ledger-ordering evidence throughout resolution and replay.
 
 ---
 
-## 6.5 Multitenant Isolation Tests (L5)
+## 6.5 Multitenant Governance Isolation Tests (L5)
 
 Testing SHALL verify:
 
@@ -682,10 +711,10 @@ Examples include, but are not limited to:
 - Failure of any required Conformance Requirement (CR)
 - Failure of any required Test Case (TC)
 - Failure of deterministic governance verification
-- Failure of Canonical State reconstruction
+- Failure of Canonical State resolution or failure to reproduce that resolution from recorded qualified source versions and applicable ordered Governance Ledger records for replay
 - Failure of Governance Evidence validation
 - Failure of Append-Only Governance Ledger validation
-- Failure of Human Review enforcement
+- Failure of Governance Approval enforcement
 - Failure of Execution Authorization validation
 - Failure of Commit Boundary validation
 - Failure of tenant isolation
@@ -724,7 +753,7 @@ Conformance is evaluated against the complete set of normative artifacts contain
 - HTTP Interface Specification
 - JSON Schemas
 - Security Specification
-- Human Review Specification
+- Governance Approval and Human Adjudication Specification
 - Provenance Wire Format Specification
 - Append-Only Governance Ledger Specification
 - Error Mapping Specification
@@ -763,10 +792,12 @@ Conformance verifies:
 - Interface interoperability
 - Deterministic governance
 - Governance pipeline correctness
-- Human Review processing
+- Governance Approval and human-adjudication processing
 - Execution Authorization
-- Commit Boundary enforcement
-- Governance Evidence production
+- applicable pre-commit Continuation Integrity
+- Governance Realization and final Commit-Bound Admissibility
+- Policy Enforcement Point and Commit Boundary enforcement
+- cross-cutting Governance Evidence production throughout applicable governance-significant processing
 - Append-Only Governance Ledger integrity
 - Canonical State derivation
 - Deterministic replay
@@ -775,14 +806,17 @@ Conformance verifies:
 
 The authoritative conformance traceability model is:
 
-```
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
+```text
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
+        |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
+        v
+Conformance Test Case (TC)
 ```
 
 Conformance SHALL be demonstrated using the official AGCP Requirements Traceability Matrix (RTM) and Conformance Test Suite.

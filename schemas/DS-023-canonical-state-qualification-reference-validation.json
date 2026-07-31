@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "date": "2026-07-30",
+  "schema_id": "DS-023",
+  "schema_file": "canonical_state.json",
+  "qualification_property": "qualification_result",
+  "ds032_reference": "state_qualification_result.json#/$defs/state_qualification_result_ref",
+  "legacy_top_level_qualification_property_absent": true,
+  "embedded_transitional_result_absent": true,
+  "qualified_reference_accepted": true,
+  "not_qualified_reference_rejected": true,
+  "indeterminate_reference_rejected": true,
+  "embedded_full_result_rejected": true,
+  "draft_2020_12_schema_count": 44,
+  "resolved_reference_count": 3245,
+  "reference_issue_count": 0,
+  "catalog_version": "1.0.35",
+  "catalog_hash_mismatch_count": 0,
+  "rtm_unchanged": true,
+  "canonical_state_sha256": "677d84bbef278287b75a995f221c60c8bbeb7aabafce19b764cefa1ca5c62380"
+}

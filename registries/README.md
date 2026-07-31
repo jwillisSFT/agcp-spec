@@ -1,6 +1,6 @@
 # Registries
 
-**Status:** Informational\
+**Status:** Normative\
 **Repository Versioning:** Repository Release Governed
 
 ## Purpose
@@ -18,6 +18,34 @@ SHALL interpret registered values according to that registry.
 
 ------------------------------------------------------------------------
 
+
+## Canonical Validation
+
+Every JSON registry document in this directory SHALL validate against:
+
+```text
+../schemas/registry_document.schema.json
+```
+
+Each registry document carries stable registry identity, explicit release and lifecycle metadata, integrity digests, document-level traceability, and typed entry metadata. Every normative entry also carries a permanent `REG-NNN` identifier and direct NS and CR references. Registry payloads SHALL NOT be duplicated under `schemas/`. Implementations SHALL verify the declared document and entry-set digests before using a registry release.
+
+------------------------------------------------------------------------
+
+
+## Entry Identifiers and Traceability
+
+The active registry-entry namespace is cataloged in:
+
+```text
+registry-entry-catalog.json
+registry-entry-catalog.csv
+REGISTRY-ENTRY-CATALOG.md
+```
+
+The current release assigns `REG-001` through `REG-092`. Each entry records `ns_refs` and `cr_refs`; release-level traceability SHALL NOT be used as a substitute for the entry-level mappings. REG identifiers are permanent and SHALL NOT be reused.
+
+------------------------------------------------------------------------
+
 # Registry Contents
 
 Depending on the repository release, this directory may include
@@ -28,7 +56,7 @@ registries such as:
 -   Rejection Code Registry
 -   Governance Stage Registry
 -   Governance Evidence Type Registry
--   Human Review Role Registry
+-   Governance Approval Role Registry
 -   Policy Evaluation Registry
 -   Additional implementation-independent controlled vocabularies
 

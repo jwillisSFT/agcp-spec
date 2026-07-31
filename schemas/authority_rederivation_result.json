@@ -1,0 +1,1947 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/authority_rederivation_result.json",
+  "title": "Authority Re-Derivation Result",
+  "description": "Canonical, independently identifiable and traceable result of re-deriving proposal-specific authority immediately before commitment from current qualified governance inputs. The result evaluates current Canonical State, Authority Lineage, Delegation Artifacts, Governance Approval Artifacts, qualified evidence, authorization, target, tenant, governance domain, lifecycle, scope, validity, revocation, subject eligibility, recursive containment, and cross-domain isolation. It precedes Commit-Bound Admissibility and Governance Binding Validation and does not itself grant permission to execute.",
+  "x-agcp-ds-id": "DS-034",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Commit-Time Authority Re-Derivation Result",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-103",
+      "ARM-301",
+      "ARM-302",
+      "ARM-303",
+      "ARM-304",
+      "ARM-305",
+      "ARM-306",
+      "ARM-307",
+      "ARM-308",
+      "ARM-601",
+      "ARM-603",
+      "ARM-606",
+      "ARM-609",
+      "ARM-610"
+    ],
+    "core_sections": [
+      "4.11",
+      "8.4",
+      "8.6A",
+      "9.1",
+      "9.3",
+      "9.6A",
+      "12.1",
+      "12.2",
+      "12.3",
+      "12.4",
+      "12.5",
+      "12.6"
+    ],
+    "normative_statements": [
+      "NS-8.6A-01",
+      "NS-8.6A-02",
+      "NS-8.6A-03",
+      "NS-9.6A-01",
+      "NS-12.1-01",
+      "NS-12.1-02",
+      "NS-12.2-01",
+      "NS-12.2-02",
+      "NS-12.3-01",
+      "NS-12.3-02",
+      "NS-12.4-01",
+      "NS-12.4-02",
+      "NS-12.4-03",
+      "NS-12.4-04",
+      "NS-12.5-01",
+      "NS-12.5-02",
+      "NS-12.6-02",
+      "NS-12.6-03",
+      "NS-12.7-03"
+    ],
+    "conformance_requirements": [
+      "CR-024",
+      "CR-025",
+      "CR-031",
+      "CR-032",
+      "CR-033",
+      "CR-096",
+      "CR-115",
+      "CR-116"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "evaluation_id": {
+      "$ref": "common.json#/$defs/evaluation_id"
+    },
+    "result_type": {
+      "const": "AUTHORITY_REDERIVATION_RESULT"
+    },
+    "evaluation_stage": {
+      "const": "IMMEDIATELY_BEFORE_COMMITMENT"
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "authority_subject": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "lifecycle_state_ref": {
+      "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    "validity_horizon": {
+      "$ref": "common.json#/$defs/validity_window"
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+    },
+    "execution_authorization_ref": {
+      "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+    },
+    "canonical_state_basis": {
+      "$ref": "#/$defs/canonical_state_basis"
+    },
+    "authority_lineage_basis": {
+      "$ref": "#/$defs/authority_lineage_basis"
+    },
+    "authority_basis_mode": {
+      "type": "string",
+      "enum": [
+        "DIRECT",
+        "DELEGATED",
+        "APPROVAL_SUPPORTED",
+        "DELEGATED_AND_APPROVAL_SUPPORTED"
+      ]
+    },
+    "delegation_artifact_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/delegation_artifact_evaluation"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "approval_artifact_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/approval_artifact_evaluation"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "authority_input_status": {
+      "$ref": "#/$defs/authority_input_status"
+    },
+    "determinations": {
+      "$ref": "#/$defs/authority_determinations"
+    },
+    "outcome": {
+      "$ref": "#/$defs/authority_rederivation_outcome"
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "ELIGIBLE_FOR_COMMIT_BOUND_ADMISSIBILITY",
+        "STRUCTURAL_REFUSAL_REQUIRED",
+        "EVALUATION_BLOCKED"
+      ]
+    },
+    "effective_authority": {
+      "$ref": "#/$defs/effective_authority"
+    },
+    "failure_reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/authority_failure_reason"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "missing_input_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "evaluated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "evaluator": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "input_set_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "result_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "evaluation_id",
+    "result_type",
+    "evaluation_stage",
+    "proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "target_ref",
+    "authority_subject",
+    "scope",
+    "lifecycle_state_ref",
+    "validity_horizon",
+    "evaluation_horizon",
+    "governance_version_ref",
+    "governance_configuration_ref",
+    "policy_refs",
+    "execution_authorization_ref",
+    "canonical_state_basis",
+    "authority_lineage_basis",
+    "authority_basis_mode",
+    "qualified_evidence_refs",
+    "authority_input_status",
+    "determinations",
+    "outcome",
+    "disposition",
+    "evaluated_at",
+    "evaluator",
+    "input_set_digest",
+    "result_digest",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authority_basis_mode": {
+            "enum": [
+              "DELEGATED",
+              "DELEGATED_AND_APPROVAL_SUPPORTED"
+            ]
+          }
+        },
+        "required": [
+          "authority_basis_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "delegation_artifact_evaluations"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authority_basis_mode": {
+            "enum": [
+              "APPROVAL_SUPPORTED",
+              "DELEGATED_AND_APPROVAL_SUPPORTED"
+            ]
+          }
+        },
+        "required": [
+          "authority_basis_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "approval_artifact_evaluations"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authority_basis_mode": {
+            "const": "DIRECT"
+          }
+        },
+        "required": [
+          "authority_basis_mode"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "delegation_artifact_evaluations"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "AUTHORITY_ESTABLISHED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "effective_authority"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "failure_reasons"
+              ]
+            },
+            {
+              "required": [
+                "missing_input_refs"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "disposition": {
+            "const": "ELIGIBLE_FOR_COMMIT_BOUND_ADMISSIBILITY"
+          },
+          "canonical_state_basis": {
+            "$ref": "#/$defs/qualified_current_canonical_state_basis"
+          },
+          "authority_lineage_basis": {
+            "$ref": "#/$defs/valid_authority_lineage_basis"
+          },
+          "authority_input_status": {
+            "$ref": "#/$defs/established_authority_input_status"
+          },
+          "determinations": {
+            "$ref": "#/$defs/satisfied_authority_determinations"
+          },
+          "delegation_artifact_evaluations": {
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/delegation_artifact_evaluation"
+                },
+                {
+                  "properties": {
+                    "status": {
+                      "const": "VALID"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "approval_artifact_evaluations": {
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/approval_artifact_evaluation"
+                },
+                {
+                  "properties": {
+                    "status": {
+                      "const": "VALID"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "semantic_assertions": {
+            "properties": {
+              "authority_at_commitment_established": {
+                "const": true
+              },
+              "may_proceed_to_commit_bound_admissibility": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "AUTHORITY_NOT_ESTABLISHED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "failure_reasons"
+        ],
+        "not": {
+          "required": [
+            "effective_authority"
+          ]
+        },
+        "properties": {
+          "disposition": {
+            "const": "STRUCTURAL_REFUSAL_REQUIRED"
+          },
+          "determinations": {
+            "$ref": "#/$defs/determinations_with_failure"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "authority_at_commitment_established": {
+                "const": false
+              },
+              "may_proceed_to_commit_bound_admissibility": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "INDETERMINATE"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "missing_input_refs"
+        ],
+        "not": {
+          "required": [
+            "effective_authority"
+          ]
+        },
+        "properties": {
+          "disposition": {
+            "const": "EVALUATION_BLOCKED"
+          },
+          "determinations": {
+            "$ref": "#/$defs/determinations_with_indeterminate"
+          },
+          "semantic_assertions": {
+            "properties": {
+              "authority_at_commitment_established": {
+                "const": false
+              },
+              "may_proceed_to_commit_bound_admissibility": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "authority_rederivation_result_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-034 Authority Re-Derivation Result.",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "$ref": "#/$defs/authority_rederivation_outcome"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_id": {
+          "$ref": "common.json#/$defs/target_id"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "outcome",
+        "result_digest",
+        "proposal_id",
+        "evaluated_at"
+      ]
+    },
+    "authority_rederivation_outcome": {
+      "type": "string",
+      "enum": [
+        "AUTHORITY_ESTABLISHED",
+        "AUTHORITY_NOT_ESTABLISHED",
+        "INDETERMINATE"
+      ]
+    },
+    "canonical_state_basis": {
+      "type": "object",
+      "description": "Current qualified Canonical State basis used during Authority Re-Derivation.",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "state_qualification_result_ref": {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        "resolved_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "current_for_evaluation_horizon": {
+          "type": "boolean"
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "canonical_state_ref",
+        "state_qualification_result_ref",
+        "resolved_at",
+        "current_for_evaluation_horizon",
+        "basis_digest"
+      ]
+    },
+    "qualified_current_canonical_state_basis": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/canonical_state_basis"
+        },
+        {
+          "properties": {
+            "state_qualification_result_ref": {
+              "allOf": [
+                {
+                  "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+                },
+                {
+                  "properties": {
+                    "outcome": {
+                      "const": "QUALIFIED"
+                    }
+                  },
+                  "required": [
+                    "outcome"
+                  ]
+                }
+              ]
+            },
+            "current_for_evaluation_horizon": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "authority_lineage_basis": {
+      "type": "object",
+      "description": "Current validation summary for the DS-024 Authority Lineage used in re-derivation.",
+      "additionalProperties": false,
+      "properties": {
+        "authority_lineage_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        },
+        "lineage_validation_status": {
+          "type": "string",
+          "enum": [
+            "VALID",
+            "INVALID",
+            "INDETERMINATE"
+          ]
+        },
+        "complete_chain_verified": {
+          "type": "boolean"
+        },
+        "scope_containment_verified": {
+          "type": "boolean"
+        },
+        "revocation_status": {
+          "type": "string",
+          "enum": [
+            "CLEAR",
+            "REVOKED",
+            "INDETERMINATE"
+          ]
+        },
+        "subject_eligibility": {
+          "type": "string",
+          "enum": [
+            "ELIGIBLE",
+            "INELIGIBLE",
+            "NONEXISTENT",
+            "INDETERMINATE"
+          ]
+        },
+        "recursive_authority_containment": {
+          "type": "string",
+          "enum": [
+            "SATISFIED",
+            "VIOLATED",
+            "INDETERMINATE"
+          ]
+        },
+        "cross_domain_isolation": {
+          "type": "string",
+          "enum": [
+            "SAME_DOMAIN",
+            "GOVERNED_TRANSITION",
+            "UNGOVERNED_TRANSITION",
+            "INDETERMINATE"
+          ]
+        },
+        "validated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "authority_lineage_ref",
+        "lineage_validation_status",
+        "complete_chain_verified",
+        "scope_containment_verified",
+        "revocation_status",
+        "subject_eligibility",
+        "recursive_authority_containment",
+        "cross_domain_isolation",
+        "validated_at",
+        "basis_digest"
+      ]
+    },
+    "valid_authority_lineage_basis": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/authority_lineage_basis"
+        },
+        {
+          "properties": {
+            "lineage_validation_status": {
+              "const": "VALID"
+            },
+            "complete_chain_verified": {
+              "const": true
+            },
+            "scope_containment_verified": {
+              "const": true
+            },
+            "revocation_status": {
+              "const": "CLEAR"
+            },
+            "subject_eligibility": {
+              "const": "ELIGIBLE"
+            },
+            "recursive_authority_containment": {
+              "const": "SATISFIED"
+            },
+            "cross_domain_isolation": {
+              "enum": [
+                "SAME_DOMAIN",
+                "GOVERNED_TRANSITION"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "delegation_artifact_evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "delegation_artifact_ref": {
+          "$ref": "delegation_artifact.json#/$defs/delegation_artifact_ref"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "VALID",
+            "INVALID",
+            "EXPIRED",
+            "NOT_YET_VALID",
+            "REVOKED",
+            "OUT_OF_SCOPE",
+            "CROSS_DOMAIN_UNGOVERNED",
+            "INDETERMINATE"
+          ]
+        },
+        "scope_containment_verified": {
+          "type": "boolean"
+        },
+        "recursive_containment_verified": {
+          "type": "boolean"
+        },
+        "revocation_checked": {
+          "type": "boolean"
+        },
+        "validity_checked": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "delegation_artifact_ref",
+        "status",
+        "scope_containment_verified",
+        "recursive_containment_verified",
+        "revocation_checked",
+        "validity_checked",
+        "basis",
+        "evaluated_at"
+      ]
+    },
+    "approval_artifact_evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "approval_artifact_ref": {
+          "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "VALID",
+            "INVALID",
+            "EXPIRED",
+            "NOT_YET_VALID",
+            "REVOKED",
+            "WITHDRAWN",
+            "CANCELLED",
+            "SUPERSEDED",
+            "INELIGIBLE_APPROVER",
+            "NEGATIVE_ADJUDICATION",
+            "INDETERMINATE"
+          ]
+        },
+        "contribution_role": {
+          "type": "string",
+          "enum": [
+            "APPROVAL",
+            "COSIGNATURE",
+            "QUORUM_CONTRIBUTION",
+            "RISK_ACCEPTANCE",
+            "ADJUDICATION"
+          ]
+        },
+        "proposal_target_scope_and_lifecycle_binding_verified": {
+          "type": "boolean"
+        },
+        "cryptographic_attribution_verified": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "approval_artifact_ref",
+        "status",
+        "contribution_role",
+        "proposal_target_scope_and_lifecycle_binding_verified",
+        "cryptographic_attribution_verified",
+        "basis",
+        "evaluated_at"
+      ]
+    },
+    "authority_input_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tenant_status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "SUSPENDED",
+            "DECOMMISSIONED",
+            "INDETERMINATE"
+          ]
+        },
+        "subject_status": {
+          "type": "string",
+          "enum": [
+            "ELIGIBLE",
+            "INELIGIBLE",
+            "NONEXISTENT",
+            "INDETERMINATE"
+          ]
+        },
+        "prior_authorization_status": {
+          "type": "string",
+          "enum": [
+            "CURRENT",
+            "INVALID",
+            "EXPIRED",
+            "REVOKED",
+            "CONSUMED",
+            "INDETERMINATE"
+          ]
+        },
+        "revocation_status": {
+          "type": "string",
+          "enum": [
+            "CLEAR",
+            "REVOKED",
+            "INDETERMINATE"
+          ]
+        },
+        "lifecycle_status": {
+          "type": "string",
+          "enum": [
+            "ELIGIBLE",
+            "INELIGIBLE",
+            "TERMINAL",
+            "INDETERMINATE"
+          ]
+        },
+        "validity_status": {
+          "type": "string",
+          "enum": [
+            "CURRENT",
+            "NOT_YET_VALID",
+            "EXPIRED",
+            "INDETERMINATE"
+          ]
+        },
+        "cross_domain_status": {
+          "type": "string",
+          "enum": [
+            "SAME_DOMAIN",
+            "GOVERNED_TRANSITION",
+            "UNGOVERNED_TRANSITION",
+            "INDETERMINATE"
+          ]
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "tenant_status",
+        "subject_status",
+        "prior_authorization_status",
+        "revocation_status",
+        "lifecycle_status",
+        "validity_status",
+        "cross_domain_status",
+        "evaluated_at"
+      ]
+    },
+    "established_authority_input_status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/authority_input_status"
+        },
+        {
+          "properties": {
+            "tenant_status": {
+              "const": "ACTIVE"
+            },
+            "subject_status": {
+              "const": "ELIGIBLE"
+            },
+            "prior_authorization_status": {
+              "const": "CURRENT"
+            },
+            "revocation_status": {
+              "const": "CLEAR"
+            },
+            "lifecycle_status": {
+              "const": "ELIGIBLE"
+            },
+            "validity_status": {
+              "const": "CURRENT"
+            },
+            "cross_domain_status": {
+              "enum": [
+                "SAME_DOMAIN",
+                "GOVERNED_TRANSITION"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "determination_status": {
+      "type": "string",
+      "enum": [
+        "SATISFIED",
+        "NOT_SATISFIED",
+        "INDETERMINATE"
+      ]
+    },
+    "authority_determination": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "applicability": {
+          "type": "string",
+          "enum": [
+            "APPLICABLE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "failure_codes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/authority_failure_code"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "status",
+        "applicability",
+        "basis",
+        "evaluated_at"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "NOT_SATISFIED",
+                  "INDETERMINATE"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "failure_codes"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "SATISFIED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "failure_codes"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "authority_determinations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_binding": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "target_binding": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "tenant_binding": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "governance_domain_binding": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "canonical_state_qualification": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "evidence_qualification": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "authority_lineage_completeness": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "delegation_validity": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "approval_validity": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "revocation_clearance": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "subject_eligibility": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "scope_containment": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "lifecycle_eligibility": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "validity": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "recursive_authority_containment": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "cross_domain_isolation": {
+          "$ref": "#/$defs/authority_determination"
+        },
+        "prior_authorization_currency": {
+          "$ref": "#/$defs/authority_determination"
+        }
+      },
+      "required": [
+        "proposal_binding",
+        "target_binding",
+        "tenant_binding",
+        "governance_domain_binding",
+        "canonical_state_qualification",
+        "evidence_qualification",
+        "authority_lineage_completeness",
+        "delegation_validity",
+        "approval_validity",
+        "revocation_clearance",
+        "subject_eligibility",
+        "scope_containment",
+        "lifecycle_eligibility",
+        "validity",
+        "recursive_authority_containment",
+        "cross_domain_isolation",
+        "prior_authorization_currency"
+      ]
+    },
+    "satisfied_authority_determinations": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/authority_determinations"
+        },
+        {
+          "properties": {
+            "proposal_binding": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "target_binding": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "tenant_binding": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "governance_domain_binding": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "canonical_state_qualification": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "evidence_qualification": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "authority_lineage_completeness": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "delegation_validity": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "approval_validity": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "revocation_clearance": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "subject_eligibility": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "scope_containment": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "lifecycle_eligibility": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "validity": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "recursive_authority_containment": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "cross_domain_isolation": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            },
+            "prior_authorization_currency": {
+              "properties": {
+                "status": {
+                  "const": "SATISFIED"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "determinations_with_failure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/authority_determinations"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "proposal_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "target_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "tenant_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "governance_domain_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "canonical_state_qualification": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "evidence_qualification": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "authority_lineage_completeness": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "delegation_validity": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "approval_validity": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "revocation_clearance": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "subject_eligibility": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "scope_containment": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "lifecycle_eligibility": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "validity": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "recursive_authority_containment": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "cross_domain_isolation": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "prior_authorization_currency": {
+                  "properties": {
+                    "status": {
+                      "const": "NOT_SATISFIED"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "determinations_with_indeterminate": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/authority_determinations"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "proposal_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "target_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "tenant_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "governance_domain_binding": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "canonical_state_qualification": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "evidence_qualification": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "authority_lineage_completeness": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "delegation_validity": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "approval_validity": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "revocation_clearance": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "subject_eligibility": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "scope_containment": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "lifecycle_eligibility": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "validity": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "recursive_authority_containment": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "cross_domain_isolation": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "prior_authorization_currency": {
+                  "properties": {
+                    "status": {
+                      "const": "INDETERMINATE"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "effective_authority": {
+      "type": "object",
+      "description": "Proposal-specific authority established for the current evaluation horizon. This is not a portable token and does not itself authorize execution.",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "authority_subject": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "scope": {
+          "$ref": "common.json#/$defs/governance_scope"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "authority_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "proposal_specific": {
+          "const": true
+        },
+        "portable_or_reusable": {
+          "const": false
+        },
+        "permission_to_execute": {
+          "const": false
+        }
+      },
+      "required": [
+        "proposal_id",
+        "authority_subject",
+        "tenant_id",
+        "governance_domain_id",
+        "target_ref",
+        "scope",
+        "validity_window",
+        "authority_digest",
+        "proposal_specific",
+        "portable_or_reusable",
+        "permission_to_execute"
+      ]
+    },
+    "authority_failure_code": {
+      "type": "string",
+      "enum": [
+        "TENANT_INACTIVE",
+        "TENANT_SUSPENDED",
+        "TENANT_DECOMMISSIONED",
+        "SUBJECT_INELIGIBLE",
+        "SUBJECT_NONEXISTENT",
+        "PRIOR_AUTHORIZATION_INVALID",
+        "PRIOR_AUTHORIZATION_EXPIRED",
+        "PRIOR_AUTHORIZATION_REVOKED",
+        "PRIOR_AUTHORIZATION_CONSUMED",
+        "CANONICAL_STATE_NOT_QUALIFIED",
+        "CANONICAL_STATE_STALE",
+        "EVIDENCE_NOT_QUALIFIED",
+        "AUTHORITY_LINEAGE_INVALID",
+        "AUTHORITY_LINEAGE_INCOMPLETE",
+        "DELEGATION_INVALID",
+        "DELEGATION_EXPIRED",
+        "DELEGATION_REVOKED",
+        "DELEGATION_OUT_OF_SCOPE",
+        "APPROVAL_INVALID",
+        "APPROVAL_EXPIRED",
+        "APPROVAL_REVOKED",
+        "APPROVAL_NEGATIVE",
+        "SCOPE_EXCEEDED",
+        "LIFECYCLE_INELIGIBLE",
+        "VALIDITY_NOT_CURRENT",
+        "REVOCATION_DETECTED",
+        "RECURSIVE_AUTHORITY_EXPANSION",
+        "CROSS_DOMAIN_AUTHORITY_NOT_ESTABLISHED",
+        "PROPOSAL_BINDING_MISMATCH",
+        "TARGET_BINDING_MISMATCH",
+        "TENANT_BINDING_MISMATCH",
+        "GOVERNANCE_DOMAIN_BINDING_MISMATCH",
+        "QUALIFIED_INPUT_MISSING",
+        "OTHER_AUTHORITY_REDERIVATION_FAILURE"
+      ]
+    },
+    "authority_failure_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/authority_failure_code"
+        },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "PROPOSAL_BINDING",
+            "TARGET_BINDING",
+            "TENANT_BINDING",
+            "GOVERNANCE_DOMAIN_BINDING",
+            "CANONICAL_STATE_QUALIFICATION",
+            "EVIDENCE_QUALIFICATION",
+            "AUTHORITY_LINEAGE_COMPLETENESS",
+            "DELEGATION_VALIDITY",
+            "APPROVAL_VALIDITY",
+            "REVOCATION_CLEARANCE",
+            "SUBJECT_ELIGIBILITY",
+            "SCOPE_CONTAINMENT",
+            "LIFECYCLE_ELIGIBILITY",
+            "VALIDITY",
+            "RECURSIVE_AUTHORITY_CONTAINMENT",
+            "CROSS_DOMAIN_ISOLATION",
+            "PRIOR_AUTHORIZATION_CURRENCY",
+            "CROSS_DIMENSION"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "affected_input_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "rejection_code": {
+          "$ref": "common.json#/$defs/rejection_code"
+        }
+      },
+      "required": [
+        "code",
+        "dimension",
+        "summary"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "description": "Recorded or resolvable material sufficient to reproduce Authority Re-Derivation without executing the governed action.",
+      "additionalProperties": false,
+      "properties": {
+        "rederivation_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "input_snapshot_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/uri"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "canonical_state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "authority_lineage_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "delegation_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "approval_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "qualified_evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "policy_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluation_algorithm_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "historical_action_execution_required": {
+          "const": false
+        }
+      },
+      "required": [
+        "rederivation_profile",
+        "input_snapshot_refs",
+        "canonical_state_digest",
+        "authority_lineage_digest",
+        "qualified_evidence_set_digest",
+        "governance_version_ref",
+        "policy_basis_digest",
+        "evaluation_algorithm_id",
+        "historical_action_execution_required"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "current_qualified_governance_inputs_used": {
+          "const": true
+        },
+        "authority_at_commitment_established": {
+          "type": "boolean"
+        },
+        "may_proceed_to_commit_bound_admissibility": {
+          "type": "boolean"
+        },
+        "identity_alone_established_authority": {
+          "const": false
+        },
+        "standing_permission_alone_established_authority": {
+          "const": false
+        },
+        "prior_authorization_alone_established_authority": {
+          "const": false
+        },
+        "delegation_alone_established_authority": {
+          "const": false
+        },
+        "approval_alone_established_authority": {
+          "const": false
+        },
+        "authority_is_proposal_specific": {
+          "const": true
+        },
+        "authority_is_portable": {
+          "const": false
+        },
+        "permission_to_execute_granted": {
+          "const": false
+        },
+        "commit_bound_admissibility_completed": {
+          "const": false
+        },
+        "governance_binding_validation_completed": {
+          "const": false
+        },
+        "time_of_check_time_of_use_revalidation_performed": {
+          "const": true
+        },
+        "deterministic_replay_supported": {
+          "const": true
+        },
+        "result_is_attributable": {
+          "const": true
+        }
+      },
+      "required": [
+        "current_qualified_governance_inputs_used",
+        "authority_at_commitment_established",
+        "may_proceed_to_commit_bound_admissibility",
+        "identity_alone_established_authority",
+        "standing_permission_alone_established_authority",
+        "prior_authorization_alone_established_authority",
+        "delegation_alone_established_authority",
+        "approval_alone_established_authority",
+        "authority_is_proposal_specific",
+        "authority_is_portable",
+        "permission_to_execute_granted",
+        "commit_bound_admissibility_completed",
+        "governance_binding_validation_completed",
+        "time_of_check_time_of_use_revalidation_performed",
+        "deterministic_replay_supported",
+        "result_is_attributable"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Profile-defined extensions that cannot alter the canonical meaning or outcome of Authority Re-Derivation.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    }
+  }
+}

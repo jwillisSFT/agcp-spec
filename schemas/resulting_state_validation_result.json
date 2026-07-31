@@ -1,0 +1,1408 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/resulting_state_validation_result.json",
+  "title": "Resulting-State Validation Result",
+  "description": "Canonical, independently identifiable and traceable result of validating before commitment that the state projected to result from one governed transition, a complete Bind Set, or an explicitly governed executable subset satisfies all applicable governance requirements. The result preserves constraints, invariants, dependency and coupling conditions, aggregate-state effects, qualified Canonical State, deterministic projection, attribution, integrity, and replay. It contributes to Commit-Bound Admissibility but does not establish authority, authorize execution, select an executable subset, or itself commit any transition.",
+  "$comment": "DS-031 implements ARM-205 and Core Section 9.6B. A VALID result is required for continued admissibility processing but is not permission to execute. INVALID and INDETERMINATE results block commitment; Structural Refusal is recorded separately by DS-028 when applied.",
+  "x-agcp-ds-id": "DS-031",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Result",
+  "x-agcp-normative-basis": {
+    "arm_ids": [
+      "ARM-205",
+      "ARM-206",
+      "ARM-207",
+      "ARM-208",
+      "ARM-216",
+      "ARM-217"
+    ],
+    "ns_ids": [
+      "NS-9.6B-01",
+      "NS-9.6B-02",
+      "NS-9.6B-04",
+      "NS-9.6B-05"
+    ],
+    "cr_ids": [
+      "CR-102",
+      "CR-109"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "resulting_state_validation_id": {
+      "$ref": "#/$defs/resulting_state_validation_id"
+    },
+    "result_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/resulting_state_validation_outcome"
+    },
+    "disposition": {
+      "$ref": "#/$defs/resulting_state_validation_disposition"
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "evaluated_transition_set": {
+      "$ref": "#/$defs/evaluated_transition_set"
+    },
+    "target_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/target_ref"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "canonical_state_basis": {
+      "$ref": "#/$defs/qualified_canonical_state_basis"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "projection_basis": {
+      "$ref": "#/$defs/projection_basis"
+    },
+    "projected_state_components": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/projected_state_component"
+      },
+      "minItems": 1,
+      "maxItems": 4096
+    },
+    "governance_requirement_evaluations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/governance_requirement_evaluation"
+      },
+      "minItems": 1,
+      "maxItems": 8192
+    },
+    "aggregate_validation": {
+      "$ref": "#/$defs/aggregate_validation"
+    },
+    "supporting_qualified_evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 512
+    },
+    "failure_reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/failure_reason"
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "indeterminate_reasons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/indeterminate_reason"
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "evaluated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "result_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "resulting_state_validation_id",
+    "result_version",
+    "outcome",
+    "disposition",
+    "proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "evaluated_transition_set",
+    "target_refs",
+    "canonical_state_basis",
+    "governance_version_ref",
+    "policy_refs",
+    "evaluation_horizon",
+    "projection_basis",
+    "projected_state_components",
+    "governance_requirement_evaluations",
+    "aggregate_validation",
+    "supporting_qualified_evidence",
+    "evaluated_at",
+    "attribution",
+    "result_digest",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "VALID"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "ELIGIBLE_FOR_COMMIT_BOUND_ADMISSIBILITY"
+          },
+          "aggregate_validation": {
+            "$ref": "#/$defs/satisfied_aggregate_validation"
+          },
+          "governance_requirement_evaluations": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/governance_requirement_evaluation"
+                },
+                {
+                  "properties": {
+                    "outcome": {
+                      "const": "SATISFIED"
+                    }
+                  },
+                  "required": [
+                    "outcome"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "failure_reasons"
+              ]
+            },
+            {
+              "required": [
+                "indeterminate_reasons"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "INVALID"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "STRUCTURAL_REFUSAL_REQUIRED"
+          }
+        },
+        "required": [
+          "failure_reasons"
+        ],
+        "anyOf": [
+          {
+            "properties": {
+              "governance_requirement_evaluations": {
+                "contains": {
+                  "properties": {
+                    "outcome": {
+                      "const": "VIOLATED"
+                    }
+                  },
+                  "required": [
+                    "outcome"
+                  ]
+                },
+                "minContains": 1
+              }
+            }
+          },
+          {
+            "properties": {
+              "aggregate_validation": {
+                "$ref": "#/$defs/aggregate_validation_with_violation"
+              }
+            }
+          }
+        ],
+        "not": {
+          "required": [
+            "indeterminate_reasons"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "INDETERMINATE"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "EVALUATION_BLOCKED"
+          }
+        },
+        "required": [
+          "indeterminate_reasons"
+        ],
+        "anyOf": [
+          {
+            "properties": {
+              "governance_requirement_evaluations": {
+                "contains": {
+                  "properties": {
+                    "outcome": {
+                      "const": "INDETERMINATE"
+                    }
+                  },
+                  "required": [
+                    "outcome"
+                  ]
+                },
+                "minContains": 1
+              }
+            }
+          },
+          {
+            "properties": {
+              "aggregate_validation": {
+                "$ref": "#/$defs/aggregate_validation_with_indeterminate"
+              }
+            }
+          }
+        ],
+        "not": {
+          "required": [
+            "failure_reasons"
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "resulting_state_validation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for a DS-031 Resulting-State Validation Result."
+    },
+    "resulting_state_validation_outcome": {
+      "type": "string",
+      "enum": [
+        "VALID",
+        "INVALID",
+        "INDETERMINATE"
+      ],
+      "description": "Outcome of evaluating the projected resulting state against applicable governance requirements."
+    },
+    "resulting_state_validation_disposition": {
+      "type": "string",
+      "enum": [
+        "ELIGIBLE_FOR_COMMIT_BOUND_ADMISSIBILITY",
+        "STRUCTURAL_REFUSAL_REQUIRED",
+        "EVALUATION_BLOCKED"
+      ]
+    },
+    "resulting_state_validation_result_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-031 Resulting-State Validation Result.",
+      "additionalProperties": false,
+      "properties": {
+        "resulting_state_validation_id": {
+          "$ref": "#/$defs/resulting_state_validation_id"
+        },
+        "outcome": {
+          "$ref": "#/$defs/resulting_state_validation_outcome"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "resulting_state_validation_id",
+        "outcome",
+        "result_digest",
+        "proposal_id",
+        "evaluated_at"
+      ]
+    },
+    "approved_executable_subset": {
+      "type": "object",
+      "description": "Explicitly governed executable subset supplied for Resulting-State Validation. This structure records the subset being evaluated; it does not select or authorize that subset.",
+      "additionalProperties": false,
+      "properties": {
+        "subset_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "selected_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "excluded_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "selection_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "partial_bind_admissibility_established": {
+          "const": true
+        },
+        "parent_proposal_admissibility_preserved": {
+          "const": true
+        },
+        "required_dependencies_preserved": {
+          "const": true
+        },
+        "ordering_preserved": {
+          "const": true
+        },
+        "authority_preserved": {
+          "const": true
+        },
+        "evidence_preserved": {
+          "const": true
+        },
+        "canonical_state_preserved": {
+          "const": true
+        },
+        "policy_preserved": {
+          "const": true
+        },
+        "invariants_preserved": {
+          "const": true
+        },
+        "subset_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "subset_id",
+        "selected_sub_transition_ids",
+        "selection_basis_digest",
+        "partial_bind_admissibility_established",
+        "parent_proposal_admissibility_preserved",
+        "required_dependencies_preserved",
+        "ordering_preserved",
+        "authority_preserved",
+        "evidence_preserved",
+        "canonical_state_preserved",
+        "policy_preserved",
+        "invariants_preserved",
+        "subset_digest"
+      ]
+    },
+    "evaluated_transition_set": {
+      "type": "object",
+      "description": "One transition, the complete candidate Bind Set, or an explicitly governed executable subset whose projected aggregate state is evaluated.",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_scope": {
+          "type": "string",
+          "enum": [
+            "SINGLE_TRANSITION",
+            "COMPLETE_BIND_SET",
+            "APPROVED_EXECUTABLE_SUBSET"
+          ]
+        },
+        "sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "complete_candidate_set_preserved": {
+          "type": "boolean"
+        },
+        "bind_set_ref": {
+          "$ref": "bind_set.json#/$defs/bind_set_ref"
+        },
+        "governance_dependency_graph_ref": {
+          "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+        },
+        "coupling_semantics": {
+          "$ref": "common.json#/$defs/composite_coupling_semantics_enum"
+        },
+        "approved_executable_subset": {
+          "$ref": "#/$defs/approved_executable_subset"
+        },
+        "transition_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "evaluation_scope",
+        "sub_transition_ids",
+        "complete_candidate_set_preserved",
+        "transition_set_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evaluation_scope": {
+                "const": "SINGLE_TRANSITION"
+              }
+            },
+            "required": [
+              "evaluation_scope"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sub_transition_ids": {
+                "maxItems": 1
+              },
+              "complete_candidate_set_preserved": {
+                "const": true
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "bind_set_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "governance_dependency_graph_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "coupling_semantics"
+                  ]
+                },
+                {
+                  "required": [
+                    "approved_executable_subset"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "evaluation_scope": {
+                "const": "COMPLETE_BIND_SET"
+              }
+            },
+            "required": [
+              "evaluation_scope"
+            ]
+          },
+          "then": {
+            "required": [
+              "bind_set_ref",
+              "governance_dependency_graph_ref",
+              "coupling_semantics"
+            ],
+            "properties": {
+              "complete_candidate_set_preserved": {
+                "const": true
+              }
+            },
+            "not": {
+              "required": [
+                "approved_executable_subset"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "evaluation_scope": {
+                "const": "APPROVED_EXECUTABLE_SUBSET"
+              }
+            },
+            "required": [
+              "evaluation_scope"
+            ]
+          },
+          "then": {
+            "required": [
+              "bind_set_ref",
+              "governance_dependency_graph_ref",
+              "coupling_semantics",
+              "approved_executable_subset"
+            ],
+            "properties": {
+              "complete_candidate_set_preserved": {
+                "const": true
+              },
+              "coupling_semantics": {
+                "not": {
+                  "const": "STRONGLY_COUPLED"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "canonical_state_basis": {
+      "type": "object",
+      "description": "Current qualified Canonical State basis used for the projection.",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "state_qualification_result_ref": {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        "current_for_evaluation_horizon": {
+          "type": "boolean"
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "canonical_state_ref",
+        "state_qualification_result_ref",
+        "current_for_evaluation_horizon",
+        "basis_digest"
+      ]
+    },
+    "qualified_canonical_state_basis": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/canonical_state_basis"
+        },
+        {
+          "properties": {
+            "state_qualification_result_ref": {
+              "allOf": [
+                {
+                  "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+                },
+                {
+                  "properties": {
+                    "outcome": {
+                      "const": "QUALIFIED"
+                    }
+                  },
+                  "required": [
+                    "outcome"
+                  ]
+                }
+              ]
+            },
+            "current_for_evaluation_horizon": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "ordering_basis": {
+      "type": "object",
+      "description": "Governance-significant ordering basis for deterministic projection. Arrival time alone is prohibited.",
+      "additionalProperties": false,
+      "properties": {
+        "ordering_method": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_LEDGER_ORDER",
+            "DEPENDENCY_GRAPH_ORDER",
+            "POLICY_DEFINED_ORDER",
+            "COMPOSITE_ORDER"
+          ]
+        },
+        "ledger_position": {
+          "$ref": "governance_ledger_event.json#/$defs/ledger_position"
+        },
+        "dependency_graph_ref": {
+          "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+        },
+        "policy_ref": {
+          "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+        },
+        "ordering_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "arrival_time_used_as_governance_basis": {
+          "const": false
+        }
+      },
+      "required": [
+        "ordering_method",
+        "ordering_digest",
+        "arrival_time_used_as_governance_basis"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "ordering_method": {
+                "const": "GOVERNANCE_LEDGER_ORDER"
+              }
+            },
+            "required": [
+              "ordering_method"
+            ]
+          },
+          "then": {
+            "required": [
+              "ledger_position"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "ordering_method": {
+                "const": "DEPENDENCY_GRAPH_ORDER"
+              }
+            },
+            "required": [
+              "ordering_method"
+            ]
+          },
+          "then": {
+            "required": [
+              "dependency_graph_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "ordering_method": {
+                "const": "POLICY_DEFINED_ORDER"
+              }
+            },
+            "required": [
+              "ordering_method"
+            ]
+          },
+          "then": {
+            "required": [
+              "policy_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "ordering_method": {
+                "const": "COMPOSITE_ORDER"
+              }
+            },
+            "required": [
+              "ordering_method"
+            ]
+          },
+          "then": {
+            "required": [
+              "dependency_graph_ref",
+              "policy_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "projection_basis": {
+      "type": "object",
+      "description": "Deterministic basis used to project the aggregate state produced by the evaluated transition set.",
+      "additionalProperties": false,
+      "properties": {
+        "current_state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "aggregate_effect_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "projected_aggregate_state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "projection_method_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "projection_method_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "ordering_basis": {
+          "$ref": "#/$defs/ordering_basis"
+        },
+        "projection_inputs_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "deterministic_projection": {
+          "const": true
+        }
+      },
+      "required": [
+        "current_state_digest",
+        "aggregate_effect_digest",
+        "projected_aggregate_state_digest",
+        "projection_method_id",
+        "projection_method_version",
+        "ordering_basis",
+        "projection_inputs_digest",
+        "deterministic_projection"
+      ]
+    },
+    "projected_state_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "component_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "baseline_component_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "projected_component_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "affected_target_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/target_id"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "contributing_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "component_projection_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "component_id",
+        "component_type",
+        "projected_component_digest",
+        "affected_target_ids",
+        "contributing_sub_transition_ids",
+        "component_projection_digest"
+      ]
+    },
+    "governance_requirement_evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "requirement_type": {
+          "type": "string",
+          "enum": [
+            "POLICY",
+            "CONSTRAINT",
+            "INVARIANT",
+            "DEPENDENCY",
+            "COUPLING",
+            "AUTHORITY",
+            "EVIDENCE",
+            "CANONICAL_STATE",
+            "AGGREGATE_STATE"
+          ]
+        },
+        "requirement_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "outcome": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "affected_component_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "supporting_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "requirement_type",
+        "requirement_ref",
+        "outcome",
+        "basis_digest",
+        "evaluated_at"
+      ]
+    },
+    "determination_status": {
+      "type": "string",
+      "enum": [
+        "SATISFIED",
+        "VIOLATED",
+        "INDETERMINATE"
+      ]
+    },
+    "aggregate_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "constraints_preserved": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "invariants_preserved": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "dependency_conditions_preserved": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "coupling_semantics_preserved": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "authority_conditions_preserved": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "evidence_conditions_preserved": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "canonical_state_conditions_preserved": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "no_unauthorized_effects": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "aggregate_state_admissible": {
+          "$ref": "#/$defs/determination_status"
+        },
+        "validation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "constraints_preserved",
+        "invariants_preserved",
+        "dependency_conditions_preserved",
+        "coupling_semantics_preserved",
+        "authority_conditions_preserved",
+        "evidence_conditions_preserved",
+        "canonical_state_conditions_preserved",
+        "no_unauthorized_effects",
+        "aggregate_state_admissible",
+        "validation_digest"
+      ]
+    },
+    "satisfied_aggregate_validation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/aggregate_validation"
+        },
+        {
+          "properties": {
+            "constraints_preserved": {
+              "const": "SATISFIED"
+            },
+            "invariants_preserved": {
+              "const": "SATISFIED"
+            },
+            "dependency_conditions_preserved": {
+              "const": "SATISFIED"
+            },
+            "coupling_semantics_preserved": {
+              "const": "SATISFIED"
+            },
+            "authority_conditions_preserved": {
+              "const": "SATISFIED"
+            },
+            "evidence_conditions_preserved": {
+              "const": "SATISFIED"
+            },
+            "canonical_state_conditions_preserved": {
+              "const": "SATISFIED"
+            },
+            "no_unauthorized_effects": {
+              "const": "SATISFIED"
+            },
+            "aggregate_state_admissible": {
+              "const": "SATISFIED"
+            }
+          }
+        }
+      ]
+    },
+    "aggregate_validation_with_violation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/aggregate_validation"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "constraints_preserved": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "constraints_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "invariants_preserved": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "invariants_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "dependency_conditions_preserved": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "dependency_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "coupling_semantics_preserved": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "coupling_semantics_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "authority_conditions_preserved": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "authority_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "evidence_conditions_preserved": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "evidence_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "canonical_state_conditions_preserved": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "canonical_state_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "no_unauthorized_effects": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "no_unauthorized_effects"
+              ]
+            },
+            {
+              "properties": {
+                "aggregate_state_admissible": {
+                  "const": "VIOLATED"
+                }
+              },
+              "required": [
+                "aggregate_state_admissible"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "aggregate_validation_with_indeterminate": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/aggregate_validation"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "constraints_preserved": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "constraints_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "invariants_preserved": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "invariants_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "dependency_conditions_preserved": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "dependency_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "coupling_semantics_preserved": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "coupling_semantics_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "authority_conditions_preserved": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "authority_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "evidence_conditions_preserved": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "evidence_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "canonical_state_conditions_preserved": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "canonical_state_conditions_preserved"
+              ]
+            },
+            {
+              "properties": {
+                "no_unauthorized_effects": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "no_unauthorized_effects"
+              ]
+            },
+            {
+              "properties": {
+                "aggregate_state_admissible": {
+                  "const": "INDETERMINATE"
+                }
+              },
+              "required": [
+                "aggregate_state_admissible"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "failure_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,127}$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "requirement_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "code",
+        "description",
+        "requirement_refs"
+      ]
+    },
+    "indeterminate_reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,127}$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "unresolved_input_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "code",
+        "description",
+        "unresolved_input_refs"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "projection_method_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "projection_method_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "evaluation_order_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "output_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "replay_instructions_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "deterministic_replay_supported": {
+          "const": true
+        }
+      },
+      "required": [
+        "input_set_digest",
+        "projection_method_id",
+        "projection_method_version",
+        "evaluation_order_digest",
+        "output_digest",
+        "deterministic_replay_supported"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "projected_state_evaluated_before_commitment": {
+          "const": true
+        },
+        "applicable_constraints_preservation_required": {
+          "const": true
+        },
+        "applicable_invariants_preservation_required": {
+          "const": true
+        },
+        "aggregate_effects_evaluated": {
+          "const": true
+        },
+        "arrival_time_not_governance_basis": {
+          "const": true
+        },
+        "current_canonical_state_not_overridden": {
+          "const": true
+        },
+        "valid_result_required_for_admissibility_continuation": {
+          "const": true
+        },
+        "partial_subset_requires_explicit_governance": {
+          "const": true
+        },
+        "result_does_not_select_executable_subset": {
+          "const": true
+        },
+        "result_does_not_establish_authority": {
+          "const": true
+        },
+        "result_does_not_authorize_execution": {
+          "const": true
+        },
+        "result_does_not_commit_transition": {
+          "const": true
+        }
+      },
+      "required": [
+        "projected_state_evaluated_before_commitment",
+        "applicable_constraints_preservation_required",
+        "applicable_invariants_preservation_required",
+        "aggregate_effects_evaluated",
+        "arrival_time_not_governance_basis",
+        "current_canonical_state_not_overridden",
+        "valid_result_required_for_admissibility_continuation",
+        "partial_subset_requires_explicit_governance",
+        "result_does_not_select_executable_subset",
+        "result_does_not_establish_authority",
+        "result_does_not_authorize_execution",
+        "result_does_not_commit_transition"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Namespaced extension values that cannot alter canonical DS-031 meaning.",
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z0-9.-]*:[A-Za-z0-9._-]+$"
+      },
+      "additionalProperties": true
+    }
+  }
+}

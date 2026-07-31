@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": {
+    "sheetnames_unchanged": true,
+    "dimensions_unchanged": true,
+    "freeze_panes_unchanged": true,
+    "merged_ranges_unchanged": true,
+    "column_widths_unchanged": true,
+    "row_heights_unchanged": true,
+    "style_ids_unchanged": true,
+    "auto_filter_unchanged": true,
+    "gridlines_unchanged": true,
+    "styles_xml_unchanged": true,
+    "theme_xml_unchanged": true
+  },
+  "before_sha256": "755425ddbb2e3f3e425744a696ce58623a2ddf6f227986aaec18fbfb92538dad",
+  "after_sha256": "359f683785c47ef6943cd343eaf9aa07f9b70c4ba352023ede33ec65f4266358"
+}

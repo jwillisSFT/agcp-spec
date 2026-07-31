@@ -1,0 +1,1322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/registry_document.schema.json",
+  "title": "AGCP Registry Document",
+  "description": "Canonical validator for AGCP controlled-registry documents. It binds stable registry and entry identity, release and lifecycle state, integrity, direct entry-level NS/CR traceability, release-level architectural traceability, registry rules, field definitions, and typed entries without allowing a registry to alter Core normative behavior independently.",
+  "x-agcp-ds-id": "DS-044",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "const": "https://agcp.ai/schemas/registry_document.schema.json"
+    },
+    "registry_document_id": {
+      "$ref": "#/$defs/registry_document_id"
+    },
+    "registry_id": {
+      "$ref": "#/$defs/registry_id"
+    },
+    "registry_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "registry_kind": {
+      "$ref": "#/$defs/registry_kind"
+    },
+    "normative_status": {
+      "type": "string",
+      "enum": [
+        "NORMATIVE",
+        "INFORMATIVE"
+      ]
+    },
+    "series": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "release": {
+      "$ref": "#/$defs/registry_release"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/registry_lifecycle"
+    },
+    "integrity": {
+      "$ref": "#/$defs/registry_integrity"
+    },
+    "traceability": {
+      "$ref": "#/$defs/registry_traceability"
+    },
+    "registry_rules": {
+      "$ref": "#/$defs/registry_rules"
+    },
+    "fields": {
+      "$ref": "#/$defs/field_definitions"
+    },
+    "constraint_types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/constraint_type_entry"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "invariant_types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/invariant_type_entry"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "codes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rejection_code_entry"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/generic_registry_entry"
+      },
+      "minItems": 1,
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/registry_semantic_assertions"
+    }
+  },
+  "required": [
+    "$schema",
+    "registry_document_id",
+    "registry_id",
+    "registry_name",
+    "registry_kind",
+    "normative_status",
+    "series",
+    "description",
+    "release",
+    "lifecycle",
+    "integrity",
+    "traceability",
+    "registry_rules",
+    "fields",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "registry_kind": {
+            "const": "CONSTRAINT_TYPE"
+          }
+        },
+        "required": [
+          "registry_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "constraint_types"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "invariant_types"
+              ]
+            },
+            {
+              "required": [
+                "codes"
+              ]
+            },
+            {
+              "required": [
+                "entries"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "registry_kind": {
+            "const": "INVARIANT_TYPE"
+          }
+        },
+        "required": [
+          "registry_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "invariant_types"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "constraint_types"
+              ]
+            },
+            {
+              "required": [
+                "codes"
+              ]
+            },
+            {
+              "required": [
+                "entries"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "registry_kind": {
+            "const": "REJECTION_CODE"
+          }
+        },
+        "required": [
+          "registry_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "codes"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "constraint_types"
+              ]
+            },
+            {
+              "required": [
+                "invariant_types"
+              ]
+            },
+            {
+              "required": [
+                "entries"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "registry_kind": {
+            "not": {
+              "enum": [
+                "CONSTRAINT_TYPE",
+                "INVARIANT_TYPE",
+                "REJECTION_CODE"
+              ]
+            }
+          }
+        },
+        "required": [
+          "registry_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "entries"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "constraint_types"
+              ]
+            },
+            {
+              "required": [
+                "invariant_types"
+              ]
+            },
+            {
+              "required": [
+                "codes"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "registry_document_id": {
+      "type": "string",
+      "pattern": "^REGDOC-[A-Z0-9][A-Z0-9-]{1,63}$",
+      "description": "Stable identity of a registry document independent of its release."
+    },
+    "registry_id": {
+      "type": "string",
+      "pattern": "^REG-[A-Z0-9][A-Z0-9-]{1,63}$",
+      "description": "Stable identity of the controlled registry."
+    },
+    "registry_kind": {
+      "type": "string",
+      "enum": [
+        "CONSTRAINT_TYPE",
+        "INVARIANT_TYPE",
+        "REJECTION_CODE",
+        "POLICY",
+        "GOVERNANCE_STAGE",
+        "GOVERNANCE_EVIDENCE_TYPE",
+        "HUMAN_REVIEW_ROLE",
+        "IMPLEMENTATION_PROFILE",
+        "CAPABILITY",
+        "ASSESSMENT",
+        "CONFORMANCE",
+        "REVOCATION",
+        "EXTENSION"
+      ]
+    },
+    "registry_lifecycle_state": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "VALIDATED",
+        "ACTIVE",
+        "DEPRECATED",
+        "RETIRED",
+        "SUPERSEDED"
+      ]
+    },
+    "registry_release": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "release_id": {
+          "type": "string",
+          "pattern": "^REG-[A-Z0-9-]+-v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "registry_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "specification_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "publication_status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "PRE_RELEASE",
+            "CURRENT",
+            "SUPERSEDED",
+            "WITHDRAWN"
+          ]
+        },
+        "published_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "authority": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "repository_path": {
+          "type": "string",
+          "pattern": "^registries/[A-Za-z0-9._-]+\\.json$"
+        },
+        "canonical_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "supersedes_release_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "release_id",
+        "registry_release",
+        "specification_version",
+        "publication_status",
+        "published_at",
+        "authority",
+        "repository_path",
+        "canonical_uri"
+      ]
+    },
+    "registry_lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lifecycle_state": {
+          "$ref": "#/$defs/registry_lifecycle_state"
+        },
+        "effective_from": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "deprecated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "retired_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "superseded_by_ref": {
+          "$ref": "#/$defs/registry_document_ref"
+        }
+      },
+      "required": [
+        "lifecycle_state"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "lifecycle_state": {
+                "const": "ACTIVE"
+              }
+            },
+            "required": [
+              "lifecycle_state"
+            ]
+          },
+          "then": {
+            "required": [
+              "effective_from"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "deprecated_at"
+                  ]
+                },
+                {
+                  "required": [
+                    "retired_at"
+                  ]
+                },
+                {
+                  "required": [
+                    "superseded_by_ref"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lifecycle_state": {
+                "const": "DEPRECATED"
+              }
+            },
+            "required": [
+              "lifecycle_state"
+            ]
+          },
+          "then": {
+            "required": [
+              "deprecated_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lifecycle_state": {
+                "const": "RETIRED"
+              }
+            },
+            "required": [
+              "lifecycle_state"
+            ]
+          },
+          "then": {
+            "required": [
+              "retired_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lifecycle_state": {
+                "const": "SUPERSEDED"
+              }
+            },
+            "required": [
+              "lifecycle_state"
+            ]
+          },
+          "then": {
+            "required": [
+              "superseded_by_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "registry_integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Document integrity. entry_set_digest covers the specialized entry array. document_digest covers the canonical document with integrity.document_digest omitted.",
+      "properties": {
+        "integrity_protected": {
+          "const": true
+        },
+        "digest_algorithm": {
+          "const": "SHA-256"
+        },
+        "canonicalization": {
+          "const": "JCS-RFC8785"
+        },
+        "entry_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "entry_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "document_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "integrity_protected",
+        "digest_algorithm",
+        "canonicalization",
+        "entry_count",
+        "entry_set_digest",
+        "document_digest"
+      ]
+    },
+    "registry_traceability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_artifact_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "schema_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^schemas/[A-Za-z0-9._-]+(?:#.*)?$"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "requirement_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CR-[0-9]{3}$"
+          },
+          "minItems": 1,
+          "maxItems": 122,
+          "uniqueItems": true
+        },
+        "entry_traceability_policy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "architecture_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ARM-[0-9]{3}$"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "normative_statement_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^NS-[0-9]+(?:\\.[0-9A-Z]+)*-[0-9]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 512,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "source_artifact_refs",
+        "schema_refs",
+        "architecture_refs",
+        "normative_statement_refs",
+        "requirement_refs",
+        "entry_traceability_policy"
+      ]
+    },
+    "registry_rules": {
+      "type": "object",
+      "description": "Named normative registry rules. Rule names are stable machine-readable keys and values are normative statements.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]{1,63}$"
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true
+          }
+        ]
+      },
+      "minProperties": 1,
+      "maxProperties": 64
+    },
+    "field_definitions": {
+      "type": "object",
+      "description": "Human-readable definitions of registry entry fields.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]{1,63}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024
+      },
+      "minProperties": 1,
+      "maxProperties": 64
+    },
+    "constraint_type_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reg_id": {
+          "type": "string",
+          "pattern": "^REG-[0-9]{3}$"
+        },
+        "ns_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^NS-[0-9]+(?:\\.[0-9A-Z]+)*-[0-9]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "cr_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CR-[0-9]{3}$"
+          },
+          "minItems": 1,
+          "maxItems": 122,
+          "uniqueItems": true
+        },
+        "entry_status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "DEPRECATED",
+            "RETIRED"
+          ]
+        },
+        "introduced_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deprecated_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "retired_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "successor_entry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "entry_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "constraint_type": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{1,127}$"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{1,63}$"
+        },
+        "default_stage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "required_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "failure_behavior": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "governance_evidence": {
+          "type": "string",
+          "enum": [
+            "required",
+            "required_when_attributable",
+            "conditional",
+            "not_required"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "reg_id",
+        "ns_refs",
+        "cr_refs",
+        "constraint_type",
+        "entry_status",
+        "introduced_in_release",
+        "entry_digest",
+        "category",
+        "default_stage",
+        "applies_to",
+        "required_inputs",
+        "outcomes",
+        "failure_behavior",
+        "governance_evidence",
+        "description"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "DEPRECATED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "deprecated_in_release"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "RETIRED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "retired_in_release"
+            ]
+          }
+        }
+      ]
+    },
+    "invariant_type_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reg_id": {
+          "type": "string",
+          "pattern": "^REG-[0-9]{3}$"
+        },
+        "ns_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^NS-[0-9]+(?:\\.[0-9A-Z]+)*-[0-9]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "cr_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CR-[0-9]{3}$"
+          },
+          "minItems": 1,
+          "maxItems": 122,
+          "uniqueItems": true
+        },
+        "entry_status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "DEPRECATED",
+            "RETIRED"
+          ]
+        },
+        "introduced_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deprecated_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "retired_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "successor_entry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "entry_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "invariant_type": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{1,127}$"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{1,63}$"
+        },
+        "default_stage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "default_enforcement_level": {
+          "type": "string",
+          "enum": [
+            "Hard",
+            "Soft"
+          ]
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "required_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "failure_behavior": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "governance_evidence": {
+          "type": "string",
+          "enum": [
+            "required",
+            "required_when_attributable",
+            "conditional",
+            "not_required"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "reg_id",
+        "ns_refs",
+        "cr_refs",
+        "invariant_type",
+        "entry_status",
+        "introduced_in_release",
+        "entry_digest",
+        "category",
+        "default_stage",
+        "default_enforcement_level",
+        "applies_to",
+        "required_inputs",
+        "outcomes",
+        "failure_behavior",
+        "governance_evidence",
+        "description"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "DEPRECATED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "deprecated_in_release"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "RETIRED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "retired_in_release"
+            ]
+          }
+        }
+      ]
+    },
+    "generic_registry_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reg_id": {
+          "type": "string",
+          "pattern": "^REG-[0-9]{3}$"
+        },
+        "ns_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^NS-[0-9]+(?:\\.[0-9A-Z]+)*-[0-9]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "cr_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CR-[0-9]{3}$"
+          },
+          "minItems": 1,
+          "maxItems": 122,
+          "uniqueItems": true
+        },
+        "entry_status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "DEPRECATED",
+            "RETIRED"
+          ]
+        },
+        "introduced_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deprecated_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "retired_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "successor_entry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "entry_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "entry_id": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_.:-]{1,127}$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "entry_payload": {
+          "type": "object",
+          "additionalProperties": true,
+          "maxProperties": 64
+        }
+      },
+      "required": [
+        "reg_id",
+        "ns_refs",
+        "cr_refs",
+        "entry_id",
+        "entry_status",
+        "introduced_in_release",
+        "entry_digest",
+        "description",
+        "entry_payload"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "DEPRECATED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "deprecated_in_release"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "RETIRED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "retired_in_release"
+            ]
+          }
+        }
+      ]
+    },
+    "rejection_code_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reg_id": {
+          "type": "string",
+          "pattern": "^REG-[0-9]{3}$"
+        },
+        "ns_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^NS-[0-9]+(?:\\.[0-9A-Z]+)*-[0-9]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "cr_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CR-[0-9]{3}$"
+          },
+          "minItems": 1,
+          "maxItems": 122,
+          "uniqueItems": true
+        },
+        "entry_status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "DEPRECATED",
+            "RETIRED"
+          ]
+        },
+        "introduced_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deprecated_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "retired_in_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "successor_entry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "entry_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_.:-]{1,127}$"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{1,63}$"
+        },
+        "default_http_status": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 599
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "governance_stage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "governance_evidence": {
+          "type": "string",
+          "enum": [
+            "required",
+            "required_when_attributable",
+            "conditional",
+            "not_required"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "reg_id",
+        "ns_refs",
+        "cr_refs",
+        "code",
+        "entry_status",
+        "introduced_in_release",
+        "entry_digest",
+        "category",
+        "default_http_status",
+        "retryable",
+        "governance_stage",
+        "governance_evidence",
+        "description"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "DEPRECATED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "deprecated_in_release"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "entry_status": {
+                "const": "RETIRED"
+              }
+            },
+            "required": [
+              "entry_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "retired_in_release"
+            ]
+          }
+        }
+      ]
+    },
+    "registry_semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "identifiers_are_stable_and_not_repurposed": {
+          "const": true
+        },
+        "changes_are_release_governed": {
+          "const": true
+        },
+        "registry_does_not_independently_modify_core_requirements": {
+          "const": true
+        },
+        "integrity_is_verified_before_use": {
+          "const": true
+        },
+        "unknown_value_behavior_is_governed_by_applicable_specification": {
+          "const": true
+        }
+      },
+      "required": [
+        "identifiers_are_stable_and_not_repurposed",
+        "changes_are_release_governed",
+        "registry_does_not_independently_modify_core_requirements",
+        "integrity_is_verified_before_use",
+        "unknown_value_behavior_is_governed_by_applicable_specification"
+      ]
+    },
+    "registry_document_ref": {
+      "type": "object",
+      "description": "Integrity-bound reference to a specific controlled-registry release.",
+      "additionalProperties": false,
+      "properties": {
+        "registry_document_id": {
+          "$ref": "#/$defs/registry_document_id"
+        },
+        "registry_id": {
+          "$ref": "#/$defs/registry_id"
+        },
+        "registry_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "registry_kind": {
+          "$ref": "#/$defs/registry_kind"
+        },
+        "release_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "registry_release": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "lifecycle_state": {
+          "$ref": "#/$defs/registry_lifecycle_state"
+        },
+        "canonical_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "document_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        }
+      },
+      "required": [
+        "registry_document_id",
+        "registry_id",
+        "registry_name",
+        "registry_kind",
+        "release_id",
+        "registry_release",
+        "lifecycle_state",
+        "canonical_uri",
+        "document_digest"
+      ]
+    }
+  }
+}

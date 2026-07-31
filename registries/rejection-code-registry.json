@@ -1,12 +1,300 @@
 {
-  "registry": "AGCP Rejection Code Registry",
-  "status": "Normative",
+  "$schema": "https://agcp.ai/schemas/registry_document.schema.json",
+  "registry_document_id": "REGDOC-REJECTION-CODE",
+  "registry_id": "REG-REJECTION-CODE",
+  "registry_name": "AGCP Rejection Code Registry",
+  "registry_kind": "REJECTION_CODE",
+  "normative_status": "NORMATIVE",
   "series": "AGCP Core",
-  "versioning": {
-    "authority": "repository release tag",
-    "embedded_version": false
-  },
   "description": "Authoritative registry of rejection and failure codes used by AGCP HTTP interfaces, Governance Evidence, conformance tests, and implementation error reporting.",
+  "release": {
+    "release_id": "REG-REJECTION-CODE-v2.0.0",
+    "registry_release": "v2.0.0",
+    "specification_version": "v2.0",
+    "publication_status": "CURRENT",
+    "published_at": "2026-07-30T12:26:00-04:00",
+    "authority": "AGCP controlled repository release",
+    "repository_path": "registries/rejection-code-registry.json",
+    "canonical_uri": "https://agcp.ai/registries/rejection-code-registry.json"
+  },
+  "lifecycle": {
+    "lifecycle_state": "ACTIVE",
+    "effective_from": "2026-07-30T09:27:00-04:00"
+  },
+  "integrity": {
+    "integrity_protected": true,
+    "digest_algorithm": "SHA-256",
+    "canonicalization": "JCS-RFC8785",
+    "entry_count": 40,
+    "entry_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "45d76904ed764e928f9a0d0dadcbba19db6548cb944dd2e8430ed339c0f89274",
+      "canonicalization": "JCS-RFC8785"
+    },
+    "document_digest": {
+      "algorithm": "SHA-256",
+      "value": "0bd32815431b36c93004049aa82e907579c13c5d7e9224ea1795b356a1bd5d04",
+      "canonicalization": "JCS-RFC8785"
+    }
+  },
+  "traceability": {
+    "source_artifact_refs": [
+      "spec/AGCP-Core.docx",
+      "spec/Architecture Reference Model.docx",
+      "spec/AGCP Normative Statements.docx",
+      "spec/AGCP_Runtime_Governance_Requirements_CR-001_thru_CR-122.csv",
+      "registries/README.md"
+    ],
+    "schema_refs": [
+      "schemas/registry_document.schema.json",
+      "schemas/error_response.json",
+      "schemas/refusal_record.json",
+      "schemas/governance_ledger_event.json"
+    ],
+    "requirement_refs": [
+      "CR-002",
+      "CR-003",
+      "CR-004",
+      "CR-005",
+      "CR-006",
+      "CR-007",
+      "CR-008",
+      "CR-009",
+      "CR-010",
+      "CR-012",
+      "CR-014",
+      "CR-015",
+      "CR-016",
+      "CR-017",
+      "CR-019",
+      "CR-020",
+      "CR-021",
+      "CR-022",
+      "CR-023",
+      "CR-024",
+      "CR-025",
+      "CR-026",
+      "CR-027",
+      "CR-028",
+      "CR-029",
+      "CR-030",
+      "CR-032",
+      "CR-035",
+      "CR-036",
+      "CR-037",
+      "CR-038",
+      "CR-040",
+      "CR-041",
+      "CR-042",
+      "CR-043",
+      "CR-044",
+      "CR-046",
+      "CR-047",
+      "CR-048",
+      "CR-049",
+      "CR-050",
+      "CR-051",
+      "CR-052",
+      "CR-053",
+      "CR-054",
+      "CR-055",
+      "CR-056",
+      "CR-057",
+      "CR-058",
+      "CR-061",
+      "CR-062",
+      "CR-063",
+      "CR-064",
+      "CR-065",
+      "CR-066",
+      "CR-067",
+      "CR-068",
+      "CR-069",
+      "CR-070",
+      "CR-071",
+      "CR-072",
+      "CR-073",
+      "CR-074",
+      "CR-075",
+      "CR-076",
+      "CR-078",
+      "CR-079",
+      "CR-080",
+      "CR-082",
+      "CR-084",
+      "CR-085",
+      "CR-086",
+      "CR-087",
+      "CR-088",
+      "CR-090",
+      "CR-093",
+      "CR-096",
+      "CR-097",
+      "CR-102",
+      "CR-103",
+      "CR-104",
+      "CR-107",
+      "CR-110",
+      "CR-111",
+      "CR-112",
+      "CR-113",
+      "CR-114",
+      "CR-115",
+      "CR-116",
+      "CR-117",
+      "CR-122"
+    ],
+    "entry_traceability_policy": "Every registry entry carries a permanent REG identifier and direct NS and CR references. Entry relationships are explicit and integrity-bound; release-level traceability does not substitute for entry-level traceability.",
+    "architecture_refs": [
+      "ARM-101",
+      "ARM-102",
+      "ARM-103",
+      "ARM-105",
+      "ARM-106",
+      "ARM-107",
+      "ARM-108",
+      "ARM-201",
+      "ARM-202",
+      "ARM-203",
+      "ARM-204",
+      "ARM-205",
+      "ARM-206",
+      "ARM-208",
+      "ARM-209",
+      "ARM-210",
+      "ARM-211",
+      "ARM-212",
+      "ARM-213",
+      "ARM-216",
+      "ARM-302",
+      "ARM-303",
+      "ARM-304",
+      "ARM-305",
+      "ARM-306",
+      "ARM-307",
+      "ARM-308",
+      "ARM-401",
+      "ARM-402",
+      "ARM-403",
+      "ARM-404",
+      "ARM-405",
+      "ARM-406",
+      "ARM-407",
+      "ARM-408",
+      "ARM-501",
+      "ARM-502",
+      "ARM-503",
+      "ARM-504",
+      "ARM-505",
+      "ARM-506",
+      "ARM-507",
+      "ARM-508",
+      "ARM-509",
+      "ARM-510",
+      "ARM-511",
+      "ARM-512",
+      "ARM-601",
+      "ARM-602",
+      "ARM-603",
+      "ARM-604",
+      "ARM-605",
+      "ARM-606",
+      "ARM-607",
+      "ARM-608",
+      "ARM-609",
+      "ARM-610",
+      "ARM-701",
+      "ARM-702",
+      "ARM-703",
+      "ARM-704",
+      "ARM-705",
+      "ARM-706",
+      "ARM-707",
+      "ARM-708",
+      "ARM-709",
+      "ARM-710",
+      "ARM-801",
+      "ARM-802",
+      "ARM-803",
+      "ARM-804",
+      "ARM-805",
+      "ARM-806",
+      "ARM-807",
+      "ARM-808",
+      "ARM-809"
+    ],
+    "normative_statement_refs": [
+      "NS-10.2-02",
+      "NS-10.4-01",
+      "NS-10.5-01",
+      "NS-10.5-02",
+      "NS-10.6-01",
+      "NS-10.6-02",
+      "NS-10.7-01",
+      "NS-10.7-02",
+      "NS-10.7-03",
+      "NS-11.4-02",
+      "NS-11.5-03",
+      "NS-12.1-01",
+      "NS-12.4-01",
+      "NS-12.4-03",
+      "NS-12.5-02",
+      "NS-12.7-02",
+      "NS-13.4-03",
+      "NS-13.5-01",
+      "NS-13.6A-02",
+      "NS-13.6B-01",
+      "NS-13.6B-05",
+      "NS-13.6B-06",
+      "NS-14.1-01",
+      "NS-14.5-02",
+      "NS-15.3-01",
+      "NS-15.3-02",
+      "NS-15.4-01",
+      "NS-15.4-02",
+      "NS-15.5-02",
+      "NS-15.6-01",
+      "NS-15.6A-04",
+      "NS-15.7-03",
+      "NS-4.6-01",
+      "NS-4.6-04",
+      "NS-4.7-01",
+      "NS-5.2.1-01",
+      "NS-5.2.6-01",
+      "NS-6.3-02",
+      "NS-6.4-02",
+      "NS-6.5-01",
+      "NS-6.5-02",
+      "NS-6.6-01",
+      "NS-6.6A-01",
+      "NS-6.6A-02",
+      "NS-6.7-02",
+      "NS-7.3-02",
+      "NS-7.4-01",
+      "NS-7.4-03",
+      "NS-7.5-01",
+      "NS-7.5-02",
+      "NS-7.5-03",
+      "NS-8.4-01",
+      "NS-8.5-01",
+      "NS-8.5-02",
+      "NS-8.5-03",
+      "NS-9.1-02",
+      "NS-9.2-01",
+      "NS-9.3-01",
+      "NS-9.3-02",
+      "NS-9.4-01",
+      "NS-9.5-01",
+      "NS-9.5-03"
+    ]
+  },
+  "registry_rules": {
+    "stability": "Rejection-code identifiers are stable registry keys and SHALL NOT be repurposed.",
+    "extensibility": "Implementations MAY define extension rejection codes in a governed implementation-profile namespace without conflicting with registered AGCP codes.",
+    "unknown_code_behavior": "Unknown rejection codes SHALL fail validation and SHALL NOT be presented as registered AGCP outcomes.",
+    "determinism": "Code lookup and status mapping SHALL be deterministic for the applicable registry release.",
+    "evidence": "Governance-significant rejection conditions SHALL preserve the evidence requirements declared by the registered code."
+  },
   "fields": {
     "code": "Stable rejection code identifier.",
     "category": "Functional error category.",
@@ -14,368 +302,1093 @@
     "retryable": "Whether the same request may succeed without changing authoritative governance inputs.",
     "governance_stage": "Primary AGCP stage or supporting service associated with the code.",
     "governance_evidence": "Whether Governance Evidence is normally required when the error is attributable to a governed object.",
-    "description": "Normative description of the rejection condition."
+    "description": "Normative description of the rejection condition.",
+    "reg_id": "Permanent REG namespace identifier assigned to this registry entry.",
+    "ns_refs": "Normative Statement identifiers directly implemented or supported by the entry.",
+    "cr_refs": "Conformance Requirement identifiers directly implemented or supported by the entry."
   },
   "codes": [
     {
+      "reg_id": "REG-053",
       "code": "IDEMPOTENCY_CONFLICT",
+      "ns_refs": [
+        "NS-6.6A-01"
+      ],
+      "cr_refs": [
+        "CR-009"
+      ],
       "category": "request_conflict",
       "default_http_status": 409,
       "retryable": false,
       "governance_stage": "HTTP Interface",
       "governance_evidence": "not_required",
-      "description": "The same Idempotency-Key was reused with a different request payload for the same tenant and endpoint."
+      "description": "The same Idempotency-Key was reused with a different request payload for the same tenant and endpoint.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "a30f51397a0aa59685c6156e3923d905f31a8001baefeff5b35f52f29f63c3c4",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-054",
       "code": "SCHEMA_VALIDATION_FAILED",
+      "ns_refs": [
+        "NS-6.4-02",
+        "NS-6.7-02"
+      ],
+      "cr_refs": [
+        "CR-004"
+      ],
       "category": "request_validation",
       "default_http_status": 400,
       "retryable": false,
       "governance_stage": "Proposal Qualification",
       "governance_evidence": "conditional",
-      "description": "The request, Proposal, governance artifact, or submitted object failed required schema validation."
+      "description": "The request, Proposal, governance artifact, or submitted object failed required schema validation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "6f5fddb469b2eef3c4629cedaaf5c4771583d0221c49cbebbae01b7273cc23eb",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-055",
       "code": "PROVENANCE_INVALID",
+      "ns_refs": [
+        "NS-6.4-02",
+        "NS-10.5-01"
+      ],
+      "cr_refs": [
+        "CR-005",
+        "CR-047"
+      ],
       "category": "provenance",
       "default_http_status": 400,
       "retryable": false,
       "governance_stage": "Proposal Qualification",
       "governance_evidence": "required_when_attributable",
-      "description": "Required provenance, signature, attribution, or binding information is invalid, missing, expired, unverifiable, or not logically associated with the governed object."
+      "description": "Required provenance, signature, attribution, or binding information is invalid, missing, expired, unverifiable, or not logically associated with the governed object.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "02e32ac1663a53086616c72b52b79841a363cc2c6fb2f5b9375874abaaf2eca3",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-056",
       "code": "TENANT_STATE_INVALID",
+      "ns_refs": [
+        "NS-7.4-03"
+      ],
+      "cr_refs": [
+        "CR-006",
+        "CR-024",
+        "CR-025"
+      ],
       "category": "tenant_isolation",
       "default_http_status": 403,
       "retryable": true,
       "governance_stage": "Tenant and Domain Isolation",
       "governance_evidence": "required_when_attributable",
-      "description": "The tenant state does not permit the requested governance operation."
+      "description": "The tenant state does not permit the requested governance operation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "2a7d82c71b388466cd49adff3d55b193b5224f65fa543b0d48a50ab99fd0ba83",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-057",
       "code": "TENANT_SCOPE_VIOLATION",
+      "ns_refs": [
+        "NS-11.4-02",
+        "NS-11.5-03"
+      ],
+      "cr_refs": [
+        "CR-026",
+        "CR-027",
+        "CR-028",
+        "CR-029",
+        "CR-030"
+      ],
       "category": "tenant_isolation",
       "default_http_status": 403,
       "retryable": false,
       "governance_stage": "Tenant and Domain Isolation",
       "governance_evidence": "conditional",
-      "description": "The request attempts to access, operate on, or infer a resource outside the authorized tenant scope."
+      "description": "The request attempts to access, operate on, or infer a resource outside the authorized tenant scope.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "d1b83db7f5f4d63f6be900321e0cc946c69e52f16ab4ae1cbab61598fc8f7934",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-058",
       "code": "GOVERNANCE_DOMAIN_VIOLATION",
+      "ns_refs": [
+        "NS-14.1-01",
+        "NS-14.5-02"
+      ],
+      "cr_refs": [
+        "CR-072",
+        "CR-116"
+      ],
       "category": "domain_isolation",
       "default_http_status": 403,
       "retryable": false,
       "governance_stage": "Cross-Domain Authority Isolation",
       "governance_evidence": "conditional",
-      "description": "The request violates governance-domain isolation, domain sovereignty, or governed cross-domain authority requirements."
+      "description": "The request violates governance-domain isolation, domain sovereignty, or governed cross-domain authority requirements.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "c182f9d1945231db94d84dad8755de8b105e3cb7623d60c79894287758ba8623",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-059",
       "code": "RESOURCE_NOT_FOUND",
+      "ns_refs": [
+        "NS-11.5-03",
+        "NS-13.6A-02"
+      ],
+      "cr_refs": [
+        "CR-010",
+        "CR-026"
+      ],
       "category": "resource",
       "default_http_status": 404,
       "retryable": false,
       "governance_stage": "HTTP Interface",
       "governance_evidence": "not_required",
-      "description": "The requested resource was not found or is intentionally hidden by a cross-scope disclosure policy."
+      "description": "The requested resource was not found or is intentionally hidden by a cross-scope disclosure policy.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "ff8fc3d0ab961fa9a3f462bb505b51bd2fd0ffe597476736891ed1c947b839fd",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-060",
       "code": "PROPOSAL_NOT_FOUND",
+      "ns_refs": [
+        "NS-11.5-03",
+        "NS-13.6A-02"
+      ],
+      "cr_refs": [
+        "CR-010",
+        "CR-026"
+      ],
       "category": "resource",
       "default_http_status": 404,
       "retryable": false,
       "governance_stage": "HTTP Interface",
       "governance_evidence": "not_required",
-      "description": "The requested Proposal does not exist within the authorized tenant and governance-domain scope."
+      "description": "The requested Proposal does not exist within the authorized tenant and governance-domain scope.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "45abc4f7af38ea22451234bf817bd2cabeb70382c31e67e444a9d1c4a65daced",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-061",
       "code": "AUTHORIZATION_NOT_FOUND",
+      "ns_refs": [
+        "NS-9.3-01",
+        "NS-9.3-02"
+      ],
+      "cr_refs": [
+        "CR-022"
+      ],
       "category": "resource",
       "default_http_status": 404,
       "retryable": false,
       "governance_stage": "Execution Authorization",
       "governance_evidence": "not_required",
-      "description": "The requested Execution Authorization does not exist within the authorized tenant and governance-domain scope."
+      "description": "The requested Execution Authorization does not exist within the authorized tenant and governance-domain scope.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "510bd0e6044c46754e393f431ead3111571fc8bf1b81b2f1ca09066c9b29ff56",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-062",
       "code": "GOVERNANCE_EVIDENCE_NOT_FOUND",
+      "ns_refs": [
+        "NS-10.6-01",
+        "NS-10.6-02"
+      ],
+      "cr_refs": [
+        "CR-041",
+        "CR-068"
+      ],
       "category": "resource",
       "default_http_status": 404,
       "retryable": false,
       "governance_stage": "Governance Evidence",
       "governance_evidence": "not_required",
-      "description": "The requested Governance Evidence record does not exist within the authorized tenant and governance-domain scope."
+      "description": "The requested Governance Evidence record does not exist within the authorized tenant and governance-domain scope.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "d5ae6ac51bfc7b73266368affe4f04228b5eecdbcb7e51598db42452ee26618c",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-063",
       "code": "GOVERNANCE_ARTIFACT_NOT_FOUND",
+      "ns_refs": [
+        "NS-15.3-01",
+        "NS-15.6-01"
+      ],
+      "cr_refs": [
+        "CR-110",
+        "CR-113"
+      ],
       "category": "resource",
       "default_http_status": 404,
       "retryable": false,
       "governance_stage": "Governance Self-Protection",
       "governance_evidence": "not_required",
-      "description": "The requested governance artifact does not exist within the authorized tenant and governance-domain scope."
+      "description": "The requested governance artifact does not exist within the authorized tenant and governance-domain scope.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "20d733350a9b63852581d576e2536ea7f6e4efd42c6dea140878150801dad49f",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-064",
       "code": "POLICY_NOT_FOUND",
+      "ns_refs": [
+        "NS-7.3-02",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-007",
+        "CR-029"
+      ],
       "category": "policy",
       "default_http_status": 422,
       "retryable": true,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "No applicable governance policy could be resolved for the Proposal under the relevant tenant, governance-domain, Canonical State, and governance context."
+      "description": "No applicable governance policy could be resolved for the Proposal under the relevant tenant, governance-domain, Canonical State, and governance context.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "8cd2a10a5d90483a5917819d46ce0c6b64c2263247ef3297aec7cbd424be21cf",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-065",
       "code": "POLICY_MODULE_UNAVAILABLE",
+      "ns_refs": [
+        "NS-7.3-02",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-007",
+        "CR-075"
+      ],
       "category": "policy",
       "default_http_status": 503,
       "retryable": true,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "A required Policy Evaluation Module or policy-evaluation dependency is unavailable."
+      "description": "A required Policy Evaluation Module or policy-evaluation dependency is unavailable.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "b1601ee881023e45bec743c6d3dd113a3d373921c41df2401328b045cbe9370b",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-066",
       "code": "POLICY_MODULE_NONDETERMINISTIC",
+      "ns_refs": [
+        "NS-5.2.1-01",
+        "NS-15.7-03"
+      ],
+      "cr_refs": [
+        "CR-075",
+        "CR-076",
+        "CR-078",
+        "CR-110",
+        "CR-113"
+      ],
       "category": "policy",
       "default_http_status": 422,
       "retryable": false,
       "governance_stage": "Governance Self-Protection",
       "governance_evidence": "required_when_attributable",
-      "description": "A Policy Evaluation Module failed determinism validation or was detected to depend on nondeterministic inputs or behavior."
+      "description": "A Policy Evaluation Module failed determinism validation or was detected to depend on nondeterministic inputs or behavior.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "9cd685231c41fa0149764ad76e5419e5524b21d1dac4cc3fe79c6bd6708a2f9a",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-067",
       "code": "POLICY_EVALUATION_OUTPUT_INVALID",
+      "ns_refs": [
+        "NS-7.5-02",
+        "NS-7.5-03"
+      ],
+      "cr_refs": [
+        "CR-075",
+        "CR-076",
+        "CR-104"
+      ],
       "category": "policy",
       "default_http_status": 422,
       "retryable": false,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "Policy evaluation produced missing, malformed, unsupported, or non-conformant output."
+      "description": "Policy evaluation produced missing, malformed, unsupported, or non-conformant output.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "5eb50ccd10deb00471ebe6776ebca7d1a971f0762766974f7f30345e5c532790",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-068",
       "code": "PROPOSAL_STRUCTURAL_REFUSAL",
+      "ns_refs": [
+        "NS-6.3-02",
+        "NS-6.5-01",
+        "NS-6.5-02"
+      ],
+      "cr_refs": [
+        "CR-003",
+        "CR-036",
+        "CR-037",
+        "CR-038",
+        "CR-043",
+        "CR-087"
+      ],
       "category": "proposal_qualification",
       "default_http_status": 400,
       "retryable": false,
       "governance_stage": "Proposal Qualification",
       "governance_evidence": "required_when_attributable",
-      "description": "The Proposal failed structural or prerequisite qualification and was structurally refused."
+      "description": "The Proposal failed structural or prerequisite qualification and was structurally refused.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "ea06224a408bc2e2f8409b772a20f112f67845355985c79b1bd20c00730a0ee1",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-069",
       "code": "GOVERNANCE_DENIED",
+      "ns_refs": [
+        "NS-7.5-01",
+        "NS-7.5-02"
+      ],
+      "cr_refs": [
+        "CR-003",
+        "CR-053",
+        "CR-054",
+        "CR-055",
+        "CR-087"
+      ],
       "category": "governance_decision",
       "default_http_status": 200,
       "retryable": false,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required",
-      "description": "The Governance Decision Function produced Denied as the authoritative governance outcome."
+      "description": "The Governance Decision Function produced Denied as the authoritative governance outcome.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "2411dfdeebd95e59603a27f50589371dda98ce08111b415af596a7e826c65f49",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
-      "code": "PENDING_HUMAN_REVIEW",
+      "reg_id": "REG-070",
+      "code": "GOVERNANCE_APPROVAL_REQUIRED",
+      "ns_refs": [
+        "NS-7.5-01",
+        "NS-13.6B-01"
+      ],
+      "cr_refs": [
+        "CR-002",
+        "CR-012",
+        "CR-058"
+      ],
       "category": "governance_decision",
       "default_http_status": 200,
       "retryable": true,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required",
-      "description": "The Governance Decision Function produced Pending Human Review as the authoritative governance outcome."
+      "description": "The Governance Decision Function produced the canonical Pending Human Review outcome and requires governed adjudication or one or more Governance Approval Artifacts before progression.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "78f483b24753b399961cb54834ed2de37dc5657bb655107a3fa3d94d0e121ad7",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-071",
       "code": "GOVERNED_REEVALUATION_REQUIRED",
+      "ns_refs": [
+        "NS-8.5-03",
+        "NS-13.4-03",
+        "NS-13.5-01"
+      ],
+      "cr_refs": [
+        "CR-035",
+        "CR-093",
+        "CR-107",
+        "CR-122"
+      ],
       "category": "governance_decision",
       "default_http_status": 409,
       "retryable": true,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "The requested operation cannot proceed until governed re-evaluation occurs."
+      "description": "The requested operation cannot proceed until governed re-evaluation occurs.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "1543900ab503f7221026ba77bfb3c66cde0b47832698f8b2e5ce9c5183cc2353",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-072",
       "code": "AUTHORIZATION_FAILURE",
+      "ns_refs": [
+        "NS-8.5-01",
+        "NS-8.5-02"
+      ],
+      "cr_refs": [
+        "CR-020",
+        "CR-021",
+        "CR-061"
+      ],
       "category": "execution_authorization",
       "default_http_status": 409,
       "retryable": true,
       "governance_stage": "Execution Authorization",
       "governance_evidence": "required_when_attributable",
-      "description": "Execution Authorization failed or did not produce Authorized for Commit Boundary Processing."
+      "description": "Execution Authorization failed or did not produce Authorized for Commit Boundary Processing.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "676794031eebce7c166641afb29820cbf93b04bddbefbf7c3af0616a54778a58",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-073",
       "code": "EXECUTION_AUTHORIZATION_INVALID",
+      "ns_refs": [
+        "NS-8.4-01",
+        "NS-9.4-01"
+      ],
+      "cr_refs": [
+        "CR-022",
+        "CR-023",
+        "CR-032",
+        "CR-096"
+      ],
       "category": "execution_authorization",
       "default_http_status": 409,
       "retryable": true,
       "governance_stage": "Execution Authorization",
       "governance_evidence": "required_when_attributable",
-      "description": "The supplied Execution Authorization is missing, invalid, expired, revoked, consumed, not bound to the Action, or otherwise unsuitable for Commit Boundary processing."
+      "description": "The supplied Execution Authorization is missing, invalid, expired, revoked, consumed, not bound to the Action, or otherwise unsuitable for Commit Boundary processing.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "f9291557645fb0a0390db7fcaf565723e15f749fa258ee068becbfde075330be",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-074",
       "code": "ACTION_NOT_AUTHORIZED",
+      "ns_refs": [
+        "NS-9.2-01",
+        "NS-9.5-03"
+      ],
+      "cr_refs": [
+        "CR-020",
+        "CR-021",
+        "CR-080",
+        "CR-088"
+      ],
       "category": "commit_boundary",
       "default_http_status": 409,
       "retryable": true,
       "governance_stage": "Commit Boundary",
       "governance_evidence": "required_when_attributable",
-      "description": "The Action is not authorized for Commit Boundary processing."
+      "description": "The Action is not authorized for Commit Boundary processing.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "9e34cd64a9bc336476841af090dbcfa1c113aa102d9697a21e1eba5fa1b17c8f",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-075",
       "code": "COMMIT_BOUNDARY_REQUIRED",
+      "ns_refs": [
+        "NS-4.7-01",
+        "NS-9.1-02"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-079",
+        "CR-080",
+        "CR-102"
+      ],
       "category": "commit_boundary",
       "default_http_status": 409,
       "retryable": true,
       "governance_stage": "Commit Boundary",
       "governance_evidence": "required_when_attributable",
-      "description": "The requested governance-significant execution requires successful Commit Boundary processing before it may become operationally real."
+      "description": "The requested governance-significant execution requires successful Commit Boundary processing before it may become operationally real.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "ba56a968e1e6ce01bf929b2864190fe6b6ef97ac8b18260cd9d18be6644b783a",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-076",
       "code": "COMMIT_BOUNDARY_FAILED",
+      "ns_refs": [
+        "NS-9.4-01",
+        "NS-9.5-01",
+        "NS-9.5-03"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-020",
+        "CR-021",
+        "CR-022",
+        "CR-023",
+        "CR-024",
+        "CR-025",
+        "CR-080",
+        "CR-084",
+        "CR-088"
+      ],
       "category": "commit_boundary",
       "default_http_status": 422,
       "retryable": true,
       "governance_stage": "Commit Boundary",
       "governance_evidence": "required_when_attributable",
-      "description": "Commit Boundary processing failed because one or more commit prerequisites were not satisfied."
+      "description": "Commit Boundary processing failed because one or more commit prerequisites were not satisfied.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "7ac5b70332db6e44e10445e3b35d7b1389a080e30a5b9f3e7a6c22782cc72989",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-077",
       "code": "ACTION_REPRESENTATION_MUTATED",
+      "ns_refs": [
+        "NS-6.6-01",
+        "NS-9.4-01"
+      ],
+      "cr_refs": [
+        "CR-022",
+        "CR-074"
+      ],
       "category": "proposal_integrity",
       "default_http_status": 409,
       "retryable": false,
       "governance_stage": "Commit Boundary",
       "governance_evidence": "required_when_attributable",
-      "description": "The qualified Action Representation changed after qualification or no longer matches the authoritative qualified Proposal."
+      "description": "The qualified Action Representation changed after qualification or no longer matches the authoritative qualified Proposal.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "9a46a586cbd18251677af1ce93cc115705d73ebaf923db45e5e0a3294b84d1e2",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-078",
       "code": "GOVERNANCE_CONTEXT_INVALID",
+      "ns_refs": [
+        "NS-6.6A-02",
+        "NS-9.4-01"
+      ],
+      "cr_refs": [
+        "CR-046",
+        "CR-070",
+        "CR-071"
+      ],
       "category": "proposal_integrity",
       "default_http_status": 409,
       "retryable": true,
       "governance_stage": "Commit Boundary",
       "governance_evidence": "required_when_attributable",
-      "description": "The Governance Context is missing, invalid, stale, inconsistent, or no longer suitable for the requested governed operation."
+      "description": "The Governance Context is missing, invalid, stale, inconsistent, or no longer suitable for the requested governed operation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "6328bf495b5ab7a080631ab9db86a4e7fea1ab13d35a58e798af3e865bbb2f0d",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-079",
       "code": "CANONICAL_STATE_INVALID",
+      "ns_refs": [
+        "NS-4.6-01",
+        "NS-4.6-04",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-042",
+        "CR-049",
+        "CR-050",
+        "CR-051",
+        "CR-052",
+        "CR-055",
+        "CR-103",
+        "CR-104"
+      ],
       "category": "canonical_state",
       "default_http_status": 422,
       "retryable": true,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "Canonical State is incomplete, inconsistent, unverifiable, stale, unsuitable, or fails integrity, provenance, freshness, or consistency validation."
+      "description": "Canonical State is incomplete, inconsistent, unverifiable, stale, unsuitable, or fails integrity, provenance, freshness, or consistency validation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "787bb72b58b3773219f06f2496be77452fc692cbf0c858867969907e51f2a8d5",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-080",
       "code": "CANONICAL_STATE_UNAVAILABLE",
+      "ns_refs": [
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-048"
+      ],
       "category": "canonical_state",
       "default_http_status": 503,
       "retryable": true,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "Required Canonical State cannot be resolved or made available for governance evaluation."
+      "description": "Required Canonical State cannot be resolved or made available for governance evaluation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "b7d4aff60435a040b66defb2718ef4dbfb88d15989f525c8184b0ab1cdc88ae4",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-081",
       "code": "AUTHORITY_LINEAGE_INVALID",
+      "ns_refs": [
+        "NS-12.1-01",
+        "NS-12.4-01",
+        "NS-12.4-03"
+      ],
+      "cr_refs": [
+        "CR-040",
+        "CR-044",
+        "CR-065",
+        "CR-096",
+        "CR-115",
+        "CR-116"
+      ],
       "category": "authority",
       "default_http_status": 403,
       "retryable": true,
       "governance_stage": "Delegation and Authority Lineage",
       "governance_evidence": "required_when_attributable",
-      "description": "Authority Lineage is missing, invalid, incomplete, expired, unverifiable, or not sufficient for the requested governance operation."
+      "description": "Authority Lineage is missing, invalid, incomplete, expired, unverifiable, or not sufficient for the requested governance operation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "731f53ad942a878d4646f03026ac3ac567c10f463e8d132bbfa75b8a3ed42d4b",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-082",
       "code": "AUTHORITY_REVOKED",
+      "ns_refs": [
+        "NS-12.4-01",
+        "NS-12.5-02"
+      ],
+      "cr_refs": [
+        "CR-024",
+        "CR-025",
+        "CR-096"
+      ],
       "category": "authority",
       "default_http_status": 403,
       "retryable": false,
       "governance_stage": "Delegation and Authority Lineage",
       "governance_evidence": "required_when_attributable",
-      "description": "Required authority or delegated authority has been revoked."
+      "description": "Required authority or delegated authority has been revoked.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "083b7a9f37ae4478a88a55f453115415749bad9cc1bc83dbc19206e4a3f3aafb",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-083",
       "code": "AUTHORITY_REPLAY_DETECTED",
+      "ns_refs": [
+        "NS-12.4-01",
+        "NS-12.7-02"
+      ],
+      "cr_refs": [
+        "CR-023",
+        "CR-044",
+        "CR-115"
+      ],
       "category": "authority",
       "default_http_status": 409,
       "retryable": false,
       "governance_stage": "Delegation and Authority Lineage",
       "governance_evidence": "required_when_attributable",
-      "description": "The request attempts unauthorized replay or reuse of authority, delegation, approval, or authorization material."
+      "description": "The request attempts unauthorized replay or reuse of authority, delegation, approval, or authorization material.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "f6977ca998ba7a71534620dbb250bc7dea6a2fe57b5dde75bb2a2990da3a3b06",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
-      "code": "HUMAN_REVIEW_INVALID",
-      "category": "human_review",
+      "reg_id": "REG-084",
+      "code": "GOVERNANCE_APPROVAL_INVALID",
+      "ns_refs": [
+        "NS-13.6B-01"
+      ],
+      "cr_refs": [
+        "CR-014",
+        "CR-016",
+        "CR-058"
+      ],
+      "category": "governance_approval",
       "default_http_status": 422,
       "retryable": false,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "A human-review artifact is malformed, invalid, unauthoritative, insufficient, or not bound to the Proposal."
+      "description": "A Governance Approval Artifact is malformed, invalid, unauthoritative, insufficient, or not bound to the Proposal.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "f3295cc0640e825564234175ad4bffc5079a5a45274aa3351d11ff3d2d64953d",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
-      "code": "HUMAN_REVIEW_EXPIRED",
-      "category": "human_review",
+      "reg_id": "REG-085",
+      "code": "GOVERNANCE_APPROVAL_EXPIRED",
+      "ns_refs": [
+        "NS-13.6B-05",
+        "NS-13.6B-06"
+      ],
+      "cr_refs": [
+        "CR-015",
+        "CR-017",
+        "CR-061"
+      ],
+      "category": "governance_approval",
       "default_http_status": 409,
       "retryable": true,
       "governance_stage": "Governance Decision Function",
       "governance_evidence": "required_when_attributable",
-      "description": "A human-review artifact, approval, cosign, or adjudication artifact is expired and cannot be considered."
+      "description": "A Governance Approval Artifact is expired and cannot contribute approval, cosignature, adjudication, or quorum evidence.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "f1bbe22d5d98bb3efe32ace0019f46cae37663012b463069c8b07e8b1d84675a",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-086",
       "code": "GOVERNANCE_ARTIFACT_INVALID",
+      "ns_refs": [
+        "NS-15.4-01",
+        "NS-15.4-02",
+        "NS-15.5-02"
+      ],
+      "cr_refs": [
+        "CR-110",
+        "CR-111",
+        "CR-112",
+        "CR-113",
+        "CR-114"
+      ],
       "category": "governance_artifact",
       "default_http_status": 422,
       "retryable": false,
       "governance_stage": "Governance Self-Protection",
       "governance_evidence": "required_when_attributable",
-      "description": "A governance-significant artifact failed integrity, structure, provenance, authority, invariant, or validation requirements."
+      "description": "A governance-significant artifact failed integrity, structure, provenance, authority, invariant, or validation requirements.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "59c433e05b8575c36c0885b03ba3c74f7e90f943e650d55d6f39e1aba302c696",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-087",
       "code": "GOVERNANCE_ARTIFACT_UNAUTHORIZED",
+      "ns_refs": [
+        "NS-15.4-01",
+        "NS-15.7-03"
+      ],
+      "cr_refs": [
+        "CR-113",
+        "CR-117"
+      ],
       "category": "governance_artifact",
       "default_http_status": 403,
       "retryable": false,
       "governance_stage": "Governance Self-Protection",
       "governance_evidence": "required_when_attributable",
-      "description": "The actor, authority, tenant, or governance domain is not authorized to register, modify, activate, retire, or otherwise affect the governance artifact."
+      "description": "The actor, authority, tenant, or governance domain is not authorized to register, modify, activate, retire, or otherwise affect the governance artifact.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "fc0b988f53d32c0ad11516637ae7f11148c8cac7541267a00f4a93709370be22",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-088",
       "code": "GOVERNANCE_ARTIFACT_ACTIVATION_DENIED",
+      "ns_refs": [
+        "NS-15.3-02",
+        "NS-15.5-02",
+        "NS-15.6A-04"
+      ],
+      "cr_refs": [
+        "CR-110",
+        "CR-111",
+        "CR-112",
+        "CR-113",
+        "CR-114",
+        "CR-117"
+      ],
       "category": "governance_artifact",
       "default_http_status": 422,
       "retryable": true,
       "governance_stage": "Governance Self-Protection",
       "governance_evidence": "required_when_attributable",
-      "description": "The governance artifact cannot become operationally effective because validation, authority, invariant, prerequisite, or self-protection requirements are not satisfied."
+      "description": "The governance artifact cannot become operationally effective because validation, authority, invariant, prerequisite, or self-protection requirements are not satisfied.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "e361d742681d5bd5a53425c353f0de67fd85c7f41b9a95c6a9eb8b294d16edd8",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-089",
       "code": "GOVERNANCE_EVIDENCE_INCOMPLETE",
+      "ns_refs": [
+        "NS-10.2-02",
+        "NS-10.4-01"
+      ],
+      "cr_refs": [
+        "CR-041",
+        "CR-054",
+        "CR-062",
+        "CR-063",
+        "CR-064",
+        "CR-065",
+        "CR-066",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-097"
+      ],
       "category": "governance_evidence",
       "default_http_status": 422,
       "retryable": false,
       "governance_stage": "Governance Evidence",
       "governance_evidence": "not_required",
-      "description": "Governance Evidence is missing required fields or is insufficient to establish required processing state, traceability, attribution, or replayability."
+      "description": "Governance Evidence is missing required fields or is insufficient to establish required processing state, traceability, attribution, or replayability.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "5d0f5e038c7fb287aa36815a1b06abab84e657be887784fc0726642ab4e42cdd",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-090",
       "code": "GOVERNANCE_EVIDENCE_INVALID",
+      "ns_refs": [
+        "NS-10.5-01",
+        "NS-10.5-02"
+      ],
+      "cr_refs": [
+        "CR-041",
+        "CR-056",
+        "CR-064",
+        "CR-065",
+        "CR-066",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-097"
+      ],
       "category": "governance_evidence",
       "default_http_status": 422,
       "retryable": false,
       "governance_stage": "Governance Evidence",
       "governance_evidence": "not_required",
-      "description": "Governance Evidence is corrupted, unverifiable, non-attributable, out of order, not logically associated with the governed object, or otherwise invalid."
+      "description": "Governance Evidence is corrupted, unverifiable, non-attributable, out of order, not logically associated with the governed object, or otherwise invalid.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "108275fa5e411238af79ab469a8ddad50b68a719b9c6e49d1af0a42080bde11e",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-091",
       "code": "REPLAY_REJECTED",
+      "ns_refs": [
+        "NS-10.7-01",
+        "NS-10.7-02",
+        "NS-10.7-03"
+      ],
+      "cr_refs": [
+        "CR-008",
+        "CR-057",
+        "CR-066",
+        "CR-082",
+        "CR-085",
+        "CR-086"
+      ],
       "category": "replay",
       "default_http_status": 409,
       "retryable": false,
       "governance_stage": "Governance Evidence",
       "governance_evidence": "conditional",
-      "description": "Deterministic replay was rejected because required evidence, authoritative inputs, Canonical State references, integrity checks, or governance interpretation could not be reproduced."
+      "description": "Deterministic replay was rejected because required evidence, authoritative inputs, Canonical State references, integrity checks, or governance interpretation could not be reproduced.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "68f03e9237d96bb6a037f5f6e9c1879220a7af4874e87cbf65f6f1bdd81ade0f",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-092",
       "code": "INTERNAL_ERROR",
+      "ns_refs": [
+        "NS-5.2.6-01",
+        "NS-7.5-02"
+      ],
+      "cr_refs": [
+        "CR-073",
+        "CR-090"
+      ],
       "category": "implementation",
       "default_http_status": 503,
       "retryable": true,
       "governance_stage": "HTTP Interface",
       "governance_evidence": "conditional",
-      "description": "An implementation failure prevented the request from completing. This code SHALL NOT be used to mask deterministic governance failures that have a more specific rejection code."
+      "description": "An implementation failure prevented the request from completing. This code SHALL NOT be used to mask deterministic governance failures that have a more specific rejection code.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "b19854313c0ef78f1a8f9426d1fc5eb2fc65b4c7907e7bc1c405dd38d137a6ff",
+        "canonicalization": "JCS-RFC8785"
+      }
     }
-  ]
+  ],
+  "semantic_assertions": {
+    "identifiers_are_stable_and_not_repurposed": true,
+    "changes_are_release_governed": true,
+    "registry_does_not_independently_modify_core_requirements": true,
+    "integrity_is_verified_before_use": true,
+    "unknown_value_behavior_is_governed_by_applicable_specification": true
+  }
 }

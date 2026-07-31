@@ -1,164 +1,144 @@
-# AGCP Human Review Specification
+# AGCP Human Adjudication and Governance Approval Specification
 
 **Status:** Normative
 
 ## 1. Purpose
 
-This specification defines the normative structure and processing
-requirements for Human Review within AGCP.
+This specification defines the normative structure and processing requirements for human adjudication, governed approval, cosignature, risk acceptance, cancellation, withdrawal, and quorum participation within AGCP.
 
-Human Review replaces the earlier HITL token model with a
-governance-centric model supporting deterministic reviewer
-authorization, quorum evaluation, Governance Evidence generation, and
-Authority Lineage validation.
+The canonical approval object is the Governance Approval Artifact defined by `schemas/governance_approval_artifact.json` (DS-026). All approval, adjudication, cosignature, risk-acceptance, cancellation, withdrawal, and quorum-participation evidence SHALL use this canonical object.
 
 ## 2. Scope
 
-This specification applies to every AGCP implementation that supports
-governance decisions requiring human participation.
+This specification applies to every AGCP implementation that supports governance decisions requiring human or governed approval participation.
 
 It complements:
 
--   AGCP Core Specification
--   Policy Evaluation Contract (PEC)
--   AGCP HTTP Interface Specification
--   Governance Evidence Specification
--   Human Review Artifact schema (`schemas/human_review_artifact.json`)
+- AGCP Core Specification;
+- Architecture Reference Model;
+- Policy Evaluation Contract;
+- AGCP HTTP Interface Specification;
+- Governance Evidence Specification; and
+- Governance Approval Artifact schema (`schemas/governance_approval_artifact.json`).
 
-## 3. Human Review Model
+## 3. Governance Approval Model
 
-Human Review is performed against a Proposal and associated Governance
-Decision.
+A Governance Approval Artifact SHALL be bound to:
 
-A review SHALL be bound to:
+- eligible Proposal Identity;
+- Tenant and governance domain;
+- target and governance scope;
+- eligible Derived Lifecycle State;
+- applicable policy and Governance Version;
+- validity conditions;
+- accountable approver identity and Authority Lineage;
+- Canonical State basis at adjudication; and
+- attributable Governance Evidence.
 
--   tenant_id
--   governance_domain_id
--   proposal_id
--   action_id (when applicable)
--   Governance Context
--   Canonical State
--   Authority Lineage
+Approval, negative adjudication, cosignature, risk acceptance, cancellation, withdrawal, and quorum participation SHALL be represented as cryptographically attributable and verifiable Governance Approval Artifacts.
 
-## 4. Review Lifecycle
+## 4. Approval Status and Lifecycle
 
-Possible review states are:
+Approval artifact status values are:
 
--   Pending
--   Approved
--   Rejected
--   Expired
--   Withdrawn
+- ACTIVE;
+- EXPIRED;
+- CANCELLED;
+- WITHDRAWN;
+- REVOKED; and
+- SUPERSEDED.
 
-When quorum is satisfied, the Governance Decision proceeds to Execution
-Authorization.
+Only an ACTIVE artifact may contribute to current approval or quorum evaluation, subject to current policy, lifecycle, authority, validity, Canonical State, and other applicable governance conditions.
 
-## 5. Reviewer Authorization
+Expiration, cancellation, withdrawal, revocation, and supersession SHALL preserve history, attribution, reason, and evidence while preventing the artifact from supporting commitment.
 
-A reviewer SHALL:
+## 5. Approver Eligibility
 
--   possess the required governance role;
--   be authorized through the applicable Authority Lineage;
--   authenticate using an approved cryptographic credential.
+An approver SHALL:
 
-Reviewer authorization SHALL be tenant-scoped.
+- possess the required governance role or governed authority;
+- be eligible under current Tenant, governance-domain, subject-status, lifecycle, scope, and policy conditions;
+- possess attributable Authority Lineage; and
+- authenticate using an approved cryptographic credential.
+
+Approver eligibility SHALL be verified for the specific Proposal Identity and artifact scope.
 
 ## 6. Cryptographic Binding
 
-Each review decision SHALL be cryptographically bound to:
+Each Governance Approval Artifact SHALL be cryptographically bound to its canonical content, including:
 
--   tenant_id
--   governance_domain_id
--   proposal_id
--   action_id (if present)
--   reviewer identity
--   Authority Lineage reference
--   review timestamp
--   review decision
--   nonce
+- approval artifact identity and version;
+- Proposal Identity;
+- Tenant and governance domain;
+- target and scope;
+- lifecycle-state binding;
+- decision and approval kind;
+- approver identity;
+- Authority Lineage reference;
+- policy and Governance Version;
+- validity window;
+- Canonical State reference;
+- issuance time;
+- replay-protection values; and
+- artifact digest.
 
-Modification of any bound field SHALL invalidate the signature.
+Modification of any bound field SHALL invalidate verification.
 
 ## 7. Canonicalization
 
-Before signing:
-
-1.  Remove the signature field.
-2.  Sort object keys lexicographically.
-3.  Preserve array ordering.
-4.  Serialize as minimal UTF-8 JSON.
-
-The resulting byte sequence SHALL be the canonical representation.
+The applicable implementation profile SHALL identify the canonicalization method used before digest and signature calculation. The canonicalization method SHALL be recorded in the Governance Approval Artifact.
 
 ## 8. Signature Requirements
 
-Implementations SHALL support at least one of:
-
--   Ed25519
--   ES256
--   RS256
-
-Signatures SHALL be detached and verifiable from the canonical
-representation.
+Signatures SHALL be detached or embedded in a manner that permits independent verification of the canonical artifact representation. The applicable implementation profile SHALL define permitted cryptographic algorithms and verification profiles.
 
 ## 9. Replay Protection
 
-Review submissions SHALL include a nonce.
+Governance Approval Artifacts SHALL include replay-protection material bound to the proposal, approver, Tenant, governance domain, scope, validity horizon, and decision. Previously accepted artifacts SHALL NOT be replayed for a different proposal or governance context.
 
-The tuple:
+## 10. Quorum Accumulation
 
--   tenant_id
--   proposal_id
--   reviewer
--   nonce
+Governance escalation SHALL support deterministic accumulation of valid partial quorum through one or more Governance Approval Artifacts.
 
-SHALL be unique within the replay window.
+Only artifacts that pass eligibility, validity, signature, duplication, Tenant, domain, scope, and lifecycle checks may contribute to quorum.
 
-Previously accepted review decisions SHALL NOT be replayed.
+Duplicate contributions from the same principal SHALL NOT satisfy additional distinct-principal requirements.
 
-## 10. Quorum Evaluation
+Completion of required quorum SHALL make the Proposal eligible for the applicable lifecycle transition, subject to all other governance conditions. It SHALL NOT itself constitute authority at commitment or permission to execute.
 
-Required reviewer roles SHALL be defined by applicable governance
-policy.
+## 11. Negative Adjudication, Cancellation, and Withdrawal
 
-Quorum SHALL be evaluated deterministically.
+Governance Approval Artifacts SHALL support negative adjudication. Authorized governance authorities SHALL be able to cancel pending Proposals before commitment. Approvers or governance authorities may withdraw artifacts where policy permits.
 
-Duplicate approvals from the same reviewer SHALL NOT satisfy additional
-quorum requirements.
+Negative adjudication, cancellation, and withdrawal SHALL record attributable reason, authority, effective time, lifecycle effect, and Governance Evidence.
 
-## 11. Governance Evidence
+## 12. Governance Evidence
 
-Every accepted review decision SHALL produce Governance Evidence.
+Every accepted Governance Approval Artifact SHALL produce or reference Governance Evidence sufficient to reconstruct:
 
-Evidence SHALL reference:
+- the Proposal Identity and lifecycle state;
+- the decision and approval kind;
+- the approver and eligibility basis;
+- the Authority Lineage;
+- the applicable policy and Governance Version;
+- the validity and signature-verification results;
+- any quorum contribution and accumulated state; and
+- any expiration, cancellation, withdrawal, revocation, or supersession.
 
--   Proposal
--   Governance Decision
--   reviewer
--   Authority Lineage
--   review outcome
--   timestamp
+## 13. Canonical Schema
 
-## 12. Human Review Artifact
+The authoritative externally observable representation SHALL conform exclusively to:
 
-The canonical externally observable representation of Human Review SHALL
-conform to:
+`schemas/governance_approval_artifact.json` (DS-026)
 
-`schemas/human_review_artifact.json`
+DS-026 is the only approval-artifact schema in the AGCP v2.0 active schema set.
 
-## 13. Security Considerations
+## 14. Commit-Time Interpretation
 
-Implementations SHALL:
+A Governance Approval Artifact is evidence used during governance evaluation, Authority Re-Derivation, lifecycle progression, and Commit-Bound Admissibility. Approval or quorum completion SHALL NOT itself constitute authority at commitment, final admissibility, or permission to execute.
 
--   verify reviewer authorization;
--   validate signatures;
--   enforce replay protection;
--   preserve tenant isolation;
--   generate immutable Governance Evidence.
+Current qualified governance inputs SHALL be re-evaluated before commitment.
 
-## 14. Versioning
+## 15. Versioning
 
-Repository releases govern specification versioning.
-
-This specification intentionally contains no embedded specification
-version.
+Repository releases govern specification versioning. This specification intentionally contains no embedded release number.

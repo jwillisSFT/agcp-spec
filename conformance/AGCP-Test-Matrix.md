@@ -2,229 +2,185 @@
 
 **Status:** Informational
 
-This document provides a human-readable traceability matrix linking the
-normative AGCP conformance model to the executable conformance harness.
+This document provides a human-readable capability index for the executable conformance harness.
+The governing relationship among Formal Test Cases, Harness Checks, Harness Test Vectors, execution evidence, and conformance determinations is defined in `AGCP-Conformance-Traceability-and-Automation-Model.md`.
+The executable vector catalog is maintained in:
 
-The authoritative machine-readable mapping is maintained in:
+```text
+/conformance/AGCP-Conformance-Harness-Spec.yml
+```
 
-``` text
+Its exact human-readable mirror is:
+
+```text
+/conformance/AGCP-Conformance-Test-Vectors.md
+```
+
+The authoritative machine-readable NS/CR/TC/DS/IF/REG/fixture/Harness-Check/Test-Vector mapping is:
+
+```text
 /conformance/test-mapping.json
 ```
 
-This document is intended for reviewers, implementers, auditors, and
-certification activities. The JSON mapping remains the normative
-machine-readable source for automated tooling.
+---
 
-------------------------------------------------------------------------
+# Conformance traceability and automation model
 
-# Conformance Traceability Model
-
-AGCP conformance verification follows the repository's authoritative
-traceability model:
-
-``` text
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
-        ↓
-Harness Test Vector (implementation layer)
+```text
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
+        |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
+        v
+Formal Test Case (TC)
+        |
+        +--> non-automated evidence and procedures
+        |
+        +--> Harness Checks
+                 |
+                 v
+             Harness Test Vectors
+                 |
+                 v
+             execution evidence
+        |
+        v
+TC assessment result
 ```
 
-The first four levels constitute the authoritative normative
-traceability chain.
+Harness Checks and Harness Test Vectors provide executable support for portions of Formal Test Cases and SHALL NOT introduce additional normative requirements or independently establish conformance.
 
-Harness Test Vectors provide an executable realization of the published
-Test Cases and SHALL NOT introduce additional normative requirements.
+---
 
-All Normative Statements SHALL be covered by one or more Conformance
-Requirements.
+# Capability matrix
 
-All Conformance Requirements SHALL be verified by one or more Test
-Cases.
+| Validated capability | Current executable vectors |
+|---|---|
+| Proposal qualification and positive authorization path | `TV-PROP-001` |
+| Governance approval required | `TV-PROP-002` |
+| Governance denial through hard invariant | `TV-PROP-003` |
+| Structural refusal and proposal-schema rejection | `TV-PROP-004` |
+| Provenance validation | `TV-PROP-005` |
+| Tenant operational-state validation | `TV-PROP-006` |
+| Policy resolution | `TV-PROP-007` |
+| Idempotent replay and idempotency conflict | `TV-PROP-008`, `TV-PROP-009` |
+| Externally observable Proposal View and transient-state suppression | `TV-GET-001`, `TV-GET-002` |
+| Partial quorum and completed quorum | `TV-GAPP-001`, `TV-GAPP-002` |
+| Expired and invalid Governance Approval Artifacts | `TV-GAPP-003`, `TV-GAPP-004` |
+| Successful Governance Realization and Commit Boundary | `TV-COMMIT-001` |
+| Incomplete approval, mismatched authorization, replay, and inactive-Tenant commit rejection | `TV-COMMIT-002`, `TV-COMMIT-003`, `TV-COMMIT-004`, `TV-COMMIT-005` |
+| Governance Evidence and DS-040 ledger-event references | `TV-EVID-001` |
+| Canonical State source resolution and ledger-ordering integrity | `TV-STATE-001`, `TV-STATE-002` |
+| Cross-Tenant setup and isolation across Proposal, approval, commitment, and evidence interfaces | `TV-XTEN-SETUP`, `TV-XTEN-001`, `TV-XTEN-002`, `TV-XTEN-003`, `TV-XTEN-004` |
+| IF-001 metadata discovery | `TV-META-001` |
+| Execution Authorization retrieval, not-found handling, and isolation | `TV-EAUTH-001`, `TV-EAUTH-002`, `TV-EAUTH-003` |
+| Policy Evaluation Module registration, validation, isolation, and idempotency | `TV-PEM-001`, `TV-PEM-002`, `TV-PEM-003`, `TV-PEM-004`, `TV-PEM-005` |
+| Governance Policy registration, validation, isolation, and idempotency | `TV-POL-001`, `TV-POL-002`, `TV-POL-003`, `TV-POL-004`, `TV-POL-005` |
+| Governance Artifact retrieval, not-found handling, and isolation | `TV-GART-001`, `TV-GART-002`, `TV-GART-003` |
+| Governance Configuration and risk-based re-evaluation controls | `TV-GCFG-001` |
+| Deterministic Governance Compilation and source-to-output lineage | `TV-GCOMP-001` |
+| Constitutional validation and protected-constraint preservation | `TV-GCONST-001`, `TV-GCONST-002` |
+| Governance Omission Analysis | `TV-GOMIT-001` |
+| Governance self-protection and self-modification isolation | `TV-GSELF-001` |
+| Atomic Controlled Governance Activation and failure preservation | `TV-GACT-001`, `TV-GACT-002` |
+| Governed rollback, evidence, lineage, and replay | `TV-GROLL-001` |
 
-Every Test Case SHOULD be exercised by one or more Harness Test Vectors.
+---
 
-------------------------------------------------------------------------
+# Mandatory IF-001 operation coverage
 
-# Test Matrix
+| Mandatory operation | Positive vector | Applicable negative, isolation, and idempotency coverage |
+|---|---|---|
+| `GET /agcp/v2/meta` (`getMetadata`) | `TV-META-001` | Not applicable: public, parameterless operation with only a declared `200` response |
+| `POST /agcp/v2/proposals/submit` (`submitProposal`) | `TV-PROP-001` | `TV-PROP-004` through `TV-PROP-009`, `TV-XTEN-SETUP` |
+| `GET /agcp/v2/proposals/{proposal_id}` (`getProposal`) | `TV-GET-001` | `TV-GET-002`, `TV-XTEN-001` |
+| `POST /agcp/v2/proposals/{proposal_id}/governance-approvals` (`submitGovernanceApproval`) | `TV-GAPP-001`, `TV-GAPP-002` | `TV-GAPP-003`, `TV-GAPP-004`, `TV-XTEN-002` |
+| `GET /agcp/v2/execution-authorizations/{authorization_id}` (`getExecutionAuthorization`) | `TV-EAUTH-001` | `TV-EAUTH-002`, `TV-EAUTH-003` |
+| `POST /agcp/v2/commit-boundary/commit` (`commitBoundaryProcessing`) | `TV-COMMIT-001` | `TV-COMMIT-002` through `TV-COMMIT-005`, `TV-XTEN-003` |
+| `GET /agcp/v2/governance-evidence/{evidence_id}` (`getGovernanceEvidence`) | `TV-EVID-001` | `TV-XTEN-004` |
+| `POST /agcp/v2/governance-artifacts/policy-modules` (`registerPolicyEvaluationModule`) | `TV-PEM-001` | `TV-PEM-002`, `TV-PEM-003`, `TV-PEM-004`, `TV-PEM-005` |
+| `POST /agcp/v2/governance-artifacts/policies` (`registerGovernancePolicy`) | `TV-POL-001` | `TV-POL-002`, `TV-POL-003`, `TV-POL-004`, `TV-POL-005` |
+| `GET /agcp/v2/governance-artifacts/{artifact_id}` (`getGovernanceArtifact`) | `TV-GART-001` | `TV-GART-002`, `TV-GART-003` |
 
-  -----------------------------------------------------------------------
-  Validated Capability        Representative Harness Test Vectors
-  --------------------------- -------------------------------------------
-  Proposal Qualification      TV-PROP-001, TV-PROP-002
+Every mandatory operation has a schema-valid positive vector. Negative, tenant/domain-isolation, and idempotency vectors are required where the operation contract makes those behaviors applicable.
 
-  Governance Decision --      TV-GOV-001
-  Authorized                  
+---
 
-  Governance Decision --      TV-GOV-002
-  Denied                      
+# Complete synchronized vector index
 
-  Governance Decision --      TV-GOV-003
-  Human Review Required       
+The following identifier set is identical to the executable and human-readable catalogs.
 
-  Human Review -- Partial     TV-HR-001
-  Quorum                      
+| ID | Name |
+|---|---|
+| `TV-PROP-001` | Submit qualified proposal -> Authorized for Commit Boundary Processing |
+| `TV-PROP-002` | Submit proposal requiring governed human adjudication -> Pending Human Review outcome |
+| `TV-PROP-003` | Submit proposal with hard invariant failure -> Denied |
+| `TV-PROP-004` | DS-013 wrapper with malformed DS-021 proposal -> Structural Refusal / schema rejection |
+| `TV-PROP-005` | Invalid provenance -> PROVENANCE_INVALID |
+| `TV-PROP-006` | Tenant not ACTIVE -> TENANT_STATE_INVALID |
+| `TV-PROP-007` | Policy not found -> POLICY_NOT_FOUND |
+| `TV-PROP-008` | Idempotent replay with identical proposal payload -> same Proposal View and no new Governance Ledger Events |
+| `TV-PROP-009` | Idempotency conflict -> IDEMPOTENCY_CONFLICT |
+| `TV-GET-001` | Get authorized Proposal View returns externally observable governance state and never SUBMITTED |
+| `TV-GET-002` | Pre-decision proposal state is not externally observable |
+| `TV-GAPP-001` | Partial Governance Approval quorum -> Pending Human Review outcome remains |
+| `TV-GAPP-002` | Valid Governance Approval Artifact completes quorum -> Execution Authorization available |
+| `TV-GAPP-003` | Expired Governance Approval Artifact -> GOVERNANCE_APPROVAL_EXPIRED |
+| `TV-GAPP-004` | Invalid Governance Approval Artifact -> GOVERNANCE_APPROVAL_INVALID |
+| `TV-COMMIT-001` | Commit Boundary succeeds with valid Execution Authorization |
+| `TV-COMMIT-002` | Commit Boundary while governed approval remains incomplete -> ACTION_NOT_AUTHORIZED |
+| `TV-COMMIT-003` | Commit Boundary with mismatched authorization -> ACTION_NOT_AUTHORIZED |
+| `TV-COMMIT-004` | Commit replay after Commit Successful -> ACTION_NOT_AUTHORIZED |
+| `TV-COMMIT-005` | Commit Boundary when tenant not ACTIVE -> TENANT_STATE_INVALID |
+| `TV-EVID-001` | Governance Evidence view validates DS-040 Governance Ledger Event references |
+| `TV-STATE-001` | Canonical State resolution from qualified authoritative sources succeeds |
+| `TV-STATE-002` | Canonical State resolution rejects reordered incorporated ledger history |
+| `TV-XTEN-SETUP` | Setup tenant T2 proposal for cross-tenant tests |
+| `TV-XTEN-001` | Cross-tenant Proposal View access is forbidden or hidden |
+| `TV-XTEN-002` | Cross-tenant Governance Approval Artifact submission is forbidden or hidden |
+| `TV-XTEN-003` | Cross-tenant Commit Boundary is forbidden or hidden |
+| `TV-XTEN-004` | Cross-tenant Governance Evidence access is forbidden or hidden |
+| `TV-META-001` | Implementation metadata advertises the controlled IF-001 and conformance surface |
+| `TV-EAUTH-001` | Retrieve an available Execution Authorization view |
+| `TV-EAUTH-002` | Unknown Execution Authorization is not found |
+| `TV-EAUTH-003` | Cross-tenant Execution Authorization access is forbidden or hidden |
+| `TV-PEM-001` | Register a schema-valid Policy Evaluation Module without activating it |
+| `TV-PEM-002` | Malformed Policy Evaluation Module registration is rejected before governance processing |
+| `TV-PEM-003` | Cross-tenant Policy Evaluation Module registration is forbidden |
+| `TV-PEM-004` | Equivalent Policy Evaluation Module registration replay is idempotent |
+| `TV-PEM-005` | Conflicting Policy Evaluation Module registration replay is rejected |
+| `TV-POL-001` | Register a schema-valid Governance Policy without activating it |
+| `TV-POL-002` | Malformed Governance Policy registration is rejected before governance processing |
+| `TV-POL-003` | Cross-tenant Governance Policy registration is forbidden |
+| `TV-POL-004` | Equivalent Governance Policy registration replay is idempotent |
+| `TV-POL-005` | Conflicting Governance Policy registration replay is rejected |
+| `TV-GART-001` | Retrieve a registered Governance Artifact view |
+| `TV-GART-002` | Unknown Governance Artifact is not found |
+| `TV-GART-003` | Cross-tenant Governance Artifact access is forbidden or hidden |
+| `TV-GCFG-001` | Validate active Governance Configuration, controlled change requirements, and risk-based re-evaluation configuration |
+| `TV-GCOMP-001` | Equivalent qualified governance inputs compile deterministically to the same machine-evaluable artifact and lineage |
+| `TV-GCONST-001` | Constitutional validation preserves protected constraints and permits activation eligibility |
+| `TV-GCONST-002` | Attempted weakening of a protected constitutional constraint fails validation and cannot become activation-eligible |
+| `TV-GOMIT-001` | Material governance omission is detected before activation eligibility |
+| `TV-GSELF-001` | A governed system cannot directly modify its active admissibility conditions |
+| `TV-GACT-001` | Approved and validated governance package activates atomically with evidence, lineage, and Governance Version establishment |
+| `TV-GACT-002` | Injected member-activation failure prevents partial activation and preserves the prior authoritative version |
+| `TV-GROLL-001` | Governed rollback restores the prior Governance Version atomically and preserves evidence and lineage |
 
-  Human Review -- Quorum      TV-HR-002
-  Satisfied                   
+---
 
-  Human Review -- Invalid /   TV-HR-003
-  Expired Review Rejected     
+# Coverage expectations
 
-  Execution Authorization --  TV-AUTH-001
-  Success                     
-
-  Execution Authorization --  TV-AUTH-002
-  Authorization Failure       
-
-  Commit Boundary --          TV-CB-001
-  Successful Commit           
-
-  Commit Boundary -- Commit   TV-CB-002
-  Without Authorization       
-  Rejected                    
-
-  Commit Boundary -- Commit   TV-CB-003
-  With Changed Governance     
-  Conditions Rejected         
-
-  Tenant Isolation            TV-XTEN-001, TV-XTEN-002
-
-  Governance Domain Isolation TV-XDOM-001
-
-  Canonical State             TV-LEDGER-001
-  Reconstruction              
-
-  Reordered Ledger Detection  TV-LEDGER-002
-
-  Ledger Immutability         TV-LEDGER-003
-
-  Governance Pipeline         TV-META-001
-  Ordering                    
-
-  Idempotent Proposal         TV-META-002
-  Submission                  
-
-  Deterministic Replay        TV-META-003
-  -----------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-# Coverage Expectations
-
-The authoritative Requirements Traceability Matrix (RTM) SHALL ensure:
-
--   Every Normative Statement (NS) maps to one or more Conformance
-    Requirements (CR).
--   Every Conformance Requirement maps to one or more Test Cases (TC).
--   Every mandatory Test Case is represented by one or more Harness Test
-    Vectors.
--   No mandatory normative behavior is left without executable
-    verification.
-
-Representative Harness Test Vectors listed in this document are
-illustrative. The complete mapping is maintained in the machine-readable
-mapping file.
-
-------------------------------------------------------------------------
-
-# Canonical State Verification
-
-The conformance harness SHALL verify that:
-
--   Canonical State is derived from the ordered Append-Only Governance
-    Ledger, or from a verifiable materialized state whose derivation
-    from the ordered ledger can be deterministically reproduced.
--   Ledger sequence order, rather than timestamp order, determines
-    authoritative state transitions.
--   Reordered ledger histories are rejected or produce a Canonical State
-    that is not accepted as equivalent to the authoritative Canonical
-    State.
--   Governance Evidence remains consistent throughout Canonical State
-    reconstruction.
-
-------------------------------------------------------------------------
-
-# Governance Evidence Verification
-
-The conformance harness SHALL verify that Governance Evidence:
-
--   conforms to the published schema;
--   is linked to the corresponding governance event;
--   maintains integrity throughout governance processing;
--   remains attributable to the originating tenant and Governance
-    Domain; and
--   supports deterministic replay and audit.
-
-------------------------------------------------------------------------
-
-# Tenant and Governance Domain Isolation
-
-The conformance harness SHALL verify:
-
--   tenant isolation;
--   Governance Domain isolation, where implemented;
--   prevention of unauthorized cross-tenant access;
--   prevention of unauthorized cross-domain access;
--   tenant-scoped Governance Evidence;
--   tenant-scoped Append-Only Governance Ledger history; and
--   tenant-scoped Canonical State derivation.
-
-------------------------------------------------------------------------
-
-# Relationship to Other Conformance Artifacts
-
-  -----------------------------------------------------------------------
-  Artifact                              Purpose
-  ------------------------------------- ---------------------------------
-  Requirements Traceability Matrix      Authoritative NS → CR → TC
-  (RTM)                                 mapping
-
-  AGCP Conformance Specification        Defines conformance model and
-                                        profiles
-
-  AGCP Conformance Harness              Defines executable conformance
-  Specification                         behavior
-
-  AGCP Conformance Test Vectors         Defines representative executable
-                                        test vectors
-
-  test-mapping.json                     Machine-readable traceability
-                                        mapping
-  -----------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-# Notes
-
-This document is intentionally human-readable.
-
-The authoritative machine-readable mapping remains:
-
-``` text
-/conformance/test-mapping.json
-```
-
-Where discrepancies exist, the following precedence SHALL apply:
-
-``` text
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
-        ↓
-test-mapping.json
-        ↓
-Harness Test Vectors
-```
-
-Harness artifacts SHALL remain synchronized with the Requirements
-Traceability Matrix and SHALL NOT introduce independent normative
-behavior.
+- Every vector identifier in the YAML harness SHALL appear in the Markdown mirror.
+- The Markdown mirror SHALL NOT introduce additional or alternate vector identifiers.
+- Every vector name and substantive scenario SHALL agree across both representations.
+- `test-mapping.json` remains the authoritative TC-level machine-readable traceability source.
+- Every TC record SHALL contain one or more valid `harness_check_ids`.
+- Every TC record SHALL contain `test_vector_ids`, `supporting_test_vector_ids`, and a controlled `test_vector_mapping_status`.
+- A TC without a dedicated executable vector SHALL use `NO_DEDICATED_EXECUTABLE_VECTOR` and retain an explicit disposition rather than implying missing traceability.
+- Every Harness Check and every current Harness Test Vector SHALL be referenced by at least one TC mapping.
+- Harness checks and fixture mappings may reference any identifier in this synchronized catalog.

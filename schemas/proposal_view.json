@@ -1,16 +1,49 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/proposal_view.json",
+  "$id": "https://agcp.ai/schemas/proposal_view.json",
   "title": "Proposal View",
-  "description": "Canonical externally observable view of an AGCP Proposal and its governance lifecycle. This schema summarizes Proposal Qualification, Governance Decision Function processing, Execution Authorization status, Commit Boundary status, and references to Governance Evidence.",
+  "description": "Canonical externally observable view of a governed proposal. The view keeps authoritative Derived Lifecycle State separate from transient processing status and exposes canonical references to the proposal, context, state, authority, decisions, authorizations, commit attempts and results, evidence, receipts, refusals, composite-governance objects, enforcement, degradation, continuation, terminality, and replay-relevant history.",
+  "$comment": "DS-014 is an externally retrievable view, not the authoritative source of lifecycle state. Authoritative lifecycle state is derived from qualified governance sources and the Governance Ledger; transient processing status must never be presented as canonical lifecycle state.",
+  "x-agcp-ds-id": "DS-014",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Externally Observable Proposal Lifecycle View",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-407",
+      "ARM-601",
+      "ARM-605",
+      "ARM-703",
+      "ARM-802"
+    ],
+    "core_sections": [
+      "4.6",
+      "4.7",
+      "7.2",
+      "13.6",
+      "13.6A"
+    ],
+    "normative_statements": [
+      "NS-4.6-01",
+      "NS-4.7-01",
+      "NS-13.6A-02"
+    ],
+    "conformance_requirements": [
+      "CR-010",
+      "CR-011"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "proposal_id": {
-      "$ref": "common.json#/$defs/proposal_id"
+    "proposal_view_id": {
+      "$ref": "common.json#/$defs/identifier"
     },
-    "action_id": {
-      "$ref": "common.json#/$defs/action_id"
+    "view_type": {
+      "const": "PROPOSAL_VIEW"
+    },
+    "proposal_ref": {
+      "$ref": "governed_action_proposal.json#/$defs/governed_action_proposal_ref"
     },
     "tenant_id": {
       "$ref": "common.json#/$defs/tenant_id"
@@ -18,62 +51,164 @@
     "governance_domain_id": {
       "$ref": "common.json#/$defs/governance_domain_id"
     },
-    "qualification_outcome": {
-      "$ref": "common.json#/$defs/qualification_outcome_enum"
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
     },
-    "governance_decision": {
-      "$ref": "common.json#/$defs/governance_outcome_enum"
+    "authoritative_lifecycle": {
+      "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
     },
-    "execution_authorization": {
-      "$ref": "common.json#/$defs/execution_authorization_outcome_enum"
+    "processing_status": {
+      "$ref": "#/$defs/processing_status"
     },
-    "commit_boundary_outcome": {
-      "$ref": "common.json#/$defs/commit_boundary_outcome_enum"
-    },
-    "continuation_outcome": {
-      "$ref": "common.json#/$defs/continuation_outcome_enum"
-    },
-    "policy_ref": {
-      "$ref": "common.json#/$defs/policy_ref"
-    },
-    "canonical_state_ref": {
-      "$ref": "common.json#/$defs/canonical_state_ref"
-    },
-    "authority_lineage_ref": {
-      "$ref": "common.json#/$defs/authority_lineage_ref"
+    "qualification_summary": {
+      "$ref": "#/$defs/qualification_summary"
     },
     "governance_context_ref": {
-      "$ref": "common.json#/$defs/governance_context_ref"
+      "$ref": "governance_context_envelope.json#/$defs/governance_context_envelope_ref"
     },
-    "governance_configuration_ref": {
-      "$ref": "common.json#/$defs/governance_configuration_ref"
+    "canonical_state_ref": {
+      "$ref": "canonical_state.json#/$defs/canonical_state_ref"
     },
-    "governance_decision_ref": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256,
-      "description": "Reference to the Governance Decision Result associated with this Proposal."
+    "authority_lineage_ref": {
+      "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
     },
-    "execution_authorization_ref": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256,
-      "description": "Reference to the Execution Authorization associated with this Proposal."
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
     },
-    "commit_boundary_ref": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256,
-      "description": "Reference to the Commit Boundary result associated with this Proposal."
+    "current_governance_decision_ref": {
+      "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+    },
+    "governance_decision_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_decision_result.json#/$defs/governance_decision_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "current_execution_authorization_ref": {
+      "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+    },
+    "execution_authorization_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "commit_boundary_request_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "commit_boundary_request.json#/$defs/commit_boundary_request_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "current_commit_boundary_result_ref": {
+      "$ref": "commit_boundary_result.json#/$defs/commit_boundary_result_ref"
+    },
+    "commit_boundary_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "commit_boundary_result.json#/$defs/commit_boundary_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
     },
     "governance_evidence_refs": {
       "type": "array",
       "items": {
-        "$ref": "common.json#/$defs/stage_evidence_ref"
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
       },
-      "maxItems": 128,
-      "uniqueItems": true,
-      "description": "References to Governance Evidence generated throughout the Proposal lifecycle."
+      "minItems": 1,
+      "maxItems": 1024,
+      "uniqueItems": true
+    },
+    "governance_receipt_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_receipt.json#/$defs/governance_receipt_ref"
+      },
+      "minItems": 1,
+      "maxItems": 1024,
+      "uniqueItems": true
+    },
+    "refusal_record_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "refusal_record.json#/$defs/refusal_record_ref"
+      },
+      "minItems": 1,
+      "maxItems": 1024,
+      "uniqueItems": true
+    },
+    "bind_set_ref": {
+      "$ref": "bind_set.json#/$defs/bind_set_ref"
+    },
+    "dependency_graph_ref": {
+      "$ref": "governance_dependency_graph.json#/$defs/governance_dependency_graph_ref"
+    },
+    "resulting_state_validation_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "deterministic_adjudication_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "governance_binding_validation_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "authority_rederivation_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "authority_rederivation_result.json#/$defs/authority_rederivation_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "enforcement_context_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "enforcement_context.json#/$defs/enforcement_context_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "continuation_outcome": {
+      "$ref": "continuation_integrity_result.json#/$defs/continuation_integrity_outcome"
+    },
+    "continuation_integrity_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "continuation_integrity_result.json#/$defs/continuation_integrity_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
     },
     "created_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
@@ -81,18 +216,225 @@
     "last_updated_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "metadata": {
+    "generated_by": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "view_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "extensions": {
       "type": "object",
-      "description": "Implementation-defined metadata that SHALL NOT alter normative governance semantics.",
-      "additionalProperties": true
+      "description": "Namespaced implementation extensions that cannot alter canonical governance meaning.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]+:[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64
     }
   },
   "required": [
-    "proposal_id",
+    "proposal_view_id",
+    "view_type",
+    "proposal_ref",
     "tenant_id",
-    "qualification_outcome",
-    "governance_decision",
+    "governance_domain_id",
+    "target_ref",
+    "authoritative_lifecycle",
+    "processing_status",
+    "qualification_summary",
     "governance_evidence_refs",
-    "created_at"
-  ]
+    "created_at",
+    "last_updated_at",
+    "generated_by",
+    "view_digest"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authoritative_lifecycle": {
+            "properties": {
+              "terminality": {
+                "const": "TERMINAL"
+              }
+            },
+            "required": [
+              "terminality"
+            ]
+          }
+        },
+        "required": [
+          "authoritative_lifecycle"
+        ]
+      },
+      "then": {
+        "properties": {
+          "processing_status": {
+            "properties": {
+              "status": {
+                "const": "NONE"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "qualification_summary": {
+            "properties": {
+              "outcome": {
+                "const": "Structural Refusal"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          }
+        },
+        "required": [
+          "qualification_summary"
+        ]
+      },
+      "then": {
+        "required": [
+          "refusal_record_refs"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "proposal_view_ref": {
+      "type": "object",
+      "description": "Stable integrity-bound reference to DS-014 Proposal View.",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_view_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "view_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "last_updated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "proposal_view_id",
+        "view_digest"
+      ]
+    },
+    "processing_status": {
+      "type": "object",
+      "description": "Non-authoritative transient implementation status. It must never be used as Canonical State or Derived Lifecycle State.",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "RECEIVED",
+            "QUALIFYING",
+            "EVALUATING",
+            "AWAITING_APPROVAL",
+            "AUTHORIZING",
+            "CONTINUATION_MONITORING",
+            "PREPARING_COMMIT",
+            "ENFORCING",
+            "IDLE",
+            "NONE"
+          ]
+        },
+        "observed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "source_component": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "authoritative": {
+          "const": false
+        }
+      },
+      "required": [
+        "status",
+        "observed_at",
+        "source_component",
+        "authoritative"
+      ]
+    },
+    "qualification_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "$ref": "common.json#/$defs/qualification_outcome_enum"
+        },
+        "qualified_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "refusal_record_ref": {
+          "$ref": "refusal_record.json#/$defs/refusal_record_ref"
+        }
+      },
+      "required": [
+        "outcome",
+        "evidence_refs"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "Structural Refusal"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "required": [
+              "refusal_record_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "Qualified Proposal"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "refusal_record_ref"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
 }

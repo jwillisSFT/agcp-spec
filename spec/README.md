@@ -8,23 +8,18 @@ AGCP is a deterministic runtime governance architecture that governs execution a
 
 ---
 
-# Specification Hierarchy
+# Specification Precedence
 
-The AGCP specification ecosystem is organized as follows:
+Where interpretation requires resolution among AGCP sources, the following order applies:
 
-```
-AGCP Core Specification
-        │
-        ├── Architecture Reference Model (ARM)
-        ├── Normative Statements
-        ├── Companion Specifications
-        │
-        ├── Runtime Governance Requirements
-        ├── Requirements Traceability Matrix (RTM)
-        └── Conformance Test Suite
-```
+1. Published AGCP Runtime Governance Conformance Requirements (CRs)
+2. AGCP Core Specification
+3. Applicable normative Companion Specifications expressly adopted by the implementation profile
+4. Implementation Profiles
+5. AGCP Conformance Test Suite
+6. Reference Implementations
 
-The Core Specification is the constitutional specification for AGCP. All other specification artifacts derive from or support the Core.
+The CRs establish controlled normative capability requirements, and the Core defines corresponding normative runtime behavior. The ARM is the authoritative architectural vocabulary and conceptual reference used to interpret ARM-defined concepts, but it does not independently create conformance obligations. Normative Statements are extracted atomic obligations from the Core used for stable identification and traceability. The RTM is the authoritative traceability artifact. Neither the Normative Statements, RTM, tests, assessments, profiles, nor reference implementations supersede a higher-precedence normative source.
 
 ---
 
@@ -45,13 +40,13 @@ The Core Specification defines:
 * governance invariants
 * conformance requirements
 
-The Core Specification is the authoritative source of normative requirements.
+The Core Specification is the second-precedence normative source after the published CRs and defines AGCP normative runtime behavior. Applicable adopted normative Companion Specifications may add profile-specific obligations without weakening or contradicting the CRs or Core.
 
 ---
 
 ## Architecture Reference Model (ARM)
 
-The Architecture Reference Model provides informative architectural guidance and rationale supporting the Core Specification.
+The Architecture Reference Model provides the authoritative architectural vocabulary and conceptual reference supporting interpretation of the CRs and Core Specification. It is non-normative and does not independently create conformance obligations.
 
 The ARM explains:
 
@@ -69,7 +64,7 @@ The ARM introduces no additional normative requirements.
 
 ## Normative Statements
 
-The Normative Statements document extracts and enumerates every normative requirement defined by the Core Specification.
+The Normative Statements document extracts and enumerates atomic obligations from the Core Specification for stable identification, traceability, testing, and assessment. It does not create an independently superior normative source and does not alter the precedence of the CRs, Core, or applicable adopted normative Companion Specifications.
 
 Each statement:
 
@@ -94,7 +89,7 @@ Examples include:
 * Storage contracts
 * Registry specifications
 
-Companion Specifications extend the Core without modifying its constitutional behavior.
+Applicable normative Companion Specifications may add profile-specific obligations only where expressly adopted. They remain below the CRs and Core in precedence and SHALL NOT weaken, replace, or contradict either source.
 
 ---
 
@@ -118,15 +113,15 @@ Additional repository components include:
 
 The specification ecosystem distinguishes between normative and informative artifacts.
 
-## Normative
+## Normative Sources
 
-Normative artifacts define required behavior.
+Normative behavior is established by:
 
-These include:
+1. Published AGCP Runtime Governance Conformance Requirements (CRs)
+2. AGCP Core Specification
+3. Applicable normative Companion Specifications expressly adopted by the implementation profile
 
-* AGCP Core Specification
-* Normative Statements
-* Applicable Companion Specifications
+Implementation Profiles, the Conformance Test Suite, and Reference Implementations occupy the lower precedence positions established by the Core. Normative Statements are extraction and traceability artifacts derived from the Core, not an independently superior normative source.
 
 ## Informative
 

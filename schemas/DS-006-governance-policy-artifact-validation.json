@@ -1,0 +1,24 @@
+{
+  "overall": "PASS",
+  "actual_schema_count": 40,
+  "reference_count": 2449,
+  "common_definition_count": 85,
+  "instance_tests": {
+    "positive": [
+      "registered",
+      "active"
+    ],
+    "negative": [
+      "active_missing_activation",
+      "registered_with_compiled",
+      "constitutional_exceptionable",
+      "arrival_timing",
+      "arbitrary_metadata",
+      "governance_change_without_approval",
+      "active_invalid_compilation",
+      "execution_authority_claim",
+      "policy_ref_missing_digest"
+    ]
+  },
+  "issues": []
+}

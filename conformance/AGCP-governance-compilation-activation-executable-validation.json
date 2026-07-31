@@ -1,0 +1,218 @@
+{
+  "record_id": "AGCP-GOVERNANCE-COMPILATION-ACTIVATION-EXECUTABLE-VALIDATION-2026-07-31",
+  "status": "PASS",
+  "validated_at": "2026-07-31T12:34:00Z",
+  "check_id": "CHECK-GOVERNANCE-COMPILATION-ACTIVATION",
+  "check_severity": "MUST",
+  "source_hashes": {
+    "conformance/harness-checks.json": "97a9d30f166aafe04c954c7344f9a7688584121e68e4516e61f966691597deb8",
+    "conformance/AGCP Harness Check Registry.md": "95b47f1b84cb97fe047b318e784f9eba5cbe2db52707b89036d7fa1348a3142d",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "0dd2b25ddae6e2fee29dfcc0e02d0baaf560dc4fe41047b2ec805df5aa029120",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "0c26b0cd0bf56d7820b98664953f6137942dbec3307cbc048c245c33e7b3ba57",
+    "conformance/AGCP-Test-Matrix.md": "fe188db374cdd9291db575977437b70de67a12d9159227948392d1fb6f38406d",
+    "conformance/test-mapping.json": "eb352ecbd584cbbd2f2008d67e60e133ff42c17eb6e33e44dccdf3419a08a47e",
+    "schemas/governance_configuration.json": "1af7552f0e9c8b8f379a157c9680d0f11c5f59abb6e07757fae2e82b4fb1ad03",
+    "schemas/compiled_governance_artifact.json": "5da50676019e44e7a90b73ac383cf1d021601d115321881f8f29e03f2c9d68bc",
+    "schemas/controlled_governance_activation.json": "02840dea425e77a6be5b30e8185b8ec31ef08e72b2991441990e14badaea1adc",
+    "schemas/examples/ds041-governance-configuration-active.json": "0b7e57800e1698c18bd080b75d6ee98e2696020a74693bbd5713af1fba6cdfbd",
+    "schemas/examples/ds042-compiled-governance-artifact-validated.json": "51c539dc4b4f20303cc5f5345476d8cbcd4ae537771d6ab205e754be7a7a278c",
+    "schemas/examples/ds043-controlled-governance-activation-activated.json": "dcae383725b1c6e970b456cca6d3f89a02c121c84d4e76afa45407bce2279bd0"
+  },
+  "summary": {
+    "must_check_count": 17,
+    "must_checks_with_substantive_vectors": 17,
+    "must_checks_without_substantive_vectors": 0,
+    "governance_compilation_activation_vector_count": 9,
+    "declared_expected_behavior_count": 8,
+    "expected_behaviors_asserted": 8,
+    "affected_formal_test_count": 7,
+    "affected_formal_tests_with_direct_vectors": 7
+  },
+  "substantive_vector_ids": [
+    "TV-GCFG-001",
+    "TV-GCOMP-001",
+    "TV-GCONST-001",
+    "TV-GCONST-002",
+    "TV-GOMIT-001",
+    "TV-GSELF-001",
+    "TV-GACT-001",
+    "TV-GACT-002",
+    "TV-GROLL-001"
+  ],
+  "behavior_coverage": [
+    {
+      "behavior": "Governance Configuration and active risk-based re-evaluation configuration",
+      "vectors": [
+        "TV-GCFG-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Deterministic compilation and machine-evaluable output",
+      "vectors": [
+        "TV-GCOMP-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Complete source-to-output lineage and replay",
+      "vectors": [
+        "TV-GCOMP-001",
+        "TV-GACT-001",
+        "TV-GROLL-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Constitutional validation and constraint preservation",
+      "vectors": [
+        "TV-GCONST-001",
+        "TV-GCONST-002"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Material omission detection",
+      "vectors": [
+        "TV-GOMIT-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Governance self-protection and direct self-modification prevention",
+      "vectors": [
+        "TV-GSELF-001",
+        "TV-GCONST-002"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Approved validated atomic controlled activation",
+      "vectors": [
+        "TV-GACT-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Activation failure atomicity and prior-version preservation",
+      "vectors": [
+        "TV-GACT-002"
+      ],
+      "result": "PASS"
+    },
+    {
+      "behavior": "Governed rollback with evidence, lineage, ledger ordering, and replay",
+      "vectors": [
+        "TV-GROLL-001"
+      ],
+      "result": "PASS"
+    }
+  ],
+  "formal_test_mapping": {
+    "TC-110": [
+      "TV-GCOMP-001",
+      "TV-GACT-001"
+    ],
+    "TC-111": [
+      "TV-GCONST-001",
+      "TV-GCONST-002",
+      "TV-GACT-001"
+    ],
+    "TC-112": [
+      "TV-GCONST-001",
+      "TV-GCONST-002",
+      "TV-GACT-001"
+    ],
+    "TC-113": [
+      "TV-GCONST-002",
+      "TV-GSELF-001",
+      "TV-GACT-001",
+      "TV-GACT-002",
+      "TV-GROLL-001"
+    ],
+    "TC-114": [
+      "TV-GOMIT-001",
+      "TV-GACT-001"
+    ],
+    "TC-117": [
+      "TV-GCFG-001",
+      "TV-GSELF-001",
+      "TV-GACT-001",
+      "TV-GACT-002",
+      "TV-GROLL-001"
+    ],
+    "TC-122": [
+      "TV-GCFG-001"
+    ]
+  },
+  "issues": [],
+  "closure_statement": "Every MUST Harness Check references at least one substantive executable vector, and every expected behavior declared by CHECK-GOVERNANCE-COMPILATION-ACTIVATION is asserted by one or more controlled vectors.",
+  "validation_rules": [
+    "Every severity MUST Harness Check references at least one catalog vector with a nonempty request or harness operation and nonempty expected assertions.",
+    "CHECK-GOVERNANCE-COMPILATION-ACTIVATION references only the nine dedicated F-09 substantive vectors.",
+    "Each declared expected behavior of CHECK-GOVERNANCE-COMPILATION-ACTIVATION is covered by one or more dedicated vectors.",
+    "The YAML and Markdown vector catalogs contain the same 54 identifiers and names.",
+    "TC-110, TC-111, TC-112, TC-113, TC-114, TC-117, and TC-122 directly map to applicable dedicated vectors.",
+    "The DS-041, DS-042, and DS-043 positive fixtures validate against their active schemas."
+  ],
+  "expected_behavior_assertion_map": [
+    {
+      "expected_behavior_index": 1,
+      "vectors": [
+        "TV-GCFG-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "expected_behavior_index": 2,
+      "vectors": [
+        "TV-GCOMP-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "expected_behavior_index": 3,
+      "vectors": [
+        "TV-GCONST-001",
+        "TV-GCONST-002"
+      ],
+      "result": "PASS"
+    },
+    {
+      "expected_behavior_index": 4,
+      "vectors": [
+        "TV-GOMIT-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "expected_behavior_index": 5,
+      "vectors": [
+        "TV-GSELF-001",
+        "TV-GCONST-002"
+      ],
+      "result": "PASS"
+    },
+    {
+      "expected_behavior_index": 6,
+      "vectors": [
+        "TV-GACT-001"
+      ],
+      "result": "PASS"
+    },
+    {
+      "expected_behavior_index": 7,
+      "vectors": [
+        "TV-GACT-002"
+      ],
+      "result": "PASS"
+    },
+    {
+      "expected_behavior_index": 8,
+      "vectors": [
+        "TV-GROLL-001"
+      ],
+      "result": "PASS"
+    }
+  ]
+}

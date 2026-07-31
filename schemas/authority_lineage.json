@@ -1,0 +1,1187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/authority_lineage.json",
+  "title": "Authority Lineage",
+  "description": "Canonical domain schema for the complete, attributable, integrity-protected chain through which the evidentiary basis for authority is originated, delegated, approved, constrained, revoked, re-established, and validated for a specific proposed transition. Authority Lineage remains bound to Proposal Identity, target, tenant, governance domain, scope, lifecycle, validity, Canonical State, policy, and evidence. It supports deterministic reconstruction and Authority Re-Derivation but is not portable executable authority and does not itself constitute authority at commitment or permission to execute.",
+  "x-agcp-ds-id": "DS-024",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "authority_lineage_id",
+    "lineage_version",
+    "lineage_role",
+    "lineage_mode",
+    "authority_source_mode",
+    "proposal_identity",
+    "tenant_id",
+    "originating_governance_domain_id",
+    "current_governance_domain_id",
+    "participating_governance_domains",
+    "originating_authority",
+    "current_subject",
+    "target_ref",
+    "effective_scope",
+    "origin_record",
+    "domain_segments",
+    "governance_version_ref",
+    "policy_refs",
+    "canonical_state_ref",
+    "lineage_events",
+    "complete_chain_assertion",
+    "scope_containment_summary",
+    "revocation_status",
+    "subject_eligibility",
+    "replay_protection",
+    "validation",
+    "lineage_attribution",
+    "evidence_refs",
+    "lineage_digest"
+  ],
+  "properties": {
+    "authority_lineage_id": {
+      "$ref": "common.json#/$defs/authority_lineage_id"
+    },
+    "lineage_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "lineage_role": {
+      "const": "EVIDENTIARY_AUTHORITY_BASIS_NOT_EXECUTION_AUTHORITY",
+      "description": "Fixed role preventing Authority Lineage from being interpreted as portable authority, final admissibility, or permission to execute."
+    },
+    "lineage_mode": {
+      "type": "string",
+      "enum": [
+        "SAME_DOMAIN",
+        "CROSS_DOMAIN"
+      ]
+    },
+    "authority_source_mode": {
+      "type": "string",
+      "enum": [
+        "DIRECT",
+        "DELEGATED"
+      ]
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "originating_governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "current_governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "participating_governance_domains": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/governance_domain_id"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "originating_authority": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "current_subject": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "effective_scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "origin_record": {
+      "$ref": "#/$defs/origin_record"
+    },
+    "delegation_chain": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/delegation_link"
+      },
+      "minItems": 1
+    },
+    "approval_chain": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/approval_link"
+      },
+      "minItems": 1
+    },
+    "mission_task_lineage_ref": {
+      "$ref": "common.json#/$defs/mission_task_lineage_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "domain_segments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain_segment"
+      },
+      "minItems": 1
+    },
+    "cross_domain_transitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cross_domain_transition"
+      },
+      "minItems": 1
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "canonical_state_ref": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "prior_authorization_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Historical authorization evidence only. Prior authorization does not constitute current authority or permission to execute."
+    },
+    "lineage_events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/lineage_event"
+      },
+      "minItems": 1,
+      "contains": {
+        "properties": {
+          "event_type": {
+            "const": "ORIGIN_ESTABLISHED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "minContains": 1
+    },
+    "complete_chain_assertion": {
+      "$ref": "#/$defs/complete_chain_assertion"
+    },
+    "scope_containment_summary": {
+      "$ref": "#/$defs/scope_containment_summary"
+    },
+    "revocation_status": {
+      "$ref": "#/$defs/revocation_status_summary"
+    },
+    "subject_eligibility": {
+      "$ref": "#/$defs/subject_eligibility_result"
+    },
+    "replay_protection": {
+      "$ref": "#/$defs/replay_protection"
+    },
+    "validation": {
+      "$ref": "#/$defs/lineage_validation"
+    },
+    "lineage_attribution": {
+      "$ref": "#/$defs/lineage_attribution"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "lineage_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "supersedes_authority_lineage_ref": {
+      "$ref": "#/$defs/authority_lineage_ref"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authority_source_mode": {
+            "const": "DELEGATED"
+          }
+        },
+        "required": [
+          "authority_source_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "delegation_chain"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "delegation_chain"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lineage_mode": {
+            "const": "CROSS_DOMAIN"
+          }
+        },
+        "required": [
+          "lineage_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "cross_domain_transitions"
+        ],
+        "properties": {
+          "participating_governance_domains": {
+            "minItems": 2
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "cross_domain_transitions"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "validation": {
+            "properties": {
+              "outcome": {
+                "const": "VALID"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          }
+        },
+        "required": [
+          "validation"
+        ]
+      },
+      "then": {
+        "properties": {
+          "revocation_status": {
+            "properties": {
+              "overall_status": {
+                "const": "ACTIVE"
+              }
+            },
+            "required": [
+              "overall_status"
+            ]
+          },
+          "subject_eligibility": {
+            "properties": {
+              "status": {
+                "const": "ELIGIBLE"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "authority_lineage_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-024 Authority Lineage object.",
+      "additionalProperties": false,
+      "properties": {
+        "authority_lineage_id": {
+          "$ref": "common.json#/$defs/authority_lineage_id"
+        },
+        "lineage_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "lineage_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "lineage_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "scope": {
+          "$ref": "common.json#/$defs/governance_scope"
+        }
+      },
+      "required": [
+        "authority_lineage_id",
+        "lineage_digest"
+      ]
+    },
+    "origin_record": {
+      "type": "object",
+      "description": "Attributable establishment of the originating governance authority and initial authority basis.",
+      "additionalProperties": false,
+      "properties": {
+        "originating_authority": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "originating_actor": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "originating_agent": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "established_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "authority_basis_type": {
+          "type": "string",
+          "enum": [
+            "DIRECT_GOVERNANCE_AUTHORITY",
+            "POLICY_DERIVED_AUTHORITY",
+            "EXTERNAL_AUTHORITATIVE_GRANT"
+          ]
+        },
+        "authority_basis_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "initial_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "origin_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "originating_authority",
+        "originating_actor",
+        "established_at",
+        "authority_basis_type",
+        "authority_basis_refs",
+        "initial_scope_digest",
+        "origin_digest"
+      ]
+    },
+    "delegation_link": {
+      "type": "object",
+      "description": "One ordered link in the delegation chain. Chain-position continuity and equality with the referenced DS-025 artifact are semantic validation obligations.",
+      "additionalProperties": false,
+      "properties": {
+        "chain_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "delegation_artifact_ref": {
+          "$ref": "delegation_artifact.json#/$defs/delegation_artifact_ref"
+        },
+        "delegating_principal": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "receiving_principal": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "source_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "delegated_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "revocation_reference_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "link_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "link_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "chain_position",
+        "delegation_artifact_ref",
+        "delegating_principal",
+        "receiving_principal",
+        "source_scope_digest",
+        "delegated_scope_digest",
+        "validity_window",
+        "revocation_reference_id",
+        "link_evidence_refs",
+        "link_digest"
+      ]
+    },
+    "approval_link": {
+      "type": "object",
+      "description": "Attributable approval evidence in the authority basis. Approval evidence does not itself constitute authority at commitment.",
+      "additionalProperties": false,
+      "properties": {
+        "approval_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "approval_artifact_ref": {
+          "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+        },
+        "approval_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "approval_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "link_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "approval_position",
+        "approval_artifact_ref",
+        "approval_scope_digest",
+        "approval_evidence_refs",
+        "link_digest"
+      ]
+    },
+    "domain_segment": {
+      "type": "object",
+      "description": "Independent authority segment maintained by one participating governance domain.",
+      "additionalProperties": false,
+      "properties": {
+        "segment_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "domain_authority": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "domain_subject": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "domain_scope": {
+          "$ref": "common.json#/$defs/governance_scope"
+        },
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "authority_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "independent_authority_established": {
+          "const": true
+        },
+        "domain_sovereignty_preserved": {
+          "const": true
+        },
+        "segment_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "segment_position",
+        "governance_domain_id",
+        "domain_authority",
+        "domain_subject",
+        "domain_scope",
+        "policy_refs",
+        "canonical_state_ref",
+        "authority_evidence_refs",
+        "independent_authority_established",
+        "domain_sovereignty_preserved",
+        "segment_digest"
+      ]
+    },
+    "cross_domain_transition": {
+      "type": "object",
+      "description": "Explicit governed transition between independent authority segments. Authority does not propagate implicitly across the boundary.",
+      "additionalProperties": false,
+      "properties": {
+        "transition_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "transition_delegation_ref": {
+          "$ref": "delegation_artifact.json#/$defs/delegation_artifact_ref"
+        },
+        "governed_trust_relationship_ref": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "escalation_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "independent_target_domain_authority_established": {
+          "const": true
+        },
+        "domain_isolation_preserved": {
+          "const": true
+        },
+        "transition_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "transition_position",
+        "source_governance_domain_id",
+        "target_governance_domain_id",
+        "transition_delegation_ref",
+        "governed_trust_relationship_ref",
+        "escalation_evidence_refs",
+        "independent_target_domain_authority_established",
+        "domain_isolation_preserved",
+        "transition_digest"
+      ]
+    },
+    "lineage_event": {
+      "type": "object",
+      "description": "Ordered, attributable event preserving the evolution of the evidentiary authority basis without turning historical events into current authority.",
+      "additionalProperties": false,
+      "properties": {
+        "event_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "event_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "event_type": {
+          "type": "string",
+          "enum": [
+            "ORIGIN_ESTABLISHED",
+            "DELEGATION_ADDED",
+            "APPROVAL_ADDED",
+            "SCOPE_CONSTRAINED",
+            "REVOCATION_OBSERVED",
+            "AUTHORITY_REESTABLISHED",
+            "AUTHORIZATION_REFERENCED",
+            "DOMAIN_TRANSITION",
+            "LIFECYCLE_TRANSITION",
+            "SUBJECT_STATUS_CHANGED",
+            "REEVALUATION_REQUIRED"
+          ]
+        },
+        "occurred_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "actor": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "related_delegation_ref": {
+          "$ref": "delegation_artifact.json#/$defs/delegation_artifact_ref"
+        },
+        "related_approval_ref": {
+          "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+        },
+        "related_authorization_ref": {
+          "$ref": "execution_authorization_view.json#/$defs/execution_authorization_view_ref"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "event_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "event_position",
+        "event_id",
+        "event_type",
+        "occurred_at",
+        "governance_domain_id",
+        "actor",
+        "evidence_refs",
+        "event_digest"
+      ]
+    },
+    "complete_chain_assertion": {
+      "type": "object",
+      "description": "Attributable assertion that the lineage begins with an established origin, has no omitted delegation or domain-transition links, and remains reconstructable.",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "const": "COMPLETE_AND_RECONSTRUCTABLE"
+        },
+        "origin_present": {
+          "const": true
+        },
+        "delegation_link_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "approval_link_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "domain_segment_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "gap_detection_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evaluator": {
+          "$ref": "#/$defs/lineage_attribution"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "outcome",
+        "origin_present",
+        "delegation_link_count",
+        "approval_link_count",
+        "domain_segment_count",
+        "event_count",
+        "gap_detection_method",
+        "evaluated_at",
+        "evaluator",
+        "evidence_refs",
+        "result_digest"
+      ]
+    },
+    "scope_containment_summary": {
+      "type": "object",
+      "description": "Lineage-wide verification that every delegated or derived scope is contained within its parent authority and the effective scope is proposal-, target-, tenant-, and domain-bounded.",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "const": "ALL_AUTHORITY_WITHIN_GOVERNED_PARENT_SCOPE"
+        },
+        "effective_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluated_link_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recursive_authority_contained": {
+          "const": true
+        },
+        "authority_amplification_detected": {
+          "const": false
+        },
+        "evaluation_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evaluator": {
+          "$ref": "#/$defs/lineage_attribution"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "outcome",
+        "effective_scope_digest",
+        "evaluated_link_count",
+        "recursive_authority_contained",
+        "authority_amplification_detected",
+        "evaluation_method",
+        "evaluated_at",
+        "evaluator",
+        "evidence_refs",
+        "result_digest"
+      ]
+    },
+    "revocation_status_summary": {
+      "type": "object",
+      "description": "Current qualified revocation and expiration result resolved from Canonical State. Historical lineage does not override this result.",
+      "additionalProperties": false,
+      "properties": {
+        "resolution_mode": {
+          "const": "CURRENT_QUALIFIED_CANONICAL_STATE"
+        },
+        "overall_status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "REVOKED",
+            "EXPIRED",
+            "SUBJECT_INELIGIBLE",
+            "UNKNOWN"
+          ]
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "affected_delegation_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "delegation_artifact.json#/$defs/delegation_artifact_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "revocation_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "resolution_mode",
+        "overall_status",
+        "evaluated_at",
+        "canonical_state_ref",
+        "revocation_evidence_refs",
+        "result_digest"
+      ]
+    },
+    "subject_eligibility_result": {
+      "type": "object",
+      "description": "Current qualified subject-existence and eligibility determination from Canonical State.",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ELIGIBLE",
+            "INELIGIBLE",
+            "NONEXISTENT",
+            "UNKNOWN"
+          ]
+        },
+        "subject": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "status",
+        "subject",
+        "evaluated_at",
+        "canonical_state_ref",
+        "evidence_refs",
+        "result_digest"
+      ]
+    },
+    "replay_protection": {
+      "type": "object",
+      "description": "Binding and verification controls preventing lineage, delegation, approval, or prior authorization evidence from being replayed for a different proposal, target, tenant, domain, scope, or validity horizon.",
+      "additionalProperties": false,
+      "properties": {
+        "authority_replay_prohibited": {
+          "const": true
+        },
+        "proposal_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "target_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "scope_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "tenant_domain_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "checked_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "authority_replay_prohibited",
+        "proposal_binding_digest",
+        "target_binding_digest",
+        "scope_binding_digest",
+        "tenant_domain_binding_digest",
+        "checked_at",
+        "evidence_refs",
+        "result_digest"
+      ]
+    },
+    "validation_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin_established": {
+          "type": "boolean"
+        },
+        "chain_complete": {
+          "type": "boolean"
+        },
+        "attribution_consistent": {
+          "type": "boolean"
+        },
+        "delegation_constraints_valid": {
+          "type": "boolean"
+        },
+        "delegation_lifetimes_valid": {
+          "type": "boolean"
+        },
+        "revocation_checked": {
+          "type": "boolean"
+        },
+        "subject_eligible": {
+          "type": "boolean"
+        },
+        "scope_contained": {
+          "type": "boolean"
+        },
+        "cross_domain_isolation_preserved": {
+          "type": "boolean"
+        },
+        "recursive_authority_contained": {
+          "type": "boolean"
+        },
+        "replay_protection_valid": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "origin_established",
+        "chain_complete",
+        "attribution_consistent",
+        "delegation_constraints_valid",
+        "delegation_lifetimes_valid",
+        "revocation_checked",
+        "subject_eligible",
+        "scope_contained",
+        "cross_domain_isolation_preserved",
+        "recursive_authority_contained",
+        "replay_protection_valid"
+      ]
+    },
+    "lineage_validation": {
+      "type": "object",
+      "description": "Deterministic validation of the complete Authority Lineage. A VALID lineage is still evidence for Authority Re-Derivation and is not authority at commitment.",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "VALID",
+            "INVALID",
+            "REEVALUATION_REQUIRED"
+          ]
+        },
+        "deterministic_validation_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "validated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "assertions": {
+          "$ref": "#/$defs/validation_assertions"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "reevaluation_required": {
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "validation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "outcome",
+        "deterministic_validation_method",
+        "validated_at",
+        "canonical_state_ref",
+        "assertions",
+        "reevaluation_required",
+        "evidence_refs",
+        "validation_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "VALID"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "reevaluation_required": {
+                "const": false
+              },
+              "assertions": {
+                "properties": {
+                  "origin_established": {
+                    "const": true
+                  },
+                  "chain_complete": {
+                    "const": true
+                  },
+                  "attribution_consistent": {
+                    "const": true
+                  },
+                  "delegation_constraints_valid": {
+                    "const": true
+                  },
+                  "delegation_lifetimes_valid": {
+                    "const": true
+                  },
+                  "revocation_checked": {
+                    "const": true
+                  },
+                  "subject_eligible": {
+                    "const": true
+                  },
+                  "scope_contained": {
+                    "const": true
+                  },
+                  "cross_domain_isolation_preserved": {
+                    "const": true
+                  },
+                  "recursive_authority_contained": {
+                    "const": true
+                  },
+                  "replay_protection_valid": {
+                    "const": true
+                  }
+                }
+              }
+            },
+            "not": {
+              "required": [
+                "findings"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "INVALID",
+                  "REEVALUATION_REQUIRED"
+                ]
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "required": [
+              "findings"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "REEVALUATION_REQUIRED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "reevaluation_required": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "lineage_attribution": {
+      "type": "object",
+      "description": "Attribution of Authority Lineage creation or validation without recursively embedding another lineage reference.",
+      "additionalProperties": false,
+      "properties": {
+        "principal": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "attributed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "signature": {
+          "$ref": "common.json#/$defs/signature"
+        }
+      },
+      "required": [
+        "principal",
+        "attributed_at"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Profile-defined extensions. Extension content cannot broaden authority, replace current-state qualification, suppress revocation, merge governance domains, alter lineage ordering, or convert lineage evidence into execution authority.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    }
+  }
+}

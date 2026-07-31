@@ -1,61 +1,2003 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/invariant_evaluation.json",
-  "title": "Invariant Evaluation",
-  "description": "Result of evaluating a single AGCP invariant during governance processing.",
+  "$id": "https://agcp.ai/schemas/invariant_evaluation.json",
+  "title": "Governance Invariant Evaluation Result",
+  "description": "Canonical, attributable, integrity-protected result of evaluating one DS-008 Governance Invariant Definition for a specific Governed Action Proposal, Proposal Identity, Tenant, governance domain, target, evaluation horizon, Governance Version, and qualified governance-input set. DS-012 records applicability, deterministic assertion evaluation, preserved, violated, indeterminate, or not-applicable outcomes, and explicitly identifies any resulting Structural Refusal, governed escalation, lifecycle effect, and Governance Evidence without itself authorizing execution or establishing authority at commitment.",
+  "$comment": "DS-012 is proposal-specific and invariant-specific. JSON Schema enforces structural and outcome-specific consistency; implementations must additionally verify semantic equality among proposal, Tenant, governance domain, target, policy, configuration, Governance Version, Canonical State, evidence, authority, lifecycle, invariant, effect, and digest bindings.",
+  "x-agcp-ds-id": "DS-012",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Governance Decision Function — Invariant Evaluation Result",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-105",
+      "ARM-108",
+      "ARM-204",
+      "ARM-505",
+      "ARM-601",
+      "ARM-604",
+      "ARM-606",
+      "ARM-701",
+      "ARM-801",
+      "ARM-803",
+      "ARM-804"
+    ],
+    "core_sections": [
+      "5.2.1",
+      "5.5",
+      "7.3",
+      "7.4",
+      "7.5",
+      "7.6",
+      "7.6A",
+      "10.1",
+      "10.3",
+      "10.4",
+      "10.5",
+      "10.7",
+      "10.8A",
+      "13.6A",
+      "13.6B"
+    ],
+    "normative_statements": [
+      "NS-5.2.1-01",
+      "NS-5.2.1-02",
+      "NS-5.5-01",
+      "NS-5.5-02",
+      "NS-7.3-01",
+      "NS-7.3-02",
+      "NS-7.4-01",
+      "NS-7.4-02",
+      "NS-7.4-05",
+      "NS-7.5-01",
+      "NS-7.5-02",
+      "NS-7.5-03",
+      "NS-7.5-04",
+      "NS-7.5-05",
+      "NS-7.6-03",
+      "NS-7.6A-01",
+      "NS-10.1-01",
+      "NS-10.1-02",
+      "NS-10.3-01",
+      "NS-10.4-01",
+      "NS-10.5-01",
+      "NS-10.5-02",
+      "NS-10.7-01",
+      "NS-10.8A-01",
+      "NS-13.6A-04",
+      "NS-13.6B-01",
+      "NS-13.6B-02"
+    ],
+    "conformance_requirements": [
+      "CR-001",
+      "CR-003",
+      "CR-053",
+      "CR-058",
+      "CR-063",
+      "CR-075",
+      "CR-076",
+      "CR-078",
+      "CR-087"
+    ]
+  },
   "type": "object",
   "additionalProperties": false,
+  "$defs": {
+    "invariant_evaluation_outcome": {
+      "type": "string",
+      "enum": [
+        "PRESERVED",
+        "VIOLATED",
+        "INDETERMINATE",
+        "NOT_APPLICABLE"
+      ],
+      "description": "Canonical result of evaluating the applicable Governance Invariant for the bound proposal and evaluation horizon."
+    },
+    "invariant_evaluation_disposition": {
+      "type": "string",
+      "enum": [
+        "CONTINUE_EVALUATION",
+        "STRUCTURAL_REFUSAL",
+        "ESCALATION_REQUIRED",
+        "RE_EVALUATION_REQUIRED",
+        "EVALUATION_BLOCKED",
+        "NO_EFFECT"
+      ]
+    },
+    "qualified_dimension_status": {
+      "type": "string",
+      "enum": [
+        "QUALIFIED",
+        "NOT_REQUIRED",
+        "NOT_QUALIFIED",
+        "INDETERMINATE"
+      ]
+    },
+    "input_qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposal": {
+          "const": "QUALIFIED"
+        },
+        "tenant_domain": {
+          "const": "QUALIFIED"
+        },
+        "target": {
+          "const": "QUALIFIED"
+        },
+        "policy": {
+          "const": "QUALIFIED"
+        },
+        "governance_configuration": {
+          "const": "QUALIFIED"
+        },
+        "governance_version": {
+          "const": "QUALIFIED"
+        },
+        "canonical_state": {
+          "$ref": "#/$defs/qualified_dimension_status"
+        },
+        "evidence": {
+          "$ref": "#/$defs/qualified_dimension_status"
+        },
+        "authority": {
+          "$ref": "#/$defs/qualified_dimension_status"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/qualified_dimension_status"
+        },
+        "all_required_inputs_qualified": {
+          "type": "boolean"
+        },
+        "unqualified_required_dimensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "CANONICAL_STATE",
+              "EVIDENCE",
+              "AUTHORITY",
+              "LIFECYCLE",
+              "POLICY",
+              "GOVERNANCE_CONFIGURATION",
+              "GOVERNANCE_VERSION",
+              "TARGET",
+              "TENANT_DOMAIN",
+              "PROPOSAL",
+              "INVARIANT"
+            ]
+          },
+          "maxItems": 11
+        },
+        "invariant": {
+          "const": "QUALIFIED"
+        }
+      },
+      "required": [
+        "proposal",
+        "tenant_domain",
+        "target",
+        "invariant",
+        "policy",
+        "governance_configuration",
+        "governance_version",
+        "canonical_state",
+        "evidence",
+        "authority",
+        "lifecycle",
+        "all_required_inputs_qualified",
+        "unqualified_required_dimensions"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "all_required_inputs_qualified": {
+                "const": true
+              }
+            },
+            "required": [
+              "all_required_inputs_qualified"
+            ]
+          },
+          "then": {
+            "properties": {
+              "unqualified_required_dimensions": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "all_required_inputs_qualified": {
+                "const": false
+              }
+            },
+            "required": [
+              "all_required_inputs_qualified"
+            ]
+          },
+          "then": {
+            "properties": {
+              "unqualified_required_dimensions": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "qualified_input_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposal_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "invariant_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "target_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "policy_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_configuration_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_package_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "canonical_state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "state_qualification_result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evidence_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evidence_qualification_result_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "authority_lineage_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "lifecycle_state_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluation_input_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "proposal_digest",
+        "invariant_digest",
+        "target_binding_digest",
+        "policy_set_digest",
+        "governance_configuration_digest",
+        "governance_version_package_digest",
+        "evaluation_input_set_digest"
+      ]
+    },
+    "applicability_determination": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "applicable": {
+          "type": "boolean"
+        },
+        "evaluated_applicability_assertion_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "matched_applicability_assertion_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "determination_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "applicable",
+        "evaluated_applicability_assertion_ids",
+        "matched_applicability_assertion_ids",
+        "determination_basis_digest"
+      ]
+    },
+    "ordering_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "basis_type": {
+          "type": "string",
+          "enum": [
+            "EXPLICIT_POLICY_ORDER",
+            "CONSTRAINT_DEPENDENCY_ORDER",
+            "REGISTRY_ORDER",
+            "COMPILED_ARTIFACT_ORDER",
+            "NO_ORDERING_DEPENDENCY"
+          ]
+        },
+        "evaluation_ordinal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "arrival_timing_used": {
+          "const": false
+        },
+        "implementation_scheduling_used": {
+          "const": false
+        }
+      },
+      "required": [
+        "basis_type",
+        "evaluation_ordinal",
+        "basis_digest",
+        "arrival_timing_used",
+        "implementation_scheduling_used"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_input_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "invariant_semantics_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluator_profile_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "profile_uri": {
+              "$ref": "common.json#/$defs/uri"
+            },
+            "profile_digest": {
+              "$ref": "common.json#/$defs/content_digest"
+            }
+          },
+          "required": [
+            "profile_uri",
+            "profile_digest"
+          ]
+        },
+        "ordering_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "deterministic_evaluation": {
+          "const": true
+        },
+        "equivalent_inputs_equivalent_result": {
+          "const": true
+        },
+        "arrival_timing_used": {
+          "const": false
+        },
+        "implementation_specific_behavior_used": {
+          "const": false
+        },
+        "replay_produces_governance_verification_not_operational_reexecution": {
+          "const": true
+        }
+      },
+      "required": [
+        "canonical_input_set_digest",
+        "invariant_semantics_digest",
+        "evaluator_profile_ref",
+        "ordering_basis_digest",
+        "deterministic_evaluation",
+        "equivalent_inputs_equivalent_result",
+        "arrival_timing_used",
+        "implementation_specific_behavior_used",
+        "replay_produces_governance_verification_not_operational_reexecution"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "result_is_proposal_specific": {
+          "const": true
+        },
+        "result_is_invariant_specific": {
+          "const": true
+        },
+        "result_is_tenant_domain_target_bound": {
+          "const": true
+        },
+        "unqualified_inputs_do_not_support_preserved_outcome": {
+          "const": true
+        },
+        "mandatory_invariant_violation_prevents_authorization": {
+          "const": true
+        },
+        "structural_refusal_is_explicitly_identified": {
+          "const": true
+        },
+        "escalation_is_explicitly_identified": {
+          "const": true
+        },
+        "lifecycle_effect_is_explicitly_identified": {
+          "const": true
+        },
+        "governance_evidence_is_required": {
+          "const": true
+        },
+        "result_does_not_establish_authority_at_commitment": {
+          "const": true
+        },
+        "result_does_not_authorize_execution": {
+          "const": true
+        },
+        "result_does_not_commit_transition": {
+          "const": true
+        },
+        "extensions_cannot_alter_canonical_governance_meaning": {
+          "const": true
+        }
+      },
+      "required": [
+        "result_is_proposal_specific",
+        "result_is_invariant_specific",
+        "result_is_tenant_domain_target_bound",
+        "unqualified_inputs_do_not_support_preserved_outcome",
+        "mandatory_invariant_violation_prevents_authorization",
+        "structural_refusal_is_explicitly_identified",
+        "escalation_is_explicitly_identified",
+        "lifecycle_effect_is_explicitly_identified",
+        "governance_evidence_is_required",
+        "result_does_not_establish_authority_at_commitment",
+        "result_does_not_authorize_execution",
+        "result_does_not_commit_transition",
+        "extensions_cannot_alter_canonical_governance_meaning"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Explicitly namespaced non-normative extensions. Extensions cannot alter canonical DS-012 meaning, outcome, refusal, escalation, lifecycle, or evidence semantics.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]{1,127}:[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": true
+    },
+    "invariant_evaluation_ref": {
+      "type": "object",
+      "description": "Stable attributable and integrity-bound reference to a DS-012 Governance Invariant Evaluation Result.",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "invariant_id": {
+          "$ref": "invariant_definition.json#/$defs/invariant_definition_id"
+        },
+        "proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "outcome": {
+          "$ref": "#/$defs/invariant_evaluation_outcome"
+        },
+        "disposition": {
+          "$ref": "#/$defs/invariant_evaluation_disposition"
+        },
+        "structural_refusal_required": {
+          "type": "boolean"
+        },
+        "escalation_required": {
+          "type": "boolean"
+        },
+        "lifecycle_effect_type": {
+          "$ref": "#/$defs/lifecycle_effect/properties/effect_type"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "evaluation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "evaluation_id",
+        "invariant_id",
+        "proposal_id",
+        "tenant_id",
+        "governance_domain_id",
+        "target_ref",
+        "outcome",
+        "disposition",
+        "structural_refusal_required",
+        "escalation_required",
+        "lifecycle_effect_type",
+        "governance_evidence_refs",
+        "governance_version_ref",
+        "evaluation_digest",
+        "evaluated_at"
+      ]
+    },
+    "evaluated_assertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assertion_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "assertion_outcome": {
+          "type": "string",
+          "enum": [
+            "PRESERVED",
+            "VIOLATED",
+            "INDETERMINATE",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "input_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^/[A-Za-z0-9_.~/-]+$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "input_subset_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "assertion_id",
+        "assertion_outcome",
+        "input_paths",
+        "input_subset_digest"
+      ],
+      "description": "Result for one deterministically evaluated assertion or protected property of the bound invariant."
+    },
+    "structural_refusal_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Explicit identification of whether the invariant result produces Structural Refusal and the canonical DS-028 refusal evidence.",
+      "properties": {
+        "structural_refusal_required": {
+          "type": "boolean"
+        },
+        "prevents_authorization": {
+          "type": "boolean"
+        },
+        "rejection_code": {
+          "$ref": "common.json#/$defs/rejection_code"
+        },
+        "refusal_record_ref": {
+          "$ref": "refusal_record.json#/$defs/refusal_record_ref"
+        },
+        "effect_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "structural_refusal_required",
+        "prevents_authorization",
+        "effect_basis_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": true
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "then": {
+            "required": [
+              "rejection_code",
+              "refusal_record_ref"
+            ],
+            "properties": {
+              "prevents_authorization": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "then": {
+            "properties": {
+              "prevents_authorization": {
+                "const": false
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "rejection_code"
+                  ]
+                },
+                {
+                  "required": [
+                    "refusal_record_ref"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "escalation_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Explicit identification of any governed escalation resulting from invariant evaluation. Approval artifacts are evidence and do not themselves establish authority at commitment.",
+      "properties": {
+        "escalation_required": {
+          "type": "boolean"
+        },
+        "escalation_status": {
+          "type": "string",
+          "enum": [
+            "NOT_REQUIRED",
+            "REQUIRED",
+            "INITIATED",
+            "PENDING",
+            "SATISFIED",
+            "TERMINATED_NEGATIVE"
+          ]
+        },
+        "escalation_type": {
+          "type": "string",
+          "enum": [
+            "HUMAN_ADJUDICATION",
+            "PARTIAL_QUORUM",
+            "QUORUM_COMPLETION",
+            "CROSS_DOMAIN_REVIEW",
+            "GOVERNANCE_RE_EVALUATION",
+            "OTHER_GOVERNED_ESCALATION"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "required_approval_artifact_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "approval_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "target_lifecycle_state": {
+          "$ref": "governance_lifecycle_record.json#/$defs/derived_lifecycle_state"
+        },
+        "effect_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "partial_quorum_accumulation_supported": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "escalation_required",
+        "escalation_status",
+        "effect_basis_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "escalation_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "then": {
+            "properties": {
+              "escalation_status": {
+                "const": "NOT_REQUIRED"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "escalation_type"
+                  ]
+                },
+                {
+                  "required": [
+                    "reason"
+                  ]
+                },
+                {
+                  "required": [
+                    "required_approval_artifact_count"
+                  ]
+                },
+                {
+                  "required": [
+                    "approval_artifact_refs"
+                  ]
+                },
+                {
+                  "required": [
+                    "target_lifecycle_state"
+                  ]
+                },
+                {
+                  "required": [
+                    "partial_quorum_accumulation_supported"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "escalation_required": {
+                "const": true
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "then": {
+            "required": [
+              "escalation_type",
+              "reason",
+              "target_lifecycle_state"
+            ],
+            "properties": {
+              "escalation_status": {
+                "enum": [
+                  "REQUIRED",
+                  "INITIATED",
+                  "PENDING",
+                  "SATISFIED",
+                  "TERMINATED_NEGATIVE"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "escalation_type": {
+                "enum": [
+                  "PARTIAL_QUORUM",
+                  "QUORUM_COMPLETION"
+                ]
+              }
+            },
+            "required": [
+              "escalation_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "required_approval_artifact_count",
+              "partial_quorum_accumulation_supported"
+            ],
+            "properties": {
+              "partial_quorum_accumulation_supported": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "escalation_status": {
+                "const": "SATISFIED"
+              }
+            },
+            "required": [
+              "escalation_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "approval_artifact_refs"
+            ]
+          }
+        }
+      ]
+    },
+    "lifecycle_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Explicit authoritative-lifecycle effect resulting from invariant evaluation. DS-012 identifies the effect; DS-038 remains the authoritative lifecycle record.",
+      "properties": {
+        "lifecycle_state_considered": {
+          "type": "boolean"
+        },
+        "effect_type": {
+          "type": "string",
+          "enum": [
+            "NO_CHANGE",
+            "TRANSITION_REQUIRED",
+            "TRANSITION_APPLIED",
+            "PENDING_ESCALATION",
+            "GOVERNED_RE_EVALUATION_REQUIRED",
+            "TERMINAL_STRUCTURAL_REFUSAL",
+            "COMMITMENT_SUSPENDED"
+          ]
+        },
+        "prior_lifecycle_state_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        },
+        "resulting_lifecycle_state_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+        },
+        "lifecycle_transition_ref": {
+          "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
+        },
+        "effect_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "lifecycle_state_considered",
+        "effect_type",
+        "effect_basis_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "lifecycle_state_considered": {
+                "const": false
+              }
+            },
+            "required": [
+              "lifecycle_state_considered"
+            ]
+          },
+          "then": {
+            "properties": {
+              "effect_type": {
+                "const": "NO_CHANGE"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prior_lifecycle_state_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "resulting_lifecycle_state_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "lifecycle_transition_ref"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lifecycle_state_considered": {
+                "const": true
+              }
+            },
+            "required": [
+              "lifecycle_state_considered"
+            ]
+          },
+          "then": {
+            "required": [
+              "prior_lifecycle_state_ref",
+              "resulting_lifecycle_state_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "effect_type": {
+                "const": "TRANSITION_APPLIED"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "lifecycle_transition_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "effect_type": {
+                "const": "TERMINAL_STRUCTURAL_REFUSAL"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resulting_lifecycle_state_ref": {
+                "allOf": [
+                  {
+                    "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+                  },
+                  {
+                    "properties": {
+                      "derived_lifecycle_state": {
+                        "const": "STRUCTURALLY_REFUSED"
+                      },
+                      "terminality": {
+                        "const": "TERMINAL"
+                      },
+                      "commitment_eligibility": {
+                        "const": "INELIGIBLE_TERMINAL"
+                      }
+                    },
+                    "required": [
+                      "derived_lifecycle_state",
+                      "terminality",
+                      "commitment_eligibility"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "effect_type": {
+                "const": "PENDING_ESCALATION"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resulting_lifecycle_state_ref": {
+                "allOf": [
+                  {
+                    "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+                  },
+                  {
+                    "properties": {
+                      "derived_lifecycle_state": {
+                        "const": "PENDING_HUMAN_ADJUDICATION"
+                      },
+                      "terminality": {
+                        "const": "NONTERMINAL"
+                      },
+                      "commitment_eligibility": {
+                        "const": "SUSPENDED"
+                      }
+                    },
+                    "required": [
+                      "derived_lifecycle_state",
+                      "terminality",
+                      "commitment_eligibility"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "effect_type": {
+                "const": "GOVERNED_RE_EVALUATION_REQUIRED"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resulting_lifecycle_state_ref": {
+                "allOf": [
+                  {
+                    "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+                  },
+                  {
+                    "properties": {
+                      "derived_lifecycle_state": {
+                        "const": "GOVERNED_RE_EVALUATION_REQUIRED"
+                      },
+                      "terminality": {
+                        "const": "NONTERMINAL"
+                      },
+                      "commitment_eligibility": {
+                        "const": "RE_EVALUATION_REQUIRED"
+                      }
+                    },
+                    "required": [
+                      "derived_lifecycle_state",
+                      "terminality",
+                      "commitment_eligibility"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "effect_type": {
+                "const": "COMMITMENT_SUSPENDED"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resulting_lifecycle_state_ref": {
+                "allOf": [
+                  {
+                    "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+                  },
+                  {
+                    "properties": {
+                      "derived_lifecycle_state": {
+                        "const": "COMMITMENT_SUSPENDED"
+                      },
+                      "terminality": {
+                        "const": "NONTERMINAL"
+                      },
+                      "commitment_eligibility": {
+                        "const": "SUSPENDED"
+                      }
+                    },
+                    "required": [
+                      "derived_lifecycle_state",
+                      "terminality",
+                      "commitment_eligibility"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
   "properties": {
-    "invariant_id": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128
+    "evaluation_id": {
+      "$ref": "common.json#/$defs/evaluation_id"
     },
-    "invariant_type": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256,
-      "description": "Invariant type identifier from the invariant-type registry."
+    "result_type": {
+      "const": "GOVERNANCE_INVARIANT_EVALUATION_RESULT"
     },
-    "enforcement_level": {
-      "$ref": "common.json#/$defs/invariant_enforcement_enum"
+    "invariant_ref": {
+      "$ref": "invariant_definition.json#/$defs/invariant_definition_ref"
+    },
+    "proposal_ref": {
+      "$ref": "governed_action_proposal.json#/$defs/governed_action_proposal_ref"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
     },
     "governance_stage": {
       "$ref": "common.json#/$defs/governance_pipeline_stage_enum"
     },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "governance_configuration_ref": {
+      "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "canonical_state_ref": {
+      "$ref": "canonical_state.json#/$defs/canonical_state_ref"
+    },
+    "state_qualification_result_ref": {
+      "allOf": [
+        {
+          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "QUALIFIED"
+            }
+          },
+          "required": [
+            "outcome"
+          ]
+        }
+      ]
+    },
+    "qualified_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "evidence_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "evidence_qualification_result.json#/$defs/evidence_qualification_result_ref"
+          },
+          {
+            "properties": {
+              "outcome": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          }
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "authority_lineage_ref": {
+      "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+    },
+    "lifecycle_state_ref": {
+      "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_state_ref"
+    },
+    "input_qualification": {
+      "$ref": "#/$defs/input_qualification"
+    },
+    "qualified_input_hashes": {
+      "$ref": "#/$defs/qualified_input_hashes"
+    },
+    "applicability": {
+      "$ref": "#/$defs/applicability_determination"
+    },
+    "evaluated_assertions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evaluated_assertion"
+      },
+      "minItems": 1,
+      "maxItems": 512
+    },
+    "ordering_basis": {
+      "$ref": "#/$defs/ordering_basis"
+    },
     "outcome": {
-      "$ref": "common.json#/$defs/pass_fail_enum"
+      "$ref": "#/$defs/invariant_evaluation_outcome"
+    },
+    "disposition": {
+      "$ref": "#/$defs/invariant_evaluation_disposition"
     },
     "reason": {
       "type": "string",
-      "maxLength": 2048
+      "minLength": 1,
+      "maxLength": 4096
     },
-    "rejection_code": {
-      "$ref": "common.json#/$defs/rejection_code"
+    "violated_assertion_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/identifier"
+      },
+      "minItems": 1,
+      "uniqueItems": true
     },
-    "policy_ref": {
-      "$ref": "common.json#/$defs/policy_ref"
+    "indeterminate_dimensions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "CANONICAL_STATE",
+          "EVIDENCE",
+          "AUTHORITY",
+          "LIFECYCLE",
+          "POLICY",
+          "GOVERNANCE_CONFIGURATION",
+          "GOVERNANCE_VERSION",
+          "TARGET",
+          "TENANT_DOMAIN",
+          "PROPOSAL",
+          "CONSTRAINT",
+          "ASSERTION_EVALUATION"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
     },
-    "canonical_state_ref": {
-      "$ref": "common.json#/$defs/canonical_state_ref"
+    "structural_refusal_effect": {
+      "$ref": "#/$defs/structural_refusal_effect"
     },
-    "authority_lineage_ref": {
-      "$ref": "common.json#/$defs/authority_lineage_ref"
+    "escalation_effect": {
+      "$ref": "#/$defs/escalation_effect"
     },
-    "evaluation_timestamp": {
+    "lifecycle_effect": {
+      "$ref": "#/$defs/lifecycle_effect"
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "evaluated_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
     },
-    "metadata": {
-      "type": "object",
-      "description": "Implementation-defined diagnostic metadata.",
-      "additionalProperties": true
+    "evaluation_attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "evaluation_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
     }
   },
   "required": [
-    "invariant_id",
-    "invariant_type",
-    "enforcement_level",
+    "evaluation_id",
+    "result_type",
+    "invariant_ref",
+    "proposal_ref",
+    "tenant_id",
+    "governance_domain_id",
+    "target_ref",
     "governance_stage",
-    "outcome"
+    "evaluation_horizon",
+    "governance_version_ref",
+    "governance_configuration_ref",
+    "policy_refs",
+    "input_qualification",
+    "qualified_input_hashes",
+    "applicability",
+    "evaluated_assertions",
+    "ordering_basis",
+    "outcome",
+    "disposition",
+    "structural_refusal_effect",
+    "escalation_effect",
+    "lifecycle_effect",
+    "governance_evidence_refs",
+    "evaluated_at",
+    "evaluation_attribution",
+    "provenance",
+    "evaluation_digest",
+    "integrity_signature",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "input_qualification": {
+            "properties": {
+              "canonical_state": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "canonical_state"
+            ]
+          }
+        },
+        "required": [
+          "input_qualification"
+        ]
+      },
+      "then": {
+        "required": [
+          "canonical_state_ref",
+          "state_qualification_result_ref"
+        ],
+        "properties": {
+          "qualified_input_hashes": {
+            "required": [
+              "canonical_state_digest",
+              "state_qualification_result_digest"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input_qualification": {
+            "properties": {
+              "evidence": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "evidence"
+            ]
+          }
+        },
+        "required": [
+          "input_qualification"
+        ]
+      },
+      "then": {
+        "required": [
+          "qualified_evidence_refs",
+          "evidence_qualification_result_refs"
+        ],
+        "properties": {
+          "qualified_input_hashes": {
+            "required": [
+              "evidence_set_digest",
+              "evidence_qualification_result_digests"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input_qualification": {
+            "properties": {
+              "authority": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "authority"
+            ]
+          }
+        },
+        "required": [
+          "input_qualification"
+        ]
+      },
+      "then": {
+        "required": [
+          "authority_lineage_ref"
+        ],
+        "properties": {
+          "qualified_input_hashes": {
+            "required": [
+              "authority_lineage_digest"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input_qualification": {
+            "properties": {
+              "lifecycle": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "lifecycle"
+            ]
+          }
+        },
+        "required": [
+          "input_qualification"
+        ]
+      },
+      "then": {
+        "required": [
+          "lifecycle_state_ref"
+        ],
+        "properties": {
+          "qualified_input_hashes": {
+            "required": [
+              "lifecycle_state_digest"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "PRESERVED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "CONTINUE_EVALUATION"
+          },
+          "applicability": {
+            "properties": {
+              "applicable": {
+                "const": true
+              }
+            },
+            "required": [
+              "applicable"
+            ]
+          },
+          "input_qualification": {
+            "properties": {
+              "all_required_inputs_qualified": {
+                "const": true
+              }
+            },
+            "required": [
+              "all_required_inputs_qualified"
+            ]
+          },
+          "structural_refusal_effect": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "escalation_effect": {
+            "properties": {
+              "escalation_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "NO_CHANGE"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "violated_assertion_ids"
+              ]
+            },
+            {
+              "required": [
+                "indeterminate_dimensions"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "VIOLATED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "reason",
+          "violated_assertion_ids"
+        ],
+        "properties": {
+          "disposition": {
+            "enum": [
+              "STRUCTURAL_REFUSAL",
+              "ESCALATION_REQUIRED",
+              "RE_EVALUATION_REQUIRED"
+            ]
+          },
+          "applicability": {
+            "properties": {
+              "applicable": {
+                "const": true
+              }
+            },
+            "required": [
+              "applicable"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "INDETERMINATE"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "reason",
+          "indeterminate_dimensions"
+        ],
+        "properties": {
+          "disposition": {
+            "enum": [
+              "STRUCTURAL_REFUSAL",
+              "ESCALATION_REQUIRED",
+              "RE_EVALUATION_REQUIRED",
+              "EVALUATION_BLOCKED"
+            ]
+          },
+          "input_qualification": {
+            "properties": {
+              "all_required_inputs_qualified": {
+                "const": false
+              }
+            },
+            "required": [
+              "all_required_inputs_qualified"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "NOT_APPLICABLE"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "reason"
+        ],
+        "properties": {
+          "disposition": {
+            "const": "NO_EFFECT"
+          },
+          "applicability": {
+            "properties": {
+              "applicable": {
+                "const": false
+              }
+            },
+            "required": [
+              "applicable"
+            ]
+          },
+          "structural_refusal_effect": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "escalation_effect": {
+            "properties": {
+              "escalation_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "NO_CHANGE"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "violated_assertion_ids"
+              ]
+            },
+            {
+              "required": [
+                "indeterminate_dimensions"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "VIOLATED"
+          },
+          "invariant_ref": {
+            "properties": {
+              "enforcement_level": {
+                "const": "Hard"
+              }
+            },
+            "required": [
+              "enforcement_level"
+            ]
+          }
+        },
+        "required": [
+          "outcome",
+          "invariant_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "STRUCTURAL_REFUSAL"
+          },
+          "structural_refusal_effect": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": true
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "escalation_effect": {
+            "properties": {
+              "escalation_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "TERMINAL_STRUCTURAL_REFUSAL"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "disposition": {
+            "const": "STRUCTURAL_REFUSAL"
+          }
+        },
+        "required": [
+          "disposition"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_refusal_effect": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": true
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "escalation_effect": {
+            "properties": {
+              "escalation_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "TERMINAL_STRUCTURAL_REFUSAL"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "disposition": {
+            "const": "ESCALATION_REQUIRED"
+          }
+        },
+        "required": [
+          "disposition"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_refusal_effect": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "escalation_effect": {
+            "properties": {
+              "escalation_required": {
+                "const": true
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "PENDING_ESCALATION"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "disposition": {
+            "const": "RE_EVALUATION_REQUIRED"
+          }
+        },
+        "required": [
+          "disposition"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_refusal_effect": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "escalation_effect": {
+            "properties": {
+              "escalation_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "GOVERNED_RE_EVALUATION_REQUIRED"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "disposition": {
+            "const": "EVALUATION_BLOCKED"
+          }
+        },
+        "required": [
+          "disposition"
+        ]
+      },
+      "then": {
+        "properties": {
+          "structural_refusal_effect": {
+            "properties": {
+              "structural_refusal_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "structural_refusal_required"
+            ]
+          },
+          "escalation_effect": {
+            "properties": {
+              "escalation_required": {
+                "const": false
+              }
+            },
+            "required": [
+              "escalation_required"
+            ]
+          },
+          "lifecycle_effect": {
+            "properties": {
+              "effect_type": {
+                "const": "COMMITMENT_SUSPENDED"
+              }
+            },
+            "required": [
+              "effect_type"
+            ]
+          }
+        }
+      }
+    }
   ]
 }

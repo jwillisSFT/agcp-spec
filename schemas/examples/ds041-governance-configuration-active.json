@@ -1,0 +1,277 @@
+{
+  "governance_configuration_id": "config-1",
+  "configuration_version": "1.0.0",
+  "configuration_type": "GOVERNANCE_CONFIGURATION",
+  "configuration_status": "ACTIVE",
+  "tenant_id": "tenant-1",
+  "governance_domain_id": "domain-1",
+  "effective_scope": {
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1"
+  },
+  "applicable_policy_refs": [
+    {
+      "policy_id": "policy-1",
+      "policy_version": "2.0.0",
+      "policy_digest": {
+        "algorithm": "SHA-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "artifact_uri": "https://agcp.ai/example/policies/policy-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
+      "status": "Active"
+    }
+  ],
+  "source_governance_intent_refs": [
+    {
+      "intent_id": "intent-id-1",
+      "intent_version": "1.0.0",
+      "intent_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "originating_authority": {
+        "principal_id": "principal-id-1",
+        "principal_type": "AGENT"
+      }
+    }
+  ],
+  "configuration_manifest": {
+    "manifest_complete": true,
+    "hidden_configuration_present": false,
+    "implicit_configuration_influences_decisions": false,
+    "settings": [
+      {
+        "setting_id": "setting-id-1",
+        "setting_path": "runtime.commit_boundary.enabled",
+        "setting_type": "BOOLEAN",
+        "setting_value": true,
+        "governance_significance": "ADMISSIBILITY",
+        "protection_class": "ORDINARY",
+        "runtime_mutability": "CONTROLLED_ACTIVATION_ONLY",
+        "source_intent_refs": [
+          {
+            "intent_id": "intent-id-1",
+            "intent_version": "1.0.0",
+            "intent_digest": {
+              "algorithm": "SHA-256",
+              "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "originating_authority": {
+              "principal_id": "principal-id-1",
+              "principal_type": "AGENT"
+            }
+          }
+        ],
+        "setting_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ],
+    "manifest_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "risk_based_re_evaluation_configuration": {
+    "enabled": true,
+    "configuration_version": "1.0.0",
+    "material_change_rules": [
+      {
+        "rule_id": "rule-id-1",
+        "risk_class": "LOW",
+        "change_classes": [
+          "AUTHORITY"
+        ],
+        "materiality_criteria": [
+          "example"
+        ],
+        "affected_proposal_selector": {
+          "selector_id": "selector-id-1",
+          "selector_version": "1.0.0",
+          "selector_policy_ref": {
+            "policy_id": "policy-id-1",
+            "policy_version": "1.0.0",
+            "policy_digest": {
+              "algorithm": "SHA-256",
+              "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "artifact_uri": "https://agcp.ai/example/artifact-uri",
+            "tenant_id": "tenant-id-1",
+            "governance_domain_id": "governance-domain-id-1",
+            "status": "Registered"
+          },
+          "nonterminal_lifecycle_states": [
+            "SUBMITTED"
+          ],
+          "selection_inputs": [
+            "PROPOSAL_IDENTITY"
+          ],
+          "preserves_unaffected_proposals": true,
+          "unnecessary_re_evaluation_prohibited": true,
+          "selector_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "required_disposition": "RE_EVALUATE_BEFORE_COMMIT",
+        "re_evaluation_stage": "CONTINUATION_INTEGRITY",
+        "rule_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ],
+    "change_detection_ordering_basis": "GOVERNANCE_LEDGER_ORDER",
+    "arrival_timing_used_as_governance_basis": false,
+    "default_unmatched_change_disposition": "GOVERNED_ESCALATION",
+    "requires_current_state_qualification": true,
+    "requires_current_evidence_qualification": true,
+    "requires_authority_rederivation_where_applicable": true,
+    "requires_attributable_outcome_evidence": true,
+    "configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "protected_configuration_paths": [
+    "runtime.commit_boundary.enabled"
+  ],
+  "configuration_availability": {
+    "available_for_governance_evaluation": true,
+    "externally_retrievable": true,
+    "authoritative_artifact_uri": "https://agcp.ai/example/authoritative-artifact-uri",
+    "resolution_profile": "example",
+    "availability_evidence_ref": {
+      "governance_evidence_id": "governance-evidence-id-1",
+      "evidence_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  },
+  "change_control": {
+    "change_origin": "EXTERNAL_GOVERNANCE_AUTHORITY",
+    "change_request_ref": "https://agcp.ai/example/change-request-ref",
+    "governance_compilation_required": true,
+    "constitutional_validation_required": true,
+    "governance_omission_analysis_required": true,
+    "controlled_activation_required": true,
+    "direct_self_modification_prohibited": true,
+    "prior_authoritative_version_preserved_on_failure": true,
+    "external_approval_artifact_refs": [
+      {
+        "approval_artifact_id": "approval-config-approval-1",
+        "decision": "APPROVE",
+        "status": "ACTIVE",
+        "proposal_id": "proposal-1",
+        "tenant_id": "tenant-1",
+        "governance_domain_id": "domain-1",
+        "target_id": "target-1",
+        "artifact_digest": {
+          "algorithm": "SHA-256",
+          "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "validity_window": {
+          "not_before": "2026-07-30T16:00:00Z",
+          "expires_at": "2026-07-31T16:00:00Z"
+        }
+      }
+    ]
+  },
+  "governance_evidence_refs": [
+    {
+      "governance_evidence_id": "evidence-8",
+      "evidence_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "created_at": "2026-07-30T16:00:00Z",
+  "attribution": {
+    "principal": {
+      "principal_id": "principal-id-1",
+      "principal_type": "AGENT"
+    },
+    "attributed_at": "2026-07-30T16:00:00Z"
+  },
+  "provenance": {
+    "signer": "example",
+    "signature": {
+      "alg": "SHA-256",
+      "kid": "key-1",
+      "sig": "signature-value"
+    },
+    "signed_at": "2026-07-30T16:00:00Z"
+  },
+  "configuration_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "integrity_signature": {
+    "alg": "SHA-256",
+    "kid": "key-1",
+    "sig": "signature-value"
+  },
+  "replay_material": {
+    "canonical_configuration_uri": "https://agcp.ai/example/canonical-configuration-uri",
+    "source_intent_digests": [
+      {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "policy_digests": [
+      {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "canonicalization_profile": "example",
+    "deterministic_replay_supported": true
+  },
+  "semantic_assertions": {
+    "all_governance_significant_configuration_explicit": true,
+    "configuration_attributable": true,
+    "configuration_versioned": true,
+    "configuration_available_for_evaluation": true,
+    "hidden_configuration_influences_decisions": false,
+    "implicit_configuration_influences_decisions": false,
+    "governed_system_can_directly_modify_admissibility_conditions": false,
+    "external_approval_compilation_validation_and_activation_required_for_change": true,
+    "risk_based_re_evaluation_deterministic": true,
+    "unaffected_nonterminal_proposals_preserved": true,
+    "configuration_establishes_authority_at_commitment": false,
+    "configuration_authorizes_execution": false,
+    "configuration_activates_itself": false,
+    "deterministic_replay_supported": true
+  },
+  "governance_version_ref": {
+    "governance_version_id": "gv-2.0.0"
+  },
+  "controlled_governance_activation_ref": {
+    "controlled_governance_activation_id": "CGA-ACTIVATION-1",
+    "activation_version": "2.0.0",
+    "activation_status": "ACTIVATED",
+    "activation_operation": "INITIAL_ACTIVATION",
+    "package_id": "GAP-EXAMPLE-1",
+    "established_governance_version_ref": {
+      "governance_version_id": "gv-2.0.0"
+    },
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "completed_at": "2026-07-30T16:00:00Z",
+    "activation_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "effective_from": "2026-07-30T16:00:00Z"
+}

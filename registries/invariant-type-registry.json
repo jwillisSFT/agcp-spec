@@ -1,12 +1,326 @@
 {
-  "registry": "AGCP Invariant Type Registry",
-  "status": "Normative",
+  "$schema": "https://agcp.ai/schemas/registry_document.schema.json",
+  "registry_document_id": "REGDOC-INVARIANT-TYPE",
+  "registry_id": "REG-INVARIANT-TYPE",
+  "registry_name": "AGCP Invariant Type Registry",
+  "registry_kind": "INVARIANT_TYPE",
+  "normative_status": "NORMATIVE",
   "series": "AGCP Core",
-  "versioning": {
-    "authority": "repository release tag",
-    "embedded_version": false
-  },
   "description": "Authoritative registry of recognized AGCP invariant types used across governance evaluation, authorization, Commit Boundary processing, Continuation Integrity, Governance Evidence, and Governance Self-Protection.",
+  "release": {
+    "release_id": "REG-INVARIANT-TYPE-v2.0.0",
+    "registry_release": "v2.0.0",
+    "specification_version": "v2.0",
+    "publication_status": "CURRENT",
+    "published_at": "2026-07-30T12:26:00-04:00",
+    "authority": "AGCP controlled repository release",
+    "repository_path": "registries/invariant-type-registry.json",
+    "canonical_uri": "https://agcp.ai/registries/invariant-type-registry.json"
+  },
+  "lifecycle": {
+    "lifecycle_state": "ACTIVE",
+    "effective_from": "2026-07-30T09:27:00-04:00"
+  },
+  "integrity": {
+    "integrity_protected": true,
+    "digest_algorithm": "SHA-256",
+    "canonicalization": "JCS-RFC8785",
+    "entry_count": 26,
+    "entry_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "e918da4830da2a1691fc1beb604ef66f4a5e241b31c8d28b9ca4a64680ce5ed9",
+      "canonicalization": "JCS-RFC8785"
+    },
+    "document_digest": {
+      "algorithm": "SHA-256",
+      "value": "2cead8b63832f287ca0dd3afa2722e47e50cb2fe3a117b9c0d87dd5f4bf7fb36",
+      "canonicalization": "JCS-RFC8785"
+    }
+  },
+  "traceability": {
+    "source_artifact_refs": [
+      "spec/AGCP-Core.docx",
+      "spec/Architecture Reference Model.docx",
+      "spec/AGCP Normative Statements.docx",
+      "spec/AGCP_Runtime_Governance_Requirements_CR-001_thru_CR-122.csv",
+      "registries/README.md"
+    ],
+    "schema_refs": [
+      "schemas/registry_document.schema.json",
+      "schemas/invariant_definition.json",
+      "schemas/invariant_evaluation.json",
+      "schemas/compiled_governance_artifact.json"
+    ],
+    "requirement_refs": [
+      "CR-001",
+      "CR-002",
+      "CR-003",
+      "CR-008",
+      "CR-011",
+      "CR-012",
+      "CR-013",
+      "CR-014",
+      "CR-015",
+      "CR-016",
+      "CR-017",
+      "CR-018",
+      "CR-019",
+      "CR-020",
+      "CR-021",
+      "CR-022",
+      "CR-023",
+      "CR-024",
+      "CR-025",
+      "CR-026",
+      "CR-027",
+      "CR-028",
+      "CR-029",
+      "CR-030",
+      "CR-032",
+      "CR-034",
+      "CR-035",
+      "CR-040",
+      "CR-041",
+      "CR-042",
+      "CR-044",
+      "CR-046",
+      "CR-047",
+      "CR-048",
+      "CR-049",
+      "CR-050",
+      "CR-051",
+      "CR-052",
+      "CR-053",
+      "CR-054",
+      "CR-055",
+      "CR-056",
+      "CR-058",
+      "CR-059",
+      "CR-060",
+      "CR-061",
+      "CR-062",
+      "CR-063",
+      "CR-064",
+      "CR-065",
+      "CR-066",
+      "CR-067",
+      "CR-068",
+      "CR-069",
+      "CR-070",
+      "CR-071",
+      "CR-072",
+      "CR-073",
+      "CR-074",
+      "CR-075",
+      "CR-076",
+      "CR-077",
+      "CR-078",
+      "CR-079",
+      "CR-080",
+      "CR-081",
+      "CR-082",
+      "CR-083",
+      "CR-084",
+      "CR-085",
+      "CR-086",
+      "CR-088",
+      "CR-089",
+      "CR-090",
+      "CR-091",
+      "CR-092",
+      "CR-093",
+      "CR-096",
+      "CR-097",
+      "CR-098",
+      "CR-099",
+      "CR-100",
+      "CR-101",
+      "CR-102",
+      "CR-103",
+      "CR-104",
+      "CR-105",
+      "CR-106",
+      "CR-107",
+      "CR-108",
+      "CR-109",
+      "CR-110",
+      "CR-111",
+      "CR-112",
+      "CR-113",
+      "CR-114",
+      "CR-115",
+      "CR-116",
+      "CR-117",
+      "CR-118",
+      "CR-119",
+      "CR-120",
+      "CR-121",
+      "CR-122"
+    ],
+    "entry_traceability_policy": "Every registry entry carries a permanent REG identifier and direct NS and CR references. Entry relationships are explicit and integrity-bound; release-level traceability does not substitute for entry-level traceability.",
+    "architecture_refs": [
+      "ARM-101",
+      "ARM-102",
+      "ARM-103",
+      "ARM-105",
+      "ARM-106",
+      "ARM-107",
+      "ARM-108",
+      "ARM-201",
+      "ARM-202",
+      "ARM-203",
+      "ARM-204",
+      "ARM-205",
+      "ARM-206",
+      "ARM-207",
+      "ARM-208",
+      "ARM-209",
+      "ARM-210",
+      "ARM-211",
+      "ARM-212",
+      "ARM-213",
+      "ARM-214",
+      "ARM-215",
+      "ARM-216",
+      "ARM-217",
+      "ARM-302",
+      "ARM-303",
+      "ARM-304",
+      "ARM-305",
+      "ARM-306",
+      "ARM-307",
+      "ARM-308",
+      "ARM-401",
+      "ARM-402",
+      "ARM-403",
+      "ARM-404",
+      "ARM-405",
+      "ARM-406",
+      "ARM-407",
+      "ARM-408",
+      "ARM-501",
+      "ARM-502",
+      "ARM-503",
+      "ARM-504",
+      "ARM-505",
+      "ARM-506",
+      "ARM-507",
+      "ARM-508",
+      "ARM-509",
+      "ARM-510",
+      "ARM-511",
+      "ARM-512",
+      "ARM-601",
+      "ARM-602",
+      "ARM-603",
+      "ARM-604",
+      "ARM-605",
+      "ARM-606",
+      "ARM-607",
+      "ARM-608",
+      "ARM-609",
+      "ARM-610",
+      "ARM-701",
+      "ARM-702",
+      "ARM-703",
+      "ARM-704",
+      "ARM-705",
+      "ARM-706",
+      "ARM-707",
+      "ARM-708",
+      "ARM-709",
+      "ARM-710",
+      "ARM-801",
+      "ARM-802",
+      "ARM-803",
+      "ARM-804",
+      "ARM-805",
+      "ARM-806",
+      "ARM-807",
+      "ARM-808",
+      "ARM-809"
+    ],
+    "normative_statement_refs": [
+      "NS-10.1-02",
+      "NS-10.2-02",
+      "NS-10.4-01",
+      "NS-10.5-01",
+      "NS-10.5-02",
+      "NS-10.8-01",
+      "NS-11.4-01",
+      "NS-11.4-02",
+      "NS-11.7-02",
+      "NS-12.1-01",
+      "NS-12.4-02",
+      "NS-12.4-03",
+      "NS-12.7-02",
+      "NS-13.1-01",
+      "NS-13.1-02",
+      "NS-13.4-01",
+      "NS-13.5-02",
+      "NS-13.5-03",
+      "NS-13.5-04",
+      "NS-13.6-05",
+      "NS-13.6A-01",
+      "NS-13.6A-04",
+      "NS-13.6A-05",
+      "NS-13.6B-01",
+      "NS-13.6B-02",
+      "NS-13.6B-03",
+      "NS-13.6B-05",
+      "NS-13.6B-06",
+      "NS-14.1-01",
+      "NS-14.4-01",
+      "NS-14.7-02",
+      "NS-15.3-02",
+      "NS-15.4-01",
+      "NS-15.4-02",
+      "NS-15.6A-02",
+      "NS-15.6A-03",
+      "NS-15.6B-01",
+      "NS-15.6B-02",
+      "NS-15.7-02",
+      "NS-16.4-01",
+      "NS-16.4-02",
+      "NS-16.4-03",
+      "NS-16.5-02",
+      "NS-16.6-02",
+      "NS-16.6A-01",
+      "NS-16.6A-02",
+      "NS-16.6A-03",
+      "NS-17.2-03",
+      "NS-4.11-01",
+      "NS-4.4-01",
+      "NS-4.6-01",
+      "NS-4.6-02",
+      "NS-4.6-04",
+      "NS-4.7-01",
+      "NS-5.2.1-01",
+      "NS-5.2.1-02",
+      "NS-5.2.3-02",
+      "NS-5.2.5-03",
+      "NS-5.2.6-01",
+      "NS-5.3-01",
+      "NS-5.3-02",
+      "NS-5.3-03",
+      "NS-5.9-02",
+      "NS-6.6-01",
+      "NS-6.6A-02",
+      "NS-7.4-01",
+      "NS-7.4-02",
+      "NS-7.5-03",
+      "NS-7.6-01",
+      "NS-8.2-02",
+      "NS-8.4-01",
+      "NS-8.6-01",
+      "NS-9.4-01",
+      "NS-9.4-02",
+      "NS-9.4-03",
+      "NS-9.6-04",
+      "NS-9.6A-02",
+      "NS-9.6A-04"
+    ]
+  },
   "registry_rules": {
     "stability": "Invariant type identifiers are stable registry keys and SHALL NOT be repurposed.",
     "extensibility": "Implementations MAY define extension invariant types in an implementation or profile-specific namespace, provided extension invariants do not weaken AGCP normative behavior.",
@@ -30,11 +344,32 @@
     "outcomes": "Permitted invariant evaluation outcomes.",
     "failure_behavior": "Required behavior when the invariant fails.",
     "governance_evidence": "Whether Governance Evidence is normally required.",
-    "description": "Normative description of the invariant type."
+    "description": "Normative description of the invariant type.",
+    "reg_id": "Permanent REG namespace identifier assigned to this registry entry.",
+    "ns_refs": "Normative Statement identifiers directly implemented or supported by the entry.",
+    "cr_refs": "Conformance Requirement identifiers directly implemented or supported by the entry."
   },
   "invariant_types": [
     {
+      "reg_id": "REG-027",
       "invariant_type": "DETERMINISTIC_GOVERNANCE",
+      "ns_refs": [
+        "NS-5.2.1-01",
+        "NS-5.2.1-02",
+        "NS-5.2.6-01"
+      ],
+      "cr_refs": [
+        "CR-008",
+        "CR-034",
+        "CR-073",
+        "CR-074",
+        "CR-075",
+        "CR-076",
+        "CR-077",
+        "CR-078",
+        "CR-089",
+        "CR-090"
+      ],
       "category": "global_governance",
       "default_stage": "Governance Decision Function",
       "default_enforcement_level": "Hard",
@@ -60,10 +395,37 @@
       ],
       "failure_behavior": "Deny, refuse, fail authorization, fail Commit Boundary, or reject replay as applicable.",
       "governance_evidence": "required_when_attributable",
-      "description": "Preserves deterministic externally observable governance behavior for identical authoritative inputs."
+      "description": "Preserves deterministic externally observable governance behavior for identical authoritative inputs.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "8ec37cd1e9348ed097a1bec0831f1b7f21a6cc3fa11662e236e56e5368f2c6a0",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-028",
       "invariant_type": "GOVERNANCE_DECISION_INTEGRITY",
+      "ns_refs": [
+        "NS-7.4-01",
+        "NS-7.4-02",
+        "NS-7.5-03",
+        "NS-7.6-01"
+      ],
+      "cr_refs": [
+        "CR-001",
+        "CR-002",
+        "CR-003",
+        "CR-053",
+        "CR-054",
+        "CR-055",
+        "CR-075",
+        "CR-076",
+        "CR-083",
+        "CR-104",
+        "CR-120"
+      ],
       "category": "global_governance",
       "default_stage": "Governance Decision Function",
       "default_enforcement_level": "Hard",
@@ -87,10 +449,35 @@
       ],
       "failure_behavior": "Deny, require Governed Re-evaluation, or refuse decision publication.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures governance decisions are authoritative, attributable, supported by resolved policy and Canonical State, and not substituted or reinterpreted outside the Governance Decision Function."
+      "description": "Ensures governance decisions are authoritative, attributable, supported by resolved policy and Canonical State, and not substituted or reinterpreted outside the Governance Decision Function.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "c7edcbc132fe6fae87b7bd0047c27627ff8247a02de42ed73aae656ae0672189",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-029",
       "invariant_type": "EXECUTION_AUTHORIZATION_INTEGRITY",
+      "ns_refs": [
+        "NS-4.11-01",
+        "NS-8.2-02",
+        "NS-8.4-01",
+        "NS-8.6-01"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-020",
+        "CR-021",
+        "CR-022",
+        "CR-023",
+        "CR-061",
+        "CR-096",
+        "CR-120",
+        "CR-121"
+      ],
       "category": "execution_authorization",
       "default_stage": "Execution Authorization",
       "default_enforcement_level": "Hard",
@@ -114,10 +501,40 @@
       ],
       "failure_behavior": "Authorization Failure or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures Execution Authorization is valid, current, bound to the governed Action, and not treated as unconditional future execution authority."
+      "description": "Ensures Execution Authorization is valid, current, bound to the governed Action, and not treated as unconditional future execution authority.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "063083e905073813d1cab3fa5bf2a58067177c79345c64ee8a985c65838734e0",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-030",
       "invariant_type": "COMMIT_BOUNDARY_INTEGRITY",
+      "ns_refs": [
+        "NS-4.7-01",
+        "NS-9.4-02",
+        "NS-9.4-03",
+        "NS-9.6-04"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-020",
+        "CR-021",
+        "CR-022",
+        "CR-023",
+        "CR-024",
+        "CR-025",
+        "CR-079",
+        "CR-080",
+        "CR-084",
+        "CR-088",
+        "CR-119",
+        "CR-120",
+        "CR-121"
+      ],
       "category": "commit_boundary",
       "default_stage": "Commit Boundary",
       "default_enforcement_level": "Hard",
@@ -141,10 +558,37 @@
       ],
       "failure_behavior": "Commit Failed or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures no governance-significant execution becomes operationally real unless successful Commit Boundary processing binds authoritative Execution Authorization immediately before execution."
+      "description": "Ensures no governance-significant execution becomes operationally real unless successful Commit Boundary processing binds authoritative Execution Authorization immediately before execution.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "ee59f39952f0dc3e8f2e8de1bc16be62095f53105dc451d93ed2bc32dbecf8fb",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-031",
       "invariant_type": "CANONICAL_STATE_INTEGRITY",
+      "ns_refs": [
+        "NS-4.6-01",
+        "NS-4.6-02",
+        "NS-4.6-04",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-042",
+        "CR-048",
+        "CR-049",
+        "CR-050",
+        "CR-051",
+        "CR-052",
+        "CR-062",
+        "CR-083",
+        "CR-084",
+        "CR-103",
+        "CR-104"
+      ],
       "category": "canonical_state",
       "default_stage": "Governance Decision Function",
       "default_enforcement_level": "Hard",
@@ -169,10 +613,31 @@
       ],
       "failure_behavior": "Structural Refusal, Denied, Authorization Failure, Commit Failed, or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures Canonical State remains complete, consistent, authoritative, fresh, available, provenance-backed, and integrity-protected wherever required."
+      "description": "Ensures Canonical State remains complete, consistent, authoritative, fresh, available, provenance-backed, and integrity-protected wherever required.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "962490e77b84b0ba14d190d77a9e8783eeb2b75bb0af0f386d36e55d64faa25e",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-032",
       "invariant_type": "CANONICAL_STATE_AUTHORITY",
+      "ns_refs": [
+        "NS-4.6-02",
+        "NS-5.2.5-03",
+        "NS-7.4-01"
+      ],
+      "cr_refs": [
+        "CR-046",
+        "CR-051",
+        "CR-083",
+        "CR-084",
+        "CR-103",
+        "CR-104"
+      ],
       "category": "canonical_state",
       "default_stage": "Governance Decision Function",
       "default_enforcement_level": "Hard",
@@ -196,10 +661,37 @@
       ],
       "failure_behavior": "Reject use of non-authoritative state and require governed evaluation against Canonical State.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures non-authoritative observations, telemetry, cached values, stale data, or speculative state SHALL NOT supersede authoritative Canonical State."
+      "description": "Ensures non-authoritative observations, telemetry, cached values, stale data, or speculative state SHALL NOT supersede authoritative Canonical State.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "082acaaea12d707c73d96a9f2d285e8b55acaeb5075ad37130cb3825e9206071",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-033",
       "invariant_type": "GOVERNANCE_EVIDENCE_INTEGRITY",
+      "ns_refs": [
+        "NS-10.2-02",
+        "NS-10.5-01",
+        "NS-10.5-02"
+      ],
+      "cr_refs": [
+        "CR-041",
+        "CR-047",
+        "CR-056",
+        "CR-064",
+        "CR-065",
+        "CR-066",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-085",
+        "CR-086",
+        "CR-097"
+      ],
       "category": "governance_evidence",
       "default_stage": "Governance Evidence",
       "default_enforcement_level": "Hard",
@@ -224,10 +716,38 @@
       ],
       "failure_behavior": "Evidence rejection, replay rejection, or conformance failure.",
       "governance_evidence": "not_required",
-      "description": "Ensures Governance Evidence preserves authenticity, integrity, attribution, traceability, chronological ordering, and logical association with the governed object."
+      "description": "Ensures Governance Evidence preserves authenticity, integrity, attribution, traceability, chronological ordering, and logical association with the governed object.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "196fcea997e642a0806dbb73323c112f9c2eee7bd17ff6a5acf144045124d1fa",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-034",
       "invariant_type": "GOVERNANCE_EVIDENCE_COMPLETENESS",
+      "ns_refs": [
+        "NS-10.1-02",
+        "NS-10.4-01",
+        "NS-10.8-01"
+      ],
+      "cr_refs": [
+        "CR-041",
+        "CR-054",
+        "CR-062",
+        "CR-063",
+        "CR-064",
+        "CR-065",
+        "CR-066",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-085",
+        "CR-086",
+        "CR-097"
+      ],
       "category": "governance_evidence",
       "default_stage": "Governance Evidence",
       "default_enforcement_level": "Hard",
@@ -257,10 +777,32 @@
       ],
       "failure_behavior": "Evidence rejection, replay rejection, or conformance failure.",
       "governance_evidence": "not_required",
-      "description": "Ensures Governance Evidence contains sufficient information to establish governed processing state, traceability, and replayability."
+      "description": "Ensures Governance Evidence contains sufficient information to establish governed processing state, traceability, and replayability.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "612bc744a9c78a371bcb49909b6d807ce69d00c9bf2480a598d6eaf9c40158d0",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-035",
       "invariant_type": "AUTHORITY_LINEAGE_INTEGRITY",
+      "ns_refs": [
+        "NS-4.4-01",
+        "NS-12.1-01",
+        "NS-12.4-03"
+      ],
+      "cr_refs": [
+        "CR-040",
+        "CR-044",
+        "CR-065",
+        "CR-072",
+        "CR-096",
+        "CR-115",
+        "CR-116"
+      ],
       "category": "authority",
       "default_stage": "Delegation and Authority Lineage",
       "default_enforcement_level": "Hard",
@@ -269,7 +811,7 @@
         "Action",
         "Execution Authorization",
         "Commit Boundary",
-        "human-review artifact",
+        "governance-approval artifact",
         "governance artifact"
       ],
       "required_inputs": [
@@ -286,10 +828,32 @@
       ],
       "failure_behavior": "Structural Refusal, Denied, Authorization Failure, Commit Failed, or artifact activation denial.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures Authority Lineage is preserved, validated, attributable, unexpired, unreplayed, and sufficient for the governed operation."
+      "description": "Ensures Authority Lineage is preserved, validated, attributable, unexpired, unreplayed, and sufficient for the governed operation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "47ca1c73b063e5ac6f104df4b5736380e8efdb847a40d508db786cbab40487ea",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-036",
       "invariant_type": "AUTHORITY_NON_EXPANSION",
+      "ns_refs": [
+        "NS-12.4-02",
+        "NS-12.7-02",
+        "NS-16.6A-02"
+      ],
+      "cr_refs": [
+        "CR-027",
+        "CR-028",
+        "CR-029",
+        "CR-072",
+        "CR-115",
+        "CR-116",
+        "CR-118"
+      ],
       "category": "authority",
       "default_stage": "Delegation and Authority Lineage",
       "default_enforcement_level": "Hard",
@@ -297,7 +861,7 @@
         "delegated authority",
         "Authority Lineage",
         "cross-domain authority",
-        "human-review authority",
+        "governance-approval authority",
         "Execution Authorization"
       ],
       "required_inputs": [
@@ -313,10 +877,30 @@
       ],
       "failure_behavior": "Deny, refuse, fail authorization, or require Governed Re-evaluation.",
       "governance_evidence": "required_when_attributable",
-      "description": "Prevents unauthorized authority expansion, unauthorized authority propagation, and authority replay."
+      "description": "Prevents unauthorized authority expansion, unauthorized authority propagation, and authority replay.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "28cfd3ec2595eef128718cf2439b01a5497272559ebc653ecb4c26363c921831",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-037",
       "invariant_type": "TENANT_ISOLATION",
+      "ns_refs": [
+        "NS-11.4-01",
+        "NS-11.4-02",
+        "NS-11.7-02"
+      ],
+      "cr_refs": [
+        "CR-026",
+        "CR-027",
+        "CR-028",
+        "CR-029",
+        "CR-030"
+      ],
       "category": "tenant_isolation",
       "default_stage": "Tenant and Domain Isolation",
       "default_enforcement_level": "Hard",
@@ -340,10 +924,28 @@
       ],
       "failure_behavior": "Refuse, deny, forbid access, or hide protected resource existence.",
       "governance_evidence": "conditional",
-      "description": "Ensures tenant-scoped resources, evidence, authority, policy, and governance artifacts are not exposed or applied across tenant boundaries without authorization."
+      "description": "Ensures tenant-scoped resources, evidence, authority, policy, and governance artifacts are not exposed or applied across tenant boundaries without authorization.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "ddccc4b008c64ba2e213cea91667a7f9e438181902c93fe0dd87df847d7a1279",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-038",
       "invariant_type": "GOVERNANCE_DOMAIN_ISOLATION",
+      "ns_refs": [
+        "NS-14.1-01",
+        "NS-14.4-01",
+        "NS-14.7-02"
+      ],
+      "cr_refs": [
+        "CR-072",
+        "CR-116",
+        "CR-118"
+      ],
       "category": "domain_isolation",
       "default_stage": "Cross-Domain Authority Isolation",
       "default_enforcement_level": "Hard",
@@ -368,10 +970,32 @@
       ],
       "failure_behavior": "Refuse, deny, forbid access, prevent authority propagation, or require Governed Re-evaluation.",
       "governance_evidence": "required_when_attributable",
-      "description": "Preserves governance domain sovereignty and prevents unauthorized authority, configuration, or Canonical State substitution across governance domains."
+      "description": "Preserves governance domain sovereignty and prevents unauthorized authority, configuration, or Canonical State substitution across governance domains.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "e9c42e2017bfc728277f3f0aa68ad4f8f1f60c03b378581c9d1e9678f5828ad5",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-039",
       "invariant_type": "GOVERNANCE_CONFIGURATION_INTEGRITY",
+      "ns_refs": [
+        "NS-15.4-01",
+        "NS-15.6B-01",
+        "NS-15.7-02"
+      ],
+      "cr_refs": [
+        "CR-091",
+        "CR-092",
+        "CR-093",
+        "CR-110",
+        "CR-113",
+        "CR-117",
+        "CR-122"
+      ],
       "category": "configuration",
       "default_stage": "Governance Self-Protection",
       "default_enforcement_level": "Hard",
@@ -396,10 +1020,31 @@
       ],
       "failure_behavior": "Artifact rejection, activation denial, Authorization Failure, Commit Failed, or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures governance configuration is valid, integrity-protected, authority-backed, and not substituted or bypassed."
+      "description": "Ensures governance configuration is valid, integrity-protected, authority-backed, and not substituted or bypassed.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "11f5dbe5cb2bec81b2e44d575a644909e5c40b74b2a8c2c71a7fce99e66967d7",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-040",
       "invariant_type": "IMPLEMENTATION_INDEPENDENCE",
+      "ns_refs": [
+        "NS-5.2.6-01",
+        "NS-5.9-02",
+        "NS-17.2-03"
+      ],
+      "cr_refs": [
+        "CR-073",
+        "CR-075",
+        "CR-077",
+        "CR-078",
+        "CR-089",
+        "CR-090"
+      ],
       "category": "global_governance",
       "default_stage": "conformance assessment",
       "default_enforcement_level": "Hard",
@@ -421,19 +1066,43 @@
       ],
       "failure_behavior": "Conformance failure.",
       "governance_evidence": "conditional",
-      "description": "Ensures implementation-specific internal architecture, transport choices, storage layout, concurrency, or deployment topology do not substitute for externally observable normative behavior."
+      "description": "Ensures implementation-specific internal architecture, transport choices, storage layout, concurrency, or deployment topology do not substitute for externally observable normative behavior.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "02076ed3aa2ffcfeb12fef275902e83eef5e1bab0dd78a5c3f24169f17cf3a3c",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-041",
       "invariant_type": "GOVERNANCE_PIPELINE_ORDERING",
+      "ns_refs": [
+        "NS-5.3-01",
+        "NS-5.3-02",
+        "NS-5.3-03"
+      ],
+      "cr_refs": [
+        "CR-001",
+        "CR-002",
+        "CR-003",
+        "CR-011",
+        "CR-019",
+        "CR-020",
+        "CR-021",
+        "CR-081"
+      ],
       "category": "lifecycle",
       "default_stage": "Proposal Qualification",
       "default_enforcement_level": "Hard",
       "applies_to": [
         "Proposal",
         "governance pipeline",
-        "Execution Authorization",
-        "Commit Boundary",
-        "Continuation Integrity"
+        "Execution Authorization or eligible nonterminal state",
+        "Continuation Integrity",
+        "Governance Realization",
+        "Commit Boundary"
       ],
       "required_inputs": [
         "processing trace",
@@ -447,10 +1116,40 @@
       ],
       "failure_behavior": "Refuse progression, fail authorization, fail Commit Boundary, or conformance failure.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures Proposal Qualification, Governance Decision Function, Execution Authorization, Commit Boundary, and Continuation Integrity execute only in the required order where applicable."
+      "description": "Ensures Proposal Qualification, Governance Decision Function, Execution Authorization or another eligible nonterminal state, applicable pre-commit Continuation Integrity, Governance Realization, and Commit Boundary processing occur only in the required order.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "a461031ffac51c5f9f934c0f88f8982e6207c9fee16e8dfd99acb12cd90f5c72",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-042",
       "invariant_type": "LIFECYCLE_INTEGRITY",
+      "ns_refs": [
+        "NS-13.6A-01",
+        "NS-13.6A-04",
+        "NS-13.6A-05"
+      ],
+      "cr_refs": [
+        "CR-011",
+        "CR-017",
+        "CR-018",
+        "CR-023",
+        "CR-061",
+        "CR-081",
+        "CR-082",
+        "CR-091",
+        "CR-092",
+        "CR-093",
+        "CR-098",
+        "CR-099",
+        "CR-100",
+        "CR-101",
+        "CR-122"
+      ],
       "category": "lifecycle",
       "default_stage": "Commit Boundary",
       "default_enforcement_level": "Hard",
@@ -474,10 +1173,32 @@
       ],
       "failure_behavior": "Prevent unauthorized lifecycle progression or conformance failure.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures governed lifecycle progression is derived from authoritative governance events and does not permit unauthorized state transitions."
+      "description": "Ensures governed lifecycle progression is derived from authoritative governance events and does not permit unauthorized state transitions.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "99b49030afa01b93405c26381aa1fe67db23ca912498f4de2d83e0936492332d",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-043",
       "invariant_type": "QUALIFIED_PROPOSAL_IMMUTABILITY",
+      "ns_refs": [
+        "NS-6.6-01",
+        "NS-6.6A-02",
+        "NS-9.4-01"
+      ],
+      "cr_refs": [
+        "CR-022",
+        "CR-035",
+        "CR-046",
+        "CR-067",
+        "CR-070",
+        "CR-071",
+        "CR-074"
+      ],
       "category": "proposal_integrity",
       "default_stage": "Commit Boundary",
       "default_enforcement_level": "Hard",
@@ -500,23 +1221,53 @@
       ],
       "failure_behavior": "Commit Failed or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures the qualified Action Representation remains immutable and the qualified Governance Context remains authoritative unless governed re-qualification occurs."
+      "description": "Ensures the qualified Action Representation remains immutable and the qualified Governance Context remains authoritative unless governed re-qualification occurs.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "77fe8b7d4ac9474a37ecb05bb158892ca9996a48404f6cb803023bf1d12a96de",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
-      "invariant_type": "HUMAN_REVIEW_GOVERNANCE",
-      "category": "human_review",
+      "reg_id": "REG-044",
+      "invariant_type": "GOVERNANCE_APPROVAL_GOVERNANCE",
+      "ns_refs": [
+        "NS-13.6B-01",
+        "NS-13.6B-02",
+        "NS-13.6B-03",
+        "NS-13.6B-05",
+        "NS-13.6B-06"
+      ],
+      "cr_refs": [
+        "CR-002",
+        "CR-012",
+        "CR-013",
+        "CR-014",
+        "CR-015",
+        "CR-016",
+        "CR-017",
+        "CR-018",
+        "CR-058",
+        "CR-059",
+        "CR-060",
+        "CR-061",
+        "CR-072"
+      ],
+      "category": "governance_approval",
       "default_stage": "Governance Decision Function",
       "default_enforcement_level": "Hard",
       "applies_to": [
         "Pending Human Review",
         "Deferred",
-        "human-review artifact",
+        "governance-approval artifact",
         "quorum",
         "Governed Re-evaluation"
       ],
       "required_inputs": [
         "applicable governance policy",
-        "human-review artifacts",
+        "governance-approval artifacts",
         "required roles",
         "Authority Lineage",
         "Canonical State",
@@ -528,10 +1279,33 @@
       ],
       "failure_behavior": "Remain Pending Human Review, remain Deferred, deny, or require Governed Re-evaluation.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures human-review requirements, roles, quorum, artifact validity, and governed re-evaluation requirements are preserved."
+      "description": "Ensures governance-approval requirements, roles, quorum, artifact validity, and governed re-evaluation requirements are preserved.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "18077edd521da6f79468db08076df574a01dd0fa7d788f73f43d17b3d0e13353",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-045",
       "invariant_type": "COMMIT_AUTHORIZATION_BINDING",
+      "ns_refs": [
+        "NS-9.4-02",
+        "NS-9.6A-02",
+        "NS-9.6A-04"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-022",
+        "CR-023",
+        "CR-032",
+        "CR-084",
+        "CR-096",
+        "CR-120",
+        "CR-121"
+      ],
       "category": "commit_boundary",
       "default_stage": "Commit Boundary",
       "default_enforcement_level": "Hard",
@@ -552,62 +1326,139 @@
       ],
       "failure_behavior": "Commit Failed, Authorization Failure, or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures the Commit Boundary binds authoritative Execution Authorization to the specific governance-significant Action immediately before execution."
+      "description": "Ensures the Commit Boundary binds authoritative Execution Authorization to the specific governance-significant Action immediately before execution.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "00d447e00c15f19b6a149b2d347887871cf8ec45e2e0b5d44a8821d9a1e2fb09",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-046",
       "invariant_type": "CONTINUATION_INTEGRITY",
+      "ns_refs": [
+        "NS-13.1-01",
+        "NS-13.1-02",
+        "NS-13.4-01",
+        "NS-13.6-05"
+      ],
+      "cr_refs": [
+        "CR-035",
+        "CR-061",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-070",
+        "CR-071",
+        "CR-091",
+        "CR-092",
+        "CR-093",
+        "CR-098",
+        "CR-099",
+        "CR-100",
+        "CR-101",
+        "CR-122"
+      ],
       "category": "continuation_integrity",
       "default_stage": "Continuation Integrity",
       "default_enforcement_level": "Hard",
       "applies_to": [
-        "continuing Action",
-        "governed execution",
-        "continuation object",
-        "DEGRADED state",
-        "resumption"
+        "authorized or otherwise eligible nonterminal Proposal",
+        "pre-commit continuation interval",
+        "continuation basis",
+        "Admissible Path Viability",
+        "DEGRADED lifecycle state",
+        "governed recovery"
       ],
       "required_inputs": [
-        "continued execution authority",
+        "continued authority basis supporting potential commitment",
         "governance dependencies",
         "governance configuration",
         "Authority Lineage",
-        "Canonical State where required",
-        "mandatory governance conditions"
+        "Canonical State where applicable",
+        "mandatory governance conditions",
+        "Derived Lifecycle State"
       ],
       "outcomes": [
         "PASS",
         "FAIL"
       ],
-      "failure_behavior": "DEGRADED, Suspend Execution, Governed Termination, or Governed Re-evaluation Required.",
+      "failure_behavior": "Commitment Suspended, Governed Re-evaluation Required, transition to a policy-defined non-executable lifecycle state, or escalation, refusal, expiration, cancellation, or another governed terminal disposition.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures continuing governed execution validates authority, dependencies, configuration, Authority Lineage, Canonical State where required, and mandatory governance conditions before continuation or resumption."
+      "description": "Ensures an authorized or otherwise eligible nonterminal Proposal preserves or re-establishes its verified continuation basis and Admissible Path Viability before final Commit-Bound Admissibility; it does not govern post-commit execution.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "dce38dfa7a9d60538681a831f28021e177540ce6b5c81fe891e3561f35d200e9",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-047",
       "invariant_type": "DEGRADED_STATE_SAFETY",
+      "ns_refs": [
+        "NS-13.5-02",
+        "NS-13.5-03",
+        "NS-13.5-04"
+      ],
+      "cr_refs": [
+        "CR-091",
+        "CR-092",
+        "CR-093",
+        "CR-100",
+        "CR-101",
+        "CR-122"
+      ],
       "category": "continuation_integrity",
       "default_stage": "Continuation Integrity",
       "default_enforcement_level": "Hard",
       "applies_to": [
-        "DEGRADED state",
-        "continuation object",
-        "governed execution"
+        "DEGRADED lifecycle state",
+        "nonterminal Proposal",
+        "pre-commit continuation interval",
+        "governed recovery"
       ],
       "required_inputs": [
         "Continuation Integrity outcome",
         "unresolved governance conditions",
         "Governance Evidence",
-        "resumption conditions"
+        "restoration conditions",
+        "Admissible Path Viability"
       ],
       "outcomes": [
         "PASS",
         "FAIL"
       ],
-      "failure_behavior": "Prevent unrestricted execution and require governed resolution or re-evaluation.",
+      "failure_behavior": "Prevent commitment or further pre-commit progression and require governed resolution, re-evaluation, recovery, or policy-defined terminal disposition.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures DEGRADED indicates unresolved governance conditions and does not permit unrestricted execution until governed resolution occurs."
+      "description": "Ensures DEGRADED represents unresolved pre-commit governance conditions and does not permit commitment or further progression until governed resolution restores eligibility or produces another policy-defined disposition.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "39dfc2cce99fcd6d0c533e744dc176ca68999fec78ceca767230dccb529298d3",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-048",
       "invariant_type": "GOVERNANCE_ARTIFACT_VALIDATION",
+      "ns_refs": [
+        "NS-15.3-02",
+        "NS-15.4-01",
+        "NS-15.4-02"
+      ],
+      "cr_refs": [
+        "CR-110",
+        "CR-111",
+        "CR-112",
+        "CR-113",
+        "CR-114",
+        "CR-117"
+      ],
       "category": "governance_artifact",
       "default_stage": "Governance Self-Protection",
       "default_enforcement_level": "Hard",
@@ -630,10 +1481,30 @@
       ],
       "failure_behavior": "Artifact rejection, activation denial, or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures governance-significant artifacts undergo validation before activation or operational use."
+      "description": "Ensures governance-significant artifacts undergo validation before activation or operational use.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "2e00cf176713ae469a0c27ed1d15bf1ee09492239fabb5ac1ddb587cd5e7cc29",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-049",
       "invariant_type": "GOVERNANCE_ARTIFACT_NON_WEAKENING",
+      "ns_refs": [
+        "NS-15.6A-02",
+        "NS-15.6A-03",
+        "NS-15.6B-02"
+      ],
+      "cr_refs": [
+        "CR-111",
+        "CR-112",
+        "CR-113",
+        "CR-114",
+        "CR-117"
+      ],
       "category": "governance_artifact",
       "default_stage": "Governance Self-Protection",
       "default_enforcement_level": "Hard",
@@ -656,10 +1527,36 @@
       ],
       "failure_behavior": "Artifact rejection or activation denial.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures governance artifacts do not weaken applicable governance constraints, system-level invariants, or constitutional invariants where applicable."
+      "description": "Ensures governance artifacts do not weaken applicable governance constraints, system-level invariants, or constitutional invariants where applicable.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "3445692ea1723f1123908231ed68df8fd00a01b2129dffcc6364c10fd24548b9",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-050",
       "invariant_type": "GOVERNANCE_BYPASS_PREVENTION",
+      "ns_refs": [
+        "NS-5.2.3-02",
+        "NS-9.6-04",
+        "NS-15.4-01"
+      ],
+      "cr_refs": [
+        "CR-019",
+        "CR-020",
+        "CR-021",
+        "CR-079",
+        "CR-080",
+        "CR-088",
+        "CR-102",
+        "CR-113",
+        "CR-119",
+        "CR-120",
+        "CR-121"
+      ],
       "category": "governance_self_protection",
       "default_stage": "Governance Self-Protection",
       "default_enforcement_level": "Hard",
@@ -684,10 +1581,35 @@
       ],
       "failure_behavior": "Refuse, deny, fail authorization, fail commit, reject artifact, or conformance failure.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures no governed operation bypasses mandatory AGCP governance processing, validation, authorization, evidence, or Commit Boundary requirements."
+      "description": "Ensures no governed operation bypasses mandatory AGCP governance processing, validation, authorization, evidence, or Commit Boundary requirements.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "cdeef8e15b2f27b5f9a87b92e1c7f8cd39e33c5089740bffa4975bb1e5b35971",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-051",
       "invariant_type": "AUTONOMOUS_COORDINATION_INTEGRITY",
+      "ns_refs": [
+        "NS-16.4-01",
+        "NS-16.4-02",
+        "NS-16.6A-01",
+        "NS-16.6A-02",
+        "NS-16.6A-03"
+      ],
+      "cr_refs": [
+        "CR-105",
+        "CR-106",
+        "CR-107",
+        "CR-108",
+        "CR-109",
+        "CR-115",
+        "CR-116",
+        "CR-118"
+      ],
       "category": "autonomous_coordination",
       "default_stage": "Autonomous Coordination",
       "default_enforcement_level": "Hard",
@@ -712,10 +1634,31 @@
       ],
       "failure_behavior": "Coordination refusal, suspension, denial, or Governed Re-evaluation Required.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures autonomous coordination preserves participant independence, Authority Lineage, tenant/domain isolation, coordination constraints, and prevents unauthorized authority propagation."
+      "description": "Ensures autonomous coordination preserves participant independence, Authority Lineage, tenant/domain isolation, coordination constraints, and prevents unauthorized authority propagation.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "082bcb65f30fc9b97aeccd6a5e89a52fcbe89b17556cd364036c57ca5261b16c",
+        "canonicalization": "JCS-RFC8785"
+      }
     },
     {
+      "reg_id": "REG-052",
       "invariant_type": "ATOMIC_COORDINATED_OUTCOME",
+      "ns_refs": [
+        "NS-16.4-03",
+        "NS-16.5-02",
+        "NS-16.6-02"
+      ],
+      "cr_refs": [
+        "CR-105",
+        "CR-106",
+        "CR-107",
+        "CR-108",
+        "CR-109",
+        "CR-118"
+      ],
       "category": "autonomous_coordination",
       "default_stage": "Autonomous Coordination",
       "default_enforcement_level": "Hard",
@@ -737,7 +1680,21 @@
       ],
       "failure_behavior": "Prevent incomplete atomic coordination or require Governed Re-evaluation.",
       "governance_evidence": "required_when_attributable",
-      "description": "Ensures coordinated governance outcomes preserve required atomicity where applicable and do not permit unauthorized partial execution."
+      "description": "Ensures coordinated governance outcomes preserve required atomicity where applicable and do not permit unauthorized partial execution.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.0",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "1f755991b6ced63891cda146f82ae4ca4c728dfbeab34fdfc5a76a125d678469",
+        "canonicalization": "JCS-RFC8785"
+      }
     }
-  ]
+  ],
+  "semantic_assertions": {
+    "identifiers_are_stable_and_not_repurposed": true,
+    "changes_are_release_governed": true,
+    "registry_does_not_independently_modify_core_requirements": true,
+    "integrity_is_verified_before_use": true,
+    "unknown_value_behavior_is_governed_by_applicable_specification": true
+  }
 }

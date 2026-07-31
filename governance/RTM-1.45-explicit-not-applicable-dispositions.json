@@ -1,0 +1,301 @@
+{
+  "rtm_dataset_version": "RTM-1.45",
+  "dispositions": {
+    "DS_ID": [
+      {
+        "cr_id": "CR-073",
+        "title": "REST vs Message Bus Same Result",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS disposition: not schema-applicable. Transport independence is implemented and verified through controlled interfaces and conformance behavior; no single data schema independently establishes it."
+      }
+    ],
+    "IF_ID": [
+      {
+        "cr_id": "CR-001",
+        "title": "Submit -> Authorized",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-002",
+        "title": "Submit -> Pending HITL",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-003",
+        "title": "Submit -> Rejected (Hard Invariant Failure)",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-008 invariant-definition update: DS-008 supplies the canonical versioned and integrity-bound governance invariant definition, including protected and constitutional classification, deterministic semantics, source and artifact lineage, non-weakening controls, DS-042 validation, DS-043 controlled activation, and Governance Version. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-004",
+        "title": "Schema Validation Failure",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-044 validates release-governed registry identity, lifecycle, integrity, traceability, and typed entries; authoritative registry payloads reside only under registries/. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-005",
+        "title": "Provenance Validation Failure",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-006",
+        "title": "Tenant Inactive on Submit",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-004 v2.0 Tenant governance-record update: authoritative versioned Tenant state, attributable append-only state and configuration history, transition basis, Governance Evidence, explicit isolation controls, and complete record integrity. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-008",
+        "title": "Idempotent Replay (Identical Payload)",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS semantic review: direct/contextual schema mappings assigned based on Proposal Identity, deterministic adjudication, refusal, and ordered replay semantics. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-009",
+        "title": "Idempotency Conflict",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS semantic review: direct/contextual schema mappings assigned based on Proposal Identity, deterministic adjudication, refusal, and ordered replay semantics. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-011",
+        "title": "Transient State Not Externally Observable",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-012",
+        "title": "Valid Cosign, Quorum Not Yet Met",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-013",
+        "title": "Valid Cosign Completes Quorum",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-014",
+        "title": "Cosign Wrong State",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-015",
+        "title": "Cosign Expired",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-016",
+        "title": "Cosign Invalid Signature",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-017",
+        "title": "HITL Expiration -> Rejected",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-018",
+        "title": "Governance Cancellation -> Rejected",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-048",
+        "title": "Canonical State Unavailable",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-032 provides the canonical independently traceable State Qualification result. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-049",
+        "title": "Stale Canonical State",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-032 provides the canonical independently traceable State Qualification result. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-050",
+        "title": "Conflicting Canonical-State Sources",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-032 provides the canonical independently traceable State Qualification result. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-051",
+        "title": "Telemetry Conflicts With Canonical State",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-052",
+        "title": "Canonical-State Hash Mismatch",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-053",
+        "title": "Structural Refusal Due to Invariant Violation",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-028 provides the canonical Structural Refusal record. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-008 invariant-definition update: DS-008 supplies the canonical versioned and integrity-bound governance invariant definition, including protected and constitutional classification, deterministic semantics, source and artifact lineage, non-weakening controls, DS-042 validation, DS-043 controlled activation, and Governance Version. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-054",
+        "title": "Structural Refusal Due to Missing Evidence",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-028 provides the canonical Structural Refusal record. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-055",
+        "title": "Structural Refusal Due to Canonical-State Conflict",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-028 provides the canonical Structural Refusal record. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-056",
+        "title": "Refusal Record Missing Attribution",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-028 provides the canonical Structural Refusal record. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-057",
+        "title": "Refusal Record Not Replayable",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-028 provides the canonical Structural Refusal record. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-058",
+        "title": "Escalation Required but Missing Artifact",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-059",
+        "title": "Escalation Resolved to Commit",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-060",
+        "title": "Escalation Resolved to Refusal",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. DS-028 provides the canonical Structural Refusal record. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-061",
+        "title": "Deferred Authorization Expires",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-016 is permanently retired; DS-026 Governance Approval Artifact is the authoritative active mapping. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-062",
+        "title": "Missing Canonical-State Reference",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-063",
+        "title": "Missing Invariant References",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-007 constraint-artifact update: DS-007 supplies the canonical versioned and integrity-bound governance constraint reference required for governance outcomes to identify governing constraints. DS-008 invariant-definition update: DS-008 supplies the canonical versioned and integrity-bound governance invariant definition, including protected and constitutional classification, deterministic semantics, source and artifact lineage, non-weakening controls, DS-042 validation, DS-043 controlled activation, and Governance Version. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-044 validates release-governed registry identity, lifecycle, integrity, traceability, and typed entries; authoritative registry payloads reside only under registries/. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-064",
+        "title": "Missing Evidence Hashes",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-065",
+        "title": "Invalid Signer Identity",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-066",
+        "title": "Receipt Replay Hash Mismatch",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-067",
+        "title": "Evidence Changes Between Proposal and Commit",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-068",
+        "title": "Evidence Unavailable at Commit",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-069",
+        "title": "Evidence Lineage Gap Across Agents",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-070",
+        "title": "Governance Context Preserved Across Handoff",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-071",
+        "title": "Downstream Agent Drops Context",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-072",
+        "title": "Cross-Domain Delegation Requires Escalation",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-091",
+        "title": "Degraded Governance State",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. DS-039 provides the canonical Continuation Integrity result, including path viability, degradation, governed re-evaluation, and recovery evidence. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-092",
+        "title": "DEGRADED as Non-Terminal State",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. DS-039 provides the canonical Continuation Integrity result, including path viability, degradation, governed re-evaluation, and recovery evidence. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-093",
+        "title": "Re-Evaluation Required from DEGRADED State",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-038 lifecycle update: DS-038 provides the canonical Proposal-Identity-bound Governance Lifecycle Record, ordered transition history and basis, externally retrievable Derived Lifecycle State, transient-state exclusion, terminality, approval/refusal effects, expiration/cancellation, and nonterminal degradation/re-evaluation state. DS-039 provides the canonical Continuation Integrity result, including path viability, degradation, governed re-evaluation, and recovery evidence. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-097",
+        "title": "Evidence Qualification Before Admissibility",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-098",
+        "title": "Continuation Integrity Preservation",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-039 provides the canonical Continuation Integrity result, including path viability, degradation, governed re-evaluation, and recovery evidence. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-099",
+        "title": "Admissible Path Viability Tracking",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-039 provides the canonical Continuation Integrity result, including path viability, degradation, governed re-evaluation, and recovery evidence. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-100",
+        "title": "Degraded Continuation Detection",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-039 provides the canonical Continuation Integrity result, including path viability, degradation, governed re-evaluation, and recovery evidence. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-101",
+        "title": "Continuation Recovery Support",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-039 provides the canonical Continuation Integrity result, including path viability, degradation, governed re-evaluation, and recovery evidence. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-103",
+        "title": "State Qualification Prior to Admissibility",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-032 provides the canonical independently traceable State Qualification result. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-104",
+        "title": "Governance Decision State Suitability",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      },
+      {
+        "cr_id": "CR-118",
+        "title": "Autonomous Coordination Bounds",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition."
+      }
+    ],
+    "REG_ID": [
+      {
+        "cr_id": "CR-031",
+        "title": "Dual Authorized Conflicting Actions",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-034 records proposal-specific Authority Re-Derivation from current qualified governance inputs immediately before commitment. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. REG disposition: not registry-applicable; no controlled registry entry independently implements this requirement."
+      },
+      {
+        "cr_id": "CR-033",
+        "title": "Divergent State Assumption Conflict",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-034 records proposal-specific Authority Re-Derivation from current qualified governance inputs immediately before commitment. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. REG disposition: not registry-applicable; no controlled registry entry independently implements this requirement."
+      },
+      {
+        "cr_id": "CR-039",
+        "title": "Expired Proposal",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. REG disposition: not registry-applicable; no controlled registry entry independently implements this requirement."
+      },
+      {
+        "cr_id": "CR-094",
+        "title": "Admissible Set Determination",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-037 provides the canonical Admissible Set and Deterministic Adjudication result for this requirement. REG disposition: not registry-applicable; no controlled registry entry independently implements this requirement."
+      },
+      {
+        "cr_id": "CR-095",
+        "title": "Deterministic Adjudication of Competing Futures",
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-037 provides the canonical Admissible Set and Deterministic Adjudication result for this requirement. REG disposition: not registry-applicable; no controlled registry entry independently implements this requirement."
+      }
+    ]
+  }
+}

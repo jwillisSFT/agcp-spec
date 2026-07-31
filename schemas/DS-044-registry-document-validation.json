@@ -1,0 +1,89 @@
+{
+  "schema": "DS-044",
+  "status": "PASS",
+  "date": "2026-07-30",
+  "checks": {
+    "draft_2020_12_schemas_validated": 44,
+    "references_resolved": 3245,
+    "reference_issues": [],
+    "registry_payload_mirrors_under_schemas": 0,
+    "authoritative_registry_documents": 3,
+    "common_definition_count": 65,
+    "unused_common_definitions": [],
+    "catalog_hash_mismatches": [],
+    "openapi_parses": true,
+    "rtm_formula_count": 0,
+    "rtm_formula_errors": [],
+    "rtm_rows_updated": [
+      {
+        "row": 5,
+        "rtm_id": "RTM-00004",
+        "cr_id": "CR-004"
+      },
+      {
+        "row": 64,
+        "rtm_id": "RTM-00063",
+        "cr_id": "CR-063"
+      },
+      {
+        "row": 77,
+        "rtm_id": "RTM-00076",
+        "cr_id": "CR-076"
+      },
+      {
+        "row": 111,
+        "rtm_id": "RTM-00110",
+        "cr_id": "CR-110"
+      }
+    ]
+  },
+  "positive_cases": [
+    {
+      "case": "constraint-type-registry.json",
+      "result": "PASS",
+      "entries": 26
+    },
+    {
+      "case": "invariant-type-registry.json",
+      "result": "PASS",
+      "entries": 26
+    },
+    {
+      "case": "rejection-code-registry.json",
+      "result": "PASS",
+      "entries": 40
+    }
+  ],
+  "negative_cases": [
+    {
+      "case": "missing_release",
+      "result": "REJECTED",
+      "reason": "'release' is a required property"
+    },
+    {
+      "case": "wrong_specialized_payload",
+      "result": "REJECTED",
+      "reason": "'codes' is a required property"
+    },
+    {
+      "case": "entry_missing_digest",
+      "result": "REJECTED",
+      "reason": "'entry_digest' is a required property"
+    },
+    {
+      "case": "active_with_retired_timestamp",
+      "result": "REJECTED",
+      "reason": "{'lifecycle_state': 'ACTIVE', 'effective_from': '2026-07-30T09:27:00-04:00', 'retired_at': '2026-07-30T09:27:00-04:00'} should not be valid under {'anyOf': [{'required': ['deprecated_at']}, {'required': ['retired_at']}, {'required': ['superseded_by_ref']}]}"
+    },
+    {
+      "case": "unknown_top_level_property",
+      "result": "REJECTED",
+      "reason": "Additional properties are not allowed ('metadata' was unexpected)"
+    },
+    {
+      "case": "entry_set_digest_mismatch",
+      "result": "REJECTED",
+      "reason": "computed entry-set digest does not match declared digest"
+    }
+  ]
+}

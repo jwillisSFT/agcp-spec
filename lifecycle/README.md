@@ -7,24 +7,24 @@
 
 This directory contains companion documents describing the AGCP governance progression model.
 
-These documents explain how governance progresses from Proposal Qualification through Governed Execution. They are intended to assist architects, implementers, reviewers, and conformance engineers in understanding the governance processing model defined by the AGCP specifications.
+These documents explain how governance progresses from Proposal Qualification through applicable pre-commit Continuation Integrity, Governance Realization, Commit Boundary processing, and Governed Execution. They are intended to assist architects, implementers, reviewers, and conformance engineers in understanding the governance processing model defined by the AGCP specifications.
 
 Except where explicitly stated, these documents do not introduce independent normative requirements.
 
 ---
 
-# Relationship to the Core Specification
+# Relationship to the Authoritative Sources
 
-The AGCP Core Specification is the authoritative definition of governance behavior.
+The published CRs are the highest-precedence normative capability requirements, followed by the AGCP Core Specification and any applicable normative Companion Specifications expressly adopted by the implementation profile. The ARM governs architectural terminology and concept meaning without independently creating conformance obligations.
 
 The lifecycle documents in this directory:
 
 - explain governance progression;
-- summarize normative behavior;
+- summarize behavior established by the authoritative normative sources;
 - provide implementation guidance; and
 - illustrate the relationship between governance stages.
 
-Where any inconsistency exists, the Core Specification takes precedence.
+Normative Statements are Core-derived extraction and traceability artifacts. Where an inconsistency exists, it SHALL be resolved using the complete Core-defined precedence order rather than treating this lifecycle material or the Normative Statements as an independent normative authority.
 
 ---
 
@@ -59,10 +59,14 @@ Governance Decision Function
     │     Human Review
     │
     ▼
-Execution Authorization
+Execution Authorization / Eligible Nonterminal State
+    │
+    ├──► Continuation Integrity, where applicable before commitment
+    │           ├──► Re-evaluation, Degraded State, Recovery, or Terminal Disposition
+    │           └──► Remains Eligible
     │
     ▼
-Commit Boundary
+Governance Realization and Commit Boundary
     │
     ├──► Commit Rejected
     │
@@ -70,17 +74,17 @@ Commit Boundary
 Governed Execution
 ```
 
-This progression represents governance processing rather than an application state machine.
+This progression represents governance processing rather than an application state machine. Continuation Integrity ends at successful commitment or another governed terminal lifecycle state; post-commit operational controls are separately defined and are not Continuation Integrity.
 
 ---
 
 # Canonical State
 
-Canonical State is derived from the ordered Append-Only Governance Ledger, or from a verifiable materialized state whose derivation can be deterministically reproduced from ordered ledger entries.
+Canonical State is deterministically resolved from the applicable qualified authoritative governance sources. The ordered Append-Only Governance Ledger is authoritative for recorded governance events, event ordering, and Derived Lifecycle State incorporated into Canonical State, but need not originate every governance-relevant fact.
 
-Ledger sequence order is authoritative.
+Ledger sequence order is authoritative for ledger-governed events and Derived Lifecycle State.
 
-Timestamp ordering is not authoritative.
+Timestamp ordering and implementation-specific storage ordering are not authoritative substitutes for ledger sequence order.
 
 ---
 
@@ -90,7 +94,7 @@ Governance Evidence documents governance-significant events throughout the gover
 
 The Append-Only Governance Ledger establishes the authoritative ordering and persistence of those events.
 
-Together they enable deterministic replay, auditability, and Canonical State reconstruction.
+Together with the applicable qualified authoritative governance sources, they enable deterministic replay, auditability, and Canonical State resolution.
 
 ---
 
@@ -101,16 +105,21 @@ The behavior described by the lifecycle documents is verified by the AGCP Confor
 The authoritative traceability model is:
 
 ```text
-Normative Specification
-        ↓
-Normative Statement (NS)
-        ↓
-Conformance Requirement (CR)
-        ↓
-Test Case (TC)
-        ↓
+Published AGCP Runtime Governance Conformance Requirements (CRs)
+        +
+AGCP Core Specification
+        +
+Applicable adopted normative Companion Specification obligations
+        |
+        | mapped in the authoritative RTM using Core-derived
+        | Normative Statement (NS) identifiers
+        v
+Conformance Test Case (TC)
+        |
+        v
 Harness Check
-        ↓
+        |
+        v
 Harness Test Vector
 ```
 

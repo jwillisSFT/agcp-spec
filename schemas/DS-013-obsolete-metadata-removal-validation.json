@@ -1,0 +1,41 @@
+{
+  "parse": {
+    "json_files": 144,
+    "yaml_files": 4
+  },
+  "catalog_version": "1.0.42",
+  "active_schema_count": 43,
+  "hash_mismatches": [],
+  "metaschema_errors": [],
+  "deprecated_locations": [],
+  "schema_ref_count": 3579,
+  "schema_ref_errors": [],
+  "openapi": {
+    "version": "3.1.0",
+    "ref_count": 142,
+    "external_ref_count": 99,
+    "errors": []
+  },
+  "fixtures": {
+    "declared": 24,
+    "actual": 24,
+    "failures": []
+  },
+  "ds013_assertions": {
+    "metadata_property_absent": true,
+    "extensions_property_present": true,
+    "additional_properties_false": true,
+    "no_deprecated_keyword": true,
+    "catalog_version_1_0_42": true,
+    "fixture_mapping_version_1_0_42": true
+  },
+  "catalog_sync": {
+    "json_hash_matches": true,
+    "csv_hash_matches": true,
+    "json_csv_description_match": true,
+    "json_csv_notes_match": true,
+    "json_csv_modified_date_match": true
+  },
+  "status": "PASS",
+  "errors": []
+}

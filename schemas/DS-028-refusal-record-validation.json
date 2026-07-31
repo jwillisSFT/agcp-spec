@@ -1,0 +1,127 @@
+{
+  "schema_id": "DS-028",
+  "schema_file": "refusal_record.json",
+  "checks": [
+    {
+      "name": "Draft 2020-12 structural validation",
+      "passed": true,
+      "detail": "28 implemented schemas validated"
+    },
+    {
+      "name": "Cross-schema reference targets exist",
+      "passed": true,
+      "detail": "1169 references inspected"
+    },
+    {
+      "name": "Catalog counts",
+      "passed": true,
+      "detail": "28 implemented"
+    },
+    {
+      "name": "DS-028 catalog active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog SHA-256 values",
+      "passed": true,
+      "detail": "28 hashes verified"
+    },
+    {
+      "name": "OpenAPI DS-028 components",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OpenAPI ErrorResponse externalized",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "RTM DS-028 mappings",
+      "passed": true,
+      "detail": "CR-053;CR-054;CR-055;CR-056;CR-057;CR-060;CR-087;CR-088"
+    },
+    {
+      "name": "RTM dataset version",
+      "passed": true,
+      "detail": "RTM-1.15 across all rows"
+    }
+  ],
+  "positive_tests": [
+    {
+      "name": "invariant violation refusal",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "missing evidence refusal",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "canonical state conflict refusal",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "binding failure refusal",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "enforcement refusal",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_tests": [
+    {
+      "name": "policy denial cannot be refusal",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "missing attribution rejected",
+      "passed": true,
+      "error": "'attribution' is a required property"
+    },
+    {
+      "name": "missing ledger event rejected",
+      "passed": true,
+      "error": "'ledger_event_ref' is a required property"
+    },
+    {
+      "name": "executed refused action rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "missing invariant refs rejected",
+      "passed": true,
+      "error": "'violated_invariant_refs' is a required property"
+    },
+    {
+      "name": "missing evidence qualification rejected",
+      "passed": true,
+      "error": "'evidence_qualification_result_ref' is a required property"
+    },
+    {
+      "name": "enforcement refusal without enforcement result rejected",
+      "passed": true,
+      "error": "'enforcement_result' is a required property"
+    },
+    {
+      "name": "non-namespaced extension rejected",
+      "passed": true,
+      "error": "'bad' does not match '^(x-|[A-Za-z][A-Za-z0-9.-]*:).+'"
+    }
+  ],
+  "summary": {
+    "passed": true,
+    "implemented_schema_count": 28,
+    "cross_schema_reference_count": 1169,
+    "catalog_version": "1.0.10",
+    "rtm_version": "RTM-1.15"
+  }
+}

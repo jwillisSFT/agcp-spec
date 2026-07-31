@@ -1,0 +1,170 @@
+{
+  "schema_id": "DS-034",
+  "schema_file": "authority_rederivation_result.json",
+  "checks": [
+    {
+      "name": "Draft 2020-12 structural validation",
+      "passed": true,
+      "detail": "31 implemented schemas validated"
+    },
+    {
+      "name": "Cross-schema references and fragments",
+      "passed": true,
+      "detail": "1268 references resolved"
+    },
+    {
+      "name": "Catalog counts",
+      "passed": true,
+      "detail": "31 implemented; 13 reserved"
+    },
+    {
+      "name": "DS-034 catalog active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Catalog hashes",
+      "passed": true,
+      "detail": "31 hashes verified"
+    },
+    {
+      "name": "Catalog DS IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "OpenAPI DS-034 components",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "RTM DS-034 mappings",
+      "passed": true,
+      "detail": "CR-024;CR-025;CR-031;CR-032;CR-033;CR-096;CR-115;CR-116"
+    },
+    {
+      "name": "RTM dataset version",
+      "passed": true,
+      "detail": "{'RTM-1.18'}"
+    },
+    {
+      "name": "RTM formulas and errors",
+      "passed": true,
+      "detail": "0 formulas; 0 errors"
+    },
+    {
+      "name": "RTM formatting preservation",
+      "passed": true,
+      "detail": "dimensions, merges, widths, heights, and style IDs preserved"
+    }
+  ],
+  "positive_tests": [
+    {
+      "name": "direct authority established",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "delegated authority established",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "delegated and approval-supported authority established",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "authority not established after revocation",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "indeterminate authority due to unresolved current state",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "authority_rederivation_result_ref valid",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "negative_tests": [
+    {
+      "name": "established authority with non-current Canonical State rejected",
+      "passed": true,
+      "error": "True was expected"
+    },
+    {
+      "name": "established authority with unqualified Canonical State rejected",
+      "passed": true,
+      "error": "'QUALIFIED' was expected"
+    },
+    {
+      "name": "established authority for suspended tenant rejected",
+      "passed": true,
+      "error": "'ACTIVE' was expected"
+    },
+    {
+      "name": "established authority with failed determination rejected",
+      "passed": true,
+      "error": "'SATISFIED' was expected"
+    },
+    {
+      "name": "portable authority claim rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "permission-to-execute claim rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "delegated mode without Delegation Artifact rejected",
+      "passed": true,
+      "error": "'delegation_artifact_evaluations' is a required property"
+    },
+    {
+      "name": "approval-supported mode without Approval Artifact rejected",
+      "passed": true,
+      "error": "'approval_artifact_evaluations' is a required property"
+    },
+    {
+      "name": "direct mode with Delegation Artifact rejected",
+      "passed": true,
+      "error": "{'evaluation_id': 'AR-001', 'result_type': 'AUTHORITY_REDERIVATION_RESULT', 'evaluation_stage': 'IMMEDIATELY_BEFORE_COMMITMENT', 'proposal_identity': {'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'canonical_content_digest': {'algorithm': 'SHA-256', 'value': 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 'canonicalization': 'JCS'}, 'originator': {'principal_id': 'ORIGINATOR-001', 'principal_type': 'GOVERNANCE_AUTHORITY', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}, 'identity_scope': {'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_ids': ['TARGET-001'], 'action_types': ['WRITE']}}, 'action_id': 'ACT-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_ref': {'target_id': 'TARGET-001', 'target_type': 'SERVICE', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}}, 'authority_subject': {'principal_id': 'AUTH-SUBJECT', 'principal_type': 'GOVERNANCE_AUTHORITY', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}, 'scope': {'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_ids': ['TARGET-001'], 'action_types': ['WRITE']}, 'lifecycle_state_ref': {'lifecycle_record_id': 'LR-001', 'derived_lifecycle_state': 'AUTHORIZED', 'terminality': 'NONTERMINAL', 'derived_at': '2026-07-29T17:10:00Z'}, 'validity_horizon': {'not_before': '2026-07-29T17:05:00Z', 'expires_at': '2026-07-29T17:15:00Z'}, 'evaluation_horizon': {'horizon_id': 'HORIZON-001', 'evaluated_at': '2026-07-29T17:10:00Z', 'validity_window': {'not_before': '2026-07-29T17:05:00Z', 'expires_at': '2026-07-29T17:15:00Z'}}, 'governance_version_ref': {'governance_version_id': 'GV-002', 'version': '2.0.0', 'package_digest': {'algorithm': 'SHA-256', 'value': '3333333333333333333333333333333333333333333333333333333333333333', 'canonicalization': 'JCS'}}, 'policy_refs': [{'policy_id': 'POLICY-001', 'policy_digest': {'algorithm': 'SHA-256', 'value': '2222222222222222222222222222222222222222222222222222222222222222', 'canonicalization': 'JCS'}, 'effective_scope': {'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_ids': ['TARGET-001'], 'action_types': ['WRITE']}}], 'governance_context_ref': {'governance_context_id': 'GC-001', 'governance_context_version': '1.0.0', 'governance_context_digest': {'algorithm': 'SHA-256', 'value': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'canonicalization': 'JCS'}}, 'governance_decision_ref': {'governance_decision_id': 'GD-001', 'decision': 'Authorized', 'decision_digest': {'algorithm': 'SHA-256', 'value': 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'canonicalization': 'JCS'}, 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'target_ref': {'target_id': 'TARGET-001', 'target_type': 'SERVICE', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}}, 'governance_version_ref': {'governance_version_id': 'GV-002', 'version': '2.0.0', 'package_digest': {'algorithm': 'SHA-256', 'value': '3333333333333333333333333333333333333333333333333333333333333333', 'canonicalization': 'JCS'}}}, 'execution_authorization_ref': {'authorization_id': 'EA-001', 'outcome': 'Authorized for Commit Boundary Processing', 'authorization_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}, 'issued_at': '2026-07-29T17:10:00Z', 'validity_window': {'not_before': '2026-07-29T17:05:00Z', 'expires_at': '2026-07-29T17:15:00Z'}, 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'target_ref': {'target_id': 'TARGET-001', 'target_type': 'SERVICE', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}}, 'governance_version_ref': {'governance_version_id': 'GV-002', 'version': '2.0.0', 'package_digest': {'algorithm': 'SHA-256', 'value': '3333333333333333333333333333333333333333333333333333333333333333', 'canonicalization': 'JCS'}}}, 'canonical_state_basis': {'canonical_state_ref': {'canonical_state_id': 'CS-001', 'canonical_state_version': '1.0.0', 'canonical_state_digest': {'algorithm': 'SHA-256', 'value': '8888888888888888888888888888888888888888888888888888888888888888', 'canonicalization': 'JCS'}, 'resolved_at': '2026-07-29T17:10:00Z', 'evaluation_horizon': {'horizon_id': 'HORIZON-001', 'evaluated_at': '2026-07-29T17:10:00Z', 'validity_window': {'not_before': '2026-07-29T17:05:00Z', 'expires_at': '2026-07-29T17:15:00Z'}}, 'state_qualification_result_ref': {'evaluation_id': 'SQ-001', 'outcome': 'QUALIFIED', 'result_digest': {'algorithm': 'SHA-256', 'value': '9999999999999999999999999999999999999999999999999999999999999999', 'canonicalization': 'JCS'}}}, 'state_qualification_result_ref': {'evaluation_id': 'SQ-001', 'outcome': 'QUALIFIED', 'result_digest': {'algorithm': 'SHA-256', 'value': '9999999999999999999999999999999999999999999999999999999999999999', 'canonicalization': 'JCS'}}, 'resolved_at': '2026-07-29T17:10:00Z', 'current_for_evaluation_horizon': True, 'basis_digest': {'algorithm': 'SHA-256', 'value': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'canonicalization': 'JCS'}}, 'authority_lineage_basis': {'authority_lineage_ref': {'authority_lineage_id': 'AL-001', 'lineage_version': '1.0.0', 'lineage_digest': {'algorithm': 'SHA-256', 'value': '7777777777777777777777777777777777777777777777777777777777777777', 'canonicalization': 'JCS'}, 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'evaluated_at': '2026-07-29T17:10:00Z', 'scope': {'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_ids': ['TARGET-001'], 'action_types': ['WRITE']}}, 'lineage_validation_status': 'VALID', 'complete_chain_verified': True, 'scope_containment_verified': True, 'revocation_status': 'CLEAR', 'subject_eligibility': 'ELIGIBLE', 'recursive_authority_containment': 'SATISFIED', 'cross_domain_isolation': 'SAME_DOMAIN', 'validated_at': '2026-07-29T17:10:00Z', 'basis_digest': {'algorithm': 'SHA-256', 'value': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'canonicalization': 'JCS'}}, 'authority_basis_mode': 'DIRECT', 'qualified_evidence_refs': [{'evidence_ref': {'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}, 'qualification_result_ref': {'evaluation_id': 'EQ-001', 'outcome': 'QUALIFIED', 'result_digest': {'algorithm': 'SHA-256', 'value': '5555555555555555555555555555555555555555555555555555555555555555', 'canonicalization': 'JCS'}, 'proposal_id': 'PROP-001', 'evidence_set_digest': {'algorithm': 'SHA-256', 'value': '6666666666666666666666666666666666666666666666666666666666666666', 'canonicalization': 'JCS'}}, 'authority_basis_ref': {'authority_lineage_id': 'AL-001', 'lineage_digest': {'algorithm': 'SHA-256', 'value': '7777777777777777777777777777777777777777777777777777777777777777', 'canonicalization': 'JCS'}}}], 'authority_input_status': {'tenant_status': 'ACTIVE', 'subject_status': 'ELIGIBLE', 'prior_authorization_status': 'CURRENT', 'revocation_status': 'CLEAR', 'lifecycle_status': 'ELIGIBLE', 'validity_status': 'CURRENT', 'cross_domain_status': 'SAME_DOMAIN', 'evaluated_at': '2026-07-29T17:10:00Z'}, 'determinations': {'proposal_binding': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'target_binding': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'tenant_binding': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'governance_domain_binding': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'canonical_state_qualification': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'evidence_qualification': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'authority_lineage_completeness': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'delegation_validity': {'status': 'SATISFIED', 'applicability': 'NOT_APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'approval_validity': {'status': 'SATISFIED', 'applicability': 'NOT_APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'revocation_clearance': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'subject_eligibility': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'scope_containment': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'lifecycle_eligibility': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'validity': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'recursive_authority_containment': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'cross_domain_isolation': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}, 'prior_authorization_currency': {'status': 'SATISFIED', 'applicability': 'APPLICABLE', 'basis': 'SATISFIED using current qualified governance inputs.', 'evidence_refs': [{'governance_evidence_id': 'GE-001', 'governance_stage': 'Delegation and Authority Lineage', 'evidence_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'created_at': '2026-07-29T17:10:00Z', 'proposal_id': 'PROP-001', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}], 'evaluated_at': '2026-07-29T17:10:00Z'}}, 'outcome': 'AUTHORITY_ESTABLISHED', 'disposition': 'ELIGIBLE_FOR_COMMIT_BOUND_ADMISSIBILITY', 'effective_authority': {'proposal_id': 'PROP-001', 'authority_subject': {'principal_id': 'AUTH-SUBJECT', 'principal_type': 'GOVERNANCE_AUTHORITY', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}, 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_ref': {'target_id': 'TARGET-001', 'target_type': 'SERVICE', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_digest': {'algorithm': 'SHA-256', 'value': '1111111111111111111111111111111111111111111111111111111111111111', 'canonicalization': 'JCS'}}, 'scope': {'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001', 'target_ids': ['TARGET-001'], 'action_types': ['WRITE']}, 'validity_window': {'not_before': '2026-07-29T17:05:00Z', 'expires_at': '2026-07-29T17:15:00Z'}, 'authority_digest': {'algorithm': 'SHA-256', 'value': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'canonicalization': 'JCS'}, 'proposal_specific': True, 'portable_or_reusable': False, 'permission_to_execute': False}, 'evaluated_at': '2026-07-29T17:10:00Z', 'evaluator': {'principal': {'principal_id': 'AUTH-EVALUATOR', 'principal_type': 'GOVERNANCE_AUTHORITY', 'tenant_id': 'TENANT-001', 'governance_domain_id': 'DOMAIN-001'}, 'attributed_at': '2026-07-29T17:10:00Z', 'signature': {'alg': 'EdDSA', 'kid': 'key-1', 'sig': 'abcdefgh12345678', 'payload_digest': {'algorithm': 'SHA-256', 'value': 'ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', 'canonicalization': 'JCS'}, 'signer_id': 'AUTH-EVALUATOR', 'signed_at': '2026-07-29T17:10:00Z'}}, 'input_set_digest': {'algorithm': 'SHA-256', 'value': '2222222222222222222222222222222222222222222222222222222222222222', 'canonicalization': 'JCS'}, 'result_digest': {'algorithm': 'SHA-256', 'value': '3333333333333333333333333333333333333333333333333333333333333333', 'canonicalization': 'JCS'}, 'replay_material': {'rederivation_profile': 'AGCP-AUTHORITY-REDERIVATION-2.0', 'input_snapshot_refs': ['urn:agcp:authority-inputs:001'], 'canonical_state_digest': {'algorithm': 'SHA-256', 'value': '8888888888888888888888888888888888888888888888888888888888888888', 'canonicalization': 'JCS'}, 'authority_lineage_digest': {'algorithm': 'SHA-256', 'value': '7777777777777777777777777777777777777777777777777777777777777777', 'canonicalization': 'JCS'}, 'qualified_evidence_set_digest': {'algorithm': 'SHA-256', 'value': '6666666666666666666666666666666666666666666666666666666666666666', 'canonicalization': 'JCS'}, 'governance_version_ref': {'governance_version_id': 'GV-002', 'version': '2.0.0', 'package_digest': {'algorithm': 'SHA-256', 'value': '3333333333333333333333333333333333333333333333333333333333333333', 'canonicalization': 'JCS'}}, 'policy_basis_digest': {'algorithm': 'SHA-256', 'value': '2222222222222222222222222222222222222222222222222222222222222222', 'canonicalization': 'JCS'}, 'evaluation_algorithm_id': 'AGCP-AUTH-RD-1', 'historical_action_execution_required': False}, 'semantic_assertions': {'current_qualified_governance_inputs_used': True, 'authority_at_commitment_established': True, 'may_proceed_to_commit_bound_admissibility': True, 'identity_alone_established_authority': False, 'standing_permission_alone_established_authority': False, 'prior_authorization_alone_established_authority': False, 'delegation_alone_established_authority': False, 'approval_alone_established_authority': False, 'authority_is_proposal_specific': True, 'authority_is_portable': False, 'permission_to_execute_granted': False, 'commit_bound_admissibility_completed': False, 'governance_binding_validation_completed': False, 'time_of_check_time_of_use_revalidation_performed': True, 'deterministic_replay_supported': True, 'result_is_attributable': True}, 'delegation_artifact_evaluations': [{'delegation_artifact_ref': {'delegation_artifact_id': 'DA-001', 'artifact_version': '1.0.0', 'artifact_digest': {'algorithm': 'SHA-256', 'value': '4444444444444444444444444444444444444444444444444444444444444444', 'canonicalization': 'JCS'}, 'tenant_id': 'TENANT-001', 'source_governance_domain_id': 'DOMAIN-001', 'target_governance_domain_id': 'DOMAIN-001', 'validity_window': {'not_before': '2026-07-29T17:00:00Z', 'expires_at': '2026-07-29T18:00:00Z'}, 'authority_lineage_ref': {'authority_lineage_id': 'AL-001', 'lineage_digest': {'algorithm': 'SHA-256', 'value': '7777777777777777777777777777777777777777777777777777777777777777', 'canonicalization': 'JCS'}}}, 'status': 'VALID', 'scope_containment_verified': True, 'recursive_containment_verified': True, 'revocation_checked': True, 'validity_checked': True, 'basis': 'Delegation validated against current qualified inputs.', 'evaluated_at': '2026-07-29T17:10:00Z'}]} should not be valid under {'required': ['delegation_artifact_evaluations']}"
+    },
+    {
+      "name": "not-established result without failure reason rejected",
+      "passed": true,
+      "error": "'failure_reasons' is a required property"
+    },
+    {
+      "name": "indeterminate result without missing inputs rejected",
+      "passed": true,
+      "error": "'missing_input_refs' is a required property"
+    },
+    {
+      "name": "approval treated as sufficient authority rejected",
+      "passed": true,
+      "error": "False was expected"
+    },
+    {
+      "name": "non-namespaced extension rejected",
+      "passed": true,
+      "error": "'bad' does not match '^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\\\.[A-Za-z0-9][A-Za-z0-9._-]*)$'"
+    }
+  ],
+  "reference_errors": [],
+  "summary": {
+    "result": "PASS",
+    "implemented_schema_count": 31,
+    "cross_schema_reference_count": 1268,
+    "catalog_version": "1.0.14",
+    "rtm_version": "RTM-1.18",
+    "positive_test_count": 6,
+    "negative_test_count": 13
+  }
+}

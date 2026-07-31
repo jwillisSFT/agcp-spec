@@ -1,0 +1,14 @@
+{
+  "before_dimensions": "123x44",
+  "after_dimensions": "123x44",
+  "merged_cells_unchanged": true,
+  "column_widths_unchanged": true,
+  "row_heights_unchanged": true,
+  "freeze_panes_unchanged": true,
+  "auto_filter_unchanged": true,
+  "style_ids_unchanged": true,
+  "xl/styles.xml_unchanged": true,
+  "xl/theme/theme1.xml_unchanged": true,
+  "xl/workbook.xml_unchanged": true,
+  "result": "PASS"
+}

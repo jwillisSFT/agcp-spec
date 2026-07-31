@@ -1,0 +1,809 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/delegation_artifact.json",
+  "title": "Delegation Artifact",
+  "description": "Canonical domain schema for an independently verifiable artifact recording bounded authority delegated from one governance principal to another. A Delegation Artifact preserves source authority, scope attenuation, validity, revocation controls, tenant and governance-domain boundaries, target binding, recursive-delegation limits, cross-domain escalation evidence, attribution, integrity, and lineage continuity. It is evidence used during Authority Re-Derivation and does not itself constitute unconditional authority at commitment or permission to execute.",
+  "$comment": "DS-025 represents an immutable delegated-authority artifact. Current authority, subject eligibility, revocation, expiration, and commit-time admissibility remain derived from current qualified Canonical State and other qualified governance inputs. Scope containment, principal-domain equality, temporal ordering, and digest equivalence require semantic validation where JSON Schema cannot compare arbitrary values across object locations.",
+  "x-agcp-ds-id": "DS-025",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Governance Object — Delegation Artifact",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-102",
+      "ARM-103",
+      "ARM-302",
+      "ARM-303",
+      "ARM-304",
+      "ARM-305",
+      "ARM-306",
+      "ARM-307",
+      "ARM-308",
+      "ARM-603",
+      "ARM-604",
+      "ARM-606",
+      "ARM-609",
+      "ARM-610",
+      "ARM-703",
+      "ARM-709",
+      "ARM-710"
+    ],
+    "core_sections": [
+      "4.4",
+      "8.6A",
+      "10.8A",
+      "12.1",
+      "12.2",
+      "12.3",
+      "12.4",
+      "12.5",
+      "12.6",
+      "12.7",
+      "14.1",
+      "14.4",
+      "14.6",
+      "16.6A"
+    ],
+    "normative_statements": [
+      "NS-4.4-01",
+      "NS-8.6A-02",
+      "NS-8.6A-03",
+      "NS-10.8A-03",
+      "NS-12.1-01",
+      "NS-12.1-02",
+      "NS-12.2-01",
+      "NS-12.2-02",
+      "NS-12.3-01",
+      "NS-12.3-02",
+      "NS-12.4-01",
+      "NS-12.4-02",
+      "NS-12.4-03",
+      "NS-12.4-04",
+      "NS-12.5-01",
+      "NS-12.5-02",
+      "NS-12.6-01",
+      "NS-12.6-02",
+      "NS-12.6-03",
+      "NS-12.6-04",
+      "NS-12.6-05",
+      "NS-12.7-01",
+      "NS-12.7-02",
+      "NS-12.7-03",
+      "NS-14.1-01",
+      "NS-14.6-02",
+      "NS-16.6A-01",
+      "NS-16.6A-02",
+      "NS-16.6A-03"
+    ],
+    "conformance_requirements": [
+      "CR-040",
+      "CR-042",
+      "CR-044",
+      "CR-045",
+      "CR-047",
+      "CR-072",
+      "CR-115"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "delegation_artifact_id": {
+      "$ref": "common.json#/$defs/identifier"
+    },
+    "artifact_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "artifact_role": {
+      "const": "DELEGATION_EVIDENCE_NOT_EXECUTION_AUTHORITY",
+      "description": "Fixed role preventing the artifact from being interpreted as unconditional executable authority."
+    },
+    "authority_source": {
+      "$ref": "#/$defs/authority_source"
+    },
+    "delegation_mode": {
+      "type": "string",
+      "enum": [
+        "SAME_DOMAIN",
+        "CROSS_DOMAIN"
+      ]
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "source_governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target_governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "originating_authority": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "delegating_principal": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "receiving_principal": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "source_authority_scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "delegated_scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "scope_containment_assertion": {
+      "$ref": "#/$defs/scope_containment_assertion"
+    },
+    "binding": {
+      "$ref": "#/$defs/delegation_binding"
+    },
+    "delegation_purpose": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "delegation_constraints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/delegation_constraint"
+      },
+      "uniqueItems": true
+    },
+    "validity_window": {
+      "$ref": "common.json#/$defs/validity_window"
+    },
+    "revocation_control": {
+      "$ref": "#/$defs/revocation_control"
+    },
+    "recursive_delegation": {
+      "$ref": "#/$defs/recursive_delegation_control"
+    },
+    "cross_domain_governance": {
+      "$ref": "#/$defs/cross_domain_governance"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "canonical_state_ref_at_issuance": {
+      "$ref": "common.json#/$defs/canonical_state_ref"
+    },
+    "governance_context_ref": {
+      "$ref": "common.json#/$defs/governance_context_ref"
+    },
+    "authority_lineage_ref": {
+      "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+    },
+    "issuance": {
+      "$ref": "#/$defs/issuance_record"
+    },
+    "verification_material": {
+      "$ref": "#/$defs/verification_material"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "artifact_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "supersedes_delegation_ref": {
+      "$ref": "#/$defs/delegation_artifact_ref"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "delegation_artifact_id",
+    "artifact_version",
+    "artifact_role",
+    "authority_source",
+    "delegation_mode",
+    "tenant_id",
+    "source_governance_domain_id",
+    "target_governance_domain_id",
+    "originating_authority",
+    "delegating_principal",
+    "receiving_principal",
+    "source_authority_scope",
+    "delegated_scope",
+    "scope_containment_assertion",
+    "binding",
+    "delegation_purpose",
+    "validity_window",
+    "revocation_control",
+    "recursive_delegation",
+    "governance_version_ref",
+    "policy_refs",
+    "canonical_state_ref_at_issuance",
+    "issuance",
+    "verification_material",
+    "evidence_refs",
+    "artifact_digest"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "delegation_mode": {
+            "const": "CROSS_DOMAIN"
+          }
+        },
+        "required": [
+          "delegation_mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "cross_domain_governance"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "cross_domain_governance"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authority_source": {
+            "properties": {
+              "source_type": {
+                "const": "DELEGATED_AUTHORITY"
+              }
+            },
+            "required": [
+              "source_type"
+            ]
+          }
+        },
+        "required": [
+          "authority_source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authority_source": {
+            "required": [
+              "parent_delegation_ref"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "authority_source": {
+            "not": {
+              "required": [
+                "parent_delegation_ref"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "delegation_artifact_ref": {
+      "type": "object",
+      "description": "Stable reference to an independently verifiable DS-025 Delegation Artifact.",
+      "additionalProperties": false,
+      "properties": {
+        "delegation_artifact_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "artifact_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "source_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "authority_lineage_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        }
+      },
+      "required": [
+        "delegation_artifact_id",
+        "artifact_digest"
+      ]
+    },
+    "authority_source": {
+      "type": "object",
+      "description": "Identifies whether the delegating principal derives authority directly from an originating governance authority or through a prior Delegation Artifact.",
+      "additionalProperties": false,
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "ORIGINATING_GOVERNANCE_AUTHORITY",
+            "DELEGATED_AUTHORITY"
+          ]
+        },
+        "chain_position": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parent_delegation_ref": {
+          "$ref": "#/$defs/delegation_artifact_ref"
+        },
+        "source_authority_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "source_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "source_type",
+        "chain_position",
+        "source_authority_evidence_refs",
+        "source_scope_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "source_type": {
+                "const": "ORIGINATING_GOVERNANCE_AUTHORITY"
+              }
+            },
+            "required": [
+              "source_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "chain_position": {
+                "const": 0
+              }
+            },
+            "not": {
+              "required": [
+                "parent_delegation_ref"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source_type": {
+                "const": "DELEGATED_AUTHORITY"
+              }
+            },
+            "required": [
+              "source_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "chain_position": {
+                "minimum": 1
+              }
+            },
+            "required": [
+              "parent_delegation_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "scope_containment_assertion": {
+      "type": "object",
+      "description": "Attributable verification that delegated authority is no broader than the authority possessed by the delegating principal. Subset semantics are validated by the implementation.",
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {
+          "const": "DELEGATED_SCOPE_WITHIN_SOURCE_AUTHORITY"
+        },
+        "source_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "delegated_scope_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluation_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evaluator": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "outcome",
+        "source_scope_digest",
+        "delegated_scope_digest",
+        "evaluation_method",
+        "evaluated_at",
+        "evaluator",
+        "evidence_refs",
+        "result_digest"
+      ]
+    },
+    "delegation_binding": {
+      "type": "object",
+      "description": "Binds delegated authority either to one Proposal Identity and target or to an expressly bounded standing scope. Neither mode constitutes authority at commitment.",
+      "additionalProperties": false,
+      "properties": {
+        "binding_mode": {
+          "type": "string",
+          "enum": [
+            "PROPOSAL_SPECIFIC",
+            "BOUNDED_STANDING"
+          ]
+        },
+        "proposal_identity": {
+          "$ref": "common.json#/$defs/proposal_identity"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "binding_mode",
+        "binding_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "binding_mode": {
+                "const": "PROPOSAL_SPECIFIC"
+              }
+            },
+            "required": [
+              "binding_mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "proposal_identity",
+              "target_ref"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "proposal_identity"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "delegation_constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "constraint_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "constraint_ref": {
+          "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+        },
+        "constraint_expression": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": true
+        },
+        "constraint_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "constraint_type",
+        "constraint_digest"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "constraint_ref"
+          ]
+        },
+        {
+          "required": [
+            "constraint_expression"
+          ]
+        }
+      ]
+    },
+    "revocation_control": {
+      "type": "object",
+      "description": "Immutable instructions and authoritative lookup information required to detect revocation from current qualified governance state. The mutable revocation result is not stored as self-asserted authority in the artifact.",
+      "additionalProperties": false,
+      "properties": {
+        "revocation_check_required": {
+          "const": true
+        },
+        "status_resolution_mode": {
+          "const": "CURRENT_QUALIFIED_CANONICAL_STATE"
+        },
+        "revocation_authority": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "revocation_registry_ref": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "revocation_reference_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "revocation_policy_ref": {
+          "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+        },
+        "control_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "revocation_check_required",
+        "status_resolution_mode",
+        "revocation_authority",
+        "revocation_registry_ref",
+        "revocation_reference_id",
+        "control_digest"
+      ]
+    },
+    "recursive_delegation_control": {
+      "type": "object",
+      "description": "Bounds recursive and downstream delegation so authority cannot expand or produce an unmediated execution path.",
+      "additionalProperties": false,
+      "properties": {
+        "may_redelegate": {
+          "type": "boolean"
+        },
+        "max_remaining_depth": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scope_attenuation_required": {
+          "const": true
+        },
+        "authority_amplification_prohibited": {
+          "const": true
+        },
+        "independent_downstream_governance_required": {
+          "const": true
+        },
+        "control_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "may_redelegate",
+        "max_remaining_depth",
+        "scope_attenuation_required",
+        "authority_amplification_prohibited",
+        "independent_downstream_governance_required",
+        "control_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "may_redelegate": {
+                "const": false
+              }
+            },
+            "required": [
+              "may_redelegate"
+            ]
+          },
+          "then": {
+            "properties": {
+              "max_remaining_depth": {
+                "const": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "max_remaining_depth": {
+                "minimum": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "cross_domain_governance": {
+      "type": "object",
+      "description": "Governed cross-domain transition evidence. Cross-domain delegation requires approved escalation and a qualified trust relationship; it does not merge governance domains.",
+      "additionalProperties": false,
+      "properties": {
+        "source_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "escalation_required": {
+          "const": true
+        },
+        "escalation_outcome": {
+          "const": "APPROVED"
+        },
+        "escalation_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "trust_relationship_ref": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "transition_policy_ref": {
+          "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+        },
+        "transition_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "transition_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "source_governance_domain_id",
+        "target_governance_domain_id",
+        "escalation_required",
+        "escalation_outcome",
+        "escalation_artifact_refs",
+        "trust_relationship_ref",
+        "transition_policy_ref",
+        "transition_evidence_refs",
+        "transition_digest"
+      ]
+    },
+    "issuance_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issued_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "issuer_attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "source_authority_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "issuance_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "issued_at",
+        "issuer_attribution",
+        "source_authority_evidence_refs",
+        "issuance_digest"
+      ]
+    },
+    "verification_material": {
+      "type": "object",
+      "description": "Cryptographic or equivalent verification material sufficient to verify attribution and artifact integrity independently.",
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "signed_payload_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "signatures": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/signature"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "verification_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "verification_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "verification_material_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "canonicalization_method",
+        "signed_payload_digest",
+        "signatures",
+        "verification_profile",
+        "verification_evidence_refs",
+        "verification_material_digest"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Profile-defined extensions. Extension content cannot expand delegated authority, bypass revocation, alter lineage, or weaken canonical delegation semantics.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    }
+  }
+}

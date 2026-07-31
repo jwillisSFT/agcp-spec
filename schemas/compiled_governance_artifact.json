@@ -1,0 +1,1705 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/compiled_governance_artifact.json",
+  "title": "Compiled Governance Artifact",
+  "description": "Canonical, independently identifiable, versioned, attributable, traceable, integrity-protected, machine-evaluable output of Governance Compilation. It preserves the originating governance intent and all applicable constraints, invariants, refusal paths, escalation semantics, evidence requirements, authority rules, commit meaning, compilation context, dependency set, and derivation lineage. It records Constitutional Validation, Governance Omission Analysis, Governance Self-Protection, and activation eligibility, but does not itself establish authority at commitment, determine Commit-Bound Admissibility, authorize execution, or activate governance.",
+  "$comment": "DS-042 implements ARM-501 through ARM-506 and supports ARM-507 through ARM-512; Core Section 15.6A; NS-15.6A-01 through NS-15.6A-03; and CR-110 through CR-114. JSON Schema validates structural completeness, explicit semantic-preservation assertions, deterministic compilation context, lineage, validation and omission-analysis outcomes, and activation-eligibility consistency. Implementations must additionally verify compiler behavior, semantic equivalence, source-to-output traceability, protected-constraint preservation, material-omission analysis, cryptographic signatures, and deterministic replay.",
+  "x-agcp-ds-id": "DS-042",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Canonical Governance Compilation Object — Compiled Governance Artifact",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-501",
+      "ARM-502",
+      "ARM-503",
+      "ARM-504",
+      "ARM-505",
+      "ARM-506",
+      "ARM-507",
+      "ARM-508",
+      "ARM-509",
+      "ARM-510",
+      "ARM-511",
+      "ARM-512"
+    ],
+    "core_sections": [
+      "15.6A"
+    ],
+    "normative_statements": [
+      "NS-15.6A-01",
+      "NS-15.6A-02",
+      "NS-15.6A-03"
+    ],
+    "conformance_requirements": [
+      "CR-110",
+      "CR-111",
+      "CR-112",
+      "CR-113",
+      "CR-114"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "compiled_governance_artifact_id": {
+      "$ref": "#/$defs/compiled_governance_artifact_id"
+    },
+    "artifact_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "artifact_type": {
+      "const": "COMPILED_GOVERNANCE_ARTIFACT"
+    },
+    "compilation_status": {
+      "$ref": "#/$defs/compilation_status"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "effective_scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "governance_configuration_ref": {
+      "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+    },
+    "governance_version_candidate_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "source_governance_intent_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_configuration.json#/$defs/governance_intent_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "compilation_context": {
+      "$ref": "#/$defs/compilation_context"
+    },
+    "source_manifest": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source_artifact_ref"
+      },
+      "minItems": 2,
+      "maxItems": 4096
+    },
+    "validated_dependency_set": {
+      "$ref": "#/$defs/validated_dependency_set"
+    },
+    "machine_evaluable_representation": {
+      "$ref": "#/$defs/machine_evaluable_representation"
+    },
+    "domain_constraint_sets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain_constraint_set"
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "execution_constraint_sets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/execution_constraint_set"
+      },
+      "minItems": 1,
+      "maxItems": 1024
+    },
+    "semantic_preservation": {
+      "$ref": "#/$defs/semantic_preservation"
+    },
+    "governance_artifact_lineage": {
+      "$ref": "#/$defs/governance_artifact_lineage"
+    },
+    "constitutional_validation_result": {
+      "$ref": "#/$defs/constitutional_validation_result"
+    },
+    "governance_omission_analysis_result": {
+      "$ref": "#/$defs/governance_omission_analysis_result"
+    },
+    "governance_self_protection_assessment": {
+      "$ref": "#/$defs/governance_self_protection_assessment"
+    },
+    "activation_eligibility": {
+      "$ref": "#/$defs/activation_eligibility"
+    },
+    "governance_approval_artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "governance_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "minItems": 1,
+      "maxItems": 512,
+      "uniqueItems": true
+    },
+    "compiled_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "validated_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "superseded_by_compiled_governance_artifact_ref": {
+      "$ref": "#/$defs/compiled_governance_artifact_ref"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance"
+    },
+    "artifact_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "compiled_governance_artifact_id",
+    "artifact_version",
+    "artifact_type",
+    "compilation_status",
+    "tenant_id",
+    "governance_domain_id",
+    "effective_scope",
+    "governance_configuration_ref",
+    "source_governance_intent_refs",
+    "compilation_context",
+    "source_manifest",
+    "validated_dependency_set",
+    "machine_evaluable_representation",
+    "domain_constraint_sets",
+    "execution_constraint_sets",
+    "semantic_preservation",
+    "governance_artifact_lineage",
+    "constitutional_validation_result",
+    "governance_omission_analysis_result",
+    "governance_self_protection_assessment",
+    "activation_eligibility",
+    "governance_evidence_refs",
+    "compiled_at",
+    "attribution",
+    "provenance",
+    "artifact_digest",
+    "integrity_signature",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "properties": {
+        "source_manifest": {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "source_artifact_type": {
+                "const": "GOVERNANCE_INTENT"
+              }
+            },
+            "required": [
+              "source_artifact_type"
+            ]
+          },
+          "minContains": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "source_manifest": {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "source_artifact_type": {
+                "const": "GOVERNANCE_CONFIGURATION"
+              }
+            },
+            "required": [
+              "source_artifact_type"
+            ]
+          },
+          "minContains": 1
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compilation_status": {
+            "enum": [
+              "COMPILED",
+              "VALIDATION_PENDING"
+            ]
+          }
+        },
+        "required": [
+          "compilation_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "activation_eligibility": {
+            "const": "NOT_EVALUATED"
+          },
+          "constitutional_validation_result": {
+            "properties": {
+              "outcome": {
+                "const": "PENDING"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "governance_omission_analysis_result": {
+            "properties": {
+              "outcome": {
+                "const": "PENDING"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compilation_status": {
+            "const": "VALIDATED"
+          }
+        },
+        "required": [
+          "compilation_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "validated_at",
+          "governance_version_candidate_ref"
+        ],
+        "properties": {
+          "activation_eligibility": {
+            "const": "ELIGIBLE"
+          },
+          "constitutional_validation_result": {
+            "properties": {
+              "outcome": {
+                "const": "PASSED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "governance_omission_analysis_result": {
+            "properties": {
+              "outcome": {
+                "const": "PASSED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "governance_self_protection_assessment": {
+            "properties": {
+              "assessment_complete": {
+                "const": true
+              },
+              "constitutional_constraints_preserved": {
+                "const": true
+              },
+              "protected_safeguards_not_weakened": {
+                "const": true
+              },
+              "governance_bypass_not_introduced": {
+                "const": true
+              },
+              "required_safeguards_not_disabled": {
+                "const": true
+              },
+              "material_governance_omissions_absent": {
+                "const": true
+              },
+              "self_modification_isolation_preserved": {
+                "const": true
+              }
+            },
+            "required": [
+              "assessment_complete",
+              "constitutional_constraints_preserved",
+              "protected_safeguards_not_weakened",
+              "governance_bypass_not_introduced",
+              "required_safeguards_not_disabled",
+              "material_governance_omissions_absent",
+              "self_modification_isolation_preserved"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compilation_status": {
+            "const": "INVALID"
+          }
+        },
+        "required": [
+          "compilation_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "activation_eligibility": {
+            "const": "NOT_ELIGIBLE"
+          }
+        },
+        "anyOf": [
+          {
+            "properties": {
+              "constitutional_validation_result": {
+                "properties": {
+                  "outcome": {
+                    "enum": [
+                      "FAILED",
+                      "INDETERMINATE"
+                    ]
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              }
+            }
+          },
+          {
+            "properties": {
+              "governance_omission_analysis_result": {
+                "properties": {
+                  "outcome": {
+                    "enum": [
+                      "MATERIAL_OMISSIONS_DETECTED",
+                      "INDETERMINATE"
+                    ]
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              }
+            }
+          },
+          {
+            "properties": {
+              "governance_self_protection_assessment": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "constitutional_constraints_preserved": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "constitutional_constraints_preserved"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "protected_safeguards_not_weakened": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "protected_safeguards_not_weakened"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "governance_bypass_not_introduced": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "governance_bypass_not_introduced"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "required_safeguards_not_disabled": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "required_safeguards_not_disabled"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "material_governance_omissions_absent": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "material_governance_omissions_absent"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "self_modification_isolation_preserved": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "self_modification_isolation_preserved"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compilation_status": {
+            "const": "SUPERSEDED"
+          }
+        },
+        "required": [
+          "compilation_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded_by_compiled_governance_artifact_ref"
+        ],
+        "properties": {
+          "activation_eligibility": {
+            "const": "NOT_ELIGIBLE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "activation_eligibility": {
+            "const": "ELIGIBLE"
+          }
+        },
+        "required": [
+          "activation_eligibility"
+        ]
+      },
+      "then": {
+        "properties": {
+          "compilation_status": {
+            "const": "VALIDATED"
+          }
+        },
+        "required": [
+          "compilation_status"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "compiled_governance_artifact_id": {
+      "type": "string",
+      "pattern": "^CGA-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$",
+      "maxLength": 132
+    },
+    "compiled_governance_artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compiled_governance_artifact_id": {
+          "$ref": "#/$defs/compiled_governance_artifact_id"
+        },
+        "artifact_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "compilation_status": {
+          "$ref": "#/$defs/compilation_status"
+        }
+      },
+      "required": [
+        "compiled_governance_artifact_id",
+        "artifact_version",
+        "artifact_uri",
+        "artifact_digest"
+      ]
+    },
+    "compilation_status": {
+      "type": "string",
+      "enum": [
+        "COMPILED",
+        "VALIDATION_PENDING",
+        "VALIDATED",
+        "INVALID",
+        "SUPERSEDED"
+      ]
+    },
+    "activation_eligibility": {
+      "type": "string",
+      "enum": [
+        "NOT_EVALUATED",
+        "ELIGIBLE",
+        "NOT_ELIGIBLE"
+      ],
+      "description": "Eligibility for later DS-043 Controlled Governance Activation. This field does not activate the artifact."
+    },
+    "compilation_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compilation_context_id": {
+          "type": "string",
+          "pattern": "^CCX-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "context_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "compiler_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "compiler_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deterministic_build_id": {
+          "type": "string",
+          "pattern": "^BUILD-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "target_runtime_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "governance_configuration_ref": {
+          "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+        },
+        "registry_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "registry_document.schema.json#/$defs/registry_document_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "input_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "build_parameters_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "environment_constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/uri"
+          },
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "deterministic_compilation": {
+          "const": true
+        },
+        "reproducible_compilation": {
+          "const": true
+        },
+        "created_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "context_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "compilation_context_id",
+        "context_version",
+        "compiler_id",
+        "compiler_version",
+        "deterministic_build_id",
+        "target_runtime_profile",
+        "governance_configuration_ref",
+        "input_set_digest",
+        "build_parameters_digest",
+        "deterministic_compilation",
+        "reproducible_compilation",
+        "created_at",
+        "attribution",
+        "context_digest"
+      ]
+    },
+    "source_artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_artifact_id": {
+          "$ref": "common.json#/$defs/artifact_id"
+        },
+        "source_artifact_type": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_INTENT",
+            "GOVERNANCE_CONFIGURATION",
+            "POLICY",
+            "POLICY_EVALUATION_MODULE",
+            "CONSTRAINT",
+            "INVARIANT",
+            "EXCEPTION",
+            "REGISTRY",
+            "OTHER_GOVERNANCE_SOURCE"
+          ]
+        },
+        "source_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "artifact_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "schema_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "required_for_semantics": {
+          "type": "boolean"
+        },
+        "protected_source": {
+          "type": "boolean"
+        },
+        "traceability_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "maxItems": 512,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "source_artifact_id",
+        "source_artifact_type",
+        "source_version",
+        "artifact_uri",
+        "artifact_digest",
+        "required_for_semantics",
+        "protected_source"
+      ]
+    },
+    "validated_dependency_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dependency_set_id": {
+          "type": "string",
+          "pattern": "^DEPSET-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "dependency_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 4096
+        },
+        "dependency_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "all_dependencies_resolved": {
+          "const": true
+        },
+        "all_dependencies_integrity_verified": {
+          "const": true
+        },
+        "all_dependencies_schema_validated": {
+          "const": true
+        },
+        "version_conflicts_absent": {
+          "const": true
+        },
+        "validation_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "dependency_set_id",
+        "dependency_refs",
+        "dependency_set_digest",
+        "all_dependencies_resolved",
+        "all_dependencies_integrity_verified",
+        "all_dependencies_schema_validated",
+        "version_conflicts_absent",
+        "validation_evidence_refs"
+      ]
+    },
+    "machine_evaluable_representation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "representation_format": {
+          "type": "string",
+          "enum": [
+            "JSON_LOGIC",
+            "WASM",
+            "REGO",
+            "CEL",
+            "DECISION_TABLE",
+            "BYTECODE",
+            "AGCP_DSL",
+            "OTHER_PROFILED"
+          ]
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "artifact_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "entrypoint": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "representation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "deterministic_runtime_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "machine_evaluable": {
+          "const": true
+        },
+        "immutable_representation": {
+          "const": true
+        }
+      },
+      "required": [
+        "representation_format",
+        "media_type",
+        "artifact_uri",
+        "entrypoint",
+        "representation_digest",
+        "deterministic_runtime_profile",
+        "machine_evaluable",
+        "immutable_representation"
+      ]
+    },
+    "domain_constraint_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "domain_constraint_set_id": {
+          "type": "string",
+          "pattern": "^DCS-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "effective_scope": {
+          "$ref": "common.json#/$defs/governance_scope"
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "invariant_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "invariant_definition.json#/$defs/invariant_definition_ref"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "refusal_rule_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "escalation_rule_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "evidence_requirement_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "authority_rule_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "commit_rule_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "domain_constraint_set_id",
+        "governance_domain_id",
+        "effective_scope",
+        "constraint_refs",
+        "invariant_refs",
+        "refusal_rule_ids",
+        "evidence_requirement_ids",
+        "authority_rule_ids",
+        "commit_rule_ids",
+        "set_digest"
+      ]
+    },
+    "execution_constraint_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "execution_constraint_set_id": {
+          "type": "string",
+          "pattern": "^ECS-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "derived_from_domain_constraint_set_id": {
+          "type": "string",
+          "pattern": "^DCS-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "applicable_action_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "invariant_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "invariant_definition.json#/$defs/invariant_definition_ref"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "evidence_requirement_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "authority_rule_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "commit_rule_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 2048,
+          "uniqueItems": true
+        },
+        "deterministic": {
+          "const": true
+        },
+        "set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "execution_constraint_set_id",
+        "derived_from_domain_constraint_set_id",
+        "applicable_action_types",
+        "constraint_refs",
+        "invariant_refs",
+        "evidence_requirement_ids",
+        "authority_rule_ids",
+        "commit_rule_ids",
+        "deterministic",
+        "set_digest"
+      ]
+    },
+    "semantic_preservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "governance_intent_preserved": {
+          "const": true
+        },
+        "constraints_preserved": {
+          "const": true
+        },
+        "invariants_preserved": {
+          "const": true
+        },
+        "refusal_paths_preserved": {
+          "const": true
+        },
+        "escalation_semantics_preserved": {
+          "const": true
+        },
+        "evidence_requirements_preserved": {
+          "const": true
+        },
+        "authority_rules_preserved": {
+          "const": true
+        },
+        "commit_meaning_preserved": {
+          "const": true
+        },
+        "protected_constraints_non_derogable": {
+          "const": true
+        },
+        "coverage_manifest_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "governance_intent_preserved",
+        "constraints_preserved",
+        "invariants_preserved",
+        "refusal_paths_preserved",
+        "escalation_semantics_preserved",
+        "evidence_requirements_preserved",
+        "authority_rules_preserved",
+        "commit_meaning_preserved",
+        "protected_constraints_non_derogable",
+        "coverage_manifest_digest"
+      ]
+    },
+    "governance_artifact_lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lineage_id": {
+          "$ref": "common.json#/$defs/lineage_id"
+        },
+        "root_governance_intent_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_configuration.json#/$defs/governance_intent_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "compilation_context_id": {
+          "type": "string",
+          "pattern": "^CCX-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "predecessor_compiled_artifact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/compiled_governance_artifact_ref"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "derivation_steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/derivation_step"
+          },
+          "minItems": 1,
+          "maxItems": 4096
+        },
+        "source_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "output_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "lineage_complete": {
+          "const": true
+        },
+        "lineage_replayable": {
+          "const": true
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 512,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "lineage_id",
+        "root_governance_intent_refs",
+        "compilation_context_id",
+        "derivation_steps",
+        "source_set_digest",
+        "output_digest",
+        "lineage_complete",
+        "lineage_replayable",
+        "governance_evidence_refs"
+      ]
+    },
+    "derivation_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "step_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "step_type": {
+          "type": "string",
+          "enum": [
+            "PARSE",
+            "NORMALIZE",
+            "RESOLVE_DEPENDENCIES",
+            "COMPILE_POLICY",
+            "COMPILE_CONSTRAINT",
+            "COMPILE_INVARIANT",
+            "COMPILE_EXCEPTION",
+            "GENERATE_REFUSAL_PATH",
+            "GENERATE_ESCALATION_PATH",
+            "GENERATE_EVIDENCE_REQUIREMENT",
+            "GENERATE_AUTHORITY_RULE",
+            "GENERATE_COMMIT_RULE",
+            "PACKAGE",
+            "OTHER_PROFILED"
+          ]
+        },
+        "input_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 1,
+          "maxItems": 256
+        },
+        "output_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "tool_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "tool_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "performed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        }
+      },
+      "required": [
+        "step_id",
+        "step_type",
+        "input_digests",
+        "output_digest",
+        "tool_id",
+        "tool_version",
+        "performed_at",
+        "attribution"
+      ]
+    },
+    "constitutional_validation_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "validation_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "FAILED",
+            "INDETERMINATE"
+          ]
+        },
+        "protected_safeguard_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/constitutional_finding"
+          },
+          "maxItems": 2048
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "evaluator_attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 512,
+          "uniqueItems": true
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "validation_id",
+        "outcome",
+        "protected_safeguard_set_digest",
+        "findings"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "PASSED",
+                  "FAILED",
+                  "INDETERMINATE"
+                ]
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "required": [
+              "evaluated_at",
+              "evaluator_attribution",
+              "governance_evidence_refs",
+              "result_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "FAILED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "findings": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "PASSED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "findings": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "constitutional_finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "finding_type": {
+          "type": "string",
+          "enum": [
+            "CONTRADICTION",
+            "PROHIBITED_WEAKENING",
+            "BYPASS_INTRODUCED",
+            "SAFEGUARD_DISABLED",
+            "PROTECTED_REQUIREMENT_OMITTED",
+            "SELF_MODIFICATION_ISOLATION_FAILURE",
+            "OTHER_PROTECTED_FAILURE"
+          ]
+        },
+        "protected_requirement_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "MATERIAL",
+            "CRITICAL"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "finding_id",
+        "finding_type",
+        "protected_requirement_ref",
+        "severity",
+        "description",
+        "evidence_refs"
+      ]
+    },
+    "governance_omission_analysis_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "analysis_id": {
+          "$ref": "common.json#/$defs/evaluation_id"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "MATERIAL_OMISSIONS_DETECTED",
+            "INDETERMINATE"
+          ]
+        },
+        "coverage_categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "POLICY",
+              "CONSTRAINT",
+              "INVARIANT",
+              "REFUSAL_PATH",
+              "ESCALATION_SEMANTICS",
+              "EVIDENCE_REQUIREMENT",
+              "AUTHORITY_RULE",
+              "COMMIT_RULE",
+              "PROTECTED_SAFEGUARD"
+            ]
+          },
+          "minItems": 9,
+          "maxItems": 9,
+          "uniqueItems": true
+        },
+        "traceability_coverage_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "omission_findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/omission_finding"
+          },
+          "maxItems": 2048
+        },
+        "analyzed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "analyst_attribution": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "governance_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "maxItems": 512,
+          "uniqueItems": true
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "analysis_id",
+        "outcome",
+        "coverage_categories",
+        "traceability_coverage_digest",
+        "omission_findings"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "PASSED",
+                  "MATERIAL_OMISSIONS_DETECTED",
+                  "INDETERMINATE"
+                ]
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "required": [
+              "analyzed_at",
+              "analyst_attribution",
+              "governance_evidence_refs",
+              "result_digest"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "MATERIAL_OMISSIONS_DETECTED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "omission_findings": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "PASSED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "omission_findings": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "omission_finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "omitted_category": {
+          "type": "string",
+          "enum": [
+            "POLICY",
+            "CONSTRAINT",
+            "INVARIANT",
+            "REFUSAL_PATH",
+            "ESCALATION_SEMANTICS",
+            "EVIDENCE_REQUIREMENT",
+            "AUTHORITY_RULE",
+            "COMMIT_RULE",
+            "PROTECTED_SAFEGUARD"
+          ]
+        },
+        "source_requirement_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "materiality": {
+          "const": "MATERIAL"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "finding_id",
+        "omitted_category",
+        "source_requirement_ref",
+        "materiality",
+        "description",
+        "evidence_refs"
+      ]
+    },
+    "governance_self_protection_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assessment_complete": {
+          "type": "boolean"
+        },
+        "constitutional_constraints_preserved": {
+          "type": "boolean"
+        },
+        "protected_safeguards_not_weakened": {
+          "type": "boolean"
+        },
+        "governance_bypass_not_introduced": {
+          "type": "boolean"
+        },
+        "required_safeguards_not_disabled": {
+          "type": "boolean"
+        },
+        "material_governance_omissions_absent": {
+          "type": "boolean"
+        },
+        "self_modification_isolation_preserved": {
+          "type": "boolean"
+        },
+        "assessment_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "assessment_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "assessment_complete",
+        "constitutional_constraints_preserved",
+        "protected_safeguards_not_weakened",
+        "governance_bypass_not_introduced",
+        "required_safeguards_not_disabled",
+        "material_governance_omissions_absent",
+        "self_modification_isolation_preserved",
+        "assessment_evidence_refs",
+        "assessment_digest"
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_manifest_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "compilation_context_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "validated_dependency_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "compiler_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "compiler_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "deterministic_build_id": {
+          "type": "string",
+          "pattern": "^BUILD-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "replay_instructions_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "equivalent_inputs_produce_equivalent_output": {
+          "const": true
+        }
+      },
+      "required": [
+        "source_manifest_digest",
+        "compilation_context_digest",
+        "validated_dependency_set_digest",
+        "compiler_id",
+        "compiler_version",
+        "deterministic_build_id",
+        "replay_instructions_uri",
+        "equivalent_inputs_produce_equivalent_output"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "machine_evaluable_output_of_governance_compilation": {
+          "const": true
+        },
+        "does_not_establish_authority_at_commitment": {
+          "const": true
+        },
+        "does_not_determine_commit_bound_admissibility": {
+          "const": true
+        },
+        "does_not_authorize_execution": {
+          "const": true
+        },
+        "does_not_activate_itself": {
+          "const": true
+        },
+        "remains_subject_to_commit_bound_evaluation": {
+          "const": true
+        },
+        "controlled_activation_required_before_authoritative_use": {
+          "const": true
+        },
+        "partial_activation_not_permitted": {
+          "const": true
+        }
+      },
+      "required": [
+        "machine_evaluable_output_of_governance_compilation",
+        "does_not_establish_authority_at_commitment",
+        "does_not_determine_commit_bound_admissibility",
+        "does_not_authorize_execution",
+        "does_not_activate_itself",
+        "remains_subject_to_commit_bound_evaluation",
+        "controlled_activation_required_before_authoritative_use",
+        "partial_activation_not_permitted"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)+$"
+      },
+      "additionalProperties": true,
+      "description": "Namespaced extensions that cannot alter canonical DS-042 semantics."
+    }
+  }
+}

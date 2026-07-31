@@ -1,0 +1,166 @@
+{
+  "evaluation_id": "evidence-qualification-insufficient-1",
+  "result_type": "EVIDENCE_QUALIFICATION_RESULT",
+  "proposal_id": "proposal-1",
+  "tenant_id": "tenant-1",
+  "governance_domain_id": "domain-1",
+  "target_ref": {
+    "target_id": "target-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1"
+  },
+  "policy_ref": {
+    "policy_id": "policy-1",
+    "policy_version": "2.0.0",
+    "policy_digest": {
+      "algorithm": "SHA-256",
+      "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    "artifact_uri": "https://agcp.ai/example/policies/policy-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "status": "Active"
+  },
+  "governance_version_ref": {
+    "governance_version_id": "gv-2.0.0"
+  },
+  "evaluation_horizon": {
+    "horizon_id": "horizon-id-1",
+    "evaluated_at": "2026-07-30T16:00:00Z"
+  },
+  "evidence_set_binding": {
+    "required_evidence_refs": [
+      {
+        "governance_evidence_id": "governance-evidence-id-1",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ],
+    "expected_evidence_count": 1,
+    "resolved_evidence_count": 1,
+    "required_evidence_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "proposal_evidence_binding_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "reference_resolution_status": "RESOLVED",
+    "availability_status": "AVAILABLE",
+    "resolved_evidence_refs": [
+      {
+        "governance_evidence_id": "evidence-1",
+        "evidence_digest": {
+          "algorithm": "SHA-256",
+          "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      }
+    ],
+    "resolved_evidence_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  },
+  "dimensions": {
+    "freshness": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "provenance": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "integrity": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "authority": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "resolvability": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    },
+    "sufficiency": {
+      "status": "NOT_QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z",
+      "failure_codes": [
+        "EVIDENCE_INSUFFICIENT"
+      ]
+    },
+    "availability": {
+      "status": "QUALIFIED",
+      "basis": "example",
+      "assessed_at": "2026-07-30T16:00:00Z"
+    }
+  },
+  "outcome": "NOT_QUALIFIED",
+  "disposition": "STRUCTURAL_REFUSAL_REQUIRED",
+  "evaluated_at": "2026-07-30T16:00:00Z",
+  "evaluator": {
+    "principal": {
+      "principal_id": "governance-service-1",
+      "principal_type": "SERVICE"
+    },
+    "attributed_at": "2026-07-30T16:00:00Z"
+  },
+  "qualification_basis_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "result_digest": {
+    "algorithm": "SHA-256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "replay_material": {
+    "qualification_profile": "example",
+    "input_snapshot_refs": [
+      "https://agcp.ai/example/input-snapshot-ref"
+    ],
+    "qualification_configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "required_evidence_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "policy_basis_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "governance_version_ref": {
+      "governance_version_id": "1.0.0"
+    },
+    "historical_action_execution_required": false
+  },
+  "semantic_assertions": {
+    "all_required_dimensions_evaluated": true,
+    "evidence_suitability_established": false,
+    "may_support_admissibility": false,
+    "may_support_authority": false,
+    "artifact_or_reference_existence_alone_treated_as_sufficient": false,
+    "all_required_evidence_resolved": true,
+    "all_required_evidence_available": true,
+    "proposal_target_tenant_policy_and_horizon_binding_verified": true,
+    "qualification_is_attributable": true,
+    "supports_deterministic_replay": true
+  },
+  "failure_reasons": [
+    {
+      "code": "EVIDENCE_INSUFFICIENT",
+      "dimension": "SUFFICIENCY",
+      "summary": "Required evidence is insufficient."
+    }
+  ]
+}

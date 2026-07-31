@@ -1,0 +1,1106 @@
+{
+    "status": "PASS",
+    "interface_count": 2,
+    "interfaces": [
+        {
+            "if_id": "IF-001",
+            "title": "AGCP HTTP Interface v2",
+            "interface_version": "v2",
+            "contract_version": "2.0.0",
+            "lifecycle_state": "Implemented",
+            "record_status": "Active",
+            "specification_file": "spec/AGCP-HTTP-Interface-Specification.md",
+            "machine_readable_contract": "api/AGCP-HTTP-Contract.yaml",
+            "cr_ids": [
+                "CR-010",
+                "CR-019",
+                "CR-020",
+                "CR-021",
+                "CR-022",
+                "CR-023",
+                "CR-024",
+                "CR-025",
+                "CR-026",
+                "CR-027",
+                "CR-028",
+                "CR-029",
+                "CR-030",
+                "CR-031",
+                "CR-032",
+                "CR-033",
+                "CR-034",
+                "CR-035",
+                "CR-036",
+                "CR-037",
+                "CR-038",
+                "CR-039",
+                "CR-040",
+                "CR-041",
+                "CR-042",
+                "CR-043",
+                "CR-044",
+                "CR-045",
+                "CR-046",
+                "CR-047",
+                "CR-073",
+                "CR-089",
+                "CR-090",
+                "CR-094",
+                "CR-095",
+                "CR-096",
+                "CR-102",
+                "CR-119",
+                "CR-120",
+                "CR-121"
+            ]
+        },
+        {
+            "if_id": "IF-002",
+            "title": "AGCP Policy Evaluation Contract",
+            "interface_version": "v2",
+            "contract_version": "2.0.0",
+            "lifecycle_state": "Implemented",
+            "record_status": "Active",
+            "specification_file": "spec/AGCP-Policy-Evaluation-Contract.md",
+            "machine_readable_contract": null,
+            "cr_ids": [
+                "CR-007",
+                "CR-031",
+                "CR-034",
+                "CR-073",
+                "CR-074",
+                "CR-075",
+                "CR-076",
+                "CR-077",
+                "CR-078",
+                "CR-079",
+                "CR-080",
+                "CR-081",
+                "CR-082",
+                "CR-083",
+                "CR-084",
+                "CR-085",
+                "CR-086",
+                "CR-087",
+                "CR-088",
+                "CR-089",
+                "CR-090",
+                "CR-094",
+                "CR-095",
+                "CR-105",
+                "CR-106",
+                "CR-107",
+                "CR-108",
+                "CR-109",
+                "CR-110",
+                "CR-111",
+                "CR-112",
+                "CR-113",
+                "CR-114",
+                "CR-115",
+                "CR-116",
+                "CR-117",
+                "CR-119",
+                "CR-120",
+                "CR-121",
+                "CR-122"
+            ]
+        }
+    ],
+    "rtm_assigned_cr_count": 70,
+    "rtm_na_count": 52,
+    "rtm_na_crs": [
+        "CR-001",
+        "CR-002",
+        "CR-003",
+        "CR-004",
+        "CR-005",
+        "CR-006",
+        "CR-008",
+        "CR-009",
+        "CR-011",
+        "CR-012",
+        "CR-013",
+        "CR-014",
+        "CR-015",
+        "CR-016",
+        "CR-017",
+        "CR-018",
+        "CR-048",
+        "CR-049",
+        "CR-050",
+        "CR-051",
+        "CR-052",
+        "CR-053",
+        "CR-054",
+        "CR-055",
+        "CR-056",
+        "CR-057",
+        "CR-058",
+        "CR-059",
+        "CR-060",
+        "CR-061",
+        "CR-062",
+        "CR-063",
+        "CR-064",
+        "CR-065",
+        "CR-066",
+        "CR-067",
+        "CR-068",
+        "CR-069",
+        "CR-070",
+        "CR-071",
+        "CR-072",
+        "CR-091",
+        "CR-092",
+        "CR-093",
+        "CR-097",
+        "CR-098",
+        "CR-099",
+        "CR-100",
+        "CR-101",
+        "CR-103",
+        "CR-104",
+        "CR-118"
+    ],
+    "operation_parity": {
+        "status": "PASS",
+        "openapi_contract": "api/AGCP-HTTP-Contract.yaml",
+        "interface_specification": "spec/AGCP-HTTP-Interface-Specification.md",
+        "openapi_operation_count": 10,
+        "interface_specification_operation_count": 10,
+        "operation_sets_equal": true,
+        "undocumented_openapi_operations": [],
+        "interface_only_operations": [],
+        "operations": [
+            {
+                "method": "GET",
+                "path": "/agcp/v2/meta",
+                "operation_id": "getMetadata"
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/proposals/submit",
+                "operation_id": "submitProposal"
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/proposals/{proposal_id}",
+                "operation_id": "getProposal"
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+                "operation_id": "submitGovernanceApproval"
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/execution-authorizations/{authorization_id}",
+                "operation_id": "getExecutionAuthorization"
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/commit-boundary/commit",
+                "operation_id": "commitBoundaryProcessing"
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/governance-evidence/{evidence_id}",
+                "operation_id": "getGovernanceEvidence"
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policy-modules",
+                "operation_id": "registerPolicyEvaluationModule"
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policies",
+                "operation_id": "registerGovernancePolicy"
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/governance-artifacts/{artifact_id}",
+                "operation_id": "getGovernanceArtifact"
+            }
+        ]
+    },
+    "validated_at": "2026-07-31T12:13:00Z",
+    "source_hashes": {
+        "api/AGCP-HTTP-Contract.yaml": "0695e294d8564d312590dd97115a853e2bbbb13988de2538f213a904f1afb2c9",
+        "spec/AGCP-HTTP-Interface-Specification.md": "93f68c2d7347063587852eb10ea711b297906e8ed2d2656844d9b24d1226b98e",
+        "spec/AGCP-Error-Mapping.md": "c6a3ab11873cb99be65442c5cc07545fc579ff3311aeb8fd0584ae6e54f16ac8",
+        "conformance/AGCP-Conformance-Harness-Spec.yml": "0dd2b25ddae6e2fee29dfcc0e02d0baaf560dc4fe41047b2ec805df5aa029120",
+        "conformance/AGCP-Conformance-Test-Vectors.md": "0c26b0cd0bf56d7820b98664953f6137942dbec3307cbc048c245c33e7b3ba57",
+        "conformance/AGCP-if001-executable-operation-coverage-validation.json": "74c58e634d65cc798f25bb90b12f1217f6420953b8f3f0abe8cdd7436114a19d"
+    },
+    "response_set_parity": {
+        "status": "PASS",
+        "openapi_contract": "api/AGCP-HTTP-Contract.yaml",
+        "normative_error_mapping": "spec/AGCP-Error-Mapping.md",
+        "error_mapping_operation_count": 9,
+        "matched_openapi_operation_count": 9,
+        "operations_with_equal_non_success_sets": 9,
+        "missing_openapi_status_instances": 0,
+        "extra_openapi_status_instances": 0,
+        "all_non_success_response_sets_equal": true,
+        "operations": [
+            {
+                "method": "POST",
+                "path": "/agcp/v2/proposals/submit",
+                "operation_id": "submitProposal",
+                "error_mapping_non_success_statuses": [
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_non_success_statuses": [
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/proposals/{proposal_id}",
+                "operation_id": "getProposal",
+                "error_mapping_non_success_statuses": [
+                    403,
+                    404
+                ],
+                "openapi_non_success_statuses": [
+                    403,
+                    404
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+                "operation_id": "submitGovernanceApproval",
+                "error_mapping_non_success_statuses": [
+                    400,
+                    403,
+                    404,
+                    409,
+                    422
+                ],
+                "openapi_non_success_statuses": [
+                    400,
+                    403,
+                    404,
+                    409,
+                    422
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/execution-authorizations/{authorization_id}",
+                "operation_id": "getExecutionAuthorization",
+                "error_mapping_non_success_statuses": [
+                    403,
+                    404
+                ],
+                "openapi_non_success_statuses": [
+                    403,
+                    404
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/commit-boundary/commit",
+                "operation_id": "commitBoundaryProcessing",
+                "error_mapping_non_success_statuses": [
+                    400,
+                    403,
+                    404,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_non_success_statuses": [
+                    400,
+                    403,
+                    404,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/governance-evidence/{evidence_id}",
+                "operation_id": "getGovernanceEvidence",
+                "error_mapping_non_success_statuses": [
+                    403,
+                    404,
+                    422
+                ],
+                "openapi_non_success_statuses": [
+                    403,
+                    404,
+                    422
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policy-modules",
+                "operation_id": "registerPolicyEvaluationModule",
+                "error_mapping_non_success_statuses": [
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_non_success_statuses": [
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policies",
+                "operation_id": "registerGovernancePolicy",
+                "error_mapping_non_success_statuses": [
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_non_success_statuses": [
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/governance-artifacts/{artifact_id}",
+                "operation_id": "getGovernanceArtifact",
+                "error_mapping_non_success_statuses": [
+                    403,
+                    404
+                ],
+                "openapi_non_success_statuses": [
+                    403,
+                    404
+                ],
+                "missing_from_openapi": [],
+                "extra_in_openapi": [],
+                "sets_equal": true
+            }
+        ]
+    },
+    "complete_contract_parity": {
+        "status": "PASS",
+        "interface_specification": "spec/AGCP-HTTP-Interface-Specification.md",
+        "openapi_contract": "api/AGCP-HTTP-Contract.yaml",
+        "interface_operation_count": 10,
+        "openapi_operation_count": 10,
+        "operations_with_complete_parity": 10,
+        "required_parameter_instances": 18,
+        "operations_with_json_request_schema": 5,
+        "response_status_instances": 45,
+        "missing_interface_parameter_instances": 0,
+        "extra_interface_parameter_instances": 0,
+        "request_schema_mismatches": 0,
+        "missing_interface_status_instances": 0,
+        "extra_interface_status_instances": 0,
+        "all_method_path_operation_ids_match": true,
+        "all_required_parameter_sets_match": true,
+        "all_request_schemas_match": true,
+        "all_response_status_sets_match": true,
+        "all_contract_fields_match": true,
+        "operations": [
+            {
+                "method": "GET",
+                "path": "/agcp/v2/execution-authorizations/{authorization_id}",
+                "interface_operation_id": "getExecutionAuthorization",
+                "openapi_operation_id": "getExecutionAuthorization",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "path:authorization_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "openapi_required_parameters": [
+                    "path:authorization_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": null,
+                "openapi_request_schema": null,
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    403,
+                    404
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    403,
+                    404
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/governance-artifacts/{artifact_id}",
+                "interface_operation_id": "getGovernanceArtifact",
+                "openapi_operation_id": "getGovernanceArtifact",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "path:artifact_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "openapi_required_parameters": [
+                    "path:artifact_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": null,
+                "openapi_request_schema": null,
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    403,
+                    404
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    403,
+                    404
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/governance-evidence/{evidence_id}",
+                "interface_operation_id": "getGovernanceEvidence",
+                "openapi_operation_id": "getGovernanceEvidence",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "path:evidence_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "openapi_required_parameters": [
+                    "path:evidence_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": null,
+                "openapi_request_schema": null,
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    403,
+                    404,
+                    422
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    403,
+                    404,
+                    422
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/meta",
+                "interface_operation_id": "getMetadata",
+                "openapi_operation_id": "getMetadata",
+                "operation_id_match": true,
+                "interface_required_parameters": [],
+                "openapi_required_parameters": [],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": null,
+                "openapi_request_schema": null,
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200
+                ],
+                "openapi_response_statuses": [
+                    200
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "GET",
+                "path": "/agcp/v2/proposals/{proposal_id}",
+                "interface_operation_id": "getProposal",
+                "openapi_operation_id": "getProposal",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "path:proposal_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "openapi_required_parameters": [
+                    "path:proposal_id",
+                    "query:tenant_id",
+                    "query:governance_domain_id"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": null,
+                "openapi_request_schema": null,
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    403,
+                    404
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    403,
+                    404
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/commit-boundary/commit",
+                "interface_operation_id": "commitBoundaryProcessing",
+                "openapi_operation_id": "commitBoundaryProcessing",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "openapi_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": "CommitBoundaryRequest",
+                "openapi_request_schema": "CommitBoundaryRequest",
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    404,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    404,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policies",
+                "interface_operation_id": "registerGovernancePolicy",
+                "openapi_operation_id": "registerGovernancePolicy",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "openapi_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": "GovernancePolicyArtifact",
+                "openapi_request_schema": "GovernancePolicyArtifact",
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policy-modules",
+                "interface_operation_id": "registerPolicyEvaluationModule",
+                "openapi_operation_id": "registerPolicyEvaluationModule",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "openapi_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": "PolicyEvaluationModuleArtifact",
+                "openapi_request_schema": "PolicyEvaluationModuleArtifact",
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/proposals/submit",
+                "interface_operation_id": "submitProposal",
+                "openapi_operation_id": "submitProposal",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "openapi_required_parameters": [
+                    "header:Idempotency-Key"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": "ProposalSubmitRequest",
+                "openapi_request_schema": "ProposalSubmitRequest",
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    409,
+                    422,
+                    503
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            },
+            {
+                "method": "POST",
+                "path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+                "interface_operation_id": "submitGovernanceApproval",
+                "openapi_operation_id": "submitGovernanceApproval",
+                "operation_id_match": true,
+                "interface_required_parameters": [
+                    "path:proposal_id",
+                    "header:Idempotency-Key"
+                ],
+                "openapi_required_parameters": [
+                    "path:proposal_id",
+                    "header:Idempotency-Key"
+                ],
+                "missing_from_interface_parameters": [],
+                "extra_in_interface_parameters": [],
+                "required_parameters_match": true,
+                "interface_request_schema": "GovernanceApprovalRequest",
+                "openapi_request_schema": "GovernanceApprovalRequest",
+                "request_schema_match": true,
+                "interface_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    404,
+                    409,
+                    422
+                ],
+                "openapi_response_statuses": [
+                    200,
+                    400,
+                    403,
+                    404,
+                    409,
+                    422
+                ],
+                "missing_from_interface_statuses": [],
+                "extra_in_interface_statuses": [],
+                "response_statuses_match": true,
+                "all_fields_match": true
+            }
+        ]
+    },
+    "checks": {
+        "if001_executable_operation_coverage": "PASS"
+    },
+    "metrics": {
+        "mandatory_if001_operations": 10,
+        "operations_with_schema_valid_positive_vectors": 10,
+        "operations_with_complete_applicable_executable_coverage": 10,
+        "harness_test_vectors": 54,
+        "harness_checks": 17,
+        "harness_http_primary_and_setup_requests": 52,
+        "controlled_conformance_fixtures": 29,
+        "f08_newly_covered_operations": 5,
+        "f08_new_operations_with_complete_applicable_coverage": 5
+    },
+    "executable_operation_coverage": {
+        "validation_record": "conformance/AGCP-if001-executable-operation-coverage-validation.json",
+        "status": "PASS",
+        "validation_scope_note": "F-08 requires positive coverage for all ten mandatory operations and complete applicable negative, isolation, and idempotency coverage for the five operations that previously had no executable vector. Pre-existing operation category breadth is preserved but is not redefined by this corrective action. F-09 adds nine non-HTTP Governance Compilation and Controlled Activation vectors and does not alter IF-001 coverage categories. F-09 adds nine non-HTTP Governance Compilation and Controlled Activation vectors and does not alter IF-001 coverage categories.",
+        "mandatory_operation_count": 10,
+        "operations_with_schema_valid_positive_coverage": 10,
+        "f08_newly_covered_operation_count": 5,
+        "f08_new_operations_with_complete_applicable_coverage": 5,
+        "operation_results": [
+            {
+                "operation_id": "getMetadata",
+                "method": "GET",
+                "path": "/agcp/v2/meta",
+                "positive_vectors": [
+                    "TV-META-001"
+                ],
+                "negative_vectors": [],
+                "isolation_vectors": [],
+                "idempotency_vectors": [],
+                "coverage_baseline": "F-08 newly added operation",
+                "f08_required_categories": [
+                    "positive"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "submitProposal",
+                "method": "POST",
+                "path": "/agcp/v2/proposals/submit",
+                "positive_vectors": [
+                    "TV-PROP-001"
+                ],
+                "negative_vectors": [
+                    "TV-PROP-004",
+                    "TV-PROP-005",
+                    "TV-PROP-006",
+                    "TV-PROP-007"
+                ],
+                "isolation_vectors": [
+                    "TV-XTEN-SETUP"
+                ],
+                "idempotency_vectors": [
+                    "TV-PROP-008",
+                    "TV-PROP-009"
+                ],
+                "coverage_baseline": "pre-existing executable operation",
+                "f08_required_categories": [
+                    "positive"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "getProposal",
+                "method": "GET",
+                "path": "/agcp/v2/proposals/{proposal_id}",
+                "positive_vectors": [
+                    "TV-GET-001"
+                ],
+                "negative_vectors": [
+                    "TV-GET-002"
+                ],
+                "isolation_vectors": [
+                    "TV-XTEN-001"
+                ],
+                "idempotency_vectors": [],
+                "coverage_baseline": "pre-existing executable operation",
+                "f08_required_categories": [
+                    "positive"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "submitGovernanceApproval",
+                "method": "POST",
+                "path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+                "positive_vectors": [
+                    "TV-GAPP-001",
+                    "TV-GAPP-002"
+                ],
+                "negative_vectors": [
+                    "TV-GAPP-003",
+                    "TV-GAPP-004"
+                ],
+                "isolation_vectors": [
+                    "TV-XTEN-002"
+                ],
+                "idempotency_vectors": [],
+                "coverage_baseline": "pre-existing executable operation",
+                "f08_required_categories": [
+                    "positive"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "getExecutionAuthorization",
+                "method": "GET",
+                "path": "/agcp/v2/execution-authorizations/{authorization_id}",
+                "positive_vectors": [
+                    "TV-EAUTH-001"
+                ],
+                "negative_vectors": [
+                    "TV-EAUTH-002"
+                ],
+                "isolation_vectors": [
+                    "TV-EAUTH-003"
+                ],
+                "idempotency_vectors": [],
+                "coverage_baseline": "F-08 newly added operation",
+                "f08_required_categories": [
+                    "positive",
+                    "negative",
+                    "isolation"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "commitBoundaryProcessing",
+                "method": "POST",
+                "path": "/agcp/v2/commit-boundary/commit",
+                "positive_vectors": [
+                    "TV-COMMIT-001"
+                ],
+                "negative_vectors": [
+                    "TV-COMMIT-002",
+                    "TV-COMMIT-003",
+                    "TV-COMMIT-004",
+                    "TV-COMMIT-005"
+                ],
+                "isolation_vectors": [
+                    "TV-XTEN-003"
+                ],
+                "idempotency_vectors": [
+                    "TV-COMMIT-004"
+                ],
+                "coverage_baseline": "pre-existing executable operation",
+                "f08_required_categories": [
+                    "positive"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "getGovernanceEvidence",
+                "method": "GET",
+                "path": "/agcp/v2/governance-evidence/{evidence_id}",
+                "positive_vectors": [
+                    "TV-EVID-001"
+                ],
+                "negative_vectors": [],
+                "isolation_vectors": [
+                    "TV-XTEN-004"
+                ],
+                "idempotency_vectors": [],
+                "coverage_baseline": "pre-existing executable operation",
+                "f08_required_categories": [
+                    "positive"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "registerPolicyEvaluationModule",
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policy-modules",
+                "positive_vectors": [
+                    "TV-PEM-001"
+                ],
+                "negative_vectors": [
+                    "TV-PEM-002"
+                ],
+                "isolation_vectors": [
+                    "TV-PEM-003"
+                ],
+                "idempotency_vectors": [
+                    "TV-PEM-004",
+                    "TV-PEM-005"
+                ],
+                "coverage_baseline": "F-08 newly added operation",
+                "f08_required_categories": [
+                    "positive",
+                    "negative",
+                    "isolation",
+                    "idempotency"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "registerGovernancePolicy",
+                "method": "POST",
+                "path": "/agcp/v2/governance-artifacts/policies",
+                "positive_vectors": [
+                    "TV-POL-001"
+                ],
+                "negative_vectors": [
+                    "TV-POL-002"
+                ],
+                "isolation_vectors": [
+                    "TV-POL-003"
+                ],
+                "idempotency_vectors": [
+                    "TV-POL-004",
+                    "TV-POL-005"
+                ],
+                "coverage_baseline": "F-08 newly added operation",
+                "f08_required_categories": [
+                    "positive",
+                    "negative",
+                    "isolation",
+                    "idempotency"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            },
+            {
+                "operation_id": "getGovernanceArtifact",
+                "method": "GET",
+                "path": "/agcp/v2/governance-artifacts/{artifact_id}",
+                "positive_vectors": [
+                    "TV-GART-001"
+                ],
+                "negative_vectors": [
+                    "TV-GART-002"
+                ],
+                "isolation_vectors": [
+                    "TV-GART-003"
+                ],
+                "idempotency_vectors": [],
+                "coverage_baseline": "F-08 newly added operation",
+                "f08_required_categories": [
+                    "positive",
+                    "negative",
+                    "isolation"
+                ],
+                "missing_f08_categories": [],
+                "result": "PASS"
+            }
+        ]
+    },
+    "normative_governance_evidence_obligation_validation": {
+        "status": "PASS",
+        "controlling_core_file": "spec/AGCP-Core.docx",
+        "controlling_normative_statements_file": "spec/AGCP Normative Statements.docx",
+        "companion_file": "spec/AGCP-Error-Mapping.md",
+        "core_requirements_verified": [
+            "Core Section 10.1: Every governance-significant processing stage SHALL produce Governance Evidence.",
+            "Core Section 10.3: Governance Evidence SHALL be generated during governance-significant processing.",
+            "Core Section 10.8: Every processing section SHALL generate sufficient Governance Evidence."
+        ],
+        "policy_module_artifact_validation_rule": "PASS",
+        "governance_policy_artifact_validation_rule": "PASS",
+        "weakened_should_occurrences": 0
+    },
+    "approval_artifact_terminology_validation": {
+        "status": "PASS",
+        "active_representation": "DS-026 Governance Approval Artifact",
+        "controlled_governance_outcome_retained": "Pending Human Review",
+        "error_mapping_legacy_active_representation_phrases": 0,
+        "active_specification_human_review_artifact_as_active_representation_occurrences": 0,
+        "allowed_historical_or_explicit_retirement_references": true,
+        "result": "The active Error Mapping uses DS-026 Governance Approval Artifact terminology; Pending Human Review remains only a controlled governance outcome."
+    }
+}

@@ -1,6 +1,10 @@
 # AGCP Policy Evaluation Contract (PEC) Specification 
 
 **Status:** Normative\
+**Interface Identifier:** IF-002\
+**Interface Version:** v2\
+**Contract Version:** 2.0.0\
+**AGCP Specification Release:** v2.0.0\
 **Series:** AGCP Core\
 **Applies To:** All AGCP-conformant implementations
 
@@ -44,8 +48,8 @@ The normative governance pipeline is:
     -   Policy interaction resolution
     -   Governance outcome determination
 3.  Execution Authorization
-4.  Commit Boundary
-5.  Continuation Integrity
+4.  Continuation Integrity for nonterminal Proposals until final Commit-Bound Admissibility
+5.  Governance Realization and Commit Boundary processing
 
 PEC SHALL NOT perform Execution Authorization, Commit Boundary
 processing, or Continuation Integrity processing.
@@ -112,7 +116,7 @@ The PEM SHALL evaluate:
 
 1.  Constraints
 2.  Invariants
-3.  Human-review requirements
+3.  Governance Approval and governed human-adjudication requirements
 4.  Applicable policy interactions
 
 The PEM SHALL return sufficient information for the Governance Decision

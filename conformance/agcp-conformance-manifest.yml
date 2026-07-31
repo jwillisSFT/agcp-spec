@@ -4,44 +4,66 @@ agcp_conformance_manifest:
     release_model: repository_release
     status: public-review
 
+    agcp_release: v2.0.0
+  normative_precedence:
+    order:
+    - Published AGCP Runtime Governance Conformance Requirements (CRs)
+    - AGCP Core Specification
+    - Applicable normative Companion Specifications expressly adopted by the implementation profile
+    - Implementation Profiles
+    - AGCP Conformance Test Suite
+    - Reference Implementations
+    architectural_interpretation: >
+      The Architecture Reference Model governs architectural terminology and concept meaning where an ARM-defined concept is used, but does not independently create conformance obligations.
+
   normative_traceability:
     model:
-      - Normative Specification
-      - Normative Statement (NS)
-      - Conformance Requirement (CR)
-      - Test Case (TC)
+    - Published CRs and applicable Core behavior
+    - Applicable adopted normative Companion Specification obligations
+    - Core-derived Normative Statement (NS) identifiers
+    - Requirements Traceability Matrix (RTM) mappings
+    - Conformance Test Case (TC)
     description: >
-      The authoritative conformance traceability model is maintained by the
-      Requirements Traceability Matrix and the conformance test suite. Harness
-      checks and test vectors provide executable realization of Test Cases and
-      SHALL NOT introduce independent normative requirements.
+      The RTM is the authoritative conformance traceability artifact. Normative Statements identify atomic obligations extracted from the Core and do not supersede the CRs, Core, or applicable adopted normative Companion Specifications. Harness checks and test vectors provide executable realization of Test Cases and SHALL NOT introduce independent normative requirements.
 
   normative_documents:
-    - spec/AGCP-Core.docx
-    - spec/AGCP-Policy-Evaluation-Contract.md
-    - spec/AGCP-HTTP-Interface-Specification.md
-    - spec/AGCP-Provenance-Wire-Format-Specification.md
-    - spec/AGCP-Human-Review-Specification.md
-    - spec/AGCP-Multitenant-Operational-Specification.md
-    - spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md
-    - spec/AGCP-Error-Mapping.md
+  - spec/AGCP_Runtime_Governance_Requirements_CR-001_thru_CR-122.csv
+  - spec/AGCP-Core.docx
+  - spec/AGCP-Policy-Evaluation-Contract.md
+  - spec/AGCP-HTTP-Interface-Specification.md
+  - spec/AGCP-Provenance-Wire-Format-Specification.md
+  - spec/AGCP-Human-Review-Specification.md
+  - spec/AGCP-Multitenant-Operational-Specification.md
+  - spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md
+  - spec/AGCP-Error-Mapping.md
 
   api_contract:
     file: api/AGCP-HTTP-Contract.yaml
     description: OpenAPI contract for AGCP HTTP interface conformance.
 
+    interface_id: IF-001
+    interface_version: v2
   schemas:
     directory: schemas/
     description: Published JSON Schemas for AGCP governance artifacts, requests, responses, and common types.
 
   registries:
     directory: registries/
-    description: Published registries for rejection codes, constraint types, invariant types, and related registered values.
+    description: Published registries for rejection codes, constraint types, invariant types, and related registered 
+      values.
 
   conformance_artifacts:
+    relationship_model:
+      file: conformance/AGCP-Conformance-Traceability-and-Automation-Model.md
+      description: Defines the normative relationship semantics among CRs, NS identifiers, the RTM, Formal Test Cases, Harness Checks, Harness Test Vectors, execution evidence, assessment results, and conformance claims without creating new implementation obligations.
     conformance_specification:
       file: conformance/AGCP-Conformance.md
-      description: Defines conformance profiles, required conformance behavior, and repository-release conformance model.
+      description: Defines conformance profiles, required conformance behavior, and repository-release conformance 
+        model.
+
+    test_suite:
+      file: conformance/Conformance Test Suite.md
+      description: Defines the authoritative Formal Test Case methodology, required evidence, and assessment-result rules.
 
     test_matrix:
       file: conformance/AGCP-Test-Matrix.md
@@ -49,54 +71,96 @@ agcp_conformance_manifest:
 
     test_mapping:
       file: conformance/test-mapping.json
-      description: Machine-readable NS-to-CR-to-TC-to-harness-vector mapping.
+      description: Machine-readable CR/Core-derived-NS/TC mapping extended to DS, IF, REG, fixtures, Harness Checks, and Harness Test Vectors, with explicit dispositions where no dedicated vector exists.
 
     harness_checks:
       file: conformance/harness-checks.json
-      description: Executable harness checks. These are harness-local checks and are not an independent normative assertion layer.
+      description: Executable harness checks. These are harness-local checks and are not an independent normative 
+        assertion layer.
 
     deterministic_test_vectors:
       file: conformance/AGCP-Conformance-Test-Vectors.md
-      description: Deterministic execution scenarios covering Proposal Qualification, Governance Decision, Human Review, Execution Authorization, Commit Boundary, Governance Evidence, Append-Only Governance Ledger behavior, Canonical State reconstruction, and isolation behavior.
+      description: Fifty-four deterministic execution scenarios covering all ten mandatory IF-001 operations, Proposal
+        Qualification, Governance Decision, Governance Approval and Adjudication, Execution Authorization, applicable
+        pre-commit Continuation Integrity, Governance Realization, Commit-Bound Admissibility, Policy Enforcement Point
+        and Commit Boundary behavior, governance-artifact registration and retrieval, Governance Configuration, deterministic Governance Compilation, constitutional validation, omission analysis, Governance Self-Protection, atomic Controlled Governance Activation, governed rollback, cross-cutting Governance Evidence,
+        Append-Only Governance Ledger behavior, Canonical State resolution, idempotency, and isolation behavior.
 
     harness_specification:
       file: conformance/AGCP-Conformance-Harness-Spec.yml
       description: Specification for running automated AGCP conformance tests.
 
+    harness_request_parameter_validation:
+      file: conformance/AGCP-harness-request-parameter-validation.json
+      description: Controlled validation record proving that every primary request and HTTP setup prestep supplies every required IF-001 path, query, and header parameter.
+
+    harness_error_model_validation:
+      file: conformance/AGCP-harness-error-model-validation.json
+      description: Controlled validation record proving that every declared harness rejection-code and HTTP-status pair agrees with the normative Error Mapping and active rejection-code registry, that every expected primary or setup status is declared by the matched IF-001 OpenAPI operation, and that governance-significant Error Mapping obligations preserve the Core Governance Evidence requirement.
+
+    if001_executable_operation_coverage_validation:
+      file: conformance/AGCP-if001-executable-operation-coverage-validation.json
+      description: Controlled validation record proving that all ten mandatory IF-001 operations have schema-valid positive executable coverage and that the five operations added under F-08 have all applicable negative, tenant/domain-isolation, and idempotency scenarios.
+
+    governance_compilation_activation_executable_validation:
+      file: conformance/AGCP-governance-compilation-activation-executable-validation.json
+      description: Controlled validation record proving that every MUST Harness Check has at least one substantive executable vector and that Governance Configuration, deterministic compilation, constitutional validation, omission analysis, self-protection, atomic controlled activation, failure preservation, governed rollback, evidence, and lineage are asserted.
+
+    fixture_mapping:
+      file: conformance/fixture-mapping.json
+      description: Machine-readable mapping from exact active schema files to validated conformance examples.
+    schema_examples:
+      directory: schemas/examples/
+      description: Draft 2020-12-valid canonical examples used by the conformance fixture catalog.
   pass_criteria:
     requirements:
-      - All applicable Normative Statement, Conformance Requirement, and Test Case mappings must pass.
-      - All applicable deterministic test vectors must pass.
-      - Governance-significant events must be recorded in the Append-Only Governance Ledger where required.
-      - Canonical State SHALL be deterministically resolved from qualified authoritative governance sources. The ordered Governance Ledger is authoritative for recorded governance events, authoritative event ordering, and Derived Lifecycle State.
-      - Materialized governance state used for replay must be verifiably derived from the applicable authoritative sources and ledger records.
-      - Governance Evidence must be produced, linked, attributable, integrity-protected, and sufficient for audit and deterministic replay.
-      - Human Review, Execution Authorization, and Commit Boundary requirements must be enforced where applicable.
-      - Tenant and Governance Domain isolation requirements must be enforced where applicable.
-
+    - All applicable Normative Statement, Conformance Requirement, and Test Case mappings must pass.
+    - Every fixture in conformance/fixture-mapping.json must validate against its exact active schema file before 
+      harness execution.
+    - All applicable deterministic test vectors must pass.
+    - Every mandatory IF-001 operation must have at least one schema-valid positive executable vector, and operations added under F-08 must have the applicable negative, tenant/Governance-Domain-isolation, and idempotency coverage defined by the controlled operation-coverage record.
+    - Governance-significant events must be recorded in the Append-Only Governance Ledger where required.
+    - Canonical State SHALL be deterministically resolved from qualified authoritative governance sources. The ordered 
+      Governance Ledger is authoritative for recorded governance events, authoritative event ordering, and Derived 
+      Lifecycle State.
+    - Materialized governance state used for replay must be verifiably derived from the applicable authoritative sources
+      and ledger records.
+    - Governance Evidence must be produced as a cross-cutting supporting service during every applicable governance-significant
+      stage, linked, attributable, integrity-protected, and sufficient for audit and deterministic replay.
+    - Governance Approval and Adjudication, Execution Authorization, applicable pre-commit Continuation Integrity,
+      Governance Realization, final Commit-Bound Admissibility, Policy Enforcement Point, and Commit Boundary requirements
+      must be enforced where applicable.
+    - Tenant and Governance Domain isolation requirements must be enforced where applicable.
+    - Every MUST Harness Check must reference at least one substantive executable vector, and every declared expected behavior must be asserted by the controlled vector catalog.
   determinism_requirements:
-    - Governance pipeline execution order must conform to the applicable normative pipeline.
-    - Identical authoritative inputs must produce equivalent externally observable governance outcomes.
-    - Replay of identical proposals using the applicable replay-protection or idempotency mechanism must not create conflicting governance state.
-    - Ledger sequence order, not timestamp order, SHALL determine the authoritative ordering of recorded governance events and the derivation of Derived Lifecycle State.
-    - Where Canonical State incorporates Governance Ledger records, those records SHALL be interpreted according to authoritative ledger ordering. Other Canonical State facts SHALL be resolved from their applicable qualified authoritative governance sources.
-    - Materialized Canonical State views must be reproducible from ordered Append-Only Governance Ledger entries.
+  - Governance pipeline execution order must include Proposal Qualification, Governance Decision Function, Execution Authorization or another eligible nonterminal state, applicable pre-commit Continuation Integrity, and Governance Realization/Commit Boundary processing.
+  - Governance Evidence must be treated as a cross-cutting supporting service rather than a terminal pipeline stage.
+  - Identical authoritative inputs must produce equivalent externally observable governance outcomes.
+  - Replay of identical proposals using the applicable replay-protection or idempotency mechanism must not create 
+    conflicting governance state.
+  - Ledger sequence order, not timestamp order, SHALL determine the authoritative ordering of recorded governance events
+    and the derivation of Derived Lifecycle State.
+  - Where Canonical State incorporates Governance Ledger records, those records SHALL be interpreted according to 
+    authoritative ledger ordering. Other Canonical State facts SHALL be resolved from their applicable qualified 
+    authoritative governance sources.
+  - Materialized Canonical State views must be reproducible from the applicable qualified authoritative governance sources, including ordered Governance Ledger records for recorded governance events and Derived Lifecycle State.
 
   conformance_profiles:
     L1:
-      name: Interface and Schema Conformance
+      name: "Schema & Envelope Validation"
       description: Baseline interface, schema, structured error, and metadata conformance.
     L2:
-      name: Governance Pipeline Conformance
+      name: Ordered Governance Mediation
       description: Proposal Qualification, Governance Decision, Governance Evidence, and ledger recording behavior.
     L3:
       name: Deterministic Governance
-      description: Deterministic replay, Canonical State reconstruction, and ordered ledger-derived state behavior.
+      description: Deterministic replay, Canonical State source resolution, and authoritative ledger-ordering behavior.
     L4:
-      name: Human Review, Execution Authorization, and Commit Boundary
-      description: Human Review enforcement, Execution Authorization validation, and Commit Boundary gating.
+      name: Execution Authorization Control
+      description: Governance Approval enforcement, governed-adjudication validation, Execution Authorization 
+        validation, and Commit Boundary gating.
     L5:
-      name: Multitenant and Governance Domain Isolation
+      name: Multitenant Governance Isolation
       description: Tenant isolation, Governance Domain isolation, and cross-boundary negative-test behavior.
 
   implementation_modes:
@@ -105,10 +169,12 @@ agcp_conformance_manifest:
       description: Demonstrates architectural conformance and executable semantics but may omit production hardening.
     production_implementation:
       normative: false
-      description: Operational implementation intended to satisfy applicable normative, security, operational, and conformance requirements.
+      description: Operational implementation intended to satisfy applicable normative, security, operational, and 
+        conformance requirements.
 
   notes:
-    - This manifest is an index and execution aid for the conformance package.
-    - Repository releases govern versioning.
-    - Harness checks and test vectors SHALL remain synchronized with the Requirements Traceability Matrix and conformance test cases.
-    - Where conflicts exist, normative specifications and the NS-to-CR-to-TC traceability chain take precedence over harness-local artifacts.
+  - This manifest is an index and execution aid for the conformance package.
+  - Repository releases govern versioning.
+  - Harness checks and test vectors SHALL remain synchronized with the Requirements Traceability Matrix and conformance 
+    test cases.
+  - Conflicts SHALL be resolved using the normative_precedence order above. The RTM mappings and Core-derived NS identifiers govern traceability but do not alter normative precedence; all take precedence over harness-local artifacts only to the extent established by that order.

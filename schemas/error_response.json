@@ -1,8 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agcp.example/schemas/error_response.json",
+  "$id": "https://agcp.ai/schemas/error_response.json",
   "title": "AGCP ErrorResponse",
-  "description": "Standard error response for AGCP HTTP interfaces. Rejection codes SHALL be defined by the AGCP rejection-code registry.",
+  "description": "Standard error response for AGCP HTTP interfaces. Transport and application errors remain distinct from Structural Refusal. When an interface conveys Structural Refusal, it references the canonical DS-028 Refusal Record rather than treating refusal as an ordinary error.",
+  "x-agcp-ds-id": "DS-002",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -36,6 +39,17 @@
         "governance_evidence_generated": {
           "type": "boolean",
           "description": "Indicates whether Governance Evidence was generated for this outcome."
+        },
+        "outcome_classification": {
+          "type": "string",
+          "enum": [
+            "TRANSPORT_OR_APPLICATION_ERROR",
+            "STRUCTURAL_REFUSAL"
+          ],
+          "description": "Distinguishes an interface/application error from an attributable governance Structural Refusal."
+        },
+        "refusal_record_ref": {
+          "$ref": "refusal_record.json#/$defs/refusal_record_ref"
         }
       },
       "required": [
@@ -53,6 +67,30 @@
             "required": [
               "governance_evidence_generated"
             ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome_classification": {
+                "const": "STRUCTURAL_REFUSAL"
+              }
+            },
+            "required": [
+              "outcome_classification"
+            ]
+          },
+          "then": {
+            "required": [
+              "refusal_record_ref",
+              "governance_stage",
+              "governance_evidence_generated"
+            ],
+            "properties": {
+              "governance_evidence_generated": {
+                "const": true
+              }
+            }
           }
         }
       ]

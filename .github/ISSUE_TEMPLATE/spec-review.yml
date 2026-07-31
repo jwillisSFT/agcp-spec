@@ -7,8 +7,8 @@ body:
     id: section
     attributes:
       label: Specification Section
-      description: Section number or document reference
-      placeholder: e.g. AGCP-Core.md Section 5.2
+      description: Provide the current repository-relative document path and section number.
+      placeholder: e.g. spec/AGCP-Core.docx Section 5.2
     validations:
       required: true
 
@@ -29,7 +29,7 @@ body:
         - Conformance Clarification
         - Security Concern
         - Determinism Concern
-        - Multitenant Isolation Concern
+        - Multitenant Governance Isolation Concern
     validations:
       required: true
 

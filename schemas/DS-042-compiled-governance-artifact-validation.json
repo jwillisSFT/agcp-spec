@@ -1,0 +1,30 @@
+{
+  "overall": "PASS",
+  "checks": {
+    "draft_2020_12_schema_validation": "PASS (39 schemas)",
+    "cross_schema_reference_resolution": "PASS (2213 references)",
+    "validated_compiled_artifact": "PASS",
+    "validation_pending_artifact": "PASS",
+    "invalid_artifact_record": "PASS",
+    "validated_missing_governance_version_rejected": "PASS",
+    "validated_failed_constitutional_validation_rejected": "PASS",
+    "validated_material_omission_rejected": "PASS",
+    "validated_disabled_safeguard_rejected": "PASS",
+    "missing_governance_intent_source_rejected": "PASS",
+    "nondeterministic_compilation_rejected": "PASS",
+    "non_machine_evaluable_output_rejected": "PASS",
+    "execution_authority_claim_rejected": "PASS",
+    "invalid_status_without_failure_basis_rejected": "PASS",
+    "policy_ds042_reference_integration": "PASS",
+    "active_policy_without_ds042_rejected": "PASS",
+    "active_artifact_view_without_ds042_rejected": "PASS",
+    "artifact_view_ds042_reference_integration": "PASS",
+    "catalog_identifiers_and_hashes": "PASS (39 implemented)",
+    "rtm_mapping_consistency": "PASS (CR-110 through CR-114)",
+    "rtm_formula_check": "PASS (0 formulas; no introduced errors)",
+    "rtm_format_preservation": "PASS",
+    "openapi_parse_and_refs": "PASS",
+    "canonical_reference_ownership": "PASS"
+  },
+  "issues": []
+}

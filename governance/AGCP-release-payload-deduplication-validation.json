@@ -1,0 +1,52 @@
+{
+  "validation_id": "AGCP-RELEASE-PAYLOAD-DEDUPLICATION-2026-07-30",
+  "status": "PASS",
+  "specification_version": "v2.0.0",
+  "schema_catalog_version": "1.0.42",
+  "date": "2026-07-30",
+  "scope": "Removal of four byte-identical duplicate validation-report payload groups from the internal repository and release ZIP.",
+  "authoritative_placement_rules": [
+    {
+      "artifact_class": "DS-specific validation record",
+      "authoritative_location": "schemas/",
+      "rationale": "DS-specific update and validation records are maintained alongside the corresponding active schema and update document."
+    },
+    {
+      "artifact_class": "Schema Catalog validation record",
+      "authoritative_location": "schemas/catalog/",
+      "rationale": "schemas/README.md identifies schemas/catalog/schema-catalog-validation.json as the authoritative Catalog validation record."
+    }
+  ],
+  "removed_files": [
+    "schemas/catalog/ds032-state-qualification-result-validation.json",
+    "schemas/catalog/ds033-evidence-qualification-result-validation.json",
+    "schemas/catalog/ds034-authority-rederivation-result-validation.json",
+    "schemas/schema-catalog-validation.json"
+  ],
+  "retained_files": [
+    "schemas/DS-032-state-qualification-result-validation.json",
+    "schemas/DS-033-evidence-qualification-result-validation.json",
+    "schemas/DS-034-authority-rederivation-result-validation.json",
+    "schemas/catalog/schema-catalog-validation.json"
+  ],
+  "change_impact": {
+    "schema_content_changed": false,
+    "schema_catalog_version_changed": false,
+    "schema_catalog_hashes_changed": false,
+    "openapi_contract_changed": false,
+    "fixture_payloads_changed": false,
+    "rtm_mappings_changed": false,
+    "normative_behavior_changed": false
+  },
+  "verification_expectations": {
+    "duplicate_zip_entry_names": 0,
+    "byte_identical_duplicate_groups": 0,
+    "semantic_duplicate_machine_readable_payload_groups": 0,
+    "active_schema_metaschema_errors": 0,
+    "schema_reference_errors": 0,
+    "openapi_reference_errors": 0,
+    "fixture_validation_failures": 0,
+    "catalog_hash_mismatches": 0,
+    "obsolete_active_schema_fields": 0
+  }
+}

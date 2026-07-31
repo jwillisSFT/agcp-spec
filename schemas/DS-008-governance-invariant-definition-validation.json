@@ -1,0 +1,54 @@
+{
+  "overall": "PASS",
+  "actual_schema_count": 40,
+  "reference_count": 2743,
+  "common_definition_count": 80,
+  "instance_tests": {
+    "positive": [
+      "registered",
+      "protected",
+      "constitutional",
+      "active"
+    ],
+    "negative": [
+      "protected_soft",
+      "constitutional_exceptionable",
+      "active_missing_activation",
+      "active_invalid_compilation",
+      "arrival_timing",
+      "weakening_allowed",
+      "arbitrary_metadata",
+      "registered_with_compilation",
+      "execution_authority_claim",
+      "invariant_ref_missing_digest"
+    ]
+  },
+  "retired_common_definitions": [
+    "invariant_id",
+    "invariant_enforcement_enum",
+    "invariant_ref"
+  ],
+  "updated_dependent_schemas": [
+    "common.json",
+    "compiled_governance_artifact.json",
+    "governance_dependency_graph.json",
+    "invariant_evaluation.json",
+    "policy_artifact.json",
+    "refusal_record.json"
+  ],
+  "rtm_format_preservation": {
+    "overall": "PASS",
+    "same_sheetnames": true,
+    "same_dimensions": true,
+    "same_merged_ranges": true,
+    "same_column_widths": true,
+    "same_row_heights": true,
+    "same_style_ids": true,
+    "same_freeze_panes": true,
+    "same_auto_filter": true,
+    "formula_count_before": 0,
+    "formula_count_after": 0,
+    "formula_errors_after": 0
+  },
+  "issues": []
+}

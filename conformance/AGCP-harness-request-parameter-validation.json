@@ -1,0 +1,1565 @@
+{
+  "record_id": "AGCP-HARNESS-REQUEST-PARAMETER-VALIDATION-2026-07-31",
+  "record_type": "controlled_conformance_validation",
+  "status": "PASS",
+  "validated_at": "2026-07-31T11:30:00Z",
+  "scope": {
+    "authoritative_harness": "conformance/AGCP-Conformance-Harness-Spec.yml",
+    "human_readable_mirror": "conformance/AGCP-Conformance-Test-Vectors.md",
+    "authoritative_interface_contract": "api/AGCP-HTTP-Contract.yaml",
+    "requests_in_scope": "Every primary request and every HTTP arrange.prestep request.",
+    "parameter_locations": [
+      "path",
+      "query",
+      "header"
+    ]
+  },
+  "source_hashes": {
+    "api/AGCP-HTTP-Contract.yaml": "0695e294d8564d312590dd97115a853e2bbbb13988de2538f213a904f1afb2c9",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "0dd2b25ddae6e2fee29dfcc0e02d0baaf560dc4fe41047b2ec805df5aa029120",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "0c26b0cd0bf56d7820b98664953f6137942dbec3307cbc048c245c33e7b3ba57"
+  },
+  "validation_rules": [
+    "Each request SHALL resolve to exactly one IF-001 OpenAPI operation by HTTP method and path template.",
+    "Every OpenAPI parameter marked required in path, query, or header SHALL be present and non-empty.",
+    "Each primary request and each HTTP setup prestep SHALL be validated independently.",
+    "Every fixture-backed request body SHALL be resolved before request-schema validation.",
+    "A schema-invalid request is permitted only where the vector explicitly tests HTTP 400 SCHEMA_VALIDATION_FAILED.",
+    "Every expected primary or setup status SHALL be declared by the matched IF-001 operation.",
+    "The Markdown mirror SHALL contain the same vector identifier and name set as the authoritative YAML catalog."
+  ],
+  "summary": {
+    "expected_request_count": 52,
+    "validated_request_count": 52,
+    "primary_request_count": 43,
+    "setup_prestep_request_count": 9,
+    "required_parameter_instances_checked": 78,
+    "missing_required_parameter_instances": 0,
+    "requests_preempted_by_parameter_validation": 0,
+    "expected_status_instances_checked": 58,
+    "undeclared_status_instances": 0,
+    "fixture_backed_request_schema_checks": 16,
+    "fixture_backed_request_schema_failures": 0,
+    "markdown_mirror_vectors_checked": 54,
+    "markdown_mirror_mismatches": 0
+  },
+  "requests": [
+    {
+      "vector_id": "TV-PROP-001",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_001"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-002",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_002"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-003",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_003"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-004",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        400
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_004"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-005",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        400
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_005"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-006",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        403
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_006"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-007",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        422
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_007"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-008",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_008"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-008",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_008"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-009",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        409
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_009"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PROP-009",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PROP_009"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GET-001",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/proposals/${P_PROP_001}",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}",
+      "operation_id": "getProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GET-002",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/proposals/P_TRANSIENT_002",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}",
+      "operation_id": "getProposal",
+      "declared_http_outcomes": [
+        404
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GAPP-001",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/${P_GAPP_001}/governance-approvals",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+      "operation_id": "submitGovernanceApproval",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 2,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_GAPP_001_APPROVAL"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GAPP-001",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_GAPP_001"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GAPP-002",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/${P_PROP_002}/governance-approvals",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+      "operation_id": "submitGovernanceApproval",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 2,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_GAPP_002"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GAPP-003",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/${P_PROP_002}/governance-approvals",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+      "operation_id": "submitGovernanceApproval",
+      "declared_http_outcomes": [
+        409
+      ],
+      "required_parameter_count": 2,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_GAPP_003"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GAPP-004",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/${P_PROP_002}/governance-approvals",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+      "operation_id": "submitGovernanceApproval",
+      "declared_http_outcomes": [
+        422
+      ],
+      "required_parameter_count": 2,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_GAPP_004"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-COMMIT-001",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/commit-boundary/commit",
+      "matched_openapi_path": "/agcp/v2/commit-boundary/commit",
+      "operation_id": "commitBoundaryProcessing",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_COMMIT_001"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-COMMIT-002",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/commit-boundary/commit",
+      "matched_openapi_path": "/agcp/v2/commit-boundary/commit",
+      "operation_id": "commitBoundaryProcessing",
+      "declared_http_outcomes": [
+        409
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_COMMIT_002"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-COMMIT-003",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/commit-boundary/commit",
+      "matched_openapi_path": "/agcp/v2/commit-boundary/commit",
+      "operation_id": "commitBoundaryProcessing",
+      "declared_http_outcomes": [
+        409
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_COMMIT_003"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-COMMIT-004",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/commit-boundary/commit",
+      "matched_openapi_path": "/agcp/v2/commit-boundary/commit",
+      "operation_id": "commitBoundaryProcessing",
+      "declared_http_outcomes": [
+        409
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_COMMIT_004"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-COMMIT-005",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/commit-boundary/commit",
+      "matched_openapi_path": "/agcp/v2/commit-boundary/commit",
+      "operation_id": "commitBoundaryProcessing",
+      "declared_http_outcomes": [
+        403
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_COMMIT_005"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-EVID-001",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/governance-evidence/${EV_PROP_001[0]}",
+      "matched_openapi_path": "/agcp/v2/governance-evidence/{evidence_id}",
+      "operation_id": "getGovernanceEvidence",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "evidence_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-XTEN-SETUP",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/submit",
+      "matched_openapi_path": "/agcp/v2/proposals/submit",
+      "operation_id": "submitProposal",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_XTEN_SETUP"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-XTEN-001",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/proposals/${P_T2_001}",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}",
+      "operation_id": "getProposal",
+      "declared_http_outcomes": [
+        403,
+        404
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-XTEN-002",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/proposals/${P_T2_001}/governance-approvals",
+      "matched_openapi_path": "/agcp/v2/proposals/{proposal_id}/governance-approvals",
+      "operation_id": "submitGovernanceApproval",
+      "declared_http_outcomes": [
+        403,
+        404
+      ],
+      "required_parameter_count": 2,
+      "supplied_required_parameters": [
+        {
+          "name": "proposal_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_XTEN_002"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-XTEN-003",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/commit-boundary/commit",
+      "matched_openapi_path": "/agcp/v2/commit-boundary/commit",
+      "operation_id": "commitBoundaryProcessing",
+      "declared_http_outcomes": [
+        403,
+        404
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_XTEN_003"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-XTEN-004",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/governance-evidence/EV_T2_001",
+      "matched_openapi_path": "/agcp/v2/governance-evidence/{evidence_id}",
+      "operation_id": "getGovernanceEvidence",
+      "declared_http_outcomes": [
+        403,
+        404
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "evidence_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-META-001",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/meta",
+      "matched_openapi_path": "/agcp/v2/meta",
+      "operation_id": "getMetadata",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 0,
+      "supplied_required_parameters": [],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-EAUTH-001",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/execution-authorizations/${EA_PROP_001}",
+      "matched_openapi_path": "/agcp/v2/execution-authorizations/{authorization_id}",
+      "operation_id": "getExecutionAuthorization",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "authorization_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-EAUTH-002",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/execution-authorizations/EA-NOT-FOUND",
+      "matched_openapi_path": "/agcp/v2/execution-authorizations/{authorization_id}",
+      "operation_id": "getExecutionAuthorization",
+      "declared_http_outcomes": [
+        404
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "authorization_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-EAUTH-003",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/execution-authorizations/${EA_T2_001}",
+      "matched_openapi_path": "/agcp/v2/execution-authorizations/{authorization_id}",
+      "operation_id": "getExecutionAuthorization",
+      "declared_http_outcomes": [
+        403,
+        404
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "authorization_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PEM-001",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PEM_001"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PEM-002",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        400
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PEM_002"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PEM-003",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        403
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PEM_003"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PEM-004",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PEM_004"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PEM-004",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PEM_004"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PEM-005",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        409
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PEM_005"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-PEM-005",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_PEM_005"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-POL-001",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policies",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policies",
+      "operation_id": "registerGovernancePolicy",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_POL_001"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-POL-002",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policies",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policies",
+      "operation_id": "registerGovernancePolicy",
+      "declared_http_outcomes": [
+        400
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_POL_002"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-POL-003",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policies",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policies",
+      "operation_id": "registerGovernancePolicy",
+      "declared_http_outcomes": [
+        403
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_POL_003"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-POL-004",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policies",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policies",
+      "operation_id": "registerGovernancePolicy",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_POL_004"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-POL-004",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policies",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policies",
+      "operation_id": "registerGovernancePolicy",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_POL_004"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-POL-005",
+      "request_role": "primary",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policies",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policies",
+      "operation_id": "registerGovernancePolicy",
+      "declared_http_outcomes": [
+        409
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_POL_005"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-POL-005",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policies",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policies",
+      "operation_id": "registerGovernancePolicy",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_POL_005"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GART-001",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/governance-artifacts/${GART_001}",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/{artifact_id}",
+      "operation_id": "getGovernanceArtifact",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "artifact_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GART-001",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_GART_001_SETUP"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GART-002",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/governance-artifacts/ART-NOT-FOUND",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/{artifact_id}",
+      "operation_id": "getGovernanceArtifact",
+      "declared_http_outcomes": [
+        404
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "artifact_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GART-003",
+      "request_role": "primary",
+      "method": "GET",
+      "request_path": "/agcp/v2/governance-artifacts/${GART_T2_003}",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/{artifact_id}",
+      "operation_id": "getGovernanceArtifact",
+      "declared_http_outcomes": [
+        403,
+        404
+      ],
+      "required_parameter_count": 3,
+      "supplied_required_parameters": [
+        {
+          "name": "artifact_id",
+          "in": "path",
+          "present": true,
+          "value": "resolved-from-path"
+        },
+        {
+          "name": "tenant_id",
+          "in": "query",
+          "present": true,
+          "value": "T1"
+        },
+        {
+          "name": "governance_domain_id",
+          "in": "query",
+          "present": true,
+          "value": "domain-primary"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    },
+    {
+      "vector_id": "TV-GART-003",
+      "request_role": "prestep[0]",
+      "method": "POST",
+      "request_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "matched_openapi_path": "/agcp/v2/governance-artifacts/policy-modules",
+      "operation_id": "registerPolicyEvaluationModule",
+      "declared_http_outcomes": [
+        200
+      ],
+      "required_parameter_count": 1,
+      "supplied_required_parameters": [
+        {
+          "name": "Idempotency-Key",
+          "in": "header",
+          "present": true,
+          "value": "K_GART_003_SETUP"
+        }
+      ],
+      "missing_required_parameters": [],
+      "parameter_validation_preempts_declared_outcome": false,
+      "status": "PASS"
+    }
+  ],
+  "fixture_backed_request_schema_validation": [
+    {
+      "vector_id": "TV-PEM-001",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-PEM-002",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": false,
+      "expected_valid": false,
+      "result": "PASS",
+      "errors": [
+        "'' does not match '^PEM-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$'"
+      ]
+    },
+    {
+      "vector_id": "TV-PEM-003",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-PEM-004",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-PEM-004",
+      "request_role": "prestep[0]",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-PEM-005",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-PEM-005",
+      "request_role": "prestep[0]",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-POL-001",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-POL-002",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_artifact.json",
+      "valid": false,
+      "expected_valid": false,
+      "result": "PASS",
+      "errors": [
+        "'' should be non-empty",
+        "'' does not match '^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$'"
+      ]
+    },
+    {
+      "vector_id": "TV-POL-003",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-POL-004",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-POL-004",
+      "request_role": "prestep[0]",
+      "schema_file": "schemas/policy_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-POL-005",
+      "request_role": "primary",
+      "schema_file": "schemas/policy_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-POL-005",
+      "request_role": "prestep[0]",
+      "schema_file": "schemas/policy_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-GART-001",
+      "request_role": "prestep[0]",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "vector_id": "TV-GART-003",
+      "request_role": "prestep[0]",
+      "schema_file": "schemas/policy_evaluation_module_artifact.json",
+      "valid": true,
+      "expected_valid": true,
+      "result": "PASS",
+      "errors": []
+    }
+  ],
+  "markdown_mirror_checks": {
+    "yaml_vector_count": 54,
+    "markdown_vector_count": 54,
+    "id_sets_equal": true,
+    "markdown_only_ids": [],
+    "yaml_only_ids": [],
+    "name_mismatches": []
+  },
+  "closure_statement": "All 52 HTTP primary and setup requests continue to satisfy every required IF-001 path, query, and header parameter; the nine F-09 harness-operation vectors introduce no additional HTTP request and the complete 54-vector YAML/Markdown catalogs are synchronized."
+}

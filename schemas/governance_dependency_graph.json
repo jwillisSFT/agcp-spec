@@ -1,0 +1,2246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_dependency_graph.json",
+  "title": "Governance Dependency Graph",
+  "description": "Canonical, independently identifiable and traceable structured representation of governance-significant dependency, prerequisite, ordering, authority, synchronization, consistency, execution, resource, policy, evidence, and state relationships among governed sub-transitions of a composite proposal. The graph makes dependencies explicit for composite evaluation, re-evaluation, Governance Binding Validation, Deterministic Adjudication, Partial-Bind Admissibility, Resulting-State Validation, coordinated enforcement, and replay. It does not itself establish authority, authorize execution, or determine partial-bind admissibility.",
+  "$comment": "DS-036 is the authoritative Governance Dependency Graph domain object. Cross-object equality and graph-theoretic properties—including unique node identifiers, endpoint resolution, source/target inequality, cycle analysis, and correspondence with the parent proposal—require semantic validation because standard JSON Schema cannot compare arbitrary values across object locations. The schema therefore requires attributable validation assertions and integrity evidence for those properties.",
+  "x-agcp-ds-id": "DS-036",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Composite Governance Dependency Model",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-206",
+      "ARM-207",
+      "ARM-208",
+      "ARM-209",
+      "ARM-212",
+      "ARM-216",
+      "ARM-217",
+      "ARM-807"
+    ],
+    "core_sections": [
+      "9.6A",
+      "9.6B",
+      "13.3",
+      "13.4",
+      "16.3",
+      "16.4"
+    ],
+    "normative_statements": [
+      "NS-9.6A-02",
+      "NS-9.6A-03",
+      "NS-9.6B-02",
+      "NS-9.6B-03",
+      "NS-9.6B-04",
+      "NS-9.6B-05",
+      "NS-13.3-01",
+      "NS-13.3-02",
+      "NS-13.4-01",
+      "NS-13.4-03",
+      "NS-16.3-01",
+      "NS-16.3-02",
+      "NS-16.4-01",
+      "NS-16.4-02",
+      "NS-16.4-03"
+    ],
+    "conformance_requirements": [
+      "CR-106",
+      "CR-107"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "dependency_graph_id": {
+      "$ref": "common.json#/$defs/identifier"
+    },
+    "graph_type": {
+      "const": "GOVERNANCE_DEPENDENCY_GRAPH"
+    },
+    "graph_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "graph_status": {
+      "type": "string",
+      "enum": [
+        "DECLARED",
+        "QUALIFIED",
+        "INVALID",
+        "DEGRADED",
+        "SUPERSEDED"
+      ]
+    },
+    "parent_proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "candidate_bind_set_ref": {
+      "$ref": "bind_set.json#/$defs/bind_set_ref"
+    },
+    "coupling_semantics": {
+      "$ref": "common.json#/$defs/composite_coupling_semantics_enum"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/graph_node"
+      },
+      "minItems": 2,
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "description": "Complete declared set of governed sub-transitions participating in the graph."
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dependency_edge"
+      },
+      "minItems": 1,
+      "maxItems": 16384,
+      "uniqueItems": true,
+      "description": "Explicit governance-significant relationships among graph nodes."
+    },
+    "global_constraints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/global_graph_constraint"
+      },
+      "minItems": 1,
+      "maxItems": 512,
+      "uniqueItems": true
+    },
+    "dependency_change_policy": {
+      "$ref": "#/$defs/dependency_change_policy"
+    },
+    "latest_dependency_change": {
+      "$ref": "#/$defs/dependency_change_record"
+    },
+    "evaluation_horizon": {
+      "$ref": "common.json#/$defs/evaluation_horizon"
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "graph_validation": {
+      "$ref": "#/$defs/graph_validation"
+    },
+    "recorded_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "graph_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "replay_material": {
+      "$ref": "#/$defs/replay_material"
+    },
+    "semantic_assertions": {
+      "$ref": "#/$defs/semantic_assertions"
+    },
+    "superseded_by_ref": {
+      "$ref": "#/$defs/governance_dependency_graph_ref"
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "dependency_graph_id",
+    "graph_type",
+    "graph_version",
+    "graph_status",
+    "parent_proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "coupling_semantics",
+    "nodes",
+    "dependencies",
+    "dependency_change_policy",
+    "evaluation_horizon",
+    "governance_version_ref",
+    "policy_refs",
+    "recorded_at",
+    "attribution",
+    "graph_digest",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "graph_status": {
+            "const": "QUALIFIED"
+          }
+        },
+        "required": [
+          "graph_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "graph_validation"
+        ],
+        "properties": {
+          "graph_validation": {
+            "$ref": "#/$defs/qualified_graph_validation"
+          },
+          "latest_dependency_change": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/dependency_change_record"
+              },
+              {
+                "properties": {
+                  "material_change_detected": {
+                    "const": false
+                  },
+                  "re_evaluation_required": {
+                    "const": false
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "graph_status": {
+            "const": "INVALID"
+          }
+        },
+        "required": [
+          "graph_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "graph_validation"
+        ],
+        "properties": {
+          "graph_validation": {
+            "$ref": "#/$defs/invalid_graph_validation"
+          }
+        },
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "graph_status": {
+            "const": "DEGRADED"
+          }
+        },
+        "required": [
+          "graph_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "graph_validation",
+          "latest_dependency_change"
+        ],
+        "properties": {
+          "graph_validation": {
+            "$ref": "#/$defs/degraded_graph_validation"
+          },
+          "latest_dependency_change": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/dependency_change_record"
+              },
+              {
+                "properties": {
+                  "material_change_detected": {
+                    "const": true
+                  },
+                  "re_evaluation_required": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "affected_sub_transition_ids"
+                ]
+              }
+            ]
+          }
+        },
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "graph_status": {
+            "const": "SUPERSEDED"
+          }
+        },
+        "required": [
+          "graph_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded_by_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "graph_status": {
+            "const": "DECLARED"
+          }
+        },
+        "required": [
+          "graph_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "superseded_by_ref"
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "governance_dependency_graph_ref": {
+      "type": "object",
+      "description": "Stable reference to a DS-036 Governance Dependency Graph.",
+      "additionalProperties": false,
+      "properties": {
+        "dependency_graph_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "graph_version": {
+          "$ref": "common.json#/$defs/version_string"
+        },
+        "graph_status": {
+          "type": "string",
+          "enum": [
+            "DECLARED",
+            "QUALIFIED",
+            "INVALID",
+            "DEGRADED",
+            "SUPERSEDED"
+          ]
+        },
+        "graph_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "parent_proposal_id": {
+          "$ref": "common.json#/$defs/proposal_id"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "recorded_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "dependency_graph_id",
+        "graph_version",
+        "graph_digest",
+        "parent_proposal_id"
+      ]
+    },
+    "graph_node": {
+      "type": "object",
+      "description": "Governed sub-transition participating in the dependency graph.",
+      "additionalProperties": false,
+      "properties": {
+        "sub_transition_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "proposal_identity": {
+          "$ref": "common.json#/$defs/proposal_identity"
+        },
+        "action_id": {
+          "$ref": "common.json#/$defs/action_id"
+        },
+        "target_ref": {
+          "$ref": "common.json#/$defs/target_ref"
+        },
+        "tenant_id": {
+          "$ref": "common.json#/$defs/tenant_id"
+        },
+        "governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "authority_lineage_ref": {
+          "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+        },
+        "node_role": {
+          "type": "string",
+          "enum": [
+            "REQUIRED",
+            "OPTIONAL",
+            "CONDITIONAL"
+          ]
+        },
+        "required_for_parent_admissibility": {
+          "type": "boolean"
+        },
+        "condition_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "node_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "sub_transition_id",
+        "proposal_identity",
+        "target_ref",
+        "tenant_id",
+        "governance_domain_id",
+        "node_role",
+        "required_for_parent_admissibility",
+        "node_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "node_role": {
+                "const": "CONDITIONAL"
+              }
+            },
+            "required": [
+              "node_role"
+            ]
+          },
+          "then": {
+            "required": [
+              "condition_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "node_role": {
+                "const": "REQUIRED"
+              }
+            },
+            "required": [
+              "node_role"
+            ]
+          },
+          "then": {
+            "properties": {
+              "required_for_parent_admissibility": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "dependency_edge": {
+      "type": "object",
+      "description": "Explicit directed or bidirectional governance-significant relationship between governed sub-transitions.",
+      "additionalProperties": false,
+      "properties": {
+        "dependency_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "relationship_type": {
+          "type": "string",
+          "enum": [
+            "PREREQUISITE",
+            "ORDERING",
+            "AUTHORITY",
+            "SYNCHRONIZATION",
+            "CONSISTENCY",
+            "EXECUTION",
+            "RESOURCE",
+            "POLICY",
+            "EVIDENCE",
+            "STATE"
+          ]
+        },
+        "source_sub_transition_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "target_sub_transition_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "source_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "target_governance_domain_id": {
+          "$ref": "common.json#/$defs/governance_domain_id"
+        },
+        "directionality": {
+          "type": "string",
+          "enum": [
+            "DIRECTED",
+            "BIDIRECTIONAL"
+          ]
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "source_target_distinct": {
+          "const": true
+        },
+        "condition": {
+          "$ref": "#/$defs/dependency_condition"
+        },
+        "prerequisite_rule": {
+          "$ref": "#/$defs/prerequisite_rule"
+        },
+        "ordering_rule": {
+          "$ref": "#/$defs/ordering_rule"
+        },
+        "authority_rule": {
+          "$ref": "#/$defs/authority_rule"
+        },
+        "synchronization_rule": {
+          "$ref": "#/$defs/synchronization_rule"
+        },
+        "consistency_rule": {
+          "$ref": "#/$defs/consistency_rule"
+        },
+        "execution_rule": {
+          "$ref": "#/$defs/execution_rule"
+        },
+        "resource_rule": {
+          "$ref": "#/$defs/resource_rule"
+        },
+        "policy_rule": {
+          "$ref": "#/$defs/policy_rule"
+        },
+        "evidence_rule": {
+          "$ref": "#/$defs/evidence_rule"
+        },
+        "state_rule": {
+          "$ref": "#/$defs/state_rule"
+        },
+        "failure_effect": {
+          "type": "string",
+          "enum": [
+            "BLOCK_SOURCE",
+            "BLOCK_TARGET",
+            "BLOCK_GRAPH",
+            "REQUIRE_REEVALUATION",
+            "DEGRADE_PARENT_PROPOSAL",
+            "STRUCTURAL_REFUSAL"
+          ]
+        },
+        "change_materiality": {
+          "type": "string",
+          "enum": [
+            "MATERIAL",
+            "NON_MATERIAL",
+            "CONTEXTUAL"
+          ]
+        },
+        "re_evaluation_required_on_material_change": {
+          "const": true
+        },
+        "dependency_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "extensions": {
+          "$ref": "#/$defs/namespaced_extensions"
+        }
+      },
+      "required": [
+        "dependency_id",
+        "relationship_type",
+        "source_sub_transition_id",
+        "target_sub_transition_id",
+        "source_governance_domain_id",
+        "target_governance_domain_id",
+        "directionality",
+        "mandatory",
+        "source_target_distinct",
+        "failure_effect",
+        "change_materiality",
+        "re_evaluation_required_on_material_change",
+        "dependency_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "PREREQUISITE"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "prerequisite_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "ORDERING"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "ordering_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "AUTHORITY"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "authority_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "SYNCHRONIZATION"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "synchronization_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "CONSISTENCY"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "consistency_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "EXECUTION"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "execution_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "RESOURCE"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "resource_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "POLICY"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "policy_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "EVIDENCE"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "evidence_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "state_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "relationship_type": {
+                "const": "STATE"
+              }
+            },
+            "required": [
+              "relationship_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "state_rule"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prerequisite_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "ordering_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "authority_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "synchronization_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "consistency_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "execution_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "resource_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "policy_rule"
+                  ]
+                },
+                {
+                  "required": [
+                    "evidence_rule"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "dependency_condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "condition_type": {
+          "type": "string",
+          "enum": [
+            "ALWAYS",
+            "STATE_PREDICATE",
+            "EVIDENCE_PREDICATE",
+            "POLICY_PREDICATE",
+            "AUTHORITY_PREDICATE",
+            "RESOURCE_PREDICATE",
+            "CUSTOM_GOVERNED"
+          ]
+        },
+        "condition_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "condition_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "evaluated_immediately_before_commitment": {
+          "type": "boolean"
+        },
+        "failure_is_governance_significant": {
+          "const": true
+        }
+      },
+      "required": [
+        "condition_type",
+        "condition_digest",
+        "evaluated_immediately_before_commitment",
+        "failure_is_governance_significant"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "condition_type": {
+                "not": {
+                  "const": "ALWAYS"
+                }
+              }
+            },
+            "required": [
+              "condition_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "condition_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "prerequisite_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "satisfaction_mode": {
+          "type": "string",
+          "enum": [
+            "TARGET_REQUIRES_SOURCE",
+            "SOURCE_REQUIRES_TARGET",
+            "MUTUAL_PREREQUISITE"
+          ]
+        },
+        "required_lifecycle_state": {
+          "$ref": "governance_lifecycle_record.json#/$defs/derived_lifecycle_state"
+        },
+        "required_outcome_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "satisfaction_mode",
+        "basis_digest"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "required_lifecycle_state"
+          ]
+        },
+        {
+          "required": [
+            "required_outcome_ref"
+          ]
+        }
+      ]
+    },
+    "ordering_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ordering_mode": {
+          "type": "string",
+          "enum": [
+            "SOURCE_BEFORE_TARGET",
+            "TARGET_BEFORE_SOURCE",
+            "TOTAL_ORDER_GROUP",
+            "PARTIAL_ORDER_GROUP"
+          ]
+        },
+        "ordering_basis": {
+          "type": "string",
+          "enum": [
+            "GOVERNANCE_LEDGER_ORDER",
+            "EXPLICIT_SEQUENCE_NUMBER",
+            "POLICY_DEFINED_PRECEDENCE",
+            "DEPENDENCY_TOPOLOGY"
+          ]
+        },
+        "sequence_group_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "tie_break_basis_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "arrival_time_is_ordering_basis": {
+          "const": false
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "ordering_mode",
+        "ordering_basis",
+        "arrival_time_is_ordering_basis",
+        "basis_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "ordering_mode": {
+                "enum": [
+                  "TOTAL_ORDER_GROUP",
+                  "PARTIAL_ORDER_GROUP"
+                ]
+              }
+            },
+            "required": [
+              "ordering_mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "sequence_group_id"
+            ]
+          }
+        }
+      ]
+    },
+    "authority_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authority_dependency_mode": {
+          "type": "string",
+          "enum": [
+            "SOURCE_AUTHORIZES_TARGET",
+            "TARGET_AUTHORIZES_SOURCE",
+            "SHARED_AUTHORITY_BASIS",
+            "INDEPENDENT_AUTHORITY_REQUIRED"
+          ]
+        },
+        "authority_lineage_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "scope_containment_required": {
+          "const": true
+        },
+        "cross_domain_transition_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "implicit_authority_propagation_permitted": {
+          "const": false
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "authority_dependency_mode",
+        "authority_lineage_refs",
+        "scope_containment_required",
+        "implicit_authority_propagation_permitted",
+        "basis_digest"
+      ]
+    },
+    "synchronization_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "synchronization_mode": {
+          "type": "string",
+          "enum": [
+            "BARRIER",
+            "LOCKSTEP",
+            "ALL_REQUIRED_READY",
+            "POLICY_DEFINED_QUORUM",
+            "COORDINATED_WINDOW"
+          ]
+        },
+        "synchronization_group_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "readiness_condition_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "validity_window": {
+          "$ref": "common.json#/$defs/validity_window"
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "synchronization_mode",
+        "synchronization_group_id",
+        "basis_digest"
+      ]
+    },
+    "consistency_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "consistency_mode": {
+          "type": "string",
+          "enum": [
+            "SHARED_CANONICAL_STATE",
+            "AGGREGATE_INVARIANT",
+            "MUTUAL_CONSISTENCY",
+            "VERSION_COHERENCE",
+            "POLICY_DEFINED"
+          ]
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "constraint_artifact.json#/$defs/constraint_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "invariant_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "invariant_definition.json#/$defs/invariant_definition_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "consistency_basis_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "consistency_mode",
+        "basis_digest"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "constraint_refs"
+          ]
+        },
+        {
+          "required": [
+            "invariant_refs"
+          ]
+        },
+        {
+          "required": [
+            "consistency_basis_ref"
+          ]
+        }
+      ]
+    },
+    "execution_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "execution_dependency_mode": {
+          "type": "string",
+          "enum": [
+            "REQUIRES_SUCCESS",
+            "REQUIRES_NON_EXECUTION",
+            "MUTUAL_EXCLUSION",
+            "ATOMIC_EXECUTION_GROUP",
+            "CONDITIONAL_EXECUTION"
+          ]
+        },
+        "enforcement_condition_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "atomic_group_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "partial_execution_permitted": {
+          "type": "boolean"
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "execution_dependency_mode",
+        "partial_execution_permitted",
+        "basis_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "execution_dependency_mode": {
+                "const": "ATOMIC_EXECUTION_GROUP"
+              }
+            },
+            "required": [
+              "execution_dependency_mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "atomic_group_id"
+            ],
+            "properties": {
+              "partial_execution_permitted": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "execution_dependency_mode": {
+                "const": "CONDITIONAL_EXECUTION"
+              }
+            },
+            "required": [
+              "execution_dependency_mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "enforcement_condition_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "resource_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resource_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "access_mode": {
+          "type": "string",
+          "enum": [
+            "READ",
+            "WRITE",
+            "CREATE",
+            "DELETE",
+            "LOCK",
+            "RESERVE"
+          ]
+        },
+        "exclusivity": {
+          "type": "string",
+          "enum": [
+            "SHARED",
+            "EXCLUSIVE",
+            "POLICY_DEFINED"
+          ]
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "resource_ref",
+        "access_mode",
+        "exclusivity",
+        "basis_digest"
+      ]
+    },
+    "policy_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "version_coherence_required": {
+          "const": true
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "policy_refs",
+        "governance_version_ref",
+        "version_coherence_required",
+        "basis_digest"
+      ]
+    },
+    "evidence_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required_evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "minimum_qualified_evidence_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "evidence_continuity_required": {
+          "const": true
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "required_evidence_refs",
+        "minimum_qualified_evidence_count",
+        "evidence_continuity_required",
+        "basis_digest"
+      ]
+    },
+    "state_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_state_ref": {
+          "$ref": "common.json#/$defs/canonical_state_ref"
+        },
+        "state_predicate_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "state_qualification_required": {
+          "const": true
+        },
+        "basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "state_predicate_ref",
+        "state_qualification_required",
+        "basis_digest"
+      ]
+    },
+    "global_graph_constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "constraint_type": {
+          "type": "string",
+          "enum": [
+            "ACYCLIC_REQUIRED_RELATIONSHIPS",
+            "TOTAL_ORDER_REQUIRED",
+            "ATOMIC_GROUP",
+            "MUTUAL_EXCLUSION",
+            "CROSS_DOMAIN_ISOLATION",
+            "AGGREGATE_STATE",
+            "POLICY_DEFINED"
+          ]
+        },
+        "applies_to_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "constraint_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "constraint_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "constraint_type",
+        "applies_to_sub_transition_ids",
+        "constraint_digest"
+      ]
+    },
+    "dependency_change_policy": {
+      "type": "object",
+      "description": "Policy governing material dependency-condition changes and deterministic identification of affected nonterminal proposals.",
+      "additionalProperties": false,
+      "properties": {
+        "policy_ref": {
+          "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+        },
+        "monitored_condition_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "maxItems": 1024,
+          "uniqueItems": true
+        },
+        "material_change_requires_re_evaluation": {
+          "const": true
+        },
+        "affected_nonterminal_proposals_deterministically_identified": {
+          "const": true
+        },
+        "evaluation_occurs_before_bind": {
+          "const": true
+        },
+        "change_policy_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "policy_ref",
+        "monitored_condition_refs",
+        "material_change_requires_re_evaluation",
+        "affected_nonterminal_proposals_deterministically_identified",
+        "evaluation_occurs_before_bind",
+        "change_policy_digest"
+      ]
+    },
+    "dependency_change_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "change_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "changed_dependency_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 16384,
+          "uniqueItems": true
+        },
+        "affected_sub_transition_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "material_change_detected": {
+          "type": "boolean"
+        },
+        "re_evaluation_required": {
+          "type": "boolean"
+        },
+        "detected_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "change_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "change_id",
+        "changed_dependency_ids",
+        "material_change_detected",
+        "re_evaluation_required",
+        "detected_at",
+        "change_basis_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "material_change_detected": {
+                "const": true
+              }
+            },
+            "required": [
+              "material_change_detected"
+            ]
+          },
+          "then": {
+            "required": [
+              "affected_sub_transition_ids"
+            ],
+            "properties": {
+              "re_evaluation_required": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "material_change_detected": {
+                "const": false
+              }
+            },
+            "required": [
+              "material_change_detected"
+            ]
+          },
+          "then": {
+            "properties": {
+              "re_evaluation_required": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "graph_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "validation_status": {
+          "type": "string",
+          "enum": [
+            "VALID",
+            "INVALID",
+            "DEGRADED",
+            "INDETERMINATE"
+          ]
+        },
+        "node_identifiers_unique": {
+          "type": "boolean"
+        },
+        "dependency_identifiers_unique": {
+          "type": "boolean"
+        },
+        "all_edge_endpoints_resolved": {
+          "type": "boolean"
+        },
+        "no_self_dependencies": {
+          "type": "boolean"
+        },
+        "required_cycles_absent": {
+          "type": "boolean"
+        },
+        "ordering_constraints_satisfiable": {
+          "type": "boolean"
+        },
+        "cross_domain_transitions_governed": {
+          "type": "boolean"
+        },
+        "all_required_dependencies_explicit": {
+          "type": "boolean"
+        },
+        "validation_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "invalid_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "indeterminate_input_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "evaluated_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "validator": {
+          "$ref": "common.json#/$defs/attribution"
+        },
+        "validation_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "validation_status",
+        "node_identifiers_unique",
+        "dependency_identifiers_unique",
+        "all_edge_endpoints_resolved",
+        "no_self_dependencies",
+        "required_cycles_absent",
+        "ordering_constraints_satisfiable",
+        "cross_domain_transitions_governed",
+        "all_required_dependencies_explicit",
+        "validation_profile",
+        "evaluated_at",
+        "validator",
+        "validation_digest"
+      ]
+    },
+    "qualified_graph_validation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/graph_validation"
+        },
+        {
+          "properties": {
+            "validation_status": {
+              "const": "VALID"
+            },
+            "node_identifiers_unique": {
+              "const": true
+            },
+            "dependency_identifiers_unique": {
+              "const": true
+            },
+            "all_edge_endpoints_resolved": {
+              "const": true
+            },
+            "no_self_dependencies": {
+              "const": true
+            },
+            "required_cycles_absent": {
+              "const": true
+            },
+            "ordering_constraints_satisfiable": {
+              "const": true
+            },
+            "cross_domain_transitions_governed": {
+              "const": true
+            },
+            "all_required_dependencies_explicit": {
+              "const": true
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "invalid_reasons"
+                ]
+              },
+              {
+                "required": [
+                  "indeterminate_input_refs"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "invalid_graph_validation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/graph_validation"
+        },
+        {
+          "properties": {
+            "validation_status": {
+              "const": "INVALID"
+            }
+          },
+          "required": [
+            "invalid_reasons"
+          ]
+        }
+      ]
+    },
+    "degraded_graph_validation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/graph_validation"
+        },
+        {
+          "properties": {
+            "validation_status": {
+              "const": "DEGRADED"
+            }
+          },
+          "required": [
+            "invalid_reasons"
+          ]
+        }
+      ]
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "validation_profile": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "node_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "dependency_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "ordering_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "policy_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "governance_version_ref": {
+          "$ref": "common.json#/$defs/governance_version_ref"
+        },
+        "historical_action_execution_required": {
+          "const": false
+        }
+      },
+      "required": [
+        "validation_profile",
+        "node_set_digest",
+        "dependency_set_digest",
+        "ordering_basis_digest",
+        "policy_basis_digest",
+        "governance_version_ref",
+        "historical_action_execution_required"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "all_nodes_belong_to_parent_proposal": {
+          "const": true
+        },
+        "node_identifiers_unique": {
+          "const": true
+        },
+        "dependency_identifiers_unique": {
+          "const": true
+        },
+        "all_edge_endpoints_resolve_to_nodes": {
+          "const": true
+        },
+        "no_self_dependencies": {
+          "const": true
+        },
+        "required_dependencies_are_explicit": {
+          "const": true
+        },
+        "arrival_time_is_not_governance_ordering_basis": {
+          "const": true
+        },
+        "cross_domain_relationships_are_explicitly_governed": {
+          "const": true
+        },
+        "material_dependency_change_triggers_re_evaluation": {
+          "const": true
+        },
+        "affected_nonterminal_proposals_are_deterministically_identified": {
+          "const": true
+        },
+        "graph_does_not_establish_authority": {
+          "const": true
+        },
+        "graph_does_not_authorize_execution": {
+          "const": true
+        },
+        "graph_does_not_establish_partial_bind_admissibility": {
+          "const": true
+        },
+        "deterministic_replay_supported": {
+          "const": true
+        }
+      },
+      "required": [
+        "all_nodes_belong_to_parent_proposal",
+        "node_identifiers_unique",
+        "dependency_identifiers_unique",
+        "all_edge_endpoints_resolve_to_nodes",
+        "no_self_dependencies",
+        "required_dependencies_are_explicit",
+        "arrival_time_is_not_governance_ordering_basis",
+        "cross_domain_relationships_are_explicitly_governed",
+        "material_dependency_change_triggers_re_evaluation",
+        "affected_nonterminal_proposals_are_deterministically_identified",
+        "graph_does_not_establish_authority",
+        "graph_does_not_authorize_execution",
+        "graph_does_not_establish_partial_bind_admissibility",
+        "deterministic_replay_supported"
+      ]
+    },
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Profile-defined extensions that cannot alter the canonical dependency graph, its validation status, or its governance meaning.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    }
+  }
+}
