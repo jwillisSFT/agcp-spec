@@ -37,14 +37,14 @@ The repository-level comparison, including this release-notes file, is:
 
 | Measure | Attached v1 comparison archive | AGCP v2.0.0 repository |
 |---|---:|---:|
-| Total files | 59 | 268 |
-| Files added in v2 | — | 231 |
+| Total files | 59 | 267 |
+| Files added in v2 | — | 230 |
 | Files removed from the v1 layout | — | 22 |
 | Common files materially modified | — | 35 |
 | Common files unchanged | — | 2 |
 | HTTP operations | 4 | 10 |
 | OpenAPI component schemas | 14 | 96 |
-| Root schema JSON files | 18 | 89, including schemas and validation records |
+| Root schema JSON files | 18 | 96, including schemas and validation records |
 | Active cataloged DS schemas | Not cataloged | 43 |
 | Retired DS identifiers | Not cataloged | 1 (`DS-016`) |
 | Harness Test Vectors | 16 | 54 |
@@ -425,7 +425,7 @@ The obsolete `transitions/` directory is removed.
 
 The HTTP reference pseudocode is renamed and expanded as `AGCP-HTTP-Reference-Implementation-Pseudocode.md`.
 
-A `research/` package is added for supporting papers and terminology references. Research publications are informative unless expressly adopted by a normative source.
+A `research/` package is added for supporting papers and terminology references. Research publications are informative unless expressly adopted by a normative source. The current v2.0.0 research package intentionally includes `Runtime Governance Body of Knowledge - Glossary - DRAFT For Discussion Purposes Only.pdf` in place of the earlier `AI Runtime Governance - Vocabulary – Walkthrough Style - v.1.3.pdf` reference.
 
 ### 9.4 Licensing and patent notice
 
@@ -534,6 +534,7 @@ The F-17-controlled repository incorporates the following audit closures:
 - mandatory Governance Evidence language preserved in Error Mapping;
 - Markdown fence structure repaired in the normative Conformance Specification;
 - active validation records aligned to RTM-1.45;
+- schema-specific validation JSON records placed under `schemas/`, with catalog metadata and catalog validation retained under `schemas/catalog/`;
 - retired Human Review Artifact terminology removed from active representations;
 - traceability wording separated from normative precedence;
 - Canonical State resolution terminology corrected; and
@@ -547,6 +548,7 @@ The controlled v2 repository used for these notes passed the following consisten
 
 - all JSON and YAML control files parsed without duplicate-key failures;
 - all 43 active schemas passed Draft 2020-12 metaschema validation;
+- `schemas/common.json` contained 62 reachable shared definitions, with no unused definitions and no obsolete `pass_fail_enum`;
 - Schema Catalog hashes and forward/reverse dependencies were synchronized;
 - all OpenAPI references resolved;
 - Interface Specification and OpenAPI method/path/operationId, required-parameter, request-schema, and response-set parity passed for all ten operations;
