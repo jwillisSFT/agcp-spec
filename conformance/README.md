@@ -216,6 +216,12 @@ normative specifications.
 
 ------------------------------------------------------------------------
 
+## Informative Implementation and Traceability References
+
+- [AGCP v2.0.0 Requirement Traceability Annex](reference/AGCP-v2.0.0-Requirement-Traceability-Annex.pdf) — consolidated implementation and validation references for CR-001 through CR-122. Informative; does not alter normative precedence.
+
+------------------------------------------------------------------------
+
 # Repository Versioning
 
 This directory follows repository-release versioning.
