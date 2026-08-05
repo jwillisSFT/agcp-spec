@@ -1,20 +1,11 @@
 # AGCP `common.json` Controlled-Baseline Update Report
 
-<<<<<<< HEAD
-**Artifact:** `schemas/common.json`  
-**DS identifier:** `DS-001`  
-**Schema dialect:** JSON Schema Draft 2020-12  
-**Specification baseline:** AGCP v2.0.0  
-**Schema Catalog version:** `1.0.44`  
-**Updated:** 2026-07-31
-=======
 **Artifact:** `schemas/common.json`
 **DS identifier:** `DS-001`
 **Schema dialect:** JSON Schema Draft 2020-12
 **Specification baseline:** AGCP v2.0.1 accumulated correction
 **Schema Catalog version:** `1.0.50`
 **Updated:** 2026-08-03
->>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 
 ---
 
