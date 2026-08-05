@@ -231,7 +231,7 @@ Controlled examples in `schemas/examples/` are structural schema fixtures. The `
 
 ## Repository synchronization control
 
-`governance/AGCP-v2.0.1-repository-synchronization-manifest.json` inventories the accumulated public-repository correction set, and `governance/validate_repository_synchronization.py` verifies catalogs, RTM versions and mappings, manifests, vectors, validation reports, indexes, release records, and file hashes before packaging.
+`governance/AGCP-v2.0.4-repository-synchronization-manifest.json` inventories the accumulated public-repository correction set, and `governance/validate_repository_synchronization.py` verifies catalogs, RTM versions and mappings, manifests, vectors, validation reports, indexes, release records, and file hashes before packaging.
 
 
 ## Repository-wide integrity gate

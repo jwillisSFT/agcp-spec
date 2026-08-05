@@ -2,7 +2,7 @@
   "status": "PASS",
   "schema": "DS-004",
   "filename": "tenant.json",
-  "validated_at": "2026-07-30",
+  "validated_at": "2026-08-05",
   "draft_2020_12_schema_count": 44,
   "metaschema_issues": [],
   "resolved_reference_count": 3581,

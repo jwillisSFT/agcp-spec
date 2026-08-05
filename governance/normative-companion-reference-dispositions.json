@@ -2,7 +2,7 @@
   "document_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-DISPOSITIONS",
   "title": "AGCP Normative Companion Reference Dispositions",
   "version": "1.0.0",
-  "release_target": "v2.0.1",
+  "release_target": "v2.0.4",
   "status": "CONTROLLED",
   "finding": "P1-01",
   "purpose": "Resolve repository references that name normative companion artifacts not present in the controlled release and bind each retired label to existing canonical artifacts.",
@@ -24,7 +24,7 @@
         "schemas/common.json",
         "registries/rejection-code-registry.json"
       ],
-      "rationale": "The v2.0.1 controlled repository contains no standalone security companion. Security-relevant obligations remain distributed across the published CRs, Core, adopted companion specifications, schemas, and registries. The retired label does not identify an artifact and shall not be used as a normative reference."
+      "rationale": "The v2.0.4 controlled repository contains no standalone security companion. Security-relevant obligations remain distributed across the published CRs, Core, adopted companion specifications, schemas, and registries. The retired label does not identify an artifact and shall not be used as a normative reference."
     },
     {
       "disposition_id": "NCRD-002",
@@ -41,7 +41,7 @@
         "spec/AGCP-Provenance-Wire-Format-Specification.md",
         "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md"
       ],
-      "rationale": "The v2.0.1 controlled repository contains no standalone governance-evidence companion. Normative evidence obligations are established by the CRs and Core and serialized through DS-020 Governance Evidence and DS-033 Evidence Qualification Result, with provenance and ledger continuity supplied by the published companion specifications."
+      "rationale": "The v2.0.4 controlled repository contains no standalone governance-evidence companion. Normative evidence obligations are established by the CRs and Core and serialized through DS-020 Governance Evidence and DS-033 Evidence Qualification Result, with provenance and ledger continuity supplied by the published companion specifications."
     },
     {
       "disposition_id": "NCRD-003",

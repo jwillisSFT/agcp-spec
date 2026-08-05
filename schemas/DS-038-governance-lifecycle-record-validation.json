@@ -1,7 +1,7 @@
 {
   "overall_result": "PASS",
   "schema_id": "DS-038",
-  "validated_at": "2026-07-30",
+  "validated_at": "2026-08-05",
   "checks": [
     {
       "name": "json_parse",

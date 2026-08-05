@@ -2,10 +2,10 @@
   "catalog_id": "REG-CATALOG-1.0",
   "title": "AGCP Registry Entry Catalog",
   "description": "Authoritative catalog of permanent REG identifiers and direct entry-level NS/CR traceability for active registry entries.",
-  "specification_version": "v2.0.1",
+  "specification_version": "v2.0.4",
   "catalog_version": "1.0.3",
   "publication_status": "CURRENT",
-  "last_modified_date": "2026-08-03",
+  "last_modified_date": "2026-08-05",
   "entry_count": 94,
   "identifier_policy": "REG identifiers are permanent, non-reusable, and remain reserved after deprecation or retirement.",
   "entries": [
@@ -1395,7 +1395,7 @@
         "CR-010",
         "CR-026"
       ],
-      "entry_digest": "744240d3ea9bb4a4bd373e30af80e1ddb102c52238f9f0776222fbe5291ae118"
+      "entry_digest": "7740c514d4d8f10b4f4048c14ffba984035b753ef132157a923f75672a9cf3e0"
     },
     {
       "reg_id": "REG-061",
@@ -1412,7 +1412,7 @@
       "cr_refs": [
         "CR-022"
       ],
-      "entry_digest": "228011c730316ced5e26de39d60e5c1ae78f95002c986486c41c41c78fe9488c"
+      "entry_digest": "c8a75e3a2adb1230af881f329706ff57050ca153c631b649196a793f0972e259"
     },
     {
       "reg_id": "REG-062",
@@ -1430,7 +1430,7 @@
         "CR-041",
         "CR-068"
       ],
-      "entry_digest": "283332ffc930cf3096f5596d839f084a4880201a4ec654b00bdcf5be573e81ee"
+      "entry_digest": "5de8d5f2fde3a95c2f246ba1792c2913985af933b9d910475e951f627d214f05"
     },
     {
       "reg_id": "REG-063",
@@ -1448,7 +1448,7 @@
         "CR-110",
         "CR-113"
       ],
-      "entry_digest": "a557f70edbb0534dd73c98fa019f84ad47239dd8c907b9e76a04ea579aa1d595"
+      "entry_digest": "b8f9c045831c2c09b60ef1d3b81a3e85e7f2e0d82c6c6657b8a2430c0ca8e3cb"
     },
     {
       "reg_id": "REG-064",
@@ -2055,7 +2055,7 @@
       "registry_kind": "REJECTION_CODE",
       "entry_identifier": "REQUEST_THROTTLED",
       "entry_status": "ACTIVE",
-      "introduced_in_release": "v2.0.1",
+      "introduced_in_release": "v2.0.4",
       "ns_refs": [
         "NS-13.6A-02"
       ],
@@ -2064,7 +2064,7 @@
         "CR-089",
         "CR-090"
       ],
-      "entry_digest": "835e0b5fd0ed2afc09ff6ae8c1f57213f66ea0e6cf2dab36c8466918a460f06f"
+      "entry_digest": "cbb4d1c8c5f5d5f9b28073822f2b95d9d90619f673c070568911ba99fcbdbab8"
     },
     {
       "reg_id": "REG-094",
@@ -2073,7 +2073,7 @@
       "registry_kind": "REJECTION_CODE",
       "entry_identifier": "CAPACITY_UNAVAILABLE",
       "entry_status": "ACTIVE",
-      "introduced_in_release": "v2.0.1",
+      "introduced_in_release": "v2.0.4",
       "ns_refs": [
         "NS-13.6A-02"
       ],
@@ -2084,14 +2084,14 @@
         "CR-089",
         "CR-090"
       ],
-      "entry_digest": "f170ddcb4fdd7143e827ae53bf61db1e178a1dbcc7dd8d3bbfc2705d1c9367a6"
+      "entry_digest": "7e8e4563628556877b0d035da4ad5cd0ab86595d232927caa338ea9fb46eacbf"
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
-  "repository_release_target": "v2.0.1",
-  "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+  "repository_release_target": "v2.0.4",
+  "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "controlling_published_baseline": "v2.0.0",
-  "baseline_date": "2026-07-30",
+  "controlling_published_baseline": "v2.0.4",
+  "baseline_date": "2026-08-05",
   "rtm_dataset_version": "RTM-1.46"
 }

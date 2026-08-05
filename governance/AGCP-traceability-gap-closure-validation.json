@@ -1,14 +1,14 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   },
   "status": "PASS",
-  "validated_at": "2026-08-03",
+  "validated_at": "2026-08-05",
   "checks": [
     {
       "check": "all_active_schema_catalog_hashes_match",
@@ -93,11 +93,11 @@
     "interface_count": 2
   },
   "source_hashes": {
-    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
-    "api/interface-catalog.json": "99fc2b1259f450501c6848b9859659f28f89374de65409cbdf0880a535a56e6d",
-    "registries/registry-entry-catalog.json": "05760e6455452f6783a08dd0f180b7b4709e24de7ac3a0a4c4de2d20025df32e",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "55f8d49e698667bd2e55e9218354c02ffa3d4195dd7dc73303b17598dbc164d3",
-    "conformance/test-mapping.json": "e64d863fc1137c670d0c589b744f24e5a2d4457d6e5db318f73d7f63a694dc44",
-    "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc"
+    "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
+    "api/interface-catalog.json": "bd1aa071d9a792e9be2f25584a0f7bf3ee2b3c55e7ec71afeabca3e7e5460832",
+    "registries/registry-entry-catalog.json": "9bc8d9f1791c272357a6e99ff72d3e359c018687f0d71ff1a947d6cb2e511934",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
+    "conformance/test-mapping.json": "91ad9c5fb7a1a2042d1917544ac2d76b63ec04797cc1135d9e70a267642a6168",
+    "conformance/fixture-mapping.json": "55b6dbb2ad2c2ff7f193d72f9f81779c6abe40f582c01ee5d955aea814fe36bd"
   }
 }

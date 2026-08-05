@@ -4444,9 +4444,6 @@ the authoritative CR set, Core Specification, Architecture Reference Model, RTM,
 Conformance Test Suite.
 
 
-## Profile-specific IF-002 deterministic WASM vector package
-
-
 ## External content-digest vector package
 
 The controlled machine-readable package `conformance/digests/AGCP-Content-Digest-Test-Vectors.json` supplements TC-042, TC-052, TC-064, and TC-066 with algorithm/output-length, lowercase-encoding, and negative schema vectors. Formal Test Cases remain authoritative.

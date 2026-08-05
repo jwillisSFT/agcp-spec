@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   },
   "validation_type": "AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_VALIDATION",
@@ -13,6 +13,6 @@
   "controlled_profiles_published": 0,
   "informational_examples_checked": 1,
   "manifest_files_checked": 7,
-  "manifest_sha256": "5e8d9c2bc92abfff76bb50717f45cfe41421736039d11a9221bb8bc3a5a1e566",
+  "manifest_sha256": "d66095b4d1890f642b790cfb7ed09606d5594b301d316ff1e61e7e7c677b84a7",
   "issues": []
 }

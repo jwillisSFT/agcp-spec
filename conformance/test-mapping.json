@@ -1,6 +1,6 @@
 {
   "source_workbook": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
-  "test_count": 122,
+  "test_count": 110,
   "tests": [
     {
       "tc_id": "TC-001",
@@ -5184,7 +5184,7 @@
   "fixture_mapping": "conformance/fixture-mapping.json",
   "interface_id": "IF-001",
   "interface_version": "v2",
-  "last_validated_date": "2026-08-03",
+  "last_validated_date": "2026-08-05",
   "validation_status": "PASS",
   "interface_catalog": "api/interface-catalog.json",
   "registry_entry_catalog": "registries/registry-entry-catalog.json",
@@ -5216,8 +5216,8 @@
     "validation_report": "governance/AGCP-semantic-fixture-validation.json"
   },
   "repository_synchronization": {
-    "manifest": "governance/AGCP-v2.0.1-repository-synchronization-manifest.json",
-    "validation_report": "governance/AGCP-v2.0.1-repository-synchronization-validation.json",
+    "manifest": "governance/AGCP-v2.0.4-repository-synchronization-manifest.json",
+    "validation_report": "governance/AGCP-v2.0.4-repository-synchronization-validation.json",
     "status": "PASS"
   }
 }

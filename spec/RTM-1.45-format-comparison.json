@@ -2,7 +2,7 @@
   "status": "PASS",
   "record_classification": "active_controlled_change_validation",
   "finding": "F-17",
-  "validated_at": "2026-07-31T13:00:00Z",
+  "validated_at": "2026-08-05",
   "before_baseline": "F-16 controlled repository baseline",
   "after": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
   "checks": {

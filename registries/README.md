@@ -3,11 +3,11 @@
 **Status:** Normative  
 **Artifact Lifecycle:** Current  
 **Publication Status:** CURRENT  
-**Repository Release Target:** AGCP v2.0.1  
-**Repository Release Target Status:** Unreleased Accumulated Correction Set  
-**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline  
+**Repository Release Target:** AGCP v2.0.4  
+**Repository Release Target Status:** Public Review Controlled Baseline  
+**Controlling Published Baseline:** AGCP v2.0.4 Public Review Controlled Baseline  
 **Controlling Baseline Status:** PUBLIC_REVIEW_CONTROLLED_BASELINE  
-**Baseline Date:** 2026-07-30  
+**Baseline Date:** 2026-08-05  
 **Repository Versioning:** Repository Release Governed
 
 ## Purpose
@@ -150,6 +150,6 @@ They improve interoperability, consistency, and long-term compatibility
 without constraining implementation architecture beyond the normative
 requirements of the specifications.
 
-## v2.0.1 Public Error Contract
+## v2.0.4 Public Error Contract
 
-The rejection-code registry release `v2.0.1` normalizes every public protected-resource lookup to `RESOURCE_NOT_FOUND`, deprecates resource-specific not-found codes for public IF-001 use, and adds `REQUEST_THROTTLED` (429 plus required Retry-After) and `CAPACITY_UNAVAILABLE` (503). Transport/service conditions are not authoritative Governance Outcomes.
+The rejection-code registry release `v2.0.4` normalizes every public protected-resource lookup to `RESOURCE_NOT_FOUND`, deprecates resource-specific not-found codes for public IF-001 use, and adds `REQUEST_THROTTLED` (429 plus required Retry-After) and `CAPACITY_UNAVAILABLE` (503). Transport/service conditions are not authoritative Governance Outcomes.

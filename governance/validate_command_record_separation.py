@@ -124,7 +124,7 @@ for t in tm['tests']:
         tres.append({'tc':t['tc_id'],'ds45':'DS-045' in t['ds_ids'],'if1':'IF-001' in t['if_ids'],'schema':'schemas/governance_approval_submission.json' in t['schema_files'],'vectors':'conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json' in t.get('supporting_companion_vectors',[])})
 check('test_mapping_affected_rows',len(tres)==11 and all(all(v for k,v in x.items() if k!='tc') for x in tres),tres)
 
-report={'release_context':{'repository_release_target':'v2.0.1','repository_release_target_status':'UNRELEASED_ACCUMULATED_CORRECTION_SET','controlling_published_baseline':'v2.0.0','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-07-30','artifact_lifecycle_state':'CURRENT'},
+report={'release_context':{'repository_release_target':'v2.0.4','repository_release_target_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','controlling_published_baseline':'v2.0.4','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-08-05','artifact_lifecycle_state':'CURRENT'},
  'report_id':'AGCP-P0-06-GOVERNANCE-APPROVAL-COMMAND-RECORD-SEPARATION',
  'status':'PASS' if not issues else 'FAIL','validated_at':'2026-08-03','finding':'P0-06',
  'submission_schema':'schemas/governance_approval_submission.json','submission_ds_id':'DS-045',

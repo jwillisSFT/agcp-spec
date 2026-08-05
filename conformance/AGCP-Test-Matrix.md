@@ -186,9 +186,6 @@ The following identifier set is identical to the executable and human-readable c
 - Harness checks and fixture mappings may reference any identifier in this synchronized catalog.
 
 
-## Profile-specific IF-002 deterministic WASM companion
-
-
 ## P1-12 content-digest contract
 
 | Capability | Formal tests | Supporting vectors | Required result |

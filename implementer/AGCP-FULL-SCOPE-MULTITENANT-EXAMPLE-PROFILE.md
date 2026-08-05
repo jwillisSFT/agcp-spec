@@ -33,7 +33,7 @@ Unless a value is expressly labeled `AGCP-CONTROLLED`, all implementation-specif
 
 The following are real AGCP-connected values in this example: AGCP v2.0.0, the 2026-07-30 Public Review Controlled Baseline designation, CR-001 through CR-122, the cited ARM and NS identifiers, the AGCP architectural and normative concepts, the controlled AGCP artifact names cited from the source materials, and the public interface version/path `/agcp/v2`. The example hostname combined with that path remains illustrative.
 
-The implementation name `agcp-rs`, the service name `AGCP-DTS`, all AWS and third-party services, all resource and capacity values, all IP addresses and CIDR blocks, and all build/deployment repository paths are `ILLUSTRATIVE`. Profile-specific identifiers such as `AGCP-FULL-SCOPE-MULTITENANT-DEMO-2.0.0`, `ADR-PROF-*`, `RTM-2.0.0-PROFILE-EXT-1.0.0`, and `IF-002-AGCP-WASM-PEC-1.0.0` are `PROPOSED-EXAMPLE` identifiers unless an authoritative AGCP repository later publishes them.
+The implementation name `agcp-rs`, the service name `AGCP-DTS`, all AWS and third-party services, all resource and capacity values, all IP addresses and CIDR blocks, and all build/deployment repository paths are `ILLUSTRATIVE`. Profile-specific identifiers such as `AGCP-FULL-SCOPE-MULTITENANT-DEMO-2.0.0`, `ADR-PROF-*`, `RTM-2.0.0-PROFILE-EXT-1.0.0`, and `PROFILE-SELECTED-PEC-MACHINE-CONTRACT-EXAMPLE` are `PROPOSED-EXAMPLE` identifiers unless an authoritative AGCP repository later publishes them.
 
 ### 2.2 Security posture
 
@@ -150,7 +150,7 @@ The Implementation Profile and its optional machine-readable representation belo
 | Schema Catalog | Corrected v2.0.0 catalog | `baseline.lock.json` entry `schema_catalog` | Signed release manifest | Current after Section 29 corrections | Mandatory |
 | Registry Catalog | Corrected v2.0.0 catalog | `baseline.lock.json` entry `registry_catalog` | Signed release manifest | Current after Section 29 corrections | Mandatory |
 | Interface Specification | IF-001 v2.0.0 (`AGCP-CONTROLLED`) | Controlled baseline location | Controlled baseline integrity record | Current | Mandatory where applicable |
-| Proposed profile companion | IF-002-AGCP-WASM-PEC-1.0.0 (`PROPOSED-EXAMPLE`) | `interfaces/if-002-wasm-pec/` (`ILLUSTRATIVE`) | Example signed release manifest | Not published | Required only if an adopted profile enables independently authored WASM modules |
+| Proposed profile companion | PROFILE-SELECTED-PEC-MACHINE-CONTRACT-EXAMPLE (`PROPOSED-EXAMPLE`) | `interfaces/profile-selected-pec-machine-contract/` (`ILLUSTRATIVE`) | Example signed release manifest | Not published | Required only if an adopted profile enables independently authored WASM modules |
 | OpenAPI Contract | Corrected IF-001 OpenAPI v2.0.0 | `openapi/agcp-if-001-v2.0.0.yaml` | Signed release manifest | Current after Section 29 corrections | Mandatory |
 | Conformance Test Suite | TC-001 through TC-122 plus profile extension 1.0.0 | `tests/conformance/` and `tests/profile/full-scope-multitenant-demo/` | Signed release manifest | Current | Mandatory |
 | Assessment Procedures | Applicable AGCP assessment procedures | `assessment/` | Signed release manifest | Current | Mandatory for claims |
@@ -801,7 +801,7 @@ Every conformance claim shall include:
 ### 19.2 Profile-specific machine contract
 
 - **Classification:** `FIXED_NORMATIVE_OBLIGATION` after adoption.
-- **Companion interface identifier and version:** `IF-002-AGCP-WASM-PEC-1.0.0`.
+- **Companion interface identifier and version:** `PROFILE-SELECTED-PEC-MACHINE-CONTRACT-EXAMPLE`.
 - **ABI version:** `agcp_pec_abi_v1`.
 - **Input envelope:** Canonical bytes containing profile/version, Proposal Identity, qualified proposal digest, Canonical State snapshot descriptor, policy/configuration digests, authoritative evaluation time, and applicable evidence/authority references.
 - **Output envelope:** Canonical decision result containing outcome, constraints/invariants, reasons, required approvals, dependency declarations, and deterministic diagnostics safe for protected evidence.
@@ -1263,13 +1263,13 @@ The adopted Implementation Profile would control AGCP semantic constraints and p
 
 | Finding ID | Classification | Description | Required ruling or correction | Affected artifacts | Blocking scope | Status | Verification evidence |
 |---|---|---|---|---|---|---|---|
-| P0-02 | `REPOSITORY_CORRECTION` | Provenance wire/schema contradiction | Make wire-format envelope authoritative and synchronize schemas, examples, OpenAPI, tests, catalog, and reports | Provenance spec and dependents | Freezing provenance structs and interoperability claim | Open in the v2.0.0 baseline; mandatory before interoperability or conformance claim | Corrected validation and test report |
-| P0-10 | `REPOSITORY_CORRECTION` | Semantically inconsistent positive fixtures | Correct tenant/proposal/domain/policy/artifact bindings and add negative vectors | Controlled examples and tests | Conformance evidence quality | Open in the v2.0.0 baseline; mandatory before interoperability or conformance claim | Semantic fixture validation |
-| P2-01 | `REPOSITORY_CORRECTION` | Inconsistent publication/lifecycle labels | Separate release status, artifact lifecycle, version, and baseline date | Catalogs and artifacts | Controlled publication metadata | Open in the v2.0.0 baseline; mandatory before interoperability or conformance claim | Repository metadata audit |
-| P1-01 | `REPOSITORY_CORRECTION` | References to absent normative companions | Remove, supersede, or resolve controlled references | Specifications and catalogs | Normative reference integrity | Open in the v2.0.0 baseline; mandatory before interoperability or conformance claim | Link/reference validation |
-| P0-06 | `REPOSITORY_CORRECTION` plus profile ADR | Ingress combines claimant facts and server-derived assertions | Add submission and authoritative record schemas | Schemas, OpenAPI, examples, RTM, tests | Public trust boundary | Open in the v2.0.0 baseline; mandatory before interoperability or conformance claim | Schema and trust-boundary tests |
-| P1-03 | `REPOSITORY_CORRECTION` plus profile mapping | Inconsistent public not-found codes | Public `RESOURCE_NOT_FOUND`; retain specific codes only in protected evidence | OpenAPI, vectors, pseudocode | Public error interoperability | Open in the v2.0.0 baseline; mandatory before interoperability or conformance claim | Contract tests |
-| P1-12 | `REPOSITORY_CORRECTION` | Digest length/case not coupled to algorithm | Enforce exact algorithm lengths and lowercase | Schemas and vectors | Digest validation | Open in the v2.0.0 baseline; mandatory before interoperability or conformance claim | Schema tests |
+| P0-02 | `REPOSITORY_CORRECTION` | Provenance wire/schema contradiction | Make wire-format envelope authoritative and synchronize schemas, examples, OpenAPI, tests, catalog, and reports | Provenance spec and dependents | Freezing provenance structs and interoperability claim | Resolved in the v2.0.4 baseline; required for any interoperability or conformance claim | Corrected validation and test report |
+| P0-10 | `REPOSITORY_CORRECTION` | Semantically inconsistent positive fixtures | Correct tenant/proposal/domain/policy/artifact bindings and add negative vectors | Controlled examples and tests | Conformance evidence quality | Resolved in the v2.0.4 baseline; required for any interoperability or conformance claim | Semantic fixture validation |
+| P2-01 | `REPOSITORY_CORRECTION` | Inconsistent publication/lifecycle labels | Separate release status, artifact lifecycle, version, and baseline date | Catalogs and artifacts | Controlled publication metadata | Resolved in the v2.0.4 baseline; required for any interoperability or conformance claim | Repository metadata audit |
+| P1-01 | `REPOSITORY_CORRECTION` | References to absent normative companions | Remove, supersede, or resolve controlled references | Specifications and catalogs | Normative reference integrity | Resolved in the v2.0.4 baseline; required for any interoperability or conformance claim | Link/reference validation |
+| P0-06 | `REPOSITORY_CORRECTION` plus profile ADR | Ingress combines claimant facts and server-derived assertions | Add submission and authoritative record schemas | Schemas, OpenAPI, examples, RTM, tests | Public trust boundary | Resolved in the v2.0.4 baseline; required for any interoperability or conformance claim | Schema and trust-boundary tests |
+| P1-03 | `REPOSITORY_CORRECTION` plus profile mapping | Inconsistent public not-found codes | Public `RESOURCE_NOT_FOUND`; retain specific codes only in protected evidence | OpenAPI, vectors, pseudocode | Public error interoperability | Resolved in the v2.0.4 baseline; required for any interoperability or conformance claim | Contract tests |
+| P1-12 | `REPOSITORY_CORRECTION` | Digest length/case not coupled to algorithm | Enforce exact algorithm lengths and lowercase | Schemas and vectors | Digest validation | Resolved in the v2.0.4 baseline; required for any interoperability or conformance claim | Schema tests |
 | P0-05 | `REPOSITORY_CORRECTION` / companion creation | IF-002 machine contract absent | Publish controlled WASM PEC interface | IF-002, RTM, tests | Independent policy modules | Mandatory before independently authored policy modules are enabled | ABI validation |
 
 ## 30. Associated Decision Records
@@ -1322,7 +1322,7 @@ The RTM profile extension shall add relationship-specific rows rather than one g
 | Implementation Profile | This informational example v1.2.0 | `profiles/full-scope-multitenant-demo/AGCP-FULL-SCOPE-MULTITENANT-DEMO-2.0.0.md` | Detached `.sha256` file | Example | Not approved; informational only |
 | Machine-readable profile | v1.2.0 | `profiles/full-scope-multitenant-demo/profile.yaml` | Signed release manifest | Example | Not approved; informational only |
 | Public interface | IF-001 v2.0.0 (`AGCP-CONTROLLED`) | Controlled baseline location | Controlled baseline integrity record | Current | Referenced; any correction remains subject to repository governance |
-| WASM PEC interface | IF-002-AGCP-WASM-PEC-1.0.0 | `interfaces/if-002-wasm-pec/` | Signed release manifest | Proposed example companion | Not part of the controlled baseline |
+| WASM PEC interface | PROFILE-SELECTED-PEC-MACHINE-CONTRACT-EXAMPLE | `interfaces/profile-selected-pec-machine-contract/` | Signed release manifest | Proposed example companion | Not part of the controlled baseline |
 | Schema catalog | AGCP v2.0.0 catalog (`AGCP-CONTROLLED`) | Controlled baseline location | Controlled baseline integrity record | Current baseline artifact | Repository findings in Section 29 remain separate |
 | Registry catalog | AGCP v2.0.0 catalog (`AGCP-CONTROLLED`) | Controlled baseline location | Controlled baseline integrity record | Current baseline artifact | Repository findings in Section 29 remain separate |
 | RTM profile extension | RTM-2.0.0-PROFILE-EXT-1.0.0 | `traceability/rtm/` | Signed release manifest | Illustrative mapping plan | Not incorporated into the authoritative RTM |

@@ -1,17 +1,17 @@
 # AGCP JSON Schemas
 
-This directory contains the authoritative JSON Schema Draft 2020-12 definitions for the AGCP v2.0.1 schema set, together with the controlled Data Schema Catalog, validation records, implementation reports, and schema examples.
+This directory contains the authoritative JSON Schema Draft 2020-12 definitions for the AGCP v2.0.4 schema set, together with the controlled Data Schema Catalog, validation records, implementation reports, and schema examples.
 
 ## Current Release Status
 
-- AGCP specification version: `v2.0.1`
+- AGCP specification version: `v2.0.4`
 - Schema Catalog identifier: `DS-CATALOG-1.0`
 - Schema Catalog version: `1.0.50`
 - Catalog publication status: `CURRENT`
 - Artifact lifecycle state: `CURRENT`
-- Repository release target: `v2.0.1` (`UNRELEASED_ACCUMULATED_CORRECTION_SET`)
+- Repository release target: `v2.0.4` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
 - Controlling published baseline: `v2.0.0` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
-- Baseline date: `2026-07-30`
+- Baseline date: `2026-08-05`
 - Active implemented schemas: **44**
 - Permanently assigned DS identifiers: **45** (`DS-001` through `DS-045`)
 - Retired DS identifiers: **1**

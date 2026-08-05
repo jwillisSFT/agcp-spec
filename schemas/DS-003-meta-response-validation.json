@@ -2,7 +2,7 @@
   "status": "PASS",
   "schema": "DS-003",
   "filename": "meta_response.json",
-  "validated_at": "2026-08-03",
+  "validated_at": "2026-08-05",
   "draft_2020_12_schema_count": 97,
   "metaschema_issues": [],
   "positive_cases": [
@@ -69,11 +69,11 @@
   "rtm_sha256": "8660278b82aa0f8250418e18ca65918cc2e08fc76435622ead4159cb9c6bb656",
   "p1_14_p1_17_status": "PASS",
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   }
 }

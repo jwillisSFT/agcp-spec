@@ -2,7 +2,7 @@
 
 ## Scope
 
-This document records the completed migration of the AGCP HTTP interface to IF-001, the version 2 HTTP surface for the AGCP v2.0.1 accumulated correction set, and its current validation against the controlling AGCP v2.0.0 Public Review baseline. It is a current controlled worktree record, not a historical validation snapshot or a claim that v2.0.1 has already been published.
+This document records the completed migration of the AGCP HTTP interface to IF-001, the version 2 HTTP surface for the AGCP v2.0.4 public release, and its validation against the controlling AGCP v2.0.4 Public Review Controlled Baseline. It is a current controlled release record.
 
 - Controlled RTM baseline: `RTM-1.46`
 - Baseline date: `2026-07-30`
@@ -14,10 +14,10 @@ This document records the completed migration of the AGCP HTTP interface to IF-0
 - Canonical path namespace: `/agcp/v2`
 - Interface identifier: `IF-001`
 - OpenAPI version: `3.1.0`
-- Contract version: `2.0.1`
+- Contract version: `2.0.4`
 - Artifact lifecycle state: `CURRENT`
-- Repository release target: `v2.0.1`
-- Repository release target status: `UNRELEASED_ACCUMULATED_CORRECTION_SET`
+- Repository release target: `v2.0.4`
+- Repository release target status: `PUBLIC_REVIEW_CONTROLLED_BASELINE`
 - Controlling published baseline: `v2.0.0`
 - Controlling baseline status: `PUBLIC_REVIEW_CONTROLLED_BASELINE`
 - `/agcp/v1` is not independently versioned and is not retained as a compatibility surface.
@@ -118,6 +118,6 @@ No schema catalog increment was required because no Data Schema definition chang
 
 The governance-approval POST operation now references `schemas/governance_approval_submission.json` (DS-045). `schemas/governance_approval_artifact.json` (DS-026) remains the authoritative record schema and requires `artifact_origin: AGCP_CREATED_OR_QUALIFIED`. Claimant attempts to submit server-derived verification, eligibility, quorum, lifecycle, evidence, digest, replay, or ledger fields are rejected structurally.
 
-## v2.0.1 Error and Metadata Reconciliation
+## v2.0.4 Error and Metadata Reconciliation
 
-OpenAPI 2.0.1 now uses reusable `PublicNotFound`, `TooManyRequests`, and `ServiceUnavailable` responses. All public 404 responses use `RESOURCE_NOT_FOUND`; every operation declares 429 with required delay-seconds `Retry-After` and 503 for capacity/dependency unavailability. `GET /agcp/v2/meta` is bound to the expanded DS-003 immutable baseline, profile, schema/validator, and active-governance contract.
+OpenAPI 2.0.4 now uses reusable `PublicNotFound`, `TooManyRequests`, and `ServiceUnavailable` responses. All public 404 responses use `RESOURCE_NOT_FOUND`; every operation declares 429 with required delay-seconds `Retry-After` and 503 for capacity/dependency unavailability. `GET /agcp/v2/meta` is bound to the expanded DS-003 immutable baseline, profile, schema/validator, and active-governance contract.

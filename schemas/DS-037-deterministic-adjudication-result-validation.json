@@ -1,7 +1,7 @@
 {
   "schema": "DS-037 deterministic_adjudication_result.json",
   "status": "PASS",
-  "validated_at": "2026-07-29",
+  "validated_at": "2026-08-05",
   "draft_2020_12_schema_count": 35,
   "cross_schema_reference_count": 1650,
   "positive_tests": {

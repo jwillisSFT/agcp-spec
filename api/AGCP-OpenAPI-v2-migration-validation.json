@@ -131,20 +131,20 @@
     "undocumented_openapi_operations": [],
     "interface_only_operations": []
   },
-  "validated_at": "2026-08-03",
+  "validated_at": "2026-08-05",
   "source_hashes": {
-    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
-    "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
-    "spec/AGCP-Error-Mapping.md": "20a2c73d524cfd9ff536883598344ca3418233c6d3c294bbe85362aed48eeee8",
+    "api/AGCP-HTTP-Contract.yaml": "3a074f0607bf0ed9f8f1adab01c90a8b667636bbba87acc6f6ddacf3041b05f8",
+    "spec/AGCP-HTTP-Interface-Specification.md": "fd87e100f2be6b1bb634148fc8eab02f7c16dfe4ca6b3d0fc7e9c9e9fde1abf3",
+    "spec/AGCP-Error-Mapping.md": "c27fef006bd097172d3935f7266042ab2f7f18a2061c0ae32347e9e9ddc37d30",
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "2eac84f633138e36909328bf8b28403b728986bb3006271e1e249d64b76a4a6c",
-    "conformance/AGCP-if001-executable-operation-coverage-validation.json": "fb153d57db60cd9dafa0d6247a0f04ac6e5a01423320f48bce2c4158d92f21d3",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "55f8d49e698667bd2e55e9218354c02ffa3d4195dd7dc73303b17598dbc164d3",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
+    "conformance/AGCP-if001-executable-operation-coverage-validation.json": "a90d97340f7b37ce3124b41696c839da319ee66214e6f8a003a3a347ddca0b6b",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
     "schemas/error_response.json": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
-    "schemas/meta_response.json": "87ae704d02b15ad93673928d84e6250e9b3f09257e631cb8c74eadad081f7dcf",
-    "registries/rejection-code-registry.json": "19726bc7a8da1181eaf7c74054cc0a677031ff36a67807dac779f5f654c9da12",
-    "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json": "733ad071c50ec61bfb2ae995915ce047f6768860343ea3ec45151e1e598a739b",
-    "governance/AGCP-http-error-metadata-validation.json": "31cb050d7b69f28bfb763398b441214e7bbf750116d0f21655bdb5263d7e367c"
+    "schemas/meta_response.json": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
+    "registries/rejection-code-registry.json": "3f11c8880557b4ed5cd2955ab3e0af5151cd661798b3349162970d7475edaed7",
+    "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json": "caadcec849862d165ec494abc1b09817cf1bc4473ad67de376a5ec63ea9a43b5",
+    "governance/AGCP-http-error-metadata-validation.json": "7e5adfe1ec5fca062f7a8bdb97d69662745dae0d1e27e86d7e7509316f52070d"
   },
   "response_set_parity": {
     "status": "PASS",
@@ -1003,7 +1003,7 @@
   "p0_05_if002_scope_refresh": {
     "status": "PASS",
     "finding": "P0-05",
-    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately."
+    "scope": "Source hashes refreshed after publication of the profile-selected policy-evaluation machine-contract companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately."
   },
   "p0_06_command_record_separation": {
     "finding": "P0-06",
@@ -1029,7 +1029,7 @@
     "lowercase_hexadecimal_required": true,
     "vectors": "conformance/digests/AGCP-Content-Digest-Test-Vectors.json"
   },
-  "openapi_contract_version": "2.0.1",
+  "openapi_contract_version": "2.0.4",
   "p1_03_p1_09_p1_14_p1_17": {
     "status": "PASS",
     "operation_count": 10,
@@ -1044,11 +1044,11 @@
     "validation_report": "governance/AGCP-semantic-fixture-validation.json"
   },
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   }
 }

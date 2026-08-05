@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   },
   "report_id": "AGCP-P1-12-CONTENT-DIGEST-CONTRACT",
@@ -20,7 +20,7 @@
     "BLAKE2B-512": 128
   },
   "dependent_schema_count": 40,
-  "controlled_digest_instance_count": 975,
+  "controlled_digest_instance_count": 966,
   "positive_vector_count": 5,
   "negative_vector_count": 14,
   "affected_crs": [
@@ -32,13 +32,13 @@
   "source_hashes": {
     "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
     "schemas/examples/common-content-digest-examples.json": "335d62b3e52c0844635c26a9eb97c48242d0d62f0d7fecbf7259264229e0f777",
-    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
-    "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
+    "api/AGCP-HTTP-Contract.yaml": "3a074f0607bf0ed9f8f1adab01c90a8b667636bbba87acc6f6ddacf3041b05f8",
+    "spec/AGCP-HTTP-Interface-Specification.md": "fd87e100f2be6b1bb634148fc8eab02f7c16dfe4ca6b3d0fc7e9c9e9fde1abf3",
     "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e",
-    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
-    "conformance/test-mapping.json": "e64d863fc1137c670d0c589b744f24e5a2d4457d6e5db318f73d7f63a694dc44",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "55f8d49e698667bd2e55e9218354c02ffa3d4195dd7dc73303b17598dbc164d3",
-    "governance/validate_content_digest_contract.py": "073feec8c63859cf69ad113e6fc2a0294dd5817ca173299950e042c574b96b56"
+    "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
+    "conformance/test-mapping.json": "91ad9c5fb7a1a2042d1917544ac2d76b63ec04797cc1135d9e70a267642a6168",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
+    "governance/validate_content_digest_contract.py": "9edac56056c51c014b1e946d2bc3f7dff027f4d8fe1398dd32b7332827a78025"
   },
   "checks": [
     {
@@ -262,7 +262,7 @@
       "check": "controlled_digest_instances_valid",
       "status": "PASS",
       "detail": {
-        "count": 975,
+        "count": 966,
         "errors": []
       }
     },

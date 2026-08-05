@@ -2,7 +2,7 @@
   "schema_id": "DS-012",
   "filename": "invariant_evaluation.json",
   "status": "PASS",
-  "validated_at": "2026-07-30",
+  "validated_at": "2026-08-05",
   "metaschema_validation": {
     "status": "PASS",
     "schema_count": 44,

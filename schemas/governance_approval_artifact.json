@@ -7,7 +7,7 @@
   "x-agcp-ds-id": "DS-026",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Canonical Governance Object \u2014 Governance Approval Artifact",
+  "x-agcp-schema-role": "Canonical Governance Object — Governance Approval Artifact",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-107",
@@ -920,7 +920,7 @@
     },
     "lifecycle_effect": {
       "type": "object",
-      "description": "Governed lifecycle effect supported by the artifact. The effect records eligibility or adjudication consequences and remains distinct from the artifact\u2019s own active, expired, revoked, or superseded status.",
+      "description": "Governed lifecycle effect supported by the artifact. The effect records eligibility or adjudication consequences and remains distinct from the artifact’s own active, expired, revoked, or superseded status.",
       "additionalProperties": false,
       "properties": {
         "effect_type": {

@@ -9,8 +9,8 @@
   "description": "Authoritative registry of recognized AGCP invariant types used across governance evaluation, authorization, Commit Boundary processing, Continuation Integrity, Governance Evidence, and Governance Self-Protection.",
   "release": {
     "release_id": "REG-INVARIANT-TYPE-v2.0.0",
-    "registry_release": "v2.0.0",
-    "specification_version": "v2.0.0",
+    "registry_release": "v2.0.4",
+    "specification_version": "v2.0.4",
     "publication_status": "CURRENT",
     "published_at": "2026-07-30T12:26:00-04:00",
     "authority": "AGCP controlled repository release",
@@ -28,13 +28,12 @@
     "entry_count": 26,
     "entry_set_digest": {
       "algorithm": "SHA-256",
-      "value": "e918da4830da2a1691fc1beb604ef66f4a5e241b31c8d28b9ca4a64680ce5ed9",
+      "value": "cd3153eb577dc2e82e588339ff15e1621e9d14ead648d80e0a270d3bd8d1c268",
       "canonicalization": "JCS-RFC8785"
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "d08f0744c62701904b6194f5e87141790393fbfcbe437aa7ccde831efcd9a6ce",
-      "canonicalization": "JCS-RFC8785"
+      "value": "ca926af1b9d22f88e38481038b0b1ffae7e5833c49036d4e2324ed3a9c4cd51b"
     }
   },
   "traceability": {
@@ -400,8 +399,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "8ec37cd1e9348ed097a1bec0831f1b7f21a6cc3fa11662e236e56e5368f2c6a0",
-        "canonicalization": "JCS-RFC8785"
+        "value": "8ec37cd1e9348ed097a1bec0831f1b7f21a6cc3fa11662e236e56e5368f2c6a0"
       }
     },
     {
@@ -454,8 +452,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "c7edcbc132fe6fae87b7bd0047c27627ff8247a02de42ed73aae656ae0672189",
-        "canonicalization": "JCS-RFC8785"
+        "value": "c7edcbc132fe6fae87b7bd0047c27627ff8247a02de42ed73aae656ae0672189"
       }
     },
     {
@@ -506,8 +503,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "063083e905073813d1cab3fa5bf2a58067177c79345c64ee8a985c65838734e0",
-        "canonicalization": "JCS-RFC8785"
+        "value": "063083e905073813d1cab3fa5bf2a58067177c79345c64ee8a985c65838734e0"
       }
     },
     {
@@ -563,8 +559,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "ee59f39952f0dc3e8f2e8de1bc16be62095f53105dc451d93ed2bc32dbecf8fb",
-        "canonicalization": "JCS-RFC8785"
+        "value": "ee59f39952f0dc3e8f2e8de1bc16be62095f53105dc451d93ed2bc32dbecf8fb"
       }
     },
     {
@@ -618,8 +613,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "962490e77b84b0ba14d190d77a9e8783eeb2b75bb0af0f386d36e55d64faa25e",
-        "canonicalization": "JCS-RFC8785"
+        "value": "962490e77b84b0ba14d190d77a9e8783eeb2b75bb0af0f386d36e55d64faa25e"
       }
     },
     {
@@ -666,8 +660,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "082acaaea12d707c73d96a9f2d285e8b55acaeb5075ad37130cb3825e9206071",
-        "canonicalization": "JCS-RFC8785"
+        "value": "082acaaea12d707c73d96a9f2d285e8b55acaeb5075ad37130cb3825e9206071"
       }
     },
     {
@@ -721,8 +714,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "196fcea997e642a0806dbb73323c112f9c2eee7bd17ff6a5acf144045124d1fa",
-        "canonicalization": "JCS-RFC8785"
+        "value": "196fcea997e642a0806dbb73323c112f9c2eee7bd17ff6a5acf144045124d1fa"
       }
     },
     {
@@ -782,8 +774,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "612bc744a9c78a371bcb49909b6d807ce69d00c9bf2480a598d6eaf9c40158d0",
-        "canonicalization": "JCS-RFC8785"
+        "value": "612bc744a9c78a371bcb49909b6d807ce69d00c9bf2480a598d6eaf9c40158d0"
       }
     },
     {
@@ -833,8 +824,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "47ca1c73b063e5ac6f104df4b5736380e8efdb847a40d508db786cbab40487ea",
-        "canonicalization": "JCS-RFC8785"
+        "value": "47ca1c73b063e5ac6f104df4b5736380e8efdb847a40d508db786cbab40487ea"
       }
     },
     {
@@ -882,8 +872,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "28cfd3ec2595eef128718cf2439b01a5497272559ebc653ecb4c26363c921831",
-        "canonicalization": "JCS-RFC8785"
+        "value": "28cfd3ec2595eef128718cf2439b01a5497272559ebc653ecb4c26363c921831"
       }
     },
     {
@@ -929,8 +918,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "ddccc4b008c64ba2e213cea91667a7f9e438181902c93fe0dd87df847d7a1279",
-        "canonicalization": "JCS-RFC8785"
+        "value": "ddccc4b008c64ba2e213cea91667a7f9e438181902c93fe0dd87df847d7a1279"
       }
     },
     {
@@ -975,8 +963,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "e9c42e2017bfc728277f3f0aa68ad4f8f1f60c03b378581c9d1e9678f5828ad5",
-        "canonicalization": "JCS-RFC8785"
+        "value": "e9c42e2017bfc728277f3f0aa68ad4f8f1f60c03b378581c9d1e9678f5828ad5"
       }
     },
     {
@@ -1025,8 +1012,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "11f5dbe5cb2bec81b2e44d575a644909e5c40b74b2a8c2c71a7fce99e66967d7",
-        "canonicalization": "JCS-RFC8785"
+        "value": "11f5dbe5cb2bec81b2e44d575a644909e5c40b74b2a8c2c71a7fce99e66967d7"
       }
     },
     {
@@ -1071,8 +1057,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "02076ed3aa2ffcfeb12fef275902e83eef5e1bab0dd78a5c3f24169f17cf3a3c",
-        "canonicalization": "JCS-RFC8785"
+        "value": "02076ed3aa2ffcfeb12fef275902e83eef5e1bab0dd78a5c3f24169f17cf3a3c"
       }
     },
     {
@@ -1121,8 +1106,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "a461031ffac51c5f9f934c0f88f8982e6207c9fee16e8dfd99acb12cd90f5c72",
-        "canonicalization": "JCS-RFC8785"
+        "value": "a461031ffac51c5f9f934c0f88f8982e6207c9fee16e8dfd99acb12cd90f5c72"
       }
     },
     {
@@ -1178,8 +1162,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "99b49030afa01b93405c26381aa1fe67db23ca912498f4de2d83e0936492332d",
-        "canonicalization": "JCS-RFC8785"
+        "value": "99b49030afa01b93405c26381aa1fe67db23ca912498f4de2d83e0936492332d"
       }
     },
     {
@@ -1226,8 +1209,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "77fe8b7d4ac9474a37ecb05bb158892ca9996a48404f6cb803023bf1d12a96de",
-        "canonicalization": "JCS-RFC8785"
+        "value": "77fe8b7d4ac9474a37ecb05bb158892ca9996a48404f6cb803023bf1d12a96de"
       }
     },
     {
@@ -1284,8 +1266,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "18077edd521da6f79468db08076df574a01dd0fa7d788f73f43d17b3d0e13353",
-        "canonicalization": "JCS-RFC8785"
+        "value": "18077edd521da6f79468db08076df574a01dd0fa7d788f73f43d17b3d0e13353"
       }
     },
     {
@@ -1331,8 +1312,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "00d447e00c15f19b6a149b2d347887871cf8ec45e2e0b5d44a8821d9a1e2fb09",
-        "canonicalization": "JCS-RFC8785"
+        "value": "00d447e00c15f19b6a149b2d347887871cf8ec45e2e0b5d44a8821d9a1e2fb09"
       }
     },
     {
@@ -1392,8 +1372,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "dce38dfa7a9d60538681a831f28021e177540ce6b5c81fe891e3561f35d200e9",
-        "canonicalization": "JCS-RFC8785"
+        "value": "dce38dfa7a9d60538681a831f28021e177540ce6b5c81fe891e3561f35d200e9"
       }
     },
     {
@@ -1439,8 +1418,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "39dfc2cce99fcd6d0c533e744dc176ca68999fec78ceca767230dccb529298d3",
-        "canonicalization": "JCS-RFC8785"
+        "value": "39dfc2cce99fcd6d0c533e744dc176ca68999fec78ceca767230dccb529298d3"
       }
     },
     {
@@ -1486,8 +1464,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "2e00cf176713ae469a0c27ed1d15bf1ee09492239fabb5ac1ddb587cd5e7cc29",
-        "canonicalization": "JCS-RFC8785"
+        "value": "2e00cf176713ae469a0c27ed1d15bf1ee09492239fabb5ac1ddb587cd5e7cc29"
       }
     },
     {
@@ -1532,8 +1509,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "3445692ea1723f1123908231ed68df8fd00a01b2129dffcc6364c10fd24548b9",
-        "canonicalization": "JCS-RFC8785"
+        "value": "3445692ea1723f1123908231ed68df8fd00a01b2129dffcc6364c10fd24548b9"
       }
     },
     {
@@ -1586,8 +1562,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "cdeef8e15b2f27b5f9a87b92e1c7f8cd39e33c5089740bffa4975bb1e5b35971",
-        "canonicalization": "JCS-RFC8785"
+        "value": "cdeef8e15b2f27b5f9a87b92e1c7f8cd39e33c5089740bffa4975bb1e5b35971"
       }
     },
     {
@@ -1639,8 +1614,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "082bcb65f30fc9b97aeccd6a5e89a52fcbe89b17556cd364036c57ca5261b16c",
-        "canonicalization": "JCS-RFC8785"
+        "value": "082bcb65f30fc9b97aeccd6a5e89a52fcbe89b17556cd364036c57ca5261b16c"
       }
     },
     {
@@ -1685,8 +1659,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "1f755991b6ced63891cda146f82ae4ca4c728dfbeab34fdfc5a76a125d678469",
-        "canonicalization": "JCS-RFC8785"
+        "value": "1f755991b6ced63891cda146f82ae4ca4c728dfbeab34fdfc5a76a125d678469"
       }
     }
   ],

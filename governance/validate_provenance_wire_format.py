@@ -188,7 +188,7 @@ check('tc005_maps_cross_language_vectors', tc5.get('supporting_companion_vectors
 fixture_mapping=json.loads((ROOT/'conformance/fixture-mapping.json').read_text())
 check('catalog_version_synchronized', cat['catalog_version']=='1.0.50' and test_mapping['schema_catalog_version']=='1.0.50' and fixture_mapping['schema_catalog_version']=='1.0.50',{'catalog':cat['catalog_version'],'test_mapping':test_mapping['schema_catalog_version'],'fixture_mapping':fixture_mapping['schema_catalog_version']})
 
-report={'release_context':{'repository_release_target':'v2.0.1','repository_release_target_status':'UNRELEASED_ACCUMULATED_CORRECTION_SET','controlling_published_baseline':'v2.0.0','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-07-30','artifact_lifecycle_state':'CURRENT'},
+report={'release_context':{'repository_release_target':'v2.0.4','repository_release_target_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','controlling_published_baseline':'v2.0.4','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-08-05','artifact_lifecycle_state':'CURRENT'},
  'report_id':'AGCP-P0-02-PROVENANCE-WIRE-SCHEMA-SYNCHRONIZATION',
  'status':'PASS' if not issues else 'FAIL',
  'validated_at':'2026-08-03',

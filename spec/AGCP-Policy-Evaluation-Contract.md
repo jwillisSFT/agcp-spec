@@ -3,12 +3,12 @@
 **Status:** Normative\
 **Interface Identifier:** IF-002\
 **Interface Version:** v2\
-**Contract Version:** 2.0.1\
-**AGCP Specification Release:** v2.0.1\
+**Contract Version:** 2.0.4\
+**AGCP Specification Release:** v2.0.4\
 **Artifact Lifecycle:** Current\
-**Repository Release Target Status:** Unreleased Accumulated Correction Set\
-**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline\
-**Baseline Date:** 2026-07-30\
+**Repository Release Target Status:** Public Review Controlled Baseline  
+**Controlling Published Baseline:** AGCP v2.0.4 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-08-05  
 **Series:** AGCP Core\
 **Applies To:** All AGCP-conformant implementations
 

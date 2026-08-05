@@ -3,11 +3,11 @@
   "$id": "https://agcp.ai/schemas/governed_action_proposal.json",
   "title": "Governed Action Proposal",
   "description": "Canonical domain schema for a governance-significant proposed transition submitted to AGCP runtime-governance evaluation. The object declares stable Proposal Identity, operational intent, target, requested effect, canonical Action Representation, associated Governance Context, provenance, temporal validity, and applicable composite-governance semantics through the canonical DS-035 Bind Set and DS-036 Governance Dependency Graph. A Governed Action Proposal is not execution and does not confer authority at commitment.",
-  "$comment": "DS-021 is the authoritative Governed Action Proposal domain object. DS-022 is the authoritative Governance Context Envelope and DS-035 is the authoritative Bind Set and DS-036 is the authoritative Governance Dependency Graph. Cross-object equality requirements\u2014such as Tenant, governance-domain, Proposal Identity, target, parent/sub-transition binding, graph-node membership, and dependency endpoint resolution\u2014are semantic Proposal Qualification obligations because standard JSON Schema cannot compare arbitrary values across object locations.",
+  "$comment": "DS-021 is the authoritative Governed Action Proposal domain object. DS-022 is the authoritative Governance Context Envelope and DS-035 is the authoritative Bind Set and DS-036 is the authoritative Governance Dependency Graph. Cross-object equality requirements—such as Tenant, governance-domain, Proposal Identity, target, parent/sub-transition binding, graph-node membership, and dependency endpoint resolution—are semantic Proposal Qualification obligations because standard JSON Schema cannot compare arbitrary values across object locations.",
   "x-agcp-ds-id": "DS-021",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Canonical Governance Object \u2014 Governed Action Proposal",
+  "x-agcp-schema-role": "Canonical Governance Object — Governed Action Proposal",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-101",

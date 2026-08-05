@@ -1,5 +1,5 @@
 {
-  "vector_set_id": "AGCP-PROVENANCE-WIRE-2.0.1",
+  "vector_set_id": "AGCP-PROVENANCE-WIRE-2.0.4",
   "specification": "spec/AGCP-Provenance-Wire-Format-Specification.md",
   "schema": "schemas/common.json#/$defs/provenance",
   "canonicalization": "RFC8785_JCS",

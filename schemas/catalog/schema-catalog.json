@@ -2,7 +2,7 @@
   "catalog_id": "DS-CATALOG-1.0",
   "title": "AGCP Data Schema Catalog",
   "description": "Authoritative catalog and DS namespace assignment for implemented and proposed AGCP JSON Schemas.",
-  "specification_version": "v2.0.1",
+  "specification_version": "v2.0.4",
   "catalog_version": "1.0.50",
   "publication_status": "CURRENT",
   "created_date": "2026-07-22",
@@ -46,7 +46,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-006",
         "DS-007",
@@ -211,7 +211,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-028"
@@ -274,7 +274,7 @@
       ],
       "sha256": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
       "assigned_date": "2026-07-22",
-      "notes": "v2.0.1 P1-03/P1-09 correction: public 404 is normalized to RESOURCE_NOT_FOUND; REQUEST_THROTTLED requires 429 plus Retry-After; CAPACITY_UNAVAILABLE uses 503; transport/service conditions are not Governance Outcomes.",
+      "notes": "v2.0.4 P1-03/P1-09 correction: public 404 is normalized to RESOURCE_NOT_FOUND; REQUEST_THROTTLED requires 429 plus Retry-After; CAPACITY_UNAVAILABLE uses 503; transport/service conditions are not Governance Outcomes.",
       "last_modified_date": "2026-08-03"
     },
     {
@@ -289,7 +289,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -339,9 +339,9 @@
         "CR-090",
         "CR-073"
       ],
-      "sha256": "87ae704d02b15ad93673928d84e6250e9b3f09257e631cb8c74eadad081f7dcf",
+      "sha256": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
       "assigned_date": "2026-07-22",
-      "notes": "v2.0.1 P1-14/P1-17 correction: metadata advertises immutable baseline and profile digests, schema and validator-set integrity, active governance version, IF-001 identity, and optional public-safe deployment binding.",
+      "notes": "v2.0.4 P1-14/P1-17 correction: metadata advertises immutable baseline and profile digests, schema and validator-set integrity, active governance version, IF-001 identity, and optional public-safe deployment binding.",
       "last_modified_date": "2026-08-03"
     },
     {
@@ -356,7 +356,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -440,7 +440,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -509,7 +509,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -599,7 +599,7 @@
         "CR-114",
         "CR-117"
       ],
-      "sha256": "01c26b01eff4b007fb24eabad0100074b0ed3b3b0263ed508f0b18904af10778",
+      "sha256": "48aba64b03d02280cfdc4cc377440bb63bcb3089884697440c00df99ee95de93",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for v2.0 as the canonical policy-intent artifact. Owns the integrity-bound policy reference used by active schemas and directly references DS-041, DS-042, and DS-043.",
       "last_modified_date": "2026-07-30"
@@ -616,7 +616,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -709,7 +709,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -816,7 +816,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -902,7 +902,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -967,7 +967,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1035,7 +1035,7 @@
         "CR-076",
         "CR-078"
       ],
-      "sha256": "f3981f98af3fb57ba010d6e66713e05895be355b021e08608a3071b611af36e7",
+      "sha256": "8353d29e3e80262bee2b38c72ea8893c651f63be8ec552311d9956660469032e",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively refactored for AGCP v2.0 with canonical Proposal, Constraint, Tenant/domain, target, evaluation horizon, Governance Version and Configuration, qualified-input digests, evidence, attribution, integrity, replay, and outcome-specific validation. Unrestricted metadata removed.",
       "last_modified_date": "2026-07-30"
@@ -1052,7 +1052,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1136,7 +1136,7 @@
         "CR-078",
         "CR-087"
       ],
-      "sha256": "11fa6539de1e3b3640e3ffee0f6ff3441eaa920daf7c818061e2ed4ea5f4d86f",
+      "sha256": "da1d3c850a79e66f50e88e4193528cbc669bd411973513a43c6b24f2920acafa",
       "assigned_date": "2026-07-22",
       "notes": "Canonical invariant-evaluation result with explicit Structural Refusal, escalation, lifecycle-effect, Governance Evidence, deterministic qualified-input binding, attribution, integrity, and replay semantics.",
       "last_modified_date": "2026-07-30"
@@ -1153,7 +1153,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-021"
@@ -1230,7 +1230,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1291,7 +1291,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1414,7 +1414,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1512,7 +1512,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1647,7 +1647,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1785,7 +1785,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2013,7 +2013,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2111,7 +2111,7 @@
         "CR-108",
         "CR-109"
       ],
-      "sha256": "d59c9c55405fbe070fc0aee769f993e302fa591272e69097d37ee08c3e2e7d58",
+      "sha256": "d141c8e3bf9dceb1456afec8f4cd3fc214d8c07c0160d676d54c1471be30101d",
       "assigned_date": "2026-07-22",
       "notes": "Canonical Governed Action Proposal. Composite proposals now reference canonical DS-035 Bind Set policy/reference definitions and canonical DS-036 Governance Dependency Graph rather than local transitional composite definitions. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00008;RTM-00009 and CR-008;CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
       "last_modified_date": "2026-07-30"
@@ -2128,7 +2128,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2215,7 +2215,7 @@
         "CR-071",
         "CR-118"
       ],
-      "sha256": "02cbccc41c359187fdffd26f932e7a7f9cfa02414c9e3c66e243b04bb7ce17d9",
+      "sha256": "1bd353d10c578a338e793ea86388372d922872eedbd3670628173b444164c1a0",
       "assigned_date": "2026-07-22",
       "notes": "Canonical Governance Context Envelope. Delegation, Authority Lineage, approval, refusal, qualified-evidence, and dependency-graph references resolve to their canonical DS schemas; inline Canonical State remains prohibited.",
       "last_modified_date": "2026-07-29"
@@ -2232,7 +2232,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -2301,7 +2301,7 @@
         "CR-051",
         "CR-103"
       ],
-      "sha256": "fc77ec47acea091b572567c806fa2feda2f1519ae060472c400a13a8016126cf",
+      "sha256": "677d84bbef278287b75a995f221c60c8bbeb7aabafce19b764cefa1ca5c62380",
       "assigned_date": "2026-07-22",
       "notes": "Canonical State uses the qualification_result property to carry an integrity-bound DS-032 State Qualification Result reference constrained to outcome QUALIFIED. The former embedded top-level qualification result is not retained. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
       "last_modified_date": "2026-07-30"
@@ -2318,7 +2318,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2450,7 +2450,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2533,7 +2533,7 @@
         "CR-072",
         "CR-115"
       ],
-      "sha256": "9ac52825110125bf27c01a7d89c54c09d566d5a593f544e811f797919b43678e",
+      "sha256": "7ebf7aea68f1b81afd018cbcc0eae09f6820e4faa989977c57ea3142ad372998",
       "assigned_date": "2026-07-22",
       "notes": "Implemented as an immutable delegation-evidence object. Current authority, revocation, expiration, subject eligibility, and commit-time admissibility are re-derived from current qualified governance inputs. DS-022 now uses the DS-025 reference definition. Authority Lineage references now resolve through canonical DS-024.",
       "last_modified_date": "2026-07-30"
@@ -2550,7 +2550,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2636,7 +2636,7 @@
         "CR-060",
         "CR-061"
       ],
-      "sha256": "637b768c631538e03f80ff09ad7a65aa89ecdf25c78ecf1a25a12ba7c2f18bbb",
+      "sha256": "52656fc18ea4a4786aa62f16ac80426261f8d370c14271559fd7d9cf8d740625",
       "assigned_date": "2026-07-22",
       "notes": "Authoritative DS-026 AGCP-created or AGCP-qualified Governance Approval Artifact. It requires artifact_origin=AGCP_CREATED_OR_QUALIFIED and is not accepted as IF-001 ingress. DS-016 remains permanently retired; DS-045 is the separate active submission schema.",
       "supersedes": [
@@ -2656,7 +2656,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -2751,7 +2751,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -2855,7 +2855,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2933,7 +2933,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3007,7 +3007,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3068,7 +3068,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-020"
@@ -3119,7 +3119,7 @@
         "CR-050",
         "CR-103"
       ],
-      "sha256": "55e9ae9e948dff1a5e16bbeb41d0b3f468b3c41d4efb09f4c0d88417f0d549a8",
+      "sha256": "2a540ebc37c18dc65f769daad00a8cb62a4325f4099c92250feae489d4316e17",
       "assigned_date": "2026-07-22",
       "notes": "Extracted from the transitional State Qualification model embedded in DS-023. DS-032 now records qualified, not-qualified, and indeterminate outcomes; DS-023 accepts only the qualified outcome. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
       "last_modified_date": "2026-07-30"
@@ -3136,7 +3136,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3203,7 +3203,7 @@
         "CR-068",
         "CR-097"
       ],
-      "sha256": "6a1302fbf1daa243d429ee7b97f064b82f72a4099f8e2f63cdd395337ab8d789",
+      "sha256": "848bf6eb2cdbb78a33b5a4c0f3ae4d6f4d4acbc23fc15b0ada338cc55d536ce3",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-033 Evidence Qualification result. The schema externalizes the transitional shared model, adds mandatory availability qualification, supports qualified, not-qualified, and indeterminate outcomes, and supplies the canonical qualified_evidence_ref used by active governance schemas. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
       "last_modified_date": "2026-07-30"
@@ -3220,7 +3220,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3322,7 +3322,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3366,7 +3366,7 @@
         "CR-108",
         "CR-109"
       ],
-      "sha256": "80f8c9660b5304038c264cc6f45a058a16a5315dff78c30b7967bfe77d4f58e1",
+      "sha256": "d98a575bec9588c47b03438e7b93316e0eba18a11edf41cafe943ca14be55eac",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-035 complete candidate Bind Set. It preserves parent/sub-transition identity, targets, authority domains, coupling semantics, DS-036 dependency-graph binding, aggregate-effect basis, and declared partial-binding policy. It does not establish authority, authorize execution, determine Partial-Bind Admissibility, or approve an executable subset.",
       "last_modified_date": "2026-07-29"
@@ -3383,7 +3383,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3445,7 +3445,7 @@
         "CR-106",
         "CR-107"
       ],
-      "sha256": "e6989c9ada8d197aa89f901b262658d1f7485cb81395f7aab233671779698983",
+      "sha256": "439c23ff76174ffa848605e5f5345bd49f4b5b4ce72319e2d41cf26dc516be20",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-036 Governance Dependency Graph extracted from DS-021. It models explicit governed sub-transition nodes and typed dependency relationships, requires attributable graph validation and replay material, and mandates deterministic pre-bind re-evaluation after material dependency-condition change. It does not itself establish authority, authorize execution, or determine partial-bind admissibility.",
       "last_modified_date": "2026-07-30"
@@ -3462,7 +3462,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3527,7 +3527,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3641,7 +3641,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3762,7 +3762,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3945,7 +3945,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -4011,7 +4011,7 @@
         "CR-117",
         "CR-122"
       ],
-      "sha256": "cc25ccf843067426c8c320bb484544d5655b178fd2440b8f38fd39e60abd069b",
+      "sha256": "1af7552f0e9c8b8f379a157c9680d0f11c5f59abb6e07757fae2e82b4fb1ad03",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. Canonical reference ownership moved from common.json to DS-041. Active configurations require explicit settings, deterministic risk-based re-evaluation rules, external change control, integrity, availability, and controlled activation binding. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
       "last_modified_date": "2026-07-30"
@@ -4028,7 +4028,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -4082,7 +4082,7 @@
         "CR-113",
         "CR-114"
       ],
-      "sha256": "b947c0fffc9c69e973bc7fbd7aa8e4223e1b46f106924e8563e2ddf9311b1319",
+      "sha256": "5da50676019e44e7a90b73ac383cf1d021601d115321881f8f29e03f2c9d68bc",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. DS-042 owns the Compiled Governance Artifact identifier and reference. It records deterministic compilation, semantic preservation, complete lineage, constitutional validation, omission analysis, self-protection, and activation eligibility without itself activating governance or authorizing execution.",
       "last_modified_date": "2026-07-30"
@@ -4099,7 +4099,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -4149,7 +4149,7 @@
         "CR-114",
         "CR-117"
       ],
-      "sha256": "924946745d771e68b825f1ba590c7d251a915ea4bc5d5a6e55be471bd7755c23",
+      "sha256": "02840dea425e77a6be5b30e8185b8ec31ef08e72b2991441990e14badaea1adc",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. DS-043 owns the Controlled Governance Activation record and reference. It requires a complete DS-042 package, external DS-026 approval, successful constitutional validation and omission analysis, atomic activation, Governance Version establishment, prior-version preservation on failure, rollback basis, activation evidence, provenance, integrity, and replay material.",
       "last_modified_date": "2026-07-30"
@@ -4166,7 +4166,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001"
       ],
@@ -4257,7 +4257,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -4317,7 +4317,7 @@
         "CR-060",
         "CR-061"
       ],
-      "sha256": "ad450b9e08c534a3a9e4b3340fcb42893d7a27a9a211d1997f97bd747b1103c4",
+      "sha256": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
       "assigned_date": "2026-08-03",
       "last_modified_date": "2026-08-03",
       "notes": "Implemented for P0-06 command-versus-authoritative-record separation. DS-045 accepts claimant content and provenance only; additionalProperties:false rejects AGCP-derived verification, eligibility, quorum, lifecycle, evidence, digest, replay, and ledger assertions. IF-001 accepts DS-045 and never accepts DS-026 as request content."
@@ -4325,20 +4325,20 @@
   ],
   "proposed_reserved_schemas": [],
   "excluded_non_schema_files": [],
-  "last_modified_date": "2026-08-03",
+  "last_modified_date": "2026-08-05",
   "retired_schemas": [
     {
       "ds_id": "DS-016",
       "historical_filename": "human_review_artifact.json",
       "repository_path": null,
       "historical_canonical_uri": "https://agcp.ai/schemas/human_review_artifact.json",
-      "title": "Human Review Artifact Identifier \u2014 Retired",
+      "title": "Human Review Artifact Identifier — Retired",
       "description": "Permanently retired DS identifier formerly used for a Human Review Artifact compatibility schema. DS-026 Governance Approval Artifact is the sole active approval and adjudication schema.",
       "category": "Retired Identifier",
       "artifact_type": "Retired DS Identifier Record",
       "lifecycle_state": "Retired",
       "record_status": "Historical",
-      "specification_version": "v2.0.1",
+      "specification_version": "v2.0.4",
       "superseded_by": "DS-026",
       "retired_date": "2026-07-30",
       "assigned_date": "2026-07-22",
@@ -4387,10 +4387,10 @@
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
-  "repository_release_target": "v2.0.1",
-  "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+  "repository_release_target": "v2.0.4",
+  "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "controlling_published_baseline": "v2.0.0",
-  "baseline_date": "2026-07-30",
+  "controlling_published_baseline": "v2.0.4",
+  "baseline_date": "2026-08-05",
   "rtm_dataset_version": "RTM-1.46"
 }

@@ -2,7 +2,7 @@
 
 **Status:** Controlled repository reference disposition  
 **Version:** 1.0.0  
-**Release target:** AGCP v2.0.1  
+**Release target:** AGCP v2.0.4  
 **Finding:** P1-01
 
 ## 1. Purpose
@@ -24,7 +24,7 @@ A subject-area label shall not be written as though it were a standalone specifi
 
 ### 3.1 Standalone security-companion label
 
-The former standalone security-companion label is retired as an absent repository reference. AGCP v2.0.1 does not publish one umbrella security specification.
+The former standalone security-companion label is retired as an absent repository reference. AGCP v2.0.4 does not publish one umbrella security specification.
 
 Security-relevant normative obligations remain distributed across:
 
@@ -41,7 +41,7 @@ A repository document shall reference the applicable artifacts from this set rat
 
 ### 3.2 Standalone governance-evidence-companion label
 
-The former standalone governance-evidence-companion label is retired as an absent repository reference. AGCP v2.0.1 does not publish a separate governance-evidence specification.
+The former standalone governance-evidence-companion label is retired as an absent repository reference. AGCP v2.0.4 does not publish a separate governance-evidence specification.
 
 The evidence contract is controlled by:
 
@@ -64,7 +64,7 @@ The reversed noncanonical title is retired. This is a naming correction only; th
 
 ## 4. Repository-wide disposition
 
-The v2.0.1 correction pass searched specifications, lifecycle documents, governance documents, conformance documents, schemas, OpenAPI, registries, examples, catalogs, the RTM workbook, and Office-document text. Active stale references were found only in the Markdown files corrected under finding P1-01.
+The v2.0.4 correction pass searched specifications, lifecycle documents, governance documents, conformance documents, schemas, OpenAPI, registries, examples, catalogs, the RTM workbook, and Office-document text. Active stale references were found only in the Markdown files corrected under finding P1-01.
 
 Historical comparison records may preserve earlier wording when the text is explicitly presented as historical `before` or `after` data. Such records are not active normative references.
 

@@ -1,7 +1,7 @@
 {
   "schema_id": "DS-023",
   "schema_file": "canonical_state.json",
-  "validated_at": "2026-07-30",
+  "validated_at": "2026-08-05",
   "qualification_property": "qualification_result",
   "external_state_qualification_schema": "DS-032",
   "external_reference": "state_qualification_result.json#/$defs/state_qualification_result_ref",

@@ -1,7 +1,7 @@
 {
   "catalog_type": "AGCP_IMPLEMENTATION_PROFILE_CATALOG",
   "catalog_version": "1.0.3",
-  "release_target": "2.0.1",
+  "release_target": "2.0.4",
   "entries": [
     {
       "profile_id": "AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE",
@@ -23,10 +23,10 @@
     }
   ],
   "catalog_format": "JSON_DATA",
-  "repository_release_target": "v2.0.1",
-  "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+  "repository_release_target": "v2.0.4",
+  "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "artifact_lifecycle_state": "CURRENT",
-  "controlling_published_baseline": "v2.0.0",
-  "baseline_date": "2026-07-30",
+  "controlling_published_baseline": "v2.0.4",
+  "baseline_date": "2026-08-05",
   "rtm_dataset_version": "RTM-1.46"
 }

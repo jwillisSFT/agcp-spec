@@ -224,7 +224,7 @@
     "remaining_missing_reverse_dependencies": [],
     "remaining_extra_reverse_dependencies": []
   },
-  "validated_at": "2026-08-03",
+  "validated_at": "2026-08-05",
   "p0_02_provenance_correction": {
     "ds_id": "DS-001",
     "rtm_id": "RTM-00005",
@@ -273,11 +273,11 @@
     "hash_mismatches": []
   },
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   }
 }

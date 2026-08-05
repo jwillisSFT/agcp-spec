@@ -8,9 +8,9 @@
   "series": "AGCP Core",
   "description": "Authoritative registry of rejection and failure codes used by AGCP HTTP interfaces, Governance Evidence, conformance tests, and implementation error reporting.",
   "release": {
-    "release_id": "REG-REJECTION-CODE-v2.0.1",
-    "registry_release": "v2.0.1",
-    "specification_version": "v2.0.1",
+    "release_id": "REG-REJECTION-CODE-v2.0.4",
+    "registry_release": "v2.0.4",
+    "specification_version": "v2.0.4",
     "publication_status": "CURRENT",
     "published_at": "2026-08-03T12:11:00-04:00",
     "authority": "AGCP controlled repository release",
@@ -29,11 +29,11 @@
     "entry_count": 42,
     "entry_set_digest": {
       "algorithm": "SHA-256",
-      "value": "ee96112e72b7b281a87a8b8dc57cc100f9af4c2153259c4d6b3c9c433e7a4939"
+      "value": "28cc3a5913abc390f7855d722801a26a93999e0e1b13eb202af1eeeefb9d2745"
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "de07a00cabbb7f3a9be9d653a5a78fd5b474388e01dd006e32a056dc849557bb"
+      "value": "5950ff38eacb993df0fe91935cb0b0b126910d518ae76842578d99d25e7be7fa"
     }
   },
   "traceability": {
@@ -499,9 +499,9 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "744240d3ea9bb4a4bd373e30af80e1ddb102c52238f9f0776222fbe5291ae118"
+        "value": "7740c514d4d8f10b4f4048c14ffba984035b753ef132157a923f75672a9cf3e0"
       },
-      "deprecated_in_release": "v2.0.1",
+      "deprecated_in_release": "v2.0.4",
       "successor_entry_id": "REG-059"
     },
     {
@@ -524,9 +524,9 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "228011c730316ced5e26de39d60e5c1ae78f95002c986486c41c41c78fe9488c"
+        "value": "c8a75e3a2adb1230af881f329706ff57050ca153c631b649196a793f0972e259"
       },
-      "deprecated_in_release": "v2.0.1",
+      "deprecated_in_release": "v2.0.4",
       "successor_entry_id": "REG-059"
     },
     {
@@ -550,9 +550,9 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "283332ffc930cf3096f5596d839f084a4880201a4ec654b00bdcf5be573e81ee"
+        "value": "5de8d5f2fde3a95c2f246ba1792c2913985af933b9d910475e951f627d214f05"
       },
-      "deprecated_in_release": "v2.0.1",
+      "deprecated_in_release": "v2.0.4",
       "successor_entry_id": "REG-059"
     },
     {
@@ -576,9 +576,9 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "a557f70edbb0534dd73c98fa019f84ad47239dd8c907b9e76a04ea579aa1d595"
+        "value": "b8f9c045831c2c09b60ef1d3b81a3e85e7f2e0d82c6c6657b8a2430c0ca8e3cb"
       },
-      "deprecated_in_release": "v2.0.1",
+      "deprecated_in_release": "v2.0.4",
       "successor_entry_id": "REG-059"
     },
     {
@@ -1371,10 +1371,10 @@
       "governance_evidence": "not_required",
       "description": "The request was rejected by pre-governance transport or service throttling before governance evaluation began. Retry-After is required. This is not a Governance Outcome.",
       "entry_status": "ACTIVE",
-      "introduced_in_release": "v2.0.1",
+      "introduced_in_release": "v2.0.4",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "835e0b5fd0ed2afc09ff6ae8c1f57213f66ea0e6cf2dab36c8466918a460f06f"
+        "value": "cbb4d1c8c5f5d5f9b28073822f2b95d9d90619f673c070568911ba99fcbdbab8"
       }
     },
     {
@@ -1397,10 +1397,10 @@
       "governance_evidence": "not_required",
       "description": "The implementation cannot safely begin processing because required system or node capacity is unavailable. This is a transport/service condition, not a Governance Outcome.",
       "entry_status": "ACTIVE",
-      "introduced_in_release": "v2.0.1",
+      "introduced_in_release": "v2.0.4",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "f170ddcb4fdd7143e827ae53bf61db1e178a1dbcc7dd8d3bbfc2705d1c9367a6"
+        "value": "7e8e4563628556877b0d035da4ad5cd0ab86595d232927caa338ea9fb46eacbf"
       }
     }
   ],

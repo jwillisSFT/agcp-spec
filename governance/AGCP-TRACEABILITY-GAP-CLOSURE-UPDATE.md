@@ -3,7 +3,7 @@
 **Date:** 2026-08-03  
 **Schema Catalog:** 1.0.50  
 **RTM dataset:** RTM-1.46  
-**AGCP release target:** v2.0.1 (unreleased accumulated correction set)  
+**AGCP release target:** v2.0.4 (unreleased accumulated correction set)  
 
 ## 1. Scope
 
@@ -88,6 +88,6 @@ Updated assets include:
 - RTM formulas, styles, dimensions, merged cells, widths, heights, and theme were preserved.
 
 
-## 8. v2.0.1 repository synchronization
+## 8. v2.0.4 repository synchronization
 
-The accumulated correction set now synchronizes the RTM, Schema Catalog, Interface Catalog, Registry Entry Catalog, Implementation Profile Catalog, fixture and test mappings, conformance manifest, validation reports, indexes, and release records. The RTM dataset is advanced to RTM-1.46; all 122 rows identify specification version v.2.0.1. The current mappings are 122 DS-assigned rows, 84 IF-assigned rows plus 38 explicit N/A dispositions, and 117 REG-assigned rows plus 5 explicit N/A dispositions.
+The accumulated correction set now synchronizes the RTM, Schema Catalog, Interface Catalog, Registry Entry Catalog, Implementation Profile Catalog, fixture and test mappings, conformance manifest, validation reports, indexes, and release records. The RTM dataset is advanced to RTM-1.46; all 122 rows identify specification version v.2.0.4. The current mappings are 122 DS-assigned rows, 84 IF-assigned rows plus 38 explicit N/A dispositions, and 117 REG-assigned rows plus 5 explicit N/A dispositions.

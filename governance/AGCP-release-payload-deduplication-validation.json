@@ -1,10 +1,10 @@
 {
   "validation_id": "AGCP-RELEASE-PAYLOAD-DEDUPLICATION-REVALIDATION-2026-08-03",
   "status": "PASS",
-  "specification_version": "v2.0.1",
+  "specification_version": "v2.0.4",
   "schema_catalog_version": "1.0.50",
   "date": "2026-08-03",
-  "scope": "Revalidation that the accumulated v2.0.1 repository contains no duplicate or transitional machine-readable validation payloads.",
+  "scope": "Revalidation that the accumulated v2.0.4 repository contains no duplicate or transitional machine-readable validation payloads.",
   "authoritative_placement_rules": [
     {
       "artifact_class": "DS-specific validation record",
@@ -50,16 +50,16 @@
     "obsolete_active_schema_fields": 0
   },
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   },
   "original_validation_id": "AGCP-RELEASE-PAYLOAD-DEDUPLICATION-2026-07-30",
   "source_hashes": {
-    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
-    "governance/AGCP-traceability-gap-closure-validation.json": "30c641e57e3fa75f3a37aedb6afa51a73aa853a158ce5b89e7d1090f187426a0"
+    "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
+    "governance/AGCP-traceability-gap-closure-validation.json": "350bc89f62a04220852f0079db6d3235b5faec5a5a2d7e9500ec2e62fbca0e8d"
   }
 }

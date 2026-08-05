@@ -7,7 +7,7 @@
   "x-agcp-ds-id": "DS-042",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Canonical Governance Compilation Object \u2014 Compiled Governance Artifact",
+  "x-agcp-schema-role": "Canonical Governance Compilation Object — Compiled Governance Artifact",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-501",

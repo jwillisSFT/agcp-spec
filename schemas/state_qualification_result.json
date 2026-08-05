@@ -6,7 +6,7 @@
   "x-agcp-ds-id": "DS-032",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Qualification Result \u2014 State Qualification",
+  "x-agcp-schema-role": "Qualification Result — State Qualification",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-103",

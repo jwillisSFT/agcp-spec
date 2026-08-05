@@ -3,7 +3,7 @@
 **Artifact:** `schemas/common.json`
 **DS identifier:** `DS-001`
 **Schema dialect:** JSON Schema Draft 2020-12
-**Specification baseline:** AGCP v2.0.1 accumulated correction
+**Specification baseline:** AGCP v2.0.4 accumulated correction
 **Schema Catalog version:** `1.0.50`
 **Updated:** 2026-08-03
 
@@ -11,7 +11,7 @@
 
 ## 1. Purpose
 
-This report documents the current controlled-baseline state of `schemas/common.json` and replaces earlier intermediate update metrics that no longer describe the final AGCP v2.0.0 schema package.
+This report documents the current controlled-baseline state of `schemas/common.json` and replaces earlier intermediate update metrics that no longer describe the final AGCP v2.0.4 schema package.
 
 `DS-001` is the shared definitions library for the active AGCP v2.0.0 schema set. It contains only definitions that are directly referenced by active schemas or are transitively required by other definitions in `common.json`.
 
@@ -41,7 +41,7 @@ The current `common.json` contains 62 definitions. Fifty-five are referenced dir
 
 ## 3. Clarification of Earlier Metrics
 
-An earlier version of this report stated that `common.json` contained 141 definitions and that 108 definitions had been added. Those figures described an intermediate expansion and are not valid for the final controlled AGCP v2.0.0 baseline.
+An earlier version of this report stated that `common.json` contained 141 definitions and that 108 definitions had been added. Those figures described an intermediate expansion and are not valid for the final controlled AGCP v2.0.4 baseline.
 
 During baseline normalization:
 
@@ -58,7 +58,7 @@ The authoritative current count is therefore **62**, not 141.
 
 ## 4. Principal Controlled-Baseline Changes
 
-The controlled v2.0.0 `common.json`:
+The controlled v2.0.4 `common.json`:
 
 - establishes stable, machine-safe identifiers for proposals, actions, tenants, Governance Domains, decisions, evidence, authorization, Canonical State, authority, receipts, refusals, approvals, enforcement, versions, targets, evaluations, re-evaluation, and lineage;
 - provides common timestamp, URI, version, sequence, digest, and rejection-code types;
@@ -75,7 +75,7 @@ The controlled v2.0.0 `common.json`:
 
 ## 4A. P0-02 Provenance Wire Correction
 
-The v2.0.1 accumulated correction replaces the conflicting legacy `provenance` structure with the exact normative wire envelope from the AGCP Provenance Wire Format Specification. The corrected definition:
+The v2.0.4 accumulated correction replaces the conflicting legacy `provenance` structure with the exact normative wire envelope from the AGCP Provenance Wire Format Specification. The corrected definition:
 
 - requires top-level `signer`, `kid`, `alg`, `signed_at`, `nonce`, `scope`, and detached `signature`;
 - permits optional `expires_at`;
@@ -212,7 +212,7 @@ Canonical domain objects and specialized results remain owned by their assigned 
 
 ## 7. Validation Results
 
-The controlled AGCP v2.0.0 schema package produced the following results:
+The controlled AGCP v2.0.4 schema package produced the following results:
 
 - JSON parse of `schemas/common.json`: **PASS**
 - Draft 2020-12 metaschema validation for all 43 active cataloged schemas: **PASS**

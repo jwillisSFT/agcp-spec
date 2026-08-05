@@ -1,18 +1,18 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   },
   "status": "PASS",
   "record_classification": "active_unreleased_correction_set",
   "finding": "P1-01/P0-02/P0-05/STEP-10",
-  "validated_at": "2026-08-03",
+  "validated_at": "2026-08-05",
   "controlled_baseline": {
-    "release_target": "AGCP v2.0.1",
+    "release_target": "AGCP v2.0.4",
     "rtm_dataset_version": "RTM-1.46",
     "rtm_artifact": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
     "rtm_sha256": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90"
@@ -48,7 +48,7 @@
         "CR-005"
       ],
       "dispositions": [
-        "Adopted Normative Companion - authoritative AGCP provenance wire representation synchronized with DS-001 and IF-001 for v2.0.1."
+        "Adopted Normative Companion - authoritative AGCP provenance wire representation synchronized with DS-001 and IF-001 for v2.0.4."
       ]
     },
     {

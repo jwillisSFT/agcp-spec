@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   },
   "rtm_dataset_version": "RTM-1.46",
@@ -69,7 +69,7 @@
       {
         "cr_id": "CR-052",
         "title": "Canonical-State Hash Mismatch",
-        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition. P1-12 v2.0.1 correction: DS-001 now enforces exact lowercase-hexadecimal content-digest lengths for SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512. Controlled vectors reject algorithm/value mismatch, uppercase encoding, ambiguous BLAKE2B, non-hex values, missing fields, and undeclared properties."
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition. P1-12 v2.0.4 correction: DS-001 now enforces exact lowercase-hexadecimal content-digest lengths for SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512. Controlled vectors reject algorithm/value mismatch, uppercase encoding, ambiguous BLAKE2B, non-hex values, missing fields, and undeclared properties."
       },
       {
         "cr_id": "CR-053",
@@ -109,7 +109,7 @@
       {
         "cr_id": "CR-064",
         "title": "Missing Evidence Hashes",
-        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition. P1-12 v2.0.1 correction: DS-001 now enforces exact lowercase-hexadecimal content-digest lengths for SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512. Controlled vectors reject algorithm/value mismatch, uppercase encoding, ambiguous BLAKE2B, non-hex values, missing fields, and undeclared properties."
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. DS-033 provides the canonical Evidence Qualification result for freshness, provenance, integrity, authority, resolvability, sufficiency, and availability. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition. P1-12 v2.0.4 correction: DS-001 now enforces exact lowercase-hexadecimal content-digest lengths for SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512. Controlled vectors reject algorithm/value mismatch, uppercase encoding, ambiguous BLAKE2B, non-hex values, missing fields, and undeclared properties."
       },
       {
         "cr_id": "CR-065",
@@ -119,7 +119,7 @@
       {
         "cr_id": "CR-066",
         "title": "Receipt Replay Hash Mismatch",
-        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition. P1-12 v2.0.1 correction: DS-001 now enforces exact lowercase-hexadecimal content-digest lengths for SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512. Controlled vectors reject algorithm/value mismatch, uppercase encoding, ambiguous BLAKE2B, non-hex values, missing fields, and undeclared properties."
+        "rationale": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS-027 canonical Governance Receipt added for attributable, integrity-protected, replayable non-refusal governance outcomes. Step 5 workflow-schema refactor uses direct canonical schema references and outcome-specific validation. DS-040 provides the canonical append-only ordered Governance Ledger event, integrity chain, typed governance references, and reconstruction basis. DS-011 now supplies the canonical proposal-specific, integrity-protected Governance Constraint Evaluation Result with qualified-input digests, deterministic outcome semantics, attribution, evidence, and replay material. IF disposition: not interface-applicable; this requirement is realized by runtime, schema, evidence, lifecycle, ledger, registry, or governance-artifact controls rather than a controlled interface definition. P1-12 v2.0.4 correction: DS-001 now enforces exact lowercase-hexadecimal content-digest lengths for SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512. Controlled vectors reject algorithm/value mismatch, uppercase encoding, ambiguous BLAKE2B, non-hex values, missing fields, and undeclared properties."
       },
       {
         "cr_id": "CR-067",

@@ -5,7 +5,7 @@
   "implementation": {
     "implementation_id": "AGCP-TEST",
     "implementation_name": "AGCP Test Implementation",
-    "implementation_release": "2.0.1",
+    "implementation_release": "2.0.4",
     "implementation_build_digest": {
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -47,10 +47,10 @@
   ],
   "default_agcp_release_id": "AGCP-v2.0.0",
   "schema_set": {
-    "schema_set_id": "DS-SET-v2.0.1",
+    "schema_set_id": "DS-SET-v2.0.4",
     "schema_catalog_id": "DS-CATALOG-1.0",
     "catalog_version": "1.0.50",
-    "agcp_specification_version": "2.0.1",
+    "agcp_specification_version": "2.0.4",
     "publication_status": "RELEASE_CANDIDATE",
     "catalog_uri": "https://agcp.example/test",
     "catalog_digest": {
@@ -96,7 +96,7 @@
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
       "generator_name": "agcp-validator-generator",
-      "generator_version": "2.0.1"
+      "generator_version": "2.0.4"
     }
   },
   "implementation_profile": {

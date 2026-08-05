@@ -1,22 +1,25 @@
 openapi: 3.1.0
 info:
   title: AGCP HTTP Interface Contract
-  version: 2.0.1
-  description: 'Machine-readable HTTP interface contract for AGCP v2.0.1 contract-compatible implementations.
+  version: 2.0.4
+  description: 'Machine-readable HTTP interface contract for AGCP v2.0.4 contract-compatible
+    implementations.
 
 
-    This contract defines IF-001, the AGCP HTTP Interface version 2. Its canonical path namespace is /agcp/v2. The
-    path major version is aligned with the AGCP v2 interface contract and is not an independently versioned v1 compatibility
-    surface. No /agcp/v1 compatibility paths are part of this release.
+    This contract defines IF-001, the AGCP HTTP Interface version 2. Its canonical
+    path namespace is /agcp/v2. The path major version is aligned with the AGCP v2
+    interface contract and is not an independently versioned v1 compatibility surface.
+    No /agcp/v1 compatibility paths are part of this release.
 
 
-    The contract defines paths, operations, parameters, request and response bodies, status-code mappings, and references
-    to authoritative AGCP schemas and registries. Normative governance behavior is defined by the AGCP Core Specification.
+    The contract defines paths, operations, parameters, request and response bodies,
+    status-code mappings, and references to authoritative AGCP schemas and registries.
+    Normative governance behavior is defined by the AGCP Core Specification.
 
 
-    The AGCP governance pipeline is: Proposal Qualification; Governance Decision Function; Execution Authorization;
-    Continuation Integrity for nonterminal proposals where applicable; Governance Realization and Commit Boundary
-    processing.'
+    The AGCP governance pipeline is: Proposal Qualification; Governance Decision Function;
+    Execution Authorization; Continuation Integrity for nonterminal proposals where
+    applicable; Governance Realization and Commit Boundary processing.'
 servers:
 - url: https://{host}
   variables:
@@ -46,10 +49,11 @@ paths:
       - Metadata
       operationId: getMetadata
       summary: Get AGCP implementation metadata.
-      description: Returns immutable baseline identity and digest, implementation profile identity and digest, schema
-        and generated-validator set integrity, registry releases, conformance and capability claims, active governance
-        version, IF-001 contract identity, and optional public-safe deployment binding. This endpoint MAY be accessible
-        without tenant context and SHALL NOT disclose secrets.
+      description: Returns immutable baseline identity and digest, implementation
+        profile identity and digest, schema and generated-validator set integrity,
+        registry releases, conformance and capability claims, active governance version,
+        IF-001 contract identity, and optional public-safe deployment binding. This
+        endpoint MAY be accessible without tenant context and SHALL NOT disclose secrets.
       security: []
       responses:
         '200':
@@ -68,12 +72,14 @@ paths:
       - Proposals
       operationId: submitProposal
       summary: Submit a Proposal for AGCP governance processing.
-      description: "Submits a governance-significant Proposal for Proposal Qualification and\nGovernance Decision\
-        \ Function processing.\n\nThe response SHALL reflect an authoritative externally observable governance\n\
-        result. Transient internal processing states SHALL NOT be exposed as canonical\nexternally observable governance\
-        \ states.\n\nIdempotency:\n  - If Idempotency-Key is reused with identical payload, the implementation\n\
-        \    SHALL return the existing ProposalView.\n  - If Idempotency-Key is reused with a different payload,\
-        \ the implementation\n    SHALL return 409 with rejection_code IDEMPOTENCY_CONFLICT.\n"
+      description: "Submits a governance-significant Proposal for Proposal Qualification\
+        \ and\nGovernance Decision Function processing.\n\nThe response SHALL reflect\
+        \ an authoritative externally observable governance\nresult. Transient internal\
+        \ processing states SHALL NOT be exposed as canonical\nexternally observable\
+        \ governance states.\n\nIdempotency:\n  - If Idempotency-Key is reused with\
+        \ identical payload, the implementation\n    SHALL return the existing ProposalView.\n\
+        \  - If Idempotency-Key is reused with a different payload, the implementation\n\
+        \    SHALL return 409 with rejection_code IDEMPOTENCY_CONFLICT.\n"
       parameters:
       - name: Idempotency-Key
         in: header
@@ -107,7 +113,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '409':
-          description: Conflict, including idempotency conflict or invalid lifecycle transition.
+          description: Conflict, including idempotency conflict or invalid lifecycle
+            transition.
           content:
             application/json:
               schema:
@@ -128,7 +135,8 @@ paths:
       - Proposals
       operationId: getProposal
       summary: Get a Proposal by identifier.
-      description: 'Returns the externally observable authoritative Proposal state and governance
+      description: 'Returns the externally observable authoritative Proposal state
+        and governance
 
         outcome. Internal processing states SHALL NOT be exposed as canonical states.
 
@@ -174,13 +182,16 @@ paths:
       - Governance Approval
       operationId: submitGovernanceApproval
       summary: Submit a Governance Approval Submission for independent AGCP qualification.
-      description: Accepts exactly one DS-045 Governance Approval Submission as untrusted claimant ingress. The
-        request SHALL NOT contain a DS-026 Governance Approval Artifact or claimant-asserted verification, eligibility,
-        quorum-completion, lifecycle-effect, Canonical State, authority, evidence, replay, digest, or ledger results.
-        AGCP independently validates provenance, binds authenticated identity, resolves current qualified governance
-        inputs, evaluates eligibility and quorum, records Governance Evidence and ledger ordering, and only then
-        creates or qualifies a DS-026 Governance Approval Artifact. Neither the submission nor the resulting artifact
-        constitutes authority at commitment or permission to execute.
+      description: Accepts exactly one DS-045 Governance Approval Submission as untrusted
+        claimant ingress. The request SHALL NOT contain a DS-026 Governance Approval
+        Artifact or claimant-asserted verification, eligibility, quorum-completion,
+        lifecycle-effect, Canonical State, authority, evidence, replay, digest, or
+        ledger results. AGCP independently validates provenance, binds authenticated
+        identity, resolves current qualified governance inputs, evaluates eligibility
+        and quorum, records Governance Evidence and ledger ordering, and only then
+        creates or qualifies a DS-026 Governance Approval Artifact. Neither the submission
+        nor the resulting artifact constitutes authority at commitment or permission
+        to execute.
       parameters:
       - name: proposal_id
         in: path
@@ -207,8 +218,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProposalView'
         '400':
-          description: Invalid Governance Approval Submission or request structure, including claimant-asserted
-            server-derived fields.
+          description: Invalid Governance Approval Submission or request structure,
+            including claimant-asserted server-derived fields.
           content:
             application/json:
               schema:
@@ -222,14 +233,15 @@ paths:
         '404':
           $ref: '#/components/responses/PublicNotFound'
         '409':
-          description: Invalid governance transition, expired submission window, or replayed Governance Approval
-            Submission.
+          description: Invalid governance transition, expired submission window, or
+            replayed Governance Approval Submission.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '422':
-          description: Governance Approval Submission cannot be independently qualified for the governed Proposal.
+          description: Governance Approval Submission cannot be independently qualified
+            for the governed Proposal.
           content:
             application/json:
               schema:
@@ -244,7 +256,8 @@ paths:
       - Execution Authorization
       operationId: getExecutionAuthorization
       summary: Get an Execution Authorization by identifier.
-      description: 'Returns the authoritative Execution Authorization record, where available.
+      description: 'Returns the authoritative Execution Authorization record, where
+        available.
 
 
         Execution Authorization SHALL NOT itself perform execution.
@@ -291,15 +304,18 @@ paths:
       - Commit Boundary
       operationId: commitBoundaryProcessing
       summary: Perform Commit Boundary processing for an authorized Proposal.
-      description: "Commit Boundary processing is valid only when:\n  - Proposal Qualification has successfully\
-        \ completed\n  - the Governance Decision Function produced an authoritative outcome permitting authorization\n\
-        \  - Execution Authorization produced Authorized for Commit Boundary Processing\n  - execution_authorization_ref\
-        \ matches the authoritative Execution Authorization\n  - required authority remains valid\n  - tenant and\
-        \ governance-domain constraints remain satisfied\n  - governance configuration remains valid\n  - the qualified\
-        \ Action Representation and Governance Context remain valid\n\nOn success, Commit Boundary processing binds\
-        \ the authoritative Execution\nAuthorization to the governance-significant Action immediately before execution.\n\
-        \nReplays or attempts using invalid, expired, revoked, consumed, or modified\nauthorization SHALL fail or\
-        \ require Governed Re-evaluation.\n"
+      description: "Commit Boundary processing is valid only when:\n  - Proposal Qualification\
+        \ has successfully completed\n  - the Governance Decision Function produced\
+        \ an authoritative outcome permitting authorization\n  - Execution Authorization\
+        \ produced Authorized for Commit Boundary Processing\n  - execution_authorization_ref\
+        \ matches the authoritative Execution Authorization\n  - required authority\
+        \ remains valid\n  - tenant and governance-domain constraints remain satisfied\n\
+        \  - governance configuration remains valid\n  - the qualified Action Representation\
+        \ and Governance Context remain valid\n\nOn success, Commit Boundary processing\
+        \ binds the authoritative Execution\nAuthorization to the governance-significant\
+        \ Action immediately before execution.\n\nReplays or attempts using invalid,\
+        \ expired, revoked, consumed, or modified\nauthorization SHALL fail or require\
+        \ Governed Re-evaluation.\n"
       parameters:
       - name: Idempotency-Key
         in: header
@@ -327,7 +343,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '403':
-          description: Forbidden tenant, governance domain, authority, or configuration condition.
+          description: Forbidden tenant, governance domain, authority, or configuration
+            condition.
           content:
             application/json:
               schema:
@@ -335,8 +352,8 @@ paths:
         '404':
           $ref: '#/components/responses/PublicNotFound'
         '409':
-          description: Conflict, including invalid authorization, invalid transition, replay, or required governed
-            re-evaluation.
+          description: Conflict, including invalid authorization, invalid transition,
+            replay, or required governed re-evaluation.
           content:
             application/json:
               schema:
@@ -357,7 +374,8 @@ paths:
       - Governance Evidence
       operationId: getGovernanceEvidence
       summary: Get Governance Evidence by identifier.
-      description: 'Returns Governance Evidence sufficient to support audit, conformance assessment,
+      description: 'Returns Governance Evidence sufficient to support audit, conformance
+        assessment,
 
         deterministic replay, and forensic reconstruction, subject to tenant and governance
 
@@ -411,15 +429,15 @@ paths:
       - Governance Artifacts
       operationId: registerPolicyEvaluationModule
       summary: Register a Policy Evaluation Module artifact.
-      description: 'Registers an integrity-bound, tenant- and governance-domain-scoped Policy Evaluation Module
-        artifact with deterministic interface, policy, configuration, registry, compilation, lineage, validation,
-        and activation bindings.
+      description: 'Registers an integrity-bound, tenant- and governance-domain-scoped
+        Policy Evaluation Module artifact with deterministic interface, policy, configuration,
+        registry, compilation, lineage, validation, and activation bindings.
 
 
         Registration SHALL NOT make the artifact operationally effective unless all
 
-        applicable governance compilation, constitutional validation, omission-analysis, self-protection, approval,
-        and controlled-activation prerequisites are satisfied.
+        applicable governance compilation, constitutional validation, omission-analysis,
+        self-protection, approval, and controlled-activation prerequisites are satisfied.
 
         '
       parameters:
@@ -475,7 +493,8 @@ paths:
       - Governance Artifacts
       operationId: registerGovernancePolicy
       summary: Register a governance policy artifact.
-      description: 'Registers a tenant-scoped and governance-domain-scoped policy artifact.
+      description: 'Registers a tenant-scoped and governance-domain-scoped policy
+        artifact.
 
         Operational activation is governed by AGCP Governance Self-Protection and
 
@@ -606,8 +625,8 @@ components:
     Provenance:
       allOf:
       - $ref: ../schemas/common.json#/$defs/provenance
-      description: Canonical AGCP provenance wire envelope. alg and kid are top-level fields; signature is a detached
-        protected_header_b64..signature_b64 string.
+      description: Canonical AGCP provenance wire envelope. alg and kid are top-level
+        fields; signature is a detached protected_header_b64..signature_b64 string.
       example:
         signer: client:test
         kid: kid-test
@@ -619,8 +638,8 @@ components:
     ContentDigest:
       allOf:
       - $ref: ../schemas/common.json#/$defs/content_digest
-      description: Algorithm-explicit AGCP content digest. The value is lowercase hexadecimal and its exact length
-        is bound to the declared algorithm by DS-001.
+      description: Algorithm-explicit AGCP content digest. The value is lowercase
+        hexadecimal and its exact length is bound to the declared algorithm by DS-001.
       example:
         algorithm: SHA-256
         value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -797,8 +816,8 @@ components:
       $ref: ../schemas/registry_document.schema.json#/$defs/registry_document_ref
   headers:
     RetryAfter:
-      description: 'Required for HTTP 429. AGCP uses delay-seconds: a positive decimal integer indicating the minimum
-        number of seconds before retry.'
+      description: 'Required for HTTP 429. AGCP uses delay-seconds: a positive decimal
+        integer indicating the minimum number of seconds before retry.'
       required: true
       schema:
         type: integer
@@ -806,7 +825,8 @@ components:
         maximum: 86400
   responses:
     PublicNotFound:
-      description: Protected resource not found or existence intentionally hidden. Public responses use only RESOURCE_NOT_FOUND.
+      description: Protected resource not found or existence intentionally hidden.
+        Public responses use only RESOURCE_NOT_FOUND.
       content:
         application/json:
           schema:
@@ -821,7 +841,8 @@ components:
               outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
               transport_disposition: NOT_FOUND
     TooManyRequests:
-      description: Pre-governance transport or service throttling. No Governance Outcome is produced.
+      description: Pre-governance transport or service throttling. No Governance Outcome
+        is produced.
       headers:
         Retry-After:
           $ref: '#/components/headers/RetryAfter'
@@ -840,8 +861,9 @@ components:
               transport_disposition: THROTTLED
               retry_after_seconds: 30
     ServiceUnavailable:
-      description: Processing cannot safely begin because system/node capacity or a required service dependency
-        is unavailable. This is not itself a Governance Outcome.
+      description: Processing cannot safely begin because system/node capacity or
+        a required service dependency is unavailable. This is not itself a Governance
+        Outcome.
       headers:
         Retry-After:
           description: Optional delay-seconds advisory for retryable HTTP 503 responses.
@@ -876,6 +898,6 @@ components:
                   transport_disposition: DEPENDENCY_UNAVAILABLE
 x-agcp-interface-id: IF-001
 x-agcp-interface-version: v2
-x-agcp-specification-release: v2.0.1
+x-agcp-specification-release: v2.0.4
 x-agcp-path-namespace: /agcp/v2
 x-agcp-v1-compatibility: false

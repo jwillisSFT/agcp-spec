@@ -6,21 +6,21 @@
   "interfaces": [
     {
       "if_id": "IF-001",
-      "contract_version": "2.0.1",
+      "contract_version": "2.0.4",
       "specification_file": "spec/AGCP-HTTP-Interface-Specification.md",
       "cr_count": 56
     },
     {
       "if_id": "IF-002",
-      "contract_version": "2.0.1",
+      "contract_version": "2.0.4",
       "specification_file": "spec/AGCP-Policy-Evaluation-Contract.md",
       "cr_count": 40
     }
   ],
   "private_profile_references": 0,
   "source_hashes": {
-    "api/interface-catalog.json": "99fc2b1259f450501c6848b9859659f28f89374de65409cbdf0880a535a56e6d",
-    "api/interface-catalog.csv": "845de6020b46de49e08c7794686f55f0e95383ec04b28384222bb2d58a0c56db",
-    "api/INTERFACE-CATALOG.md": "34e9e692db7ad8b126bc1ee6d8316251540e36ab55c37967d5471c3ab9a49298"
+    "api/interface-catalog.json": "bd1aa071d9a792e9be2f25584a0f7bf3ee2b3c55e7ec71afeabca3e7e5460832",
+    "api/interface-catalog.csv": "0d6124096b3c4074145aef4aff282c48b40e5c80df732fd26872a95b7726a5a0",
+    "api/INTERFACE-CATALOG.md": "350c9b2013d2607f3343ecc793c9dcc043c347bb55d2bff9697f3cf1851778d8"
   }
 }

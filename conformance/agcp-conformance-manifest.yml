@@ -2,13 +2,13 @@ agcp_conformance_manifest:
   spec:
     name: AGCP
     release_model: repository_release
-    repository_release_target: v2.0.1
-    repository_release_target_status: unreleased-accumulated-correction-set
+    repository_release_target: v2.0.4
+    repository_release_target_status: public-review-controlled-baseline
     artifact_lifecycle_state: current
-    controlling_published_baseline: v2.0.0
+    controlling_published_baseline: v2.0.4
     controlling_baseline_status: public-review-controlled-baseline
-    baseline_date: 2026-07-30
-    agcp_release: v2.0.1
+    baseline_date: 2026-08-05
+    agcp_release: v2.0.4
     rtm_dataset_version: RTM-1.46
     schema_catalog_version: 1.0.50
     interface_catalog_version: 1.0.5
@@ -332,10 +332,10 @@ repository_synchronization:
   interface_catalog_version: 1.0.5
   registry_entry_catalog_version: 1.0.3
   implementation_profile_catalog_version: 1.0.3
-  update_record: governance/AGCP-v2.0.1-REPOSITORY-SYNCHRONIZATION-UPDATE.md
-  manifest: governance/AGCP-v2.0.1-repository-synchronization-manifest.json
+  update_record: governance/AGCP-v2.0.4-REPOSITORY-SYNCHRONIZATION-UPDATE.md
+  manifest: governance/AGCP-v2.0.4-repository-synchronization-manifest.json
   validator: governance/validate_repository_synchronization.py
-  validation_report: governance/AGCP-v2.0.1-repository-synchronization-validation.json
+  validation_report: governance/AGCP-v2.0.4-repository-synchronization-validation.json
 repository_integrity:
   execution_step: 11
   findings:
@@ -354,11 +354,10 @@ repository_integrity:
   - P2-02
   - P2-04
   - P2-06
-  correction_summary: AGCP-v2.0.1-CORRECTION-SUMMARY.md
   validator: governance/validate_repository_integrity.py
-  validation_report: governance/AGCP-v2.0.1-repository-integrity-validation.json
-  repository_synchronization_manifest: governance/AGCP-v2.0.1-repository-synchronization-manifest.json
-  repository_synchronization_report: governance/AGCP-v2.0.1-repository-synchronization-validation.json
+  validation_report: governance/AGCP-v2.0.4-repository-integrity-validation.json
+  repository_synchronization_manifest: governance/AGCP-v2.0.4-repository-synchronization-manifest.json
+  repository_synchronization_report: governance/AGCP-v2.0.4-repository-synchronization-validation.json
   claim_effect: Repository integrity validation establishes internal public-repository
     coherence only. It does not establish implementation conformance, production authorization,
     or approval of a proposed Implementation Profile.

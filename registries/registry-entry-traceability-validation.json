@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "validated_at": "2026-08-03",
+  "validated_at": "2026-08-05",
   "catalog_version": "1.0.3",
   "registry_entry_count": 94,
   "identifier_range": [
@@ -13,7 +13,7 @@
   "all_entries_have_reg_id": true,
   "all_entries_have_ns_refs": true,
   "all_entries_have_cr_refs": true,
-  "registry_release": "v2.0.1",
+  "registry_release": "v2.0.4",
   "registry_document_sha256": "19726bc7a8da1181eaf7c74054cc0a677031ff36a67807dac779f5f654c9da12",
   "p1_03_p1_09": {
     "resource_not_found_successor": "REG-059",
@@ -28,11 +28,11 @@
     "status": "PASS"
   },
   "release_context": {
-    "repository_release_target": "v2.0.1",
-    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-    "controlling_published_baseline": "v2.0.0",
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-07-30",
+    "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   }
 }

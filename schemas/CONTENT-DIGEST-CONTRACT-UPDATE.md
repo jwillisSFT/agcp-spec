@@ -1,7 +1,7 @@
 # DS-001 Content Digest Contract Update
 
 **Finding:** P1-12  
-**Release target:** AGCP v2.0.1  
+**Release target:** AGCP v2.0.4  
 **Controlled schema:** `schemas/common.json#/$defs/content_digest`
 
 ## Corrected contract

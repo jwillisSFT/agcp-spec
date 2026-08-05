@@ -1,7 +1,7 @@
 {
   "report_id": "DS-016-RETIREMENT-VALIDATION",
   "status": "PASS",
-  "validated_at": "2026-07-30",
+  "validated_at": "2026-08-05",
   "active_schema_count": 43,
   "retired_identifier_count": 1,
   "resolved_reference_count": 3579,

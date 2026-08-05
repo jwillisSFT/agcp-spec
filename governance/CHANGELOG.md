@@ -1,45 +1,51 @@
-## 2026-08-03 - v2.0.1 Step 11 repository-wide integrity validation
+# AGCP Change Log
 
-- Added the public `AGCP-v2.0.1-CORRECTION-SUMMARY.md`.
-- Added the repository-wide integrity validator, controlled PASS report, and CI workflow.
+## v2.0.4 - 2026-08-05
+
+- Published AGCP v2.0.4 as the current Public Review Controlled Baseline.
+- Removed all non-public deployment profile artifacts and residual public-repository references.
+- Retained the generic Implementation Profile specification, schema, template, catalog, and informational example.
+- Removed stale references to deleted implementation-specific machine-contract companion artifacts and absent hosted workflow files.
+- Corrected repository synchronization manifest/validator release-context compatibility.
+- Aligned release-specific filenames, OpenAPI metadata, catalogs, registries, RTM specification version, conformance assets, validation reports, and repository indexes to v2.0.4.
+- Regenerated schema hashes, registry entry/document digests, source-hash records, synchronization manifest, and aggregate integrity evidence.
+
+## 2026-08-03 - v2.0.4 Step 11 repository-wide integrity validation
+
+- Added the repository-wide integrity validator, controlled PASS report, and automated validation.
 - Re-ran all finding-specific validators and the repository synchronization validator.
 - Verified parseability, metaschema validity, reference and link resolution, catalog hashes, RTM dispositions, controlled report freshness, synchronization-manifest coverage, and release-payload duplicate/transitional-file absence.
-- Preserved the v2.0.1 target as an unreleased correction set and the controlled Implementation Profile as proposed and pre-conformance.
+- This pre-release validation state was superseded by the final v2.0.4 Public Review Controlled Baseline publication.
 
 
-## 2026-08-03 - v2.0.1 Step 10 repository synchronization
+## 2026-08-03 - v2.0.4 Step 10 repository synchronization
 
 - Advanced the RTM dataset to `RTM-1.46` and synchronized specification-version metadata across all 122 CR rows.
 - Synchronized Schema Catalog `1.0.50`, Interface Catalog `1.0.5`, Registry Entry Catalog `1.0.3`, and Implementation Profile Catalog `1.0.3`.
-- Added the repository synchronization manifest, validator, validation report, and CI workflow.
+- Added the repository synchronization manifest, validator, validation report, and automated validation.
 - Regenerated current traceability, fixture, mapping, companion-disposition, catalog, manifest, and release records.
-## 2026-08-03 - v2.0.1 P2-01 release and lifecycle metadata alignment
+## 2026-08-03 - v2.0.4 P2-01 release and lifecycle metadata alignment
 
-- Separated the unreleased v2.0.1 repository target from the controlling published v2.0.0 Public Review Controlled Baseline.
+- During pre-release preparation, separated the v2.0.4 repository target from the then-controlling v2.0.0 Public Review Controlled Baseline; final publication now makes v2.0.4 controlling.
 - Standardized current artifact lifecycle, catalog publication status, specification versions, baseline status, and baseline date across specifications, schemas, interfaces, registries, manifests, metadata examples, validation records, and release notes.
 - Advanced the Schema Catalog to 1.0.49, Interface Catalog to 1.0.4, and Registry Entry Catalog to 1.0.2.
 - Added controlled metadata policy, automated validation, and CI.
 
 
-## 2026-08-03 - P0-05 IF-002 deterministic WASM machine contract
-
-- Added normative and machine-readable contracts, canonical envelope schemas, public vectors, profile binding, interface catalog entries, direct RTM mappings, test-mapping references, and CI validation.
-- Preserved the implementation-independent IF-002 contract and explicitly prevented the profile-specific WASM selection from becoming a universal AGCP Core requirement.
-
 # AGCP Specification Changelog
 
-## 2026-08-03 - v2.0.1 P0-02 provenance wire correction
+## 2026-08-03 - v2.0.4 P0-02 provenance wire correction
 
 - Synchronized the normative provenance wire specification with DS-001.
 - Corrected OpenAPI, controlled examples, harness vectors, catalogs, hashes, validation records, and CR-005 traceability.
 - Added cross-language Ed25519 detached-signature vectors and CI validation.
 
-## 2026-08-03 - v2.0.1 Implementation Profile package integration
+## 2026-08-03 - v2.0.4 Implementation Profile package integration
 
 - Added the controlled Implementation Profile Specification and Draft 2020-12 schema under `implementer/`.
 - Superseded `AGCP-Implementation-Decision-Record-Template.md` with the correctly named `AGCP-Implementation-Profile-Template.md`.
-- Added the implementation-profile directory README, human-readable and machine-readable catalogs, package manifest, repository validator, controlled validation report, and CI workflow.
-- Registered the package in the root README, architecture overview, conformance manifest, and v2.0.1 working release notes.
+- Added the implementation-profile directory README, human-readable and machine-readable catalogs, package manifest, repository validator, controlled validation report, and automated validation.
+- Registered the package in the root README, architecture overview, conformance manifest, and v2.0.4 working release notes.
 - Preserved the profile content digest `e67c090dd394e3d3a8eb4129c64b2e598b8404eaaac587a963a7b49bf862ed7f` and pinned baseline SHA-256 `790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326`.
 - Findings addressed by this integration step: P0-01, P1-14, P2-02, and P2-06.
 
@@ -240,7 +246,7 @@
 
 **Status:** Informational  
 **Current Published Normative Release:** v2.0.0  
-**Current Unreleased Repository Target:** v2.0.1  
+**Current Unreleased Repository Target:** v2.0.4  
 **Current Worktree Artifact Lifecycle:** CURRENT
 
 ---
@@ -381,7 +387,7 @@ Added DS-045 Governance Approval Submission as untrusted IF-001 ingress; made DS
 
 ## 2026-08-03 - P0-10 semantic fixture correction
 
-Corrected fourteen controlled positive fixtures, added semantic mismatch vectors, integrated claimant-assertion negatives, and added semantic fixture validation and CI enforcement.
+Corrected fourteen controlled positive fixtures, added semantic mismatch vectors, integrated claimant-assertion negatives, and added semantic fixture validation and automated validation enforcement.
 
 ## 2026-08-03 - P1-01 normative companion reference disposition
 

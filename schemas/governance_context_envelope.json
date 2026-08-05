@@ -3,11 +3,11 @@
   "$id": "https://agcp.ai/schemas/governance_context_envelope.json",
   "title": "Governance Context Envelope",
   "description": "Canonical domain schema for the attributable, versioned governance-relevant context associated with a Governed Action Proposal. The envelope preserves identity, tenant, policy, evidence, delegation, authority, lineage, target, lifecycle, risk, handoff, coordination, and outcome relationships needed for governance evaluation and continuity. Context may inform governance but is not authoritative Canonical State and cannot override it.",
-  "$comment": "DS-022 is the authoritative Governance Context Envelope domain object. The envelope is proposal-bound and continuity-preserving. Values that must match the containing DS-021 proposal\u2014Proposal Identity, Tenant, governance domain, target, and related bindings\u2014are semantic Proposal Qualification obligations because standard JSON Schema cannot compare arbitrary values across object locations. Inline Canonical State is intentionally prohibited; only a qualified Canonical State reference may be carried. Delegation references resolve to the canonical DS-025 Delegation Artifact reference definition.",
+  "$comment": "DS-022 is the authoritative Governance Context Envelope domain object. The envelope is proposal-bound and continuity-preserving. Values that must match the containing DS-021 proposal—Proposal Identity, Tenant, governance domain, target, and related bindings—are semantic Proposal Qualification obligations because standard JSON Schema cannot compare arbitrary values across object locations. Inline Canonical State is intentionally prohibited; only a qualified Canonical State reference may be carried. Delegation references resolve to the canonical DS-025 Delegation Artifact reference definition.",
   "x-agcp-ds-id": "DS-022",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Canonical Governance Object \u2014 Governance Context Envelope",
+  "x-agcp-schema-role": "Canonical Governance Object — Governance Context Envelope",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-101",

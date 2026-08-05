@@ -1,16 +1,16 @@
 {
   "catalog_id": "IF-CATALOG-1.0",
   "title": "AGCP Interface Definition Catalog",
-  "specification_version": "v2.0.1",
+  "specification_version": "v2.0.4",
   "catalog_version": "1.0.5",
   "publication_status": "CURRENT",
-  "last_modified_date": "2026-08-03",
+  "last_modified_date": "2026-08-05",
   "interfaces": [
     {
       "if_id": "IF-001",
       "title": "AGCP HTTP Interface v2",
       "interface_version": "v2",
-      "contract_version": "2.0.1",
+      "contract_version": "2.0.4",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-HTTP-Interface-Specification.md",
@@ -98,7 +98,7 @@
       "if_id": "IF-002",
       "title": "AGCP Policy Evaluation Contract",
       "interface_version": "v2",
-      "contract_version": "2.0.1",
+      "contract_version": "2.0.4",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-Policy-Evaluation-Contract.md",
@@ -148,10 +148,10 @@
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
-  "repository_release_target": "v2.0.1",
-  "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+  "repository_release_target": "v2.0.4",
+  "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "controlling_published_baseline": "v2.0.0",
-  "baseline_date": "2026-07-30",
+  "controlling_published_baseline": "v2.0.4",
+  "baseline_date": "2026-08-05",
   "rtm_dataset_version": "RTM-1.46"
 }

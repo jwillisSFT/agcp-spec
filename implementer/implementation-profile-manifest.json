@@ -1,7 +1,7 @@
 {
   "manifest_type": "AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_MANIFEST",
   "manifest_version": "1.0.3",
-  "release_target": "v2.0.1",
+  "release_target": "v2.0.4",
   "generated_date": "2026-08-05",
   "profile_format_version": "1.1.0",
   "scope": "Public format, schema, template, informational example, and catalogs only. Operational deployment profiles are distributed separately.",
@@ -23,23 +23,23 @@
     },
     {
       "path": "AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md",
-      "sha256": "6df86f92c7e57fa622d36f9c4a6c6d9e4aeda814503cfe3be4443fd2fe041ccc",
-      "bytes": 144397
+      "sha256": "ee871a12b0a609e76b6bf461330e3aead8c8ec0e508806f815430bcd9f73deb7",
+      "bytes": 144545
     },
     {
       "path": "IMPLEMENTATION-PROFILE-CATALOG.md",
-      "sha256": "885434ffd8d43a7629bfbbad093ee1dbde3156b7ffd99ffb37f5fab849db3d0c",
+      "sha256": "119e3ae45d0e6db1e6af168f2d20891040f743d8295e32ab5558e73bccd8a924",
       "bytes": 944
     },
     {
       "path": "implementation-profile-catalog.json",
-      "sha256": "e19b1c5a4cd4dd889946e24ea0bcb4f37745ba349a592fc7a07476fa0d84ed87",
-      "bytes": 1215
+      "sha256": "109c17a9b31c1d958d0f9e89a83c1d8e69652ce49eef0cada66a724f38c70470",
+      "bytes": 1211
     },
     {
       "path": "implementation-profile-catalog.csv",
-      "sha256": "4213da95ea9e315de74fe85090a4dadba95faa1e9b8480208de6e7e06286dc12",
-      "bytes": 930
+      "sha256": "99c5dae8493e74b8a8ecd89f4c7eead0b53af20bcd03436155bb670d6716d99a",
+      "bytes": 578
     }
   ],
   "rtm_dataset_version": "RTM-1.46"

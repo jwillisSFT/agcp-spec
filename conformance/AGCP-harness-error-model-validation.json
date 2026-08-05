@@ -2,7 +2,7 @@
   "record_id": "AGCP-HARNESS-ERROR-MODEL-VALIDATION-2026-07-31",
   "record_type": "controlled_conformance_validation",
   "status": "PASS",
-  "validated_at": "2026-08-03",
+  "validated_at": "2026-08-05",
   "scope": {
     "harness_specification": "conformance/AGCP-Conformance-Harness-Spec.yml",
     "markdown_mirror": "conformance/AGCP-Conformance-Test-Vectors.md",
@@ -16,10 +16,10 @@
   },
   "source_hashes": {
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "2eac84f633138e36909328bf8b28403b728986bb3006271e1e249d64b76a4a6c",
-    "spec/AGCP-Error-Mapping.md": "20a2c73d524cfd9ff536883598344ca3418233c6d3c294bbe85362aed48eeee8",
-    "registries/rejection-code-registry.json": "19726bc7a8da1181eaf7c74054cc0a677031ff36a67807dac779f5f654c9da12",
-    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25"
+    "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
+    "spec/AGCP-Error-Mapping.md": "c27fef006bd097172d3935f7266042ab2f7f18a2061c0ae32347e9e9ddc37d30",
+    "registries/rejection-code-registry.json": "3f11c8880557b4ed5cd2955ab3e0af5151cd661798b3349162970d7475edaed7",
+    "api/AGCP-HTTP-Contract.yaml": "3a074f0607bf0ed9f8f1adab01c90a8b667636bbba87acc6f6ddacf3041b05f8"
   },
   "validation_rules": [
     "Every declared rejection_code SHALL be an ACTIVE rejection-code registry entry.",
@@ -1915,7 +1915,7 @@
   "p0_05_if002_scope_refresh": {
     "status": "PASS",
     "finding": "P0-05",
-    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately."
+    "scope": "Source hashes refreshed after publication of the profile-selected policy-evaluation machine-contract companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately."
   },
   "p1_03_p1_09_p1_14_p1_17_regression": "PASS",
   "p0_10_semantic_fixture_regression": {

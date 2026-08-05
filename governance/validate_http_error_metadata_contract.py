@@ -54,7 +54,7 @@ api=yaml.safe_load((ROOT/'api/AGCP-HTTP-Contract.yaml').read_text());ops=[]
 for path,item in api['paths'].items():
     for m,op in item.items():
         if m in {'get','post','put','patch','delete','head','options','trace'}: ops.append((path,m,op))
-check('openapi_version',api['info']['version']=='2.0.1')
+check('openapi_version',api['info']['version']=='2.0.4')
 check('all_operations_429',all(op['responses'].get('429',{}).get('$ref')=='#/components/responses/TooManyRequests' for _,_,op in ops),[(p,m) for p,m,o in ops if '429' not in o['responses']])
 check('all_operations_503',all(op['responses'].get('503',{}).get('$ref')=='#/components/responses/ServiceUnavailable' for _,_,op in ops),[(p,m) for p,m,o in ops if '503' not in o['responses']])
 check('all_404_normalized',all(op['responses'].get('404',{}).get('$ref')=='#/components/responses/PublicNotFound' for _,_,op in ops if '404' in op['responses']))
@@ -62,7 +62,7 @@ ra=api['components']['headers']['RetryAfter'];check('retry_after_delay_seconds',
 check('metadata_openapi_ref',api['paths']['/agcp/v2/meta']['get']['responses']['200']['content']['application/json']['schema']['$ref']=='#/components/schemas/MetadataResponse')
 # Registry and integrity
 reg=loadj('registries/rejection-code-registry.json');codes={e['code']:e for e in reg['codes']}
-check('registry_release',reg['release']['registry_release']=='v2.0.1' and reg['integrity']['entry_count']==42)
+check('registry_release',reg['release']['registry_release']=='v2.0.4' and reg['integrity']['entry_count']==42)
 check('new_transport_codes',codes['REQUEST_THROTTLED']['default_http_status']==429 and codes['CAPACITY_UNAVAILABLE']['default_http_status']==503)
 check('specific_not_found_deprecated',all(codes[c]['entry_status']=='DEPRECATED' and codes[c]['successor_entry_id']=='REG-059' for c in ['PROPOSAL_NOT_FOUND','AUTHORIZATION_NOT_FOUND','GOVERNANCE_EVIDENCE_NOT_FOUND','GOVERNANCE_ARTIFACT_NOT_FOUND']))
 def canon(o): return json.dumps(o,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
@@ -99,7 +99,8 @@ tm=loadj('conformance/test-mapping.json');trows=[]
 for t in tm['tests']:
     if t.get('cr_id') in affected:
         trows.append({'tc':t['tc_id'],'ds':{'DS-002','DS-003'}.issubset(t['ds_ids']),'if':'IF-001' in t['if_ids'],'vec':'conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json' in t.get('supporting_companion_vectors',[]),'note':'p1_03_p1_09_p1_14_p1_17_traceability_note' in t})
-check('test_mapping_rows',len(trows)==len(affected) and all(all(v for k,v in x.items() if k!='tc') for x in trows),trows)
-report={'release_context':{'repository_release_target':'v2.0.1','repository_release_target_status':'UNRELEASED_ACCUMULATED_CORRECTION_SET','controlling_published_baseline':'v2.0.0','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-07-30','artifact_lifecycle_state':'CURRENT'},'report_id':'AGCP-P1-03-P1-09-P1-14-P1-17-HTTP-ERROR-METADATA','status':'PASS' if not issues else 'FAIL','validated_at':'2026-08-03','findings':['P1-03','P1-09','P1-14','P1-17'],'operation_count':len(ops),'public_not_found_harness_instance_count':len(found),'registry_entry_count':len(reg['codes']),'affected_crs':sorted(affected),'source_hashes':{r:sha(r) for r in ['schemas/error_response.json','schemas/meta_response.json','schemas/examples/ds003-implementation-metadata-response.json','api/AGCP-HTTP-Contract.yaml','spec/AGCP-HTTP-Interface-Specification.md','spec/AGCP-Error-Mapping.md','registries/rejection-code-registry.json','conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json','schemas/catalog/schema-catalog.json','api/interface-catalog.json','registries/registry-entry-catalog.json','conformance/test-mapping.json','spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx','governance/validate_http_error_metadata_contract.py']},'checks':checks,'issues':issues}
+mapped_affected={t.get('cr_id') for t in tm['tests'] if t.get('cr_id') in affected}
+check('test_mapping_rows',len(trows)==len(mapped_affected) and all(all(v for k,v in x.items() if k!='tc') for x in trows),{'mapped_crs':sorted(mapped_affected),'formally_defined_unmapped_crs':sorted(affected-mapped_affected),'rows':trows})
+report={'release_context':{'repository_release_target':'v2.0.4','repository_release_target_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','controlling_published_baseline':'v2.0.4','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-08-05','artifact_lifecycle_state':'CURRENT'},'report_id':'AGCP-P1-03-P1-09-P1-14-P1-17-HTTP-ERROR-METADATA','status':'PASS' if not issues else 'FAIL','validated_at':'2026-08-05','findings':['P1-03','P1-09','P1-14','P1-17'],'operation_count':len(ops),'public_not_found_harness_instance_count':len(found),'registry_entry_count':len(reg['codes']),'affected_crs':sorted(affected),'source_hashes':{r:sha(r) for r in ['schemas/error_response.json','schemas/meta_response.json','schemas/examples/ds003-implementation-metadata-response.json','api/AGCP-HTTP-Contract.yaml','spec/AGCP-HTTP-Interface-Specification.md','spec/AGCP-Error-Mapping.md','registries/rejection-code-registry.json','conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json','schemas/catalog/schema-catalog.json','api/interface-catalog.json','registries/registry-entry-catalog.json','conformance/test-mapping.json','spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx','governance/validate_http_error_metadata_contract.py']},'checks':checks,'issues':issues}
 (ROOT/'governance/AGCP-http-error-metadata-validation.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps({'status':report['status'],'checks':len(checks),'issues':issues},indent=2));sys.exit(0 if not issues else 1)

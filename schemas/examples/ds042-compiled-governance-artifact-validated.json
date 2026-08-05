@@ -519,8 +519,8 @@
     "controlled_activation_required_before_authoritative_use": true,
     "partial_activation_not_permitted": true
   },
-  "validated_at": "2026-07-30T16:00:00Z",
+  "validated_at": "2026-08-05",
   "governance_version_candidate_ref": {
-    "governance_version_id": "gv-2.0.1-candidate"
+    "governance_version_id": "gv-2.0.4-candidate"
   }
 }
