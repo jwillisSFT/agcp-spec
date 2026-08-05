@@ -218,11 +218,7 @@ normative specifications.
 
 ## Informative Implementation and Traceability References
 
-<<<<<<< HEAD
-- [AGCP v2.0.0 Requirement Traceability Annex](reference/AGCP-v2.0.0-Requirement-Traceability-Annex.pdf) — consolidated implementation and validation references for CR-001 through CR-122. Informative; does not alter normative precedence.
-=======
 - [AGCP v2.0.0 Requirement Traceability Annex](reference/agcp-v2.0.0-requirement-traceability-annex.pdf) — consolidated implementation and validation references for CR-001 through CR-122. Informative; does not alter normative precedence.
->>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 
 ------------------------------------------------------------------------
 
