@@ -21,8 +21,8 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "entrypoint": "agcp_evaluate_v1",
-    "target_runtime_profile": "agcp_pec_abi_v1",
+    "entrypoint": "example_evaluate_v1",
+    "target_runtime_profile": "example_pec_abi_v1",
     "network_access_prohibited": true,
     "filesystem_mutation_prohibited": true,
     "evaluation_side_effects_prohibited": true,
@@ -30,31 +30,31 @@
     "representation_version": "1.0.0"
   },
   "interface_contract": {
-    "contract_id": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0",
+    "contract_id": "IF-002-IMPLEMENTATION-DEFINED-EXAMPLE",
     "contract_version": "1.0.0",
-    "contract_uri": "https://agcp.ai/api/if-002/AGCP-WASM-PEC-Machine-Contract.json",
+    "contract_uri": "https://example.invalid/agcp/if-002-machine-contract.json",
     "contract_digest": {
       "algorithm": "SHA-256",
-      "value": "42ae7a18c3d3e773defdde097d10bcbbb5d62bdf7d84b1722e37c07360b1ddb0"
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     },
     "supported_operations": [
       "EVALUATE_POLICY"
     ],
     "schema_bindings": [
       {
-        "schema_uri": "https://agcp.ai/api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json",
+        "schema_uri": "https://example.invalid/agcp/if-002-input.schema.json",
         "schema_digest": {
           "algorithm": "SHA-256",
-          "value": "c59412a11bc9ff019f3936a1d11b23f290abfac8c9580f0b5af80b4d0a081615"
+          "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
         },
         "schema_role": "INPUT",
         "required": true
       },
       {
-        "schema_uri": "https://agcp.ai/api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json",
+        "schema_uri": "https://example.invalid/agcp/if-002-output.schema.json",
         "schema_digest": {
           "algorithm": "SHA-256",
-          "value": "89fc5ebcc52560c32c59a4644019b929fd4dddf161381ae7d388f297a94b42a7"
+          "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
         },
         "schema_role": "OUTPUT",
         "required": true

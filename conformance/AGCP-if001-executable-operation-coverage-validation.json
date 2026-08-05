@@ -15,8 +15,8 @@
     "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
     "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe",
-    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "2eac84f633138e36909328bf8b28403b728986bb3006271e1e249d64b76a4a6c",
+    "conformance/test-mapping.json": "e64d863fc1137c670d0c589b744f24e5a2d4457d6e5db318f73d7f63a694dc44",
     "conformance/harness-checks.json": "97a9d30f166aafe04c954c7344f9a7688584121e68e4516e61f966691597deb8"
   },
   "summary": {
@@ -317,8 +317,7 @@
   "p0_05_if002_scope_refresh": {
     "status": "PASS",
     "finding": "P0-05",
-    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately.",
-    "validation_report": "governance/AGCP-if002-wasm-machine-contract-validation.json"
+    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately."
   },
   "p1_03_p1_09_p1_14_p1_17_regression": "PASS",
   "p0_10_semantic_fixture_regression": {

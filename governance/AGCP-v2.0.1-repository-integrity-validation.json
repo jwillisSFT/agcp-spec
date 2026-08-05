@@ -11,7 +11,6 @@
   "finding_scope": [
     "P0-01",
     "P0-02",
-    "P0-05",
     "P0-06",
     "P0-10",
     "P1-01",
@@ -34,38 +33,37 @@
       "check": "all_json_and_yaml_parse",
       "passed": true,
       "detail": {
-        "json_files": 179,
-        "yaml_files": 16
+        "json_files": 173,
+        "yaml_files": 4
       }
     },
     {
       "check": "all_local_schema_and_openapi_refs_resolve",
       "passed": true,
       "detail": {
-        "references_checked": 3794
+        "references_checked": 3782
       }
     },
     {
       "check": "all_controlled_json_schemas_pass_metaschema",
       "passed": true,
       "detail": {
-        "schemas_checked": 48
+        "schemas_checked": 45
       }
     },
     {
       "check": "all_repository_relative_markdown_links_resolve",
       "passed": true,
       "detail": {
-        "links_checked": 165
+        "links_checked": 146
       }
     },
     {
       "check": "repository_synchronization_manifest_is_complete_and_current",
       "passed": true,
       "detail": {
-        "manifest_entries": 339,
+        "manifest_entries": 316,
         "scope_exclusions": [
-          ".git/",
           "governance/AGCP-v2.0.1-repository-integrity-validation.json",
           "governance/AGCP-v2.0.1-repository-synchronization-manifest.json",
           "governance/AGCP-v2.0.1-repository-synchronization-validation.json"
@@ -76,14 +74,14 @@
       "check": "all_controlled_validation_reports_pass",
       "passed": true,
       "detail": {
-        "reports_checked": 23
+        "reports_checked": 22
       }
     },
     {
       "check": "all_controlled_report_source_hashes_are_current",
       "passed": true,
       "detail": {
-        "source_hashes_checked": 217
+        "source_hashes_checked": 176
       }
     },
     {
@@ -138,7 +136,6 @@
       "passed": true,
       "detail": {
         "required_artifacts": [
-          "AGCP-v2.0.1-CORRECTION-SUMMARY.md",
           "RELEASE_NOTES_v2.0.1.md",
           "governance/AGCP-v2.0.1-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
           "governance/AGCP-v2.0.1-repository-synchronization-manifest.json",
@@ -149,14 +146,14 @@
   ],
   "issues": [],
   "metrics": {
-    "repository_files_in_integrity_scope": 341,
-    "json_files_parsed": 179,
-    "yaml_files_parsed": 16,
-    "local_refs_checked": 3794,
-    "markdown_links_checked": 165,
-    "controlled_json_schemas_checked": 48,
-    "controlled_validation_reports_checked": 23,
-    "controlled_source_hashes_checked": 217,
+    "repository_files_in_integrity_scope": 318,
+    "json_files_parsed": 173,
+    "yaml_files_parsed": 4,
+    "local_refs_checked": 3782,
+    "markdown_links_checked": 146,
+    "controlled_json_schemas_checked": 45,
+    "controlled_validation_reports_checked": 22,
+    "controlled_source_hashes_checked": 176,
     "active_schema_count": 44,
     "registry_entry_count": 94,
     "fixture_count": 30,
@@ -192,11 +189,6 @@
       "status": "PASS",
       "checks_passed": 39
     },
-    "if002_wasm": {
-      "path": "governance/AGCP-if002-wasm-machine-contract-validation.json",
-      "status": "PASS",
-      "checks_passed": 23
-    },
     "command_record": {
       "path": "governance/AGCP-command-record-separation-validation.json",
       "status": "PASS",
@@ -225,12 +217,12 @@
     "release_lifecycle": {
       "path": "governance/AGCP-release-lifecycle-metadata-validation.json",
       "status": "PASS",
-      "checks_passed": 55
+      "checks_passed": 53
     },
     "repository_synchronization": {
       "path": "governance/AGCP-v2.0.1-repository-synchronization-validation.json",
       "status": "PASS",
-      "checks_passed": 12
+      "checks_passed": null
     },
     "traceability_gap_closure": {
       "path": "governance/AGCP-traceability-gap-closure-validation.json",
@@ -306,16 +298,15 @@
     "implementation_profile_catalog": "1.0.3"
   },
   "source_hashes": {
-    "AGCP-v2.0.1-CORRECTION-SUMMARY.md": "de3c58f266a3b98d175db689b8d9650543c6bdd4af2ff9ab33e9a87c69e72a15",
-    "governance/AGCP-v2.0.1-repository-synchronization-manifest.json": "30b3588381e194c7b93cdfc0eb4ea72cb4c9fcaeacd7b4b065bc9645125f1647",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
-    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
-    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
+    "governance/AGCP-v2.0.1-repository-synchronization-manifest.json": "df272e28d1aa4ba6111088953f1e28756cf9a6343c9bf226295e98d0baeb9551",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "55f8d49e698667bd2e55e9218354c02ffa3d4195dd7dc73303b17598dbc164d3",
+    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
+    "api/interface-catalog.json": "99fc2b1259f450501c6848b9859659f28f89374de65409cbdf0880a535a56e6d",
     "registries/registry-entry-catalog.json": "05760e6455452f6783a08dd0f180b7b4709e24de7ac3a0a4c4de2d20025df32e",
-    "implementer/implementation-profile-catalog.json": "dddca4a8b3554da774da5a1484460e41b428f101aaac8454938a52e70f4c3a4c",
-    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "implementer/implementation-profile-catalog.json": "e19b1c5a4cd4dd889946e24ea0bcb4f37745ba349a592fc7a07476fa0d84ed87",
+    "conformance/test-mapping.json": "e64d863fc1137c670d0c589b744f24e5a2d4457d6e5db318f73d7f63a694dc44",
     "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
-    "conformance/agcp-conformance-manifest.yml": "321cd0def8ee07e430bf66f93485442a8d2043905eaf182564f01d0055a585e3",
-    "RELEASE_NOTES_v2.0.1.md": "ebbffdde62e7e4ab39ef462499d0ce9d57ed053a8c58a83bd2fefa3314da43b8"
+    "conformance/agcp-conformance-manifest.yml": "05146f3ebc9dbfdc87693e9778ef8a194620f672163620361c5c8207d1747fd1",
+    "RELEASE_NOTES_v2.0.1.md": "0b82c559f855daf3c7ed0ef11533ebe716f2819f483652f8982acbdc58cc20f9"
   }
 }

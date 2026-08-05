@@ -6,14 +6,14 @@
   "check_severity": "MUST",
   "source_hashes": {
     "conformance/harness-checks.json": "97a9d30f166aafe04c954c7344f9a7688584121e68e4516e61f966691597deb8",
-    "conformance/AGCP Harness Check Registry.md": "95b47f1b84cb97fe047b318e784f9eba5cbe2db52707b89036d7fa1348a3142d",
+    "conformance/AGCP Harness Check Registry.md": "34212610668d129cf201dd4c107f3e08917849198bd34f82209a980a52aa9f1e",
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe",
-    "conformance/AGCP-Test-Matrix.md": "15d327904d353bfed25db9f4b71ed036b3543b25975c9101c8eafd61dfd8796b",
-    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
-    "schemas/governance_configuration.json": "1af7552f0e9c8b8f379a157c9680d0f11c5f59abb6e07757fae2e82b4fb1ad03",
-    "schemas/compiled_governance_artifact.json": "5da50676019e44e7a90b73ac383cf1d021601d115321881f8f29e03f2c9d68bc",
-    "schemas/controlled_governance_activation.json": "02840dea425e77a6be5b30e8185b8ec31ef08e72b2991441990e14badaea1adc",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "2eac84f633138e36909328bf8b28403b728986bb3006271e1e249d64b76a4a6c",
+    "conformance/AGCP-Test-Matrix.md": "84e3f650d3083d30be6af3c782c701314811996a8f5964f3e6de363322040642",
+    "conformance/test-mapping.json": "e64d863fc1137c670d0c589b744f24e5a2d4457d6e5db318f73d7f63a694dc44",
+    "schemas/governance_configuration.json": "cc25ccf843067426c8c320bb484544d5655b178fd2440b8f38fd39e60abd069b",
+    "schemas/compiled_governance_artifact.json": "b947c0fffc9c69e973bc7fbd7aa8e4223e1b46f106924e8563e2ddf9311b1319",
+    "schemas/controlled_governance_activation.json": "924946745d771e68b825f1ba590c7d251a915ea4bc5d5a6e55be471bd7755c23",
     "schemas/examples/ds041-governance-configuration-active.json": "05cba077de4af97283ceb6b89d557931af61744fb6d5c0195fc959ede83cd940",
     "schemas/examples/ds042-compiled-governance-artifact-validated.json": "f7ad9973f64720045c49cf77c55cd8b7fab2377397fae2e1c7e22cff86a9c49f",
     "schemas/examples/ds043-controlled-governance-activation-activated.json": "d45ed40ee2274dc375033282e5537b752c33601771472448209573f0b4dcb709"
@@ -225,8 +225,7 @@
   "p0_05_if002_scope_refresh": {
     "status": "PASS",
     "finding": "P0-05",
-    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately.",
-    "validation_report": "governance/AGCP-if002-wasm-machine-contract-validation.json"
+    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately."
   },
   "p1_03_p1_09_p1_14_p1_17_regression": "PASS",
   "p0_10_semantic_fixture_regression": {

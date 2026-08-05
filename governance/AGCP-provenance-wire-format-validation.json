@@ -22,16 +22,15 @@
     "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
     "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "2eac84f633138e36909328bf8b28403b728986bb3006271e1e249d64b76a4a6c",
     "conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json": "6b5ae1abb7f6ee7366c4637d57d6daea7d282ed1b8316b5ac382706ee2f85014",
-    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
-    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
-    "governance/validate_provenance_wire_format.py": "331a9f67a995020ee9a2db40f40010422b28c0e1228b7dd4263f1c6eb4ee914f",
-    ".github/workflows/validate-provenance-wire-format.yml": "2874c64e5675c6fccd9398295c510ea9cee3f40979f550a5385a7fe3282040d4",
+    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
+    "api/interface-catalog.json": "99fc2b1259f450501c6848b9859659f28f89374de65409cbdf0880a535a56e6d",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "55f8d49e698667bd2e55e9218354c02ffa3d4195dd7dc73303b17598dbc164d3",
+    "governance/validate_provenance_wire_format.py": "f0c40e35b393b17df30d73b6730bcbd14945d99fad958b64134dbd916631bbbc",
     "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
-    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
-    "conformance/test-mapping-validation.json": "1f76012cd5e70123633fb1014a967164182910a22c7a8175177b415e2a1f921e"
+    "conformance/test-mapping.json": "e64d863fc1137c670d0c589b744f24e5a2d4457d6e5db318f73d7f63a694dc44",
+    "conformance/test-mapping-validation.json": "7e3c5d469a64e4bb0c8ea3dca36cc596fe4b0ecc20671467502feb4ac2a314d0"
   },
   "checks": [
     {

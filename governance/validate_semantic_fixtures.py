@@ -105,7 +105,7 @@ report={'release_context':{'repository_release_target':'v2.0.1','repository_rele
   'conformance/fixture-mapping.json','conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json',
   'conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json',
   'schemas/governance_approval_submission.json','schemas/examples/ds045-governance-approval-submission-valid.json',
-  'governance/validate_semantic_fixtures.py','.github/workflows/validate-semantic-fixtures.yml'] + [x['file'] for x in vec['positive_fixtures']]},
+  'governance/validate_semantic_fixtures.py',] + [x['file'] for x in vec['positive_fixtures']]},
  'positive_fixture_validation':pos,'semantic_negative_validation':neg,'claimant_assertion_validation':claim,
  'checks':checks,'issues':issues
 }

@@ -19,25 +19,23 @@
   "negative_vector_count": 15,
   "controlled_fixture_count": 30,
   "source_hashes": {
-    "schemas/governance_approval_submission.json": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
+    "schemas/governance_approval_submission.json": "ad450b9e08c534a3a9e4b3340fcb42893d7a27a9a211d1997f97bd747b1103c4",
     "schemas/governance_approval_artifact.json": "637b768c631538e03f80ff09ad7a65aa89ecdf25c78ecf1a25a12ba7c2f18bbb",
     "schemas/examples/ds045-governance-approval-submission-valid.json": "9b0565c40f482ecd1ee58bf21ed873ad01c59d2a8a2f228784b7619239b40714",
     "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
     "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
     "spec/AGCP-Human-Review-Specification.md": "5113078fcb769e1e0bebef1687c35dd686da531ca11a71cdc26d6859ce6120ba",
-    "spec/AGCP-Error-Mapping.md": "fbcd5b3bca11389ae3e61997ac4ce404e86f99a1697ba3bf050479b0eec93316",
+    "spec/AGCP-Error-Mapping.md": "20a2c73d524cfd9ff536883598344ca3418233c6d3c294bbe85362aed48eeee8",
     "reference/AGCP-HTTP-Reference-Implementation-Pseudocode.md": "fd1b30291a633a4efa6eb70cc433c5407053b9ebb78e11c66940594cbd230f09",
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "2eac84f633138e36909328bf8b28403b728986bb3006271e1e249d64b76a4a6c",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
-    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
-    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
+    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
+    "api/interface-catalog.json": "99fc2b1259f450501c6848b9859659f28f89374de65409cbdf0880a535a56e6d",
     "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
-    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
-    "implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml": "60d0dbbafc130d463f64b26f542efd3bbac9591ec70168bfab4b9ef32dd1bc70",
-    "governance/validate_command_record_separation.py": "4f32b3862c4157fdff014d5c330d3daa528916fadba4870f924cb7db3f52f967",
-    ".github/workflows/validate-command-record-separation.yml": "81ba1a390b9ea8b22f2192f7e16385e5b7f9434180d5ed6eb747c38191f923d8"
+    "conformance/test-mapping.json": "e64d863fc1137c670d0c589b744f24e5a2d4457d6e5db318f73d7f63a694dc44",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "55f8d49e698667bd2e55e9218354c02ffa3d4195dd7dc73303b17598dbc164d3",
+    "governance/validate_command_record_separation.py": "f262742417abe764b62271de9102066cc641870e0d503ddad711f8aa02e3ff94"
   },
   "checks": [
     {

@@ -203,11 +203,6 @@ The following documents provide further information:
 * Requirements Traceability Matrix
 * Conformance Test Suite
 
-
-## Controlled IF-002 WASM profile companion
-
-The implementation-independent IF-002 contract remains `spec/AGCP-Policy-Evaluation-Contract.md`. The proposed Rust Student Service profile adopts the separate controlled companion `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md`, with machine-readable ABI and envelope schemas under `api/if-002/` and public vectors under `conformance/if-002/`. This preserves Core technology independence while freezing the selected profile ABI.
-
 ## Governance Approval command/record boundary
 
 DS-045 Governance Approval Submission is an untrusted command at IF-001. DS-026 Governance Approval Artifact is an authoritative AGCP-created or AGCP-qualified record. The public contract rejects claimant assertions of server-derived verification, lifecycle, quorum, evidence, replay, digest, and ledger state.
@@ -240,5 +235,3 @@ Controlled examples in `schemas/examples/` are structural schema fixtures. The `
 
 
 ## Repository-wide integrity gate
-
-The final public-repository assurance layer aggregates finding-specific validation, cross-artifact synchronization, active-schema metaschema and reference validation, Markdown link integrity, controlled source-hash freshness, RTM disposition completeness, and release-payload duplicate/transitional-file checks. The controlling artifacts are `governance/validate_repository_integrity.py`, `governance/AGCP-v2.0.1-repository-integrity-validation.json`, `.github/workflows/validate-repository-integrity.yml`, and `AGCP-v2.0.1-CORRECTION-SUMMARY.md`. This layer validates the public specification repository only and does not substitute for implementation, deployment, or conformance evidence.

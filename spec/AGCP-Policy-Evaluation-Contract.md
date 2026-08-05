@@ -205,12 +205,6 @@ Backward-compatible additions require a MINOR version increment.
 
 Editorial clarifications require a PATCH increment.
 
-## 16.1 Controlled profile-specific machine contracts
-
-The proposed Rust Student Service profile adopts the controlled companion `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0`, contract version `1.0.0`, and ABI `agcp_pec_abi_v1`. Its normative human-readable specification is `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md`; its machine-readable contract and envelope schemas are under `api/if-002/`.
-
-This adoption does not change the implementation-independent IF-002 contract for implementations that do not adopt that profile companion.
-
 ## 17. Summary
 
 The Policy Evaluation Contract standardizes deterministic policy

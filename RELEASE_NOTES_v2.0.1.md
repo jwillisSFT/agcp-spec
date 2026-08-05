@@ -10,7 +10,7 @@
 
 ## 1. Scope of this accumulated change
 
-This revision integrates the controlled Implementation Profile package required by findings P0-01, P1-14, P2-02, and P2-06. It does not change generic AGCP Core obligations.
+This revision integrates the public Implementation Profile format, schema, template, informational example, catalogs, and validation required by findings P0-01, P1-14, P2-02, and P2-06. Private deployment profiles are outside the public repository.
 
 ## 2. Added controlled profile-format artifacts
 
@@ -36,28 +36,13 @@ Added:
 
 The validator rejects prohibited YAML constructs, validates the authoritative YAML against the controlled schema, verifies canonical filenames and companion content, recomputes the profile content digest, enforces the lifecycle-dependent baseline-URI rule, and verifies the package manifest.
 
-## 5. Profile control values
-
-- Profile ID: `AGCP-RUST-STUDENT-SERVICE-2.0.0`
-- Profile version: `2.0.0-draft.6`
-- Status: `DEVELOPMENT_PRE_CONFORMANCE`
-- Lifecycle state: `PROPOSED`
-- Conformance claim status: `NOT_CLAIMED`
-- Profile content SHA-256: `3e391cd0b0a89189434776c4593dedb2b3dd460bfd5fe7f89d8fc8fdb4373b2d`
-- Pinned baseline bundle: `agcp-spec-v.2.0.0.zip`
-- Pinned baseline SHA-256: `790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326`
-- Baseline support policy: `ONE_PINNED_BASELINE_AT_A_TIME`
-- Migration policy: `EXPLICIT_MIGRATION_DECISION_REQUIRED`
-
-The baseline bundle URI remains `null` because the profile is `PROPOSED`. It must be set to an immutable URI before the lifecycle changes to `APPROVED` or `ACTIVE`.
-
-## 6. Repository indexes updated
+## 5. Repository indexes updated
 
 Updated `README.md`, `ARCHITECTURE.md`, `conformance/agcp-conformance-manifest.yml`, and `governance/CHANGELOG.md` so the controlled profile package, catalog, manifest, validation script, and CI workflow are discoverable through canonical repository paths.
 
-## 7. Compatibility effect
+## 6. Compatibility effect
 
-This change is additive for public profile-format and profile-package artifacts. It does not make the Rust Student Service technology selections universal AGCP requirements and does not establish an AGCP conformance claim.
+This change is additive for public profile-format artifacts and the informational example. It does not establish an AGCP conformance claim.
 
 ## 8. P0-02 provenance wire/schema synchronization
 
@@ -67,15 +52,6 @@ This change is additive for public profile-format and profile-package artifacts.
 - Updated all controlled wire-provenance examples and executable harness instances.
 - Added real Ed25519 cross-language vectors and automated validation.
 - Updated DS-001/IF-001 catalogs, DS-001 hash, CR-005 RTM mapping, validation records, and public repository references.
-
-## P0-05 - Controlled IF-002 deterministic WASM machine contract
-
-- Patched the implementation-independent IF-002 Policy Evaluation Contract to version `2.0.1` and added an explicit profile-companion mechanism.
-- Added `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md` for companion `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0`, version `1.0.0`, ABI `agcp_pec_abi_v1`.
-- Added the machine-readable ABI contract and canonical input, output, and controlled-failure schemas under `api/if-002/`.
-- Defined required exports, zero-import policy, bounded linear-memory ownership, deterministic restrictions, module-digest binding, resource-failure mappings, activation, rollback, compatibility, and cross-runtime replay obligations.
-- Added public IF-002 vectors, profile binding, interface-catalog entries, direct RTM mappings, test-mapping references, CI validation, and controlled validation evidence.
-- Retained the profile as `PROPOSED` / `DEVELOPMENT_PRE_CONFORMANCE`; publication of the machine contract creates no production conformance claim and does not make WebAssembly universal.
 
 ## P0-06 command-versus-authoritative-record separation
 
@@ -139,8 +115,8 @@ This change is additive for public profile-format and profile-package artifacts.
 
 - Added `AGCP-v2.0.1-CORRECTION-SUMMARY.md` as the release-facing summary of all findings addressed by the accumulated public-repository correction set.
 - Added `governance/validate_repository_integrity.py`, `governance/AGCP-v2.0.1-repository-integrity-validation.json`, and `.github/workflows/validate-repository-integrity.yml` as the final repository-wide integrity gate.
-- Re-ran every finding-specific validator and confirmed that Implementation Profile, provenance, IF-002, command/record, digest, public error/metadata, semantic-fixture, normative-reference, release/lifecycle, and synchronization reports remain current and passing.
+- Re-ran every finding-specific validator and confirmed that Implementation Profile, provenance, command/record, digest, public error/metadata, semantic-fixture, normative-reference, release/lifecycle, and synchronization reports remain current and passing.
 - Verified JSON/YAML parsing, Draft 2020-12 schemas, local JSON Schema and OpenAPI references, repository-relative Markdown links, synchronization-manifest coverage, active-schema hashes, RTM versions and DS/IF/REG dispositions, controlled report source hashes, and absence of byte-identical duplicate or transitional payloads.
 - Registered the final integrity controls in the conformance manifest, README/index files, repository architecture, release notes, and change history.
-- Preserved the v2.0.1 release target as unreleased and the Rust Student Service profile as `PROPOSED` / `DEVELOPMENT_PRE_CONFORMANCE`; no production or conformance claim is created.
+- Preserved the v2.0.1 release target as unreleased; no production or conformance claim is created.
 - Final repository-wide integrity result: `PASS`, 11 of 11 checks, 23 controlled validation reports, 3,794 local references, 165 repository-relative Markdown links, 48 controlled JSON Schemas, 217 controlled source hashes, zero duplicate-byte groups, and zero transitional filenames.

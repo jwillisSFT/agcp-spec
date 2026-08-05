@@ -124,14 +124,6 @@ for t in tm['tests']:
         tres.append({'tc':t['tc_id'],'ds45':'DS-045' in t['ds_ids'],'if1':'IF-001' in t['if_ids'],'schema':'schemas/governance_approval_submission.json' in t['schema_files'],'vectors':'conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json' in t.get('supporting_companion_vectors',[])})
 check('test_mapping_affected_rows',len(tres)==11 and all(all(v for k,v in x.items() if k!='tc') for x in tres),tres)
 
-# Controlled profile binding and digest.
-prof=yaml.safe_load((ROOT/'implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml').read_text())
-check('profile_version_draft6',prof['profile']['version']=='2.0.0-draft.6')
-check('profile_entry_schema',prof['schema_validation']['entry_points']['governance_approval_submit']=='GovernanceApprovalSubmission')
-check('profile_extension_binding',prof['extensions']['x-command-record-separation']['submission_ds_id']=='DS-045' and prof['extensions']['x-command-record-separation']['authoritative_record_ds_id']=='DS-026')
-copy_prof=copy.deepcopy(prof); declared=copy_prof['document']['digest'].pop('value'); computed=hashlib.sha256(json.dumps(copy_prof,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
-check('profile_digest_valid',declared==computed,{'declared':declared,'computed':computed})
-
 report={'release_context':{'repository_release_target':'v2.0.1','repository_release_target_status':'UNRELEASED_ACCUMULATED_CORRECTION_SET','controlling_published_baseline':'v2.0.0','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-07-30','artifact_lifecycle_state':'CURRENT'},
  'report_id':'AGCP-P0-06-GOVERNANCE-APPROVAL-COMMAND-RECORD-SEPARATION',
  'status':'PASS' if not issues else 'FAIL','validated_at':'2026-08-03','finding':'P0-06',
@@ -139,7 +131,7 @@ report={'release_context':{'repository_release_target':'v2.0.1','repository_rele
  'authoritative_record_schema':'schemas/governance_approval_artifact.json','authoritative_record_ds_id':'DS-026',
  'affected_cr_count':11,'negative_vector_count':len(neg_results),'controlled_fixture_count':fm['fixture_count'],
  'source_hashes':{rel:sha(rel) for rel in [
-  'schemas/governance_approval_submission.json','schemas/governance_approval_artifact.json','schemas/examples/ds045-governance-approval-submission-valid.json','api/AGCP-HTTP-Contract.yaml','spec/AGCP-HTTP-Interface-Specification.md','spec/AGCP-Human-Review-Specification.md','spec/AGCP-Error-Mapping.md','reference/AGCP-HTTP-Reference-Implementation-Pseudocode.md','conformance/AGCP-Conformance-Harness-Spec.yml','conformance/AGCP-Conformance-Test-Vectors.md','conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json','schemas/catalog/schema-catalog.json','api/interface-catalog.json','conformance/fixture-mapping.json','conformance/test-mapping.json','spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx','implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml','governance/validate_command_record_separation.py','.github/workflows/validate-command-record-separation.yml']},
+  'schemas/governance_approval_submission.json','schemas/governance_approval_artifact.json','schemas/examples/ds045-governance-approval-submission-valid.json','api/AGCP-HTTP-Contract.yaml','spec/AGCP-HTTP-Interface-Specification.md','spec/AGCP-Human-Review-Specification.md','spec/AGCP-Error-Mapping.md','reference/AGCP-HTTP-Reference-Implementation-Pseudocode.md','conformance/AGCP-Conformance-Harness-Spec.yml','conformance/AGCP-Conformance-Test-Vectors.md','conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json','schemas/catalog/schema-catalog.json','api/interface-catalog.json','conformance/fixture-mapping.json','conformance/test-mapping.json','spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx','governance/validate_command_record_separation.py']},
  'checks':checks,'issues':issues
 }
 out=ROOT/'governance/AGCP-command-record-separation-validation.json'; out.write_text(json.dumps(report,indent=2)+'\n')

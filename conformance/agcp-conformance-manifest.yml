@@ -20,7 +20,6 @@ agcp_conformance_manifest:
     machine_readable_policy: governance/release-lifecycle-metadata.json
     validation_script: governance/validate_release_lifecycle_metadata.py
     validation_report: governance/AGCP-release-lifecycle-metadata-validation.json
-    ci_workflow: .github/workflows/validate-release-lifecycle-metadata.yml
   normative_precedence:
     order:
     - Published AGCP Runtime Governance Conformance Requirements (CRs)
@@ -80,16 +79,7 @@ agcp_conformance_manifest:
     package_manifest: implementer/implementation-profile-manifest.json
     validation_script: governance/validate_implementation_profiles.py
     validation_report: governance/AGCP-implementation-profile-validation.json
-    profiles:
-    - profile_id: AGCP-RUST-STUDENT-SERVICE-2.0.0
-      authoritative_yaml: implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml
-      human_readable_rendering: implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.md
-      profile_version: 2.0.0-draft.6
-      status: DEVELOPMENT_PRE_CONFORMANCE
-      lifecycle_state: PROPOSED
-      profile_digest: 3e391cd0b0a89189434776c4593dedb2b3dd460bfd5fe7f89d8fc8fdb4373b2d
-      baseline_bundle_sha256: 790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326
-      conformance_claim_status: NOT_CLAIMED
+    profiles: []
     description: 'Controlled profile-format artifacts and public Implementation Profiles.
       Profile-format validation establishes serialization validity only and does not
       establish AGCP conformance.
@@ -168,7 +158,6 @@ agcp_conformance_manifest:
       machine_readable_dispositions: governance/normative-companion-reference-dispositions.json
       validation_script: governance/validate_normative_companion_references.py
       validation_report: governance/AGCP-normative-companion-reference-validation.json
-      ci_workflow: .github/workflows/validate-normative-companion-references.yml
       finding: P1-01
       description: Controlled disposition and repository-wide validation of absent
         or noncanonical normative companion references.
@@ -277,23 +266,6 @@ provenance_wire_format:
   validator: governance/validate_provenance_wire_format.py
   validation_report: governance/AGCP-provenance-wire-format-validation.json
   finding: P0-02
-  ci_workflow: .github/workflows/validate-provenance-wire-format.yml
-if002_wasm_machine_contract:
-  base_interface: IF-002
-  companion_interface_id: IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0
-  companion_contract_version: 1.0.0
-  abi_id: agcp_pec_abi_v1
-  applicable_profile: implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml
-  specification: spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md
-  machine_contract: api/if-002/AGCP-WASM-PEC-Machine-Contract.json
-  input_schema: api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json
-  output_schema: api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json
-  error_schema: api/if-002/AGCP-WASM-PEC-Error-Envelope.schema.json
-  vectors: conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json
-  validator: governance/validate_if002_wasm_machine_contract.py
-  validation_report: governance/AGCP-if002-wasm-machine-contract-validation.json
-  finding: P0-05
-  ci_workflow: .github/workflows/validate-if002-wasm-machine-contract.yml
 governance_approval_command_record_separation:
   submission_schema: schemas/governance_approval_submission.json
   authoritative_record_schema: schemas/governance_approval_artifact.json
@@ -301,7 +273,6 @@ governance_approval_command_record_separation:
   validator: governance/validate_command_record_separation.py
   validation_report: governance/AGCP-command-record-separation-validation.json
   finding: P0-06
-  ci_workflow: .github/workflows/validate-command-record-separation.yml
 content_digest_contract:
   schema: schemas/common.json#/$defs/content_digest
   examples: schemas/examples/common-content-digest-examples.json
@@ -316,7 +287,6 @@ content_digest_contract:
   - CR-064
   - CR-066
   finding: P1-12
-  ci_workflow: .github/workflows/validate-content-digest-contract.yml
 http_error_metadata_contract:
   finding_ids:
   - P1-03
@@ -330,7 +300,6 @@ http_error_metadata_contract:
   vectors: conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json
   validator: governance/validate_http_error_metadata_contract.py
   report: governance/AGCP-http-error-metadata-validation.json
-  ci_workflow: .github/workflows/validate-http-error-metadata-contract.yml
 semantic_fixture_integrity:
   findings:
   - P0-10
@@ -341,7 +310,6 @@ semantic_fixture_integrity:
   claimant_assertion_vectors: conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json
   validator: governance/validate_semantic_fixtures.py
   validation_report: governance/AGCP-semantic-fixture-validation.json
-  ci_workflow: .github/workflows/validate-semantic-fixtures.yml
 repository_synchronization:
   findings:
   - P0-01
@@ -368,33 +336,29 @@ repository_synchronization:
   manifest: governance/AGCP-v2.0.1-repository-synchronization-manifest.json
   validator: governance/validate_repository_synchronization.py
   validation_report: governance/AGCP-v2.0.1-repository-synchronization-validation.json
-  ci_workflow: .github/workflows/validate-repository-synchronization.yml
-
 repository_integrity:
   execution_step: 11
   findings:
-    - P0-01
-    - P0-02
-    - P0-05
-    - P0-06
-    - P0-10
-    - P1-01
-    - P1-03
-    - P1-09
-    - P1-12
-    - P1-14
-    - P1-17
-    - P2-01
-    - P2-02
-    - P2-04
-    - P2-06
+  - P0-01
+  - P0-02
+  - P0-05
+  - P0-06
+  - P0-10
+  - P1-01
+  - P1-03
+  - P1-09
+  - P1-12
+  - P1-14
+  - P1-17
+  - P2-01
+  - P2-02
+  - P2-04
+  - P2-06
   correction_summary: AGCP-v2.0.1-CORRECTION-SUMMARY.md
   validator: governance/validate_repository_integrity.py
   validation_report: governance/AGCP-v2.0.1-repository-integrity-validation.json
-  ci_workflow: .github/workflows/validate-repository-integrity.yml
   repository_synchronization_manifest: governance/AGCP-v2.0.1-repository-synchronization-manifest.json
   repository_synchronization_report: governance/AGCP-v2.0.1-repository-synchronization-validation.json
-  claim_effect: >-
-    Repository integrity validation establishes internal public-repository coherence only.
-    It does not establish implementation conformance, production authorization, or
-    approval of a proposed Implementation Profile.
+  claim_effect: Repository integrity validation establishes internal public-repository
+    coherence only. It does not establish implementation conformance, production authorization,
+    or approval of a proposed Implementation Profile.

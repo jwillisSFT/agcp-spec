@@ -17,7 +17,7 @@
   "source_hashes": {
     "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe"
+    "conformance/AGCP-Conformance-Test-Vectors.md": "2eac84f633138e36909328bf8b28403b728986bb3006271e1e249d64b76a4a6c"
   },
   "validation_rules": [
     "Each request SHALL resolve to exactly one IF-001 OpenAPI operation by HTTP method and path template.",
@@ -1571,8 +1571,7 @@
   "p0_05_if002_scope_refresh": {
     "status": "PASS",
     "finding": "P0-05",
-    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately.",
-    "validation_report": "governance/AGCP-if002-wasm-machine-contract-validation.json"
+    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately."
   },
   "p1_03_p1_09_p1_14_p1_17_regression": "PASS",
   "p0_10_semantic_fixture_regression": {

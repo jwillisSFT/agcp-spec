@@ -1808,4 +1808,3 @@ An example profile may be complete as an example while remaining non-operational
 | `Use the latest spec` | Creates a moving and irreproducible normative baseline. | Record the exact baseline version, bundle name, digest, and migration rule. |
 | `WASM policy engine` | Does not define an interoperable machine contract. | Reference a controlled IF-002 profile containing ABI, envelopes, imports, resource behavior, traps, digest, and activation semantics. |
 | `See code` | Code alone does not provide controlled rationale or stable traceability. | Reference the code mapping plus the governing source, decision record, verification method, and evidence. |
-

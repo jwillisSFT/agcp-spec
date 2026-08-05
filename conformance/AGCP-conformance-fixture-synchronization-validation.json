@@ -5,10 +5,10 @@
   "source_hashes": {
     "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
-    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
     "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "99a562c94cd98cce57ed42e03ad6a99ed966d548c6d28176089a75b7740900eb",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
-    "governance/AGCP-semantic-fixture-validation.json": "028ac4e8e56321992bf74b97a0dab5b8ccaa8d1fc8621fc6705e30664b620a9d"
+    "governance/AGCP-semantic-fixture-validation.json": "b8c66b61b5fe9d3d0989640ec893e069ac1f9f5dc8437821407a34f84eca3de4"
   },
   "summary": {
     "declared_fixture_count": 30,

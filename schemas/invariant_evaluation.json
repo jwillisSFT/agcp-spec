@@ -7,7 +7,7 @@
   "x-agcp-ds-id": "DS-012",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Governance Decision Function — Invariant Evaluation Result",
+  "x-agcp-schema-role": "Governance Decision Function \u2014 Invariant Evaluation Result",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-105",

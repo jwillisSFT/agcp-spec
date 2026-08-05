@@ -144,21 +144,6 @@
         "CR-120",
         "CR-121",
         "CR-122"
-      ],
-      "controlled_profile_companions": [
-        {
-          "companion_interface_id": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0",
-          "companion_contract_version": "1.0.0",
-          "abi_id": "agcp_pec_abi_v1",
-          "applicable_profile_id": "AGCP-RUST-STUDENT-SERVICE-2.0.0",
-          "status": "CONTROLLED_PROFILE_COMPANION",
-          "specification_file": "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md",
-          "machine_readable_contract": "api/if-002/AGCP-WASM-PEC-Machine-Contract.json",
-          "input_schema": "api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json",
-          "output_schema": "api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json",
-          "error_schema": "api/if-002/AGCP-WASM-PEC-Error-Envelope.schema.json",
-          "conformance_vectors": "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
-        }
       ]
     }
   ],

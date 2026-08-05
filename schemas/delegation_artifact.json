@@ -7,7 +7,7 @@
   "x-agcp-ds-id": "DS-025",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Canonical Governance Object — Delegation Artifact",
+  "x-agcp-schema-role": "Canonical Governance Object \u2014 Delegation Artifact",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-102",

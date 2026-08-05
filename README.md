@@ -7,7 +7,6 @@
 > **Current worktree composition:** RTM-1.46; Schema Catalog 1.0.50; Interface Catalog 1.0.5; Registry Entry Catalog 1.0.3; Implementation Profile Catalog 1.0.3; 44 active schemas; 94 controlled registry entries; and 30 controlled fixtures.  
 > The v2.0.1 worktree accumulates versioned corrections against the fixed v2.0.0 review baseline. Every change requires a corresponding entry in `governance/CHANGELOG.md`.  
 > **Working release notes:** [`RELEASE_NOTES_v2.0.1.md`](RELEASE_NOTES_v2.0.1.md)  
-> **Correction summary:** [`AGCP-v2.0.1-CORRECTION-SUMMARY.md`](AGCP-v2.0.1-CORRECTION-SUMMARY.md)
 > **Published-baseline release notes:** [`RELEASE_NOTES_v2.0.0.md`](RELEASE_NOTES_v2.0.0.md)  
 
 # AGCP — Governance Control Plane Architecture
@@ -108,11 +107,9 @@ Use repository-relative paths when citing documents. A structured review sequenc
 4. `spec/AGCP Normative Statements.docx` — extracted atomic Core obligations
 5. `spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx` — authoritative traceability
 6. `spec/AGCP-Policy-Evaluation-Contract.md` — implementation-independent policy-evaluation companion specification
-7. `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md` and `api/if-002/` — controlled Rust Student Service IF-002 WASM ABI companion
 8. `spec/AGCP-HTTP-Interface-Specification.md` and `api/AGCP-HTTP-Contract.yaml` — interface semantics and executable contract
 9. `spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md` — Governance Ledger Event requirements
 10. `lifecycle/AGCP Governance Lifecycle Model.md` and `lifecycle/AGCP Normative Governance Progression Table.md` — lifecycle interpretation and progression
-11. `implementer/README.md`, `implementer/AGCP-Implementation-Profile-Specification.md`, and `implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml` — controlled profile format and authoritative proposed profile
 12. `conformance/AGCP-Conformance-Traceability-and-Automation-Model.md`, `conformance/AGCP-Conformance.md`, `conformance/AGCP-Test-Matrix.md`, and `conformance/AGCP-Conformance-Test-Vectors.md` — conformance relationships, profiles, mappings, and executable tests
 
 ---
@@ -125,7 +122,6 @@ The following abbreviated tree lists the current controlled paths used for revie
 .
 ├── README.md
 ├── RELEASE_NOTES_v2.0.1.md
-├── AGCP-v2.0.1-CORRECTION-SUMMARY.md
 ├── RELEASE_NOTES_v2.0.0.md
 ├── ARCHITECTURE.md
 ├── LICENSE
@@ -154,7 +150,6 @@ The following abbreviated tree lists the current controlled paths used for revie
 │   ├── AGCP Requirements Traceability Framework.docx
 │   ├── Requirements Traceability Matrix (RTM) Specification.docx
 │   ├── AGCP-Policy-Evaluation-Contract.md
-│   ├── AGCP-WASM-Policy-Evaluation-Machine-Contract.md
 │   ├── AGCP-HTTP-Interface-Specification.md
 │   ├── AGCP-Human-Review-Specification.md
 │   ├── AGCP-Multitenant-Operational-Specification.md
@@ -219,17 +214,13 @@ The following abbreviated tree lists the current controlled paths used for revie
 │   ├── CONTRIBUTING.md
 │   ├── AGCP-implementation-profile-validation.json
 │   ├── AGCP-provenance-wire-format-validation.json
-│   ├── AGCP-if002-wasm-machine-contract-validation.json
 │   ├── validate_implementation_profiles.py
 │   ├── validate_provenance_wire_format.py
-│   └── validate_if002_wasm_machine_contract.py
 ├── implementer/
 │   ├── README.md
 │   ├── AGCP-Implementation-Profile-Specification.md
 │   ├── AGCP-Implementation-Profile-Schema.json
 │   ├── AGCP-Implementation-Profile-Template.md
-│   ├── AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml
-│   ├── AGCP-RUST-STUDENT-SERVICE-2.0.0.md
 │   ├── AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md
 │   ├── IMPLEMENTATION-PROFILE-CATALOG.md
 │   ├── implementation-profile-catalog.json
@@ -422,7 +413,6 @@ The v2.0.1 worktree separates the unreleased repository target from the controll
 
 ## v2.0.1 repository-wide integrity gate
 
-The final Step 11 gate is defined by [`governance/validate_repository_integrity.py`](governance/validate_repository_integrity.py) and its controlled report, [`governance/AGCP-v2.0.1-repository-integrity-validation.json`](governance/AGCP-v2.0.1-repository-integrity-validation.json). It aggregates every finding-specific validation, verifies repository-wide references, links, catalogs, hashes, RTM dispositions, duplicate-payload absence, and synchronization-manifest coverage, and is executed by [`.github/workflows/validate-repository-integrity.yml`](.github/workflows/validate-repository-integrity.yml). The public correction set is summarized in [`AGCP-v2.0.1-CORRECTION-SUMMARY.md`](AGCP-v2.0.1-CORRECTION-SUMMARY.md).
 
 ## v2.0.1 repository synchronization
 

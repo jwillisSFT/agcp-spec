@@ -188,7 +188,6 @@ The following identifier set is identical to the executable and human-readable c
 
 ## Profile-specific IF-002 deterministic WASM companion
 
-The proposed Rust Student Service profile adopts `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0` and ABI `agcp_pec_abi_v1`. The controlled machine-readable vector set is `conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json`. It covers canonical input/output replay, required exports, zero imports, module-digest substitution, fuel, memory, timeout, traps, output limits, unsupported ABI, and attempts by a module to assert authority it does not possess.
 
 ## P1-12 content-digest contract
 

@@ -211,7 +211,6 @@ report={'release_context':{'repository_release_target':'v2.0.1','repository_rele
      'api/interface-catalog.json',
      'spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx',
      'governance/validate_provenance_wire_format.py',
-     '.github/workflows/validate-provenance-wire-format.yml',
      'conformance/fixture-mapping.json',
      'conformance/test-mapping.json',
      'conformance/test-mapping-validation.json'

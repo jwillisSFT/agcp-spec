@@ -1,10 +1,9 @@
 # AGCP Implementation Profiles
 
-This directory contains controlled Implementation Profile format artifacts, templates, profiles, catalogs, and package-integrity records. Implementation Profiles are lower precedence than the published AGCP Runtime Governance Conformance Requirements, the AGCP Core Specification, and applicable adopted normative Companion Specifications.
+This directory contains the public Implementation Profile format, schema, template, informational example, catalogs, and package-integrity records. Implementation Profiles are lower precedence than the published AGCP Runtime Governance Conformance Requirements, the AGCP Core Specification, and applicable adopted normative Companion Specifications.
 
 Profile-format validation establishes serialization validity only. It does not establish AGCP conformance.
 
-For the public repo, please disregard any references to a student profile.
 
 ## Controlled format artifacts
 
@@ -25,15 +24,14 @@ For the public repo, please disregard any references to a student profile.
 
 ## Validation
 
-The repository validator is [`governance/validate_implementation_profiles.py`](../governance/validate_implementation_profiles.py). CI runs it through [`.github/workflows/validate-implementation-profiles.yml`](../.github/workflows/validate-implementation-profiles.yml).
 
 The validator:
 
 1. rejects YAML aliases, anchors, explicit tags, merge keys, duplicate keys, non-finite values, and non-JSON data types;
 2. converts the YAML to the JSON data model;
 3. validates the profile against the controlled JSON Schema;
-4. verifies canonical filenames and companion links;
-5. recalculates the RFC 8785-compatible SHA-256 profile content digest; and
+4. verifies public artifact paths and catalog consistency;
+5. checks that no private deployment profile is included; and
 6. verifies the profile package manifest hashes.
 
 ## Repository synchronization

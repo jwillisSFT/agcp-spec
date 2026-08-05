@@ -21,15 +21,15 @@
   "source_hashes": {
     "governance/release-lifecycle-metadata.json": "134811725993fefd2628fc8eebbedc7d4ff899557d6a3044bafd6bcfc28e50ab",
     "governance/AGCP-Release-Lifecycle-Metadata-Policy.md": "fc243773121d9dabaa01936f642a4a8117511f1e76dc3d5d3c42fd90217c00ff",
-    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
-    "schemas/catalog/schema-catalog.csv": "c40d659252b09088f825bad18c643db2fa5839c787f8b76dff8cab798f13d6d7",
+    "schemas/catalog/schema-catalog.json": "eb9f628bf8876729e9f50b7c627ba7cf326b7af973212a8ece87b9c056534f2b",
+    "schemas/catalog/schema-catalog.csv": "f5d61630fa8325eea94d6aa404bdc0a07f25b5f9f259761a68f0d3a485b813e4",
     "schemas/SCHEMA-CATALOG.md": "12d3f15ecd77bf7f7acb16dfc4de97d4a06f89001eda2e3232369e862fa79289",
     "schemas/README.md": "e5955ec6371a070d18a2c8f25451bac578ac0d8ccfd4a5184abfa7c699c67914",
-    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
-    "api/interface-catalog.csv": "97e8f151032db144a86259d75e9c7cdfa5191a80b96784d004388a51bb181bb6",
-    "api/INTERFACE-CATALOG.md": "2c71c6609264a5b4afcf6a8b6b8811fd51ce7fff16353ddaa31552dc57d66845",
+    "api/interface-catalog.json": "99fc2b1259f450501c6848b9859659f28f89374de65409cbdf0880a535a56e6d",
+    "api/interface-catalog.csv": "845de6020b46de49e08c7794686f55f0e95383ec04b28384222bb2d58a0c56db",
+    "api/INTERFACE-CATALOG.md": "34e9e692db7ad8b126bc1ee6d8316251540e36ab55c37967d5471c3ab9a49298",
     "registries/registry-entry-catalog.json": "05760e6455452f6783a08dd0f180b7b4709e24de7ac3a0a4c4de2d20025df32e",
-    "registries/registry-entry-catalog.csv": "20e81d79f3fe35f13ae8694e24ba5b3b03145a63baab0cff486c4673dfa8085e",
+    "registries/registry-entry-catalog.csv": "5294d7548777d621a42665e4d4266284fb89de5b04ac05dbf20a3932181936ae",
     "registries/REGISTRY-ENTRY-CATALOG.md": "6adcfd4d5ee1317e5054efb3271fd013411a8e79aca022985965cd4dfb57ddbd",
     "registries/constraint-type-registry.json": "bfefd68275cd4285db9d9f9b29c706204e0007ebef09214612e977e872590bf1",
     "registries/invariant-type-registry.json": "9f9e7a7bd0b982dc1105ae85d636095be262bc9d0f9d82a247706a723b484864",
@@ -37,17 +37,15 @@
     "schemas/examples/ds003-implementation-metadata-response.json": "950f4e4bfa22e69621484d28d947e0b2fe2919d97b402e3204377d27628a9573",
     "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json": "733ad071c50ec61bfb2ae995915ce047f6768860343ea3ec45151e1e598a739b",
     "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
-    "conformance/agcp-conformance-manifest.yml": "321cd0def8ee07e430bf66f93485442a8d2043905eaf182564f01d0055a585e3",
-    "RELEASE_NOTES_v2.0.1.md": "ebbffdde62e7e4ab39ef462499d0ce9d57ed053a8c58a83bd2fefa3314da43b8",
-    "governance/validate_release_lifecycle_metadata.py": "c48d200af8926062745a0ad38364aa0735ed19924f52b65e15134101ec683da0",
-    ".github/workflows/validate-release-lifecycle-metadata.yml": "0dd561e2124e08ead517d15e17af655d061e19fa1768b5e55b396e70e8bbdb2c",
+    "conformance/agcp-conformance-manifest.yml": "05146f3ebc9dbfdc87693e9778ef8a194620f672163620361c5c8207d1747fd1",
+    "RELEASE_NOTES_v2.0.1.md": "0b82c559f855daf3c7ed0ef11533ebe716f2819f483652f8982acbdc58cc20f9",
+    "governance/validate_release_lifecycle_metadata.py": "fa786ef02b89bf9b5750abc7f6d491c7bd928ef42b29122654685856b065e293",
     "spec/AGCP-Multitenant-Operational-Specification.md": "2cb540ae09754ba2d8c359df991f3e1736a30790355a78ac69aa639893191000",
     "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md": "c32ba0a6f8406360b07729a3ab9cc6e4d3ba9bdf9c2b32c690d30d146fb00abe",
-    "spec/AGCP-Policy-Evaluation-Contract.md": "61c9175ce6c7e3bf7010a8543c4b1656c1d857b6dd4ea6bd8c25353fcdcaacf0",
+    "spec/AGCP-Policy-Evaluation-Contract.md": "f7a45a87df3608641ca3219f8aff8a1eb6a98aa3f5a3097bf7fad30e69859286",
     "spec/AGCP-Provenance-Wire-Format-Specification.md": "c4823e61625cc40172dad21aa5135d9e7f2ef91a45ae51ba76ddfcc122f98c39",
     "spec/AGCP-Human-Review-Specification.md": "5113078fcb769e1e0bebef1687c35dd686da531ca11a71cdc26d6859ce6120ba",
-    "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md": "9218174b20c80e5f89d822eb4ea953f86be0846eaff455f5514a6ae6b5ebd72c",
-    "spec/AGCP-Error-Mapping.md": "fbcd5b3bca11389ae3e61997ac4ce404e86f99a1697ba3bf050479b0eec93316",
+    "spec/AGCP-Error-Mapping.md": "20a2c73d524cfd9ff536883598344ca3418233c6d3c294bbe85362aed48eeee8",
     "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a"
   },
   "checks": [
@@ -225,11 +223,6 @@
       "check": "spec_header_AGCP-Human-Review-Specification",
       "status": "PASS",
       "detail": "# AGCP Human Adjudication and Governance Approval Specification\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.1  \n**Repository Release Target:** AGCP v2.0.1  \n**Repository Release Target Status:** Unreleased Accumulated Correction Set  \n**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-07-30\n\n## 1. Purpose\n\nThis specification defines the normative structure and processing requirements for human adjudication, governed approval, cosignature, risk acceptance, cancellation, withdrawal, and quorum participation within AGCP.\n\nThe public ingress command is the Governance Approval Submission defined by `schemas/governance_approval_submission.json` (DS-045). The canonical authoritative approval record is the Governance Approval Artifact defined by `schemas/governance_approval_artifact.json` (DS-026). Claimant submissions and AGCP-created or AGCP-qualified records are distinct objects and SHALL NOT be conflated.\n\n## 2. Scope\n\nThis specification applies to every AGCP implementation that supports governance decisions requiring human or governed approval participation.\n"
-    },
-    {
-      "check": "spec_header_AGCP-WASM-Policy-Evaluation-Machine-Contract",
-      "status": "PASS",
-      "detail": "# AGCP Deterministic WASM Policy Evaluation Machine Contract\n\n**Status:** Normative Profile Companion  \n**Base Interface:** IF-002 - AGCP Policy Evaluation Contract v2  \n**Companion Interface Identifier:** `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0`  \n**Companion Contract Version:** `1.0.0`  \n**ABI Identifier:** `agcp_pec_abi_v1`  \n**Applicable Implementation Profile:** `AGCP-RUST-STUDENT-SERVICE-2.0.0`  \n**AGCP Release Target:** v2.0.1  \n**Artifact Lifecycle:** Current  \n**Repository Release Target Status:** Unreleased Accumulated Correction Set  \n**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-07-30\n\n## 1. Purpose and scope\n\nThis specification defines the deterministic WebAssembly machine boundary selected by the controlled Rust Student Service Implementation Profile. It specializes IF-002 without changing the implementation-independent AGCP Policy Evaluation Contract or making WebAssembly a universal AGCP requirement.\n\nA conforming module under this companion SHALL be a pure, side-effect-free function over a canonical input envelope, exact module bytes, declared runtime compatibility, and evidence-recorded resource limits. A Policy Evaluation Module SHALL NOT create an authoritative Governance Outcome, Governance Receipt, Execution Authorization, Controlled Governance Activation, or Commit Boundary result.\n"
     },
     {
       "check": "spec_header_AGCP-Error-Mapping",
@@ -485,18 +478,6 @@
     },
     {
       "check": "report_release_context_AGCP-provenance-wire-format-validation",
-      "status": "PASS",
-      "detail": {
-        "repository_release_target": "v2.0.1",
-        "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
-        "controlling_published_baseline": "v2.0.0",
-        "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-07-30",
-        "artifact_lifecycle_state": "CURRENT"
-      }
-    },
-    {
-      "check": "report_release_context_AGCP-if002-wasm-machine-contract-validation",
       "status": "PASS",
       "detail": {
         "repository_release_target": "v2.0.1",

@@ -27,7 +27,7 @@ RELEASE_CONTEXT = {
 }
 
 FINDINGS = [
-    "P0-01", "P0-02", "P0-05", "P0-06", "P0-10",
+    "P0-01", "P0-02", "P0-06", "P0-10",
     "P1-01", "P1-03", "P1-09", "P1-12", "P1-14", "P1-17",
     "P2-01", "P2-02", "P2-04", "P2-06",
 ]
@@ -43,7 +43,6 @@ EXPECTED_VERSIONS = {
 CONTROLLED_REPORTS = {
     "implementation_profile": "governance/AGCP-implementation-profile-validation.json",
     "provenance_wire": "governance/AGCP-provenance-wire-format-validation.json",
-    "if002_wasm": "governance/AGCP-if002-wasm-machine-contract-validation.json",
     "command_record": "governance/AGCP-command-record-separation-validation.json",
     "content_digest": "governance/AGCP-content-digest-contract-validation.json",
     "http_error_metadata": "governance/AGCP-http-error-metadata-validation.json",
@@ -198,9 +197,6 @@ def main() -> int:
     schema_paths = [entry["repository_path"] for entry in schema_catalog["implemented_schemas"]]
     schema_paths.extend([
         "implementer/AGCP-Implementation-Profile-Schema.json",
-        "api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json",
-        "api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json",
-        "api/if-002/AGCP-WASM-PEC-Error-Envelope.schema.json",
     ])
     schema_errors: list[str] = []
     for relative in sorted(set(schema_paths)):
@@ -411,7 +407,6 @@ def main() -> int:
 
     # Verify required final publication artifacts and clean internal Git state except for this validation work.
     required_final_artifacts = [
-        "AGCP-v2.0.1-CORRECTION-SUMMARY.md",
         "RELEASE_NOTES_v2.0.1.md",
         "governance/AGCP-v2.0.1-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
         "governance/AGCP-v2.0.1-repository-synchronization-manifest.json",
@@ -452,7 +447,6 @@ def main() -> int:
         "controlled_report_results": report_results,
         "versions": EXPECTED_VERSIONS,
         "source_hashes": {
-            "AGCP-v2.0.1-CORRECTION-SUMMARY.md": sha256(root / "AGCP-v2.0.1-CORRECTION-SUMMARY.md") if (root / "AGCP-v2.0.1-CORRECTION-SUMMARY.md").is_file() else None,
             SYNC_MANIFEST: sha256(root / SYNC_MANIFEST),
             "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": sha256(root / "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx"),
             "schemas/catalog/schema-catalog.json": sha256(schema_catalog_path),

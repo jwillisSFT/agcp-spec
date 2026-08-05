@@ -44,5 +44,3 @@ Harness Checks are executable realizations of portions of published Formal Test 
 - Every mandatory IF-001 operation has at least one schema-valid positive vector; applicable negative, isolation, and idempotency behavior is also executable.
 - Every `MUST` Harness Check SHALL reference at least one substantive executable vector. `CHECK-GOVERNANCE-COMPILATION-ACTIVATION` is realized by `TV-GCFG-001`, `TV-GCOMP-001`, `TV-GCONST-001`, `TV-GCONST-002`, `TV-GOMIT-001`, `TV-GSELF-001`, `TV-GACT-001`, `TV-GACT-002`, and `TV-GROLL-001`.
 - Check identifiers remain stable, but obsolete compatibility behavior is not retained.
-
-

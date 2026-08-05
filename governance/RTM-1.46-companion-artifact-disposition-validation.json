@@ -157,42 +157,6 @@
       ]
     },
     {
-      "path": "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md",
-      "repository_artifact_exists": true,
-      "reference_count": 12,
-      "rtm_ids": [
-        "RTM-00075",
-        "RTM-00076",
-        "RTM-00077",
-        "RTM-00078",
-        "RTM-00089",
-        "RTM-00090",
-        "RTM-00110",
-        "RTM-00111",
-        "RTM-00112",
-        "RTM-00113",
-        "RTM-00114",
-        "RTM-00117"
-      ],
-      "cr_ids": [
-        "CR-075",
-        "CR-076",
-        "CR-077",
-        "CR-078",
-        "CR-089",
-        "CR-090",
-        "CR-110",
-        "CR-111",
-        "CR-112",
-        "CR-113",
-        "CR-114",
-        "CR-117"
-      ],
-      "dispositions": [
-        "Adopted profile-specific normative companion for AGCP-RUST-STUDENT-SERVICE-2.0.0; controlled and traceable, but not a universal AGCP implementation requirement."
-      ]
-    },
-    {
       "path": "spec/AGCP-Continuation-Integrity.md",
       "repository_artifact_exists": false,
       "reference_count": 12,

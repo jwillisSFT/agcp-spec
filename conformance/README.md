@@ -241,11 +241,6 @@ preserving the controlled CR ↔ Core-derived NS ↔ TC traceability relationshi
 
 Cross-language canonicalization, detached-signature, schema-rejection, protected-header, algorithm, payload-modification, and replay vectors are provided in `provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json`. They are validated by `../governance/validate_provenance_wire_format.py`.
 
-
-## IF-002 deterministic WASM companion
-
-The controlled Rust Student Service profile companion is specified by `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md`. Machine-readable ABI and envelope schemas are under `api/if-002/`, and reusable ABI, import, failure, digest-binding, and replay vectors are under `conformance/if-002/`. These supplement rather than replace the Formal Test Cases.
-
 ## Governance Approval command/record separation
 
 P0-06 vectors are under `conformance/command-record/`. They verify DS-045 untrusted ingress and DS-026 authoritative-record separation.
@@ -274,5 +269,3 @@ The cumulative v2.0.1 correction set is indexed by `../governance/AGCP-v2.0.1-re
 
 
 ## Repository-wide integrity gate
-
-The final accumulated correction-set gate is `governance/validate_repository_integrity.py`. Its controlled report is `governance/AGCP-v2.0.1-repository-integrity-validation.json`, and its CI workflow is `.github/workflows/validate-repository-integrity.yml`. The public correction summary is `AGCP-v2.0.1-CORRECTION-SUMMARY.md`. This gate aggregates the finding-specific validators and repository synchronization controls; it does not establish implementation conformance.

@@ -23,7 +23,6 @@
 
 ## 2026-08-03 - P0-05 IF-002 deterministic WASM machine contract
 
-- Published the controlled Rust Student Service IF-002 companion `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0`, contract version `1.0.0`, and ABI `agcp_pec_abi_v1`.
 - Added normative and machine-readable contracts, canonical envelope schemas, public vectors, profile binding, interface catalog entries, direct RTM mappings, test-mapping references, and CI validation.
 - Preserved the implementation-independent IF-002 contract and explicitly prevented the profile-specific WASM selection from becoming a universal AGCP Core requirement.
 
@@ -38,7 +37,6 @@
 ## 2026-08-03 - v2.0.1 Implementation Profile package integration
 
 - Added the controlled Implementation Profile Specification and Draft 2020-12 schema under `implementer/`.
-- Added the authoritative `AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml` profile and its Markdown companion while preserving status `DEVELOPMENT_PRE_CONFORMANCE` and lifecycle `PROPOSED`.
 - Superseded `AGCP-Implementation-Decision-Record-Template.md` with the correctly named `AGCP-Implementation-Profile-Template.md`.
 - Added the implementation-profile directory README, human-readable and machine-readable catalogs, package manifest, repository validator, controlled validation report, and CI workflow.
 - Registered the package in the root README, architecture overview, conformance manifest, and v2.0.1 working release notes.

@@ -340,4 +340,3 @@ Specification release versioning is managed by repository release tags.
 | Governance quota, entitlement, or policy denial | 200 authoritative result | Governance Outcome | Yes | Not applicable |
 
 Resource-specific not-found codes are deprecated for public IF-001 responses. The protected reason MAY be retained in Governance Evidence or telemetry. HTTP 429 and capacity-based HTTP 503 are transport/service conditions and SHALL NOT be reported as governance denial, Structural Refusal, or authorization outcome.
-

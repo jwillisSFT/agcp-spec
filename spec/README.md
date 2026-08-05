@@ -164,7 +164,6 @@ For repository usage and project information, see:
 * `../README.md`
 
 
-- `AGCP-WASM-Policy-Evaluation-Machine-Contract.md` - controlled profile-specific IF-002 deterministic WASM ABI companion.
 
 ---
 
