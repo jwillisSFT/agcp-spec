@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json",
+  "title": "AGCP WASM PEC Input Envelope",
+  "description": "Profile-specific canonical input envelope for IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0 and ABI agcp_pec_abi_v1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_id",
+    "contract_version",
+    "abi_version",
+    "evaluation_id",
+    "tenant_id",
+    "governance_domain_id",
+    "proposal_identity",
+    "canonical_state_snapshot",
+    "governance_bindings",
+    "authoritative_evaluation_time",
+    "authority_lineage_refs",
+    "evidence_refs",
+    "resource_limits"
+  ],
+  "properties": {
+    "contract_id": {
+      "const": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0"
+    },
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "abi_version": {
+      "const": "agcp_pec_abi_v1"
+    },
+    "evaluation_id": {
+      "type": "string",
+      "pattern": "^PEVAL-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "governance_domain_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "proposal_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proposal_id",
+        "proposal_version",
+        "qualified_proposal_digest"
+      ],
+      "properties": {
+        "proposal_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "proposal_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "qualified_proposal_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "canonical_state_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_id",
+        "snapshot_digest",
+        "resolved_at",
+        "source_manifest_digest"
+      ],
+      "properties": {
+        "snapshot_id": {
+          "type": "string",
+          "pattern": "^CSS-[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+        },
+        "snapshot_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "resolved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_manifest_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "governance_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "governance_version",
+        "policy_set_digest",
+        "governance_configuration_digest",
+        "compiled_governance_artifact_digest",
+        "module_digest"
+      ],
+      "properties": {
+        "governance_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "policy_set_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "governance_configuration_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "compiled_governance_artifact_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "module_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "authoritative_evaluation_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "authority_lineage_refs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "maxItems": 256,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+      }
+    },
+    "resource_limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fuel_limit",
+        "memory_limit_bytes",
+        "output_limit_bytes",
+        "timeout_milliseconds"
+      ],
+      "properties": {
+        "fuel_limit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "memory_limit_bytes": {
+          "type": "integer",
+          "minimum": 65536
+        },
+        "output_limit_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeout_milliseconds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "SHA-256"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "record_id": "AGCP-IF001-EXECUTABLE-OPERATION-COVERAGE-VALIDATION-2026-07-31",
   "record_type": "controlled_conformance_validation",
   "status": "PASS",
-  "validated_at": "2026-07-31T11:30:00Z",
+  "validated_at": "2026-08-03",
   "scope": {
     "mandatory_interface": "IF-001",
     "openapi_contract": "api/AGCP-HTTP-Contract.yaml",
@@ -12,11 +12,11 @@
     "test_mapping": "conformance/test-mapping.json"
   },
   "source_hashes": {
-    "api/AGCP-HTTP-Contract.yaml": "0695e294d8564d312590dd97115a853e2bbbb13988de2538f213a904f1afb2c9",
-    "spec/AGCP-HTTP-Interface-Specification.md": "93f68c2d7347063587852eb10ea711b297906e8ed2d2656844d9b24d1226b98e",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "0dd2b25ddae6e2fee29dfcc0e02d0baaf560dc4fe41047b2ec805df5aa029120",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "0c26b0cd0bf56d7820b98664953f6137942dbec3307cbc048c245c33e7b3ba57",
-    "conformance/test-mapping.json": "eb352ecbd584cbbd2f2008d67e60e133ff42c17eb6e33e44dccdf3419a08a47e",
+    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
+    "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe",
+    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
     "conformance/harness-checks.json": "97a9d30f166aafe04c954c7344f9a7688584121e68e4516e61f966691597deb8"
   },
   "summary": {
@@ -306,5 +306,23 @@
     }
   ],
   "closure_statement": "All ten mandatory IF-001 operations have a schema-valid positive vector. The five operations added by F-08 also have every applicable negative, tenant/Governance-Domain-isolation, and idempotency scenario required by the corrective action.",
-  "validation_scope_note": "F-08 requires positive coverage for all ten mandatory operations and complete applicable negative, isolation, and idempotency coverage for the five operations that previously had no executable vector. Pre-existing operation category breadth is preserved but is not redefined by this corrective action. Nine F-09 non-HTTP harness-operation vectors expand Governance Compilation and Controlled Activation coverage without changing IF-001 operation coverage. Nine F-09 non-HTTP harness-operation vectors expand Governance Compilation and Controlled Activation coverage without changing IF-001 operation coverage."
+  "validation_scope_note": "F-08 requires positive coverage for all ten mandatory operations and complete applicable negative, isolation, and idempotency coverage for the five operations that previously had no executable vector. Pre-existing operation category breadth is preserved but is not redefined by this corrective action. Nine F-09 non-HTTP harness-operation vectors expand Governance Compilation and Controlled Activation coverage without changing IF-001 operation coverage. Nine F-09 non-HTTP harness-operation vectors expand Governance Compilation and Controlled Activation coverage without changing IF-001 operation coverage.",
+  "p0_02_provenance_wire_refresh": {
+    "status": "PASS",
+    "finding": "P0-02",
+    "scope": "Source hashes refreshed after provenance-only wire-envelope synchronization; previously validated operation, error, request-parameter, executable-coverage, and fixture expectations remain unchanged.",
+    "provenance_validation_report": "governance/AGCP-provenance-wire-format-validation.json",
+    "mapping_catalog_synchronization": "PASS"
+  },
+  "p0_05_if002_scope_refresh": {
+    "status": "PASS",
+    "finding": "P0-05",
+    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately.",
+    "validation_report": "governance/AGCP-if002-wasm-machine-contract-validation.json"
+  },
+  "p1_03_p1_09_p1_14_p1_17_regression": "PASS",
+  "p0_10_semantic_fixture_regression": {
+    "status": "PASS",
+    "validation_report": "governance/AGCP-semantic-fixture-validation.json"
+  }
 }

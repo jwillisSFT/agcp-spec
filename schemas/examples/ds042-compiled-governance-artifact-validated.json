@@ -6,7 +6,7 @@
   "tenant_id": "tenant-1",
   "governance_domain_id": "domain-1",
   "effective_scope": {
-    "tenant_id": "tenant-id-1"
+    "tenant_id": "tenant-1"
   },
   "governance_configuration_ref": {
     "governance_configuration_id": "config-1",
@@ -170,9 +170,9 @@
   "domain_constraint_sets": [
     {
       "domain_constraint_set_id": "DCS-EXAMPLE-1",
-      "governance_domain_id": "governance-domain-id-1",
+      "governance_domain_id": "domain-1",
       "effective_scope": {
-        "tenant_id": "tenant-id-1"
+        "tenant_id": "tenant-1"
       },
       "constraint_refs": [
         {
@@ -185,8 +185,8 @@
             "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
           },
           "artifact_uri": "https://agcp.ai/example/artifact-uri",
-          "tenant_id": "tenant-id-1",
-          "governance_domain_id": "governance-domain-id-1",
+          "tenant_id": "tenant-1",
+          "governance_domain_id": "domain-1",
           "status": "Registered"
         }
       ],
@@ -203,8 +203,8 @@
             "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
           },
           "artifact_uri": "https://agcp.ai/example/artifact-uri",
-          "tenant_id": "tenant-id-1",
-          "governance_domain_id": "governance-domain-id-1",
+          "tenant_id": "tenant-1",
+          "governance_domain_id": "domain-1",
           "status": "Registered"
         }
       ],
@@ -244,8 +244,8 @@
             "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
           },
           "artifact_uri": "https://agcp.ai/example/artifact-uri",
-          "tenant_id": "tenant-id-1",
-          "governance_domain_id": "governance-domain-id-1",
+          "tenant_id": "tenant-1",
+          "governance_domain_id": "domain-1",
           "status": "Registered"
         }
       ],
@@ -262,8 +262,8 @@
             "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
           },
           "artifact_uri": "https://agcp.ai/example/artifact-uri",
-          "tenant_id": "tenant-id-1",
-          "governance_domain_id": "governance-domain-id-1",
+          "tenant_id": "tenant-1",
+          "governance_domain_id": "domain-1",
           "status": "Registered"
         }
       ],
@@ -474,12 +474,12 @@
   },
   "provenance": {
     "signer": "example",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "key-1",
-      "sig": "signature-value"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-1",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-862fe45ff213215b38f541be",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LTEiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwNDItY29tcGlsZWQtZ292ZXJuYW5jZS1hcnRpZmFjdC12YWxpZGF0ZWQuanNvbjokLnByb3ZlbmFuY2U"
   },
   "artifact_digest": {
     "algorithm": "SHA-256",

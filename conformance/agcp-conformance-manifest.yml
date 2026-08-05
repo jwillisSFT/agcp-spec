@@ -2,20 +2,39 @@ agcp_conformance_manifest:
   spec:
     name: AGCP
     release_model: repository_release
-    status: public-review
-
-    agcp_release: v2.0.0
+    repository_release_target: v2.0.1
+    repository_release_target_status: unreleased-accumulated-correction-set
+    artifact_lifecycle_state: current
+    controlling_published_baseline: v2.0.0
+    controlling_baseline_status: public-review-controlled-baseline
+    baseline_date: 2026-07-30
+    agcp_release: v2.0.1
+    rtm_dataset_version: RTM-1.46
+    schema_catalog_version: 1.0.50
+    interface_catalog_version: 1.0.5
+    registry_entry_catalog_version: 1.0.3
+    implementation_profile_catalog_version: 1.0.3
+  release_lifecycle_metadata:
+    finding: P2-01
+    policy: governance/AGCP-Release-Lifecycle-Metadata-Policy.md
+    machine_readable_policy: governance/release-lifecycle-metadata.json
+    validation_script: governance/validate_release_lifecycle_metadata.py
+    validation_report: governance/AGCP-release-lifecycle-metadata-validation.json
+    ci_workflow: .github/workflows/validate-release-lifecycle-metadata.yml
   normative_precedence:
     order:
     - Published AGCP Runtime Governance Conformance Requirements (CRs)
     - AGCP Core Specification
-    - Applicable normative Companion Specifications expressly adopted by the implementation profile
+    - Applicable normative Companion Specifications expressly adopted by the implementation
+      profile
     - Implementation Profiles
     - AGCP Conformance Test Suite
     - Reference Implementations
-    architectural_interpretation: >
-      The Architecture Reference Model governs architectural terminology and concept meaning where an ARM-defined concept is used, but does not independently create conformance obligations.
+    architectural_interpretation: 'The Architecture Reference Model governs architectural
+      terminology and concept meaning where an ARM-defined concept is used, but does
+      not independently create conformance obligations.
 
+      '
   normative_traceability:
     model:
     - Published CRs and applicable Core behavior
@@ -23,9 +42,13 @@ agcp_conformance_manifest:
     - Core-derived Normative Statement (NS) identifiers
     - Requirements Traceability Matrix (RTM) mappings
     - Conformance Test Case (TC)
-    description: >
-      The RTM is the authoritative conformance traceability artifact. Normative Statements identify atomic obligations extracted from the Core and do not supersede the CRs, Core, or applicable adopted normative Companion Specifications. Harness checks and test vectors provide executable realization of Test Cases and SHALL NOT introduce independent normative requirements.
+    description: 'The RTM is the authoritative conformance traceability artifact.
+      Normative Statements identify atomic obligations extracted from the Core and
+      do not supersede the CRs, Core, or applicable adopted normative Companion Specifications.
+      Harness checks and test vectors provide executable realization of Test Cases
+      and SHALL NOT introduce independent normative requirements.
 
+      '
   normative_documents:
   - spec/AGCP_Runtime_Governance_Requirements_CR-001_thru_CR-122.csv
   - spec/AGCP-Core.docx
@@ -36,145 +59,342 @@ agcp_conformance_manifest:
   - spec/AGCP-Multitenant-Operational-Specification.md
   - spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md
   - spec/AGCP-Error-Mapping.md
-
   api_contract:
     file: api/AGCP-HTTP-Contract.yaml
     description: OpenAPI contract for AGCP HTTP interface conformance.
-
     interface_id: IF-001
     interface_version: v2
   schemas:
     directory: schemas/
-    description: Published JSON Schemas for AGCP governance artifacts, requests, responses, and common types.
-
+    description: Published JSON Schemas for AGCP governance artifacts, requests, responses,
+      and common types.
   registries:
     directory: registries/
-    description: Published registries for rejection codes, constraint types, invariant types, and related registered 
-      values.
+    description: Published registries for rejection codes, constraint types, invariant
+      types, and related registered values.
+  implementation_profiles:
+    directory: implementer/
+    format_specification: implementer/AGCP-Implementation-Profile-Specification.md
+    schema: implementer/AGCP-Implementation-Profile-Schema.json
+    catalog: implementer/implementation-profile-catalog.json
+    package_manifest: implementer/implementation-profile-manifest.json
+    validation_script: governance/validate_implementation_profiles.py
+    validation_report: governance/AGCP-implementation-profile-validation.json
+    profiles:
+    - profile_id: AGCP-RUST-STUDENT-SERVICE-2.0.0
+      authoritative_yaml: implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml
+      human_readable_rendering: implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.md
+      profile_version: 2.0.0-draft.6
+      status: DEVELOPMENT_PRE_CONFORMANCE
+      lifecycle_state: PROPOSED
+      profile_digest: 3e391cd0b0a89189434776c4593dedb2b3dd460bfd5fe7f89d8fc8fdb4373b2d
+      baseline_bundle_sha256: 790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326
+      conformance_claim_status: NOT_CLAIMED
+    description: 'Controlled profile-format artifacts and public Implementation Profiles.
+      Profile-format validation establishes serialization validity only and does not
+      establish AGCP conformance.
 
+      '
   conformance_artifacts:
     relationship_model:
       file: conformance/AGCP-Conformance-Traceability-and-Automation-Model.md
-      description: Defines the normative relationship semantics among CRs, NS identifiers, the RTM, Formal Test Cases, Harness Checks, Harness Test Vectors, execution evidence, assessment results, and conformance claims without creating new implementation obligations.
+      description: Defines the normative relationship semantics among CRs, NS identifiers,
+        the RTM, Formal Test Cases, Harness Checks, Harness Test Vectors, execution
+        evidence, assessment results, and conformance claims without creating new
+        implementation obligations.
     conformance_specification:
       file: conformance/AGCP-Conformance.md
-      description: Defines conformance profiles, required conformance behavior, and repository-release conformance 
-        model.
-
+      description: Defines conformance profiles, required conformance behavior, and
+        repository-release conformance model.
     test_suite:
       file: conformance/Conformance Test Suite.md
-      description: Defines the authoritative Formal Test Case methodology, required evidence, and assessment-result rules.
-
+      description: Defines the authoritative Formal Test Case methodology, required
+        evidence, and assessment-result rules.
     test_matrix:
       file: conformance/AGCP-Test-Matrix.md
-      description: Human-readable mapping between validated capabilities and representative harness test vectors.
-
+      description: Human-readable mapping between validated capabilities and representative
+        harness test vectors.
     test_mapping:
       file: conformance/test-mapping.json
-      description: Machine-readable CR/Core-derived-NS/TC mapping extended to DS, IF, REG, fixtures, Harness Checks, and Harness Test Vectors, with explicit dispositions where no dedicated vector exists.
-
+      description: Machine-readable CR/Core-derived-NS/TC mapping extended to DS,
+        IF, REG, fixtures, Harness Checks, and Harness Test Vectors, with explicit
+        dispositions where no dedicated vector exists.
     harness_checks:
       file: conformance/harness-checks.json
-      description: Executable harness checks. These are harness-local checks and are not an independent normative 
-        assertion layer.
-
+      description: Executable harness checks. These are harness-local checks and are
+        not an independent normative assertion layer.
     deterministic_test_vectors:
       file: conformance/AGCP-Conformance-Test-Vectors.md
-      description: Fifty-four deterministic execution scenarios covering all ten mandatory IF-001 operations, Proposal
-        Qualification, Governance Decision, Governance Approval and Adjudication, Execution Authorization, applicable
-        pre-commit Continuation Integrity, Governance Realization, Commit-Bound Admissibility, Policy Enforcement Point
-        and Commit Boundary behavior, governance-artifact registration and retrieval, Governance Configuration, deterministic Governance Compilation, constitutional validation, omission analysis, Governance Self-Protection, atomic Controlled Governance Activation, governed rollback, cross-cutting Governance Evidence,
-        Append-Only Governance Ledger behavior, Canonical State resolution, idempotency, and isolation behavior.
-
+      description: Fifty-four deterministic execution scenarios covering all ten mandatory
+        IF-001 operations, Proposal Qualification, Governance Decision, Governance
+        Approval and Adjudication, Execution Authorization, applicable pre-commit
+        Continuation Integrity, Governance Realization, Commit-Bound Admissibility,
+        Policy Enforcement Point and Commit Boundary behavior, governance-artifact
+        registration and retrieval, Governance Configuration, deterministic Governance
+        Compilation, constitutional validation, omission analysis, Governance Self-Protection,
+        atomic Controlled Governance Activation, governed rollback, cross-cutting
+        Governance Evidence, Append-Only Governance Ledger behavior, Canonical State
+        resolution, idempotency, and isolation behavior.
     harness_specification:
       file: conformance/AGCP-Conformance-Harness-Spec.yml
       description: Specification for running automated AGCP conformance tests.
-
     harness_request_parameter_validation:
       file: conformance/AGCP-harness-request-parameter-validation.json
-      description: Controlled validation record proving that every primary request and HTTP setup prestep supplies every required IF-001 path, query, and header parameter.
-
+      description: Controlled validation record proving that every primary request
+        and HTTP setup prestep supplies every required IF-001 path, query, and header
+        parameter.
     harness_error_model_validation:
       file: conformance/AGCP-harness-error-model-validation.json
-      description: Controlled validation record proving that every declared harness rejection-code and HTTP-status pair agrees with the normative Error Mapping and active rejection-code registry, that every expected primary or setup status is declared by the matched IF-001 OpenAPI operation, and that governance-significant Error Mapping obligations preserve the Core Governance Evidence requirement.
-
+      description: Controlled validation record proving that every declared harness
+        rejection-code and HTTP-status pair agrees with the normative Error Mapping
+        and active rejection-code registry, that every expected primary or setup status
+        is declared by the matched IF-001 OpenAPI operation, and that governance-significant
+        Error Mapping obligations preserve the Core Governance Evidence requirement.
     if001_executable_operation_coverage_validation:
       file: conformance/AGCP-if001-executable-operation-coverage-validation.json
-      description: Controlled validation record proving that all ten mandatory IF-001 operations have schema-valid positive executable coverage and that the five operations added under F-08 have all applicable negative, tenant/domain-isolation, and idempotency scenarios.
-
+      description: Controlled validation record proving that all ten mandatory IF-001
+        operations have schema-valid positive executable coverage and that the five
+        operations added under F-08 have all applicable negative, tenant/domain-isolation,
+        and idempotency scenarios.
     governance_compilation_activation_executable_validation:
       file: conformance/AGCP-governance-compilation-activation-executable-validation.json
-      description: Controlled validation record proving that every MUST Harness Check has at least one substantive executable vector and that Governance Configuration, deterministic compilation, constitutional validation, omission analysis, self-protection, atomic controlled activation, failure preservation, governed rollback, evidence, and lineage are asserted.
-
+      description: Controlled validation record proving that every MUST Harness Check
+        has at least one substantive executable vector and that Governance Configuration,
+        deterministic compilation, constitutional validation, omission analysis, self-protection,
+        atomic controlled activation, failure preservation, governed rollback, evidence,
+        and lineage are asserted.
+    reference_integrity:
+      disposition_document: governance/AGCP-Normative-Companion-Reference-Dispositions.md
+      machine_readable_dispositions: governance/normative-companion-reference-dispositions.json
+      validation_script: governance/validate_normative_companion_references.py
+      validation_report: governance/AGCP-normative-companion-reference-validation.json
+      ci_workflow: .github/workflows/validate-normative-companion-references.yml
+      finding: P1-01
+      description: Controlled disposition and repository-wide validation of absent
+        or noncanonical normative companion references.
     fixture_mapping:
       file: conformance/fixture-mapping.json
-      description: Machine-readable mapping from exact active schema files to validated conformance examples.
+      description: Machine-readable mapping from exact active schema files to validated
+        conformance examples.
     schema_examples:
       directory: schemas/examples/
-      description: Draft 2020-12-valid canonical examples used by the conformance fixture catalog.
+      description: Draft 2020-12-valid canonical examples used by the conformance
+        fixture catalog.
   pass_criteria:
     requirements:
-    - All applicable Normative Statement, Conformance Requirement, and Test Case mappings must pass.
-    - Every fixture in conformance/fixture-mapping.json must validate against its exact active schema file before 
-      harness execution.
+    - All applicable Normative Statement, Conformance Requirement, and Test Case mappings
+      must pass.
+    - Every fixture in conformance/fixture-mapping.json must validate against its
+      exact active schema file before harness execution.
     - All applicable deterministic test vectors must pass.
-    - Every mandatory IF-001 operation must have at least one schema-valid positive executable vector, and operations added under F-08 must have the applicable negative, tenant/Governance-Domain-isolation, and idempotency coverage defined by the controlled operation-coverage record.
-    - Governance-significant events must be recorded in the Append-Only Governance Ledger where required.
-    - Canonical State SHALL be deterministically resolved from qualified authoritative governance sources. The ordered 
-      Governance Ledger is authoritative for recorded governance events, authoritative event ordering, and Derived 
-      Lifecycle State.
-    - Materialized governance state used for replay must be verifiably derived from the applicable authoritative sources
-      and ledger records.
-    - Governance Evidence must be produced as a cross-cutting supporting service during every applicable governance-significant
-      stage, linked, attributable, integrity-protected, and sufficient for audit and deterministic replay.
-    - Governance Approval and Adjudication, Execution Authorization, applicable pre-commit Continuation Integrity,
-      Governance Realization, final Commit-Bound Admissibility, Policy Enforcement Point, and Commit Boundary requirements
-      must be enforced where applicable.
+    - Every mandatory IF-001 operation must have at least one schema-valid positive
+      executable vector, and operations added under F-08 must have the applicable
+      negative, tenant/Governance-Domain-isolation, and idempotency coverage defined
+      by the controlled operation-coverage record.
+    - Governance-significant events must be recorded in the Append-Only Governance
+      Ledger where required.
+    - Canonical State SHALL be deterministically resolved from qualified authoritative
+      governance sources. The ordered Governance Ledger is authoritative for recorded
+      governance events, authoritative event ordering, and Derived Lifecycle State.
+    - Materialized governance state used for replay must be verifiably derived from
+      the applicable authoritative sources and ledger records.
+    - Governance Evidence must be produced as a cross-cutting supporting service during
+      every applicable governance-significant stage, linked, attributable, integrity-protected,
+      and sufficient for audit and deterministic replay.
+    - Governance Approval and Adjudication, Execution Authorization, applicable pre-commit
+      Continuation Integrity, Governance Realization, final Commit-Bound Admissibility,
+      Policy Enforcement Point, and Commit Boundary requirements must be enforced
+      where applicable.
     - Tenant and Governance Domain isolation requirements must be enforced where applicable.
-    - Every MUST Harness Check must reference at least one substantive executable vector, and every declared expected behavior must be asserted by the controlled vector catalog.
+    - Every MUST Harness Check must reference at least one substantive executable
+      vector, and every declared expected behavior must be asserted by the controlled
+      vector catalog.
   determinism_requirements:
-  - Governance pipeline execution order must include Proposal Qualification, Governance Decision Function, Execution Authorization or another eligible nonterminal state, applicable pre-commit Continuation Integrity, and Governance Realization/Commit Boundary processing.
-  - Governance Evidence must be treated as a cross-cutting supporting service rather than a terminal pipeline stage.
-  - Identical authoritative inputs must produce equivalent externally observable governance outcomes.
-  - Replay of identical proposals using the applicable replay-protection or idempotency mechanism must not create 
-    conflicting governance state.
-  - Ledger sequence order, not timestamp order, SHALL determine the authoritative ordering of recorded governance events
-    and the derivation of Derived Lifecycle State.
-  - Where Canonical State incorporates Governance Ledger records, those records SHALL be interpreted according to 
-    authoritative ledger ordering. Other Canonical State facts SHALL be resolved from their applicable qualified 
-    authoritative governance sources.
-  - Materialized Canonical State views must be reproducible from the applicable qualified authoritative governance sources, including ordered Governance Ledger records for recorded governance events and Derived Lifecycle State.
-
+  - Governance pipeline execution order must include Proposal Qualification, Governance
+    Decision Function, Execution Authorization or another eligible nonterminal state,
+    applicable pre-commit Continuation Integrity, and Governance Realization/Commit
+    Boundary processing.
+  - Governance Evidence must be treated as a cross-cutting supporting service rather
+    than a terminal pipeline stage.
+  - Identical authoritative inputs must produce equivalent externally observable governance
+    outcomes.
+  - Replay of identical proposals using the applicable replay-protection or idempotency
+    mechanism must not create conflicting governance state.
+  - Ledger sequence order, not timestamp order, SHALL determine the authoritative
+    ordering of recorded governance events and the derivation of Derived Lifecycle
+    State.
+  - Where Canonical State incorporates Governance Ledger records, those records SHALL
+    be interpreted according to authoritative ledger ordering. Other Canonical State
+    facts SHALL be resolved from their applicable qualified authoritative governance
+    sources.
+  - Materialized Canonical State views must be reproducible from the applicable qualified
+    authoritative governance sources, including ordered Governance Ledger records
+    for recorded governance events and Derived Lifecycle State.
   conformance_profiles:
     L1:
-      name: "Schema & Envelope Validation"
+      name: Schema & Envelope Validation
       description: Baseline interface, schema, structured error, and metadata conformance.
     L2:
       name: Ordered Governance Mediation
-      description: Proposal Qualification, Governance Decision, Governance Evidence, and ledger recording behavior.
+      description: Proposal Qualification, Governance Decision, Governance Evidence,
+        and ledger recording behavior.
     L3:
       name: Deterministic Governance
-      description: Deterministic replay, Canonical State source resolution, and authoritative ledger-ordering behavior.
+      description: Deterministic replay, Canonical State source resolution, and authoritative
+        ledger-ordering behavior.
     L4:
       name: Execution Authorization Control
-      description: Governance Approval enforcement, governed-adjudication validation, Execution Authorization 
-        validation, and Commit Boundary gating.
+      description: Governance Approval enforcement, governed-adjudication validation,
+        Execution Authorization validation, and Commit Boundary gating.
     L5:
       name: Multitenant Governance Isolation
-      description: Tenant isolation, Governance Domain isolation, and cross-boundary negative-test behavior.
-
+      description: Tenant isolation, Governance Domain isolation, and cross-boundary
+        negative-test behavior.
   implementation_modes:
     reference_implementation:
       normative: false
-      description: Demonstrates architectural conformance and executable semantics but may omit production hardening.
+      description: Demonstrates architectural conformance and executable semantics
+        but may omit production hardening.
     production_implementation:
       normative: false
-      description: Operational implementation intended to satisfy applicable normative, security, operational, and 
-        conformance requirements.
-
+      description: Operational implementation intended to satisfy applicable normative,
+        security, operational, and conformance requirements.
   notes:
   - This manifest is an index and execution aid for the conformance package.
   - Repository releases govern versioning.
-  - Harness checks and test vectors SHALL remain synchronized with the Requirements Traceability Matrix and conformance 
-    test cases.
-  - Conflicts SHALL be resolved using the normative_precedence order above. The RTM mappings and Core-derived NS identifiers govern traceability but do not alter normative precedence; all take precedence over harness-local artifacts only to the extent established by that order.
+  - Harness checks and test vectors SHALL remain synchronized with the Requirements
+    Traceability Matrix and conformance test cases.
+  - Conflicts SHALL be resolved using the normative_precedence order above. The RTM
+    mappings and Core-derived NS identifiers govern traceability but do not alter
+    normative precedence; all take precedence over harness-local artifacts only to
+    the extent established by that order.
+provenance_wire_format:
+  specification: spec/AGCP-Provenance-Wire-Format-Specification.md
+  schema: schemas/common.json#/$defs/provenance
+  openapi_contract: api/AGCP-HTTP-Contract.yaml
+  vectors: conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json
+  vector_readme: conformance/provenance/README.md
+  validator: governance/validate_provenance_wire_format.py
+  validation_report: governance/AGCP-provenance-wire-format-validation.json
+  finding: P0-02
+  ci_workflow: .github/workflows/validate-provenance-wire-format.yml
+if002_wasm_machine_contract:
+  base_interface: IF-002
+  companion_interface_id: IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0
+  companion_contract_version: 1.0.0
+  abi_id: agcp_pec_abi_v1
+  applicable_profile: implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml
+  specification: spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md
+  machine_contract: api/if-002/AGCP-WASM-PEC-Machine-Contract.json
+  input_schema: api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json
+  output_schema: api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json
+  error_schema: api/if-002/AGCP-WASM-PEC-Error-Envelope.schema.json
+  vectors: conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json
+  validator: governance/validate_if002_wasm_machine_contract.py
+  validation_report: governance/AGCP-if002-wasm-machine-contract-validation.json
+  finding: P0-05
+  ci_workflow: .github/workflows/validate-if002-wasm-machine-contract.yml
+governance_approval_command_record_separation:
+  submission_schema: schemas/governance_approval_submission.json
+  authoritative_record_schema: schemas/governance_approval_artifact.json
+  vectors: conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json
+  validator: governance/validate_command_record_separation.py
+  validation_report: governance/AGCP-command-record-separation-validation.json
+  finding: P0-06
+  ci_workflow: .github/workflows/validate-command-record-separation.yml
+content_digest_contract:
+  schema: schemas/common.json#/$defs/content_digest
+  examples: schemas/examples/common-content-digest-examples.json
+  openapi_contract: api/AGCP-HTTP-Contract.yaml
+  vectors: conformance/digests/AGCP-Content-Digest-Test-Vectors.json
+  vector_readme: conformance/digests/README.md
+  validator: governance/validate_content_digest_contract.py
+  validation_report: governance/AGCP-content-digest-contract-validation.json
+  affected_crs:
+  - CR-042
+  - CR-052
+  - CR-064
+  - CR-066
+  finding: P1-12
+  ci_workflow: .github/workflows/validate-content-digest-contract.yml
+http_error_metadata_contract:
+  finding_ids:
+  - P1-03
+  - P1-09
+  - P1-14
+  - P1-17
+  error_schema: schemas/error_response.json
+  metadata_schema: schemas/meta_response.json
+  openapi_contract: api/AGCP-HTTP-Contract.yaml
+  rejection_registry: registries/rejection-code-registry.json
+  vectors: conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json
+  validator: governance/validate_http_error_metadata_contract.py
+  report: governance/AGCP-http-error-metadata-validation.json
+  ci_workflow: .github/workflows/validate-http-error-metadata-contract.yml
+semantic_fixture_integrity:
+  findings:
+  - P0-10
+  - P0-06
+  fixture_mapping: conformance/fixture-mapping.json
+  corrected_positive_fixture_count: 14
+  vectors: conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json
+  claimant_assertion_vectors: conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json
+  validator: governance/validate_semantic_fixtures.py
+  validation_report: governance/AGCP-semantic-fixture-validation.json
+  ci_workflow: .github/workflows/validate-semantic-fixtures.yml
+repository_synchronization:
+  findings:
+  - P0-01
+  - P0-02
+  - P0-05
+  - P0-06
+  - P0-10
+  - P1-01
+  - P1-03
+  - P1-09
+  - P1-12
+  - P1-14
+  - P1-17
+  - P2-01
+  - P2-02
+  - P2-04
+  - P2-06
+  rtm_dataset_version: RTM-1.46
+  schema_catalog_version: 1.0.50
+  interface_catalog_version: 1.0.5
+  registry_entry_catalog_version: 1.0.3
+  implementation_profile_catalog_version: 1.0.3
+  update_record: governance/AGCP-v2.0.1-REPOSITORY-SYNCHRONIZATION-UPDATE.md
+  manifest: governance/AGCP-v2.0.1-repository-synchronization-manifest.json
+  validator: governance/validate_repository_synchronization.py
+  validation_report: governance/AGCP-v2.0.1-repository-synchronization-validation.json
+  ci_workflow: .github/workflows/validate-repository-synchronization.yml
+
+repository_integrity:
+  execution_step: 11
+  findings:
+    - P0-01
+    - P0-02
+    - P0-05
+    - P0-06
+    - P0-10
+    - P1-01
+    - P1-03
+    - P1-09
+    - P1-12
+    - P1-14
+    - P1-17
+    - P2-01
+    - P2-02
+    - P2-04
+    - P2-06
+  correction_summary: AGCP-v2.0.1-CORRECTION-SUMMARY.md
+  validator: governance/validate_repository_integrity.py
+  validation_report: governance/AGCP-v2.0.1-repository-integrity-validation.json
+  ci_workflow: .github/workflows/validate-repository-integrity.yml
+  repository_synchronization_manifest: governance/AGCP-v2.0.1-repository-synchronization-manifest.json
+  repository_synchronization_report: governance/AGCP-v2.0.1-repository-synchronization-validation.json
+  claim_effect: >-
+    Repository integrity validation establishes internal public-repository coherence only.
+    It does not establish implementation conformance, production authorization, or
+    approval of a proposed Implementation Profile.

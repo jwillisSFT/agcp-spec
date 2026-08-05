@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_approval_submission.json",
+  "title": "Governance Approval Submission",
+  "description": "Untrusted ingress command for submitting approval, adjudication, cosignature, risk-acceptance, cancellation, withdrawal, or quorum-participation content to AGCP. The submission carries claimant-provided content and provenance only. It is not a Governance Approval Artifact, does not establish verification, eligibility, quorum completion, lifecycle effect, Canonical State qualification, authority, ledger ordering, or permission to execute.",
+  "$comment": "DS-045 is the authoritative submission schema for IF-001 governance-approval ingress. The AGCP implementation SHALL validate and independently qualify the submission before creating or qualifying DS-026 Governance Approval Artifact evidence. Server-derived fields such as approval_artifact_id, status, approver_eligibility, lifecycle_state_binding, canonical_state_ref_at_adjudication, authority_lineage_ref, governance_evidence_refs, cryptographic_verification, replay_protection, artifact_digest, semantic_assertions, lifecycle_effect, artifact_termination, and computed quorum state are intentionally absent and rejected by additionalProperties:false.",
+  "x-agcp-ds-id": "DS-045",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Governance Approval Submission — Untrusted Ingress Command",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-107",
+      "ARM-202",
+      "ARM-302",
+      "ARM-304",
+      "ARM-305",
+      "ARM-308",
+      "ARM-601",
+      "ARM-603",
+      "ARM-609",
+      "ARM-610",
+      "ARM-804",
+      "ARM-805"
+    ],
+    "core_sections": [
+      "8.6A",
+      "10.8A",
+      "13.6B"
+    ],
+    "normative_statements": [
+      "NS-8.6A-01",
+      "NS-8.6A-02",
+      "NS-8.6A-03",
+      "NS-10.8A-03",
+      "NS-13.6B-01",
+      "NS-13.6B-02",
+      "NS-13.6B-03",
+      "NS-13.6B-04",
+      "NS-13.6B-05",
+      "NS-13.6B-06"
+    ],
+    "conformance_requirements": [
+      "CR-012",
+      "CR-013",
+      "CR-014",
+      "CR-015",
+      "CR-016",
+      "CR-017",
+      "CR-018",
+      "CR-058",
+      "CR-059",
+      "CR-060",
+      "CR-061"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "namespaced_extensions": {
+      "type": "object",
+      "description": "Namespace-qualified claimant extensions. Extensions SHALL NOT assert AGCP verification, qualification, lifecycle, authority, quorum, evidence, or ledger results.",
+      "propertyNames": {
+        "pattern": "^(?:x-[A-Za-z0-9][A-Za-z0-9._-]*|[A-Za-z0-9][A-Za-z0-9.-]*\\.[A-Za-z0-9][A-Za-z0-9._-]*)$"
+      },
+      "additionalProperties": true
+    },
+    "quorum_claim": {
+      "type": "object",
+      "description": "Claimant-declared quorum association only. Threshold, eligibility, distinct-principal checks, sequence, counted status, accumulated count, and completion status are server-derived and are not accepted here.",
+      "additionalProperties": false,
+      "properties": {
+        "quorum_id": {
+          "$ref": "common.json#/$defs/identifier"
+        }
+      },
+      "required": [
+        "quorum_id"
+      ]
+    }
+  },
+  "properties": {
+    "submission_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "approval_kind": {
+      "$ref": "governance_approval_artifact.json#/$defs/approval_kind_enum"
+    },
+    "decision": {
+      "$ref": "governance_approval_artifact.json#/$defs/approval_decision_enum"
+    },
+    "proposal_identity": {
+      "$ref": "common.json#/$defs/proposal_identity"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "validity_window": {
+      "$ref": "common.json#/$defs/validity_window"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "policy_artifact.json#/$defs/policy_artifact_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "governance_version_ref": {
+      "$ref": "common.json#/$defs/governance_version_ref"
+    },
+    "claimed_approver": {
+      "$ref": "common.json#/$defs/principal",
+      "description": "Claimant-provided approver identity assertion. AGCP SHALL bind it to authenticated identity and current qualified authority before accepting it."
+    },
+    "decision_reason": {
+      "$ref": "governance_approval_artifact.json#/$defs/decision_reason"
+    },
+    "quorum_claim": {
+      "$ref": "#/$defs/quorum_claim"
+    },
+    "related_approval_artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_approval_artifact.json#/$defs/governance_approval_artifact_ref"
+      },
+      "uniqueItems": true
+    },
+    "client_submission_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Client correlation identifier only; it is not an authoritative approval-artifact identifier or ledger identifier."
+    },
+    "submitted_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339",
+      "description": "Claimant-declared submission time. It is not authoritative issuance, verification, ordering, or lifecycle time."
+    },
+    "provenance": {
+      "$ref": "common.json#/$defs/provenance",
+      "description": "Claimant provenance protecting the submission. Successful provenance verification is recorded separately in the authoritative DS-026 artifact and Governance Evidence."
+    },
+    "extensions": {
+      "$ref": "#/$defs/namespaced_extensions"
+    }
+  },
+  "required": [
+    "submission_version",
+    "approval_kind",
+    "decision",
+    "proposal_identity",
+    "tenant_id",
+    "governance_domain_id",
+    "target",
+    "scope",
+    "validity_window",
+    "policy_refs",
+    "governance_version_ref",
+    "claimed_approver",
+    "submitted_at",
+    "provenance"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "enum": [
+              "COSIGNATURE",
+              "QUORUM_PARTICIPATION"
+            ]
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "quorum_claim"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "const": "RISK_ACCEPTANCE"
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "RISK_ACCEPTANCE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "const": "CANCELLATION"
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "CANCEL"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "approval_kind": {
+            "const": "WITHDRAWAL"
+          }
+        },
+        "required": [
+          "approval_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "WITHDRAW"
+          }
+        }
+      }
+    }
+  ]
+}

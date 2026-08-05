@@ -1,14 +1,12 @@
-# AGCP Conformance Harness Specification
-# Deterministic test vectors aligned with the current AGCP repository architecture.
-# Repository release versioning is authoritative; this file intentionally omits an embedded specification version.
-
 meta:
   suite_id: agcp_conformance_harness
   status: normative-harness-specification
   versioning: repository_release
-  description: Deterministic AGCP conformance harness vectors covering all ten mandatory IF-001 operations, Proposal, 
-    Governance Evidence, Append-Only Governance Ledger, Governance Approval Artifacts, Execution Authorization, 
-    Governance Artifact registration and retrieval, Governance Configuration, deterministic Governance Compilation, constitutional validation, omission analysis, atomic Controlled Governance Activation, governed rollback, Commit Boundary, Canonical State source resolution, and authoritative ledger-ordering semantics.
+  description: Deterministic AGCP conformance harness vectors covering all ten mandatory IF-001 operations, Proposal, Governance
+    Evidence, Append-Only Governance Ledger, Governance Approval Artifacts, Execution Authorization, Governance Artifact registration
+    and retrieval, Governance Configuration, deterministic Governance Compilation, constitutional validation, omission analysis,
+    atomic Controlled Governance Activation, governed rollback, Commit Boundary, Canonical State source resolution, and authoritative
+    ledger-ordering semantics.
   assumptions:
     append_only_governance_ledger_required: true
     canonical_state_resolved_from_qualified_authoritative_sources: true
@@ -19,12 +17,13 @@ meta:
     submitted_state_is_not_externally_observable: true
     governance_evidence_required_for_governance_significant_processing: true
     governance_approval_request_schema_validation_precedes_semantic_cryptographic_verification: true
-    submitted_governance_approval_artifacts_independently_cryptographically_reverified: true
+    governance_approval_submission_is_untrusted_ingress: true
+    governance_approval_artifact_is_agcp_created_or_qualified_record: true
+    submitted_governance_approval_provenance_independently_cryptographically_verified: true
   agcp_release: v2.0.0
   interface_id: IF-001
   interface_version: v2
-  fixture_resolution: Resolve $fixture repository paths and apply $overrides before request-schema and OpenAPI 
-    validation.
+  fixture_resolution: Resolve $fixture repository paths and apply $overrides before request-schema and OpenAPI validation.
   vector_catalog:
     authoritative_source: conformance/AGCP-Conformance-Harness-Spec.yml
     human_readable_mirror: conformance/AGCP-Conformance-Test-Vectors.md
@@ -76,20 +75,22 @@ globals:
       governance_configuration_id: CFG1
       governance_configuration_hash: fedcba0987654321
   provenance:
-    valid: &id001
+    valid:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-02-25T12:00:00Z'
+      nonce: nonce-39e5a25841fa1dfa95bbc641
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDE
     invalid:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_INVALID
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-02-25T12:00:00Z'
+      nonce: nonce-8d11118b6d725b2165758e1e
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..SU5WQUxJRDpoYXJuZXNzLTAwMg
 hooks:
   tenant_state:
     T1: ACTIVE
@@ -107,11 +108,11 @@ hooks:
     - RISK_OFFICER
     - SECURITY_LEAD
   cryptographic_verifier:
-    governance_approval_artifact:
+    governance_approval_submission:
       independent_verification_required: true
       verify_signature: true
       verify_key_binding: true
-      verify_artifact_digest_binding: true
+      verify_submission_digest_binding: true
       default_outcome: PASS
   governance_compilation:
     supported_harness_operations:
@@ -181,8 +182,8 @@ assertions:
     - SUBMITTED
     - SUBMITTED_TRANSIENT
 - id: HARNESS-PIPELINE-ORDER
-  description: When ledger_append is expected, DS-040 Governance Ledger Event ordering SHALL match the expected sequence
-    within the declared ordering scope.
+  description: When ledger_append is expected, DS-040 Governance Ledger Event ordering SHALL match the expected sequence within
+    the declared ordering scope.
   apply_to_ledger:
     enforce_exact_order_on_expected_append: true
     ordering_key: ledger_position.sequence
@@ -196,8 +197,8 @@ assertions:
     validate_append_only_controls: true
     validate_integrity_protection: true
 - id: HARNESS-CANONICAL-STATE-DERIVATION
-  description: Canonical State SHALL be reproducible from the applicable qualified authoritative governance sources; 
-    incorporated Governance Ledger records and Derived Lifecycle State SHALL use authoritative ledger ordering.
+  description: Canonical State SHALL be reproducible from the applicable qualified authoritative governance sources; incorporated
+    Governance Ledger records and Derived Lifecycle State SHALL use authoritative ledger ordering.
   apply_to_responses:
     require_canonical_state_resolved_from_qualified_sources: true
     require_ledger_records_use_authoritative_ordering: true
@@ -364,11 +365,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-1c7fd9ecb3442eaad711ce8f
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDM
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-PROP-001
       extensions:
@@ -586,11 +588,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-b7128b670f061958067edc2c
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDQ
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-PROP-002
       extensions:
@@ -784,11 +787,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-46e47ce4703e987255c1acea
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDU
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-PROP-003
       extensions:
@@ -1015,11 +1019,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_INVALID
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-84c31c937c6ceef2f1d35444
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..SU5WQUxJRDpoYXJuZXNzLTAwNg
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-PROP-005
       extensions:
@@ -1177,11 +1182,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-a9847604beab861f76f2a8ed
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDc
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-PROP-006
       extensions:
@@ -1341,11 +1347,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-e57dc8795299cf25277b0f5f
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDg
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-PROP-007
       extensions:
@@ -1521,11 +1528,12 @@ tests:
               effective_at: '2026-07-30T16:00:00Z'
           provenance:
             signer: client:test
-            signature:
-              alg: Ed25519
-              kid: kid-test
-              sig: SIG_VALID_123
+            kid: kid-test
+            alg: Ed25519
             signed_at: '2026-07-30T16:00:00Z'
+            nonce: nonce-ff9df5d0958e32bdc9b3fda8
+            scope: agcp.http.request.body
+            signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDk
         submitted_at: '2026-07-30T16:00:00Z'
         client_request_id: CR-TV-PROP-008
         extensions:
@@ -1651,11 +1659,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-d34225e1706b92a6dd36ffe0
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTA
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-PROP-008
       extensions:
@@ -1788,11 +1797,12 @@ tests:
               effective_at: '2026-07-30T16:00:00Z'
           provenance:
             signer: client:test
-            signature:
-              alg: Ed25519
-              kid: kid-test
-              sig: SIG_VALID_123
+            kid: kid-test
+            alg: Ed25519
             signed_at: '2026-07-30T16:00:00Z'
+            nonce: nonce-31cb613bec5a1815dee0e9a9
+            scope: agcp.http.request.body
+            signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTE
         submitted_at: '2026-07-30T16:00:00Z'
         client_request_id: CR-PROP-009-A
         extensions:
@@ -1918,11 +1928,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-52117d00f1a15ca78eadc3b6
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTI
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-PROP-009-B
       extensions:
@@ -1976,6 +1987,12 @@ tests:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-GAPP-001
   name: Partial Governance Approval quorum -> Pending Human Review outcome remains
@@ -2099,11 +2116,12 @@ tests:
               effective_at: '2026-07-30T16:00:00Z'
           provenance:
             signer: client:test
-            signature:
-              alg: Ed25519
-              kid: kid-test
-              sig: SIG_VALID_123
+            kid: kid-test
+            alg: Ed25519
             signed_at: '2026-07-30T16:00:00Z'
+            nonce: nonce-c3bc330684a91dbb38432eda
+            scope: agcp.http.request.body
+            signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTM
         submitted_at: '2026-07-30T16:00:00Z'
         client_request_id: CR-TV-GAPP-001
         extensions:
@@ -2127,19 +2145,15 @@ tests:
     headers:
       Idempotency-Key: K_GAPP_001_APPROVAL
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      provenance: *id001
-      governance_approval_artifact:
-        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-        $overrides:
-          proposal_identity.proposal_id: ${P_GAPP_001}
-          proposal_identity.tenant_id: T1
-          proposal_identity.governance_domain_id: domain-primary
-          tenant_id: T1
-          governance_domain_id: domain-primary
-          target.tenant_id: T1
-          target.governance_domain_id: domain-primary
+      $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+      $overrides:
+        proposal_identity.proposal_id: ${P_GAPP_001}
+        proposal_identity.tenant_id: T1
+        proposal_identity.governance_domain_id: domain-primary
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        target.tenant_id: T1
+        target.governance_domain_id: domain-primary
   expected:
     http:
       status: 200
@@ -2173,7 +2187,7 @@ tests:
       requires_ledger_reference: true
     schema: proposal_view.json
 - id: TV-GAPP-002
-  name: Valid Governance Approval Artifact completes quorum -> Execution Authorization available
+  name: Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_002
@@ -2183,19 +2197,15 @@ tests:
     headers:
       Idempotency-Key: K_GAPP_002
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      provenance: *id001
-      governance_approval_artifact:
-        $fixture: ../schemas/examples/ds026-governance-approval-completed-quorum.json
-        $overrides:
-          proposal_identity.proposal_id: ${P_PROP_002}
-          proposal_identity.tenant_id: T1
-          proposal_identity.governance_domain_id: domain-primary
-          tenant_id: T1
-          governance_domain_id: domain-primary
-          target.tenant_id: T1
-          target.governance_domain_id: domain-primary
+      $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+      $overrides:
+        proposal_identity.proposal_id: ${P_PROP_002}
+        proposal_identity.tenant_id: T1
+        proposal_identity.governance_domain_id: domain-primary
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        target.tenant_id: T1
+        target.governance_domain_id: domain-primary
   capture:
     save_authorization_id_as: EA_GAPP_002
   expected:
@@ -2249,7 +2259,7 @@ tests:
         - semantic_assertions
     schema: proposal_view.json
 - id: TV-GAPP-003
-  name: Expired Governance Approval Artifact -> GOVERNANCE_APPROVAL_EXPIRED
+  name: Expired Governance Approval Submission -> GOVERNANCE_APPROVAL_EXPIRED
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_002
@@ -2259,42 +2269,17 @@ tests:
     headers:
       Idempotency-Key: K_GAPP_003
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      provenance: *id001
-      governance_approval_artifact:
-        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-        $overrides:
-          proposal_identity.proposal_id: ${P_PROP_002}
-          proposal_identity.tenant_id: T1
-          proposal_identity.governance_domain_id: domain-primary
-          tenant_id: T1
-          governance_domain_id: domain-primary
-          target.tenant_id: T1
-          target.governance_domain_id: domain-primary
-          status: EXPIRED
-          artifact_termination:
-            termination_type: EXPIRED
-            effective_at: '2026-07-30T16:00:00Z'
-            reason_code: VALIDITY_WINDOW_EXPIRED
-            reason: The Governance Approval Artifact validity window expired before use.
-            terminated_by:
-              principal:
-                principal_id: approval-lifecycle-service
-                principal_type: SYSTEM
-              attributed_at: '2026-07-30T16:00:00Z'
-            termination_authority_lineage_ref:
-              authority_lineage_id: authority-lineage-1
-              authority_lineage_digest:
-                algorithm: SHA-256
-                value: '3333333333333333333333333333333333333333333333333333333333333333'
-              lineage_version: 2.0.0
-              evaluated_at: '2026-07-30T16:00:00Z'
-            governance_evidence_refs:
-            - governance_evidence_id: evidence-expiration-1
-              evidence_digest:
-                algorithm: SHA-256
-                value: '9999999999999999999999999999999999999999999999999999999999999999'
+      $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+      $overrides:
+        proposal_identity.proposal_id: ${P_PROP_002}
+        proposal_identity.tenant_id: T1
+        proposal_identity.governance_domain_id: domain-primary
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        target.tenant_id: T1
+        target.governance_domain_id: domain-primary
+        validity_window.not_before: '2026-07-29T16:00:00Z'
+        validity_window.expires_at: '2026-07-30T15:59:59Z'
   expected:
     http:
       status: 409
@@ -2302,18 +2287,17 @@ tests:
         rejection_code: GOVERNANCE_APPROVAL_EXPIRED
     ledger_no_append: true
 - id: TV-GAPP-004
-  name: Schema-valid Governance Approval Artifact with invalid signature material -> GOVERNANCE_APPROVAL_INVALID
+  name: Schema-valid Governance Approval Submission with invalid provenance signature -> GOVERNANCE_APPROVAL_INVALID
   arrange:
     auth_as: T1
     use_proposal_id: P_PROP_002
     hooks:
       cryptographic_verifier:
-        governance_approval_artifact:
+        governance_approval_submission:
           independent_verification_required: true
-          target_artifact_id: approval-partial-1
           signature_valid: false
           key_binding_valid: false
-          artifact_digest_binding_valid: false
+          submission_digest_binding_valid: false
           failure_reason: INVALID_SIGNATURE_AND_KEY_BINDING
           rejection_code: GOVERNANCE_APPROVAL_INVALID
   request:
@@ -2322,33 +2306,26 @@ tests:
     headers:
       Idempotency-Key: K_GAPP_004
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      provenance: *id001
-      governance_approval_artifact:
-        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-        $overrides:
-          proposal_identity.proposal_id: ${P_PROP_002}
-          proposal_identity.tenant_id: T1
-          proposal_identity.governance_domain_id: domain-primary
-          tenant_id: T1
-          governance_domain_id: domain-primary
-          target.tenant_id: T1
-          target.governance_domain_id: domain-primary
-          cryptographic_verification.verification_outcome: VERIFIED
-          cryptographic_verification.signature.kid: key-unbound-tv-gapp-004
-          cryptographic_verification.signature.sig: SIG_INVALID_FOR_ARTIFACT_DIGEST
+      $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+      $overrides:
+        proposal_identity.proposal_id: ${P_PROP_002}
+        proposal_identity.tenant_id: T1
+        proposal_identity.governance_domain_id: domain-primary
+        tenant_id: T1
+        governance_domain_id: domain-primary
+        target.tenant_id: T1
+        target.governance_domain_id: domain-primary
   expected:
     request_validation:
-      governance_approval_request: PASS
-      governance_approval_artifact_ds026: PASS
+      governance_approval_submission_ds045: PASS
+      claimant_server_derived_fields_absent: true
     semantic_verification:
       cryptographic_verifier_invoked: true
       signature_valid: false
       key_binding_valid: false
-      artifact_digest_binding_valid: false
       outcome: FAILED
       rejection_code: GOVERNANCE_APPROVAL_INVALID
+      submission_digest_binding_valid: false
     http:
       status: 422
       body:
@@ -2795,11 +2772,12 @@ tests:
             effective_at: '2026-07-30T16:00:00Z'
         provenance:
           signer: client:test
-          signature:
-            alg: Ed25519
-            kid: kid-test
-            sig: SIG_VALID_123
+          kid: kid-test
+          alg: Ed25519
           signed_at: '2026-07-30T16:00:00Z'
+          nonce: nonce-a8ee94d2eddb2e4605430961
+          scope: agcp.http.request.body
+          signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTQ
       submitted_at: '2026-07-30T16:00:00Z'
       client_request_id: CR-TV-XTEN-SETUP
       extensions:
@@ -2841,9 +2819,15 @@ tests:
           status: 404
           body:
             rejection_code: RESOURCE_NOT_FOUND
+            http_status: 404
+            retryable: false
+            governance_evidence_generated: false
+            outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+            transport_disposition: NOT_FOUND
+            message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-XTEN-002
-  name: Cross-tenant Governance Approval Artifact submission is forbidden or hidden
+  name: Cross-tenant Governance Approval Submission is forbidden or hidden
   arrange:
     auth_as: T1
     use_proposal_id: P_T2_001
@@ -2853,19 +2837,15 @@ tests:
     headers:
       Idempotency-Key: K_XTEN_002
     body:
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      provenance: *id001
-      governance_approval_artifact:
-        $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-        $overrides:
-          proposal_identity.proposal_id: ${P_T2_001}
-          proposal_identity.tenant_id: T2
-          proposal_identity.governance_domain_id: domain-secondary
-          tenant_id: T2
-          governance_domain_id: domain-secondary
-          target.tenant_id: T2
-          target.governance_domain_id: domain-secondary
+      $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+      $overrides:
+        proposal_identity.proposal_id: ${P_T2_001}
+        proposal_identity.tenant_id: T2
+        proposal_identity.governance_domain_id: domain-secondary
+        tenant_id: T2
+        governance_domain_id: domain-secondary
+        target.tenant_id: T2
+        target.governance_domain_id: domain-secondary
   expected:
     http:
       status_by_strategy:
@@ -2877,6 +2857,12 @@ tests:
           status: 404
           body:
             rejection_code: RESOURCE_NOT_FOUND
+            http_status: 404
+            retryable: false
+            governance_evidence_generated: false
+            outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+            transport_disposition: NOT_FOUND
+            message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-XTEN-003
   name: Cross-tenant Commit Boundary is forbidden or hidden
@@ -2920,6 +2906,12 @@ tests:
           status: 404
           body:
             rejection_code: RESOURCE_NOT_FOUND
+            http_status: 404
+            retryable: false
+            governance_evidence_generated: false
+            outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+            transport_disposition: NOT_FOUND
+            message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-XTEN-004
   name: Cross-tenant Governance Evidence access is forbidden or hidden
@@ -2943,6 +2935,12 @@ tests:
           status: 404
           body:
             rejection_code: RESOURCE_NOT_FOUND
+            http_status: 404
+            retryable: false
+            governance_evidence_generated: false
+            outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+            transport_disposition: NOT_FOUND
+            message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-META-001
   name: Implementation metadata advertises the controlled IF-001 and conformance surface
@@ -3012,6 +3010,12 @@ tests:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-EAUTH-003
   name: Cross-tenant Execution Authorization access is forbidden or hidden
@@ -3035,6 +3039,12 @@ tests:
           status: 404
           body:
             rejection_code: RESOURCE_NOT_FOUND
+            http_status: 404
+            retryable: false
+            governance_evidence_generated: false
+            outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+            transport_disposition: NOT_FOUND
+            message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-PEM-001
   name: Register a schema-valid Policy Evaluation Module without activating it
@@ -3380,6 +3390,12 @@ tests:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-GART-003
   name: Cross-tenant Governance Artifact access is forbidden or hidden
@@ -3422,6 +3438,12 @@ tests:
           status: 404
           body:
             rejection_code: RESOURCE_NOT_FOUND
+            http_status: 404
+            retryable: false
+            governance_evidence_generated: false
+            outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+            transport_disposition: NOT_FOUND
+            message: The requested resource was not found.
     ledger_no_append: true
 - id: TV-GCFG-001
   name: Validate active Governance Configuration, controlled change requirements, and risk-based re-evaluation configuration
@@ -3947,4 +3969,8 @@ schema_fixture_validation:
 - fixture_id: FX-DS003-METADATA
   schema_file: ../schemas/meta_response.json
   example_file: ../schemas/examples/ds003-implementation-metadata-response.json
+  expected: VALID
+- fixture_id: FX-DS045-GOVERNANCE-APPROVAL-SUBMISSION
+  schema_file: ../schemas/governance_approval_submission.json
+  example_file: ../schemas/examples/ds045-governance-approval-submission-valid.json
   expected: VALID

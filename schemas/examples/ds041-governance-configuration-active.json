@@ -92,15 +92,15 @@
           "selector_id": "selector-id-1",
           "selector_version": "1.0.0",
           "selector_policy_ref": {
-            "policy_id": "policy-id-1",
-            "policy_version": "1.0.0",
+            "policy_id": "policy-1",
+            "policy_version": "2.0.0",
             "policy_digest": {
               "algorithm": "SHA-256",
               "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             },
             "artifact_uri": "https://agcp.ai/example/artifact-uri",
-            "tenant_id": "tenant-id-1",
-            "governance_domain_id": "governance-domain-id-1",
+            "tenant_id": "tenant-1",
+            "governance_domain_id": "domain-1",
             "status": "Registered"
           },
           "nonterminal_lifecycle_states": [
@@ -200,12 +200,12 @@
   },
   "provenance": {
     "signer": "example",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "key-1",
-      "sig": "signature-value"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-1",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-de4c9a2ed2e7c713f656c308",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LTEiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwNDEtZ292ZXJuYW5jZS1jb25maWd1cmF0aW9uLWFjdGl2ZS5qc29uOiQucHJvdmVuYW5jZQ"
   },
   "configuration_digest": {
     "algorithm": "SHA-256",

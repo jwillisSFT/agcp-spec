@@ -1,0 +1,118 @@
+{
+  "vector_set_id": "AGCP-PROVENANCE-WIRE-2.0.1",
+  "specification": "spec/AGCP-Provenance-Wire-Format-Specification.md",
+  "schema": "schemas/common.json#/$defs/provenance",
+  "canonicalization": "RFC8785_JCS",
+  "encoding": "UTF-8 and unpadded base64url",
+  "signature_algorithm": "Ed25519",
+  "test_key_warning": "Test-only deterministic key material. Never use in production.",
+  "private_key_seed_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "public_key_raw_hex": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+  "positive_vectors": [
+    {
+      "id": "PV-001",
+      "description": "Canonical envelope and valid detached Ed25519 signature.",
+      "protected_header_json": "{\"alg\":\"Ed25519\",\"kid\":\"test-key-ed25519-01\",\"typ\":\"AGCP+PROV\"}",
+      "protected_header_b64": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoidGVzdC1rZXktZWQyNTUxOS0wMSIsInR5cCI6IkFHQ1ArUFJPViJ9",
+      "unsigned_object": {
+        "tenant_id": "TENANT-TEST",
+        "governance_domain_id": "DOMAIN-TEST",
+        "operation": "proposal-submit",
+        "payload": {
+          "action": "TEST",
+          "amount": 10
+        },
+        "provenance": {
+          "signer": "client:test-vector",
+          "kid": "test-key-ed25519-01",
+          "alg": "Ed25519",
+          "signed_at": "2026-08-03T11:00:00Z",
+          "expires_at": "2026-08-03T12:00:00Z",
+          "nonce": "nonce-0000000000000001",
+          "scope": "agcp.http.request.body"
+        }
+      },
+      "canonical_payload_utf8": "{\"governance_domain_id\":\"DOMAIN-TEST\",\"operation\":\"proposal-submit\",\"payload\":{\"action\":\"TEST\",\"amount\":10},\"provenance\":{\"alg\":\"Ed25519\",\"expires_at\":\"2026-08-03T12:00:00Z\",\"kid\":\"test-key-ed25519-01\",\"nonce\":\"nonce-0000000000000001\",\"scope\":\"agcp.http.request.body\",\"signed_at\":\"2026-08-03T11:00:00Z\",\"signer\":\"client:test-vector\"},\"tenant_id\":\"TENANT-TEST\"}",
+      "canonical_payload_hex": "7b22676f7665726e616e63655f646f6d61696e5f6964223a22444f4d41494e2d54455354222c226f7065726174696f6e223a2270726f706f73616c2d7375626d6974222c227061796c6f6164223a7b22616374696f6e223a2254455354222c22616d6f756e74223a31307d2c2270726f76656e616e6365223a7b22616c67223a2245643235353139222c22657870697265735f6174223a22323032362d30382d30335431323a30303a30305a222c226b6964223a22746573742d6b65792d656432353531392d3031222c226e6f6e6365223a226e6f6e63652d30303030303030303030303030303031222c2273636f7065223a22616763702e687474702e726571756573742e626f6479222c227369676e65645f6174223a22323032362d30382d30335431313a30303a30305a222c227369676e6572223a22636c69656e743a746573742d766563746f72227d2c2274656e616e745f6964223a2254454e414e542d54455354227d",
+      "payload_b64": "eyJnb3Zlcm5hbmNlX2RvbWFpbl9pZCI6IkRPTUFJTi1URVNUIiwib3BlcmF0aW9uIjoicHJvcG9zYWwtc3VibWl0IiwicGF5bG9hZCI6eyJhY3Rpb24iOiJURVNUIiwiYW1vdW50IjoxMH0sInByb3ZlbmFuY2UiOnsiYWxnIjoiRWQyNTUxOSIsImV4cGlyZXNfYXQiOiIyMDI2LTA4LTAzVDEyOjAwOjAwWiIsImtpZCI6InRlc3Qta2V5LWVkMjU1MTktMDEiLCJub25jZSI6Im5vbmNlLTAwMDAwMDAwMDAwMDAwMDEiLCJzY29wZSI6ImFnY3AuaHR0cC5yZXF1ZXN0LmJvZHkiLCJzaWduZWRfYXQiOiIyMDI2LTA4LTAzVDExOjAwOjAwWiIsInNpZ25lciI6ImNsaWVudDp0ZXN0LXZlY3RvciJ9LCJ0ZW5hbnRfaWQiOiJURU5BTlQtVEVTVCJ9",
+      "signing_input_ascii": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoidGVzdC1rZXktZWQyNTUxOS0wMSIsInR5cCI6IkFHQ1ArUFJPViJ9.eyJnb3Zlcm5hbmNlX2RvbWFpbl9pZCI6IkRPTUFJTi1URVNUIiwib3BlcmF0aW9uIjoicHJvcG9zYWwtc3VibWl0IiwicGF5bG9hZCI6eyJhY3Rpb24iOiJURVNUIiwiYW1vdW50IjoxMH0sInByb3ZlbmFuY2UiOnsiYWxnIjoiRWQyNTUxOSIsImV4cGlyZXNfYXQiOiIyMDI2LTA4LTAzVDEyOjAwOjAwWiIsImtpZCI6InRlc3Qta2V5LWVkMjU1MTktMDEiLCJub25jZSI6Im5vbmNlLTAwMDAwMDAwMDAwMDAwMDEiLCJzY29wZSI6ImFnY3AuaHR0cC5yZXF1ZXN0LmJvZHkiLCJzaWduZWRfYXQiOiIyMDI2LTA4LTAzVDExOjAwOjAwWiIsInNpZ25lciI6ImNsaWVudDp0ZXN0LXZlY3RvciJ9LCJ0ZW5hbnRfaWQiOiJURU5BTlQtVEVTVCJ9",
+      "signature_b64": "_69h7JvgwOIFmioBgtOMEWbHcoNsVhX1ZO42uoK2xVsOi6trw4cDyFPKBGdFrYyBivF566j2E3_DsGekpyCuAw",
+      "signed_object": {
+        "tenant_id": "TENANT-TEST",
+        "governance_domain_id": "DOMAIN-TEST",
+        "operation": "proposal-submit",
+        "payload": {
+          "action": "TEST",
+          "amount": 10
+        },
+        "provenance": {
+          "signer": "client:test-vector",
+          "kid": "test-key-ed25519-01",
+          "alg": "Ed25519",
+          "signed_at": "2026-08-03T11:00:00Z",
+          "expires_at": "2026-08-03T12:00:00Z",
+          "nonce": "nonce-0000000000000001",
+          "scope": "agcp.http.request.body",
+          "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoidGVzdC1rZXktZWQyNTUxOS0wMSIsInR5cCI6IkFHQ1ArUFJPViJ9.._69h7JvgwOIFmioBgtOMEWbHcoNsVhX1ZO42uoK2xVsOi6trw4cDyFPKBGdFrYyBivF566j2E3_DsGekpyCuAw"
+        }
+      },
+      "expected_schema_valid": true,
+      "expected_signature_valid": true
+    }
+  ],
+  "negative_vectors": [
+    {
+      "id": "NV-001",
+      "description": "Legacy nested signature object is rejected.",
+      "mutation": "replace provenance.signature with {alg,kid,sig}",
+      "expected_schema_valid": false
+    },
+    {
+      "id": "NV-002",
+      "description": "Missing nonce is rejected.",
+      "mutation": "remove provenance.nonce",
+      "expected_schema_valid": false
+    },
+    {
+      "id": "NV-003",
+      "description": "Undeclared source_system is rejected.",
+      "mutation": "add provenance.source_system",
+      "expected_schema_valid": false
+    },
+    {
+      "id": "NV-004",
+      "description": "Non-detached signature syntax is rejected.",
+      "mutation": "replace provenance.signature with a single segment",
+      "expected_schema_valid": false
+    },
+    {
+      "id": "NV-005",
+      "description": "Protected-header kid mismatch is semantically rejected.",
+      "mutation": "change protected kid and retain envelope kid",
+      "expected_schema_valid": true,
+      "expected_signature_valid": false
+    },
+    {
+      "id": "NV-006",
+      "description": "Payload modification after signing is rejected.",
+      "mutation": "change payload.amount from 10 to 11",
+      "expected_schema_valid": true,
+      "expected_signature_valid": false
+    },
+    {
+      "id": "NV-007",
+      "description": "Digest identifier used as signature algorithm is semantically rejected.",
+      "mutation": "set provenance.alg and protected alg to SHA-256",
+      "expected_schema_valid": true,
+      "expected_signature_valid": false
+    },
+    {
+      "id": "NV-008",
+      "description": "Duplicate tenant/signer/scope/nonce tuple is replay-rejected.",
+      "mutation": "resubmit PV-001 within replay window",
+      "expected_schema_valid": true,
+      "expected_signature_valid": true,
+      "expected_replay_accepted": false
+    }
+  ]
+}

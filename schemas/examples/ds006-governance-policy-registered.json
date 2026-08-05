@@ -229,12 +229,12 @@
   },
   "provenance": {
     "signer": "TEST",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "kid-test",
-      "sig": "SIG_VALID_123"
-    },
-    "signed_at": "2026-07-31T10:00:00Z"
+    "kid": "kid-test",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-31T10:00:00Z",
+    "nonce": "nonce-4e0f9c64162393cfefdf7aa5",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMDYtZ292ZXJuYW5jZS1wb2xpY3ktcmVnaXN0ZXJlZC5qc29uOiQucHJvdmVuYW5jZQ"
   },
   "policy_digest": {
     "algorithm": "SHA-256",

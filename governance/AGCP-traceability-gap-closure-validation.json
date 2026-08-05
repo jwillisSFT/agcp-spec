@@ -1,535 +1,84 @@
 {
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
   "status": "PASS",
-  "validated_at": "2026-07-30",
+  "validated_at": "2026-08-03",
   "checks": [
     {
-      "check": "metaschema_DS-001",
+      "check": "all_active_schema_catalog_hashes_match",
       "passed": true,
-      "detail": "schemas/common.json"
+      "detail": null
     },
     {
-      "check": "metaschema_DS-002",
+      "check": "rtm_all_rows_current_version",
       "passed": true,
-      "detail": "schemas/error_response.json"
-    },
-    {
-      "check": "metaschema_DS-003",
-      "passed": true,
-      "detail": "schemas/meta_response.json"
-    },
-    {
-      "check": "metaschema_DS-004",
-      "passed": true,
-      "detail": "schemas/tenant.json"
-    },
-    {
-      "check": "metaschema_DS-005",
-      "passed": true,
-      "detail": "schemas/policy_evaluation_module_artifact.json"
-    },
-    {
-      "check": "metaschema_DS-006",
-      "passed": true,
-      "detail": "schemas/policy_artifact.json"
-    },
-    {
-      "check": "metaschema_DS-007",
-      "passed": true,
-      "detail": "schemas/constraint_artifact.json"
-    },
-    {
-      "check": "metaschema_DS-008",
-      "passed": true,
-      "detail": "schemas/invariant_definition.json"
-    },
-    {
-      "check": "metaschema_DS-009",
-      "passed": true,
-      "detail": "schemas/exception_artifact.json"
-    },
-    {
-      "check": "metaschema_DS-010",
-      "passed": true,
-      "detail": "schemas/governance_artifact_view.json"
-    },
-    {
-      "check": "metaschema_DS-011",
-      "passed": true,
-      "detail": "schemas/constraint_evaluation.json"
-    },
-    {
-      "check": "metaschema_DS-012",
-      "passed": true,
-      "detail": "schemas/invariant_evaluation.json"
-    },
-    {
-      "check": "metaschema_DS-013",
-      "passed": true,
-      "detail": "schemas/proposal_submit_request.json"
-    },
-    {
-      "check": "metaschema_DS-014",
-      "passed": true,
-      "detail": "schemas/proposal_view.json"
-    },
-    {
-      "check": "metaschema_DS-015",
-      "passed": true,
-      "detail": "schemas/governance_decision_result.json"
-    },
-    {
-      "check": "metaschema_DS-017",
-      "passed": true,
-      "detail": "schemas/execution_authorization_view.json"
-    },
-    {
-      "check": "metaschema_DS-018",
-      "passed": true,
-      "detail": "schemas/commit_boundary_request.json"
-    },
-    {
-      "check": "metaschema_DS-019",
-      "passed": true,
-      "detail": "schemas/commit_boundary_result.json"
-    },
-    {
-      "check": "metaschema_DS-020",
-      "passed": true,
-      "detail": "schemas/governance_evidence.json"
-    },
-    {
-      "check": "metaschema_DS-021",
-      "passed": true,
-      "detail": "schemas/governed_action_proposal.json"
-    },
-    {
-      "check": "metaschema_DS-022",
-      "passed": true,
-      "detail": "schemas/governance_context_envelope.json"
-    },
-    {
-      "check": "metaschema_DS-023",
-      "passed": true,
-      "detail": "schemas/canonical_state.json"
-    },
-    {
-      "check": "metaschema_DS-024",
-      "passed": true,
-      "detail": "schemas/authority_lineage.json"
-    },
-    {
-      "check": "metaschema_DS-025",
-      "passed": true,
-      "detail": "schemas/delegation_artifact.json"
-    },
-    {
-      "check": "metaschema_DS-026",
-      "passed": true,
-      "detail": "schemas/governance_approval_artifact.json"
-    },
-    {
-      "check": "metaschema_DS-027",
-      "passed": true,
-      "detail": "schemas/governance_receipt.json"
-    },
-    {
-      "check": "metaschema_DS-028",
-      "passed": true,
-      "detail": "schemas/refusal_record.json"
-    },
-    {
-      "check": "metaschema_DS-029",
-      "passed": true,
-      "detail": "schemas/enforcement_context.json"
-    },
-    {
-      "check": "metaschema_DS-030",
-      "passed": true,
-      "detail": "schemas/governance_binding_validation_result.json"
-    },
-    {
-      "check": "metaschema_DS-031",
-      "passed": true,
-      "detail": "schemas/resulting_state_validation_result.json"
-    },
-    {
-      "check": "metaschema_DS-032",
-      "passed": true,
-      "detail": "schemas/state_qualification_result.json"
-    },
-    {
-      "check": "metaschema_DS-033",
-      "passed": true,
-      "detail": "schemas/evidence_qualification_result.json"
-    },
-    {
-      "check": "metaschema_DS-034",
-      "passed": true,
-      "detail": "schemas/authority_rederivation_result.json"
-    },
-    {
-      "check": "metaschema_DS-035",
-      "passed": true,
-      "detail": "schemas/bind_set.json"
-    },
-    {
-      "check": "metaschema_DS-036",
-      "passed": true,
-      "detail": "schemas/governance_dependency_graph.json"
-    },
-    {
-      "check": "metaschema_DS-037",
-      "passed": true,
-      "detail": "schemas/deterministic_adjudication_result.json"
-    },
-    {
-      "check": "metaschema_DS-038",
-      "passed": true,
-      "detail": "schemas/governance_lifecycle_record.json"
-    },
-    {
-      "check": "metaschema_DS-039",
-      "passed": true,
-      "detail": "schemas/continuation_integrity_result.json"
-    },
-    {
-      "check": "metaschema_DS-040",
-      "passed": true,
-      "detail": "schemas/governance_ledger_event.json"
-    },
-    {
-      "check": "metaschema_DS-041",
-      "passed": true,
-      "detail": "schemas/governance_configuration.json"
-    },
-    {
-      "check": "metaschema_DS-042",
-      "passed": true,
-      "detail": "schemas/compiled_governance_artifact.json"
-    },
-    {
-      "check": "metaschema_DS-043",
-      "passed": true,
-      "detail": "schemas/controlled_governance_activation.json"
-    },
-    {
-      "check": "metaschema_DS-044",
-      "passed": true,
-      "detail": "schemas/registry_document.schema.json"
-    },
-    {
-      "check": "all_schema_refs_resolve",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_schema_constraint-type-registry.json",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_digests_constraint-type-registry.json",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_schema_invariant-type-registry.json",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_digests_invariant-type-registry.json",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_schema_rejection-code-registry.json",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_digests_rejection-code-registry.json",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_ids_unique_contiguous",
-      "passed": true,
-      "detail": {
-        "count": 92,
-        "first": "REG-001",
-        "last": "REG-092"
-      }
-    },
-    {
-      "check": "registry_cr_refs_exist",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "registry_ns_refs_exist",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "ds044_example_valid",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "all_active_schemas_have_arm_ns",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "catalog_hashes_match",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "ds015_catalog_traceability",
-      "passed": true,
-      "detail": {
-        "ds_id": "DS-015",
-        "filename": "governance_decision_result.json",
-        "repository_path": "schemas/governance_decision_result.json",
-        "canonical_uri": "https://agcp.ai/schemas/governance_decision_result.json",
-        "title": "Governance Decision Result",
-        "description": "Canonical, attributable, integrity-protected result produced by the Governance Decision Function after Proposal Qualification. The result binds the decision to the canonical proposal, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified Governance Evidence, Authority Lineage, applicable constraints and invariants, approvals, evaluation horizon, and deterministic decision basis. Non-refusal outcomes require a DS-027 Governance Receipt; Structural Refusal requires a DS-028 Refusal Record.",
-        "category": "Governance Workflow",
-        "artifact_type": "JSON Schema",
-        "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
-        "lifecycle_state": "Implemented",
-        "record_status": "Active",
-        "specification_version": "v2.0",
-        "schema_dependencies": [
-          "DS-001",
-          "DS-006",
-          "DS-009",
-          "DS-011",
-          "DS-012",
-          "DS-020",
-          "DS-021",
-          "DS-022",
-          "DS-023",
-          "DS-024",
-          "DS-026",
-          "DS-027",
-          "DS-028",
-          "DS-032",
-          "DS-033",
-          "DS-041"
-        ],
-        "dependent_schemas": [
-          "DS-014",
-          "DS-017",
-          "DS-018",
-          "DS-019",
-          "DS-020",
-          "DS-022",
-          "DS-026",
-          "DS-027",
-          "DS-028",
-          "DS-029",
-          "DS-030",
-          "DS-034",
-          "DS-037",
-          "DS-038",
-          "DS-040"
-        ],
-        "rtm_mapping_basis": "Direct Governance Decision Function mapping synchronized from the schema normative basis; decision inputs, deterministic evaluation, evidence, authority, receipt, and refusal relationships are explicit.",
-        "rtm_ids": [
-          "RTM-00001",
-          "RTM-00002",
-          "RTM-00003",
-          "RTM-00005",
-          "RTM-00007",
-          "RTM-00053",
-          "RTM-00054",
-          "RTM-00055",
-          "RTM-00062",
-          "RTM-00063",
-          "RTM-00064",
-          "RTM-00065",
-          "RTM-00066",
-          "RTM-00074",
-          "RTM-00075",
-          "RTM-00076",
-          "RTM-00077",
-          "RTM-00078",
-          "RTM-00083",
-          "RTM-00085",
-          "RTM-00087",
-          "RTM-00090",
-          "RTM-00104"
-        ],
-        "arm_ids": [
-          "ARM-201",
-          "ARM-202",
-          "ARM-203",
-          "ARM-205",
-          "ARM-206",
-          "ARM-401",
-          "ARM-601",
-          "ARM-701"
-        ],
-        "ns_ids": [
-          "NS-7.3-01",
-          "NS-7.4-01",
-          "NS-7.5-02",
-          "NS-7.6-03",
-          "NS-8.6-04"
-        ],
-        "cr_ids": [
-          "CR-001",
-          "CR-002",
-          "CR-003",
-          "CR-005",
-          "CR-007",
-          "CR-053",
-          "CR-054",
-          "CR-055",
-          "CR-062",
-          "CR-063",
-          "CR-064",
-          "CR-065",
-          "CR-066",
-          "CR-074",
-          "CR-075",
-          "CR-076",
-          "CR-077",
-          "CR-078",
-          "CR-083",
-          "CR-085",
-          "CR-087",
-          "CR-090",
-          "CR-104"
-        ],
-        "sha256": "a1f8fd07f742e89a73aee4d682eb79b4ced48ef0a500b76d112011a7a5bc1347",
-        "assigned_date": "2026-07-22",
-        "notes": "Step 5 refactor: canonical decision basis, qualified state and evidence, authority, constraints, invariants, attribution, receipt, and refusal relationships are structurally represented. Catalog ARM and NS mappings synchronized from the authoritative DS-015 schema annotation.",
-        "last_modified_date": "2026-07-30"
-      }
+      "detail": null
     },
     {
       "check": "rtm_all_ds_if_reg_dispositioned",
       "passed": true,
-      "detail": []
-    },
-    {
-      "check": "CR-008_ds_semantic_mapping",
-      "passed": true,
       "detail": {
-        "expected": [
-          "DS-021",
-          "DS-040"
-        ],
-        "got": [
-          "DS-021",
-          "DS-040"
-        ]
+        "DS_ID": {
+          "assigned": 122,
+          "na": 0,
+          "blank": 0
+        },
+        "IF_ID": {
+          "assigned": 84,
+          "na": 38,
+          "blank": 0
+        },
+        "REG_ID": {
+          "assigned": 117,
+          "na": 5,
+          "blank": 0
+        }
       }
     },
     {
-      "check": "CR-009_ds_semantic_mapping",
+      "check": "test_mapping_matches_current_rtm",
       "passed": true,
-      "detail": {
-        "expected": [
-          "DS-021",
-          "DS-028",
-          "DS-040"
-        ],
-        "got": [
-          "DS-021",
-          "DS-028",
-          "DS-040"
-        ]
-      }
+      "detail": null
     },
     {
-      "check": "CR-034_ds_semantic_mapping",
+      "check": "fixture_mapping_current",
       "passed": true,
-      "detail": {
-        "expected": [
-          "DS-015",
-          "DS-037",
-          "DS-040"
-        ],
-        "got": [
-          "DS-015",
-          "DS-037",
-          "DS-040"
-        ]
-      }
+      "detail": null
     },
     {
-      "check": "CR-073_ds_explicit_na",
+      "check": "interface_catalog_current",
       "passed": true,
-      "detail": "Reconciled Core, CRs, ARM, NS, and TCs for AGCP v.2.0. DS disposition: not schema-applicable. Transport independence is implemented and verified through controlled interfaces and conformance behavior; no single data schema independently establishes it."
+      "detail": null
     },
     {
-      "check": "interface_catalog_rtm_consistent",
+      "check": "registry_catalog_current",
       "passed": true,
-      "detail": []
+      "detail": null
     },
     {
-      "check": "registry_catalog_rtm_consistent",
+      "check": "schema_catalog_current",
       "passed": true,
-      "detail": []
-    },
-    {
-      "check": "test_mapping_matches_rtm",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "test_mapping_versions",
-      "passed": true,
-      "detail": {
-        "rtm": "RTM-1.45",
-        "catalog": "1.0.42"
-      }
-    },
-    {
-      "check": "all_fixtures_validate",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "rtm_no_formula_error_literals",
-      "passed": true,
-      "detail": []
-    },
-    {
-      "check": "openapi_yaml_parses",
-      "passed": true,
-      "detail": [
-        "openapi",
-        "info",
-        "servers",
-        "tags",
-        "security",
-        "paths",
-        "components",
-        "x-agcp-interface-id",
-        "x-agcp-interface-version",
-        "x-agcp-specification-release"
-      ]
+      "detail": null
     }
   ],
   "metrics": {
-    "active_schema_count": 43,
-    "schema_ref_count": 3579,
-    "registry_entry_count": 92,
+    "active_schema_count": 44,
+    "registry_entry_count": 94,
     "rtm_disposition_counts": {
       "DS_ID": {
-        "assigned": 121,
-        "na": 1,
+        "assigned": 122,
+        "na": 0,
         "blank": 0
       },
       "IF_ID": {
-        "assigned": 70,
-        "na": 52,
+        "assigned": 84,
+        "na": 38,
         "blank": 0
       },
       "REG_ID": {
@@ -538,9 +87,17 @@
         "blank": 0
       }
     },
-    "fixture_count": 24,
-    "catalog_version": "1.0.42",
-    "rtm_version": "RTM-1.45",
+    "fixture_count": 30,
+    "catalog_version": "1.0.50",
+    "rtm_version": "RTM-1.46",
     "interface_count": 2
+  },
+  "source_hashes": {
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
+    "registries/registry-entry-catalog.json": "05760e6455452f6783a08dd0f180b7b4709e24de7ac3a0a4c4de2d20025df32e",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
+    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc"
   }
 }

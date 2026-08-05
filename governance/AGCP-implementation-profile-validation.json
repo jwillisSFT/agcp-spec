@@ -1,0 +1,27 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "validation_type": "AGCP_IMPLEMENTATION_PROFILE_VALIDATION",
+  "status": "PASS",
+  "profiles_validated": 1,
+  "profiles": [
+    {
+      "profile_id": "AGCP-RUST-STUDENT-SERVICE-2.0.0",
+      "profile_version": "2.0.0-draft.6",
+      "status": "DEVELOPMENT_PRE_CONFORMANCE",
+      "lifecycle_state": "PROPOSED",
+      "profile_digest": "3e391cd0b0a89189434776c4593dedb2b3dd460bfd5fe7f89d8fc8fdb4373b2d",
+      "baseline_bundle": "agcp-spec-v.2.0.0.zip",
+      "baseline_sha256": "790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326",
+      "schema_errors": 0
+    }
+  ],
+  "manifest_files_checked": 9,
+  "manifest_sha256": "c8adaaf00357ada4f7e6f68a74785296a95001b9f0c2cf89ec224bafc3d02468"
+}

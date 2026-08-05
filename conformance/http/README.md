@@ -1,0 +1,3 @@
+# IF-001 Public Error and Metadata Vectors
+
+This directory contains implementation-independent vectors for P1-03, P1-09, P1-14, and P1-17. Public protected-resource lookup failures use `404 RESOURCE_NOT_FOUND`; pre-governance throttling uses `429 REQUEST_THROTTLED` with a delay-seconds `Retry-After` header; unavailable system or node capacity uses `503 CAPACITY_UNAVAILABLE`; transport/service rejection is not an authoritative Governance Outcome. The metadata vector binds immutable baseline, profile, schema set, validator set, active governance version, and optional public-safe deployment identity.

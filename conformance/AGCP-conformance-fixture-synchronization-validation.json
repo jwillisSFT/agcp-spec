@@ -1,17 +1,25 @@
 {
-  "record_id": "AGCP-CONFORMANCE-FIXTURE-SYNCHRONIZATION-VALIDATION-2026-07-31",
+  "record_id": "AGCP-CONFORMANCE-FIXTURE-SYNCHRONIZATION-VALIDATION-2026-08-03",
   "status": "PASS",
-  "validated_at": "2026-07-31T11:30:00Z",
+  "validated_at": "2026-08-03",
   "source_hashes": {
-    "conformance/fixture-mapping.json": "e939ed4d63ae709468514848e211e50e51904ca605551002a84c6c0fa6e8b353",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "0dd2b25ddae6e2fee29dfcc0e02d0baaf560dc4fe41047b2ec805df5aa029120"
+    "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "99a562c94cd98cce57ed42e03ad6a99ed966d548c6d28176089a75b7740900eb",
+    "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
+    "governance/AGCP-semantic-fixture-validation.json": "028ac4e8e56321992bf74b97a0dab5b8ccaa8d1fc8621fc6705e30664b620a9d"
   },
   "summary": {
-    "declared_fixture_count": 29,
-    "validated_fixture_count": 29,
-    "valid_fixture_count": 29,
+    "declared_fixture_count": 30,
+    "validated_fixture_count": 30,
+    "valid_fixture_count": 30,
     "invalid_fixture_count": 0,
-    "schema_fixture_validation_entries": 29
+    "schema_fixture_validation_entries": 30,
+    "schema_catalog_version": "1.0.50",
+    "semantic_fixture_count": 14,
+    "semantic_negative_vector_count": 10,
+    "claimant_assertion_negative_vector_count": 15
   },
   "fixture_validation": [
     {
@@ -19,211 +27,321 @@
       "schema_file": "schemas/constraint_evaluation.json",
       "example_file": "schemas/examples/ds011-constraint-evaluation-satisfied.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS011-VIOLATED",
       "schema_file": "schemas/constraint_evaluation.json",
       "example_file": "schemas/examples/ds011-constraint-evaluation-violated.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS012-PRESERVED",
       "schema_file": "schemas/invariant_evaluation.json",
       "example_file": "schemas/examples/ds012-invariant-evaluation-preserved.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS012-HARD-VIOLATION",
       "schema_file": "schemas/invariant_evaluation.json",
       "example_file": "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS018-SINGLE-COMMIT",
       "schema_file": "schemas/commit_boundary_request.json",
       "example_file": "schemas/examples/ds018-commit-boundary-request-single.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS019-COMMIT-SUCCESS",
       "schema_file": "schemas/commit_boundary_result.json",
       "example_file": "schemas/examples/ds019-commit-boundary-result-success.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS019-STRUCTURAL-REFUSAL",
       "schema_file": "schemas/commit_boundary_result.json",
       "example_file": "schemas/examples/ds019-commit-boundary-result-refusal.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS026-PARTIAL-QUORUM",
       "schema_file": "schemas/governance_approval_artifact.json",
       "example_file": "schemas/examples/ds026-governance-approval-partial-quorum.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS026-COMPLETED-QUORUM",
       "schema_file": "schemas/governance_approval_artifact.json",
       "example_file": "schemas/examples/ds026-governance-approval-completed-quorum.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS029-ADMISSIBLE",
       "schema_file": "schemas/enforcement_context.json",
       "example_file": "schemas/examples/ds029-enforcement-context-admissible.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS029-PREVENT",
       "schema_file": "schemas/enforcement_context.json",
       "example_file": "schemas/examples/ds029-enforcement-context-prevent.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS032-QUALIFIED",
       "schema_file": "schemas/state_qualification_result.json",
       "example_file": "schemas/examples/ds032-state-qualification-qualified.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS032-NOT-QUALIFIED",
       "schema_file": "schemas/state_qualification_result.json",
       "example_file": "schemas/examples/ds032-state-qualification-not-qualified.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS033-QUALIFIED",
       "schema_file": "schemas/evidence_qualification_result.json",
       "example_file": "schemas/examples/ds033-evidence-qualification-qualified.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS033-NOT-QUALIFIED",
       "schema_file": "schemas/evidence_qualification_result.json",
       "example_file": "schemas/examples/ds033-evidence-qualification-not-qualified.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS038-AUTHORIZED",
       "schema_file": "schemas/governance_lifecycle_record.json",
       "example_file": "schemas/examples/ds038-governance-lifecycle-authorized.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS039-DEGRADED",
       "schema_file": "schemas/continuation_integrity_result.json",
       "example_file": "schemas/examples/ds039-continuation-integrity-degraded.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS039-RECOVERED",
       "schema_file": "schemas/continuation_integrity_result.json",
       "example_file": "schemas/examples/ds039-continuation-integrity-recovered.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS040-GENESIS",
       "schema_file": "schemas/governance_ledger_event.json",
       "example_file": "schemas/examples/ds040-governance-ledger-event-genesis.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS040-SEQUENCED",
       "schema_file": "schemas/governance_ledger_event.json",
       "example_file": "schemas/examples/ds040-governance-ledger-event-sequenced.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS041-ACTIVE",
       "schema_file": "schemas/governance_configuration.json",
       "example_file": "schemas/examples/ds041-governance-configuration-active.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS042-VALIDATED",
       "schema_file": "schemas/compiled_governance_artifact.json",
       "example_file": "schemas/examples/ds042-compiled-governance-artifact-validated.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS043-ACTIVATED",
       "schema_file": "schemas/controlled_governance_activation.json",
       "example_file": "schemas/examples/ds043-controlled-governance-activation-activated.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS044-REGISTRY",
       "schema_file": "schemas/registry_document.schema.json",
       "example_file": "schemas/examples/ds044-registry-document-capability-example.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS005-REGISTERED",
       "schema_file": "schemas/policy_evaluation_module_artifact.json",
       "example_file": "schemas/examples/ds005-policy-evaluation-module-registered.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS006-REGISTERED",
       "schema_file": "schemas/policy_artifact.json",
       "example_file": "schemas/examples/ds006-governance-policy-registered.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS010-REGISTERED",
       "schema_file": "schemas/governance_artifact_view.json",
       "example_file": "schemas/examples/ds010-governance-artifact-view-registered.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS017-AUTHORIZED",
       "schema_file": "schemas/execution_authorization_view.json",
       "example_file": "schemas/examples/ds017-execution-authorization-view-authorized.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS003-METADATA",
       "schema_file": "schemas/meta_response.json",
       "example_file": "schemas/examples/ds003-implementation-metadata-response.json",
       "valid": true,
-      "errors": []
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
+    },
+    {
+      "fixture_id": "FX-DS045-GOVERNANCE-APPROVAL-SUBMISSION",
+      "schema_file": "schemas/governance_approval_submission.json",
+      "example_file": "schemas/examples/ds045-governance-approval-submission-valid.json",
+      "valid": true,
+      "errors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     }
   ],
-  "new_f08_fixtures": [
-    "FX-DS003-METADATA",
-    "FX-DS005-REGISTERED",
-    "FX-DS006-REGISTERED",
-    "FX-DS010-REGISTERED",
-    "FX-DS017-AUTHORIZED"
-  ],
-  "closure_statement": "Every controlled conformance fixture validates against its exact active schema before harness execution. The F-09 compilation/activation vectors reuse the validated DS-041, DS-042, and DS-043 fixtures and add no uncontrolled fixture."
+  "p0_10_p0_06_semantic_validation": {
+    "status": "PASS",
+    "validation_report": "governance/AGCP-semantic-fixture-validation.json",
+    "corrected_positive_fixture_count": 14,
+    "semantic_negative_vector_count": 10,
+    "claimant_assertion_negative_vector_count": 15
+  }
 }

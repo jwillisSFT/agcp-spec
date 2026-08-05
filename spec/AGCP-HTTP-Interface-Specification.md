@@ -3,7 +3,11 @@
 **Status:** Normative\
 **Interface Identifier:** IF-001\
 **Interface Version:** v2\
-**AGCP Specification Release:** v2.0.0\
+**AGCP Specification Release:** v2.0.1\
+**Artifact Lifecycle:** Current\
+**Repository Release Target Status:** Unreleased Accumulated Correction Set\
+**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline\
+**Baseline Date:** 2026-07-30\
 **Applies To:** All AGCP-conformant implementations
 
 ------------------------------------------------------------------------
@@ -60,7 +64,7 @@ Conflicts SHALL be resolved using the Core-defined precedence order: published C
 
 ## 3.1 Interface and path versioning
 
-IF-001 uses the canonical path namespace `/agcp/v2`. The path major version is aligned with the version 2 HTTP interface contract for AGCP v2.0.0. It is not an independently maintained `/agcp/v1` transport version. This release defines no `/agcp/v1` compatibility routes, aliases, redirects, or fallback request representations.
+IF-001 uses the canonical path namespace `/agcp/v2`. The path major version is aligned with the version 2 HTTP interface contract for the AGCP v2 interface series. The current contract revision is v2.0.1 and remains based on the published v2.0.0 controlled baseline. It is not an independently maintained `/agcp/v1` transport version. This release defines no `/agcp/v1` compatibility routes, aliases, redirects, or fallback request representations.
 
 ------------------------------------------------------------------------
 
@@ -108,7 +112,7 @@ non-success responses.
 | `GET` | `/agcp/v2/meta` | `getMetadata` | `none` | `none` | `200` |
 | `POST` | `/agcp/v2/proposals/submit` | `submitProposal` | `header:Idempotency-Key` | `ProposalSubmitRequest` | `200, 400, 403, 409, 422, 503` |
 | `GET` | `/agcp/v2/proposals/{proposal_id}` | `getProposal` | `path:proposal_id`, `query:tenant_id`, `query:governance_domain_id` | `none` | `200, 403, 404` |
-| `POST` | `/agcp/v2/proposals/{proposal_id}/governance-approvals` | `submitGovernanceApproval` | `path:proposal_id`, `header:Idempotency-Key` | `GovernanceApprovalRequest` | `200, 400, 403, 404, 409, 422` |
+| `POST` | `/agcp/v2/proposals/{proposal_id}/governance-approvals` | `submitGovernanceApproval` | `path:proposal_id`, `header:Idempotency-Key` | `GovernanceApprovalSubmission` | `200, 400, 403, 404, 409, 422` |
 | `GET` | `/agcp/v2/execution-authorizations/{authorization_id}` | `getExecutionAuthorization` | `path:authorization_id`, `query:tenant_id`, `query:governance_domain_id` | `none` | `200, 403, 404` |
 | `POST` | `/agcp/v2/commit-boundary/commit` | `commitBoundaryProcessing` | `header:Idempotency-Key` | `CommitBoundaryRequest` | `200, 400, 403, 404, 409, 422, 503` |
 | `GET` | `/agcp/v2/governance-evidence/{evidence_id}` | `getGovernanceEvidence` | `path:evidence_id`, `query:tenant_id`, `query:governance_domain_id` | `none` | `200, 403, 404, 422` |
@@ -128,6 +132,18 @@ For every operation requiring `Idempotency-Key`, the key SHALL be scoped to the
 `tenant_id` carried by the canonical request body and to the endpoint. Equivalent reuse
 SHALL NOT create a duplicate governance-significant effect. Conflicting reuse SHALL
 produce the declared `409` response with rejection code `IDEMPOTENCY_CONFLICT`.
+
+For every IF-001 request body or submitted artifact containing `provenance`, the
+provenance member SHALL conform to `schemas/common.json#/$defs/provenance` and the
+AGCP Provenance Wire Format Specification. `signer`, `kid`, `alg`, `signed_at`,
+`nonce`, `scope`, and the detached `signature` string are direct provenance fields.
+The nested legacy signature-object representation SHALL be rejected by schema
+validation. Provenance schema validation, protected-header comparison, key and
+algorithm authorization, canonical payload reconstruction, signature verification,
+scope enforcement, expiration, and nonce uniqueness SHALL complete before governance
+processing relies on the signed content.
+
+For every IF-001 request, response, or referenced artifact containing an algorithm-explicit content digest, the digest SHALL conform to `schemas/common.json#/$defs/content_digest`. The digest value SHALL be lowercase hexadecimal and SHALL contain exactly 64 characters for `SHA-256` and `BLAKE2B-256`, 96 characters for `SHA-384`, and 128 characters for `SHA-512` and `BLAKE2B-512`. A declared algorithm paired with a different length, uppercase hexadecimal, a non-hexadecimal value, or the ambiguous identifier `BLAKE2B` SHALL fail schema validation before governance processing relies on the digest.
 
 ## 5.1 Metadata
 
@@ -176,17 +192,15 @@ Responses SHALL conform to `ProposalView`.
 
 `POST /agcp/v2/proposals/{proposal_id}/governance-approvals`
 
-Allows governed submission of a DS-026 Governance Approval Artifact for human adjudication, cosignature, risk acceptance, cancellation, withdrawal, or quorum participation. The operation uses Governance Approval terminology; it does not expose a legacy Human Review Artifact representation.
+Accepts one DS-045 `GovernanceApprovalSubmission` as untrusted claimant ingress for human adjudication, cosignature, risk acceptance, cancellation, withdrawal, or quorum participation. The operation SHALL NOT accept DS-026 `GovernanceApprovalArtifact` as request content.
 
-Requests SHALL conform to `GovernanceApprovalRequest` and SHALL carry exactly one canonical `governance_approval_artifact`.
+The submission MAY carry claimant-provided approval content, claimed approver identity, claimant provenance, validity intent, and quorum association. It SHALL NOT carry or authoritatively assert AGCP-created fields, including approval-artifact identity or status, signature-verification outcome, replay uniqueness, approver eligibility, current lifecycle eligibility, Canonical State qualification, Authority Lineage qualification, Governance Evidence, quorum count or completion, lifecycle effect, artifact digest, semantic-verification results, or Governance Ledger ordering.
 
-Clients SHALL provide an `Idempotency-Key` header. The key SHALL be scoped to the
-`tenant_id` carried by `GovernanceApprovalRequest` and to this endpoint. Equivalent
-reuse SHALL NOT create duplicate approval, adjudication, cosignature, risk-acceptance,
-cancellation, withdrawal, or quorum effects; conflicting reuse SHALL produce `409`
-with rejection code `IDEMPOTENCY_CONFLICT`.
+AGCP SHALL validate DS-045 and provenance first; bind the authenticated subject, Tenant, Governance Domain, Proposal Identity, target, scope, and policy context; resolve current qualified governance inputs; independently verify authority, eligibility, validity, replay uniqueness, and signature; deterministically evaluate quorum and lifecycle effects; record Governance Evidence and ordered Governance Ledger events; and only then create or qualify a DS-026 `GovernanceApprovalArtifact`.
 
-Responses SHALL conform to `ProposalView`.
+Clients SHALL provide an `Idempotency-Key` header. The key SHALL be scoped to the `tenant_id` carried by `GovernanceApprovalSubmission` and to this endpoint. Equivalent reuse SHALL NOT create duplicate approval, adjudication, cosignature, risk-acceptance, cancellation, withdrawal, artifact, evidence, ledger, or quorum effects; conflicting reuse SHALL produce `409` with rejection code `IDEMPOTENCY_CONFLICT`.
+
+Responses SHALL conform to `ProposalView`. Any DS-026 record returned or referenced in the resulting view is authoritative AGCP-created or AGCP-qualified evidence, not an echo of claimant-supplied record state.
 
 ------------------------------------------------------------------------
 
@@ -423,3 +437,15 @@ This specification does not define:
 -   policy language;
 -   implementation language;
 -   user interface design.
+
+## 6.1 Public Not-Found Normalization
+
+Every public IF-001 protected-resource lookup failure SHALL return HTTP 404 with rejection code `RESOURCE_NOT_FOUND`, whether the object is absent or its existence is hidden by tenant, Governance Domain, or disclosure policy. `PROPOSAL_NOT_FOUND`, `AUTHORIZATION_NOT_FOUND`, `GOVERNANCE_EVIDENCE_NOT_FOUND`, and `GOVERNANCE_ARTIFACT_NOT_FOUND` are deprecated for public IF-001 responses and MAY be retained only in protected diagnostics or Governance Evidence.
+
+## 6.2 Pre-Governance Throttling and Capacity
+
+Pre-governance throttling SHALL return HTTP 429 with rejection code `REQUEST_THROTTLED` and a required `Retry-After` header encoded as delay-seconds. A system or node that cannot safely begin processing because capacity is unavailable SHALL return HTTP 503 with rejection code `CAPACITY_UNAVAILABLE`. These conditions occur before an authoritative governance decision and SHALL NOT be represented as Governance Outcomes. A policy or entitlement quota evaluated by governance remains an authoritative Governance Outcome rather than an HTTP 429 transport rejection.
+
+## 6.3 Metadata, Immutable Distribution, and Active Governance
+
+`GET /agcp/v2/meta` SHALL advertise the immutable AGCP baseline bundle identity and digest, the claimed Implementation Profile identity and digest, schema-set and generated-validator-set identities and digests, the active governance version and activation integrity, and the implemented IF-001 contract. A published baseline URI SHALL identify an immutable release artifact and SHALL NOT resolve to a moving branch. Optional deployment, node, workspace, Tenant, and Governance Domain binding SHALL use public-safe opaque identifiers and SHALL NOT expand authority or disclose secrets. Verified claims SHALL remain evidence-bound.

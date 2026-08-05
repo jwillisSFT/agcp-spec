@@ -77,3 +77,7 @@ DS-003 traces principally to Core Section 17 and NS-17.1-01 through NS-17.10-02,
 - OpenAPI references resolved.
 - All 63 common definitions remained actively reachable.
 - RTM structure and formatting were preserved.
+
+## v2.0.1 P1-14 and P1-17 Integration
+
+DS-003 now requires explicit immutable baseline bundle identity and digest, profile-to-baseline binding, generated validator-set identity and digest bound to the schema-set digest, and an active-governance advertisement. It optionally supports public-safe deployment/node/workspace/Tenant/Governance Domain binding. A published baseline requires a non-null immutable URI; a moving branch is not an acceptable baseline. The controlled example and validation assets were regenerated for Schema Catalog 1.0.50.

@@ -160,17 +160,24 @@ Cross-major interoperability is not guaranteed.
 
 # 6. Specification Alignment
 
-The following specification families SHALL remain aligned within the same repository release:
+The following controlled artifact families SHALL remain aligned within the same repository release:
 
-- Core Specification
-- HTTP Interface Specification
-- Policy Evaluation Contract
-- Security Specification
-- Multitenant Operational Specification
-- Governance Specifications
-- Conformance Specifications
+- AGCP Core Specification
+- AGCP HTTP Interface Specification
+- Policy Evaluation Contract and applicable controlled machine-contract companions
+- AGCP Provenance Wire Format Specification
+- AGCP Multitenant Operational Specification
+- AGCP Error Mapping
+- Append-Only Governance Ledger Specification
+- AGCP Human Adjudication and Governance Approval Specification
+- active governance schemas, including DS-020 Governance Evidence and DS-033 Evidence Qualification Result
+- Conformance Specifications and executable conformance assets
 
 Normative schemas and registries SHALL remain consistent with the repository release in which they are published.
+
+### 6.1 Normative reference integrity
+
+Every normative reference SHALL identify an existing controlled repository artifact by canonical title and path or an explicitly identified external normative source. A subject-area label SHALL NOT be written as though it were a standalone companion when no such artifact is published. Distributed obligations SHALL reference the applicable controlling artifacts identified in `AGCP-Normative-Companion-Reference-Dispositions.md`.
 
 PATCH-level editorial updates MAY occur independently provided normative behavior remains unchanged.
 
@@ -630,17 +637,19 @@ Reference, lifecycle, implementation guidance, and research documents provide in
 
 This specification defines the governance model for repository evolution.
 
-It complements, but does not replace, the following specifications:
+It complements, but does not replace, the following controlled artifacts:
 
-- AGCP Core Specification
-- AGCP HTTP Interface Specification
-- AGCP Policy Evaluation Contract
-- AGCP Security Specification
-- AGCP Multitenant Operational Specification
-- AGCP Governance Evidence Specification
-- AGCP Append-Only Governance Ledger Specification
-- AGCP Human Review Specification
-- AGCP Conformance Specification
+- the AGCP Core Specification (`../spec/AGCP-Core.docx`)
+- the AGCP HTTP Interface Specification (`../spec/AGCP-HTTP-Interface-Specification.md`)
+- the Policy Evaluation Contract (`../spec/AGCP-Policy-Evaluation-Contract.md`)
+- the AGCP Provenance Wire Format Specification (`../spec/AGCP-Provenance-Wire-Format-Specification.md`)
+- the AGCP Multitenant Operational Specification (`../spec/AGCP-Multitenant-Operational-Specification.md`)
+- AGCP Error Mapping (`../spec/AGCP-Error-Mapping.md`)
+- DS-020 Governance Evidence (`../schemas/governance_evidence.json`)
+- DS-033 Evidence Qualification Result (`../schemas/evidence_qualification_result.json`)
+- the Append-Only Governance Ledger Specification (`../spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md`)
+- the AGCP Human Adjudication and Governance Approval Specification (`../spec/AGCP-Human-Review-Specification.md`)
+- the AGCP Conformance Specification (`../conformance/AGCP-Conformance.md`)
 
 All specifications within a repository release SHALL be interpreted as a coherent specification set.
 

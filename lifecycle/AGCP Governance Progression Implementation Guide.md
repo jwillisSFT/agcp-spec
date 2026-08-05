@@ -225,11 +225,14 @@ For the mandatory behaviors summarized by this checklist, a conformant implement
 
 Read this guide together with:
 
-- AGCP Core Specification
-- AGCP Governance Lifecycle Model
-- AGCP Normative Governance Progression Table
-- AGCP Append-Only Governance Ledger Specification
-- AGCP Governance Evidence Specification
-- AGCP Human Review Specification
-- AGCP Security Specification
-- AGCP Conformance Specification
+- the AGCP Core Specification (`../spec/AGCP-Core.docx`)
+- the AGCP Governance Lifecycle Model (`AGCP Governance Lifecycle Model.md`)
+- the AGCP Normative Governance Progression Table (`AGCP Normative Governance Progression Table.md`)
+- the Append-Only Governance Ledger Specification (`../spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md`)
+- DS-020 Governance Evidence (`../schemas/governance_evidence.json`)
+- DS-033 Evidence Qualification Result (`../schemas/evidence_qualification_result.json`)
+- the AGCP Human Adjudication and Governance Approval Specification (`../spec/AGCP-Human-Review-Specification.md`)
+- the AGCP Provenance Wire Format Specification (`../spec/AGCP-Provenance-Wire-Format-Specification.md`)
+- the AGCP Multitenant Operational Specification (`../spec/AGCP-Multitenant-Operational-Specification.md`)
+- AGCP Error Mapping (`../spec/AGCP-Error-Mapping.md`)
+- the AGCP Conformance Specification (`../conformance/AGCP-Conformance.md`)

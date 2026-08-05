@@ -10,7 +10,7 @@
   "release": {
     "release_id": "REG-CONSTRAINT-TYPE-v2.0.0",
     "registry_release": "v2.0.0",
-    "specification_version": "v2.0",
+    "specification_version": "v2.0.0",
     "publication_status": "CURRENT",
     "published_at": "2026-07-30T12:26:00-04:00",
     "authority": "AGCP controlled repository release",
@@ -33,7 +33,7 @@
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "8f43853a9069e9bd80e669b00375dc0502f8a71c27b0796bc2f3677f69f520e5",
+      "value": "b3972f1df04d930207bb3e8c07fd0ec21a4d7d1e3b1c553e82df619929ebecb0",
       "canonicalization": "JCS-RFC8785"
     }
   },

@@ -1,0 +1,525 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "report_id": "AGCP-P0-06-GOVERNANCE-APPROVAL-COMMAND-RECORD-SEPARATION",
+  "status": "PASS",
+  "validated_at": "2026-08-03",
+  "finding": "P0-06",
+  "submission_schema": "schemas/governance_approval_submission.json",
+  "submission_ds_id": "DS-045",
+  "authoritative_record_schema": "schemas/governance_approval_artifact.json",
+  "authoritative_record_ds_id": "DS-026",
+  "affected_cr_count": 11,
+  "negative_vector_count": 15,
+  "controlled_fixture_count": 30,
+  "source_hashes": {
+    "schemas/governance_approval_submission.json": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
+    "schemas/governance_approval_artifact.json": "637b768c631538e03f80ff09ad7a65aa89ecdf25c78ecf1a25a12ba7c2f18bbb",
+    "schemas/examples/ds045-governance-approval-submission-valid.json": "9b0565c40f482ecd1ee58bf21ed873ad01c59d2a8a2f228784b7619239b40714",
+    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
+    "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
+    "spec/AGCP-Human-Review-Specification.md": "5113078fcb769e1e0bebef1687c35dd686da531ca11a71cdc26d6859ce6120ba",
+    "spec/AGCP-Error-Mapping.md": "fbcd5b3bca11389ae3e61997ac4ce404e86f99a1697ba3bf050479b0eec93316",
+    "reference/AGCP-HTTP-Reference-Implementation-Pseudocode.md": "fd1b30291a633a4efa6eb70cc433c5407053b9ebb78e11c66940594cbd230f09",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe",
+    "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
+    "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
+    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
+    "implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml": "60d0dbbafc130d463f64b26f542efd3bbac9591ec70168bfab4b9ef32dd1bc70",
+    "governance/validate_command_record_separation.py": "4f32b3862c4157fdff014d5c330d3daa528916fadba4870f924cb7db3f52f967",
+    ".github/workflows/validate-command-record-separation.yml": "81ba1a390b9ea8b22f2192f7e16385e5b7f9434180d5ed6eb747c38191f923d8"
+  },
+  "checks": [
+    {
+      "check": "all_schema_documents_metaschema_valid",
+      "status": "PASS",
+      "detail": 97
+    },
+    {
+      "check": "ds045_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds045_closed_ingress",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds045_prohibited_server_fields_absent",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "ds026_authoritative_origin_required",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "valid_submission_example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "authoritative_artifact_examples_valid",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "schemas/examples/ds026-governance-approval-partial-quorum.json",
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds026-governance-approval-completed-quorum.json",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "check": "submission_is_not_artifact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "artifact_is_not_submission",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "negative_server_field_vector_count",
+      "status": "PASS",
+      "detail": 15
+    },
+    {
+      "check": "all_server_field_vectors_rejected",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "NV-CMDREC-001",
+          "field": "approval_artifact_id",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-002",
+          "field": "artifact_origin",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-003",
+          "field": "status",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-004",
+          "field": "lifecycle_state_binding",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-005",
+          "field": "canonical_state_ref_at_adjudication",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-006",
+          "field": "approver_eligibility",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-007",
+          "field": "authority_lineage_ref",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-008",
+          "field": "governance_evidence_refs",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-009",
+          "field": "cryptographic_verification",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-010",
+          "field": "replay_protection",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-011",
+          "field": "artifact_digest",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-012",
+          "field": "semantic_assertions",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-013",
+          "field": "lifecycle_effect",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-014",
+          "field": "artifact_termination",
+          "rejected": true
+        },
+        {
+          "id": "NV-CMDREC-015",
+          "field": "quorum_contribution",
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "check": "negative_vector_field_set_complete",
+      "status": "PASS",
+      "detail": [
+        "approval_artifact_id",
+        "approver_eligibility",
+        "artifact_digest",
+        "artifact_origin",
+        "artifact_termination",
+        "authority_lineage_ref",
+        "canonical_state_ref_at_adjudication",
+        "cryptographic_verification",
+        "governance_evidence_refs",
+        "lifecycle_effect",
+        "lifecycle_state_binding",
+        "quorum_contribution",
+        "replay_protection",
+        "semantic_assertions",
+        "status"
+      ]
+    },
+    {
+      "check": "openapi_request_component",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "openapi_submission_component",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "openapi_old_request_component_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "openapi_artifact_not_request_ref",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "if_spec_submission_record_separation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "human_review_submission_record_separation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "error_mapping_submission_record_separation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "harness_approval_requests_use_ds045",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "TV-GAPP-001",
+          "fixture_ok": true,
+          "schema_errors": []
+        },
+        {
+          "id": "TV-GAPP-002",
+          "fixture_ok": true,
+          "schema_errors": []
+        },
+        {
+          "id": "TV-GAPP-003",
+          "fixture_ok": true,
+          "schema_errors": []
+        },
+        {
+          "id": "TV-GAPP-004",
+          "fixture_ok": true,
+          "schema_errors": []
+        },
+        {
+          "id": "TV-XTEN-002",
+          "fixture_ok": true,
+          "schema_errors": []
+        }
+      ]
+    },
+    {
+      "check": "harness_no_claimant_artifact_body",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_catalog_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_catalog_counts",
+      "status": "PASS",
+      "detail": {
+        "implemented_schema_count": 44,
+        "proposed_reserved_schema_count": 0,
+        "excluded_registry_payload_count": 0,
+        "rtm_rows_with_ds_assignments": 122,
+        "highest_assigned_ds_identifier": "DS-045",
+        "implemented_count": 44,
+        "proposed_reserved_count": 0,
+        "total_assigned_count": 45,
+        "retired_schema_count": 1,
+        "retired_count": 1,
+        "rtm_rows_with_explicit_ds_disposition": 122,
+        "rtm_rows_with_if_assignments": 84,
+        "rtm_rows_with_explicit_if_disposition": 122,
+        "rtm_rows_with_reg_assignments": 117,
+        "rtm_rows_with_explicit_reg_disposition": 122,
+        "interface_definition_count": 2,
+        "registry_entry_count": 94
+      }
+    },
+    {
+      "check": "ds045_catalog_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds026_catalog_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds045_rtm_cr_set",
+      "status": "PASS",
+      "detail": [
+        "CR-012",
+        "CR-013",
+        "CR-014",
+        "CR-015",
+        "CR-016",
+        "CR-017",
+        "CR-018",
+        "CR-058",
+        "CR-059",
+        "CR-060",
+        "CR-061"
+      ]
+    },
+    {
+      "check": "fixture_catalog_ds045",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "interface_catalog_cr_set",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "interface_catalog_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "rtm_affected_rows",
+      "status": "PASS",
+      "detail": [
+        {
+          "cr": "CR-012",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-013",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-014",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-015",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-016",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-017",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-018",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-058",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-059",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-060",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        },
+        {
+          "cr": "CR-061",
+          "ds45": true,
+          "if1": true,
+          "files": true
+        }
+      ]
+    },
+    {
+      "check": "test_mapping_affected_rows",
+      "status": "PASS",
+      "detail": [
+        {
+          "tc": "TC-012",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-013",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-014",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-015",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-016",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-017",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-018",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-058",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-059",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-060",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        },
+        {
+          "tc": "TC-061",
+          "ds45": true,
+          "if1": true,
+          "schema": true,
+          "vectors": true
+        }
+      ]
+    },
+    {
+      "check": "profile_version_draft6",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "profile_entry_schema",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "profile_extension_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "profile_digest_valid",
+      "status": "PASS",
+      "detail": {
+        "declared": "3e391cd0b0a89189434776c4593dedb2b3dd460bfd5fe7f89d8fc8fdb4373b2d",
+        "computed": "3e391cd0b0a89189434776c4593dedb2b3dd460bfd5fe7f89d8fc8fdb4373b2d"
+      }
+    }
+  ],
+  "issues": []
+}

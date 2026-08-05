@@ -1,10 +1,10 @@
 {
-  "validation_id": "AGCP-RELEASE-PAYLOAD-DEDUPLICATION-2026-07-30",
+  "validation_id": "AGCP-RELEASE-PAYLOAD-DEDUPLICATION-REVALIDATION-2026-08-03",
   "status": "PASS",
-  "specification_version": "v2.0.0",
-  "schema_catalog_version": "1.0.42",
-  "date": "2026-07-30",
-  "scope": "Removal of four byte-identical duplicate validation-report payload groups from the internal repository and release ZIP.",
+  "specification_version": "v2.0.1",
+  "schema_catalog_version": "1.0.50",
+  "date": "2026-08-03",
+  "scope": "Revalidation that the accumulated v2.0.1 repository contains no duplicate or transitional machine-readable validation payloads.",
   "authoritative_placement_rules": [
     {
       "artifact_class": "DS-specific validation record",
@@ -48,5 +48,18 @@
     "fixture_validation_failures": 0,
     "catalog_hash_mismatches": 0,
     "obsolete_active_schema_fields": 0
+  },
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "original_validation_id": "AGCP-RELEASE-PAYLOAD-DEDUPLICATION-2026-07-30",
+  "source_hashes": {
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "governance/AGCP-traceability-gap-closure-validation.json": "8c361c9cd686c2ceb1942ab9ed777b577833c041918420d87dc2984e5482aac1"
   }
 }

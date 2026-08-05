@@ -151,7 +151,7 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "proposal_id": "proposal-id-1",
+    "proposal_id": "proposal-1",
     "evaluated_at": "2026-07-30T16:00:00Z"
   },
   "qualified_evidence_refs": [
@@ -194,8 +194,8 @@
     "governance_version_ref": {
       "governance_version_id": "1.0.0"
     },
-    "tenant_id": "tenant-id-1",
-    "governance_domain_id": "governance-domain-id-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
     "effective_at": "2026-07-30T16:00:00Z"
   },
   "governance_version_ref": {
@@ -203,15 +203,15 @@
   },
   "policy_refs": [
     {
-      "policy_id": "policy-id-1",
-      "policy_version": "1.0.0",
+      "policy_id": "policy-1",
+      "policy_version": "2.0.0",
       "policy_digest": {
         "algorithm": "SHA-256",
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
       "artifact_uri": "https://agcp.ai/example/artifact-uri",
-      "tenant_id": "tenant-id-1",
-      "governance_domain_id": "governance-domain-id-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
       "status": "Registered"
     }
   ],
@@ -394,7 +394,7 @@
         "algorithm": "SHA-256",
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
-      "proposal_id": "proposal-id-1",
+      "proposal_id": "proposal-1",
       "evaluated_at": "2026-07-30T16:00:00Z"
     },
     "renewed_state_qualification_ref": {
@@ -561,12 +561,12 @@
   },
   "provenance": {
     "signer": "example",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "key-1",
-      "sig": "signature-value"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-1",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-42230cb72b397cfedff48ff3",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LTEiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMzktY29udGludWF0aW9uLWludGVncml0eS1yZWNvdmVyZWQuanNvbjokLnByb3ZlbmFuY2U"
   },
   "input_set_digest": {
     "algorithm": "SHA-256",

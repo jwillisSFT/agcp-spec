@@ -2,12 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/governance_approval_artifact.json",
   "title": "Governance Approval Artifact",
-  "description": "Canonical domain schema for an attributable, cryptographically verifiable governance artifact recording human or governed approval, cosignature, positive or negative adjudication, risk acceptance, cancellation, withdrawal, or participation in partial or completed quorum. The artifact is proposal-, lifecycle-, scope-, tenant-, target-, policy-, governance-version-, and validity-bound evidence. It may support lifecycle progression, Authority Re-Derivation, and Commit-Bound Admissibility, but does not itself constitute authority at commitment or permission to execute.",
-  "$comment": "DS-026 is the authoritative Governance Approval Artifact. Eligibility, principal authority, current lifecycle state, validity, revocation, quorum arithmetic, cross-object binding equality, and commit-time sufficiency require semantic verification where JSON Schema cannot compare arbitrary values or current authoritative state. Completion of approval or quorum creates eligibility evidence only; current qualified governance inputs must still be re-evaluated before commitment.",
+  "description": "Authoritative AGCP-created or AGCP-qualified canonical domain schema for an attributable, cryptographically verifiable governance artifact recording human or governed approval, cosignature, positive or negative adjudication, risk acceptance, cancellation, withdrawal, or participation in partial or completed quorum. The artifact is proposal-, lifecycle-, scope-, tenant-, target-, policy-, governance-version-, and validity-bound evidence. It may support lifecycle progression, Authority Re-Derivation, and Commit-Bound Admissibility, but does not itself constitute authority at commitment or permission to execute.",
+  "$comment": "DS-026 is the authoritative Governance Approval Artifact. Eligibility, principal authority, current lifecycle state, validity, revocation, quorum arithmetic, cross-object binding equality, and commit-time sufficiency require semantic verification where JSON Schema cannot compare arbitrary values or current authoritative state. Completion of approval or quorum creates eligibility evidence only; current qualified governance inputs must still be re-evaluated before commitment. A claimant SHALL NOT submit a DS-026 object as an ingress command. IF-001 accepts DS-045 Governance Approval Submission and AGCP creates or qualifies DS-026 only after independent validation, identity binding, authority and eligibility checks, Canonical State resolution, replay verification, quorum evaluation, lifecycle processing, evidence creation, and ledger ordering.",
   "x-agcp-ds-id": "DS-026",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Canonical Governance Object — Governance Approval Artifact",
+  "x-agcp-schema-role": "Canonical Governance Object \u2014 Governance Approval Artifact",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-107",
@@ -57,6 +57,10 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "artifact_origin": {
+      "const": "AGCP_CREATED_OR_QUALIFIED",
+      "description": "Fixed origin marker identifying an authoritative AGCP-created or AGCP-qualified record. It is valid only on AGCP-controlled output or persistence and is never accepted from claimant ingress."
+    },
     "approval_artifact_id": {
       "$ref": "common.json#/$defs/approval_artifact_id"
     },
@@ -115,7 +119,8 @@
       "$ref": "common.json#/$defs/principal"
     },
     "approver_eligibility": {
-      "$ref": "#/$defs/approver_eligibility"
+      "$ref": "#/$defs/approver_eligibility",
+      "description": "Authoritative AGCP eligibility result derived from current qualified governance inputs. Claimants cannot assert this field in DS-045."
     },
     "authority_lineage_ref": {
       "$ref": "common.json#/$defs/authority_lineage_ref"
@@ -158,7 +163,8 @@
       "$ref": "common.json#/$defs/attribution"
     },
     "cryptographic_verification": {
-      "$ref": "#/$defs/cryptographic_verification"
+      "$ref": "#/$defs/cryptographic_verification",
+      "description": "Authoritative AGCP verification result. Claimants cannot assert this field in DS-045."
     },
     "replay_protection": {
       "$ref": "#/$defs/replay_protection"
@@ -167,7 +173,8 @@
       "$ref": "common.json#/$defs/content_digest"
     },
     "semantic_assertions": {
-      "$ref": "#/$defs/semantic_assertions"
+      "$ref": "#/$defs/semantic_assertions",
+      "description": "Authoritative AGCP semantic-verification results. Claimants cannot assert this field in DS-045."
     },
     "supersedes_approval_artifact_ref": {
       "$ref": "#/$defs/governance_approval_artifact_ref"
@@ -186,6 +193,7 @@
     }
   },
   "required": [
+    "artifact_origin",
     "approval_artifact_id",
     "artifact_version",
     "artifact_role",
@@ -912,7 +920,7 @@
     },
     "lifecycle_effect": {
       "type": "object",
-      "description": "Governed lifecycle effect supported by the artifact. The effect records eligibility or adjudication consequences and remains distinct from the artifact’s own active, expired, revoked, or superseded status.",
+      "description": "Governed lifecycle effect supported by the artifact. The effect records eligibility or adjudication consequences and remains distinct from the artifact\u2019s own active, expired, revoked, or superseded status.",
       "additionalProperties": false,
       "properties": {
         "effect_type": {

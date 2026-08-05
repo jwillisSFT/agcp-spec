@@ -255,7 +255,59 @@ Canonicalization should:
 - preserve semantic JSON values;
 - produce stable output for identical input.
 
-## 6.2 Tenant and Governance-Domain Validation
+## 6.2 Provenance Wire Verification
+
+```text
+function verify_provenance(containing_object):
+
+    validate_schema(containing_object)
+
+    provenance = containing_object.provenance
+    require provenance has exactly:
+        signer, kid, alg, signed_at, optional expires_at,
+        nonce, scope, signature
+
+    protected_b64, signature_b64 = split_exactly_once(provenance.signature, "..")
+    protected = decode_base64url_json(protected_b64)
+
+    require protected.typ == "AGCP+PROV"
+    require protected.alg == provenance.alg
+    require protected.kid == provenance.kid
+    require signature_algorithm_allowed(provenance.alg)
+
+    key = resolve_tenant_scoped_verification_key(
+        provenance.signer,
+        provenance.kid,
+        provenance.alg
+    )
+
+    enforce_signed_at_and_optional_expiration(provenance)
+    enforce_scope_for_operation(provenance.scope)
+    enforce_nonce_uniqueness(
+        tenant_id=containing_object.tenant_id,
+        signer=provenance.signer,
+        scope=provenance.scope,
+        nonce=provenance.nonce
+    )
+
+    unsigned = deep_copy(containing_object)
+    remove unsigned.provenance.signature
+    canonical_payload = rfc8785_jcs_utf8(unsigned)
+    payload_b64 = base64url_without_padding(canonical_payload)
+    signing_input = protected_b64 + "." + payload_b64
+
+    if not verify_signature(key, provenance.alg, signing_input, signature_b64):
+        record_provenance_evidence(PROVENANCE_INVALID)
+        return error_response(400, PROVENANCE_INVALID)
+
+    record_provenance_evidence(PROVENANCE_VALID)
+    return OK
+```
+
+The nested legacy `provenance.signature.{alg,kid,sig}` object is not accepted. Digest
+algorithm identifiers such as `SHA-256` are not signature algorithms.
+
+## 6.3 Tenant and Governance-Domain Validation
 
 ```text
 function require_tenant_and_domain_valid(tenant_id, governance_domain_id):
@@ -271,7 +323,7 @@ function require_tenant_and_domain_valid(tenant_id, governance_domain_id):
     return OK
 ```
 
-## 6.3 Tenant Scope Check
+## 6.4 Tenant Scope Check
 
 ```text
 function require_same_tenant(request_tenant, resource_tenant):
@@ -282,7 +334,7 @@ function require_same_tenant(request_tenant, resource_tenant):
     return OK
 ```
 
-## 6.4 Governance Evidence Append
+## 6.5 Governance Evidence Append
 
 ```text
 function record_evidence(stage, associated_object_id, processing_outcome, context):
@@ -441,7 +493,7 @@ function get_proposal(tenant_id, governance_domain_id, proposal_id):
     proposal = proposal_get(tenant_id, governance_domain_id, proposal_id)
 
     if proposal does not exist:
-        return error_response(404, PROPOSAL_NOT_FOUND)
+        return public_not_found(PROPOSAL_NOT_FOUND)
 
     evidence_refs = evidence_list_for_object(
         tenant_id,
@@ -469,73 +521,65 @@ POST /agcp/v2/proposals/{proposal_id}/governance-approvals
 Reference pseudocode:
 
 ```text
-function submit_governance_approval(proposal_id, request, idempotency_key):
+function submit_governance_approval(proposal_id, submission, idempotency_key):
 
-    validate_schema(request, GovernanceApprovalRequest)
+    validate_schema(submission, GovernanceApprovalSubmission_DS045)
+    reject_if_schema_matches(submission, GovernanceApprovalArtifact_DS026)
 
     require_tenant_and_domain_valid(
-        request.tenant_id,
-        request.governance_domain_id
+        submission.tenant_id,
+        submission.governance_domain_id
     )
 
-    proposal = proposal_get(
-        request.tenant_id,
-        request.governance_domain_id,
-        proposal_id
+    proposal = load_proposal(proposal_id)
+    require_equal(proposal.tenant_id, submission.tenant_id)
+    require_equal(proposal.governance_domain_id, submission.governance_domain_id)
+    require_equal(proposal.proposal_identity, submission.proposal_identity)
+    require_equal(proposal.target, submission.target)
+
+    enforce_idempotency(
+        tenant_id = submission.tenant_id,
+        endpoint = "submitGovernanceApproval",
+        idempotency_key = idempotency_key,
+        request_digest = canonical_digest(submission)
     )
 
-    if proposal does not exist:
-        return error_response(404, PROPOSAL_NOT_FOUND)
+    verify_provenance(submission)
+    authenticated_actor = bind_authenticated_subject(submission.claimed_approver)
+    canonical_state = resolve_current_qualified_canonical_state(proposal)
+    authority = rederive_current_authority(authenticated_actor, proposal, canonical_state)
+    eligibility = evaluate_approver_eligibility(authenticated_actor, proposal, submission, authority)
+    replay_result = verify_and_reserve_replay_tuple(submission.provenance, proposal)
+    validity = evaluate_submission_validity(submission.validity_window, canonical_state.current_time)
 
-    if proposal.governance_outcome not in ["Pending Human Review", "Deferred"]:
-        return error_response(409, GOVERNANCE_DOMAIN_VIOLATION)
+    if any_failed(authority, eligibility, replay_result, validity):
+        record_governance_evidence_and_refusal()
+        return mapped_rejection()
 
-    verify_provenance(request.provenance)
-
-    require request.governance_approval_artifact is present
-    approval_artifact = request.governance_approval_artifact
-
-    validate_governance_approval_artifact(
-        proposal,
-        approval_artifact
+    quorum_result = deterministically_evaluate_quorum(
+        proposal, submission, authenticated_actor, canonical_state
+    )
+    lifecycle_effect = derive_governed_lifecycle_effect(
+        proposal, submission, quorum_result, canonical_state
     )
 
-    updated_decision = run_governed_reevaluation(
-        proposal,
-        approval_artifact
+    artifact = create_governance_approval_artifact_DS026(
+        artifact_origin = "AGCP_CREATED_OR_QUALIFIED",
+        submission = submission,
+        authenticated_actor = authenticated_actor,
+        canonical_state = canonical_state,
+        authority = authority,
+        eligibility = eligibility,
+        replay_result = replay_result,
+        quorum_result = quorum_result,
+        lifecycle_effect = lifecycle_effect
     )
 
-    record_evidence(
-        "Governance Decision Function",
-        proposal.proposal_id,
-        updated_decision.outcome,
-        proposal.context
-    )
-
-    # Approval or quorum completion is evidence and eligibility only.
-    # Progress only if governed re-evaluation establishes an Authorized outcome
-    # under current qualified governance inputs.
-    if updated_decision.outcome == "Authorized":
-        authorization = run_execution_authorization(
-            proposal,
-            updated_decision,
-            proposal.canonical_state_ref,
-            proposal.authority_lineage_ref
-        )
-
-        record_evidence(
-            "Execution Authorization",
-            proposal.proposal_id,
-            authorization.outcome,
-            proposal.context
-        )
-
-    view = build_proposal_view_from_current_state(proposal)
-
-    return response(200, view)
+    atomically_persist_artifact_evidence_ledger_and_idempotency(artifact)
+    return response(200, build_proposal_view_from_current_state(proposal))
 ```
 
-Governance Approval Artifacts are governed inputs. They do not themselves execute the Action or establish authority at commitment.
+Governance Approval Submissions are untrusted governed inputs. Governance Approval Artifacts are authoritative AGCP-created or AGCP-qualified evidence. Neither object executes the Action or establishes authority at commitment.
 
 ---
 
@@ -565,7 +609,7 @@ function get_execution_authorization(
     )
 
     if authorization does not exist:
-        return error_response(404, AUTHORIZATION_NOT_FOUND)
+        return public_not_found(AUTHORIZATION_NOT_FOUND)
 
     return response(200, build_execution_authorization_view(authorization))
 ```
@@ -585,7 +629,7 @@ function maintain_continuation_integrity(proposal_identity, evaluation_horizon):
     proposal = proposal_get_by_identity(proposal_identity)
 
     if proposal does not exist:
-        return error_response(404, PROPOSAL_NOT_FOUND)
+        return public_not_found(PROPOSAL_NOT_FOUND)
 
     if proposal.lifecycle_state is terminal:
         return build_continuation_result(
@@ -659,7 +703,7 @@ function commit_boundary(request, idempotency_key):
     )
 
     if proposal does not exist:
-        return error_response(404, PROPOSAL_NOT_FOUND)
+        return public_not_found(PROPOSAL_NOT_FOUND)
 
     authorization = authorization_get(
         request.tenant_id,
@@ -877,3 +921,37 @@ The normative requirements are defined by:
 - AGCP rejection-code registry
 
 Implementations need not follow this internal pseudocode, but externally observable HTTP behavior must conform to the normative AGCP specifications.
+
+# 17. Public Error and Metadata Helpers
+
+```text
+function public_not_found(protected_reason):
+    record_protected_diagnostic(protected_reason)
+    return error_response(404, RESOURCE_NOT_FOUND,
+        retryable=false, governance_evidence_generated=false,
+        transport_disposition=NOT_FOUND)
+
+function pre_governance_throttle(retry_after_seconds):
+    require retry_after_seconds > 0
+    return response(429, header("Retry-After", retry_after_seconds),
+        error_response(429, REQUEST_THROTTLED, retryable=true,
+        governance_evidence_generated=false, transport_disposition=THROTTLED,
+        retry_after_seconds=retry_after_seconds))
+
+function capacity_unavailable():
+    return error_response(503, CAPACITY_UNAVAILABLE, retryable=true,
+        governance_evidence_generated=false, transport_disposition=CAPACITY_UNAVAILABLE)
+
+function build_metadata():
+    baseline = load_pinned_immutable_baseline_record()
+    require baseline.digest verified
+    require baseline.uri is null only while publication_status == UNPUBLISHED
+    require baseline.uri does not identify a moving branch
+    validators = load_generated_validator_manifest_bound_to_schema_set()
+    active = load_active_governance_activation()
+    return signed_metadata_response(baseline, implementation_profile_digest,
+        schema_set_digest, validators.validator_set_digest, active.governance_version,
+        optional_public_safe_deployment_binding)
+```
+
+All retrieval flows return `public_not_found(...)` rather than exposing object-specific not-found codes. Throttling and capacity checks run before governance evaluation. Governance quota or entitlement denial remains an authoritative governance result.

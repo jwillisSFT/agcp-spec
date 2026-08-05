@@ -1,0 +1,80 @@
+{
+  "submission_version": "1.0.0",
+  "approval_kind": "QUORUM_PARTICIPATION",
+  "decision": "APPROVE",
+  "proposal_identity": {
+    "proposal_id": "proposal-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "canonical_content_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "originator": {
+      "principal_id": "agent-1",
+      "principal_type": "AGENT"
+    }
+  },
+  "tenant_id": "tenant-1",
+  "governance_domain_id": "domain-1",
+  "target": {
+    "target_id": "target-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1"
+  },
+  "scope": {
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "target_ids": [
+      "target-1"
+    ]
+  },
+  "validity_window": {
+    "not_before": "2026-07-30T16:00:00Z",
+    "expires_at": "2026-07-31T16:00:00Z"
+  },
+  "policy_refs": [
+    {
+      "policy_id": "policy-1",
+      "policy_version": "2.0.0",
+      "policy_digest": {
+        "algorithm": "SHA-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "artifact_uri": "https://agcp.ai/example/policies/policy-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
+      "status": "Active"
+    }
+  ],
+  "governance_version_ref": {
+    "governance_version_id": "gv-2.0.0"
+  },
+  "claimed_approver": {
+    "principal_id": "approver-1",
+    "principal_type": "USER",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1"
+  },
+  "decision_reason": {
+    "reason_code": "APPROVAL_GRANTED",
+    "reason": "The claimant submits an approval contribution for independent AGCP qualification."
+  },
+  "quorum_claim": {
+    "quorum_id": "quorum-1"
+  },
+  "client_submission_id": "approval-submission-1",
+  "submitted_at": "2026-07-30T16:00:00Z",
+  "provenance": {
+    "signer": "client:approver-1",
+    "kid": "key-approver-1",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-approval-submission-0001",
+    "scope": "agcp.http.request.body",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LWFwcHJvdmVyLTEiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6YXBwcm92YWwtc3VibWlzc2lvbi0wMDAx"
+  },
+  "extensions": {
+    "x-agcp.example": "ds045-valid-governance-approval-submission"
+  }
+}

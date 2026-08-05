@@ -2,11 +2,11 @@
   "catalog_id": "REG-CATALOG-1.0",
   "title": "AGCP Registry Entry Catalog",
   "description": "Authoritative catalog of permanent REG identifiers and direct entry-level NS/CR traceability for active registry entries.",
-  "specification_version": "v2.0.0",
-  "catalog_version": "1.0.0",
-  "publication_status": "Working Draft",
-  "last_modified_date": "2026-07-30",
-  "entry_count": 92,
+  "specification_version": "v2.0.1",
+  "catalog_version": "1.0.3",
+  "publication_status": "CURRENT",
+  "last_modified_date": "2026-08-03",
+  "entry_count": 94,
   "identifier_policy": "REG identifiers are permanent, non-reusable, and remain reserved after deprecation or retirement.",
   "entries": [
     {
@@ -1385,7 +1385,7 @@
       "registry_file": "registries/rejection-code-registry.json",
       "registry_kind": "REJECTION_CODE",
       "entry_identifier": "PROPOSAL_NOT_FOUND",
-      "entry_status": "ACTIVE",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "ns_refs": [
         "NS-11.5-03",
@@ -1395,7 +1395,7 @@
         "CR-010",
         "CR-026"
       ],
-      "entry_digest": "45abc4f7af38ea22451234bf817bd2cabeb70382c31e67e444a9d1c4a65daced"
+      "entry_digest": "744240d3ea9bb4a4bd373e30af80e1ddb102c52238f9f0776222fbe5291ae118"
     },
     {
       "reg_id": "REG-061",
@@ -1403,7 +1403,7 @@
       "registry_file": "registries/rejection-code-registry.json",
       "registry_kind": "REJECTION_CODE",
       "entry_identifier": "AUTHORIZATION_NOT_FOUND",
-      "entry_status": "ACTIVE",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "ns_refs": [
         "NS-9.3-01",
@@ -1412,7 +1412,7 @@
       "cr_refs": [
         "CR-022"
       ],
-      "entry_digest": "510bd0e6044c46754e393f431ead3111571fc8bf1b81b2f1ca09066c9b29ff56"
+      "entry_digest": "228011c730316ced5e26de39d60e5c1ae78f95002c986486c41c41c78fe9488c"
     },
     {
       "reg_id": "REG-062",
@@ -1420,7 +1420,7 @@
       "registry_file": "registries/rejection-code-registry.json",
       "registry_kind": "REJECTION_CODE",
       "entry_identifier": "GOVERNANCE_EVIDENCE_NOT_FOUND",
-      "entry_status": "ACTIVE",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "ns_refs": [
         "NS-10.6-01",
@@ -1430,7 +1430,7 @@
         "CR-041",
         "CR-068"
       ],
-      "entry_digest": "d5ae6ac51bfc7b73266368affe4f04228b5eecdbcb7e51598db42452ee26618c"
+      "entry_digest": "283332ffc930cf3096f5596d839f084a4880201a4ec654b00bdcf5be573e81ee"
     },
     {
       "reg_id": "REG-063",
@@ -1438,7 +1438,7 @@
       "registry_file": "registries/rejection-code-registry.json",
       "registry_kind": "REJECTION_CODE",
       "entry_identifier": "GOVERNANCE_ARTIFACT_NOT_FOUND",
-      "entry_status": "ACTIVE",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "ns_refs": [
         "NS-15.3-01",
@@ -1448,7 +1448,7 @@
         "CR-110",
         "CR-113"
       ],
-      "entry_digest": "20d733350a9b63852581d576e2536ea7f6e4efd42c6dea140878150801dad49f"
+      "entry_digest": "a557f70edbb0534dd73c98fa019f84ad47239dd8c907b9e76a04ea579aa1d595"
     },
     {
       "reg_id": "REG-064",
@@ -2047,6 +2047,51 @@
         "CR-090"
       ],
       "entry_digest": "b19854313c0ef78f1a8f9426d1fc5eb2fc65b4c7907e7bc1c405dd38d137a6ff"
+    },
+    {
+      "reg_id": "REG-093",
+      "registry_id": "REG-REJECTION-CODE",
+      "registry_file": "registries/rejection-code-registry.json",
+      "registry_kind": "REJECTION_CODE",
+      "entry_identifier": "REQUEST_THROTTLED",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.1",
+      "ns_refs": [
+        "NS-13.6A-02"
+      ],
+      "cr_refs": [
+        "CR-073",
+        "CR-089",
+        "CR-090"
+      ],
+      "entry_digest": "835e0b5fd0ed2afc09ff6ae8c1f57213f66ea0e6cf2dab36c8466918a460f06f"
+    },
+    {
+      "reg_id": "REG-094",
+      "registry_id": "REG-REJECTION-CODE",
+      "registry_file": "registries/rejection-code-registry.json",
+      "registry_kind": "REJECTION_CODE",
+      "entry_identifier": "CAPACITY_UNAVAILABLE",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.1",
+      "ns_refs": [
+        "NS-13.6A-02"
+      ],
+      "cr_refs": [
+        "CR-048",
+        "CR-068",
+        "CR-073",
+        "CR-089",
+        "CR-090"
+      ],
+      "entry_digest": "f170ddcb4fdd7143e827ae53bf61db1e178a1dbcc7dd8d3bbfc2705d1c9367a6"
     }
-  ]
+  ],
+  "artifact_lifecycle_state": "CURRENT",
+  "repository_release_target": "v2.0.1",
+  "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+  "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+  "controlling_published_baseline": "v2.0.0",
+  "baseline_date": "2026-07-30",
+  "rtm_dataset_version": "RTM-1.46"
 }

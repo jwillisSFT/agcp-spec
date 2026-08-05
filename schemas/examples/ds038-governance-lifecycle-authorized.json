@@ -430,12 +430,12 @@
   },
   "provenance": {
     "signer": "example",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "key-1",
-      "sig": "signature-value"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-1",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-fa0c3963b1302df2f862707f",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LTEiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMzgtZ292ZXJuYW5jZS1saWZlY3ljbGUtYXV0aG9yaXplZC5qc29uOiQucHJvdmVuYW5jZQ"
   },
   "record_digest": {
     "algorithm": "SHA-256",

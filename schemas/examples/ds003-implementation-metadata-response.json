@@ -5,7 +5,7 @@
   "implementation": {
     "implementation_id": "AGCP-TEST",
     "implementation_name": "AGCP Test Implementation",
-    "implementation_release": "2.0.0",
+    "implementation_release": "2.0.1",
     "implementation_build_digest": {
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -19,9 +19,9 @@
   "supported_agcp_releases": [
     {
       "release_id": "AGCP-v2.0.0",
-      "specification_version": "1.0.0",
+      "specification_version": "2.0.0",
       "support_status": "CURRENT",
-      "publication_status": "WORKING_DRAFT",
+      "publication_status": "PUBLISHED",
       "release_manifest_uri": "https://agcp.example/test",
       "release_manifest_digest": {
         "algorithm": "SHA-256",
@@ -33,16 +33,25 @@
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
       "normative_statement_set_id": "TEST",
-      "conformance_requirement_set_id": "TEST"
+      "conformance_requirement_set_id": "TEST",
+      "baseline_reference_type": "IMMUTABLE_RELEASE_BUNDLE",
+      "baseline_bundle_name": "agcp-spec-v.2.0.0.zip",
+      "baseline_bundle_publication_status": "UNPUBLISHED",
+      "baseline_bundle_uri": null,
+      "baseline_bundle_digest": {
+        "algorithm": "SHA-256",
+        "value": "790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326"
+      },
+      "published_at": "2026-07-30T09:27:00-04:00"
     }
   ],
   "default_agcp_release_id": "AGCP-v2.0.0",
   "schema_set": {
-    "schema_set_id": "DS-SET-TEST",
-    "schema_catalog_id": "AGCP-SCHEMA-CATALOG",
-    "catalog_version": "1.0.0",
-    "agcp_specification_version": "1.0.0",
-    "publication_status": "WORKING_DRAFT",
+    "schema_set_id": "DS-SET-v2.0.1",
+    "schema_catalog_id": "DS-CATALOG-1.0",
+    "catalog_version": "1.0.50",
+    "agcp_specification_version": "2.0.1",
+    "publication_status": "RELEASE_CANDIDATE",
     "catalog_uri": "https://agcp.example/test",
     "catalog_digest": {
       "algorithm": "SHA-256",
@@ -62,15 +71,33 @@
     "schemas": [
       {
         "ds_id": "DS-003",
-        "filename": "test.json",
+        "filename": "meta_response.json",
         "canonical_uri": "https://agcp.example/test",
-        "lifecycle_state": "Proposed",
+        "lifecycle_state": "Implemented",
         "content_digest": {
           "algorithm": "SHA-256",
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         }
       }
-    ]
+    ],
+    "validator_set": {
+      "validator_set_id": "VALIDATOR-SET-TEST-001",
+      "validator_manifest_uri": "https://agcp.example/test/validator-manifest.json",
+      "validator_manifest_digest": {
+        "algorithm": "SHA-256",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "validator_set_digest": {
+        "algorithm": "SHA-256",
+        "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "source_schema_set_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "generator_name": "agcp-validator-generator",
+      "generator_version": "2.0.1"
+    }
   },
   "implementation_profile": {
     "profile_id": "PROF-TEST-001",
@@ -82,7 +109,12 @@
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
     "lifecycle_state": "ACTIVE",
-    "mandatory_core_behavior_redefined": false
+    "mandatory_core_behavior_redefined": false,
+    "baseline_release_id": "AGCP-v2.0.0",
+    "baseline_bundle_digest": {
+      "algorithm": "SHA-256",
+      "value": "790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326"
+    }
   },
   "registry_releases": [
     {
@@ -210,7 +242,12 @@
     "metadata_does_not_establish_authority_at_commitment": true,
     "metadata_does_not_authorize_execution": true,
     "metadata_is_not_canonical_state": true,
-    "extensions_cannot_change_canonical_governance_meaning": true
+    "extensions_cannot_change_canonical_governance_meaning": true,
+    "baseline_is_immutable_and_digest_bound": true,
+    "validator_set_is_bound_to_schema_set": true,
+    "active_governance_version_is_explicit": true,
+    "deployment_binding_does_not_expand_authority": true,
+    "moving_branch_is_not_a_release_baseline": true
   },
   "attribution": {
     "principal": {
@@ -221,12 +258,12 @@
   },
   "provenance": {
     "signer": "TEST",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "kid-test",
-      "sig": "SIG_VALID_123"
-    },
-    "signed_at": "2026-07-31T10:00:00Z"
+    "kid": "kid-test",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-31T10:00:00Z",
+    "nonce": "nonce-8f2ce8ecdd265b7c63638e31",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMDMtaW1wbGVtZW50YXRpb24tbWV0YWRhdGEtcmVzcG9uc2UuanNvbjokLnByb3ZlbmFuY2U"
   },
   "response_digest": {
     "algorithm": "SHA-256",
@@ -236,5 +273,35 @@
     "alg": "SHA-256",
     "kid": "kid-test",
     "sig": "SIG_VALID_123"
+  },
+  "active_governance": {
+    "activation_status": "ACTIVE",
+    "governance_version": "GOV-TEST-001",
+    "governance_configuration_id": "GCFG-TEST-001",
+    "governance_configuration_digest": {
+      "algorithm": "SHA-256",
+      "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    "compiled_governance_artifact_digest": {
+      "algorithm": "SHA-256",
+      "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "activation_digest": {
+      "algorithm": "SHA-256",
+      "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    "activated_at": "2026-08-03T12:00:00-04:00",
+    "source_release_id": "AGCP-v2.0.0"
+  },
+  "deployment_binding": {
+    "deployment_id": "DEPLOYMENT-TEST-001",
+    "node_id": "NODE-TEST-001",
+    "workspace_id": "WORKSPACE-TEST-001",
+    "tenant_id": "TENANT-TEST-001",
+    "governance_domain_id": "DOMAIN-TEST-001",
+    "binding_digest": {
+      "algorithm": "SHA-256",
+      "value": "1111111111111111111111111111111111111111111111111111111111111111"
+    }
   }
 }

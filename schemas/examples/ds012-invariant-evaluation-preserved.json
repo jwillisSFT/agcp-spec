@@ -238,12 +238,12 @@
   },
   "provenance": {
     "signer": "governance-service-1",
-    "signature": {
-      "alg": "Ed25519",
-      "kid": "key-example",
-      "sig": "signature-example"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-example",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-5009242fe8d1fd4841176255",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LWV4YW1wbGUiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMTItaW52YXJpYW50LWV2YWx1YXRpb24tcHJlc2VydmVkLmpzb246JC5wcm92ZW5hbmNl"
   },
   "evaluation_digest": {
     "algorithm": "SHA-256",

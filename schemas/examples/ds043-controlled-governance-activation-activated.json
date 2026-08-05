@@ -33,8 +33,8 @@
           "algorithm": "SHA-256",
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
-        "tenant_id": "tenant-id-1",
-        "governance_domain_id": "governance-domain-id-1"
+        "tenant_id": "tenant-1",
+        "governance_domain_id": "domain-1"
       }
     ],
     "interdependency_manifest": [],
@@ -95,7 +95,7 @@
     }
   },
   "effective_scope": {
-    "tenant_id": "tenant-id-1"
+    "tenant_id": "tenant-1"
   },
   "governance_version_establishment": {
     "candidate_governance_version_ref": {
@@ -160,12 +160,12 @@
   },
   "provenance": {
     "signer": "example",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "key-1",
-      "sig": "signature-value"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-1",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-49cab85feaab86ebfa2da578",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LTEiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwNDMtY29udHJvbGxlZC1nb3Zlcm5hbmNlLWFjdGl2YXRpb24tYWN0aXZhdGVkLmpzb246JC5wcm92ZW5hbmNl"
   },
   "activation_digest": {
     "algorithm": "SHA-256",

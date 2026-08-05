@@ -1,20 +1,24 @@
 # AGCP JSON Schemas
 
-This directory contains the authoritative JSON Schema Draft 2020-12 definitions for the AGCP v2.0 schema set, together with the controlled Data Schema Catalog, validation records, implementation reports, and schema examples.
+This directory contains the authoritative JSON Schema Draft 2020-12 definitions for the AGCP v2.0.1 schema set, together with the controlled Data Schema Catalog, validation records, implementation reports, and schema examples.
 
 ## Current Release Status
 
-- AGCP specification version: `v2.0`
+- AGCP specification version: `v2.0.1`
 - Schema Catalog identifier: `DS-CATALOG-1.0`
-- Schema Catalog version: `1.0.44`
-- Catalog publication status: `Working Draft`
-- Active implemented schemas: **43**
-- Permanently assigned DS identifiers: **44** (`DS-001` through `DS-044`)
+- Schema Catalog version: `1.0.50`
+- Catalog publication status: `CURRENT`
+- Artifact lifecycle state: `CURRENT`
+- Repository release target: `v2.0.1` (`UNRELEASED_ACCUMULATED_CORRECTION_SET`)
+- Controlling published baseline: `v2.0.0` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
+- Baseline date: `2026-07-30`
+- Active implemented schemas: **44**
+- Permanently assigned DS identifiers: **45** (`DS-001` through `DS-045`)
 - Retired DS identifiers: **1**
 - Proposed or reserved schemas: **0**
 - Registry payloads duplicated under `schemas/`: **0**
 
-The completed namespace therefore consists of **43 active schemas plus the permanently retired DS-016 identifier**. DS identifiers are stable and SHALL NOT be reassigned. Schema content versions are governed by repository releases and catalog hashes.
+The completed namespace therefore consists of **44 active schemas plus the permanently retired DS-016 identifier**. DS identifiers are stable and SHALL NOT be reassigned. Schema content versions are governed by repository releases and catalog hashes.
 
 ## Authoritative Catalog
 
@@ -22,8 +26,8 @@ The completed namespace therefore consists of **43 active schemas plus the perma
 - Machine-readable catalog: [`catalog/schema-catalog.json`](catalog/schema-catalog.json)
 - Tabular catalog: [`catalog/schema-catalog.csv`](catalog/schema-catalog.csv)
 - Catalog validation: [`catalog/schema-catalog-validation.json`](catalog/schema-catalog-validation.json)
-- RTM/CR mapping parity: all 43 active catalog entries match the authoritative RTM-1.45 `DS_ID` assignments.
-- Reverse dependency parity: all 43 active `dependent_schemas` lists match the inverse of the active `schema_dependencies` graph.
+- RTM/CR mapping parity: all 44 active catalog entries match the authoritative RTM-1.46 `DS_ID` assignments.
+- Reverse dependency parity: all 44 active `dependent_schemas` lists match the inverse of the active `schema_dependencies` graph.
 
 ## Active Implemented Schema Assignments
 
@@ -72,6 +76,7 @@ The completed namespace therefore consists of **43 active schemas plus the perma
 | `DS-042` | [`compiled_governance_artifact.json`](compiled_governance_artifact.json) | Governance Compilation |
 | `DS-043` | [`controlled_governance_activation.json`](controlled_governance_activation.json) | Governance Compilation |
 | `DS-044` | [`registry_document.schema.json`](registry_document.schema.json) | Registry Validation |
+| `DS-045` | [`governance_approval_submission.json`](governance_approval_submission.json) | Approval and Adjudication |
 
 ## Retired DS Identifiers
 
@@ -102,7 +107,8 @@ The completed namespace therefore consists of **43 active schemas plus the perma
 - DS-022 defines the attributable and versioned Governance Context Envelope.
 - DS-023 defines Canonical State and references DS-032 for its State Qualification Result.
 - DS-024 and DS-025 define Authority Lineage and Delegation Artifacts.
-- DS-026 defines the sole active Governance Approval Artifact.
+- DS-026 defines the sole active authoritative Governance Approval Artifact.
+- DS-045 defines the separate untrusted Governance Approval Submission accepted at IF-001 ingress.
 
 ### Qualification, commitment, enforcement, and composite governance
 
@@ -215,8 +221,16 @@ These schemas are maintained with:
 - AGCP Registry Specifications;
 - AGCP Conformance Test Suite and Assessment Framework.
 
-Last synchronized: 2026-07-30.
+Last synchronized: 2026-08-03.
 
 ## Traceability closure
 
-The active release uses `RTM-1.45`. Every CR row now has an explicit DS, IF, and REG disposition. IF-001 identifies the HTTP v2 interface; IF-002 identifies the Policy Evaluation Contract. Registry entries `REG-001` through `REG-092` carry direct ARM, NS, and CR references.
+The active release uses `RTM-1.46`. Every CR row now has an explicit DS, IF, and REG disposition. IF-001 identifies the HTTP v2 interface; IF-002 identifies the Policy Evaluation Contract. Registry entries `REG-001` through `REG-092` carry direct ARM, NS, and CR references.
+
+## Provenance wire envelope
+
+`common.json#/$defs/provenance` is controlled by `../spec/AGCP-Provenance-Wire-Format-Specification.md`. Dependent schemas reference that single definition and SHALL NOT define a conflicting nested signature object. Controlled examples and vectors use the top-level wire fields and detached signature string.
+
+## P1-12 content-digest contract
+
+DS-001 binds SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512 to exact lowercase-hexadecimal output lengths. Forty active dependent schema files inherit the corrected definition through `common.json#/$defs/content_digest`. Controlled examples and negative vectors are published under `schemas/examples/` and `conformance/digests/`.

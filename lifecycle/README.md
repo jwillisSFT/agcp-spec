@@ -144,3 +144,9 @@ This directory is intended for:
 # Repository Versioning
 
 Lifecycle documentation follows repository-release versioning and evolves with the AGCP architecture while remaining consistent with the authoritative specifications.
+
+---
+
+# Canonical Evidence and Companion References
+
+Lifecycle documents use DS-020 Governance Evidence (`../schemas/governance_evidence.json`) and DS-033 Evidence Qualification Result (`../schemas/evidence_qualification_result.json`) as the canonical machine-readable evidence artifacts. Canonical companion-reference dispositions are maintained in `../governance/AGCP-Normative-Companion-Reference-Dispositions.md`.

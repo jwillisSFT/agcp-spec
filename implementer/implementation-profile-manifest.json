@@ -1,0 +1,62 @@
+{
+  "manifest_type": "AGCP_IMPLEMENTATION_PROFILE_PACKAGE_MANIFEST",
+  "manifest_version": "1.0.3",
+  "release_target": "v2.0.1",
+  "generated_date": "2026-08-03",
+  "profile_format_version": "1.1.0",
+  "controlled_profile_id": "AGCP-RUST-STUDENT-SERVICE-2.0.0",
+  "controlled_profile_version": "2.0.0-draft.6",
+  "controlled_profile_lifecycle_state": "PROPOSED",
+  "controlled_profile_status": "DEVELOPMENT_PRE_CONFORMANCE",
+  "controlled_profile_content_digest": "3e391cd0b0a89189434776c4593dedb2b3dd460bfd5fe7f89d8fc8fdb4373b2d",
+  "pinned_baseline_bundle": "agcp-spec-v.2.0.0.zip",
+  "pinned_baseline_sha256": "790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326",
+  "files": [
+    {
+      "path": "AGCP-Implementation-Profile-Specification.md",
+      "sha256": "4c1de1cd20ab11fc79e8a2e412048fe49a8a5a5a74bfe5c81d5e20506da428d0",
+      "bytes": 12218
+    },
+    {
+      "path": "AGCP-Implementation-Profile-Schema.json",
+      "sha256": "7d6e127bd5c5bfcfc127e9a3080df470ac40e65d8a96845f8484de8ef8db0dd5",
+      "bytes": 65023
+    },
+    {
+      "path": "AGCP-Implementation-Profile-Template.md",
+      "sha256": "161d40c822a3944249bffa169c989392d1d9af9e31848f137293d9e79fd41acc",
+      "bytes": 85627
+    },
+    {
+      "path": "AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml",
+      "sha256": "60d0dbbafc130d463f64b26f542efd3bbac9591ec70168bfab4b9ef32dd1bc70",
+      "bytes": 29496
+    },
+    {
+      "path": "AGCP-RUST-STUDENT-SERVICE-2.0.0.md",
+      "sha256": "b1965a44a0333dfee523e874e2835cebc6c3a68acf2d5a5d9b1930693ecc62d5",
+      "bytes": 18198
+    },
+    {
+      "path": "AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md",
+      "sha256": "6df86f92c7e57fa622d36f9c4a6c6d9e4aeda814503cfe3be4443fd2fe041ccc",
+      "bytes": 144397
+    },
+    {
+      "path": "IMPLEMENTATION-PROFILE-CATALOG.md",
+      "sha256": "d5698d1c16e553af1169af0901bdd9aa1c55eb657b42bf8ecf78efb5c1112b9a",
+      "bytes": 2451
+    },
+    {
+      "path": "implementation-profile-catalog.json",
+      "sha256": "dddca4a8b3554da774da5a1484460e41b428f101aaac8454938a52e70f4c3a4c",
+      "bytes": 2458
+    },
+    {
+      "path": "implementation-profile-catalog.csv",
+      "sha256": "412a5bc25168019f159e6a8ee157f5d22a19c12d1b216a5c07856d3fc4987562",
+      "bytes": 1563
+    }
+  ],
+  "rtm_dataset_version": "RTM-1.46"
+}

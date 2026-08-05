@@ -1,0 +1,660 @@
+{
+  "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0",
+  "findings": [
+    "P0-10",
+    "P0-06"
+  ],
+  "canonical_fixture_namespace": {
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
+    "proposal_id": "proposal-1",
+    "target_id": "target-1",
+    "policy_id": "policy-1",
+    "policy_version": "2.0.0",
+    "canonical_state_id": "canonical-state-1"
+  },
+  "positive_fixtures": [
+    {
+      "file": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_ref.proposal_identity.proposal_id",
+          "authority_rederivation_result_ref.proposal_id",
+          "qualified_evidence_refs[0].qualification_result_ref.proposal_id",
+          "resulting_state_validation_result_ref.proposal_id",
+          "enforcement_context.proposal_identity.proposal_id",
+          "enforcement_context.authority_rederivation_result_ref.proposal_id",
+          "enforcement_context.lifecycle_binding.lifecycle_state_ref.proposal_id",
+          "enforcement_context.resulting_state_validation_result_ref.proposal_id"
+        ],
+        "tenant": [
+          "proposal_ref.proposal_identity.tenant_id",
+          "proposal_ref.target_ref.tenant_id",
+          "tenant_id",
+          "target_ref.tenant_id",
+          "enforcement_context.proposal_identity.tenant_id",
+          "enforcement_context.tenant_id",
+          "enforcement_context.policy_enforcement_point.tenant_id",
+          "enforcement_context.policy_enforcement_point.enforcement_scope.tenant_id",
+          "enforcement_context.target_ref.tenant_id",
+          "enforcement_context.governance_configuration_ref.tenant_id",
+          "enforcement_context.policy_refs[0].tenant_id",
+          "enforcement_context.scope_binding.authorized_scope.tenant_id",
+          "enforcement_context.scope_binding.enforcement_scope.tenant_id"
+        ],
+        "domain": [
+          "proposal_ref.proposal_identity.governance_domain_id",
+          "proposal_ref.target_ref.governance_domain_id",
+          "governance_domain_id",
+          "target_ref.governance_domain_id",
+          "enforcement_context.proposal_identity.governance_domain_id",
+          "enforcement_context.governance_domain_id",
+          "enforcement_context.policy_enforcement_point.governance_domain_id",
+          "enforcement_context.target_ref.governance_domain_id",
+          "enforcement_context.governance_configuration_ref.governance_domain_id",
+          "enforcement_context.policy_refs[0].governance_domain_id"
+        ],
+        "target": [
+          "proposal_ref.target_ref.target_id",
+          "target_ref.target_id",
+          "enforcement_context.target_ref.target_id"
+        ],
+        "authorization": [
+          "execution_authorization_ref.authorization_id",
+          "enforcement_context.execution_authorization_ref.authorization_id"
+        ],
+        "canonical_state": [
+          "state_qualification_result_ref.canonical_state_ref.canonical_state_id",
+          "enforcement_context.canonical_state_ref.canonical_state_id"
+        ],
+        "evidence": [
+          "qualified_evidence_refs[0].evidence_ref.governance_evidence_id",
+          "enforcement_context.qualified_evidence_refs[0].evidence_ref.governance_evidence_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds019-commit-boundary-result-success.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_ref.proposal_identity.proposal_id",
+          "authority_rederivation_result_ref.proposal_id",
+          "resulting_state_validation_result_ref.proposal_id",
+          "lifecycle_effect.lifecycle_transition_ref.proposal_id",
+          "lifecycle_effect.lifecycle_transition_ref.ledger_event_ref.proposal_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.proposal_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.current_state.proposal_id"
+        ],
+        "tenant": [
+          "proposal_ref.proposal_identity.tenant_id",
+          "proposal_ref.target_ref.tenant_id",
+          "tenant_id",
+          "target_ref.tenant_id",
+          "lifecycle_effect.lifecycle_transition_ref.ledger_event_ref.tenant_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.tenant_id"
+        ],
+        "domain": [
+          "proposal_ref.proposal_identity.governance_domain_id",
+          "proposal_ref.target_ref.governance_domain_id",
+          "governance_domain_id",
+          "target_ref.governance_domain_id",
+          "lifecycle_effect.lifecycle_transition_ref.ledger_event_ref.governance_domain_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.governance_domain_id"
+        ],
+        "target": [
+          "proposal_ref.target_ref.target_id",
+          "target_ref.target_id"
+        ],
+        "lifecycle": [
+          "proposal_ref.proposal_identity.proposal_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.current_state.proposal_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds019-commit-boundary-result-refusal.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_ref.proposal_identity.proposal_id",
+          "authority_rederivation_result_ref.proposal_id",
+          "resulting_state_validation_result_ref.proposal_id",
+          "lifecycle_effect.lifecycle_transition_ref.proposal_id",
+          "lifecycle_effect.lifecycle_transition_ref.ledger_event_ref.proposal_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.proposal_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.current_state.proposal_id",
+          "refusal_record_ref.proposal_id",
+          "refusal_record_ref.ledger_event_ref.proposal_id"
+        ],
+        "tenant": [
+          "proposal_ref.proposal_identity.tenant_id",
+          "proposal_ref.target_ref.tenant_id",
+          "tenant_id",
+          "target_ref.tenant_id",
+          "lifecycle_effect.lifecycle_transition_ref.ledger_event_ref.tenant_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.tenant_id",
+          "refusal_record_ref.tenant_id",
+          "refusal_record_ref.target_ref.tenant_id",
+          "refusal_record_ref.ledger_event_ref.tenant_id"
+        ],
+        "domain": [
+          "proposal_ref.proposal_identity.governance_domain_id",
+          "proposal_ref.target_ref.governance_domain_id",
+          "governance_domain_id",
+          "target_ref.governance_domain_id",
+          "lifecycle_effect.lifecycle_transition_ref.ledger_event_ref.governance_domain_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.governance_domain_id",
+          "refusal_record_ref.governance_domain_id",
+          "refusal_record_ref.target_ref.governance_domain_id",
+          "refusal_record_ref.ledger_event_ref.governance_domain_id"
+        ],
+        "target": [
+          "proposal_ref.target_ref.target_id",
+          "target_ref.target_id",
+          "refusal_record_ref.target_ref.target_id"
+        ],
+        "lifecycle": [
+          "proposal_ref.proposal_identity.proposal_id",
+          "lifecycle_effect.governance_lifecycle_record_ref.current_state.proposal_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds026-governance-approval-partial-quorum.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_identity.proposal_id",
+          "lifecycle_state_binding.lifecycle_state_ref.proposal_id"
+        ],
+        "tenant": [
+          "proposal_identity.tenant_id",
+          "tenant_id",
+          "target.tenant_id",
+          "scope.tenant_id",
+          "policy_refs[0].tenant_id"
+        ],
+        "domain": [
+          "proposal_identity.governance_domain_id",
+          "governance_domain_id",
+          "target.governance_domain_id",
+          "policy_refs[0].governance_domain_id"
+        ],
+        "target": [
+          "target.target_id"
+        ],
+        "policy": [
+          "policy_refs[0].policy_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds026-governance-approval-completed-quorum.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_identity.proposal_id",
+          "lifecycle_state_binding.lifecycle_state_ref.proposal_id",
+          "quorum_contribution.prior_approval_artifact_refs[0].proposal_id"
+        ],
+        "tenant": [
+          "proposal_identity.tenant_id",
+          "tenant_id",
+          "target.tenant_id",
+          "scope.tenant_id",
+          "policy_refs[0].tenant_id",
+          "quorum_contribution.prior_approval_artifact_refs[0].tenant_id"
+        ],
+        "domain": [
+          "proposal_identity.governance_domain_id",
+          "governance_domain_id",
+          "target.governance_domain_id",
+          "policy_refs[0].governance_domain_id",
+          "quorum_contribution.prior_approval_artifact_refs[0].governance_domain_id"
+        ],
+        "target": [
+          "target.target_id",
+          "quorum_contribution.prior_approval_artifact_refs[0].target_id"
+        ],
+        "policy": [
+          "policy_refs[0].policy_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds029-enforcement-context-admissible.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_identity.proposal_id",
+          "authority_rederivation_result_ref.proposal_id",
+          "lifecycle_binding.lifecycle_state_ref.proposal_id",
+          "resulting_state_validation_result_ref.proposal_id"
+        ],
+        "tenant": [
+          "proposal_identity.tenant_id",
+          "tenant_id",
+          "policy_enforcement_point.tenant_id",
+          "policy_enforcement_point.enforcement_scope.tenant_id",
+          "target_ref.tenant_id",
+          "governance_configuration_ref.tenant_id",
+          "policy_refs[0].tenant_id",
+          "scope_binding.authorized_scope.tenant_id",
+          "scope_binding.enforcement_scope.tenant_id"
+        ],
+        "domain": [
+          "proposal_identity.governance_domain_id",
+          "governance_domain_id",
+          "policy_enforcement_point.governance_domain_id",
+          "target_ref.governance_domain_id",
+          "governance_configuration_ref.governance_domain_id",
+          "policy_refs[0].governance_domain_id"
+        ],
+        "target": [
+          "target_ref.target_id"
+        ],
+        "canonical_state": [
+          "canonical_state_ref.canonical_state_id"
+        ],
+        "evidence": [
+          "qualified_evidence_refs[0].evidence_ref.governance_evidence_id"
+        ],
+        "policy": [
+          "policy_refs[0].policy_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds029-enforcement-context-prevent.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_identity.proposal_id",
+          "authority_rederivation_result_ref.proposal_id",
+          "lifecycle_binding.lifecycle_state_ref.proposal_id",
+          "resulting_state_validation_result_ref.proposal_id"
+        ],
+        "tenant": [
+          "proposal_identity.tenant_id",
+          "tenant_id",
+          "policy_enforcement_point.tenant_id",
+          "policy_enforcement_point.enforcement_scope.tenant_id",
+          "target_ref.tenant_id",
+          "governance_configuration_ref.tenant_id",
+          "policy_refs[0].tenant_id",
+          "scope_binding.authorized_scope.tenant_id",
+          "scope_binding.enforcement_scope.tenant_id"
+        ],
+        "domain": [
+          "proposal_identity.governance_domain_id",
+          "governance_domain_id",
+          "policy_enforcement_point.governance_domain_id",
+          "target_ref.governance_domain_id",
+          "governance_configuration_ref.governance_domain_id",
+          "policy_refs[0].governance_domain_id"
+        ],
+        "target": [
+          "target_ref.target_id"
+        ],
+        "canonical_state": [
+          "canonical_state_ref.canonical_state_id"
+        ],
+        "evidence": [
+          "qualified_evidence_refs[0].evidence_ref.governance_evidence_id"
+        ],
+        "policy": [
+          "policy_refs[0].policy_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds039-continuation-integrity-degraded.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_identity.proposal_id",
+          "prior_lifecycle_state_ref.proposal_id",
+          "authority_rederivation_result_ref.proposal_id",
+          "dependency_basis.dependency_graph_ref.parent_proposal_id",
+          "material_change_assessment.change_event_refs[0].proposal_id",
+          "risk_based_re_evaluation_result.rederived_authority_ref.proposal_id",
+          "resulting_lifecycle_state_ref.proposal_id",
+          "ledger_event_refs[0].proposal_id",
+          "lifecycle_transition_ref.proposal_id",
+          "lifecycle_transition_ref.ledger_event_ref.proposal_id"
+        ],
+        "tenant": [
+          "proposal_identity.tenant_id",
+          "tenant_id",
+          "target_ref.tenant_id",
+          "canonical_state_basis.canonical_state_ref.tenant_id",
+          "governance_configuration_ref.tenant_id",
+          "policy_refs[0].tenant_id",
+          "dependency_basis.dependency_graph_ref.tenant_id",
+          "material_change_assessment.change_event_refs[0].tenant_id",
+          "ledger_event_refs[0].tenant_id",
+          "lifecycle_transition_ref.ledger_event_ref.tenant_id"
+        ],
+        "domain": [
+          "proposal_identity.governance_domain_id",
+          "governance_domain_id",
+          "target_ref.governance_domain_id",
+          "canonical_state_basis.canonical_state_ref.governance_domain_id",
+          "governance_configuration_ref.governance_domain_id",
+          "policy_refs[0].governance_domain_id",
+          "dependency_basis.dependency_graph_ref.governance_domain_id",
+          "material_change_assessment.change_event_refs[0].governance_domain_id",
+          "ledger_event_refs[0].governance_domain_id",
+          "lifecycle_transition_ref.ledger_event_ref.governance_domain_id"
+        ],
+        "target": [
+          "target_ref.target_id"
+        ],
+        "canonical_state": [
+          "canonical_state_basis.canonical_state_ref.canonical_state_id",
+          "canonical_state_basis.state_qualification_result_ref.canonical_state_ref.canonical_state_id",
+          "risk_based_re_evaluation_result.renewed_state_qualification_ref.canonical_state_ref.canonical_state_id"
+        ],
+        "policy": [
+          "policy_refs[0].policy_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds039-continuation-integrity-recovered.json",
+      "equivalence_groups": {
+        "proposal": [
+          "proposal_identity.proposal_id",
+          "prior_lifecycle_state_ref.proposal_id",
+          "authority_rederivation_result_ref.proposal_id",
+          "dependency_basis.dependency_graph_ref.parent_proposal_id",
+          "material_change_assessment.change_event_refs[0].proposal_id",
+          "risk_based_re_evaluation_result.rederived_authority_ref.proposal_id",
+          "resulting_lifecycle_state_ref.proposal_id",
+          "ledger_event_refs[0].proposal_id",
+          "lifecycle_transition_ref.proposal_id",
+          "lifecycle_transition_ref.ledger_event_ref.proposal_id"
+        ],
+        "tenant": [
+          "proposal_identity.tenant_id",
+          "tenant_id",
+          "target_ref.tenant_id",
+          "canonical_state_basis.canonical_state_ref.tenant_id",
+          "governance_configuration_ref.tenant_id",
+          "policy_refs[0].tenant_id",
+          "dependency_basis.dependency_graph_ref.tenant_id",
+          "material_change_assessment.change_event_refs[0].tenant_id",
+          "ledger_event_refs[0].tenant_id",
+          "lifecycle_transition_ref.ledger_event_ref.tenant_id"
+        ],
+        "domain": [
+          "proposal_identity.governance_domain_id",
+          "governance_domain_id",
+          "target_ref.governance_domain_id",
+          "canonical_state_basis.canonical_state_ref.governance_domain_id",
+          "governance_configuration_ref.governance_domain_id",
+          "policy_refs[0].governance_domain_id",
+          "dependency_basis.dependency_graph_ref.governance_domain_id",
+          "material_change_assessment.change_event_refs[0].governance_domain_id",
+          "ledger_event_refs[0].governance_domain_id",
+          "lifecycle_transition_ref.ledger_event_ref.governance_domain_id"
+        ],
+        "target": [
+          "target_ref.target_id"
+        ],
+        "canonical_state": [
+          "canonical_state_basis.canonical_state_ref.canonical_state_id",
+          "canonical_state_basis.state_qualification_result_ref.canonical_state_ref.canonical_state_id",
+          "risk_based_re_evaluation_result.renewed_state_qualification_ref.canonical_state_ref.canonical_state_id"
+        ],
+        "policy": [
+          "policy_refs[0].policy_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds040-governance-ledger-event-genesis.json",
+      "equivalence_groups": {
+        "proposal": [
+          "ordering_scope.proposal_id",
+          "event_subject.proposal_identity.proposal_id",
+          "event_artifact_refs.proposal_ref.proposal_identity.proposal_id"
+        ],
+        "tenant": [
+          "ordering_scope.tenant_id",
+          "tenant_id",
+          "event_subject.proposal_identity.tenant_id",
+          "governance_basis.policy_refs[0].tenant_id",
+          "governance_basis.constraint_refs[0].tenant_id",
+          "governance_basis.invariant_refs[0].tenant_id",
+          "event_artifact_refs.proposal_ref.proposal_identity.tenant_id",
+          "event_artifact_refs.proposal_ref.target_ref.tenant_id"
+        ],
+        "domain": [
+          "ordering_scope.governance_domain_id",
+          "governance_domain_id",
+          "event_subject.proposal_identity.governance_domain_id",
+          "governance_basis.policy_refs[0].governance_domain_id",
+          "governance_basis.constraint_refs[0].governance_domain_id",
+          "governance_basis.invariant_refs[0].governance_domain_id",
+          "event_artifact_refs.proposal_ref.proposal_identity.governance_domain_id",
+          "event_artifact_refs.proposal_ref.target_ref.governance_domain_id"
+        ],
+        "policy": [
+          "governance_basis.policy_refs[0].policy_id"
+        ],
+        "target": [
+          "event_artifact_refs.proposal_ref.target_ref.target_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds040-governance-ledger-event-sequenced.json",
+      "equivalence_groups": {
+        "proposal": [
+          "ordering_scope.proposal_id",
+          "event_subject.proposal_identity.proposal_id",
+          "event_artifact_refs.execution_authorization_view_ref.proposal_id",
+          "causality.caused_by_event_refs[0].proposal_id"
+        ],
+        "tenant": [
+          "ordering_scope.tenant_id",
+          "tenant_id",
+          "event_subject.proposal_identity.tenant_id",
+          "governance_basis.policy_refs[0].tenant_id",
+          "governance_basis.constraint_refs[0].tenant_id",
+          "governance_basis.invariant_refs[0].tenant_id",
+          "event_artifact_refs.execution_authorization_view_ref.tenant_id",
+          "causality.caused_by_event_refs[0].tenant_id"
+        ],
+        "domain": [
+          "ordering_scope.governance_domain_id",
+          "governance_domain_id",
+          "event_subject.proposal_identity.governance_domain_id",
+          "governance_basis.policy_refs[0].governance_domain_id",
+          "governance_basis.constraint_refs[0].governance_domain_id",
+          "governance_basis.invariant_refs[0].governance_domain_id",
+          "causality.caused_by_event_refs[0].governance_domain_id"
+        ],
+        "policy": [
+          "governance_basis.policy_refs[0].policy_id"
+        ],
+        "target": [
+          "event_artifact_refs.execution_authorization_view_ref.target_ref.target_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds041-governance-configuration-active.json",
+      "equivalence_groups": {
+        "tenant": [
+          "tenant_id",
+          "effective_scope.tenant_id",
+          "applicable_policy_refs[0].tenant_id",
+          "risk_based_re_evaluation_configuration.material_change_rules[0].affected_proposal_selector.selector_policy_ref.tenant_id",
+          "change_control.external_approval_artifact_refs[0].tenant_id",
+          "controlled_governance_activation_ref.tenant_id"
+        ],
+        "domain": [
+          "governance_domain_id",
+          "effective_scope.governance_domain_id",
+          "applicable_policy_refs[0].governance_domain_id",
+          "risk_based_re_evaluation_configuration.material_change_rules[0].affected_proposal_selector.selector_policy_ref.governance_domain_id",
+          "change_control.external_approval_artifact_refs[0].governance_domain_id",
+          "controlled_governance_activation_ref.governance_domain_id"
+        ],
+        "policy": [
+          "applicable_policy_refs[0].policy_id",
+          "risk_based_re_evaluation_configuration.material_change_rules[0].affected_proposal_selector.selector_policy_ref.policy_id"
+        ],
+        "policy_version": [
+          "applicable_policy_refs[0].policy_version",
+          "risk_based_re_evaluation_configuration.material_change_rules[0].affected_proposal_selector.selector_policy_ref.policy_version"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+      "equivalence_groups": {
+        "tenant": [
+          "tenant_id",
+          "effective_scope.tenant_id",
+          "governance_configuration_ref.tenant_id",
+          "compilation_context.governance_configuration_ref.tenant_id",
+          "domain_constraint_sets[0].effective_scope.tenant_id",
+          "domain_constraint_sets[0].constraint_refs[0].tenant_id",
+          "domain_constraint_sets[0].invariant_refs[0].tenant_id",
+          "execution_constraint_sets[0].constraint_refs[0].tenant_id",
+          "execution_constraint_sets[0].invariant_refs[0].tenant_id"
+        ],
+        "domain": [
+          "governance_domain_id",
+          "governance_configuration_ref.governance_domain_id",
+          "compilation_context.governance_configuration_ref.governance_domain_id",
+          "domain_constraint_sets[0].governance_domain_id",
+          "domain_constraint_sets[0].constraint_refs[0].governance_domain_id",
+          "domain_constraint_sets[0].invariant_refs[0].governance_domain_id",
+          "execution_constraint_sets[0].constraint_refs[0].governance_domain_id",
+          "execution_constraint_sets[0].invariant_refs[0].governance_domain_id"
+        ]
+      }
+    },
+    {
+      "file": "schemas/examples/ds043-controlled-governance-activation-activated.json",
+      "equivalence_groups": {
+        "tenant": [
+          "tenant_id",
+          "activation_package.governance_configuration_refs[0].tenant_id",
+          "effective_scope.tenant_id",
+          "governance_ledger_event_ref.tenant_id"
+        ],
+        "domain": [
+          "governance_domain_id",
+          "activation_package.governance_configuration_refs[0].governance_domain_id",
+          "governance_ledger_event_ref.governance_domain_id"
+        ]
+      }
+    }
+  ],
+  "semantic_mismatch_vectors": [
+    {
+      "id": "NV-SEM-001",
+      "mismatch_class": "TENANT",
+      "base_fixture": "schemas/examples/ds029-enforcement-context-admissible.json",
+      "mutation": {
+        "path": "policy_enforcement_point.tenant_id",
+        "value": "tenant-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-002",
+      "mismatch_class": "GOVERNANCE_DOMAIN",
+      "base_fixture": "schemas/examples/ds029-enforcement-context-admissible.json",
+      "mutation": {
+        "path": "policy_enforcement_point.governance_domain_id",
+        "value": "domain-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-003",
+      "mismatch_class": "PROPOSAL",
+      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "mutation": {
+        "path": "authority_rederivation_result_ref.proposal_id",
+        "value": "proposal-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-004",
+      "mismatch_class": "TARGET",
+      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "mutation": {
+        "path": "enforcement_context.target_ref.target_id",
+        "value": "target-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-005",
+      "mismatch_class": "POLICY",
+      "base_fixture": "schemas/examples/ds041-governance-configuration-active.json",
+      "mutation": {
+        "path": "risk_based_re_evaluation_configuration.material_change_rules[0].affected_proposal_selector.selector_policy_ref.policy_id",
+        "value": "policy-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-006",
+      "mismatch_class": "APPROVAL",
+      "base_fixture": "schemas/examples/ds026-governance-approval-completed-quorum.json",
+      "mutation": {
+        "path": "quorum_contribution.prior_approval_artifact_refs[0].proposal_id",
+        "value": "proposal-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-007",
+      "mismatch_class": "EVIDENCE",
+      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "mutation": {
+        "path": "enforcement_context.qualified_evidence_refs[0].evidence_ref.governance_evidence_id",
+        "value": "evidence-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-008",
+      "mismatch_class": "AUTHORIZATION",
+      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "mutation": {
+        "path": "enforcement_context.execution_authorization_ref.authorization_id",
+        "value": "authorization-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-009",
+      "mismatch_class": "LIFECYCLE",
+      "base_fixture": "schemas/examples/ds019-commit-boundary-result-success.json",
+      "mutation": {
+        "path": "lifecycle_effect.governance_lifecycle_record_ref.current_state.proposal_id",
+        "value": "proposal-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    },
+    {
+      "id": "NV-SEM-010",
+      "mismatch_class": "CANONICAL_STATE",
+      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "mutation": {
+        "path": "enforcement_context.canonical_state_ref.canonical_state_id",
+        "value": "canonical-state-other"
+      },
+      "expected": "SEMANTIC_MISMATCH"
+    }
+  ],
+  "claimant_assertion_vectors": {
+    "source": "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json",
+    "expected_negative_vector_count": 15,
+    "expected_schema_result": "INVALID"
+  }
+}

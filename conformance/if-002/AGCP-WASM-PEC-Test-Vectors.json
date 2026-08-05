@@ -1,0 +1,227 @@
+{
+  "vector_set_id": "AGCP-IF-002-WASM-PEC-VECTORS-1.0.0",
+  "status": "CONTROLLED",
+  "companion_interface_id": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0",
+  "companion_contract_version": "1.0.0",
+  "abi_id": "agcp_pec_abi_v1",
+  "machine_contract": "api/if-002/AGCP-WASM-PEC-Machine-Contract.json",
+  "schema_files": [
+    "api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json",
+    "api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json",
+    "api/if-002/AGCP-WASM-PEC-Error-Envelope.schema.json"
+  ],
+  "positive_vectors": [
+    {
+      "id": "IF002-WASM-001",
+      "purpose": "Canonical input and output validate and replay byte-for-byte.",
+      "input": {
+        "contract_id": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0",
+        "contract_version": "1.0.0",
+        "abi_version": "agcp_pec_abi_v1",
+        "evaluation_id": "PEVAL-VECTOR-001",
+        "tenant_id": "TENANT-001",
+        "governance_domain_id": "DOMAIN-PRIMARY",
+        "proposal_identity": {
+          "proposal_id": "PROPOSAL-001",
+          "proposal_version": "1.0.0",
+          "qualified_proposal_digest": {
+            "algorithm": "SHA-256",
+            "value": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        },
+        "canonical_state_snapshot": {
+          "snapshot_id": "CSS-VECTOR-001",
+          "snapshot_digest": {
+            "algorithm": "SHA-256",
+            "value": "2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          "resolved_at": "2026-08-03T12:00:00Z",
+          "source_manifest_digest": {
+            "algorithm": "SHA-256",
+            "value": "3333333333333333333333333333333333333333333333333333333333333333"
+          }
+        },
+        "governance_bindings": {
+          "governance_version": "GV-001",
+          "policy_set_digest": {
+            "algorithm": "SHA-256",
+            "value": "4444444444444444444444444444444444444444444444444444444444444444"
+          },
+          "governance_configuration_digest": {
+            "algorithm": "SHA-256",
+            "value": "5555555555555555555555555555555555555555555555555555555555555555"
+          },
+          "compiled_governance_artifact_digest": {
+            "algorithm": "SHA-256",
+            "value": "6666666666666666666666666666666666666666666666666666666666666666"
+          },
+          "module_digest": {
+            "algorithm": "SHA-256",
+            "value": "7777777777777777777777777777777777777777777777777777777777777777"
+          }
+        },
+        "authoritative_evaluation_time": "2026-08-03T12:00:00Z",
+        "authority_lineage_refs": [
+          "AUTH-LINEAGE-001"
+        ],
+        "evidence_refs": [
+          "GE-INPUT-001"
+        ],
+        "resource_limits": {
+          "fuel_limit": 25000000,
+          "memory_limit_bytes": 67108864,
+          "output_limit_bytes": 262144,
+          "timeout_milliseconds": 500
+        }
+      },
+      "canonical_input_utf8": "{\"abi_version\":\"agcp_pec_abi_v1\",\"authoritative_evaluation_time\":\"2026-08-03T12:00:00Z\",\"authority_lineage_refs\":[\"AUTH-LINEAGE-001\"],\"canonical_state_snapshot\":{\"resolved_at\":\"2026-08-03T12:00:00Z\",\"snapshot_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"2222222222222222222222222222222222222222222222222222222222222222\"},\"snapshot_id\":\"CSS-VECTOR-001\",\"source_manifest_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"3333333333333333333333333333333333333333333333333333333333333333\"}},\"contract_id\":\"IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0\",\"contract_version\":\"1.0.0\",\"evaluation_id\":\"PEVAL-VECTOR-001\",\"evidence_refs\":[\"GE-INPUT-001\"],\"governance_bindings\":{\"compiled_governance_artifact_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"6666666666666666666666666666666666666666666666666666666666666666\"},\"governance_configuration_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"5555555555555555555555555555555555555555555555555555555555555555\"},\"governance_version\":\"GV-001\",\"module_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"7777777777777777777777777777777777777777777777777777777777777777\"},\"policy_set_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"4444444444444444444444444444444444444444444444444444444444444444\"}},\"governance_domain_id\":\"DOMAIN-PRIMARY\",\"proposal_identity\":{\"proposal_id\":\"PROPOSAL-001\",\"proposal_version\":\"1.0.0\",\"qualified_proposal_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"1111111111111111111111111111111111111111111111111111111111111111\"}},\"resource_limits\":{\"fuel_limit\":25000000,\"memory_limit_bytes\":67108864,\"output_limit_bytes\":262144,\"timeout_milliseconds\":500},\"tenant_id\":\"TENANT-001\"}",
+      "canonical_input_sha256": "5401b62f63d0ffe04bebcccf89fe1f60ab05a2a8b662d7aaec521a49f264250b",
+      "expected_output": {
+        "contract_id": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0",
+        "contract_version": "1.0.0",
+        "abi_version": "agcp_pec_abi_v1",
+        "evaluation_id": "PEVAL-VECTOR-001",
+        "input_digest": {
+          "algorithm": "SHA-256",
+          "value": "5401b62f63d0ffe04bebcccf89fe1f60ab05a2a8b662d7aaec521a49f264250b"
+        },
+        "module_digest": {
+          "algorithm": "SHA-256",
+          "value": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        "evaluation_status": "COMPLETED",
+        "result": {
+          "policy_result": "SATISFIED",
+          "constraint_results": [
+            {
+              "id": "CONSTRAINT-001",
+              "result": "SATISFIED",
+              "reason_codes": [
+                "CONSTRAINT_SATISFIED"
+              ]
+            }
+          ],
+          "invariant_results": [
+            {
+              "id": "INVARIANT-001",
+              "result": "SATISFIED",
+              "reason_codes": [
+                "INVARIANT_PRESERVED"
+              ]
+            }
+          ],
+          "reason_codes": [
+            "POLICY_SATISFIED"
+          ],
+          "required_approval_refs": [],
+          "dependency_refs": [
+            "POLICY-001"
+          ],
+          "deterministic_diagnostics": [
+            {
+              "code": "EVAL_COMPLETE",
+              "message": "Deterministic evaluation completed."
+            }
+          ]
+        }
+      },
+      "canonical_output_utf8": "{\"abi_version\":\"agcp_pec_abi_v1\",\"contract_id\":\"IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0\",\"contract_version\":\"1.0.0\",\"evaluation_id\":\"PEVAL-VECTOR-001\",\"evaluation_status\":\"COMPLETED\",\"input_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"5401b62f63d0ffe04bebcccf89fe1f60ab05a2a8b662d7aaec521a49f264250b\"},\"module_digest\":{\"algorithm\":\"SHA-256\",\"value\":\"7777777777777777777777777777777777777777777777777777777777777777\"},\"result\":{\"constraint_results\":[{\"id\":\"CONSTRAINT-001\",\"reason_codes\":[\"CONSTRAINT_SATISFIED\"],\"result\":\"SATISFIED\"}],\"dependency_refs\":[\"POLICY-001\"],\"deterministic_diagnostics\":[{\"code\":\"EVAL_COMPLETE\",\"message\":\"Deterministic evaluation completed.\"}],\"invariant_results\":[{\"id\":\"INVARIANT-001\",\"reason_codes\":[\"INVARIANT_PRESERVED\"],\"result\":\"SATISFIED\"}],\"policy_result\":\"SATISFIED\",\"reason_codes\":[\"POLICY_SATISFIED\"],\"required_approval_refs\":[]}}",
+      "canonical_output_sha256": "cef57e78bff22b1829ea07099a2e5354db910811107ef092f8da754b685edb89"
+    },
+    {
+      "id": "IF002-WASM-002",
+      "purpose": "ABI result packing is stable.",
+      "output_ptr": 4096,
+      "output_len": 512,
+      "packed_i64": 17592186044928
+    },
+    {
+      "id": "IF002-WASM-003",
+      "purpose": "Required exports and zero-import surface are exact.",
+      "required_exports": [
+        "memory",
+        "agcp_pec_abi_version_v1",
+        "agcp_alloc_v1",
+        "agcp_dealloc_v1",
+        "agcp_evaluate_v1"
+      ],
+      "imports": [],
+      "expected": "ACCEPT"
+    }
+  ],
+  "negative_vectors": [
+    {
+      "id": "IF002-WASM-N001",
+      "condition": "Missing agcp_evaluate_v1 export",
+      "expected_failure_code": "ABI_INCOMPATIBLE",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N002",
+      "condition": "Import wasi_snapshot_preview1.fd_read",
+      "expected_failure_code": "PROHIBITED_IMPORT",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N003",
+      "condition": "Import host clock or randomness",
+      "expected_failure_code": "PROHIBITED_IMPORT",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N004",
+      "condition": "Exact module bytes do not match bound module digest",
+      "expected_failure_code": "MODULE_DIGEST_MISMATCH",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N005",
+      "condition": "Fuel budget exhausted",
+      "expected_failure_code": "FUEL_EXHAUSTED",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N006",
+      "condition": "Linear-memory limit exceeded",
+      "expected_failure_code": "MEMORY_LIMIT_EXCEEDED",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N007",
+      "condition": "Host wall-clock timeout reached",
+      "expected_failure_code": "TIMEOUT",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N008",
+      "condition": "WebAssembly trap",
+      "expected_failure_code": "WASM_TRAP",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N009",
+      "condition": "Output is not valid canonical output or controlled-failure envelope",
+      "expected_failure_code": "INVALID_OUTPUT",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N010",
+      "condition": "Output length exceeds the bound in the input envelope",
+      "expected_failure_code": "OUTPUT_LIMIT_EXCEEDED",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N011",
+      "condition": "ABI identifier is unsupported",
+      "expected_failure_code": "ABI_INCOMPATIBLE",
+      "authorization_permitted": false
+    },
+    {
+      "id": "IF002-WASM-N012",
+      "condition": "Module output attempts to assert Execution Authorization or Governance Receipt",
+      "expected_failure_code": "INVALID_OUTPUT",
+      "authorization_permitted": false
+    }
+  ],
+  "cross_runtime_requirement": "Supported runtimes SHALL produce identical canonical output bytes for IF002-WASM-001 using identical module bytes, input bytes, ABI version, and resource limits."
+}

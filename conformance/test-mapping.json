@@ -214,13 +214,17 @@
       "file": "TC001-TC010.md",
       "ds_ids": [
         "DS-033",
-        "DS-015"
+        "DS-015",
+        "DS-001"
       ],
       "schema_files": [
         "schemas/evidence_qualification_result.json",
-        "schemas/governance_decision_result.json"
+        "schemas/governance_decision_result.json",
+        "schemas/common.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-003",
         "REG-055"
@@ -239,7 +243,11 @@
       ],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json"
+      ],
+      "p0_02_traceability_note": "PV-001 and NV-001 through NV-008 provide deterministic canonicalization, detached-signature, header-binding, algorithm, payload-integrity, and replay verification supporting TC-005."
     },
     {
       "tc_id": "TC-006",
@@ -411,12 +419,16 @@
       "ds_ids": [
         "DS-014",
         "DS-017",
-        "DS-038"
+        "DS-038",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
         "schemas/proposal_view.json",
         "schemas/execution_authorization_view.json",
-        "schemas/governance_lifecycle_record.json"
+        "schemas/governance_lifecycle_record.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
       "if_ids": [
         "IF-001"
@@ -445,7 +457,11 @@
         "TV-GART-002"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-011",
@@ -496,12 +512,16 @@
       "contextual_ns_ids": [],
       "file": "TC011-TC020.md",
       "ds_ids": [
-        "DS-026"
+        "DS-026",
+        "DS-045"
       ],
       "schema_files": [
-        "schemas/governance_approval_artifact.json"
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-014",
         "REG-044",
@@ -520,7 +540,11 @@
       ],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-013",
@@ -533,12 +557,16 @@
       "contextual_ns_ids": [],
       "file": "TC011-TC020.md",
       "ds_ids": [
-        "DS-026"
+        "DS-026",
+        "DS-045"
       ],
       "schema_files": [
-        "schemas/governance_approval_artifact.json"
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-014",
         "REG-044"
@@ -557,7 +585,11 @@
       ],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-014",
@@ -571,13 +603,17 @@
       "file": "TC011-TC020.md",
       "ds_ids": [
         "DS-026",
-        "DS-038"
+        "DS-038",
+        "DS-045"
       ],
       "schema_files": [
         "schemas/governance_approval_artifact.json",
-        "schemas/governance_lifecycle_record.json"
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-013",
         "REG-044",
@@ -596,7 +632,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-015",
@@ -610,12 +650,16 @@
       "contextual_ns_ids": [],
       "file": "TC011-TC020.md",
       "ds_ids": [
-        "DS-026"
+        "DS-026",
+        "DS-045"
       ],
       "schema_files": [
-        "schemas/governance_approval_artifact.json"
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-013",
         "REG-044",
@@ -634,7 +678,11 @@
       ],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-016",
@@ -647,12 +695,16 @@
       "contextual_ns_ids": [],
       "file": "TC011-TC020.md",
       "ds_ids": [
-        "DS-026"
+        "DS-026",
+        "DS-045"
       ],
       "schema_files": [
-        "schemas/governance_approval_artifact.json"
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-013",
         "REG-044",
@@ -672,7 +724,11 @@
       ],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-017",
@@ -686,13 +742,17 @@
       "file": "TC011-TC020.md",
       "ds_ids": [
         "DS-026",
-        "DS-038"
+        "DS-038",
+        "DS-045"
       ],
       "schema_files": [
         "schemas/governance_approval_artifact.json",
-        "schemas/governance_lifecycle_record.json"
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-013",
         "REG-042",
@@ -712,7 +772,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-018",
@@ -726,13 +790,17 @@
       "file": "TC011-TC020.md",
       "ds_ids": [
         "DS-026",
-        "DS-038"
+        "DS-038",
+        "DS-045"
       ],
       "schema_files": [
         "schemas/governance_approval_artifact.json",
-        "schemas/governance_lifecycle_record.json"
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-013",
         "REG-042",
@@ -751,7 +819,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-019",
@@ -928,12 +1000,16 @@
       "ds_ids": [
         "DS-017",
         "DS-018",
-        "DS-019"
+        "DS-019",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
         "schemas/execution_authorization_view.json",
         "schemas/commit_boundary_request.json",
-        "schemas/commit_boundary_result.json"
+        "schemas/commit_boundary_result.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
       "if_ids": [
         "IF-001"
@@ -965,7 +1041,11 @@
       ],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-023",
@@ -1139,10 +1219,14 @@
       ],
       "file": "TC021-TC030.md",
       "ds_ids": [
-        "DS-004"
+        "DS-004",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
-        "schemas/tenant.json"
+        "schemas/tenant.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
       "if_ids": [
         "IF-001"
@@ -1169,7 +1253,11 @@
         "TV-XTEN-SETUP"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario."
+      "test_vector_disposition": "One or more current executable vectors directly realize the formal TC scenario.",
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-027",
@@ -1779,7 +1867,9 @@
         "DS-021",
         "DS-022",
         "DS-033",
-        "DS-040"
+        "DS-040",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
         "schemas/proposal_submit_request.json",
@@ -1787,7 +1877,9 @@
         "schemas/governed_action_proposal.json",
         "schemas/governance_context_envelope.json",
         "schemas/evidence_qualification_result.json",
-        "schemas/governance_ledger_event.json"
+        "schemas/governance_ledger_event.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
       "if_ids": [
         "IF-001"
@@ -1816,7 +1908,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-042",
@@ -1831,6 +1927,7 @@
       ],
       "file": "TC041-TC050.md",
       "ds_ids": [
+        "DS-001",
         "DS-013",
         "DS-021",
         "DS-022",
@@ -1842,7 +1939,8 @@
         "schemas/governed_action_proposal.json",
         "schemas/governance_context_envelope.json",
         "schemas/authority_lineage.json",
-        "schemas/delegation_artifact.json"
+        "schemas/delegation_artifact.json",
+        "schemas/common.json"
       ],
       "if_ids": [
         "IF-001"
@@ -1859,8 +1957,12 @@
       "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
-      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_mapping_status": "SUPPORTING_COMPANION_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative; the P1-12 companion vector package supplies reusable schema-level digest mismatch coverage.",
+      "supporting_companion_vectors": [
+        "conformance/digests/AGCP-Content-Digest-Test-Vectors.json"
+      ],
+      "p1_12_traceability_note": "The content-digest vector package verifies exact algorithm/output-length binding, lowercase hexadecimal, required fields, closed-object behavior, and rejection of ambiguous or inconsistent digest representations."
     },
     {
       "tc_id": "TC-043",
@@ -2105,15 +2207,21 @@
         "DS-020",
         "DS-023",
         "DS-032",
-        "DS-018"
+        "DS-018",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
         "schemas/governance_evidence.json",
         "schemas/canonical_state.json",
         "schemas/state_qualification_result.json",
-        "schemas/commit_boundary_request.json"
+        "schemas/commit_boundary_request.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-007",
         "REG-031",
@@ -2135,7 +2243,11 @@
         "TV-STATE-001"
       ],
       "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
-      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure.",
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-049",
@@ -2276,10 +2388,12 @@
       "contextual_ns_ids": [],
       "file": "TC051-TC060.md",
       "ds_ids": [
+        "DS-001",
         "DS-020"
       ],
       "schema_files": [
-        "schemas/governance_evidence.json"
+        "schemas/governance_evidence.json",
+        "schemas/common.json"
       ],
       "if_ids": [],
       "registry_ids": [
@@ -2295,8 +2409,12 @@
       "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
-      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_mapping_status": "SUPPORTING_COMPANION_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative; the P1-12 companion vector package supplies reusable schema-level digest mismatch coverage.",
+      "supporting_companion_vectors": [
+        "conformance/digests/AGCP-Content-Digest-Test-Vectors.json"
+      ],
+      "p1_12_traceability_note": "The content-digest vector package verifies exact algorithm/output-length binding, lowercase hexadecimal, required fields, closed-object behavior, and rejection of ambiguous or inconsistent digest representations."
     },
     {
       "tc_id": "TC-053",
@@ -2514,13 +2632,17 @@
       "file": "TC051-TC060.md",
       "ds_ids": [
         "DS-012",
-        "DS-026"
+        "DS-026",
+        "DS-045"
       ],
       "schema_files": [
         "schemas/invariant_evaluation.json",
-        "schemas/governance_approval_artifact.json"
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-013",
         "REG-014",
@@ -2542,7 +2664,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-059",
@@ -2557,14 +2683,18 @@
       "ds_ids": [
         "DS-026",
         "DS-038",
-        "DS-040"
+        "DS-040",
+        "DS-045"
       ],
       "schema_files": [
         "schemas/governance_approval_artifact.json",
         "schemas/governance_lifecycle_record.json",
-        "schemas/governance_ledger_event.json"
+        "schemas/governance_ledger_event.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-014",
         "REG-044"
@@ -2586,7 +2716,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-060",
@@ -2600,13 +2734,17 @@
       "file": "TC051-TC060.md",
       "ds_ids": [
         "DS-026",
-        "DS-028"
+        "DS-028",
+        "DS-045"
       ],
       "schema_files": [
         "schemas/governance_approval_artifact.json",
-        "schemas/refusal_record.json"
+        "schemas/refusal_record.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-014",
         "REG-044"
@@ -2624,7 +2762,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-061",
@@ -2638,13 +2780,17 @@
       "file": "TC061-TC070.md",
       "ds_ids": [
         "DS-026",
-        "DS-017"
+        "DS-017",
+        "DS-045"
       ],
       "schema_files": [
         "schemas/governance_approval_artifact.json",
-        "schemas/execution_authorization_view.json"
+        "schemas/execution_authorization_view.json",
+        "schemas/governance_approval_submission.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-018",
         "REG-029",
@@ -2667,7 +2813,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json"
+      ],
+      "p0_06_command_record_separation": "DS-045 is untrusted ingress; DS-026 is authoritative AGCP-created or AGCP-qualified record."
     },
     {
       "tc_id": "TC-062",
@@ -2788,6 +2938,7 @@
       ],
       "file": "TC061-TC070.md",
       "ds_ids": [
+        "DS-001",
         "DS-011",
         "DS-015",
         "DS-020",
@@ -2801,7 +2952,8 @@
         "schemas/governance_evidence.json",
         "schemas/governance_receipt.json",
         "schemas/evidence_qualification_result.json",
-        "schemas/governance_ledger_event.json"
+        "schemas/governance_ledger_event.json",
+        "schemas/common.json"
       ],
       "if_ids": [],
       "registry_ids": [
@@ -2828,8 +2980,12 @@
       "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
-      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_mapping_status": "SUPPORTING_COMPANION_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative; the P1-12 companion vector package supplies reusable schema-level digest mismatch coverage.",
+      "supporting_companion_vectors": [
+        "conformance/digests/AGCP-Content-Digest-Test-Vectors.json"
+      ],
+      "p1_12_traceability_note": "The content-digest vector package verifies exact algorithm/output-length binding, lowercase hexadecimal, required fields, closed-object behavior, and rejection of ambiguous or inconsistent digest representations."
     },
     {
       "tc_id": "TC-065",
@@ -2896,6 +3052,7 @@
       "contextual_ns_ids": [],
       "file": "TC061-TC070.md",
       "ds_ids": [
+        "DS-001",
         "DS-011",
         "DS-015",
         "DS-020",
@@ -2907,7 +3064,8 @@
         "schemas/governance_decision_result.json",
         "schemas/governance_evidence.json",
         "schemas/governance_receipt.json",
-        "schemas/governance_ledger_event.json"
+        "schemas/governance_ledger_event.json",
+        "schemas/common.json"
       ],
       "if_ids": [],
       "registry_ids": [
@@ -2934,8 +3092,12 @@
       "harness_check_mapping_status": "APPLICABLE_CHECKS_IDENTIFIED",
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
-      "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_mapping_status": "SUPPORTING_COMPANION_VECTOR",
+      "test_vector_disposition": "The formal TC remains authoritative; the P1-12 companion vector package supplies reusable schema-level digest mismatch coverage.",
+      "supporting_companion_vectors": [
+        "conformance/digests/AGCP-Content-Digest-Test-Vectors.json"
+      ],
+      "p1_12_traceability_note": "The content-digest vector package verifies exact algorithm/output-length binding, lowercase hexadecimal, required fields, closed-object behavior, and rejection of ambiguous or inconsistent digest representations."
     },
     {
       "tc_id": "TC-067",
@@ -3029,16 +3191,22 @@
         "DS-020",
         "DS-027",
         "DS-033",
-        "DS-040"
+        "DS-040",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
         "schemas/commit_boundary_request.json",
         "schemas/governance_evidence.json",
         "schemas/governance_receipt.json",
         "schemas/evidence_qualification_result.json",
-        "schemas/governance_ledger_event.json"
+        "schemas/governance_ledger_event.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
-      "if_ids": [],
+      "if_ids": [
+        "IF-001"
+      ],
       "registry_ids": [
         "REG-021",
         "REG-022",
@@ -3068,7 +3236,11 @@
         "TV-EVID-001"
       ],
       "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
-      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure."
+      "test_vector_disposition": "No dedicated one-to-one vector exists; the listed vectors exercise supporting behavior while the formal TC remains the authoritative verification procedure.",
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-069",
@@ -3233,8 +3405,14 @@
       "conditional_ns_ids": [],
       "contextual_ns_ids": [],
       "file": "TC071-TC080.md",
-      "ds_ids": [],
-      "schema_files": [],
+      "ds_ids": [
+        "DS-002",
+        "DS-003"
+      ],
+      "schema_files": [
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
+      ],
       "if_ids": [
         "IF-001",
         "IF-002"
@@ -3252,7 +3430,11 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-074",
@@ -3336,7 +3518,13 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-076",
@@ -3390,7 +3578,13 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-077",
@@ -3423,7 +3617,13 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-078",
@@ -3466,7 +3666,13 @@
       "test_vector_ids": [],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "NO_DEDICATED_EXECUTABLE_VECTOR",
-      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario."
+      "test_vector_disposition": "The formal TC remains authoritative. No dedicated harness vector is currently defined for this scenario.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-079",
@@ -3991,10 +4197,12 @@
       ],
       "file": "TC081-TC090.md",
       "ds_ids": [
-        "DS-003"
+        "DS-003",
+        "DS-002"
       ],
       "schema_files": [
-        "schemas/meta_response.json"
+        "schemas/meta_response.json",
+        "schemas/error_response.json"
       ],
       "if_ids": [
         "IF-001",
@@ -4083,7 +4291,17 @@
       ],
       "supporting_test_vector_ids": [],
       "test_vector_mapping_status": "AGGREGATE_SUITE",
-      "test_vector_disposition": "The complete current executable vector catalog supports the aggregate conformance-suite TC; formal TC evidence and assessment procedures remain authoritative."
+      "test_vector_disposition": "The complete current executable vector catalog supports the aggregate conformance-suite TC; formal TC evidence and assessment procedures remain authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ],
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-090",
@@ -4099,11 +4317,13 @@
       "file": "TC081-TC090.md",
       "ds_ids": [
         "DS-003",
-        "DS-015"
+        "DS-015",
+        "DS-002"
       ],
       "schema_files": [
         "schemas/meta_response.json",
-        "schemas/governance_decision_result.json"
+        "schemas/governance_decision_result.json",
+        "schemas/error_response.json"
       ],
       "if_ids": [
         "IF-001",
@@ -4129,7 +4349,17 @@
         "TV-GART-001"
       ],
       "test_vector_mapping_status": "SUPPORTING_EXECUTABLE_COVERAGE",
-      "test_vector_disposition": "Current executable vectors provide supporting evidence for portions of the formal TC; the complete TC procedure remains authoritative."
+      "test_vector_disposition": "Current executable vectors provide supporting evidence for portions of the formal TC; the complete TC procedure remains authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ],
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-091",
@@ -5018,7 +5248,9 @@
         "DS-010",
         "DS-042",
         "DS-009",
-        "DS-044"
+        "DS-044",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
         "schemas/policy_evaluation_module_artifact.json",
@@ -5028,10 +5260,13 @@
         "schemas/governance_artifact_view.json",
         "schemas/compiled_governance_artifact.json",
         "schemas/exception_artifact.json",
-        "schemas/registry_document.schema.json"
+        "schemas/registry_document.schema.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
       "if_ids": [
-        "IF-002"
+        "IF-002",
+        "IF-001"
       ],
       "registry_ids": [
         "REG-010",
@@ -5067,7 +5302,17 @@
         "TV-GART-002"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ],
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-111",
@@ -5133,7 +5378,13 @@
         "TV-GART-001"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-112",
@@ -5199,7 +5450,13 @@
         "TV-GART-001"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-113",
@@ -5235,7 +5492,9 @@
         "DS-010",
         "DS-042",
         "DS-043",
-        "DS-009"
+        "DS-009",
+        "DS-002",
+        "DS-003"
       ],
       "schema_files": [
         "schemas/policy_evaluation_module_artifact.json",
@@ -5245,10 +5504,13 @@
         "schemas/governance_artifact_view.json",
         "schemas/compiled_governance_artifact.json",
         "schemas/controlled_governance_activation.json",
-        "schemas/exception_artifact.json"
+        "schemas/exception_artifact.json",
+        "schemas/error_response.json",
+        "schemas/meta_response.json"
       ],
       "if_ids": [
-        "IF-002"
+        "IF-002",
+        "IF-001"
       ],
       "registry_ids": [
         "REG-010",
@@ -5288,7 +5550,17 @@
         "TV-POL-003"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ],
+      "supporting_companion_vectors": [
+        "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json"
+      ],
+      "p1_03_p1_09_p1_14_p1_17_traceability_note": "Verifies normalized public not-found behavior, pre-governance throttling, capacity unavailability, transport-versus-governance separation, and integrity-bound metadata distribution."
     },
     {
       "tc_id": "TC-114",
@@ -5349,7 +5621,13 @@
         "TV-POL-002"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-115",
@@ -5529,7 +5807,13 @@
         "TV-GART-003"
       ],
       "test_vector_mapping_status": "DIRECT_EXECUTABLE_SCENARIO",
-      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
+      "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative.",
+      "companion_vector_files": [
+        "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+      ],
+      "companion_spec_files": [
+        "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md"
+      ]
     },
     {
       "tc_id": "TC-118",
@@ -5806,13 +6090,13 @@
       "test_vector_disposition": "Dedicated substantive executable vectors directly assert the compilation, validation, activation, self-protection, rollback, evidence, lineage, or active-configuration behavior required by this Formal Test Case; the complete TC procedure remains authoritative."
     }
   ],
-  "rtm_dataset_version": "RTM-1.45",
+  "rtm_dataset_version": "RTM-1.46",
   "schema_catalog": "schemas/catalog/schema-catalog.json",
-  "schema_catalog_version": "1.0.44",
+  "schema_catalog_version": "1.0.50",
   "fixture_mapping": "conformance/fixture-mapping.json",
   "interface_id": "IF-001",
   "interface_version": "v2",
-  "last_validated_date": "2026-07-31",
+  "last_validated_date": "2026-08-03",
   "validation_status": "PASS",
   "interface_catalog": "api/interface-catalog.json",
   "registry_entry_catalog": "registries/registry-entry-catalog.json",
@@ -5832,5 +6116,20 @@
     "AGGREGATE_SUITE": 1
   },
   "unreferenced_harness_check_ids": [],
-  "unreferenced_test_vector_ids": []
+  "unreferenced_test_vector_ids": [],
+  "semantic_fixture_validation": {
+    "findings": [
+      "P0-10",
+      "P0-06"
+    ],
+    "corrected_positive_fixture_count": 14,
+    "semantic_vector_catalog": "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json",
+    "claimant_assertion_vector_catalog": "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json",
+    "validation_report": "governance/AGCP-semantic-fixture-validation.json"
+  },
+  "repository_synchronization": {
+    "manifest": "governance/AGCP-v2.0.1-repository-synchronization-manifest.json",
+    "validation_report": "governance/AGCP-v2.0.1-repository-synchronization-validation.json",
+    "status": "PASS"
+  }
 }

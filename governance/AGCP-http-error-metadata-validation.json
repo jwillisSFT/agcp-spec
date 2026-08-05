@@ -1,0 +1,445 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "report_id": "AGCP-P1-03-P1-09-P1-14-P1-17-HTTP-ERROR-METADATA",
+  "status": "PASS",
+  "validated_at": "2026-08-03",
+  "findings": [
+    "P1-03",
+    "P1-09",
+    "P1-14",
+    "P1-17"
+  ],
+  "operation_count": 10,
+  "public_not_found_harness_instance_count": 9,
+  "registry_entry_count": 42,
+  "affected_crs": [
+    "CR-010",
+    "CR-022",
+    "CR-026",
+    "CR-041",
+    "CR-048",
+    "CR-068",
+    "CR-073",
+    "CR-089",
+    "CR-090",
+    "CR-110",
+    "CR-113"
+  ],
+  "source_hashes": {
+    "schemas/error_response.json": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
+    "schemas/meta_response.json": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
+    "schemas/examples/ds003-implementation-metadata-response.json": "950f4e4bfa22e69621484d28d947e0b2fe2919d97b402e3204377d27628a9573",
+    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
+    "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
+    "spec/AGCP-Error-Mapping.md": "fbcd5b3bca11389ae3e61997ac4ce404e86f99a1697ba3bf050479b0eec93316",
+    "registries/rejection-code-registry.json": "19726bc7a8da1181eaf7c74054cc0a677031ff36a67807dac779f5f654c9da12",
+    "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json": "733ad071c50ec61bfb2ae995915ce047f6768860343ea3ec45151e1e598a739b",
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
+    "registries/registry-entry-catalog.json": "05760e6455452f6783a08dd0f180b7b4709e24de7ac3a0a4c4de2d20025df32e",
+    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
+    "implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml": "60d0dbbafc130d463f64b26f542efd3bbac9591ec70168bfab4b9ef32dd1bc70",
+    "governance/validate_http_error_metadata_contract.py": "3f3f680f5c62efc067c8810303a6f59a8e18b34524471f5f1586e4ced88dd7c7",
+    ".github/workflows/validate-http-error-metadata-contract.yml": "3121c66cbcb98f19e044f58325b0fb2c43cfc86bc9bf6d7554011c87b3646fd2"
+  },
+  "checks": [
+    {
+      "check": "vector_ordinary_not_found_schema",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "vector_cross_scope_not_found_schema",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "vector_pre_governance_throttling_schema",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "vector_capacity_unavailable_schema",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "not_found_public_code",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "cross_scope_public_code",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "throttle_429_retry_after",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capacity_503_not_governance",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "governance_quota_is_outcome",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "metadata_example_valid",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "metadata_baseline_digest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "metadata_validator_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "metadata_profile_baseline_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "metadata_active_governance",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "metadata_deployment_binding_public_safe",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "META-NV-001",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "META-NV-002",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "META-NV-003",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "META-NV-004",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "META-NV-005",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "openapi_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all_operations_429",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "all_operations_503",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "all_404_normalized",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "retry_after_delay_seconds",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "metadata_openapi_ref",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "registry_release",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "new_transport_codes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "specific_not_found_deprecated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "registry_entry_digests",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "registry_entry_set_digest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "registry_document_digest",
+      "status": "PASS",
+      "detail": {
+        "declared": "de07a00cabbb7f3a9be9d653a5a78fd5b474388e01dd006e32a056dc849557bb",
+        "computed": "de07a00cabbb7f3a9be9d653a5a78fd5b474388e01dd006e32a056dc849557bb"
+      }
+    },
+    {
+      "check": "harness_public_not_found_count",
+      "status": "PASS",
+      "detail": 9
+    },
+    {
+      "check": "harness_public_not_found_valid",
+      "status": "PASS",
+      "detail": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "check": "schema_catalog_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds002_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds003_hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "interface_catalog_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "interface_public_contract",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "registry_catalog_count",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "rtm_rows",
+      "status": "PASS",
+      "detail": [
+        {
+          "cr": "CR-010",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-022",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-026",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-041",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-048",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-068",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-073",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-089",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-090",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-110",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-113",
+          "ds": true,
+          "if": true,
+          "files": true,
+          "note": true
+        }
+      ]
+    },
+    {
+      "check": "test_mapping_rows",
+      "status": "PASS",
+      "detail": [
+        {
+          "tc": "TC-010",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-022",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-026",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-041",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-048",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-068",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-073",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-089",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-090",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-110",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        },
+        {
+          "tc": "TC-113",
+          "ds": true,
+          "if": true,
+          "vec": true,
+          "note": true
+        }
+      ]
+    },
+    {
+      "check": "profile_public_error_selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "profile_metadata_selection",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "issues": []
+}

@@ -1,4 +1,49 @@
+## 2026-08-03 - v2.0.1 Step 11 repository-wide integrity validation
+
+- Added the public `AGCP-v2.0.1-CORRECTION-SUMMARY.md`.
+- Added the repository-wide integrity validator, controlled PASS report, and CI workflow.
+- Re-ran all finding-specific validators and the repository synchronization validator.
+- Verified parseability, metaschema validity, reference and link resolution, catalog hashes, RTM dispositions, controlled report freshness, synchronization-manifest coverage, and release-payload duplicate/transitional-file absence.
+- Preserved the v2.0.1 target as an unreleased correction set and the controlled Implementation Profile as proposed and pre-conformance.
+
+
+## 2026-08-03 - v2.0.1 Step 10 repository synchronization
+
+- Advanced the RTM dataset to `RTM-1.46` and synchronized specification-version metadata across all 122 CR rows.
+- Synchronized Schema Catalog `1.0.50`, Interface Catalog `1.0.5`, Registry Entry Catalog `1.0.3`, and Implementation Profile Catalog `1.0.3`.
+- Added the repository synchronization manifest, validator, validation report, and CI workflow.
+- Regenerated current traceability, fixture, mapping, companion-disposition, catalog, manifest, and release records.
+## 2026-08-03 - v2.0.1 P2-01 release and lifecycle metadata alignment
+
+- Separated the unreleased v2.0.1 repository target from the controlling published v2.0.0 Public Review Controlled Baseline.
+- Standardized current artifact lifecycle, catalog publication status, specification versions, baseline status, and baseline date across specifications, schemas, interfaces, registries, manifests, metadata examples, validation records, and release notes.
+- Advanced the Schema Catalog to 1.0.49, Interface Catalog to 1.0.4, and Registry Entry Catalog to 1.0.2.
+- Added controlled metadata policy, automated validation, and CI.
+
+
+## 2026-08-03 - P0-05 IF-002 deterministic WASM machine contract
+
+- Published the controlled Rust Student Service IF-002 companion `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0`, contract version `1.0.0`, and ABI `agcp_pec_abi_v1`.
+- Added normative and machine-readable contracts, canonical envelope schemas, public vectors, profile binding, interface catalog entries, direct RTM mappings, test-mapping references, and CI validation.
+- Preserved the implementation-independent IF-002 contract and explicitly prevented the profile-specific WASM selection from becoming a universal AGCP Core requirement.
+
 # AGCP Specification Changelog
+
+## 2026-08-03 - v2.0.1 P0-02 provenance wire correction
+
+- Synchronized the normative provenance wire specification with DS-001.
+- Corrected OpenAPI, controlled examples, harness vectors, catalogs, hashes, validation records, and CR-005 traceability.
+- Added cross-language Ed25519 detached-signature vectors and CI validation.
+
+## 2026-08-03 - v2.0.1 Implementation Profile package integration
+
+- Added the controlled Implementation Profile Specification and Draft 2020-12 schema under `implementer/`.
+- Added the authoritative `AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml` profile and its Markdown companion while preserving status `DEVELOPMENT_PRE_CONFORMANCE` and lifecycle `PROPOSED`.
+- Superseded `AGCP-Implementation-Decision-Record-Template.md` with the correctly named `AGCP-Implementation-Profile-Template.md`.
+- Added the implementation-profile directory README, human-readable and machine-readable catalogs, package manifest, repository validator, controlled validation report, and CI workflow.
+- Registered the package in the root README, architecture overview, conformance manifest, and v2.0.1 working release notes.
+- Preserved the profile content digest `e67c090dd394e3d3a8eb4129c64b2e598b8404eaaac587a963a7b49bf862ed7f` and pinned baseline SHA-256 `790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326`.
+- Findings addressed by this integration step: P0-01, P1-14, P2-02, and P2-06.
 
 ## 2026-07-31 — AGCP v2.0.0 comparison-based release notes
 
@@ -125,7 +170,7 @@
 
 ## TV-GAPP-004 semantic cryptographic-verification correction — 2026-07-31
 
-- Kept the `TV-GAPP-004` Governance Approval request structurally valid under the IF-001 `GovernanceApprovalRequest` wrapper and DS-026.
+- At that revision, `TV-GAPP-004` remained structurally valid under the then-current wrapper and DS-026; P0-06 subsequently replaced ingress with DS-045 and reserved DS-026 for authoritative records.
 - Replaced the schema-invalid `cryptographic_verification.verification_outcome: FAILED` override with the DS-026-required `VERIFIED` value plus schema-valid invalid signature and key-binding material.
 - Added an explicit harness cryptographic-verifier hook that independently re-verifies the submitted artifact after schema validation and returns `GOVERNANCE_APPROVAL_INVALID` for the declared signature, key-binding, and artifact-digest-binding failure.
 - Preserved the required `Idempotency-Key`, HTTP 422 outcome, rejection code, and no-ledger-append expectation.
@@ -196,7 +241,9 @@
 
 
 **Status:** Informational  
-**Current Published Normative Release:** v2.0.0
+**Current Published Normative Release:** v2.0.0  
+**Current Unreleased Repository Target:** v2.0.1  
+**Current Worktree Artifact Lifecycle:** CURRENT
 
 ---
 
@@ -316,3 +363,30 @@ Backward compatible within the Version 2 MAJOR release.
 ### Migration Guidance
 
 Existing Version 2.0.x implementations remain compatible without modification.
+
+## 2026-08-03 — P0-06 governance-approval command/record separation
+
+Added DS-045 Governance Approval Submission as untrusted IF-001 ingress; made DS-026 explicitly AGCP-created or AGCP-qualified; synchronized OpenAPI, interface semantics, examples, harness vectors, catalog, RTM, test mapping, validation, and release records.
+
+## 2026-08-03 - P1-12 algorithm-specific digest contract
+
+- Corrected DS-001 to bind every declared content-digest algorithm to an exact lowercase-hexadecimal output length.
+- Added valid multi-algorithm examples and negative mismatch vectors.
+- Synchronized OpenAPI, formal TCs, test mappings, RTM rows CR-042/052/064/066, schema catalogs, validation, CI, and release records.
+
+## IF-001 public error and metadata reconciliation - 2026-08-03
+
+- Implemented P1-03, P1-09, P1-14, and P1-17.
+- Published normalized public 404, 429/Retry-After, 503 capacity, and transport-vs-governance semantics.
+- Expanded DS-003 immutable distribution and active-governance advertisements.
+- Added registry entries REG-093 and REG-094 and deprecated REG-060 through REG-063 for public use.
+
+## 2026-08-03 - P0-10 semantic fixture correction
+
+Corrected fourteen controlled positive fixtures, added semantic mismatch vectors, integrated claimant-assertion negatives, and added semantic fixture validation and CI enforcement.
+
+## 2026-08-03 - P1-01 normative companion reference disposition
+
+- Retired absent umbrella companion labels and replaced active references with exact controlled repository artifacts.
+- Bound Governance Evidence references to DS-020 and DS-033 under the controlling CR and Core obligations.
+- Normalized the human-adjudication companion title and added controlled reference-disposition metadata, validation, and CI.

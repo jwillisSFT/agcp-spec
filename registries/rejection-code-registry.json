@@ -8,14 +8,15 @@
   "series": "AGCP Core",
   "description": "Authoritative registry of rejection and failure codes used by AGCP HTTP interfaces, Governance Evidence, conformance tests, and implementation error reporting.",
   "release": {
-    "release_id": "REG-REJECTION-CODE-v2.0.0",
-    "registry_release": "v2.0.0",
-    "specification_version": "v2.0",
+    "release_id": "REG-REJECTION-CODE-v2.0.1",
+    "registry_release": "v2.0.1",
+    "specification_version": "v2.0.1",
     "publication_status": "CURRENT",
-    "published_at": "2026-07-30T12:26:00-04:00",
+    "published_at": "2026-08-03T12:11:00-04:00",
     "authority": "AGCP controlled repository release",
     "repository_path": "registries/rejection-code-registry.json",
-    "canonical_uri": "https://agcp.ai/registries/rejection-code-registry.json"
+    "canonical_uri": "https://agcp.ai/registries/rejection-code-registry.json",
+    "supersedes_release_id": "REG-REJECTION-CODE-v2.0.0"
   },
   "lifecycle": {
     "lifecycle_state": "ACTIVE",
@@ -25,16 +26,14 @@
     "integrity_protected": true,
     "digest_algorithm": "SHA-256",
     "canonicalization": "JCS-RFC8785",
-    "entry_count": 40,
+    "entry_count": 42,
     "entry_set_digest": {
       "algorithm": "SHA-256",
-      "value": "45d76904ed764e928f9a0d0dadcbba19db6548cb944dd2e8430ed339c0f89274",
-      "canonicalization": "JCS-RFC8785"
+      "value": "ee96112e72b7b281a87a8b8dc57cc100f9af4c2153259c4d6b3c9c433e7a4939"
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "0bd32815431b36c93004049aa82e907579c13c5d7e9224ea1795b356a1bd5d04",
-      "canonicalization": "JCS-RFC8785"
+      "value": "de07a00cabbb7f3a9be9d653a5a78fd5b474388e01dd006e32a056dc849557bb"
     }
   },
   "traceability": {
@@ -293,7 +292,9 @@
     "extensibility": "Implementations MAY define extension rejection codes in a governed implementation-profile namespace without conflicting with registered AGCP codes.",
     "unknown_code_behavior": "Unknown rejection codes SHALL fail validation and SHALL NOT be presented as registered AGCP outcomes.",
     "determinism": "Code lookup and status mapping SHALL be deterministic for the applicable registry release.",
-    "evidence": "Governance-significant rejection conditions SHALL preserve the evidence requirements declared by the registered code."
+    "evidence": "Governance-significant rejection conditions SHALL preserve the evidence requirements declared by the registered code.",
+    "public_not_found_normalization": "Public IF-001 protected-resource lookup failures SHALL use RESOURCE_NOT_FOUND. Resource-specific not-found codes are deprecated for public responses and may appear only in protected diagnostics or Governance Evidence.",
+    "transport_rejection_separation": "REQUEST_THROTTLED and CAPACITY_UNAVAILABLE are pre-governance transport/service conditions and SHALL NOT be represented as authoritative Governance Outcomes."
   },
   "fields": {
     "code": "Stable rejection code identifier.",
@@ -305,7 +306,8 @@
     "description": "Normative description of the rejection condition.",
     "reg_id": "Permanent REG namespace identifier assigned to this registry entry.",
     "ns_refs": "Normative Statement identifiers directly implemented or supported by the entry.",
-    "cr_refs": "Conformance Requirement identifiers directly implemented or supported by the entry."
+    "cr_refs": "Conformance Requirement identifiers directly implemented or supported by the entry.",
+    "successor_entry_id": "Successor REG identifier for a deprecated or retired entry."
   },
   "codes": [
     {
@@ -327,8 +329,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "a30f51397a0aa59685c6156e3923d905f31a8001baefeff5b35f52f29f63c3c4",
-        "canonicalization": "JCS-RFC8785"
+        "value": "a30f51397a0aa59685c6156e3923d905f31a8001baefeff5b35f52f29f63c3c4"
       }
     },
     {
@@ -351,8 +352,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "6f5fddb469b2eef3c4629cedaaf5c4771583d0221c49cbebbae01b7273cc23eb",
-        "canonicalization": "JCS-RFC8785"
+        "value": "6f5fddb469b2eef3c4629cedaaf5c4771583d0221c49cbebbae01b7273cc23eb"
       }
     },
     {
@@ -376,8 +376,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "02e32ac1663a53086616c72b52b79841a363cc2c6fb2f5b9375874abaaf2eca3",
-        "canonicalization": "JCS-RFC8785"
+        "value": "02e32ac1663a53086616c72b52b79841a363cc2c6fb2f5b9375874abaaf2eca3"
       }
     },
     {
@@ -401,8 +400,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "2a7d82c71b388466cd49adff3d55b193b5224f65fa543b0d48a50ab99fd0ba83",
-        "canonicalization": "JCS-RFC8785"
+        "value": "2a7d82c71b388466cd49adff3d55b193b5224f65fa543b0d48a50ab99fd0ba83"
       }
     },
     {
@@ -429,8 +427,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "d1b83db7f5f4d63f6be900321e0cc946c69e52f16ab4ae1cbab61598fc8f7934",
-        "canonicalization": "JCS-RFC8785"
+        "value": "d1b83db7f5f4d63f6be900321e0cc946c69e52f16ab4ae1cbab61598fc8f7934"
       }
     },
     {
@@ -454,8 +451,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "c182f9d1945231db94d84dad8755de8b105e3cb7623d60c79894287758ba8623",
-        "canonicalization": "JCS-RFC8785"
+        "value": "c182f9d1945231db94d84dad8755de8b105e3cb7623d60c79894287758ba8623"
       }
     },
     {
@@ -479,8 +475,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "ff8fc3d0ab961fa9a3f462bb505b51bd2fd0ffe597476736891ed1c947b839fd",
-        "canonicalization": "JCS-RFC8785"
+        "value": "ff8fc3d0ab961fa9a3f462bb505b51bd2fd0ffe597476736891ed1c947b839fd"
       }
     },
     {
@@ -499,14 +494,15 @@
       "retryable": false,
       "governance_stage": "HTTP Interface",
       "governance_evidence": "not_required",
-      "description": "The requested Proposal does not exist within the authorized tenant and governance-domain scope.",
-      "entry_status": "ACTIVE",
+      "description": "The requested Proposal does not exist within the authorized tenant and governance-domain scope. Protected diagnostic/evidence use only; public IF-001 responses SHALL use RESOURCE_NOT_FOUND.",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "45abc4f7af38ea22451234bf817bd2cabeb70382c31e67e444a9d1c4a65daced",
-        "canonicalization": "JCS-RFC8785"
-      }
+        "value": "744240d3ea9bb4a4bd373e30af80e1ddb102c52238f9f0776222fbe5291ae118"
+      },
+      "deprecated_in_release": "v2.0.1",
+      "successor_entry_id": "REG-059"
     },
     {
       "reg_id": "REG-061",
@@ -523,14 +519,15 @@
       "retryable": false,
       "governance_stage": "Execution Authorization",
       "governance_evidence": "not_required",
-      "description": "The requested Execution Authorization does not exist within the authorized tenant and governance-domain scope.",
-      "entry_status": "ACTIVE",
+      "description": "The requested Execution Authorization does not exist within the authorized tenant and governance-domain scope. Protected diagnostic/evidence use only; public IF-001 responses SHALL use RESOURCE_NOT_FOUND.",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "510bd0e6044c46754e393f431ead3111571fc8bf1b81b2f1ca09066c9b29ff56",
-        "canonicalization": "JCS-RFC8785"
-      }
+        "value": "228011c730316ced5e26de39d60e5c1ae78f95002c986486c41c41c78fe9488c"
+      },
+      "deprecated_in_release": "v2.0.1",
+      "successor_entry_id": "REG-059"
     },
     {
       "reg_id": "REG-062",
@@ -548,14 +545,15 @@
       "retryable": false,
       "governance_stage": "Governance Evidence",
       "governance_evidence": "not_required",
-      "description": "The requested Governance Evidence record does not exist within the authorized tenant and governance-domain scope.",
-      "entry_status": "ACTIVE",
+      "description": "The requested Governance Evidence record does not exist within the authorized tenant and governance-domain scope. Protected diagnostic/evidence use only; public IF-001 responses SHALL use RESOURCE_NOT_FOUND.",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "d5ae6ac51bfc7b73266368affe4f04228b5eecdbcb7e51598db42452ee26618c",
-        "canonicalization": "JCS-RFC8785"
-      }
+        "value": "283332ffc930cf3096f5596d839f084a4880201a4ec654b00bdcf5be573e81ee"
+      },
+      "deprecated_in_release": "v2.0.1",
+      "successor_entry_id": "REG-059"
     },
     {
       "reg_id": "REG-063",
@@ -573,14 +571,15 @@
       "retryable": false,
       "governance_stage": "Governance Self-Protection",
       "governance_evidence": "not_required",
-      "description": "The requested governance artifact does not exist within the authorized tenant and governance-domain scope.",
-      "entry_status": "ACTIVE",
+      "description": "The requested governance artifact does not exist within the authorized tenant and governance-domain scope. Protected diagnostic/evidence use only; public IF-001 responses SHALL use RESOURCE_NOT_FOUND.",
+      "entry_status": "DEPRECATED",
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "20d733350a9b63852581d576e2536ea7f6e4efd42c6dea140878150801dad49f",
-        "canonicalization": "JCS-RFC8785"
-      }
+        "value": "a557f70edbb0534dd73c98fa019f84ad47239dd8c907b9e76a04ea579aa1d595"
+      },
+      "deprecated_in_release": "v2.0.1",
+      "successor_entry_id": "REG-059"
     },
     {
       "reg_id": "REG-064",
@@ -603,8 +602,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "8cd2a10a5d90483a5917819d46ce0c6b64c2263247ef3297aec7cbd424be21cf",
-        "canonicalization": "JCS-RFC8785"
+        "value": "8cd2a10a5d90483a5917819d46ce0c6b64c2263247ef3297aec7cbd424be21cf"
       }
     },
     {
@@ -628,8 +626,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "b1601ee881023e45bec743c6d3dd113a3d373921c41df2401328b045cbe9370b",
-        "canonicalization": "JCS-RFC8785"
+        "value": "b1601ee881023e45bec743c6d3dd113a3d373921c41df2401328b045cbe9370b"
       }
     },
     {
@@ -656,8 +653,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "9cd685231c41fa0149764ad76e5419e5524b21d1dac4cc3fe79c6bd6708a2f9a",
-        "canonicalization": "JCS-RFC8785"
+        "value": "9cd685231c41fa0149764ad76e5419e5524b21d1dac4cc3fe79c6bd6708a2f9a"
       }
     },
     {
@@ -682,8 +678,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "5eb50ccd10deb00471ebe6776ebca7d1a971f0762766974f7f30345e5c532790",
-        "canonicalization": "JCS-RFC8785"
+        "value": "5eb50ccd10deb00471ebe6776ebca7d1a971f0762766974f7f30345e5c532790"
       }
     },
     {
@@ -712,8 +707,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "ea06224a408bc2e2f8409b772a20f112f67845355985c79b1bd20c00730a0ee1",
-        "canonicalization": "JCS-RFC8785"
+        "value": "ea06224a408bc2e2f8409b772a20f112f67845355985c79b1bd20c00730a0ee1"
       }
     },
     {
@@ -740,8 +734,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "2411dfdeebd95e59603a27f50589371dda98ce08111b415af596a7e826c65f49",
-        "canonicalization": "JCS-RFC8785"
+        "value": "2411dfdeebd95e59603a27f50589371dda98ce08111b415af596a7e826c65f49"
       }
     },
     {
@@ -766,8 +759,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "78f483b24753b399961cb54834ed2de37dc5657bb655107a3fa3d94d0e121ad7",
-        "canonicalization": "JCS-RFC8785"
+        "value": "78f483b24753b399961cb54834ed2de37dc5657bb655107a3fa3d94d0e121ad7"
       }
     },
     {
@@ -794,8 +786,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "1543900ab503f7221026ba77bfb3c66cde0b47832698f8b2e5ce9c5183cc2353",
-        "canonicalization": "JCS-RFC8785"
+        "value": "1543900ab503f7221026ba77bfb3c66cde0b47832698f8b2e5ce9c5183cc2353"
       }
     },
     {
@@ -820,8 +811,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "676794031eebce7c166641afb29820cbf93b04bddbefbf7c3af0616a54778a58",
-        "canonicalization": "JCS-RFC8785"
+        "value": "676794031eebce7c166641afb29820cbf93b04bddbefbf7c3af0616a54778a58"
       }
     },
     {
@@ -847,8 +837,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "f9291557645fb0a0390db7fcaf565723e15f749fa258ee068becbfde075330be",
-        "canonicalization": "JCS-RFC8785"
+        "value": "f9291557645fb0a0390db7fcaf565723e15f749fa258ee068becbfde075330be"
       }
     },
     {
@@ -874,8 +863,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "9e34cd64a9bc336476841af090dbcfa1c113aa102d9697a21e1eba5fa1b17c8f",
-        "canonicalization": "JCS-RFC8785"
+        "value": "9e34cd64a9bc336476841af090dbcfa1c113aa102d9697a21e1eba5fa1b17c8f"
       }
     },
     {
@@ -901,8 +889,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "ba56a968e1e6ce01bf929b2864190fe6b6ef97ac8b18260cd9d18be6644b783a",
-        "canonicalization": "JCS-RFC8785"
+        "value": "ba56a968e1e6ce01bf929b2864190fe6b6ef97ac8b18260cd9d18be6644b783a"
       }
     },
     {
@@ -935,8 +922,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "7ac5b70332db6e44e10445e3b35d7b1389a080e30a5b9f3e7a6c22782cc72989",
-        "canonicalization": "JCS-RFC8785"
+        "value": "7ac5b70332db6e44e10445e3b35d7b1389a080e30a5b9f3e7a6c22782cc72989"
       }
     },
     {
@@ -960,8 +946,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "9a46a586cbd18251677af1ce93cc115705d73ebaf923db45e5e0a3294b84d1e2",
-        "canonicalization": "JCS-RFC8785"
+        "value": "9a46a586cbd18251677af1ce93cc115705d73ebaf923db45e5e0a3294b84d1e2"
       }
     },
     {
@@ -986,8 +971,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "6328bf495b5ab7a080631ab9db86a4e7fea1ab13d35a58e798af3e865bbb2f0d",
-        "canonicalization": "JCS-RFC8785"
+        "value": "6328bf495b5ab7a080631ab9db86a4e7fea1ab13d35a58e798af3e865bbb2f0d"
       }
     },
     {
@@ -1018,8 +1002,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "787bb72b58b3773219f06f2496be77452fc692cbf0c858867969907e51f2a8d5",
-        "canonicalization": "JCS-RFC8785"
+        "value": "787bb72b58b3773219f06f2496be77452fc692cbf0c858867969907e51f2a8d5"
       }
     },
     {
@@ -1041,8 +1024,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "b7d4aff60435a040b66defb2718ef4dbfb88d15989f525c8184b0ab1cdc88ae4",
-        "canonicalization": "JCS-RFC8785"
+        "value": "b7d4aff60435a040b66defb2718ef4dbfb88d15989f525c8184b0ab1cdc88ae4"
       }
     },
     {
@@ -1071,8 +1053,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "731f53ad942a878d4646f03026ac3ac567c10f463e8d132bbfa75b8a3ed42d4b",
-        "canonicalization": "JCS-RFC8785"
+        "value": "731f53ad942a878d4646f03026ac3ac567c10f463e8d132bbfa75b8a3ed42d4b"
       }
     },
     {
@@ -1097,8 +1078,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "083b7a9f37ae4478a88a55f453115415749bad9cc1bc83dbc19206e4a3f3aafb",
-        "canonicalization": "JCS-RFC8785"
+        "value": "083b7a9f37ae4478a88a55f453115415749bad9cc1bc83dbc19206e4a3f3aafb"
       }
     },
     {
@@ -1123,8 +1103,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "f6977ca998ba7a71534620dbb250bc7dea6a2fe57b5dde75bb2a2990da3a3b06",
-        "canonicalization": "JCS-RFC8785"
+        "value": "f6977ca998ba7a71534620dbb250bc7dea6a2fe57b5dde75bb2a2990da3a3b06"
       }
     },
     {
@@ -1148,8 +1127,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "f3295cc0640e825564234175ad4bffc5079a5a45274aa3351d11ff3d2d64953d",
-        "canonicalization": "JCS-RFC8785"
+        "value": "f3295cc0640e825564234175ad4bffc5079a5a45274aa3351d11ff3d2d64953d"
       }
     },
     {
@@ -1174,8 +1152,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "f1bbe22d5d98bb3efe32ace0019f46cae37663012b463069c8b07e8b1d84675a",
-        "canonicalization": "JCS-RFC8785"
+        "value": "f1bbe22d5d98bb3efe32ace0019f46cae37663012b463069c8b07e8b1d84675a"
       }
     },
     {
@@ -1203,8 +1180,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "59c433e05b8575c36c0885b03ba3c74f7e90f943e650d55d6f39e1aba302c696",
-        "canonicalization": "JCS-RFC8785"
+        "value": "59c433e05b8575c36c0885b03ba3c74f7e90f943e650d55d6f39e1aba302c696"
       }
     },
     {
@@ -1228,8 +1204,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "fc0b988f53d32c0ad11516637ae7f11148c8cac7541267a00f4a93709370be22",
-        "canonicalization": "JCS-RFC8785"
+        "value": "fc0b988f53d32c0ad11516637ae7f11148c8cac7541267a00f4a93709370be22"
       }
     },
     {
@@ -1258,8 +1233,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "e361d742681d5bd5a53425c353f0de67fd85c7f41b9a95c6a9eb8b294d16edd8",
-        "canonicalization": "JCS-RFC8785"
+        "value": "e361d742681d5bd5a53425c353f0de67fd85c7f41b9a95c6a9eb8b294d16edd8"
       }
     },
     {
@@ -1292,8 +1266,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "5d0f5e038c7fb287aa36815a1b06abab84e657be887784fc0726642ab4e42cdd",
-        "canonicalization": "JCS-RFC8785"
+        "value": "5d0f5e038c7fb287aa36815a1b06abab84e657be887784fc0726642ab4e42cdd"
       }
     },
     {
@@ -1324,8 +1297,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "108275fa5e411238af79ab469a8ddad50b68a719b9c6e49d1af0a42080bde11e",
-        "canonicalization": "JCS-RFC8785"
+        "value": "108275fa5e411238af79ab469a8ddad50b68a719b9c6e49d1af0a42080bde11e"
       }
     },
     {
@@ -1354,8 +1326,7 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "68f03e9237d96bb6a037f5f6e9c1879220a7af4874e87cbf65f6f1bdd81ade0f",
-        "canonicalization": "JCS-RFC8785"
+        "value": "68f03e9237d96bb6a037f5f6e9c1879220a7af4874e87cbf65f6f1bdd81ade0f"
       }
     },
     {
@@ -1379,8 +1350,57 @@
       "introduced_in_release": "v2.0.0",
       "entry_digest": {
         "algorithm": "SHA-256",
-        "value": "b19854313c0ef78f1a8f9426d1fc5eb2fc65b4c7907e7bc1c405dd38d137a6ff",
-        "canonicalization": "JCS-RFC8785"
+        "value": "b19854313c0ef78f1a8f9426d1fc5eb2fc65b4c7907e7bc1c405dd38d137a6ff"
+      }
+    },
+    {
+      "reg_id": "REG-093",
+      "code": "REQUEST_THROTTLED",
+      "ns_refs": [
+        "NS-13.6A-02"
+      ],
+      "cr_refs": [
+        "CR-073",
+        "CR-089",
+        "CR-090"
+      ],
+      "category": "transport",
+      "default_http_status": 429,
+      "retryable": true,
+      "governance_stage": "HTTP Interface",
+      "governance_evidence": "not_required",
+      "description": "The request was rejected by pre-governance transport or service throttling before governance evaluation began. Retry-After is required. This is not a Governance Outcome.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.1",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "835e0b5fd0ed2afc09ff6ae8c1f57213f66ea0e6cf2dab36c8466918a460f06f"
+      }
+    },
+    {
+      "reg_id": "REG-094",
+      "code": "CAPACITY_UNAVAILABLE",
+      "ns_refs": [
+        "NS-13.6A-02"
+      ],
+      "cr_refs": [
+        "CR-048",
+        "CR-068",
+        "CR-073",
+        "CR-089",
+        "CR-090"
+      ],
+      "category": "transport",
+      "default_http_status": 503,
+      "retryable": true,
+      "governance_stage": "HTTP Interface",
+      "governance_evidence": "not_required",
+      "description": "The implementation cannot safely begin processing because required system or node capacity is unavailable. This is a transport/service condition, not a Governance Outcome.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.0.1",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "f170ddcb4fdd7143e827ae53bf61db1e178a1dbcc7dd8d3bbfc2705d1c9367a6"
       }
     }
   ],

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/error_response.json",
   "title": "AGCP ErrorResponse",
-  "description": "Standard error response for AGCP HTTP interfaces. Transport and application errors remain distinct from Structural Refusal. When an interface conveys Structural Refusal, it references the canonical DS-028 Refusal Record rather than treating refusal as an ordinary error.",
+  "description": "Standard IF-001 error response. Public protected-resource lookup failures use RESOURCE_NOT_FOUND. Pre-governance throttling uses REQUEST_THROTTLED with HTTP 429 and Retry-After. Processing capacity unavailable before governance begins uses CAPACITY_UNAVAILABLE with HTTP 503. These transport/application errors are not Governance Outcomes.",
   "x-agcp-ds-id": "DS-002",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
@@ -50,6 +50,23 @@
         },
         "refusal_record_ref": {
           "$ref": "refusal_record.json#/$defs/refusal_record_ref"
+        },
+        "transport_disposition": {
+          "type": "string",
+          "enum": [
+            "NOT_FOUND",
+            "THROTTLED",
+            "CAPACITY_UNAVAILABLE",
+            "DEPENDENCY_UNAVAILABLE",
+            "OTHER"
+          ],
+          "description": "Public transport/application disposition. This field does not create a Governance Outcome."
+        },
+        "retry_after_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400,
+          "description": "Delay-seconds value corresponding to the HTTP Retry-After header. Required for REQUEST_THROTTLED."
         }
       },
       "required": [
@@ -91,6 +108,142 @@
                 "const": true
               }
             }
+          }
+        },
+        {
+          "x-agcp-rule-id": "PUBLIC_NOT_FOUND",
+          "if": {
+            "properties": {
+              "rejection_code": {
+                "const": "RESOURCE_NOT_FOUND"
+              }
+            },
+            "required": [
+              "rejection_code"
+            ]
+          },
+          "then": {
+            "required": [
+              "http_status",
+              "retryable",
+              "governance_evidence_generated",
+              "outcome_classification",
+              "transport_disposition"
+            ],
+            "properties": {
+              "http_status": {
+                "const": 404
+              },
+              "retryable": {
+                "const": false
+              },
+              "governance_evidence_generated": {
+                "const": false
+              },
+              "outcome_classification": {
+                "const": "TRANSPORT_OR_APPLICATION_ERROR"
+              },
+              "transport_disposition": {
+                "const": "NOT_FOUND"
+              }
+            }
+          }
+        },
+        {
+          "x-agcp-rule-id": "REQUEST_THROTTLED",
+          "if": {
+            "properties": {
+              "rejection_code": {
+                "const": "REQUEST_THROTTLED"
+              }
+            },
+            "required": [
+              "rejection_code"
+            ]
+          },
+          "then": {
+            "required": [
+              "http_status",
+              "retryable",
+              "governance_evidence_generated",
+              "outcome_classification",
+              "transport_disposition",
+              "retry_after_seconds"
+            ],
+            "properties": {
+              "http_status": {
+                "const": 429
+              },
+              "retryable": {
+                "const": true
+              },
+              "governance_evidence_generated": {
+                "const": false
+              },
+              "outcome_classification": {
+                "const": "TRANSPORT_OR_APPLICATION_ERROR"
+              },
+              "transport_disposition": {
+                "const": "THROTTLED"
+              }
+            }
+          }
+        },
+        {
+          "x-agcp-rule-id": "CAPACITY_UNAVAILABLE",
+          "if": {
+            "properties": {
+              "rejection_code": {
+                "const": "CAPACITY_UNAVAILABLE"
+              }
+            },
+            "required": [
+              "rejection_code"
+            ]
+          },
+          "then": {
+            "required": [
+              "http_status",
+              "retryable",
+              "governance_evidence_generated",
+              "outcome_classification",
+              "transport_disposition"
+            ],
+            "properties": {
+              "http_status": {
+                "const": 503
+              },
+              "retryable": {
+                "const": true
+              },
+              "governance_evidence_generated": {
+                "const": false
+              },
+              "outcome_classification": {
+                "const": "TRANSPORT_OR_APPLICATION_ERROR"
+              },
+              "transport_disposition": {
+                "const": "CAPACITY_UNAVAILABLE"
+              }
+            }
+          }
+        },
+        {
+          "x-agcp-rule-id": "RETRY_AFTER_REQUIRES_RETRYABLE",
+          "if": {
+            "required": [
+              "retry_after_seconds"
+            ]
+          },
+          "then": {
+            "properties": {
+              "retryable": {
+                "const": true
+              }
+            },
+            "required": [
+              "retryable"
+            ]
           }
         }
       ]

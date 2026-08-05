@@ -1,11 +1,20 @@
 # AGCP `common.json` Controlled-Baseline Update Report
 
+<<<<<<< HEAD
 **Artifact:** `schemas/common.json`  
 **DS identifier:** `DS-001`  
 **Schema dialect:** JSON Schema Draft 2020-12  
 **Specification baseline:** AGCP v2.0.0  
 **Schema Catalog version:** `1.0.44`  
 **Updated:** 2026-07-31
+=======
+**Artifact:** `schemas/common.json`
+**DS identifier:** `DS-001`
+**Schema dialect:** JSON Schema Draft 2020-12
+**Specification baseline:** AGCP v2.0.1 accumulated correction
+**Schema Catalog version:** `1.0.50`
+**Updated:** 2026-08-03
+>>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 
 ---
 
@@ -73,6 +82,22 @@ The controlled v2.0.0 `common.json`:
 
 ---
 
+<<<<<<< HEAD
+=======
+## 4A. P0-02 Provenance Wire Correction
+
+The v2.0.1 accumulated correction replaces the conflicting legacy `provenance` structure with the exact normative wire envelope from the AGCP Provenance Wire Format Specification. The corrected definition:
+
+- requires top-level `signer`, `kid`, `alg`, `signed_at`, `nonce`, `scope`, and detached `signature`;
+- permits optional `expires_at`;
+- encodes `signature` as `protected_header_b64..signature_b64`;
+- rejects the prior nested signature object;
+- rejects provenance-local `source_system`, `source_artifact_ref`, `payload_digest`, and `predecessor_evidence_refs`; and
+- remains a single shared definition inherited by all dependent schemas.
+
+The controlled cross-language vectors and validation report are under `conformance/provenance/` and `governance/AGCP-provenance-wire-format-validation.json`.
+
+>>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 ## 5. Definition Inventory
 
 ### 5.1 Stable identifiers and scalar types
@@ -166,7 +191,11 @@ The 62 definitions in `common.json` are sufficient for the current active schema
 
 Identifier definitions apply machine-safe lexical patterns. Existing identifiers composed of letters, numbers, period, underscore, colon, slash, at-sign, plus, or hyphen remain valid when they satisfy the applicable length limits. Identifiers containing spaces or uncontrolled punctuation require normalization.
 
+<<<<<<< HEAD
 `hash_hex` remains available for schemas that require a legacy hexadecimal digest scalar. New or revised structures should use `content_digest` when the digest algorithm must be explicit.
+=======
+`hash_hex` remains available only as a deprecated algorithm-implicit lowercase hexadecimal scalar with controlled lengths of 64, 96, or 128 characters. New or revised structures SHALL use `content_digest`, which binds each declared algorithm to its exact lowercase-hexadecimal output length.
+>>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 
 ### 6.3 DS ownership boundaries
 
@@ -286,3 +315,10 @@ The shared definitions and ownership boundaries are aligned with:
 `schemas/common.json` is internally consistent with the active AGCP v2.0.0 schema set and the Schema Catalog. It contains 62 reachable shared definitions, all active references resolve, no definitions are unused, the obsolete `pass_fail_enum` is absent, and the cataloged SHA-256 hash matches the deployed file.
 
 The earlier 141-definition update metrics are superseded by this controlled-baseline report.
+<<<<<<< HEAD
+=======
+
+## P1-12 algorithm/output-length correction
+
+`content_digest` now rejects algorithm/value length mismatches and uppercase hexadecimal. SHA-256 and BLAKE2B-256 require 64 characters, SHA-384 requires 96, and SHA-512 and BLAKE2B-512 require 128. Ambiguous `BLAKE2B` is not permitted. The controlled examples and conformance vectors exercise all supported algorithms and negative mismatch classes.
+>>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)

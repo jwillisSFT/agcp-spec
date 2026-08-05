@@ -20,10 +20,10 @@
   "governance_domain_id": "domain-1",
   "policy_enforcement_point": {
     "policy_enforcement_point_id": "policy-enforcement-point-id-1",
-    "tenant_id": "tenant-id-1",
-    "governance_domain_id": "governance-domain-id-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
     "enforcement_scope": {
-      "tenant_id": "tenant-id-1"
+      "tenant_id": "tenant-1"
     },
     "non_bypassable_path_profile": "example"
   },
@@ -63,7 +63,7 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "proposal_id": "proposal-id-1",
+    "proposal_id": "proposal-1",
     "evaluated_at": "2026-07-30T16:00:00Z"
   },
   "authority_lineage_ref": {
@@ -74,7 +74,7 @@
     }
   },
   "canonical_state_ref": {
-    "canonical_state_id": "canonical-state-id-1"
+    "canonical_state_id": "canonical-state-1"
   },
   "state_qualification_result_ref": {
     "evaluation_id": "evaluation-id-1",
@@ -87,7 +87,7 @@
   "qualified_evidence_refs": [
     {
       "evidence_ref": {
-        "governance_evidence_id": "governance-evidence-id-1",
+        "governance_evidence_id": "evidence-1",
         "evidence_digest": {
           "algorithm": "SHA-256",
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -117,21 +117,21 @@
     "governance_version_ref": {
       "governance_version_id": "1.0.0"
     },
-    "tenant_id": "tenant-id-1",
-    "governance_domain_id": "governance-domain-id-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
     "effective_at": "2026-07-30T16:00:00Z"
   },
   "policy_refs": [
     {
-      "policy_id": "policy-id-1",
-      "policy_version": "1.0.0",
+      "policy_id": "policy-1",
+      "policy_version": "2.0.0",
       "policy_digest": {
         "algorithm": "SHA-256",
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
       "artifact_uri": "https://agcp.ai/example/artifact-uri",
-      "tenant_id": "tenant-id-1",
-      "governance_domain_id": "governance-domain-id-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
       "status": "Registered"
     }
   ],
@@ -177,10 +177,10 @@
   },
   "scope_binding": {
     "authorized_scope": {
-      "tenant_id": "tenant-id-1"
+      "tenant_id": "tenant-1"
     },
     "enforcement_scope": {
-      "tenant_id": "tenant-id-1"
+      "tenant_id": "tenant-1"
     },
     "scope_digest": {
       "algorithm": "SHA-256",
@@ -215,7 +215,7 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "proposal_id": "proposal-id-1",
+    "proposal_id": "proposal-1",
     "evaluated_at": "2026-07-30T16:00:00Z"
   },
   "commit_bound_admissibility": {

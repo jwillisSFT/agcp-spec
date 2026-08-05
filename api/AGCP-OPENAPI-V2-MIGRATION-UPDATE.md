@@ -1,10 +1,10 @@
-# AGCP OpenAPI v2 Migration Update and Current Baseline Validation
+# AGCP OpenAPI v2 Migration Update and Current Repository Validation
 
 ## Scope
 
-This document records the completed migration of the AGCP HTTP interface to IF-001, the version 2 HTTP surface for AGCP v2.0.0, and its current validation against the controlled AGCP v2.0.0 Public Review baseline. It is an active controlled-baseline record, not a historical validation snapshot.
+This document records the completed migration of the AGCP HTTP interface to IF-001, the version 2 HTTP surface for the AGCP v2.0.1 accumulated correction set, and its current validation against the controlling AGCP v2.0.0 Public Review baseline. It is a current controlled worktree record, not a historical validation snapshot or a claim that v2.0.1 has already been published.
 
-- Controlled RTM baseline: `RTM-1.45`
+- Controlled RTM baseline: `RTM-1.46`
 - Baseline date: `2026-07-30`
 - Validation record: `api/AGCP-OpenAPI-v2-migration-validation.json`
 - Validation time: `2026-07-31T12:00:00Z`
@@ -14,7 +14,12 @@ This document records the completed migration of the AGCP HTTP interface to IF-0
 - Canonical path namespace: `/agcp/v2`
 - Interface identifier: `IF-001`
 - OpenAPI version: `3.1.0`
-- Contract version: `2.0.0`
+- Contract version: `2.0.1`
+- Artifact lifecycle state: `CURRENT`
+- Repository release target: `v2.0.1`
+- Repository release target status: `UNRELEASED_ACCUMULATED_CORRECTION_SET`
+- Controlling published baseline: `v2.0.0`
+- Controlling baseline status: `PUBLIC_REVIEW_CONTROLLED_BASELINE`
 - `/agcp/v1` is not independently versioned and is not retained as a compatibility surface.
 - No v1 routes, aliases, redirects, fallback payloads, or deprecated approval properties are active.
 
@@ -34,7 +39,7 @@ The governed approval endpoint is:
 
 `POST /agcp/v2/proposals/{proposal_id}/governance-approvals`
 
-It accepts exactly one DS-026 Governance Approval Artifact through `governance_approval_artifact`. The retired DS-016 representation and `/human-review` route are not accepted.
+It accepts exactly one DS-045 Governance Approval Submission. DS-026 Governance Approval Artifact is an authoritative AGCP-created or AGCP-qualified record and is not accepted as request content. The retired DS-016 representation and `/human-review` route are not accepted.
 
 ## Canonical schema references
 
@@ -85,16 +90,16 @@ The migration updates:
 
 The HTTP interface is assigned `IF-001`.
 
-The original IF-001 migration advanced the RTM dataset from `RTM-1.43` to `RTM-1.44`. That statement describes the historical migration step only. The active validation has now been refreshed against the controlled `RTM-1.45` baseline. All 122 CR records identify `RTM-1.45`, and the 40 CR records whose repository mappings include the HTTP contract or HTTP Interface Specification continue to identify `IF-001`.
+The original IF-001 migration advanced the RTM dataset from `RTM-1.43` to `RTM-1.44`. That statement describes the historical migration step only. The active validation has now been refreshed against the controlled `RTM-1.46` baseline. All 122 CR records identify `RTM-1.46`, and the 40 CR records whose repository mappings include the HTTP contract or HTTP Interface Specification continue to identify `IF-001`.
 
 No schema catalog increment was required because no Data Schema definition changed.
 
 ## Validation summary
 
 - Validation classification: active controlled baseline.
-- Controlled RTM dataset: `RTM-1.45`.
-- All 122 CR records identify `RTM-1.45`; 40 records retain `IF-001` mappings.
-- 43 active Draft 2020-12 schemas passed metaschema validation.
+- Controlled RTM dataset: `RTM-1.46`.
+- All 122 CR records identify `RTM-1.46`; 40 records retain `IF-001` mappings.
+- 44 active Draft 2020-12 schemas passed metaschema validation.
 - 3,579 cross-schema references resolved.
 - All three registry documents passed DS-044 validation and digest verification.
 - OpenAPI strict YAML parsing passed with no duplicate keys.
@@ -108,3 +113,11 @@ No schema catalog increment was required because no Data Schema definition chang
 - No active `/agcp/v1` route remains.
 - No `/human-review` route, retired approval property, or retired human-review rejection code remains active.
 - RTM formatting, styles, formulas, dimensions, merged cells, widths, heights, and theme remain preserved.
+
+## P0-06 command/record separation
+
+The governance-approval POST operation now references `schemas/governance_approval_submission.json` (DS-045). `schemas/governance_approval_artifact.json` (DS-026) remains the authoritative record schema and requires `artifact_origin: AGCP_CREATED_OR_QUALIFIED`. Claimant attempts to submit server-derived verification, eligibility, quorum, lifecycle, evidence, digest, replay, or ledger fields are rejected structurally.
+
+## v2.0.1 Error and Metadata Reconciliation
+
+OpenAPI 2.0.1 now uses reusable `PublicNotFound`, `TooManyRequests`, and `ServiceUnavailable` responses. All public 404 responses use `RESOURCE_NOT_FOUND`; every operation declares 429 with required delay-seconds `Retry-After` and 503 for capacity/dependency unavailability. `GET /agcp/v2/meta` is bound to the expanded DS-003 immutable baseline, profile, schema/validator, and active-governance contract.

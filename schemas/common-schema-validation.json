@@ -1,5 +1,6 @@
 {
   "status": "PASS",
+<<<<<<< HEAD
   "validated_at": "2026-07-31",
   "definition_count": 62,
   "used_definition_count": 62,
@@ -7,4 +8,36 @@
   "retired_definition": "pass_fail_enum",
   "retired_definition_absent": true,
   "obsolete_references": []
+=======
+  "validated_at": "2026-08-03",
+  "schema": "schemas/common.json",
+  "ds_id": "DS-001",
+  "catalog_version": "1.0.50",
+  "definition_count": 62,
+  "content_digest_contract": {
+    "status": "PASS",
+    "algorithm_output_lengths": {
+      "SHA-256": 64,
+      "SHA-384": 96,
+      "SHA-512": 128,
+      "BLAKE2B-256": 64,
+      "BLAKE2B-512": 128
+    },
+    "encoding": "lowercase hexadecimal",
+    "uppercase_rejected": true,
+    "ambiguous_blake2b_rejected": true,
+    "dependent_schema_count": 40,
+    "valid_example_count": 5,
+    "negative_vector_count": 14
+  },
+  "provenance_wire_contract": {
+    "status": "PASS",
+    "finding": "P0-02"
+  },
+  "source_hashes": {
+    "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+    "schemas/examples/common-content-digest-examples.json": "335d62b3e52c0844635c26a9eb97c48242d0d62f0d7fecbf7259264229e0f777",
+    "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e"
+  }
+>>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 }

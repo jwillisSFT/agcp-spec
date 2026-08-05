@@ -128,9 +128,9 @@ The following identifier set is identical to the executable and human-readable c
 | `TV-GET-001` | Get authorized Proposal View returns externally observable governance state and never SUBMITTED |
 | `TV-GET-002` | Pre-decision proposal state is not externally observable |
 | `TV-GAPP-001` | Partial Governance Approval quorum -> Pending Human Review outcome remains |
-| `TV-GAPP-002` | Valid Governance Approval Artifact completes quorum -> Execution Authorization available |
-| `TV-GAPP-003` | Expired Governance Approval Artifact -> GOVERNANCE_APPROVAL_EXPIRED |
-| `TV-GAPP-004` | Invalid Governance Approval Artifact -> GOVERNANCE_APPROVAL_INVALID |
+| `TV-GAPP-002` | Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum -> Execution Authorization available |
+| `TV-GAPP-003` | Expired Governance Approval Submission -> GOVERNANCE_APPROVAL_EXPIRED |
+| `TV-GAPP-004` | Invalid Governance Approval Submission provenance -> GOVERNANCE_APPROVAL_INVALID |
 | `TV-COMMIT-001` | Commit Boundary succeeds with valid Execution Authorization |
 | `TV-COMMIT-002` | Commit Boundary while governed approval remains incomplete -> ACTION_NOT_AUTHORIZED |
 | `TV-COMMIT-003` | Commit Boundary with mismatched authorization -> ACTION_NOT_AUTHORIZED |
@@ -141,7 +141,7 @@ The following identifier set is identical to the executable and human-readable c
 | `TV-STATE-002` | Canonical State resolution rejects reordered incorporated ledger history |
 | `TV-XTEN-SETUP` | Setup tenant T2 proposal for cross-tenant tests |
 | `TV-XTEN-001` | Cross-tenant Proposal View access is forbidden or hidden |
-| `TV-XTEN-002` | Cross-tenant Governance Approval Artifact submission is forbidden or hidden |
+| `TV-XTEN-002` | Cross-tenant Governance Approval Submission is forbidden or hidden |
 | `TV-XTEN-003` | Cross-tenant Commit Boundary is forbidden or hidden |
 | `TV-XTEN-004` | Cross-tenant Governance Evidence access is forbidden or hidden |
 | `TV-META-001` | Implementation metadata advertises the controlled IF-001 and conformance surface |
@@ -184,3 +184,22 @@ The following identifier set is identical to the executable and human-readable c
 - A TC without a dedicated executable vector SHALL use `NO_DEDICATED_EXECUTABLE_VECTOR` and retain an explicit disposition rather than implying missing traceability.
 - Every Harness Check and every current Harness Test Vector SHALL be referenced by at least one TC mapping.
 - Harness checks and fixture mappings may reference any identifier in this synchronized catalog.
+
+
+## Profile-specific IF-002 deterministic WASM companion
+
+The proposed Rust Student Service profile adopts `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0` and ABI `agcp_pec_abi_v1`. The controlled machine-readable vector set is `conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json`. It covers canonical input/output replay, required exports, zero imports, module-digest substitution, fuel, memory, timeout, traps, output limits, unsupported ABI, and attempts by a module to assert authority it does not possess.
+
+## P1-12 content-digest contract
+
+| Capability | Formal tests | Supporting vectors | Required result |
+|---|---|---|---|
+| Exact digest algorithm/output-length and lowercase encoding | TC-042, TC-052, TC-064, TC-066 | `conformance/digests/AGCP-Content-Digest-Test-Vectors.json` | All valid vectors accepted; all mismatch, uppercase, ambiguous, malformed, missing, and undeclared-property vectors rejected before governance reliance. |
+
+## P1-03/P1-09/P1-14/P1-17 Coverage
+
+The public conformance set verifies `404 RESOURCE_NOT_FOUND`, `429 REQUEST_THROTTLED` with `Retry-After`, `503 CAPACITY_UNAVAILABLE`, non-creation of Governance Outcomes for transport/service rejection, governance quota denial as an authoritative outcome, and DS-003 immutable baseline/profile/schema/validator/active-governance advertisements.
+
+## P0-10 semantic fixture coverage
+
+The public conformance package verifies that all 14 corrected positive fixtures are internally consistent across declared binding groups. Ten negative vectors remain structurally valid while introducing one semantic mismatch class each. Fifteen P0-06 claimant-assertion vectors verify that untrusted DS-045 ingress cannot assert authoritative AGCP-derived fields.

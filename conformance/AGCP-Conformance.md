@@ -749,17 +749,21 @@ Implementations SHALL identify the repository release against which conformance 
 
 Conformance is evaluated against the complete set of normative artifacts contained within the referenced repository release, including:
 
-- Core Specification
-- HTTP Interface Specification
-- JSON Schemas
-- Security Specification
-- Governance Approval and Human Adjudication Specification
-- Provenance Wire Format Specification
+- AGCP Runtime Governance Conformance Requirements
+- AGCP Core Specification
+- Policy Evaluation Contract
+- AGCP HTTP Interface Specification
+- AGCP Multitenant Operational Specification
+- AGCP Human Adjudication and Governance Approval Specification
+- AGCP Provenance Wire Format Specification
 - Append-Only Governance Ledger Specification
-- Error Mapping Specification
-- Published registries
+- AGCP Error Mapping
+- active JSON Schemas, including DS-020 Governance Evidence and DS-033 Evidence Qualification Result
+- published registries
 - Requirements Traceability Matrix (RTM)
 - Official Conformance Test Suite
+
+Security and Governance Evidence obligations are evaluated through the controlling artifacts that actually exist in the referenced release; no absent umbrella companion is implied.
 
 Repository releases preserve compatibility according to the repository governance process.
 

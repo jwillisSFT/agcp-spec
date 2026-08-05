@@ -1,7 +1,7 @@
 {
   "status": "PASS",
-  "catalog_version": "1.0.44",
-  "active_schema_count": 43,
+  "catalog_version": "1.0.50",
+  "active_schema_count": 44,
   "retired_schema_count": 1,
   "all_active_schemas_have_arm_ns": true,
   "catalog_hashes_match": true,
@@ -23,29 +23,29 @@
     "NS-8.6-04"
   ],
   "rtm_metrics": {
-    "implemented_schema_count": 43,
+    "implemented_schema_count": 44,
     "proposed_reserved_schema_count": 0,
     "excluded_registry_payload_count": 0,
-    "rtm_rows_with_ds_assignments": 121,
-    "highest_assigned_ds_identifier": "DS-044",
-    "implemented_count": 43,
+    "rtm_rows_with_ds_assignments": 122,
+    "highest_assigned_ds_identifier": "DS-045",
+    "implemented_count": 44,
     "proposed_reserved_count": 0,
-    "total_assigned_count": 44,
+    "total_assigned_count": 45,
     "retired_schema_count": 1,
     "retired_count": 1,
     "rtm_rows_with_explicit_ds_disposition": 122,
-    "rtm_rows_with_if_assignments": 70,
+    "rtm_rows_with_if_assignments": 84,
     "rtm_rows_with_explicit_if_disposition": 122,
     "rtm_rows_with_reg_assignments": 117,
     "rtm_rows_with_explicit_reg_disposition": 122,
     "interface_definition_count": 2,
-    "registry_entry_count": 92
+    "registry_entry_count": 94
   },
   "rtm_cr_mapping_validation": {
     "authoritative_rtm": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
-    "rtm_dataset_version": "RTM-1.45",
-    "implemented_schema_count_checked": 43,
-    "catalog_entries_matching_authoritative_rtm": 43,
+    "rtm_dataset_version": "RTM-1.46",
+    "implemented_schema_count_checked": 44,
+    "catalog_entries_matching_authoritative_rtm": 44,
     "mapping_mismatch_count": 0,
     "all_catalog_rtm_cr_mappings_match_authoritative_rtm": true,
     "corrected_entries": {
@@ -121,8 +121,8 @@
   },
   "reverse_dependency_validation": {
     "validation_basis": "Reverse dependent_schemas values were recomputed from every active entry schema_dependencies list.",
-    "implemented_schema_count_checked": 43,
-    "catalog_entries_matching_forward_dependency_graph": 43,
+    "implemented_schema_count_checked": 44,
+    "catalog_entries_matching_forward_dependency_graph": 44,
     "reverse_dependency_mismatch_count": 0,
     "all_reverse_dependencies_match_forward_dependency_graph": true,
     "corrected_entry_count": 12,
@@ -223,5 +223,61 @@
     },
     "remaining_missing_reverse_dependencies": [],
     "remaining_extra_reverse_dependencies": []
+  },
+  "validated_at": "2026-08-03",
+  "p0_02_provenance_correction": {
+    "ds_id": "DS-001",
+    "rtm_id": "RTM-00005",
+    "cr_id": "CR-005",
+    "if_id": "IF-001",
+    "sha256": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+    "wire_contract_synchronized": true
+  },
+  "p0_06_command_record_separation": {
+    "submission_ds_id": "DS-045",
+    "authoritative_record_ds_id": "DS-026",
+    "if_id": "IF-001",
+    "affected_rtm_rows": 11,
+    "status": "PASS"
+  },
+  "p1_12_content_digest_contract": {
+    "ds_id": "DS-001",
+    "rtm_ids": [
+      "RTM-00042",
+      "RTM-00052",
+      "RTM-00064",
+      "RTM-00066"
+    ],
+    "cr_ids": [
+      "CR-042",
+      "CR-052",
+      "CR-064",
+      "CR-066"
+    ],
+    "sha256": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+    "algorithm_output_lengths": {
+      "SHA-256": 64,
+      "SHA-384": 96,
+      "SHA-512": 128,
+      "BLAKE2B-256": 64,
+      "BLAKE2B-512": 128
+    },
+    "lowercase_hexadecimal_required": true,
+    "status": "PASS"
+  },
+  "p1_03_p1_09_p1_14_p1_17": {
+    "status": "PASS",
+    "ds002_sha256": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
+    "ds003_sha256": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
+    "catalog_version": "1.0.50",
+    "hash_mismatches": []
+  },
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
   }
 }

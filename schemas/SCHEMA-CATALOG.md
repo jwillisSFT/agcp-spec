@@ -1,10 +1,14 @@
 # AGCP Data Schema Catalog
 
 - Catalog ID: `DS-CATALOG-1.0`
-- Catalog version: `1.0.44`
-- Specification version: `v2.0`
-- Publication status: `Working Draft`
-- Last modified: `2026-07-30`
+- Catalog version: `1.0.50`
+- Specification version: `v2.0.1`
+- Publication status: `CURRENT`
+- Artifact lifecycle state: `CURRENT`
+- Repository release target: `v2.0.1` (`UNRELEASED_ACCUMULATED_CORRECTION_SET`)
+- Controlling published baseline: `v2.0.0` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
+- Baseline date: `2026-07-30`
+- Last modified: `2026-08-03`
 
 ## Active Implemented Schemas
 
@@ -53,6 +57,7 @@
 | `DS-042` | `compiled_governance_artifact.json` | Governance Compilation | DS-001; DS-007; DS-008; DS-020; DS-026; DS-041; DS-044 |
 | `DS-043` | `controlled_governance_activation.json` | Governance Compilation | DS-001; DS-020; DS-026; DS-040; DS-041; DS-042 |
 | `DS-044` | `registry_document.schema.json` | Registry Validation | DS-001 |
+| `DS-045` | `governance_approval_submission.json` | Approval and Adjudication | DS-001; DS-006; DS-026 |
 
 ## Retired DS Identifiers
 
@@ -62,15 +67,23 @@
 
 ## Traceability Closure
 
-- RTM dataset: `RTM-1.45`
-- DS mappings: **121 assigned + 1 explicit N/A = 122/122 dispositioned**
-- IF mappings: **70 assigned + 52 explicit N/A = 122/122 dispositioned**
+- RTM dataset: `RTM-1.46`
+- DS mappings: **122 assigned + 0 explicit N/A = 122/122 dispositioned**
+- IF mappings: **84 assigned + 38 explicit N/A = 122/122 dispositioned**
 - REG mappings: **117 assigned + 5 explicit N/A = 122/122 dispositioned**
-- Registry entries with permanent IDs and direct ARM/NS/CR references: **92**
-- Catalog RTM/CR mappings matching authoritative RTM-1.45 DS assignments: **43/43 active schemas**
+- Registry entries with permanent IDs and direct ARM/NS/CR references: **94**
+- Catalog RTM/CR mappings matching authoritative RTM-1.46 DS assignments: **44/44 active schemas**
 - Corrected catalog entries in Version 1.0.43: **DS-015, DS-017, DS-021, DS-028, DS-037, and DS-040**
-- Reverse dependency parity in Version 1.0.44: **43/43 active schemas**; corrected entries: **DS-001, DS-007, DS-020, DS-021, DS-023, DS-024, DS-026, DS-028, DS-032, DS-033, DS-038, and DS-041**.
+- Reverse dependency parity in Version 1.0.44: **44/44 active schemas**; corrected entries: **DS-001, DS-007, DS-020, DS-021, DS-023, DS-024, DS-026, DS-028, DS-032, DS-033, DS-038, and DS-041**.
 
 ## Catalog Integrity
 
 The machine-readable catalog records canonical schema identifiers, lifecycle state, traceability, dependencies, repository paths, and SHA-256 content hashes for the active controlled schema set. Retired identifiers are maintained separately as historical namespace records and are excluded from active schema validation and release manifests.
+
+## DS-001 Provenance Wire Contract
+
+The `provenance` definition in `common.json` is the machine-readable representation of the normative AGCP Provenance Wire Format. It requires top-level `signer`, `kid`, `alg`, `signed_at`, `nonce`, `scope`, and detached `signature`, permits optional `expires_at`, rejects undeclared fields, and is explicitly mapped to CR-005 and IF-001.
+
+## P1-12 algorithm-specific digest enforcement
+
+Catalog version 1.0.50 records the corrected DS-001 hash and direct traceability to CR-042, CR-052, CR-064, and CR-066. Dependent schemas inherit the exact algorithm/output-length and lowercase-hexadecimal contract from DS-001.

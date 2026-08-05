@@ -218,7 +218,11 @@ normative specifications.
 
 ## Informative Implementation and Traceability References
 
+<<<<<<< HEAD
 - [AGCP v2.0.0 Requirement Traceability Annex](reference/AGCP-v2.0.0-Requirement-Traceability-Annex.pdf) — consolidated implementation and validation references for CR-001 through CR-122. Informative; does not alter normative precedence.
+=======
+- [AGCP v2.0.0 Requirement Traceability Annex](reference/agcp-v2.0.0-requirement-traceability-annex.pdf) — consolidated implementation and validation references for CR-001 through CR-122. Informative; does not alter normative precedence.
+>>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 
 ------------------------------------------------------------------------
 
@@ -236,3 +240,43 @@ numbers unless required for interoperability.
 Future repository releases may expand the conformance suite with
 additional Harness Checks, Test Vectors, or execution capabilities while
 preserving the controlled CR ↔ Core-derived NS ↔ TC traceability relationship maintained by the RTM, without altering normative precedence.
+
+## Provenance wire-format vectors
+
+Cross-language canonicalization, detached-signature, schema-rejection, protected-header, algorithm, payload-modification, and replay vectors are provided in `provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json`. They are validated by `../governance/validate_provenance_wire_format.py`.
+
+
+## IF-002 deterministic WASM companion
+
+The controlled Rust Student Service profile companion is specified by `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md`. Machine-readable ABI and envelope schemas are under `api/if-002/`, and reusable ABI, import, failure, digest-binding, and replay vectors are under `conformance/if-002/`. These supplement rather than replace the Formal Test Cases.
+
+## Governance Approval command/record separation
+
+P0-06 vectors are under `conformance/command-record/`. They verify DS-045 untrusted ingress and DS-026 authoritative-record separation.
+
+## Algorithm-explicit content digest vectors
+
+P1-12 vectors are under `conformance/digests/`. They verify exact SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512 output lengths, lowercase hexadecimal, required fields, closed-object behavior, and rejection of ambiguous or inconsistent digest representations. They are validated by `../governance/validate_content_digest_contract.py`.
+
+## IF-001 Error and Metadata Vectors
+
+`conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json` verifies P1-03, P1-09, P1-14, and P1-17 across public 404 normalization, 429/Retry-After, 503 capacity, transport-vs-governance separation, and integrity-bound metadata advertisements.
+
+## Semantic fixture validation
+
+The controlled positive-fixture catalog is subject to both JSON Schema validation and semantic equality validation. The semantic validator checks declared bindings for Tenant, Governance Domain, Proposal, target, policy, approval, evidence, authorization, lifecycle state, and Canonical State.
+
+- Positive fixture rules and mismatch vectors: `conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json`
+- Claimant-assertion negatives: `conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json`
+- Validator: `governance/validate_semantic_fixtures.py`
+- Controlled result: `governance/AGCP-semantic-fixture-validation.json`
+
+
+## Repository Synchronization
+
+The cumulative v2.0.1 correction set is indexed by `../governance/AGCP-v2.0.1-repository-synchronization-manifest.json` and validated by `../governance/validate_repository_synchronization.py` against `RTM-1.46` and the current catalogs.
+
+
+## Repository-wide integrity gate
+
+The final accumulated correction-set gate is `governance/validate_repository_integrity.py`. Its controlled report is `governance/AGCP-v2.0.1-repository-integrity-validation.json`, and its CI workflow is `.github/workflows/validate-repository-integrity.yml`. The public correction summary is `AGCP-v2.0.1-CORRECTION-SUMMARY.md`. This gate aggregates the finding-specific validators and repository synchronization controls; it does not establish implementation conformance.

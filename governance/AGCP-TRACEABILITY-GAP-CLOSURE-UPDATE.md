@@ -1,9 +1,9 @@
 # AGCP Traceability Gap Closure Update
 
-**Date:** 2026-07-30  
-**Schema Catalog:** 1.0.42  
-**RTM dataset:** RTM-1.45  
-**AGCP release:** v2.0.0
+**Date:** 2026-08-03  
+**Schema Catalog:** 1.0.50  
+**RTM dataset:** RTM-1.46  
+**AGCP release target:** v2.0.1 (unreleased accumulated correction set)  
 
 ## 1. Scope
 
@@ -15,7 +15,7 @@ The current baseline was more advanced than the earlier finding: DS-003, DS-011,
 
 - DS-003, DS-011, and DS-012 mappings were verified and retained.
 - DS-015 catalog traceability was synchronized from the schema's authoritative `x-agcp-normative-basis` annotation.
-- Every one of the 43 active schemas now has at least one ARM and one NS mapping.
+- Every one of the 44 active schemas now has at least one ARM and one NS mapping.
 - Schema Catalog advanced from 1.0.40 to 1.0.42.
 
 DS-015 now records:
@@ -43,7 +43,7 @@ Two controlled interfaces are now cataloged:
 
 The Policy Evaluation Contract now carries its permanent IF identifier and release metadata. RTM interface mappings are explicit, including `N/A` where a requirement is not implemented by a controlled interface definition.
 
-Result: **70 assigned + 52 explicit N/A = 122 of 122 CR rows dispositioned.**
+Result: **84 assigned + 38 explicit N/A = 122 of 122 CR rows dispositioned.**
 
 ## 5. Registry entry namespace
 
@@ -51,7 +51,7 @@ The three registry documents now assign permanent entry identifiers:
 
 - REG-001 through REG-026 — Constraint Type entries.
 - REG-027 through REG-052 — Invariant Type entries.
-- REG-053 through REG-092 — Rejection Code entries.
+- REG-053 through REG-094 — Rejection Code entries.
 
 Every entry now carries direct `ns_refs` and `cr_refs`. Architectural traceability remains explicit at the controlled registry-document release level. DS-044 requires this split model, and the registry documents, entry digests, entry-set digests, and document digests were regenerated.
 
@@ -69,7 +69,7 @@ Updated assets include:
 - Registry Entry Catalog JSON, CSV, and Markdown;
 - Interface Catalog JSON, CSV, and Markdown;
 - Policy Evaluation Contract;
-- RTM-1.45;
+- RTM-1.46;
 - conformance fixture mapping and test mapping;
 - schema and registry READMEs;
 - validation and format-preservation reports.
@@ -78,11 +78,16 @@ Updated assets include:
 
 - 43 Draft 2020-12 schemas are metaschema-valid.
 - 3,579 cross-schema references resolve.
-- 92 registry entries validate and have unique contiguous identifiers.
+- 94 registry entries validate and have unique contiguous identifiers.
 - All entry, entry-set, and document digests match.
 - All registry-entry NS and CR references resolve to authoritative identifiers, and release-level ARM references resolve.
 - Every active schema has ARM and NS traceability.
 - All 122 CR rows have explicit DS, IF, and REG dispositions.
-- Test mapping matches RTM-1.45.
-- All 24 conformance fixtures validate against their assigned schemas.
+- Test mapping matches RTM-1.46.
+- All 30 conformance fixtures validate against their assigned schemas.
 - RTM formulas, styles, dimensions, merged cells, widths, heights, and theme were preserved.
+
+
+## 8. v2.0.1 repository synchronization
+
+The accumulated correction set now synchronizes the RTM, Schema Catalog, Interface Catalog, Registry Entry Catalog, Implementation Profile Catalog, fixture and test mappings, conformance manifest, validation reports, indexes, and release records. The RTM dataset is advanced to RTM-1.46; all 122 rows identify specification version v.2.0.1. The current mappings are 122 DS-assigned rows, 84 IF-assigned rows plus 38 explicit N/A dispositions, and 117 REG-assigned rows plus 5 explicit N/A dispositions.

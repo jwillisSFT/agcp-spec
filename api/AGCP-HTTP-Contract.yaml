@@ -1,16 +1,22 @@
 openapi: 3.1.0
 info:
   title: AGCP HTTP Interface Contract
-  version: 2.0.0
-  description: "Machine-readable HTTP interface contract for AGCP v2.0.0 conformant implementations.\n\
-    \nThis contract defines IF-001, the AGCP HTTP Interface version 2. Its canonical path namespace is
-    /agcp/v2. The path major version is aligned with the AGCP v2 interface contract and is not an independently
-    versioned v1 compatibility surface. No /agcp/v1 compatibility paths are part of this release.\n\n\
-    The contract defines paths, operations, parameters, request and response bodies, status-code mappings,
-    and references to authoritative AGCP schemas and registries. Normative governance behavior is defined
-    by the AGCP Core Specification.\n\nThe AGCP governance pipeline is: Proposal Qualification; Governance
-    Decision Function; Execution Authorization; Continuation Integrity for nonterminal proposals where
-    applicable; Governance Realization and Commit Boundary processing."
+  version: 2.0.1
+  description: 'Machine-readable HTTP interface contract for AGCP v2.0.1 contract-compatible implementations.
+
+
+    This contract defines IF-001, the AGCP HTTP Interface version 2. Its canonical path namespace is /agcp/v2. The
+    path major version is aligned with the AGCP v2 interface contract and is not an independently versioned v1 compatibility
+    surface. No /agcp/v1 compatibility paths are part of this release.
+
+
+    The contract defines paths, operations, parameters, request and response bodies, status-code mappings, and references
+    to authoritative AGCP schemas and registries. Normative governance behavior is defined by the AGCP Core Specification.
+
+
+    The AGCP governance pipeline is: Proposal Qualification; Governance Decision Function; Execution Authorization;
+    Continuation Integrity for nonterminal proposals where applicable; Governance Realization and Commit Boundary
+    processing.'
 servers:
 - url: https://{host}
   variables:
@@ -40,12 +46,10 @@ paths:
       - Metadata
       operationId: getMetadata
       summary: Get AGCP implementation metadata.
-      description: 'Returns the implementation release, supported AGCP specification releases, integrity-bound
-        schema set and registry releases, claimed implementation profile, conformance levels and scope,
-        supported governance capabilities, and implemented HTTP contract. This endpoint MAY be accessible
-        without tenant context.
-
-        '
+      description: Returns immutable baseline identity and digest, implementation profile identity and digest, schema
+        and generated-validator set integrity, registry releases, conformance and capability claims, active governance
+        version, IF-001 contract identity, and optional public-safe deployment binding. This endpoint MAY be accessible
+        without tenant context and SHALL NOT disclose secrets.
       security: []
       responses:
         '200':
@@ -54,19 +58,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MetadataResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   /agcp/v2/proposals/submit:
     post:
       tags:
       - Proposals
       operationId: submitProposal
       summary: Submit a Proposal for AGCP governance processing.
-      description: "Submits a governance-significant Proposal for Proposal Qualification and\nGovernance
-        Decision Function processing.\n\nThe response SHALL reflect an authoritative externally observable
-        governance\nresult. Transient internal processing states SHALL NOT be exposed as canonical\nexternally
-        observable governance states.\n\nIdempotency:\n  - If Idempotency-Key is reused with identical
-        payload, the implementation\n    SHALL return the existing ProposalView.\n  - If Idempotency-Key
-        is reused with a different payload, the implementation\n    SHALL return 409 with rejection_code
-        IDEMPOTENCY_CONFLICT.\n"
+      description: "Submits a governance-significant Proposal for Proposal Qualification and\nGovernance Decision\
+        \ Function processing.\n\nThe response SHALL reflect an authoritative externally observable governance\n\
+        result. Transient internal processing states SHALL NOT be exposed as canonical\nexternally observable governance\
+        \ states.\n\nIdempotency:\n  - If Idempotency-Key is reused with identical payload, the implementation\n\
+        \    SHALL return the existing ProposalView.\n  - If Idempotency-Key is reused with a different payload,\
+        \ the implementation\n    SHALL return 409 with rejection_code IDEMPOTENCY_CONFLICT.\n"
       parameters:
       - name: Idempotency-Key
         in: header
@@ -112,11 +119,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '503':
-          description: Required governance service unavailable.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/ServiceUnavailable'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
   /agcp/v2/proposals/{proposal_id}:
     get:
       tags:
@@ -158,28 +163,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Proposal not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/PublicNotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   /agcp/v2/proposals/{proposal_id}/governance-approvals:
     post:
       tags:
       - Governance Approval
       operationId: submitGovernanceApproval
-      summary: Submit a Governance Approval Artifact for governed adjudication or quorum.
-      description: 'Submits exactly one DS-026 Governance Approval Artifact for a proposal whose current
-        governance outcome or lifecycle state permits governed human adjudication, cosignature, risk acceptance,
-        cancellation, withdrawal, or quorum participation. The canonical `Pending Human Review` governance
-        outcome remains a Core-defined outcome; the HTTP operation and artifact model use Governance Approval
-        terminology exclusively.
-
-
-        The artifact SHALL remain attributable, cryptographically verifiable, tenant-scoped, governance-domain-scoped,
-        proposal-bound, lifecycle-bound, scope-bound, validity-bound, and associated with Governance Evidence.
-        Approval or quorum completion SHALL NOT itself constitute authority at commitment or permission
-        to execute.'
+      summary: Submit a Governance Approval Submission for independent AGCP qualification.
+      description: Accepts exactly one DS-045 Governance Approval Submission as untrusted claimant ingress. The
+        request SHALL NOT contain a DS-026 Governance Approval Artifact or claimant-asserted verification, eligibility,
+        quorum-completion, lifecycle-effect, Canonical State, authority, evidence, replay, digest, or ledger results.
+        AGCP independently validates provenance, binds authenticated identity, resolves current qualified governance
+        inputs, evaluates eligibility and quorum, records Governance Evidence and ledger ordering, and only then
+        creates or qualifies a DS-026 Governance Approval Artifact. Neither the submission nor the resulting artifact
+        constitutes authority at commitment or permission to execute.
       parameters:
       - name: proposal_id
         in: path
@@ -197,7 +198,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GovernanceApprovalRequest'
+              $ref: '#/components/schemas/GovernanceApprovalSubmission'
       responses:
         '200':
           description: Updated Proposal view.
@@ -206,7 +207,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProposalView'
         '400':
-          description: Invalid Governance Approval Artifact or request structure.
+          description: Invalid Governance Approval Submission or request structure, including claimant-asserted
+            server-derived fields.
           content:
             application/json:
               schema:
@@ -218,23 +220,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Proposal not found or protected resource existence hidden by the selected cross-scope disclosure strategy.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/PublicNotFound'
         '409':
-          description: Invalid governance transition or replayed Governance Approval Artifact.
+          description: Invalid governance transition, expired submission window, or replayed Governance Approval
+            Submission.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '422':
-          description: Governance Approval Artifact is not acceptable for the governed Proposal.
+          description: Governance Approval Submission cannot be independently qualified for the governed Proposal.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   /agcp/v2/execution-authorizations/{authorization_id}:
     get:
       tags:
@@ -277,26 +280,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Execution Authorization not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/PublicNotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   /agcp/v2/commit-boundary/commit:
     post:
       tags:
       - Commit Boundary
       operationId: commitBoundaryProcessing
       summary: Perform Commit Boundary processing for an authorized Proposal.
-      description: "Commit Boundary processing is valid only when:\n  - Proposal Qualification has successfully
-        completed\n  - the Governance Decision Function produced an authoritative outcome permitting authorization\n\
-        \  - Execution Authorization produced Authorized for Commit Boundary Processing\n  - execution_authorization_ref
-        matches the authoritative Execution Authorization\n  - required authority remains valid\n  - tenant
-        and governance-domain constraints remain satisfied\n  - governance configuration remains valid\n\
-        \  - the qualified Action Representation and Governance Context remain valid\n\nOn success, Commit
-        Boundary processing binds the authoritative Execution\nAuthorization to the governance-significant
-        Action immediately before execution.\n\nReplays or attempts using invalid, expired, revoked, consumed,
-        or modified\nauthorization SHALL fail or require Governed Re-evaluation.\n"
+      description: "Commit Boundary processing is valid only when:\n  - Proposal Qualification has successfully\
+        \ completed\n  - the Governance Decision Function produced an authoritative outcome permitting authorization\n\
+        \  - Execution Authorization produced Authorized for Commit Boundary Processing\n  - execution_authorization_ref\
+        \ matches the authoritative Execution Authorization\n  - required authority remains valid\n  - tenant and\
+        \ governance-domain constraints remain satisfied\n  - governance configuration remains valid\n  - the qualified\
+        \ Action Representation and Governance Context remain valid\n\nOn success, Commit Boundary processing binds\
+        \ the authoritative Execution\nAuthorization to the governance-significant Action immediately before execution.\n\
+        \nReplays or attempts using invalid, expired, revoked, consumed, or modified\nauthorization SHALL fail or\
+        \ require Governed Re-evaluation.\n"
       parameters:
       - name: Idempotency-Key
         in: header
@@ -330,14 +333,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Proposal or protected resource not found, or resource existence hidden by the selected cross-scope disclosure strategy.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/PublicNotFound'
         '409':
-          description: Conflict, including invalid authorization, invalid transition, replay, or 
-            required governed re-evaluation.
+          description: Conflict, including invalid authorization, invalid transition, replay, or required governed
+            re-evaluation.
           content:
             application/json:
               schema:
@@ -349,11 +348,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '503':
-          description: Required governance service unavailable.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/ServiceUnavailable'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
   /agcp/v2/governance-evidence/{evidence_id}:
     get:
       tags:
@@ -397,32 +394,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Governance Evidence not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/PublicNotFound'
         '422':
           description: Governance Evidence is incomplete or invalid.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   /agcp/v2/governance-artifacts/policy-modules:
     post:
       tags:
       - Governance Artifacts
       operationId: registerPolicyEvaluationModule
       summary: Register a Policy Evaluation Module artifact.
-      description: 'Registers an integrity-bound, tenant- and governance-domain-scoped Policy Evaluation
-        Module artifact with deterministic interface, policy, configuration, registry, compilation, lineage,
-        validation, and activation bindings.
+      description: 'Registers an integrity-bound, tenant- and governance-domain-scoped Policy Evaluation Module
+        artifact with deterministic interface, policy, configuration, registry, compilation, lineage, validation,
+        and activation bindings.
 
 
         Registration SHALL NOT make the artifact operationally effective unless all
 
-        applicable governance compilation, constitutional validation, omission-analysis, self-protection,
-        approval, and controlled-activation prerequisites are satisfied.
+        applicable governance compilation, constitutional validation, omission-analysis, self-protection, approval,
+        and controlled-activation prerequisites are satisfied.
 
         '
       parameters:
@@ -469,11 +466,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '503':
-          description: Policy Evaluation Module unavailable.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/ServiceUnavailable'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
   /agcp/v2/governance-artifacts/policies:
     post:
       tags:
@@ -531,11 +526,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '503':
-          description: Referenced Policy Evaluation Module unavailable.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/ServiceUnavailable'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
   /agcp/v2/governance-artifacts/{artifact_id}:
     get:
       tags:
@@ -572,11 +565,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Governance artifact not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+          $ref: '#/components/responses/PublicNotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
 components:
   securitySchemes:
     bearerAuth:
@@ -611,7 +604,33 @@ components:
     ErrorResponse:
       $ref: ../schemas/error_response.json
     Provenance:
-      $ref: ../schemas/common.json#/$defs/provenance
+      allOf:
+      - $ref: ../schemas/common.json#/$defs/provenance
+      description: Canonical AGCP provenance wire envelope. alg and kid are top-level fields; signature is a detached
+        protected_header_b64..signature_b64 string.
+      example:
+        signer: client:test
+        kid: kid-test
+        alg: Ed25519
+        signed_at: '2026-08-03T11:00:00Z'
+        nonce: nonce-4f5401a20b848e65c9ee7191
+        scope: agcp.http.request.body
+        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6b3BlbmFwaS1leGFtcGxl
+    ContentDigest:
+      allOf:
+      - $ref: ../schemas/common.json#/$defs/content_digest
+      description: Algorithm-explicit AGCP content digest. The value is lowercase hexadecimal and its exact length
+        is bound to the declared algorithm by DS-001.
+      example:
+        algorithm: SHA-256
+        value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        canonicalization: JCS
+      x-agcp-algorithm-output-lengths:
+        SHA-256: 64
+        SHA-384: 96
+        SHA-512: 128
+        BLAKE2B-256: 64
+        BLAKE2B-512: 128
     PolicyRef:
       $ref: ../schemas/policy_artifact.json#/$defs/policy_artifact_ref
     CanonicalStateRef:
@@ -634,25 +653,8 @@ components:
       $ref: ../schemas/proposal_submit_request.json
     GovernanceApprovalArtifact:
       $ref: ../schemas/governance_approval_artifact.json
-    GovernanceApprovalRequest:
-      type: object
-      description: Canonical request wrapper for submission of one DS-026 Governance Approval 
-        Artifact.
-      additionalProperties: false
-      required:
-      - tenant_id
-      - governance_domain_id
-      - governance_approval_artifact
-      - provenance
-      properties:
-        tenant_id:
-          $ref: ../schemas/common.json#/$defs/tenant_id
-        governance_domain_id:
-          $ref: ../schemas/common.json#/$defs/governance_domain_id
-        governance_approval_artifact:
-          $ref: ../schemas/governance_approval_artifact.json
-        provenance:
-          $ref: ../schemas/common.json#/$defs/provenance
+    GovernanceApprovalSubmission:
+      $ref: ../schemas/governance_approval_submission.json
     CommitBoundaryRequest:
       $ref: ../schemas/commit_boundary_request.json
     ProposalView:
@@ -666,8 +668,7 @@ components:
     PolicyEvaluationModuleArtifact:
       $ref: ../schemas/policy_evaluation_module_artifact.json
     PolicyEvaluationModuleArtifactRef:
-      $ref: 
-        ../schemas/policy_evaluation_module_artifact.json#/$defs/policy_evaluation_module_artifact_ref
+      $ref: ../schemas/policy_evaluation_module_artifact.json#/$defs/policy_evaluation_module_artifact_ref
     GovernancePolicyArtifact:
       $ref: ../schemas/policy_artifact.json
     GovernancePolicyArtifactRef:
@@ -735,18 +736,15 @@ components:
     ResultingStateValidationResult:
       $ref: ../schemas/resulting_state_validation_result.json
     ResultingStateValidationResultRef:
-      $ref: 
-        ../schemas/resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref
+      $ref: ../schemas/resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref
     DeterministicAdjudicationResult:
       $ref: ../schemas/deterministic_adjudication_result.json
     DeterministicAdjudicationResultRef:
-      $ref: 
-        ../schemas/deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref
+      $ref: ../schemas/deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref
     GovernanceBindingValidationResult:
       $ref: ../schemas/governance_binding_validation_result.json
     GovernanceBindingValidationResultRef:
-      $ref: 
-        ../schemas/governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref
+      $ref: ../schemas/governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref
     EnforcementContext:
       $ref: ../schemas/enforcement_context.json
     EnforcementContextRef:
@@ -772,8 +770,7 @@ components:
     ControlledGovernanceActivation:
       $ref: ../schemas/controlled_governance_activation.json
     ControlledGovernanceActivationRef:
-      $ref: 
-        ../schemas/controlled_governance_activation.json#/$defs/controlled_governance_activation_ref
+      $ref: ../schemas/controlled_governance_activation.json#/$defs/controlled_governance_activation_ref
     ExceptionArtifactRef:
       $ref: ../schemas/exception_artifact.json#/$defs/exception_artifact_ref
     GovernanceLifecycleRecord:
@@ -798,8 +795,87 @@ components:
       $ref: ../schemas/registry_document.schema.json
     RegistryDocumentRef:
       $ref: ../schemas/registry_document.schema.json#/$defs/registry_document_ref
+  headers:
+    RetryAfter:
+      description: 'Required for HTTP 429. AGCP uses delay-seconds: a positive decimal integer indicating the minimum
+        number of seconds before retry.'
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 86400
+  responses:
+    PublicNotFound:
+      description: Protected resource not found or existence intentionally hidden. Public responses use only RESOURCE_NOT_FOUND.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              rejection_code: RESOURCE_NOT_FOUND
+              message: The requested resource was not found.
+              http_status: 404
+              retryable: false
+              governance_evidence_generated: false
+              outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+              transport_disposition: NOT_FOUND
+    TooManyRequests:
+      description: Pre-governance transport or service throttling. No Governance Outcome is produced.
+      headers:
+        Retry-After:
+          $ref: '#/components/headers/RetryAfter'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              rejection_code: REQUEST_THROTTLED
+              message: The request was throttled before governance processing began.
+              http_status: 429
+              retryable: true
+              governance_evidence_generated: false
+              outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+              transport_disposition: THROTTLED
+              retry_after_seconds: 30
+    ServiceUnavailable:
+      description: Processing cannot safely begin because system/node capacity or a required service dependency
+        is unavailable. This is not itself a Governance Outcome.
+      headers:
+        Retry-After:
+          description: Optional delay-seconds advisory for retryable HTTP 503 responses.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 86400
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            capacityUnavailable:
+              value:
+                error:
+                  rejection_code: CAPACITY_UNAVAILABLE
+                  message: Required processing capacity is unavailable.
+                  http_status: 503
+                  retryable: true
+                  governance_evidence_generated: false
+                  outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+                  transport_disposition: CAPACITY_UNAVAILABLE
+            dependencyUnavailable:
+              value:
+                error:
+                  rejection_code: POLICY_MODULE_UNAVAILABLE
+                  message: A required Policy Evaluation Module is unavailable.
+                  http_status: 503
+                  retryable: true
+                  governance_evidence_generated: true
+                  outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+                  transport_disposition: DEPENDENCY_UNAVAILABLE
 x-agcp-interface-id: IF-001
 x-agcp-interface-version: v2
-x-agcp-specification-release: v2.0.0
+x-agcp-specification-release: v2.0.1
 x-agcp-path-namespace: /agcp/v2
 x-agcp-v1-compatibility: false

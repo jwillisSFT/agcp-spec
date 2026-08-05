@@ -1,12 +1,18 @@
 # AGCP Human Adjudication and Governance Approval Specification
 
-**Status:** Normative
+**Status:** Normative  
+**Artifact Lifecycle:** Current  
+**Specification Version:** 2.0.1  
+**Repository Release Target:** AGCP v2.0.1  
+**Repository Release Target Status:** Unreleased Accumulated Correction Set  
+**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-07-30
 
 ## 1. Purpose
 
 This specification defines the normative structure and processing requirements for human adjudication, governed approval, cosignature, risk acceptance, cancellation, withdrawal, and quorum participation within AGCP.
 
-The canonical approval object is the Governance Approval Artifact defined by `schemas/governance_approval_artifact.json` (DS-026). All approval, adjudication, cosignature, risk-acceptance, cancellation, withdrawal, and quorum-participation evidence SHALL use this canonical object.
+The public ingress command is the Governance Approval Submission defined by `schemas/governance_approval_submission.json` (DS-045). The canonical authoritative approval record is the Governance Approval Artifact defined by `schemas/governance_approval_artifact.json` (DS-026). Claimant submissions and AGCP-created or AGCP-qualified records are distinct objects and SHALL NOT be conflated.
 
 ## 2. Scope
 
@@ -14,12 +20,14 @@ This specification applies to every AGCP implementation that supports governance
 
 It complements:
 
-- AGCP Core Specification;
-- Architecture Reference Model;
-- Policy Evaluation Contract;
-- AGCP HTTP Interface Specification;
-- Governance Evidence Specification; and
-- Governance Approval Artifact schema (`schemas/governance_approval_artifact.json`).
+- the AGCP Core Specification (`AGCP-Core.docx`);
+- the Architecture Reference Model (`Architecture Reference Model.docx`);
+- the Policy Evaluation Contract (`AGCP-Policy-Evaluation-Contract.md`);
+- the AGCP HTTP Interface Specification (`AGCP-HTTP-Interface-Specification.md`);
+- DS-020 Governance Evidence (`../schemas/governance_evidence.json`);
+- DS-033 Evidence Qualification Result (`../schemas/evidence_qualification_result.json`);
+- the Governance Approval Submission schema (`../schemas/governance_approval_submission.json`); and
+- the Governance Approval Artifact schema (`../schemas/governance_approval_artifact.json`).
 
 ## 3. Governance Approval Model
 
@@ -36,6 +44,13 @@ A Governance Approval Artifact SHALL be bound to:
 - attributable Governance Evidence.
 
 Approval, negative adjudication, cosignature, risk acceptance, cancellation, withdrawal, and quorum participation SHALL be represented as cryptographically attributable and verifiable Governance Approval Artifacts.
+
+
+### 3.1 Submission and Authoritative Record Separation
+
+A claimant SHALL submit DS-045 `GovernanceApprovalSubmission`. A claimant SHALL NOT submit DS-026 `GovernanceApprovalArtifact` and SHALL NOT assert AGCP verification, eligibility, Canonical State qualification, Authority Lineage qualification, replay uniqueness, quorum arithmetic, lifecycle effects, Governance Evidence, artifact digest, or Governance Ledger ordering.
+
+AGCP SHALL independently process the submission and create or qualify DS-026 only after all applicable identity, authority, validity, signature, replay, Tenant, Governance Domain, scope, lifecycle, policy, Canonical State, quorum, evidence, and ordering checks are complete. DS-026 SHALL carry `artifact_origin = AGCP_CREATED_OR_QUALIFIED`.
 
 ## 4. Approval Status and Lifecycle
 
@@ -131,7 +146,7 @@ The authoritative externally observable representation SHALL conform exclusively
 
 `schemas/governance_approval_artifact.json` (DS-026)
 
-DS-026 is the only approval-artifact schema in the AGCP v2.0 active schema set.
+DS-045 is the sole active approval-submission ingress schema. DS-026 is the sole active authoritative approval-artifact schema. The two schemas are intentionally non-interchangeable.
 
 ## 14. Commit-Time Interpretation
 

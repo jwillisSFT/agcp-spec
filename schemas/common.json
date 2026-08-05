@@ -3,7 +3,7 @@
   "$id": "https://agcp.ai/schemas/common.json",
   "title": "AGCP Common Types",
   "description": "Shared JSON Schema definitions actively required by the AGCP v2.0 schema set. Canonical domain objects and result/reference definitions are owned by their assigned DS schemas; backward-compatibility aliases are not retained.",
-  "$comment": "DS-001 contains only shared definitions reachable from the active AGCP v2.0 schema set. Governance Ledger identifiers, positions, event types, and event references are owned by DS-040.",
+  "$comment": "DS-001 contains only shared definitions reachable from the active AGCP v2.0 schema set. Governance Ledger identifiers, positions, event types, and event references are owned by DS-040. P1-12 binds each declared content-digest algorithm to its exact lowercase-hexadecimal output length.",
   "x-agcp-ds-id": "DS-001",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
@@ -213,8 +213,21 @@
     },
     "hash_hex": {
       "type": "string",
-      "pattern": "^[a-fA-F0-9]{16,128}$",
-      "description": "Legacy hexadecimal digest representation. New schemas SHOULD use content_digest when the algorithm must be explicit."
+      "description": "Deprecated algorithm-implicit lowercase hexadecimal digest scalar. Permitted only for retained legacy fields. New or revised contracts SHALL use content_digest so the algorithm and exact output length are bound together.",
+      "oneOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "A 256-bit digest encoded as exactly 64 lowercase hexadecimal characters."
+        },
+        {
+          "pattern": "^[0-9a-f]{96}$",
+          "description": "A 384-bit digest encoded as exactly 96 lowercase hexadecimal characters."
+        },
+        {
+          "pattern": "^[0-9a-f]{128}$",
+          "description": "A 512-bit digest encoded as exactly 128 lowercase hexadecimal characters."
+        }
+      ]
     },
     "hash_algorithm_enum": {
       "type": "string",
@@ -351,7 +364,7 @@
     },
     "content_digest": {
       "type": "object",
-      "description": "Algorithm-explicit content digest for integrity, binding, and replay verification.",
+      "description": "Algorithm-explicit content digest for integrity, binding, and replay verification. The value SHALL use lowercase hexadecimal and SHALL have the exact output length defined for the declared algorithm.",
       "additionalProperties": false,
       "properties": {
         "algorithm": {
@@ -359,7 +372,10 @@
         },
         "value": {
           "type": "string",
-          "pattern": "^[a-fA-F0-9]{32,128}$"
+          "minLength": 64,
+          "maxLength": 128,
+          "pattern": "^[0-9a-f]+$",
+          "description": "Lowercase hexadecimal digest output. Exact length is selected by the declared algorithm through the oneOf contract."
         },
         "canonicalization": {
           "type": "string",
@@ -371,6 +387,78 @@
       "required": [
         "algorithm",
         "value"
+      ],
+      "oneOf": [
+        {
+          "properties": {
+            "algorithm": {
+              "const": "SHA-256"
+            },
+            "value": {
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "algorithm",
+            "value"
+          ]
+        },
+        {
+          "properties": {
+            "algorithm": {
+              "const": "SHA-384"
+            },
+            "value": {
+              "pattern": "^[0-9a-f]{96}$"
+            }
+          },
+          "required": [
+            "algorithm",
+            "value"
+          ]
+        },
+        {
+          "properties": {
+            "algorithm": {
+              "const": "SHA-512"
+            },
+            "value": {
+              "pattern": "^[0-9a-f]{128}$"
+            }
+          },
+          "required": [
+            "algorithm",
+            "value"
+          ]
+        },
+        {
+          "properties": {
+            "algorithm": {
+              "const": "BLAKE2B-256"
+            },
+            "value": {
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "algorithm",
+            "value"
+          ]
+        },
+        {
+          "properties": {
+            "algorithm": {
+              "const": "BLAKE2B-512"
+            },
+            "value": {
+              "pattern": "^[0-9a-f]{128}$"
+            }
+          },
+          "required": [
+            "algorithm",
+            "value"
+          ]
+        }
       ]
     },
     "signature": {
@@ -486,7 +574,7 @@
     },
     "provenance": {
       "type": "object",
-      "description": "Provenance envelope for governance-significant submitted inputs and derived artifacts.",
+      "description": "Canonical AGCP provenance wire envelope. The envelope is signed as part of the containing JSON object after removing only provenance.signature. The signature value uses detached compact JWS-style protected_header_b64..signature_b64 encoding.",
       "additionalProperties": false,
       "properties": {
         "signer": {
@@ -494,37 +582,50 @@
           "minLength": 1,
           "maxLength": 256
         },
-        "signature": {
-          "$ref": "#/$defs/signature"
-        },
-        "signed_at": {
-          "$ref": "#/$defs/timestamp_rfc3339"
-        },
-        "source_system": {
+        "kid": {
           "type": "string",
           "minLength": 1,
           "maxLength": 256
         },
-        "source_artifact_ref": {
+        "alg": {
           "type": "string",
-          "minLength": 1,
-          "maxLength": 512
+          "minLength": 2,
+          "maxLength": 64,
+          "description": "Signature algorithm identifier. SHA digest algorithm names are not signature algorithms."
         },
-        "payload_digest": {
-          "$ref": "#/$defs/content_digest"
+        "signed_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
         },
-        "predecessor_evidence_refs": {
-          "type": "array",
-          "items": {
-            "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
-          },
-          "uniqueItems": true
+        "expires_at": {
+          "$ref": "#/$defs/timestamp_rfc3339"
+        },
+        "nonce": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 256
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 128,
+          "pattern": "^agcp\\.[a-z0-9][a-z0-9.-]*$"
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 16384,
+          "pattern": "^[A-Za-z0-9_-]+\\.\\.[A-Za-z0-9_-]+$",
+          "description": "Detached compact JWS-style protected_header_b64..signature_b64 value. The protected header typ is AGCP+PROV and its alg and kid equal the top-level provenance values."
         }
       },
       "required": [
         "signer",
-        "signature",
-        "signed_at"
+        "kid",
+        "alg",
+        "signed_at",
+        "nonce",
+        "scope",
+        "signature"
       ]
     },
     "validity_window": {

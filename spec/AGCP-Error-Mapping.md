@@ -1,6 +1,12 @@
 # AGCP Endpoint-Level Error Mapping
 
 **Status:** Normative  
+**Artifact Lifecycle:** Current  
+**Specification Version:** 2.0.1  
+**Repository Release Target:** AGCP v2.0.1  
+**Repository Release Target Status:** Unreleased Accumulated Correction Set  
+**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-07-30  
 **Series:** AGCP Core  
 **Scope:** HTTP status codes, rejection codes, and Governance Evidence behavior for the AGCP HTTP interface.
 
@@ -53,7 +59,7 @@ The implementation returns:
 
 ```text
 HTTP 404
-rejection_code: RESOURCE_NOT_FOUND or applicable not-found code
+rejection_code: RESOURCE_NOT_FOUND
 ```
 
 ## 3.2 Forbid Profile
@@ -141,8 +147,9 @@ Notes:
 
 Notes:
 
-- DS-026 Governance Approval Artifacts are governed inputs.
-- Governance Approval Artifact submission SHALL NOT itself perform execution.
+- DS-045 Governance Approval Submissions are untrusted governed commands received through IF-001.
+- A Governance Approval Submission SHALL NOT itself assert AGCP verification, eligibility, replay uniqueness, quorum completion, lifecycle effects, Canonical State resolution, authority at commitment, or ledger sequencing, and SHALL NOT itself perform execution.
+- DS-026 Governance Approval Artifacts are authoritative AGCP-created or AGCP-qualified records produced only after the required validation and governance processing.
 - If Governance Approval processing causes the governance decision to become Authorized, subsequent Execution Authorization behavior SHALL be reflected in Governance Evidence.
 
 ---
@@ -322,3 +329,15 @@ A change to any of the following is a breaking interface change:
 - required request or response schema.
 
 Specification release versioning is managed by repository release tags.
+# 11. Public Not-Found, Throttling, Capacity, and Governance-Denial Separation
+
+| Condition | HTTP | Public rejection code | Governance Outcome | Retry-After |
+|---|---:|---|---|---|
+| Protected resource absent or existence hidden | 404 | `RESOURCE_NOT_FOUND` | No | No |
+| Pre-governance throttling | 429 | `REQUEST_THROTTLED` | No | Required, delay-seconds |
+| System or node capacity unavailable before processing | 503 | `CAPACITY_UNAVAILABLE` | No | Optional |
+| Required service dependency unavailable | 503 | Applicable dependency code | No | Optional |
+| Governance quota, entitlement, or policy denial | 200 authoritative result | Governance Outcome | Yes | Not applicable |
+
+Resource-specific not-found codes are deprecated for public IF-001 responses. The protected reason MAY be retained in Governance Evidence or telemetry. HTTP 429 and capacity-based HTTP 503 are transport/service conditions and SHALL NOT be reported as governance denial, Structural Refusal, or authorization outcome.
+

@@ -1,0 +1,593 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "report_id": "AGCP-P0-02-PROVENANCE-WIRE-SCHEMA-SYNCHRONIZATION",
+  "status": "PASS",
+  "validated_at": "2026-08-03",
+  "finding": "P0-02",
+  "wire_schema": "schemas/common.json#/$defs/provenance",
+  "dependent_schema_count": 21,
+  "wire_example_count": 18,
+  "controlled_fixture_count": 30,
+  "harness_provenance_instance_count": 12,
+  "source_hashes": {
+    "spec/AGCP-Provenance-Wire-Format-Specification.md": "c4823e61625cc40172dad21aa5135d9e7f2ef91a45ae51ba76ddfcc122f98c39",
+    "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
+    "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe",
+    "conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json": "6b5ae1abb7f6ee7366c4637d57d6daea7d282ed1b8316b5ac382706ee2f85014",
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
+    "governance/validate_provenance_wire_format.py": "331a9f67a995020ee9a2db40f40010422b28c0e1228b7dd4263f1c6eb4ee914f",
+    ".github/workflows/validate-provenance-wire-format.yml": "2874c64e5675c6fccd9398295c510ea9cee3f40979f550a5385a7fe3282040d4",
+    "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
+    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "conformance/test-mapping-validation.json": "1f76012cd5e70123633fb1014a967164182910a22c7a8175177b415e2a1f921e"
+  },
+  "checks": [
+    {
+      "check": "wire_required_fields",
+      "status": "PASS",
+      "detail": [
+        "alg",
+        "kid",
+        "nonce",
+        "scope",
+        "signature",
+        "signed_at",
+        "signer"
+      ]
+    },
+    {
+      "check": "wire_rejects_undeclared_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detached_signature_pattern",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "legacy_source_fields_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "positive_schema_valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "canonical_payload_exact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "payload_b64_exact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "protected_header_typ",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "protected_header_alg_match",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "protected_header_kid_match",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "positive_signature_valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "legacy_nested_signature_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "missing_nonce_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "legacy_extra_field_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "non_detached_signature_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "negative_vector_catalog_complete",
+      "status": "PASS",
+      "detail": [
+        "NV-001",
+        "NV-002",
+        "NV-003",
+        "NV-004",
+        "NV-005",
+        "NV-006",
+        "NV-007",
+        "NV-008"
+      ]
+    },
+    {
+      "check": "negative_protected_kid_mismatch_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "negative_payload_mutation_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "negative_digest_as_signature_algorithm_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "negative_duplicate_replay_rejected",
+      "status": "PASS",
+      "detail": [
+        "TENANT-TEST",
+        "client:test-vector",
+        "agcp.http.request.body",
+        "nonce-0000000000000001"
+      ]
+    },
+    {
+      "check": "all_active_schema_documents_metaschema_valid",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "dependent_provenance_schema_count",
+      "status": "PASS",
+      "detail": [
+        "schemas/commit_boundary_request.json",
+        "schemas/compiled_governance_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/constraint_evaluation.json",
+        "schemas/continuation_integrity_result.json",
+        "schemas/controlled_governance_activation.json",
+        "schemas/exception_artifact.json",
+        "schemas/governance_approval_submission.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/governance_configuration.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_ledger_event.json",
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/invariant_definition.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/meta_response.json",
+        "schemas/policy_artifact.json",
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/tenant.json"
+      ]
+    },
+    {
+      "check": "wire_provenance_examples_valid",
+      "status": "PASS",
+      "detail": [
+        {
+          "file": "schemas/examples/ds003-implementation-metadata-response.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds005-policy-evaluation-module-registered.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds006-governance-policy-registered.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds010-governance-artifact-view-registered.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds011-constraint-evaluation-violated.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds012-invariant-evaluation-preserved.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds018-commit-boundary-request-single.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds038-governance-lifecycle-authorized.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds039-continuation-integrity-degraded.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds039-continuation-integrity-recovered.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds040-governance-ledger-event-genesis.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds040-governance-ledger-event-sequenced.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds041-governance-configuration-active.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds042-compiled-governance-artifact-validated.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds043-controlled-governance-activation-activated.json",
+          "valid": true,
+          "errors": []
+        },
+        {
+          "file": "schemas/examples/ds045-governance-approval-submission-valid.json",
+          "valid": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "check": "controlled_fixture_catalog_valid",
+      "status": "PASS",
+      "detail": [
+        {
+          "fixture_id": "FX-DS011-SATISFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS011-VIOLATED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS012-PRESERVED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS012-HARD-VIOLATION",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS018-SINGLE-COMMIT",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS019-COMMIT-SUCCESS",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS019-STRUCTURAL-REFUSAL",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS026-PARTIAL-QUORUM",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS026-COMPLETED-QUORUM",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS029-ADMISSIBLE",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS029-PREVENT",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS032-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS032-NOT-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS033-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS033-NOT-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS038-AUTHORIZED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS039-DEGRADED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS039-RECOVERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS040-GENESIS",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS040-SEQUENCED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS041-ACTIVE",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS042-VALIDATED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS043-ACTIVATED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS044-REGISTRY",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS005-REGISTERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS006-REGISTERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS010-REGISTERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS017-AUTHORIZED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS003-METADATA",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS045-GOVERNANCE-APPROVAL-SUBMISSION",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "check": "harness_provenance_instances_valid",
+      "status": "PASS",
+      "detail": {
+        "count": 12,
+        "errors": []
+      }
+    },
+    {
+      "check": "openapi_provenance_ref",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "openapi_provenance_example_valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "approval_submission_schema_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds001_catalog_hash",
+      "status": "PASS",
+      "detail": {
+        "catalog": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+        "actual": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d"
+      }
+    },
+    {
+      "check": "ds001_rtm_mapping",
+      "status": "PASS",
+      "detail": {
+        "rtm_ids": [
+          "RTM-00005",
+          "RTM-00042",
+          "RTM-00052",
+          "RTM-00064",
+          "RTM-00066"
+        ],
+        "cr_ids": [
+          "CR-005",
+          "CR-042",
+          "CR-052",
+          "CR-064",
+          "CR-066"
+        ]
+      }
+    },
+    {
+      "check": "rtm_cr005_ds001",
+      "status": "PASS",
+      "detail": [
+        "DS-033",
+        "DS-015",
+        "DS-001"
+      ]
+    },
+    {
+      "check": "rtm_cr005_if001",
+      "status": "PASS",
+      "detail": [
+        "IF-001"
+      ]
+    },
+    {
+      "check": "rtm_cr005_files",
+      "status": "PASS",
+      "detail": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Provenance-Wire-Format-Specification.md;schemas/evidence_qualification_result.json;schemas/governance_decision_result.json;registries/constraint-type-registry.json;registries/rejection-code-registry.json;registries/registry-entry-catalog.json;schemas/common.json;api/AGCP-HTTP-Contract.yaml;spec/AGCP-HTTP-Interface-Specification.md;conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json;governance/AGCP-provenance-wire-format-validation.json"
+    },
+    {
+      "check": "rtm_cr005_companion",
+      "status": "PASS",
+      "detail": "spec/AGCP-Provenance-Wire-Format-Specification.md"
+    },
+    {
+      "check": "tc005_maps_ds001",
+      "status": "PASS",
+      "detail": [
+        "DS-033",
+        "DS-015",
+        "DS-001"
+      ]
+    },
+    {
+      "check": "tc005_maps_if001",
+      "status": "PASS",
+      "detail": [
+        "IF-001"
+      ]
+    },
+    {
+      "check": "tc005_maps_common_schema",
+      "status": "PASS",
+      "detail": [
+        "schemas/evidence_qualification_result.json",
+        "schemas/governance_decision_result.json",
+        "schemas/common.json"
+      ]
+    },
+    {
+      "check": "tc005_maps_cross_language_vectors",
+      "status": "PASS",
+      "detail": [
+        "conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json"
+      ]
+    },
+    {
+      "check": "catalog_version_synchronized",
+      "status": "PASS",
+      "detail": {
+        "catalog": "1.0.50",
+        "test_mapping": "1.0.50",
+        "fixture_mapping": "1.0.50"
+      }
+    }
+  ],
+  "issues": []
+}

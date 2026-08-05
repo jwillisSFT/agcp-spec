@@ -16,3 +16,8 @@
 ## Traceability
 
 DS-005 is mapped to CR-110 through CR-114 and CR-117 and to the corresponding ARM-500 series and NS-15.6A/15.6B statements.
+
+
+## IF-002 machine-contract binding
+
+The controlled registered-module example now binds `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0`, contract version `1.0.0`, ABI target `agcp_pec_abi_v1`, the exact machine-contract digest, and exact input/output schema digests. DS-005 itself remains technology-independent: the binding is carried through its existing runtime representation and interface contract fields.

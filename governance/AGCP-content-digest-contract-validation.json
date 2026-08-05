@@ -1,0 +1,597 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "report_id": "AGCP-P1-12-CONTENT-DIGEST-CONTRACT",
+  "status": "PASS",
+  "validated_at": "2026-08-03",
+  "finding": "P1-12",
+  "schema": "schemas/common.json#/$defs/content_digest",
+  "algorithm_output_lengths": {
+    "SHA-256": 64,
+    "SHA-384": 96,
+    "SHA-512": 128,
+    "BLAKE2B-256": 64,
+    "BLAKE2B-512": 128
+  },
+  "dependent_schema_count": 40,
+  "controlled_digest_instance_count": 975,
+  "positive_vector_count": 5,
+  "negative_vector_count": 14,
+  "affected_crs": [
+    "CR-042",
+    "CR-052",
+    "CR-064",
+    "CR-066"
+  ],
+  "source_hashes": {
+    "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+    "schemas/examples/common-content-digest-examples.json": "335d62b3e52c0844635c26a9eb97c48242d0d62f0d7fecbf7259264229e0f777",
+    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
+    "spec/AGCP-HTTP-Interface-Specification.md": "275cf27bf20ea0d6daada0a8e93081152beef560c1287449d6956f51ff5d800a",
+    "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e",
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
+    "governance/validate_content_digest_contract.py": "62c8938f70c24afde695d9029aff536d992f5da4dc5c849aabf6fda73ec1ccd8",
+    ".github/workflows/validate-content-digest-contract.yml": "2cda597e858655f2975bf77bd4dd10860f7e3a399a2be48785262633f0f62683"
+  },
+  "checks": [
+    {
+      "check": "algorithm_branch_set",
+      "status": "PASS",
+      "detail": {
+        "SHA-256": "^[0-9a-f]{64}$",
+        "SHA-384": "^[0-9a-f]{96}$",
+        "SHA-512": "^[0-9a-f]{128}$",
+        "BLAKE2B-256": "^[0-9a-f]{64}$",
+        "BLAKE2B-512": "^[0-9a-f]{128}$"
+      }
+    },
+    {
+      "check": "algorithm_exact_patterns",
+      "status": "PASS",
+      "detail": {
+        "SHA-256": "^[0-9a-f]{64}$",
+        "SHA-384": "^[0-9a-f]{96}$",
+        "SHA-512": "^[0-9a-f]{128}$",
+        "BLAKE2B-256": "^[0-9a-f]{64}$",
+        "BLAKE2B-512": "^[0-9a-f]{128}$"
+      }
+    },
+    {
+      "check": "digest_closed_object",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "digest_required_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "lowercase_base_pattern",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "legacy_hash_hex_deprecated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "positive_vector_count",
+      "status": "PASS",
+      "detail": 5
+    },
+    {
+      "check": "all_positive_vectors_valid",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "CD-PV-001",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-002",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-003",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-004",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-005",
+          "valid": true
+        }
+      ]
+    },
+    {
+      "check": "negative_vector_count",
+      "status": "PASS",
+      "detail": 14
+    },
+    {
+      "check": "all_negative_vectors_rejected",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "CD-NV-001",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-002",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-003",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-004",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-005",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-006",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-007",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-008",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-009",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-010",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-011",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-012",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-013",
+          "rejected": true
+        },
+        {
+          "id": "CD-NV-014",
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "check": "controlled_example_count",
+      "status": "PASS",
+      "detail": 5
+    },
+    {
+      "check": "controlled_examples_valid",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "CD-PV-001",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-002",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-003",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-004",
+          "valid": true
+        },
+        {
+          "id": "CD-PV-005",
+          "valid": true
+        }
+      ]
+    },
+    {
+      "check": "dependent_schema_count",
+      "status": "PASS",
+      "detail": [
+        "schemas/authority_lineage.json",
+        "schemas/authority_rederivation_result.json",
+        "schemas/bind_set.json",
+        "schemas/canonical_state.json",
+        "schemas/commit_boundary_request.json",
+        "schemas/commit_boundary_result.json",
+        "schemas/compiled_governance_artifact.json",
+        "schemas/constraint_artifact.json",
+        "schemas/constraint_evaluation.json",
+        "schemas/continuation_integrity_result.json",
+        "schemas/controlled_governance_activation.json",
+        "schemas/delegation_artifact.json",
+        "schemas/deterministic_adjudication_result.json",
+        "schemas/enforcement_context.json",
+        "schemas/evidence_qualification_result.json",
+        "schemas/exception_artifact.json",
+        "schemas/execution_authorization_view.json",
+        "schemas/governance_approval_artifact.json",
+        "schemas/governance_artifact_view.json",
+        "schemas/governance_binding_validation_result.json",
+        "schemas/governance_configuration.json",
+        "schemas/governance_context_envelope.json",
+        "schemas/governance_decision_result.json",
+        "schemas/governance_dependency_graph.json",
+        "schemas/governance_evidence.json",
+        "schemas/governance_ledger_event.json",
+        "schemas/governance_lifecycle_record.json",
+        "schemas/governance_receipt.json",
+        "schemas/governed_action_proposal.json",
+        "schemas/invariant_definition.json",
+        "schemas/invariant_evaluation.json",
+        "schemas/meta_response.json",
+        "schemas/policy_artifact.json",
+        "schemas/policy_evaluation_module_artifact.json",
+        "schemas/proposal_view.json",
+        "schemas/refusal_record.json",
+        "schemas/registry_document.schema.json",
+        "schemas/resulting_state_validation_result.json",
+        "schemas/state_qualification_result.json",
+        "schemas/tenant.json"
+      ]
+    },
+    {
+      "check": "controlled_digest_instances_valid",
+      "status": "PASS",
+      "detail": {
+        "count": 975,
+        "errors": []
+      }
+    },
+    {
+      "check": "controlled_fixtures_valid",
+      "status": "PASS",
+      "detail": [
+        {
+          "fixture_id": "FX-DS011-SATISFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS011-VIOLATED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS012-PRESERVED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS012-HARD-VIOLATION",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS018-SINGLE-COMMIT",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS019-COMMIT-SUCCESS",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS019-STRUCTURAL-REFUSAL",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS026-PARTIAL-QUORUM",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS026-COMPLETED-QUORUM",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS029-ADMISSIBLE",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS029-PREVENT",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS032-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS032-NOT-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS033-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS033-NOT-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS038-AUTHORIZED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS039-DEGRADED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS039-RECOVERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS040-GENESIS",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS040-SEQUENCED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS041-ACTIVE",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS042-VALIDATED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS043-ACTIVATED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS044-REGISTRY",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS005-REGISTERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS006-REGISTERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS010-REGISTERED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS017-AUTHORIZED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS003-METADATA",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS045-GOVERNANCE-APPROVAL-SUBMISSION",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "check": "openapi_content_digest_ref",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "openapi_content_digest_example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "openapi_algorithm_length_map",
+      "status": "PASS",
+      "detail": {
+        "SHA-256": 64,
+        "SHA-384": 96,
+        "SHA-512": 128,
+        "BLAKE2B-256": 64,
+        "BLAKE2B-512": 128
+      }
+    },
+    {
+      "check": "if001_digest_rule",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_catalog_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ds001_catalog_hash",
+      "status": "PASS",
+      "detail": {
+        "catalog": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+        "actual": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d"
+      }
+    },
+    {
+      "check": "ds001_cr_mappings",
+      "status": "PASS",
+      "detail": [
+        "CR-005",
+        "CR-042",
+        "CR-052",
+        "CR-064",
+        "CR-066"
+      ]
+    },
+    {
+      "check": "rtm_digest_rows",
+      "status": "PASS",
+      "detail": [
+        {
+          "cr": "CR-042",
+          "ds1": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-052",
+          "ds1": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-064",
+          "ds1": true,
+          "files": true,
+          "note": true
+        },
+        {
+          "cr": "CR-066",
+          "ds1": true,
+          "files": true,
+          "note": true
+        }
+      ]
+    },
+    {
+      "check": "test_mapping_digest_rows",
+      "status": "PASS",
+      "detail": [
+        {
+          "tc": "TC-042",
+          "ds1": true,
+          "common": true,
+          "vectors": true,
+          "note": true
+        },
+        {
+          "tc": "TC-052",
+          "ds1": true,
+          "common": true,
+          "vectors": true,
+          "note": true
+        },
+        {
+          "tc": "TC-064",
+          "ds1": true,
+          "common": true,
+          "vectors": true,
+          "note": true
+        },
+        {
+          "tc": "TC-066",
+          "ds1": true,
+          "common": true,
+          "vectors": true,
+          "note": true
+        }
+      ]
+    },
+    {
+      "check": "formal_tc_042_digest_clause",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "formal_tc_052_digest_clause",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "formal_tc_064_digest_clause",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "formal_tc_066_digest_clause",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "manifest_content_digest_assets",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "issues": []
+}

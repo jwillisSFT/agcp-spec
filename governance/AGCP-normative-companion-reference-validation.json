@@ -1,0 +1,88 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "validation_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-VALIDATION",
+  "finding": "P1-01",
+  "release_target": "v2.0.1",
+  "validation_date": "2026-08-03",
+  "status": "PASS",
+  "summary": {
+    "checks": 7,
+    "passed": 7,
+    "failed": 0,
+    "text_artifacts_scanned": 311,
+    "office_artifacts_scanned": 6,
+    "retired_labels": 5,
+    "active_retired_reference_hits": 0,
+    "replacement_artifacts": 10,
+    "corrected_documents": 7
+  },
+  "scope_counts": {
+    "specifications": 89,
+    "openapi": 13,
+    "registries": 8,
+    "examples": 32,
+    "catalogs": 13,
+    "rtm_office": 1
+  },
+  "checks": [
+    {
+      "check_id": "NCR-001",
+      "status": "PASS",
+      "detail": "Controlled dispositions: 3"
+    },
+    {
+      "check_id": "NCR-002",
+      "status": "PASS",
+      "detail": "All replacement artifacts exist."
+    },
+    {
+      "check_id": "NCR-003",
+      "status": "PASS",
+      "detail": "Scanned 311 text artifacts and 6 Office artifacts; active retired-label hits: 0"
+    },
+    {
+      "check_id": "NCR-004",
+      "status": "PASS",
+      "detail": "All seven corrected documents contain their canonical replacement bindings."
+    },
+    {
+      "check_id": "NCR-005",
+      "status": "PASS",
+      "detail": "Canonical human-review title verified."
+    },
+    {
+      "check_id": "NCR-006",
+      "status": "PASS",
+      "detail": "All canonical local path references in corrected documents resolve."
+    },
+    {
+      "check_id": "NCR-007",
+      "status": "PASS",
+      "detail": "Repository scope scanned: {'specifications': 89, 'openapi': 13, 'registries': 8, 'examples': 32, 'catalogs': 13, 'rtm_office': 1}"
+    }
+  ],
+  "issues": [],
+  "source_hashes": {
+    "ARCHITECTURE.md": "53439975acb6e1234d13c60a08d522e2a069ae590bd9624988bd820e6e2f73d5",
+    "README.md": "17a9bb13d7eb6dda6d87e194d2884d41425de647ce102687762cfc83e042779f",
+    "conformance/AGCP-Conformance.md": "5cda6c1eaec160f6007e8e684ef30b72124e66ff170fa64ab7c8dcda8c7c274d",
+    "conformance/agcp-conformance-manifest.yml": "321cd0def8ee07e430bf66f93485442a8d2043905eaf182564f01d0055a585e3",
+    "governance/AGCP-Normative-Companion-Reference-Dispositions.md": "67f948d4bdf6355ab09c0bbcd5c8f7170758b7dd83b90fab5573394103db921f",
+    "governance/AGCP-Versioning.md": "b19d2a0c3ba96ccd3123f3ae29d4b0acbacfbb6c91ec6c7ca334c5d48503f788",
+    "governance/normative-companion-reference-dispositions.json": "8790366be653b3762fcabaea7fd17b595f7fdd1e1a830acd00d1c2a973bd1a2e",
+    "lifecycle/AGCP Governance Lifecycle Model.md": "4ac88dc8db9d46464cb7e6bd35d3f905b15975b374862ba83e40ceeed8f9ca99",
+    "lifecycle/AGCP Governance Progression Implementation Guide.md": "634f24f99410c207714ee9dd0c19e3d217de348ff9a2dbf5a21df69bff0d3c41",
+    "lifecycle/AGCP Normative Governance Progression Table.md": "5871dc6e951da09cb249f877dee0269ff238417f27cb98650d00ab4b47c3f64f",
+    "lifecycle/README.md": "91547049939b66d3878bb29521008c93f2bb42bf42cf129e83d914f5ccd79c19",
+    "spec/AGCP-Human-Review-Specification.md": "5113078fcb769e1e0bebef1687c35dd686da531ca11a71cdc26d6859ce6120ba",
+    "spec/README.md": "57405192579da376248a0a8c744c6116dd07fc1e28dc796db7f16e38a3addda1",
+    "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md": "c32ba0a6f8406360b07729a3ab9cc6e4d3ba9bdf9c2b32c690d30d146fb00abe"
+  }
+}

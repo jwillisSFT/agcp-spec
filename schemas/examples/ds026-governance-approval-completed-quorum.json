@@ -1,4 +1,5 @@
 {
+  "artifact_origin": "AGCP_CREATED_OR_QUALIFIED",
   "approval_artifact_id": "approval-complete-2",
   "artifact_version": "1.0.0",
   "artifact_role": "APPROVAL_EVIDENCE_NOT_EXECUTION_AUTHORITY",
@@ -72,7 +73,7 @@
     }
   },
   "scope": {
-    "tenant_id": "tenant-id-1"
+    "tenant_id": "tenant-1"
   },
   "validity_window": {
     "not_before": "2026-07-30T16:00:00Z",

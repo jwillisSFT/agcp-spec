@@ -64,7 +64,7 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "proposal_id": "proposal-id-1",
+    "proposal_id": "proposal-1",
     "evaluated_at": "2026-07-30T16:00:00Z"
   },
   "governance_binding_validation_result_ref": {
@@ -82,7 +82,7 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "proposal_id": "proposal-id-1",
+    "proposal_id": "proposal-1",
     "evaluated_at": "2026-07-30T16:00:00Z"
   },
   "transition_mode": "SINGLE_TRANSITION",
@@ -118,7 +118,7 @@
     "lifecycle_transition_ref": {
       "lifecycle_transition_id": "GLT-EXAMPLE-1",
       "lifecycle_record_id": "GLR-EXAMPLE-1",
-      "proposal_id": "proposal-id-1",
+      "proposal_id": "proposal-1",
       "to_state": "SUBMITTED",
       "terminality_after": "NONTERMINAL",
       "ledger_event_ref": {
@@ -165,9 +165,9 @@
     "governance_lifecycle_record_ref": {
       "lifecycle_record_id": "GLR-EXAMPLE-1",
       "record_version": "1.0.0",
-      "proposal_id": "proposal-id-1",
-      "tenant_id": "tenant-id-1",
-      "governance_domain_id": "governance-domain-id-1",
+      "proposal_id": "proposal-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
       "current_state": {
         "lifecycle_record_id": "GLR-EXAMPLE-1",
         "proposal_id": "proposal-1",

@@ -1,0 +1,181 @@
+{
+  "vector_set_id": "AGCP-GOVERNANCE-APPROVAL-COMMAND-RECORD-SEPARATION-1.0",
+  "finding": "P0-06",
+  "submission_schema": "schemas/governance_approval_submission.json",
+  "authoritative_record_schema": "schemas/governance_approval_artifact.json",
+  "valid_submission_example": "schemas/examples/ds045-governance-approval-submission-valid.json",
+  "authoritative_record_examples": [
+    "schemas/examples/ds026-governance-approval-partial-quorum.json",
+    "schemas/examples/ds026-governance-approval-completed-quorum.json"
+  ],
+  "positive_vectors": [
+    {
+      "id": "PV-CMDREC-001",
+      "description": "DS-045 claimant submission validates and contains no authoritative server-derived fields.",
+      "expected": "VALID_SUBMISSION"
+    },
+    {
+      "id": "PV-CMDREC-002",
+      "description": "DS-026 partial-quorum record validates with AGCP authoritative origin and verification results.",
+      "expected": "VALID_AUTHORITATIVE_RECORD"
+    },
+    {
+      "id": "PV-CMDREC-003",
+      "description": "DS-026 completed-quorum record validates with AGCP authoritative origin and computed quorum state.",
+      "expected": "VALID_AUTHORITATIVE_RECORD"
+    }
+  ],
+  "negative_vectors": [
+    {
+      "id": "NV-CMDREC-001",
+      "description": "Claimant attempts to assert server-derived field approval_artifact_id.",
+      "mutation": {
+        "add_top_level_field": "approval_artifact_id",
+        "value": "claimant-artifact-1"
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-002",
+      "description": "Claimant attempts to assert server-derived field artifact_origin.",
+      "mutation": {
+        "add_top_level_field": "artifact_origin",
+        "value": "AGCP_CREATED_OR_QUALIFIED"
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-003",
+      "description": "Claimant attempts to assert server-derived field status.",
+      "mutation": {
+        "add_top_level_field": "status",
+        "value": "ACTIVE"
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-004",
+      "description": "Claimant attempts to assert server-derived field lifecycle_state_binding.",
+      "mutation": {
+        "add_top_level_field": "lifecycle_state_binding",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-005",
+      "description": "Claimant attempts to assert server-derived field canonical_state_ref_at_adjudication.",
+      "mutation": {
+        "add_top_level_field": "canonical_state_ref_at_adjudication",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-006",
+      "description": "Claimant attempts to assert server-derived field approver_eligibility.",
+      "mutation": {
+        "add_top_level_field": "approver_eligibility",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-007",
+      "description": "Claimant attempts to assert server-derived field authority_lineage_ref.",
+      "mutation": {
+        "add_top_level_field": "authority_lineage_ref",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-008",
+      "description": "Claimant attempts to assert server-derived field governance_evidence_refs.",
+      "mutation": {
+        "add_top_level_field": "governance_evidence_refs",
+        "value": []
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-009",
+      "description": "Claimant attempts to assert server-derived field cryptographic_verification.",
+      "mutation": {
+        "add_top_level_field": "cryptographic_verification",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-010",
+      "description": "Claimant attempts to assert server-derived field replay_protection.",
+      "mutation": {
+        "add_top_level_field": "replay_protection",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-011",
+      "description": "Claimant attempts to assert server-derived field artifact_digest.",
+      "mutation": {
+        "add_top_level_field": "artifact_digest",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-012",
+      "description": "Claimant attempts to assert server-derived field semantic_assertions.",
+      "mutation": {
+        "add_top_level_field": "semantic_assertions",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-013",
+      "description": "Claimant attempts to assert server-derived field lifecycle_effect.",
+      "mutation": {
+        "add_top_level_field": "lifecycle_effect",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-014",
+      "description": "Claimant attempts to assert server-derived field artifact_termination.",
+      "mutation": {
+        "add_top_level_field": "artifact_termination",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    },
+    {
+      "id": "NV-CMDREC-015",
+      "description": "Claimant attempts to assert server-derived field quorum_contribution.",
+      "mutation": {
+        "add_top_level_field": "quorum_contribution",
+        "value": {}
+      },
+      "expected_schema_result": "INVALID",
+      "expected_reason": "ADDITIONAL_PROPERTY_REJECTED"
+    }
+  ],
+  "processing_invariant": "A valid DS-045 submission is never itself a DS-026 record. AGCP independently validates and qualifies it before creating or qualifying authoritative DS-026 evidence."
+}

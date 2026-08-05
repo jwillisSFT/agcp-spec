@@ -1,0 +1,142 @@
+{
+  "contract_type": "AGCP_PROFILE_SPECIFIC_IF_002_MACHINE_CONTRACT",
+  "base_interface_id": "IF-002",
+  "base_interface_version": "v2",
+  "base_contract_version": "2.0.1",
+  "companion_interface_id": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0",
+  "companion_contract_version": "1.0.0",
+  "abi_id": "agcp_pec_abi_v1",
+  "status": "CONTROLLED_PROFILE_COMPANION",
+  "applicable_profile_id": "AGCP-RUST-STUDENT-SERVICE-2.0.0",
+  "canonical_encoding": {
+    "media_type": "application/json",
+    "character_encoding": "UTF-8",
+    "canonicalization": "RFC8785_JCS"
+  },
+  "schemas": {
+    "input": "api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json",
+    "output": "api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json",
+    "controlled_failure": "api/if-002/AGCP-WASM-PEC-Error-Envelope.schema.json"
+  },
+  "module_format": {
+    "format": "WebAssembly Core 1.0",
+    "architecture": "wasm32",
+    "wasi_allowed": false,
+    "shared_memory_allowed": false,
+    "memory64_allowed": false,
+    "threads_allowed": false
+  },
+  "required_exports": [
+    {
+      "name": "memory",
+      "kind": "memory"
+    },
+    {
+      "name": "agcp_pec_abi_version_v1",
+      "params": [],
+      "results": [
+        "i32"
+      ],
+      "required_return": 1
+    },
+    {
+      "name": "agcp_alloc_v1",
+      "params": [
+        "i32"
+      ],
+      "results": [
+        "i32"
+      ]
+    },
+    {
+      "name": "agcp_dealloc_v1",
+      "params": [
+        "i32",
+        "i32"
+      ],
+      "results": []
+    },
+    {
+      "name": "agcp_evaluate_v1",
+      "params": [
+        "i32",
+        "i32"
+      ],
+      "results": [
+        "i64"
+      ]
+    }
+  ],
+  "permitted_imports": [],
+  "prohibited_import_categories": [
+    "WASI",
+    "NETWORK",
+    "FILESYSTEM",
+    "CLOCK",
+    "RANDOMNESS",
+    "ENVIRONMENT",
+    "THREADS",
+    "DYNAMIC_LINKING",
+    "PROCESS_CREATION",
+    "SHARED_MEMORY",
+    "UNBOUNDED_MEMORY_GROWTH"
+  ],
+  "memory_ownership": {
+    "input": "Host requests module memory with agcp_alloc_v1, copies exactly input_len canonical bytes, and calls agcp_evaluate_v1.",
+    "output": "agcp_evaluate_v1 returns an unsigned i64 with output_ptr in the high 32 bits and output_len in the low 32 bits. The host copies exactly output_len bytes and calls agcp_dealloc_v1.",
+    "pointer_width_bits": 32,
+    "result_packing": "(uint64(output_ptr) << 32) | uint64(output_len)",
+    "out_of_bounds_behavior": "CONTROLLED_FAILURE_INVALID_OUTPUT_OR_WASM_TRAP; NEVER AUTHORIZED"
+  },
+  "determinism": {
+    "external_io": "PROHIBITED",
+    "host_time": "PROHIBITED",
+    "randomness": "PROHIBITED",
+    "environment_variables": "PROHIBITED",
+    "mutable_global_state_across_evaluations": "PROHIBITED",
+    "authoritative_time_source": "INPUT_ENVELOPE_ONLY",
+    "canonical_state_source": "IMMUTABLE_SNAPSHOT_DESCRIPTOR_IN_INPUT",
+    "same_input_module_and_limits_same_output_bytes": true
+  },
+  "resource_limits": {
+    "numeric_values": "DEPLOYMENT_OVERLAY; NOT FIXED BY GENERIC AGCP",
+    "binding": "Exact fuel, memory, output, and timeout limits are supplied in the signed input envelope and recorded in evidence.",
+    "fuel_exhaustion": "FUEL_EXHAUSTED; authorization_permitted=false",
+    "memory_exhaustion": "MEMORY_LIMIT_EXCEEDED; authorization_permitted=false",
+    "timeout": "TIMEOUT; host terminates evaluation; no partial output is accepted",
+    "trap": "WASM_TRAP; stable failure code; never maps to Authorized",
+    "output_limit": "OUTPUT_LIMIT_EXCEEDED; output discarded; authorization_permitted=false"
+  },
+  "module_binding": {
+    "digest_algorithm": "SHA-256",
+    "digest_scope": "EXACT_WASM_MODULE_BYTES",
+    "required_in": [
+      "DS-005 artifact",
+      "input envelope",
+      "output envelope",
+      "Governance Evidence",
+      "Execution Authorization binding",
+      "commit-time revalidation"
+    ],
+    "substitution_behavior": "MODULE_DIGEST_MISMATCH; fail closed"
+  },
+  "activation": {
+    "atomic_with": [
+      "policy set",
+      "Governance Configuration",
+      "compiled governance artifact",
+      "Governance Version",
+      "effective ledger event"
+    ],
+    "partial_visibility": "PROHIBITED",
+    "rollback": "Only to a previously approved, validated, digest-pinned module set through Controlled Governance Activation."
+  },
+  "compatibility": {
+    "abi_major_rule": "Breaking ABI changes require a new abi_id and companion contract major version.",
+    "contract_minor_rule": "Backward-compatible additive envelope fields require schema and vector updates and a companion minor version.",
+    "unknown_imports": "REJECT_MODULE",
+    "unknown_required_output_fields": "REJECT_OUTPUT",
+    "unsupported_abi": "ABI_INCOMPATIBLE"
+  },
+  "conformance_vectors": "conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json"
+}

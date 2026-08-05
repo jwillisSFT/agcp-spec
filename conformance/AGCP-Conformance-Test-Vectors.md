@@ -41,7 +41,7 @@ Harness vectors provide executable realization and do not create independent nor
 - Vector identifier sets, names, requests, setup conditions, captures, and expected outcomes must remain synchronized.
 - Catalog validation fails if either file contains an identifier absent from the other.
 - Every primary request and every HTTP setup prestep SHALL supply all path, query, and header parameters required by `../api/AGCP-HTTP-Contract.yaml`; the controlled result is recorded in `AGCP-harness-request-parameter-validation.json`.
-- Governance Approval vectors that exercise semantic cryptographic failure SHALL remain structurally valid under `GovernanceApprovalRequest` and DS-026. After schema validation, the harness SHALL independently verify signature, key, and artifact-digest bindings and apply the declared semantic verifier result.
+- Governance Approval vectors that exercise semantic cryptographic failure SHALL remain structurally valid under DS-045 `GovernanceApprovalSubmission`. After schema validation, the harness SHALL independently verify claimant provenance, authenticated identity binding, key binding, and submission-digest binding. DS-026 is created or qualified only after those checks and SHALL never be supplied as request content.
 
 ## Complete vector index
 
@@ -59,9 +59,9 @@ Harness vectors provide executable realization and do not create independent nor
 | `TV-GET-001` | Get authorized Proposal View returns externally observable governance state and never SUBMITTED |
 | `TV-GET-002` | Pre-decision proposal state is not externally observable |
 | `TV-GAPP-001` | Partial Governance Approval quorum -> Pending Human Review outcome remains |
-| `TV-GAPP-002` | Valid Governance Approval Artifact completes quorum -> Execution Authorization available |
-| `TV-GAPP-003` | Expired Governance Approval Artifact -> GOVERNANCE_APPROVAL_EXPIRED |
-| `TV-GAPP-004` | Schema-valid Governance Approval Artifact with invalid signature material -> GOVERNANCE_APPROVAL_INVALID |
+| `TV-GAPP-002` | Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum -> Execution Authorization available |
+| `TV-GAPP-003` | Expired Governance Approval Submission -> GOVERNANCE_APPROVAL_EXPIRED |
+| `TV-GAPP-004` | Schema-valid Governance Approval Submission with invalid provenance signature -> GOVERNANCE_APPROVAL_INVALID |
 | `TV-COMMIT-001` | Commit Boundary succeeds with valid Execution Authorization |
 | `TV-COMMIT-002` | Commit Boundary while governed approval remains incomplete -> ACTION_NOT_AUTHORIZED |
 | `TV-COMMIT-003` | Commit Boundary with mismatched authorization -> ACTION_NOT_AUTHORIZED |
@@ -72,7 +72,7 @@ Harness vectors provide executable realization and do not create independent nor
 | `TV-STATE-002` | Canonical State resolution rejects reordered incorporated ledger history |
 | `TV-XTEN-SETUP` | Setup tenant T2 proposal for cross-tenant tests |
 | `TV-XTEN-001` | Cross-tenant Proposal View access is forbidden or hidden |
-| `TV-XTEN-002` | Cross-tenant Governance Approval Artifact submission is forbidden or hidden |
+| `TV-XTEN-002` | Cross-tenant Governance Approval Submission is forbidden or hidden |
 | `TV-XTEN-003` | Cross-tenant Commit Boundary is forbidden or hidden |
 | `TV-XTEN-004` | Cross-tenant Governance Evidence access is forbidden or hidden |
 | `TV-META-001` | Implementation metadata advertises the controlled IF-001 and conformance surface |
@@ -261,11 +261,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-eb70fac9b793fa04ef47c0ed
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MjYx
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-001
   extensions:
@@ -501,11 +502,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-399b6f11932336f6b89ce5fb
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246NTAx
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-002
   extensions:
@@ -717,11 +719,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-aa317a60af96d8e7949aa7bb
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246NzE3
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-003
   extensions:
@@ -980,11 +983,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_INVALID
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-f279a575002ab1fc85c23d2d
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..SU5WQUxJRDptYXJrZG93bjo5ODA
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-005
   extensions:
@@ -1156,11 +1160,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-658cca408c30c0a95b3e250b
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTE1Ng
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-006
   extensions:
@@ -1334,11 +1339,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-4091d97cfc6e7eff4afd8846
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTMzNA
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-007
   extensions:
@@ -1524,11 +1530,12 @@ presteps:
           effective_at: '2026-07-30T16:00:00Z'
       provenance:
         signer: client:test
-        signature:
-          alg: Ed25519
-          kid: kid-test
-          sig: SIG_VALID_123
+        kid: kid-test
+        alg: Ed25519
         signed_at: '2026-07-30T16:00:00Z'
+        nonce: nonce-f3b876e7aa1287698ce54b8f
+        scope: agcp.http.request.body
+        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTUyNA
     submitted_at: '2026-07-30T16:00:00Z'
     client_request_id: CR-TV-PROP-008
     extensions:
@@ -1658,11 +1665,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-bd8d570da8adb54118160998
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTY1OA
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-008
   extensions:
@@ -1805,11 +1813,12 @@ presteps:
           effective_at: '2026-07-30T16:00:00Z'
       provenance:
         signer: client:test
-        signature:
-          alg: Ed25519
-          kid: kid-test
-          sig: SIG_VALID_123
+        kid: kid-test
+        alg: Ed25519
         signed_at: '2026-07-30T16:00:00Z'
+        nonce: nonce-f4e4e7a3c58093add14be947
+        scope: agcp.http.request.body
+        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTgwNQ
     submitted_at: '2026-07-30T16:00:00Z'
     client_request_id: CR-PROP-009-A
     extensions:
@@ -1939,11 +1948,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-5baab0b10420931fc987f9b7
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTkzOQ
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-PROP-009-B
   extensions:
@@ -2031,12 +2041,19 @@ http:
   status: 404
   body:
     rejection_code: RESOURCE_NOT_FOUND
+    http_status: 404
+    retryable: false
+    governance_evidence_generated: false
+    outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+    transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
 ---
 
 # Governance Approval and Adjudication
+
+Controlled command/record separation vectors: `conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json`.
 
 ## TV-GAPP-001 — Partial Governance Approval quorum -> Pending Human Review outcome remains
 
@@ -2162,11 +2179,12 @@ presteps:
           effective_at: '2026-07-30T16:00:00Z'
       provenance:
         signer: client:test
-        signature:
-          alg: Ed25519
-          kid: kid-test
-          sig: SIG_VALID_123
+        kid: kid-test
+        alg: Ed25519
         signed_at: '2026-07-30T16:00:00Z'
+        nonce: nonce-0201158b154ebd4e78837f76
+        scope: agcp.http.request.body
+        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MjE2Mg
     submitted_at: '2026-07-30T16:00:00Z'
     client_request_id: CR-TV-GAPP-001
     extensions:
@@ -2194,25 +2212,15 @@ path: /agcp/v2/proposals/${P_GAPP_001}/governance-approvals
 headers:
   Idempotency-Key: K_GAPP_001_APPROVAL
 body:
-  tenant_id: T1
-  governance_domain_id: domain-primary
-  provenance:
-    signer: client:test
-    signature:
-      alg: Ed25519
-      kid: kid-test
-      sig: SIG_VALID
-    signed_at: '2026-02-25T12:00:00Z'
-  governance_approval_artifact:
-    $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-    $overrides:
-      proposal_identity.proposal_id: ${P_GAPP_001}
-      proposal_identity.tenant_id: T1
-      proposal_identity.governance_domain_id: domain-primary
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      target.tenant_id: T1
-      target.governance_domain_id: domain-primary
+  $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+  $overrides:
+    proposal_identity.proposal_id: ${P_GAPP_001}
+    proposal_identity.tenant_id: T1
+    proposal_identity.governance_domain_id: domain-primary
+    tenant_id: T1
+    governance_domain_id: domain-primary
+    target.tenant_id: T1
+    target.governance_domain_id: domain-primary
 ```
 
 ### Expected result
@@ -2253,7 +2261,7 @@ schema: proposal_view.json
 
 ---
 
-## TV-GAPP-002 — Valid Governance Approval Artifact completes quorum -> Execution Authorization available
+## TV-GAPP-002 — Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum -> Execution Authorization available
 
 ### Initial conditions and setup
 
@@ -2270,25 +2278,15 @@ path: /agcp/v2/proposals/${P_PROP_002}/governance-approvals
 headers:
   Idempotency-Key: K_GAPP_002
 body:
-  tenant_id: T1
-  governance_domain_id: domain-primary
-  provenance:
-    signer: client:test
-    signature:
-      alg: Ed25519
-      kid: kid-test
-      sig: SIG_VALID
-    signed_at: '2026-02-25T12:00:00Z'
-  governance_approval_artifact:
-    $fixture: ../schemas/examples/ds026-governance-approval-completed-quorum.json
-    $overrides:
-      proposal_identity.proposal_id: ${P_PROP_002}
-      proposal_identity.tenant_id: T1
-      proposal_identity.governance_domain_id: domain-primary
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      target.tenant_id: T1
-      target.governance_domain_id: domain-primary
+  $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+  $overrides:
+    proposal_identity.proposal_id: ${P_PROP_002}
+    proposal_identity.tenant_id: T1
+    proposal_identity.governance_domain_id: domain-primary
+    tenant_id: T1
+    governance_domain_id: domain-primary
+    target.tenant_id: T1
+    target.governance_domain_id: domain-primary
 ```
 
 ### Captured values
@@ -2353,7 +2351,7 @@ schema: proposal_view.json
 
 ---
 
-## TV-GAPP-003 — Expired Governance Approval Artifact -> GOVERNANCE_APPROVAL_EXPIRED
+## TV-GAPP-003 — Expired Governance Approval Submission -> GOVERNANCE_APPROVAL_EXPIRED
 
 ### Initial conditions and setup
 
@@ -2370,48 +2368,17 @@ path: /agcp/v2/proposals/${P_PROP_002}/governance-approvals
 headers:
   Idempotency-Key: K_GAPP_003
 body:
-  tenant_id: T1
-  governance_domain_id: domain-primary
-  provenance:
-    signer: client:test
-    signature:
-      alg: Ed25519
-      kid: kid-test
-      sig: SIG_VALID
-    signed_at: '2026-02-25T12:00:00Z'
-  governance_approval_artifact:
-    $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-    $overrides:
-      proposal_identity.proposal_id: ${P_PROP_002}
-      proposal_identity.tenant_id: T1
-      proposal_identity.governance_domain_id: domain-primary
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      target.tenant_id: T1
-      target.governance_domain_id: domain-primary
-      status: EXPIRED
-      artifact_termination:
-        termination_type: EXPIRED
-        effective_at: '2026-07-30T16:00:00Z'
-        reason_code: VALIDITY_WINDOW_EXPIRED
-        reason: The Governance Approval Artifact validity window expired before use.
-        terminated_by:
-          principal:
-            principal_id: approval-lifecycle-service
-            principal_type: SYSTEM
-          attributed_at: '2026-07-30T16:00:00Z'
-        termination_authority_lineage_ref:
-          authority_lineage_id: authority-lineage-1
-          authority_lineage_digest:
-            algorithm: SHA-256
-            value: '3333333333333333333333333333333333333333333333333333333333333333'
-          lineage_version: 2.0.0
-          evaluated_at: '2026-07-30T16:00:00Z'
-        governance_evidence_refs:
-        - governance_evidence_id: evidence-expiration-1
-          evidence_digest:
-            algorithm: SHA-256
-            value: '9999999999999999999999999999999999999999999999999999999999999999'
+  $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+  $overrides:
+    proposal_identity.proposal_id: ${P_PROP_002}
+    proposal_identity.tenant_id: T1
+    proposal_identity.governance_domain_id: domain-primary
+    tenant_id: T1
+    governance_domain_id: domain-primary
+    target.tenant_id: T1
+    target.governance_domain_id: domain-primary
+    validity_window.not_before: '2026-07-29T16:00:00Z'
+    validity_window.expires_at: '2026-07-30T15:59:59Z'
 ```
 
 ### Expected result
@@ -2426,7 +2393,7 @@ ledger_no_append: true
 
 ---
 
-## TV-GAPP-004 — Schema-valid Governance Approval Artifact with invalid signature material -> GOVERNANCE_APPROVAL_INVALID
+## TV-GAPP-004 — Schema-valid Governance Approval Submission with invalid provenance signature -> GOVERNANCE_APPROVAL_INVALID
 
 ### Initial conditions and setup
 
@@ -2435,12 +2402,11 @@ auth_as: T1
 use_proposal_id: P_PROP_002
 hooks:
   cryptographic_verifier:
-    governance_approval_artifact:
+    governance_approval_submission:
       independent_verification_required: true
-      target_artifact_id: approval-partial-1
       signature_valid: false
       key_binding_valid: false
-      artifact_digest_binding_valid: false
+      submission_digest_binding_valid: false
       failure_reason: INVALID_SIGNATURE_AND_KEY_BINDING
       rejection_code: GOVERNANCE_APPROVAL_INVALID
 ```
@@ -2453,28 +2419,15 @@ path: /agcp/v2/proposals/${P_PROP_002}/governance-approvals
 headers:
   Idempotency-Key: K_GAPP_004
 body:
-  tenant_id: T1
-  governance_domain_id: domain-primary
-  provenance:
-    signer: client:test
-    signature:
-      alg: Ed25519
-      kid: kid-test
-      sig: SIG_VALID
-    signed_at: '2026-02-25T12:00:00Z'
-  governance_approval_artifact:
-    $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-    $overrides:
-      proposal_identity.proposal_id: ${P_PROP_002}
-      proposal_identity.tenant_id: T1
-      proposal_identity.governance_domain_id: domain-primary
-      tenant_id: T1
-      governance_domain_id: domain-primary
-      target.tenant_id: T1
-      target.governance_domain_id: domain-primary
-      cryptographic_verification.verification_outcome: VERIFIED
-      cryptographic_verification.signature.kid: key-unbound-tv-gapp-004
-      cryptographic_verification.signature.sig: SIG_INVALID_FOR_ARTIFACT_DIGEST
+  $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+  $overrides:
+    proposal_identity.proposal_id: ${P_PROP_002}
+    proposal_identity.tenant_id: T1
+    proposal_identity.governance_domain_id: domain-primary
+    tenant_id: T1
+    governance_domain_id: domain-primary
+    target.tenant_id: T1
+    target.governance_domain_id: domain-primary
 ```
 
 ### Expected result
@@ -3074,11 +3027,12 @@ body:
         effective_at: '2026-07-30T16:00:00Z'
     provenance:
       signer: client:test
-      signature:
-        alg: Ed25519
-        kid: kid-test
-        sig: SIG_VALID_123
+      kid: kid-test
+      alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
+      nonce: nonce-4e8de49a3d3c23242c46c060
+      scope: agcp.http.request.body
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MzA3NA
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-XTEN-SETUP
   extensions:
@@ -3142,12 +3096,17 @@ http:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
 ---
 
-## TV-XTEN-002 — Cross-tenant Governance Approval Artifact submission is forbidden or hidden
+## TV-XTEN-002 — Cross-tenant Governance Approval Submission is forbidden or hidden
 
 ### Initial conditions and setup
 
@@ -3164,25 +3123,15 @@ path: /agcp/v2/proposals/${P_T2_001}/governance-approvals
 headers:
   Idempotency-Key: K_XTEN_002
 body:
-  tenant_id: T1
-  governance_domain_id: domain-primary
-  provenance:
-    signer: client:test
-    signature:
-      alg: Ed25519
-      kid: kid-test
-      sig: SIG_VALID
-    signed_at: '2026-02-25T12:00:00Z'
-  governance_approval_artifact:
-    $fixture: ../schemas/examples/ds026-governance-approval-partial-quorum.json
-    $overrides:
-      proposal_identity.proposal_id: ${P_T2_001}
-      proposal_identity.tenant_id: T2
-      proposal_identity.governance_domain_id: domain-secondary
-      tenant_id: T2
-      governance_domain_id: domain-secondary
-      target.tenant_id: T2
-      target.governance_domain_id: domain-secondary
+  $fixture: ../schemas/examples/ds045-governance-approval-submission-valid.json
+  $overrides:
+    proposal_identity.proposal_id: ${P_T2_001}
+    proposal_identity.tenant_id: T2
+    proposal_identity.governance_domain_id: domain-secondary
+    tenant_id: T2
+    governance_domain_id: domain-secondary
+    target.tenant_id: T2
+    target.governance_domain_id: domain-secondary
 ```
 
 ### Expected result
@@ -3198,6 +3147,11 @@ http:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
@@ -3255,6 +3209,11 @@ http:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
@@ -3292,6 +3251,11 @@ http:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
@@ -3390,6 +3354,11 @@ http:
   status: 404
   body:
     rejection_code: RESOURCE_NOT_FOUND
+    http_status: 404
+    retryable: false
+    governance_evidence_generated: false
+    outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+    transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
@@ -3427,6 +3396,11 @@ http:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
@@ -3940,6 +3914,11 @@ http:
   status: 404
   body:
     rejection_code: RESOURCE_NOT_FOUND
+    http_status: 404
+    retryable: false
+    governance_evidence_generated: false
+    outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+    transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
@@ -3996,6 +3975,11 @@ http:
       status: 404
       body:
         rejection_code: RESOURCE_NOT_FOUND
+        http_status: 404
+        retryable: false
+        governance_evidence_generated: false
+        outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
+        transport_disposition: NOT_FOUND
 ledger_no_append: true
 ```
 
@@ -4458,3 +4442,20 @@ the YAML vector. DS-040 ledger-event expectations SHALL validate against
 Passing applicable vectors supports deterministic conformance validation but does not supersede
 the authoritative CR set, Core Specification, Architecture Reference Model, RTM, or formal
 Conformance Test Suite.
+
+
+## Profile-specific IF-002 deterministic WASM vector package
+
+The proposed Rust Student Service profile adopts `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0` and ABI `agcp_pec_abi_v1`. The controlled machine-readable vector set is `conformance/if-002/AGCP-WASM-PEC-Test-Vectors.json`. It covers canonical input/output replay, required exports, zero imports, module-digest substitution, fuel, memory, timeout, traps, output limits, unsupported ABI, and attempts by a module to assert authority it does not possess.
+
+## External content-digest vector package
+
+The controlled machine-readable package `conformance/digests/AGCP-Content-Digest-Test-Vectors.json` supplements TC-042, TC-052, TC-064, and TC-066 with algorithm/output-length, lowercase-encoding, and negative schema vectors. Formal Test Cases remain authoritative.
+
+## IF-001 Public Error and Metadata Vector Package
+
+The machine-readable package `conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json` is the controlled source for public not-found, throttling, capacity, governance-denial separation, and DS-003 metadata distribution vectors.
+
+## Semantic fixture vectors
+
+The machine-readable semantic fixture vector package is `conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json`. It contains ten explicit semantic-mismatch vectors and references the fifteen claimant-assertion vectors in the command-versus-record package. Negative vectors are not positive fixtures and are not cataloged as successful examples.

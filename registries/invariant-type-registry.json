@@ -10,7 +10,7 @@
   "release": {
     "release_id": "REG-INVARIANT-TYPE-v2.0.0",
     "registry_release": "v2.0.0",
-    "specification_version": "v2.0",
+    "specification_version": "v2.0.0",
     "publication_status": "CURRENT",
     "published_at": "2026-07-30T12:26:00-04:00",
     "authority": "AGCP controlled repository release",
@@ -33,7 +33,7 @@
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "2cead8b63832f287ca0dd3afa2722e47e50cb2fe3a117b9c0d87dd5f4bf7fb36",
+      "value": "d08f0744c62701904b6194f5e87141790393fbfcbe437aa7ccde831efcd9a6ce",
       "canonicalization": "JCS-RFC8785"
     }
   },

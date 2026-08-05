@@ -50,17 +50,19 @@ Implementations MAY differ internally provided that the externally observable go
 
 # 3. Relationship to Other Specifications
 
-This document complements, but does not replace, the following specifications:
+This document complements, but does not replace, the following controlled artifacts:
 
-- AGCP Core Specification
-- AGCP Policy Evaluation Contract
-- AGCP HTTP Interface Specification
-- AGCP Security Specification
-- AGCP Multitenant Operational Specification
-- AGCP Provenance Wire Format Specification
-- AGCP Human Adjudication and Governance Approval Specification
-- AGCP Append-Only Governance Ledger Specification
-- AGCP Conformance Specification
+- the AGCP Core Specification (`../spec/AGCP-Core.docx`)
+- the Policy Evaluation Contract (`../spec/AGCP-Policy-Evaluation-Contract.md`)
+- the AGCP HTTP Interface Specification (`../spec/AGCP-HTTP-Interface-Specification.md`)
+- the AGCP Multitenant Operational Specification (`../spec/AGCP-Multitenant-Operational-Specification.md`)
+- the AGCP Provenance Wire Format Specification (`../spec/AGCP-Provenance-Wire-Format-Specification.md`)
+- AGCP Error Mapping (`../spec/AGCP-Error-Mapping.md`)
+- DS-020 Governance Evidence (`../schemas/governance_evidence.json`)
+- DS-033 Evidence Qualification Result (`../schemas/evidence_qualification_result.json`)
+- the AGCP Human Adjudication and Governance Approval Specification (`../spec/AGCP-Human-Review-Specification.md`)
+- the Append-Only Governance Ledger Specification (`../spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md`)
+- the AGCP Conformance Specification (`../conformance/AGCP-Conformance.md`)
 
 Where an inconsistency exists, it SHALL be resolved using the Core-defined precedence order: published CRs, Core Specification, applicable adopted normative Companion Specifications, Implementation Profiles, Conformance Test Suite, and Reference Implementations. This informational document does not supersede any of those sources.
 
@@ -1035,21 +1037,22 @@ Successful conformance demonstrates that an implementation preserves the externa
 
 # 18. References
 
-This document should be read together with the following AGCP specifications:
+This document should be read together with the following controlled AGCP artifacts:
 
-- AGCP Core Specification
-- AGCP Policy Evaluation Contract
-- AGCP HTTP Interface Specification
-- AGCP Security Specification
-- AGCP Multitenant Operational Specification
-- AGCP Human Adjudication and Governance Approval Specification
-- AGCP Provenance Wire Format Specification
-- AGCP Append-Only Governance Ledger Specification
-- AGCP Governance Evidence Specification
-- AGCP Conformance Specification
-- AGCP Conformance Test Matrix
-- AGCP Conformance Test Vectors
-- AGCP Harness Check Registry
+- the AGCP Core Specification (`../spec/AGCP-Core.docx`)
+- the Policy Evaluation Contract (`../spec/AGCP-Policy-Evaluation-Contract.md`)
+- the AGCP HTTP Interface Specification (`../spec/AGCP-HTTP-Interface-Specification.md`)
+- the AGCP Multitenant Operational Specification (`../spec/AGCP-Multitenant-Operational-Specification.md`)
+- the AGCP Human Adjudication and Governance Approval Specification (`../spec/AGCP-Human-Review-Specification.md`)
+- the AGCP Provenance Wire Format Specification (`../spec/AGCP-Provenance-Wire-Format-Specification.md`)
+- AGCP Error Mapping (`../spec/AGCP-Error-Mapping.md`)
+- the Append-Only Governance Ledger Specification (`../spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md`)
+- DS-020 Governance Evidence (`../schemas/governance_evidence.json`)
+- DS-033 Evidence Qualification Result (`../schemas/evidence_qualification_result.json`)
+- the AGCP Conformance Specification (`../conformance/AGCP-Conformance.md`)
+- the AGCP Conformance Test Matrix (`../conformance/AGCP-Test-Matrix.md`)
+- the AGCP Conformance Test Vectors (`../conformance/AGCP-Conformance-Test-Vectors.md`)
+- the AGCP Harness Check Registry (`../conformance/AGCP Harness Check Registry.md`)
 
 ---
 

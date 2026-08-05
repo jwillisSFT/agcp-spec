@@ -1,0 +1,49 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "validation_type": "AGCP_V2_0_1_REPOSITORY_SYNCHRONIZATION",
+  "status": "PASS",
+  "checks_passed": 12,
+  "issues": [],
+  "metrics": {
+    "manifest_file_count": 339,
+    "active_schema_count": 44,
+    "registry_entry_count": 94,
+    "fixture_count": 30,
+    "rtm_disposition_counts": {
+      "DS_ID": {
+        "assigned": 122,
+        "na": 0,
+        "blank": 0
+      },
+      "IF_ID": {
+        "assigned": 84,
+        "na": 38,
+        "blank": 0
+      },
+      "REG_ID": {
+        "assigned": 117,
+        "na": 5,
+        "blank": 0
+      }
+    },
+    "validation_source_hashes_checked": 208
+  },
+  "source_hashes": {
+    "governance/AGCP-v2.0.1-repository-synchronization-manifest.json": "30b3588381e194c7b93cdfc0eb4ea72cb4c9fcaeacd7b4b065bc9645125f1647",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90",
+    "schemas/catalog/schema-catalog.json": "696bbff80a2ec4d6daf324020ca7c0d63b8c1ef4c6e60f64a2a75556e195d289",
+    "api/interface-catalog.json": "23e6594df15f8be8b4ede0350984dd09bb86ed8a7864fb3880dae7d34fb9857b",
+    "registries/registry-entry-catalog.json": "05760e6455452f6783a08dd0f180b7b4709e24de7ac3a0a4c4de2d20025df32e",
+    "conformance/test-mapping.json": "c0af048d899281eecf3c51422a1b84849d29e914420f7c73878c4fe634a16b3e",
+    "conformance/fixture-mapping.json": "ae1ced8c7b89541a8f3edaf9ca5cfa973ea671a37492a06fb252eee09b7dd6cc",
+    "conformance/agcp-conformance-manifest.yml": "321cd0def8ee07e430bf66f93485442a8d2043905eaf182564f01d0055a585e3",
+    "RELEASE_NOTES_v2.0.1.md": "ebbffdde62e7e4ab39ef462499d0ce9d57ed053a8c58a83bd2fefa3314da43b8"
+  }
+}

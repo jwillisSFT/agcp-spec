@@ -60,6 +60,11 @@
       "formula_count_after": 0
     },
     "catalog_validation": "PASS",
-    "missing_common_definition_references": []
+    "missing_common_definition_references": [],
+    "if_002_wasm_machine_contract_binding": "PASS",
+    "if_002_abi_id": "agcp_pec_abi_v1",
+    "if_002_contract_digest": "42ae7a18c3d3e773defdde097d10bcbbb5d62bdf7d84b1722e37c07360b1ddb0",
+    "if_002_input_schema_digest": "c59412a11bc9ff019f3936a1d11b23f290abfac8c9580f0b5af80b4d0a081615",
+    "if_002_output_schema_digest": "89fc5ebcc52560c32c59a4644019b929fd4dddf161381ae7d388f297a94b42a7"
   }
 }

@@ -1,0 +1,49 @@
+{
+  "example_set_id": "AGCP-DS-001-CONTENT-DIGEST-EXAMPLES-1.0.0",
+  "title": "AGCP Content Digest Valid Examples",
+  "schema": "../common.json#/$defs/content_digest",
+  "finding": "P1-12",
+  "description": "Valid algorithm-explicit digest examples demonstrating exact lowercase-hexadecimal output lengths.",
+  "examples": [
+    {
+      "id": "CD-PV-001",
+      "digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "canonicalization": "JCS"
+      }
+    },
+    {
+      "id": "CD-PV-002",
+      "digest": {
+        "algorithm": "SHA-384",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "canonicalization": "JCS"
+      }
+    },
+    {
+      "id": "CD-PV-003",
+      "digest": {
+        "algorithm": "SHA-512",
+        "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "canonicalization": "JCS"
+      }
+    },
+    {
+      "id": "CD-PV-004",
+      "digest": {
+        "algorithm": "BLAKE2B-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "JCS"
+      }
+    },
+    {
+      "id": "CD-PV-005",
+      "digest": {
+        "algorithm": "BLAKE2B-512",
+        "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "canonicalization": "JCS"
+      }
+    }
+  ]
+}

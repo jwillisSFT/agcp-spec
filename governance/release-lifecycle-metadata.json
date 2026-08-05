@@ -1,0 +1,31 @@
+{
+  "policy_id": "AGCP-RELEASE-LIFECYCLE-METADATA-1.0",
+  "policy_version": "1.0.0",
+  "finding": "P2-01",
+  "repository_release_target": "v2.0.1",
+  "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+  "controlling_published_baseline": {
+    "release_id": "AGCP-v2.0.0",
+    "specification_version": "2.0.0",
+    "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30"
+  },
+  "current_artifact_lifecycle_state": "CURRENT",
+  "current_catalog_publication_status": "CURRENT",
+  "current_repository_specification_version": "2.0.1",
+  "rules": [
+    "Repository release target, release-target status, controlling published baseline, artifact lifecycle, publication maturity, specification version, and baseline date are separate metadata dimensions.",
+    "Active controlled artifacts in the v2.0.1 worktree use lifecycle CURRENT and publication status CURRENT unless a more specific controlled lifecycle applies.",
+    "The v2.0.1 worktree remains unreleased until a release decision is recorded; this does not change the controlling published v2.0.0 Public Review Controlled Baseline.",
+    "Working Draft is reserved for artifacts intentionally outside the controlled current repository set.",
+    "Implementation Profiles retain their own controlled lifecycle and status values."
+  ],
+  "validation_report_release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  }
+}

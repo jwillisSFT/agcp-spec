@@ -1,5 +1,11 @@
 # AGCP Specification Library
 
+**Artifact Lifecycle:** Current  
+**Repository Release Target:** AGCP v2.0.1  
+**Repository Release Target Status:** Unreleased Accumulated Correction Set  
+**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-07-30
+
 ## Overview
 
 This directory contains the normative and supporting specifications that define the Artificial Intelligence Governance Control Plane (AGCP).
@@ -157,3 +163,13 @@ For repository usage and project information, see:
 
 * `../README.md`
 
+
+- `AGCP-WASM-Policy-Evaluation-Machine-Contract.md` - controlled profile-specific IF-002 deterministic WASM ABI companion.
+
+---
+
+# Canonical Companion References
+
+Repository documents shall reference controlled artifacts by canonical title and path. The controlled disposition of retired absent companion labels and noncanonical titles is published in `../governance/AGCP-Normative-Companion-Reference-Dispositions.md` with a machine-readable companion at `../governance/normative-companion-reference-dispositions.json`.
+
+Governance Evidence is represented by DS-020 (`../schemas/governance_evidence.json`) and DS-033 (`../schemas/evidence_qualification_result.json`) under the controlling CR and Core obligations; no separate umbrella evidence specification is implied.

@@ -1,0 +1,302 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.1",
+    "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+    "controlling_published_baseline": "v2.0.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-07-30",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "status": "PASS",
+  "record_classification": "active_unreleased_correction_set",
+  "finding": "P1-01/P0-02/P0-05/STEP-10",
+  "validated_at": "2026-08-03",
+  "controlled_baseline": {
+    "release_target": "AGCP v2.0.1",
+    "rtm_dataset_version": "RTM-1.46",
+    "rtm_artifact": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
+    "rtm_sha256": "b503f04121970365c4b027e9d97e6672cebd3aefa3f7bd62e8e5ba2278d25b90"
+  },
+  "controlled_field": "Companion_Spec_Disposition",
+  "metrics": {
+    "rtm_rows": 122,
+    "companion_spec_rows": 54,
+    "companion_spec_references": 62,
+    "unique_companion_paths": 11,
+    "adopted_resolving_references": 13,
+    "planned_non_baseline_references": 49,
+    "undispositioned_references": 0,
+    "rows_without_companion_spec": 68,
+    "rows_with_explicit_disposition": 122
+  },
+  "checks": {
+    "controlled_field_present": true,
+    "every_rtm_row_has_explicit_disposition": true,
+    "every_companion_reference_has_explicit_disposition": true,
+    "adopted_companion_paths_resolve": true,
+    "planned_non_baseline_paths_are_not_required": true
+  },
+  "companion_paths": [
+    {
+      "path": "spec/AGCP-Provenance-Wire-Format-Specification.md",
+      "repository_artifact_exists": true,
+      "reference_count": 1,
+      "rtm_ids": [
+        "RTM-00005"
+      ],
+      "cr_ids": [
+        "CR-005"
+      ],
+      "dispositions": [
+        "Adopted Normative Companion - authoritative AGCP provenance wire representation synchronized with DS-001 and IF-001 for v2.0.1."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Governance-Context.md",
+      "repository_artifact_exists": false,
+      "reference_count": 2,
+      "rtm_ids": [
+        "RTM-00043",
+        "RTM-00046"
+      ],
+      "cr_ids": [
+        "CR-043",
+        "CR-046"
+      ],
+      "dispositions": [
+        "spec/AGCP-Governance-Context.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-State-Qualification.md",
+      "repository_artifact_exists": false,
+      "reference_count": 7,
+      "rtm_ids": [
+        "RTM-00048",
+        "RTM-00049",
+        "RTM-00050",
+        "RTM-00051",
+        "RTM-00052",
+        "RTM-00103",
+        "RTM-00104"
+      ],
+      "cr_ids": [
+        "CR-048",
+        "CR-049",
+        "CR-050",
+        "CR-051",
+        "CR-052",
+        "CR-103",
+        "CR-104"
+      ],
+      "dispositions": [
+        "spec/AGCP-State-Qualification.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.",
+        "spec/AGCP-State-Qualification.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.\nspec/AGCP-Action-Representation.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Action-Representation.md",
+      "repository_artifact_exists": false,
+      "reference_count": 7,
+      "rtm_ids": [
+        "RTM-00052",
+        "RTM-00053",
+        "RTM-00054",
+        "RTM-00055",
+        "RTM-00056",
+        "RTM-00057",
+        "RTM-00058"
+      ],
+      "cr_ids": [
+        "CR-052",
+        "CR-053",
+        "CR-054",
+        "CR-055",
+        "CR-056",
+        "CR-057",
+        "CR-058"
+      ],
+      "dispositions": [
+        "spec/AGCP-State-Qualification.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.\nspec/AGCP-Action-Representation.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.",
+        "spec/AGCP-Audit-Model.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.\nspec/AGCP-Action-Representation.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Audit-Model.md",
+      "repository_artifact_exists": false,
+      "reference_count": 11,
+      "rtm_ids": [
+        "RTM-00053",
+        "RTM-00054",
+        "RTM-00055",
+        "RTM-00056",
+        "RTM-00057",
+        "RTM-00058",
+        "RTM-00059",
+        "RTM-00060",
+        "RTM-00061",
+        "RTM-00064",
+        "RTM-00065"
+      ],
+      "cr_ids": [
+        "CR-053",
+        "CR-054",
+        "CR-055",
+        "CR-056",
+        "CR-057",
+        "CR-058",
+        "CR-059",
+        "CR-060",
+        "CR-061",
+        "CR-064",
+        "CR-065"
+      ],
+      "dispositions": [
+        "spec/AGCP-Audit-Model.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.\nspec/AGCP-Action-Representation.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.",
+        "spec/AGCP-Audit-Model.md - Planned / Non-Baseline; proposed/expanded roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md",
+      "repository_artifact_exists": true,
+      "reference_count": 12,
+      "rtm_ids": [
+        "RTM-00075",
+        "RTM-00076",
+        "RTM-00077",
+        "RTM-00078",
+        "RTM-00089",
+        "RTM-00090",
+        "RTM-00110",
+        "RTM-00111",
+        "RTM-00112",
+        "RTM-00113",
+        "RTM-00114",
+        "RTM-00117"
+      ],
+      "cr_ids": [
+        "CR-075",
+        "CR-076",
+        "CR-077",
+        "CR-078",
+        "CR-089",
+        "CR-090",
+        "CR-110",
+        "CR-111",
+        "CR-112",
+        "CR-113",
+        "CR-114",
+        "CR-117"
+      ],
+      "dispositions": [
+        "Adopted profile-specific normative companion for AGCP-RUST-STUDENT-SERVICE-2.0.0; controlled and traceable, but not a universal AGCP implementation requirement."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Continuation-Integrity.md",
+      "repository_artifact_exists": false,
+      "reference_count": 12,
+      "rtm_ids": [
+        "RTM-00091",
+        "RTM-00092",
+        "RTM-00093",
+        "RTM-00094",
+        "RTM-00095",
+        "RTM-00096",
+        "RTM-00097",
+        "RTM-00098",
+        "RTM-00099",
+        "RTM-00100",
+        "RTM-00101",
+        "RTM-00122"
+      ],
+      "cr_ids": [
+        "CR-091",
+        "CR-092",
+        "CR-093",
+        "CR-094",
+        "CR-095",
+        "CR-096",
+        "CR-097",
+        "CR-098",
+        "CR-099",
+        "CR-100",
+        "CR-101",
+        "CR-122"
+      ],
+      "dispositions": [
+        "spec/AGCP-Continuation-Integrity.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.",
+        "spec/AGCP-Evidence-Qualification.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.\nspec/AGCP-Continuation-Integrity.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Evidence-Qualification.md",
+      "repository_artifact_exists": false,
+      "reference_count": 1,
+      "rtm_ids": [
+        "RTM-00097"
+      ],
+      "cr_ids": [
+        "CR-097"
+      ],
+      "dispositions": [
+        "spec/AGCP-Evidence-Qualification.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status.\nspec/AGCP-Continuation-Integrity.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Composite-Governance.md",
+      "repository_artifact_exists": false,
+      "reference_count": 5,
+      "rtm_ids": [
+        "RTM-00105",
+        "RTM-00106",
+        "RTM-00107",
+        "RTM-00108",
+        "RTM-00109"
+      ],
+      "cr_ids": [
+        "CR-105",
+        "CR-106",
+        "CR-107",
+        "CR-108",
+        "CR-109"
+      ],
+      "dispositions": [
+        "spec/AGCP-Composite-Governance.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Delegation-Model.md",
+      "repository_artifact_exists": false,
+      "reference_count": 1,
+      "rtm_ids": [
+        "RTM-00115"
+      ],
+      "cr_ids": [
+        "CR-115"
+      ],
+      "dispositions": [
+        "spec/AGCP-Delegation-Model.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    },
+    {
+      "path": "spec/AGCP-Enforcement-Model.md",
+      "repository_artifact_exists": false,
+      "reference_count": 3,
+      "rtm_ids": [
+        "RTM-00119",
+        "RTM-00120",
+        "RTM-00121"
+      ],
+      "cr_ids": [
+        "CR-119",
+        "CR-120",
+        "CR-121"
+      ],
+      "dispositions": [
+        "spec/AGCP-Enforcement-Model.md - Planned / Non-Baseline; proposed roadmap/backlog artifact; not adopted and not required for AGCP v2.0.0 conformance or for this row's Accepted/Complete status."
+      ]
+    }
+  ],
+  "undispositioned": []
+}

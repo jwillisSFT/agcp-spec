@@ -2,7 +2,7 @@
   "record_id": "AGCP-HARNESS-REQUEST-PARAMETER-VALIDATION-2026-07-31",
   "record_type": "controlled_conformance_validation",
   "status": "PASS",
-  "validated_at": "2026-07-31T11:30:00Z",
+  "validated_at": "2026-08-03",
   "scope": {
     "authoritative_harness": "conformance/AGCP-Conformance-Harness-Spec.yml",
     "human_readable_mirror": "conformance/AGCP-Conformance-Test-Vectors.md",
@@ -15,9 +15,9 @@
     ]
   },
   "source_hashes": {
-    "api/AGCP-HTTP-Contract.yaml": "0695e294d8564d312590dd97115a853e2bbbb13988de2538f213a904f1afb2c9",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "0dd2b25ddae6e2fee29dfcc0e02d0baaf560dc4fe41047b2ec805df5aa029120",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "0c26b0cd0bf56d7820b98664953f6137942dbec3307cbc048c245c33e7b3ba57"
+    "api/AGCP-HTTP-Contract.yaml": "37cc647edfd990a068cfcb623d26ed3763c53298dada83eed99d9c4d1e858b25",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "e61da56e93eec7e9f552ecaaf37f99374a4a5112da2db4bf9ff28f4f187c4dfe"
   },
   "validation_rules": [
     "Each request SHALL resolve to exactly one IF-001 OpenAPI operation by HTTP method and path template.",
@@ -1561,5 +1561,22 @@
     "yaml_only_ids": [],
     "name_mismatches": []
   },
-  "closure_statement": "All 52 HTTP primary and setup requests continue to satisfy every required IF-001 path, query, and header parameter; the nine F-09 harness-operation vectors introduce no additional HTTP request and the complete 54-vector YAML/Markdown catalogs are synchronized."
+  "closure_statement": "All 52 HTTP primary and setup requests continue to satisfy every required IF-001 path, query, and header parameter; the nine F-09 harness-operation vectors introduce no additional HTTP request and the complete 54-vector YAML/Markdown catalogs are synchronized.",
+  "p0_02_provenance_wire_refresh": {
+    "status": "PASS",
+    "finding": "P0-02",
+    "scope": "Source hashes refreshed after provenance-only wire-envelope synchronization; previously validated operation, error, request-parameter, executable-coverage, and fixture expectations remain unchanged.",
+    "provenance_validation_report": "governance/AGCP-provenance-wire-format-validation.json"
+  },
+  "p0_05_if002_scope_refresh": {
+    "status": "PASS",
+    "finding": "P0-05",
+    "scope": "Source hashes refreshed after publication of the profile-specific IF-002 deterministic WASM companion. IF-001 operation, request-parameter, and error behavior remain unchanged; IF-002 machine-contract validation is recorded separately.",
+    "validation_report": "governance/AGCP-if002-wasm-machine-contract-validation.json"
+  },
+  "p1_03_p1_09_p1_14_p1_17_regression": "PASS",
+  "p0_10_semantic_fixture_regression": {
+    "status": "PASS",
+    "validation_report": "governance/AGCP-semantic-fixture-validation.json"
+  }
 }

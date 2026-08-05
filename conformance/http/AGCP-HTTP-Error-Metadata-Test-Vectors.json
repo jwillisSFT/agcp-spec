@@ -1,0 +1,468 @@
+{
+  "vector_set_id": "AGCP-IF001-ERROR-METADATA-VECTORS-2.0.1",
+  "finding_ids": [
+    "P1-03",
+    "P1-09",
+    "P1-14",
+    "P1-17"
+  ],
+  "public_error_contract": {
+    "ordinary_not_found": {
+      "http_status": 404,
+      "body": {
+        "error": {
+          "rejection_code": "RESOURCE_NOT_FOUND",
+          "message": "The requested resource was not found.",
+          "http_status": 404,
+          "retryable": false,
+          "governance_evidence_generated": false,
+          "outcome_classification": "TRANSPORT_OR_APPLICATION_ERROR",
+          "transport_disposition": "NOT_FOUND"
+        }
+      }
+    },
+    "cross_scope_not_found": {
+      "http_status": 404,
+      "body": {
+        "error": {
+          "rejection_code": "RESOURCE_NOT_FOUND",
+          "message": "The requested resource was not found.",
+          "http_status": 404,
+          "retryable": false,
+          "governance_evidence_generated": false,
+          "outcome_classification": "TRANSPORT_OR_APPLICATION_ERROR",
+          "transport_disposition": "NOT_FOUND"
+        }
+      },
+      "protected_reason": "TENANT_SCOPE_VIOLATION"
+    },
+    "pre_governance_throttling": {
+      "http_status": 429,
+      "headers": {
+        "Retry-After": "30"
+      },
+      "body": {
+        "error": {
+          "rejection_code": "REQUEST_THROTTLED",
+          "message": "The request was throttled before governance processing began.",
+          "http_status": 429,
+          "retryable": true,
+          "governance_evidence_generated": false,
+          "outcome_classification": "TRANSPORT_OR_APPLICATION_ERROR",
+          "transport_disposition": "THROTTLED",
+          "retry_after_seconds": 30
+        }
+      },
+      "governance_outcome_created": false
+    },
+    "capacity_unavailable": {
+      "http_status": 503,
+      "body": {
+        "error": {
+          "rejection_code": "CAPACITY_UNAVAILABLE",
+          "message": "Required processing capacity is unavailable.",
+          "http_status": 503,
+          "retryable": true,
+          "governance_evidence_generated": false,
+          "outcome_classification": "TRANSPORT_OR_APPLICATION_ERROR",
+          "transport_disposition": "CAPACITY_UNAVAILABLE"
+        }
+      },
+      "governance_outcome_created": false
+    },
+    "governance_quota_denial": {
+      "http_status": 200,
+      "representation": "AUTHORITATIVE_GOVERNANCE_OUTCOME",
+      "transport_error_body": null
+    }
+  },
+  "metadata_positive": {
+    "metadata_response_id": "META-TEST-001",
+    "response_type": "AGCP_IMPLEMENTATION_METADATA",
+    "generated_at": "2026-07-31T10:00:00Z",
+    "implementation": {
+      "implementation_id": "AGCP-TEST",
+      "implementation_name": "AGCP Test Implementation",
+      "implementation_release": "2.0.1",
+      "implementation_build_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "implementation_status": "OPERATIONAL",
+      "maintainer": {
+        "principal_id": "client:test",
+        "principal_type": "AGENT"
+      }
+    },
+    "supported_agcp_releases": [
+      {
+        "release_id": "AGCP-v2.0.0",
+        "specification_version": "2.0.0",
+        "support_status": "CURRENT",
+        "publication_status": "PUBLISHED",
+        "release_manifest_uri": "https://agcp.example/test",
+        "release_manifest_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "core_specification_uri": "https://agcp.example/test",
+        "core_specification_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "normative_statement_set_id": "TEST",
+        "conformance_requirement_set_id": "TEST",
+        "baseline_reference_type": "IMMUTABLE_RELEASE_BUNDLE",
+        "baseline_bundle_name": "agcp-spec-v.2.0.0.zip",
+        "baseline_bundle_publication_status": "UNPUBLISHED",
+        "baseline_bundle_uri": null,
+        "baseline_bundle_digest": {
+          "algorithm": "SHA-256",
+          "value": "790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326"
+        },
+        "published_at": "2026-07-30T09:27:00-04:00"
+      }
+    ],
+    "default_agcp_release_id": "AGCP-v2.0.0",
+    "schema_set": {
+      "schema_set_id": "DS-SET-v2.0.1",
+      "schema_catalog_id": "DS-CATALOG-1.0",
+      "catalog_version": "1.0.50",
+      "agcp_specification_version": "2.0.1",
+      "publication_status": "RELEASE_CANDIDATE",
+      "catalog_uri": "https://agcp.example/test",
+      "catalog_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "schema_manifest_uri": "https://agcp.example/test",
+      "schema_manifest_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "schema_set_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "schema_count": 1,
+      "manifest_complete": true,
+      "schemas": [
+        {
+          "ds_id": "DS-003",
+          "filename": "meta_response.json",
+          "canonical_uri": "https://agcp.example/test",
+          "lifecycle_state": "Implemented",
+          "content_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      ],
+      "validator_set": {
+        "validator_set_id": "VALIDATOR-SET-TEST-001",
+        "validator_manifest_uri": "https://agcp.example/test/validator-manifest.json",
+        "validator_manifest_digest": {
+          "algorithm": "SHA-256",
+          "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "validator_set_digest": {
+          "algorithm": "SHA-256",
+          "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "source_schema_set_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "generator_name": "agcp-validator-generator",
+        "generator_version": "2.0.1"
+      }
+    },
+    "implementation_profile": {
+      "profile_id": "PROF-TEST-001",
+      "profile_name": "Test Profile",
+      "profile_version": "1.0.0",
+      "profile_uri": "https://agcp.example/test",
+      "profile_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "lifecycle_state": "ACTIVE",
+      "mandatory_core_behavior_redefined": false,
+      "baseline_release_id": "AGCP-v2.0.0",
+      "baseline_bundle_digest": {
+        "algorithm": "SHA-256",
+        "value": "790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326"
+      }
+    },
+    "registry_releases": [
+      {
+        "registry_ref": {
+          "registry_document_id": "REGDOC-CONSTRAINT-TYPE",
+          "registry_id": "REG-CONSTRAINT-TYPE",
+          "registry_name": "AGCP Constraint Type Registry",
+          "registry_kind": "CONSTRAINT_TYPE",
+          "release_id": "REG-CONSTRAINT-TYPE-v2.0.0",
+          "registry_release": "2.0.0",
+          "lifecycle_state": "ACTIVE",
+          "canonical_uri": "https://agcp.example/registries/constraint-type.json",
+          "document_digest": {
+            "algorithm": "SHA-256",
+            "value": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        },
+        "support_status": "CURRENT"
+      },
+      {
+        "registry_ref": {
+          "registry_document_id": "REGDOC-INVARIANT-TYPE",
+          "registry_id": "REG-INVARIANT-TYPE",
+          "registry_name": "AGCP Invariant Type Registry",
+          "registry_kind": "INVARIANT_TYPE",
+          "release_id": "REG-INVARIANT-TYPE-v2.0.0",
+          "registry_release": "2.0.0",
+          "lifecycle_state": "ACTIVE",
+          "canonical_uri": "https://agcp.example/registries/invariant-type.json",
+          "document_digest": {
+            "algorithm": "SHA-256",
+            "value": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        },
+        "support_status": "CURRENT"
+      },
+      {
+        "registry_ref": {
+          "registry_document_id": "REGDOC-REJECTION-CODE",
+          "registry_id": "REG-REJECTION-CODE",
+          "registry_name": "AGCP Rejection Code Registry",
+          "registry_kind": "REJECTION_CODE",
+          "release_id": "REG-REJECTION-CODE-v2.0.0",
+          "registry_release": "2.0.0",
+          "lifecycle_state": "ACTIVE",
+          "canonical_uri": "https://agcp.example/registries/rejection-code.json",
+          "document_digest": {
+            "algorithm": "SHA-256",
+            "value": "3333333333333333333333333333333333333333333333333333333333333333"
+          }
+        },
+        "support_status": "CURRENT"
+      }
+    ],
+    "supported_conformance_levels": [
+      "L1"
+    ],
+    "conformance_claims": [
+      {
+        "claim_id": "CLAIM-TEST",
+        "conformance_level": "L1",
+        "claim_status": "NOT_CLAIMED",
+        "implementation_profile_id": "PROF-TEST-001",
+        "agcp_release_ids": [
+          "AGCP-v2.0.0"
+        ],
+        "claim_scope": {
+          "scope_type": "IMPLEMENTATION",
+          "implementation_id": "AGCP-TEST",
+          "included_capability_ids": [
+            "PROPOSAL_QUALIFICATION"
+          ],
+          "scope_digest": {
+            "algorithm": "SHA-256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "assessment_status": "NOT_ASSESSED",
+        "claim_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "claimed_at": "2026-07-31T10:00:00Z"
+      }
+    ],
+    "supported_governance_capabilities": [
+      {
+        "capability_id": "PROPOSAL_QUALIFICATION",
+        "support_status": "IMPLEMENTED",
+        "minimum_conformance_level": "L1",
+        "implementation_profile_ids": [
+          "PROF-TEST-001"
+        ],
+        "capability_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    ],
+    "http_contract": {
+      "contract_id": "TEST",
+      "contract_version": "1.0.0",
+      "openapi_version": "3.1.0",
+      "contract_uri": "https://agcp.example/test",
+      "contract_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "supported_path_versions": [
+        "/agcp/v2"
+      ],
+      "supported_media_types": [
+        "application/json"
+      ],
+      "transport_semantics_do_not_alter_governance": true
+    },
+    "semantic_assertions": {
+      "supported_agcp_releases_explicit": true,
+      "schema_set_identity_and_integrity_explicit": true,
+      "registry_releases_integrity_bound": true,
+      "implementation_profile_explicit": true,
+      "conformance_claim_scope_explicit": true,
+      "claimed_capabilities_do_not_exceed_demonstrated_scope": true,
+      "implementation_profile_does_not_redefine_mandatory_core_behavior": true,
+      "metadata_does_not_establish_authority_at_commitment": true,
+      "metadata_does_not_authorize_execution": true,
+      "metadata_is_not_canonical_state": true,
+      "extensions_cannot_change_canonical_governance_meaning": true,
+      "baseline_is_immutable_and_digest_bound": true,
+      "validator_set_is_bound_to_schema_set": true,
+      "active_governance_version_is_explicit": true,
+      "deployment_binding_does_not_expand_authority": true,
+      "moving_branch_is_not_a_release_baseline": true
+    },
+    "attribution": {
+      "principal": {
+        "principal_id": "client:test",
+        "principal_type": "AGENT"
+      },
+      "attributed_at": "2026-07-31T10:00:00Z"
+    },
+    "provenance": {
+      "signer": "TEST",
+      "kid": "kid-test",
+      "alg": "Ed25519",
+      "signed_at": "2026-07-31T10:00:00Z",
+      "nonce": "nonce-8f2ce8ecdd265b7c63638e31",
+      "scope": "agcp.governance-artifact",
+      "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMDMtaW1wbGVtZW50YXRpb24tbWV0YWRhdGEtcmVzcG9uc2UuanNvbjokLnByb3ZlbmFuY2U"
+    },
+    "response_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "integrity_signature": {
+      "alg": "SHA-256",
+      "kid": "kid-test",
+      "sig": "SIG_VALID_123"
+    },
+    "active_governance": {
+      "activation_status": "ACTIVE",
+      "governance_version": "GOV-TEST-001",
+      "governance_configuration_id": "GCFG-TEST-001",
+      "governance_configuration_digest": {
+        "algorithm": "SHA-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "compiled_governance_artifact_digest": {
+        "algorithm": "SHA-256",
+        "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      "activation_digest": {
+        "algorithm": "SHA-256",
+        "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      },
+      "activated_at": "2026-08-03T12:00:00-04:00",
+      "source_release_id": "AGCP-v2.0.0"
+    },
+    "deployment_binding": {
+      "deployment_id": "DEPLOYMENT-TEST-001",
+      "node_id": "NODE-TEST-001",
+      "workspace_id": "WORKSPACE-TEST-001",
+      "tenant_id": "TENANT-TEST-001",
+      "governance_domain_id": "DOMAIN-TEST-001",
+      "binding_digest": {
+        "algorithm": "SHA-256",
+        "value": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    }
+  },
+  "negative_vectors": [
+    {
+      "id": "HTTP-NV-001",
+      "description": "Public proposal-specific not-found code",
+      "mutation": {
+        "rejection_code": "PROPOSAL_NOT_FOUND"
+      },
+      "expected": "REJECT_PUBLIC_CONTRACT"
+    },
+    {
+      "id": "HTTP-NV-002",
+      "description": "Public authorization-specific not-found code",
+      "mutation": {
+        "rejection_code": "AUTHORIZATION_NOT_FOUND"
+      },
+      "expected": "REJECT_PUBLIC_CONTRACT"
+    },
+    {
+      "id": "HTTP-NV-003",
+      "description": "429 without Retry-After",
+      "mutation": {
+        "remove_header": "Retry-After"
+      },
+      "expected": "REJECT_PUBLIC_CONTRACT"
+    },
+    {
+      "id": "HTTP-NV-004",
+      "description": "429 represented as Governance Outcome",
+      "mutation": {
+        "governance_outcome_created": true
+      },
+      "expected": "REJECT_PUBLIC_CONTRACT"
+    },
+    {
+      "id": "HTTP-NV-005",
+      "description": "503 capacity represented as Governance Outcome",
+      "mutation": {
+        "governance_outcome_created": true
+      },
+      "expected": "REJECT_PUBLIC_CONTRACT"
+    },
+    {
+      "id": "META-NV-001",
+      "description": "Missing baseline bundle digest",
+      "mutation": {
+        "remove": "supported_agcp_releases[0].baseline_bundle_digest"
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "META-NV-002",
+      "description": "Published baseline with null URI",
+      "mutation": {
+        "set": "supported_agcp_releases[0].baseline_bundle_publication_status=PUBLISHED"
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "META-NV-003",
+      "description": "Moving branch used as baseline URI",
+      "mutation": {
+        "set": "supported_agcp_releases[0].baseline_bundle_uri=https://github.com/example/agcp/archive/refs/heads/main.zip"
+      },
+      "expected": "SEMANTIC_INVALID"
+    },
+    {
+      "id": "META-NV-004",
+      "description": "Missing validator set digest",
+      "mutation": {
+        "remove": "schema_set.validator_set.validator_set_digest"
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "META-NV-005",
+      "description": "Missing active governance advertisement",
+      "mutation": {
+        "remove": "active_governance"
+      },
+      "expected": "SCHEMA_INVALID"
+    }
+  ]
+}

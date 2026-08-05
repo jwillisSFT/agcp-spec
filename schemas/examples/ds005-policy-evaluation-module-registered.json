@@ -9,7 +9,7 @@
     "tenant_id": "T1"
   },
   "module_uri": "https://agcp.example/test",
-  "media_type": "application/json",
+  "media_type": "application/wasm",
   "module_digest": {
     "algorithm": "SHA-256",
     "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -21,8 +21,8 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "entrypoint": "TEST",
-    "target_runtime_profile": "TEST",
+    "entrypoint": "agcp_evaluate_v1",
+    "target_runtime_profile": "agcp_pec_abi_v1",
     "network_access_prohibited": true,
     "filesystem_mutation_prohibited": true,
     "evaluation_side_effects_prohibited": true,
@@ -30,31 +30,31 @@
     "representation_version": "1.0.0"
   },
   "interface_contract": {
-    "contract_id": "A-TEST-001",
+    "contract_id": "IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0",
     "contract_version": "1.0.0",
-    "contract_uri": "https://agcp.example/test",
+    "contract_uri": "https://agcp.ai/api/if-002/AGCP-WASM-PEC-Machine-Contract.json",
     "contract_digest": {
       "algorithm": "SHA-256",
-      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "value": "42ae7a18c3d3e773defdde097d10bcbbb5d62bdf7d84b1722e37c07360b1ddb0"
     },
     "supported_operations": [
       "EVALUATE_POLICY"
     ],
     "schema_bindings": [
       {
-        "schema_uri": "https://agcp.example/schemas/1.json",
+        "schema_uri": "https://agcp.ai/api/if-002/AGCP-WASM-PEC-Input-Envelope.schema.json",
         "schema_digest": {
           "algorithm": "SHA-256",
-          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          "value": "c59412a11bc9ff019f3936a1d11b23f290abfac8c9580f0b5af80b4d0a081615"
         },
         "schema_role": "INPUT",
         "required": true
       },
       {
-        "schema_uri": "https://agcp.example/schemas/2.json",
+        "schema_uri": "https://agcp.ai/api/if-002/AGCP-WASM-PEC-Output-Envelope.schema.json",
         "schema_digest": {
           "algorithm": "SHA-256",
-          "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          "value": "89fc5ebcc52560c32c59a4644019b929fd4dddf161381ae7d388f297a94b42a7"
         },
         "schema_role": "OUTPUT",
         "required": true
@@ -168,12 +168,12 @@
   },
   "provenance": {
     "signer": "TEST",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "kid-test",
-      "sig": "SIG_VALID_123"
-    },
-    "signed_at": "2026-07-31T10:00:00Z"
+    "kid": "kid-test",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-31T10:00:00Z",
+    "nonce": "nonce-9ead1bceb43b235d6ab80d76",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMDUtcG9saWN5LWV2YWx1YXRpb24tbW9kdWxlLXJlZ2lzdGVyZWQuanNvbjokLnByb3ZlbmFuY2U"
   },
   "integrity_signature": {
     "alg": "SHA-256",
@@ -187,7 +187,7 @@
     },
     "interface_contract_digest": {
       "algorithm": "SHA-256",
-      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "value": "42ae7a18c3d3e773defdde097d10bcbbb5d62bdf7d84b1722e37c07360b1ddb0"
     },
     "governance_configuration_digest": {
       "algorithm": "SHA-256",
@@ -211,7 +211,7 @@
         "value": "4444444444444444444444444444444444444444444444444444444444444444"
       }
     ],
-    "replay_profile": "TEST",
+    "replay_profile": "agcp_pec_abi_v1",
     "equivalent_inputs_equivalent_outputs": true
   },
   "semantic_assertions": {

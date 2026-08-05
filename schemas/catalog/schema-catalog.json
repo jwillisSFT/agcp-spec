@@ -2,9 +2,9 @@
   "catalog_id": "DS-CATALOG-1.0",
   "title": "AGCP Data Schema Catalog",
   "description": "Authoritative catalog and DS namespace assignment for implemented and proposed AGCP JSON Schemas.",
-  "specification_version": "v2.0",
-  "catalog_version": "1.0.44",
-  "publication_status": "Working Draft",
+  "specification_version": "v2.0.1",
+  "catalog_version": "1.0.50",
+  "publication_status": "CURRENT",
   "created_date": "2026-07-22",
   "authoritative_source": "AGCP Schema Repository",
   "identifier_format": "DS-NNN",
@@ -15,23 +15,23 @@
     "canonical_uri_policy": "Implemented and proposed schemas use https://agcp.ai/schemas/<filename> as the canonical URI."
   },
   "summary": {
-    "implemented_schema_count": 43,
+    "implemented_schema_count": 44,
     "proposed_reserved_schema_count": 0,
     "excluded_registry_payload_count": 0,
-    "rtm_rows_with_ds_assignments": 121,
-    "highest_assigned_ds_identifier": "DS-044",
-    "implemented_count": 43,
+    "rtm_rows_with_ds_assignments": 122,
+    "highest_assigned_ds_identifier": "DS-045",
+    "implemented_count": 44,
     "proposed_reserved_count": 0,
-    "total_assigned_count": 44,
+    "total_assigned_count": 45,
     "retired_schema_count": 1,
     "retired_count": 1,
     "rtm_rows_with_explicit_ds_disposition": 122,
-    "rtm_rows_with_if_assignments": 70,
+    "rtm_rows_with_if_assignments": 84,
     "rtm_rows_with_explicit_if_disposition": 122,
     "rtm_rows_with_reg_assignments": 117,
     "rtm_rows_with_explicit_reg_disposition": 122,
     "interface_definition_count": 2,
-    "registry_entry_count": 92
+    "registry_entry_count": 94
   },
   "implemented_schemas": [
     {
@@ -46,7 +46,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-006",
         "DS-007",
@@ -98,10 +98,17 @@
         "DS-041",
         "DS-042",
         "DS-043",
-        "DS-044"
+        "DS-044",
+        "DS-045"
       ],
-      "rtm_mapping_basis": "No explicit GitHub_File mapping in the current RTM.",
-      "rtm_ids": [],
+      "rtm_mapping_basis": "RTM-00005 / CR-005 maps the canonical provenance wire schema and IF-001. RTM-00042, RTM-00052, RTM-00064, and RTM-00066 map the generic algorithm-explicit content-digest contract for replay, Canonical State, evidence, and receipt integrity.",
+      "rtm_ids": [
+        "RTM-00005",
+        "RTM-00042",
+        "RTM-00052",
+        "RTM-00064",
+        "RTM-00066"
+      ],
       "arm_ids": [
         "ARM-101",
         "ARM-102",
@@ -152,6 +159,12 @@
         "ARM-804"
       ],
       "ns_ids": [
+        "NS-10.5-01",
+        "NS-10.5-02",
+        "NS-10.7-01",
+        "NS-10.8A-01",
+        "NS-10.8A-02",
+        "NS-10.8A-03",
         "NS-4.6-01",
         "NS-4.6-02",
         "NS-4.6-03",
@@ -172,16 +185,19 @@
         "NS-9.6B-02",
         "NS-9.6B-03",
         "NS-9.6B-04",
-        "NS-9.6B-05",
-        "NS-10.8A-01",
-        "NS-10.8A-02",
-        "NS-10.8A-03"
+        "NS-9.6B-05"
       ],
-      "cr_ids": [],
-      "sha256": "1ea4c1a609c6587222eeafc09d6b1eab8bf293e7d66d3775cfa7d13b165a56b5",
+      "cr_ids": [
+        "CR-005",
+        "CR-042",
+        "CR-052",
+        "CR-064",
+        "CR-066"
+      ],
+      "sha256": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
       "assigned_date": "2026-07-22",
-      "notes": "Clean AGCP v2.0 shared-definition library. Superseded, unreferenced, and transitional migration aliases are not retained; canonical domain and result objects are represented by their assigned external DS schemas. DS-011 and DS-012 now own their evaluation-outcome vocabularies. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "notes": "Canonical AGCP shared-definition library. Provenance is synchronized with the normative wire format. P1-12 binds every supported content-digest algorithm to an exact lowercase-hexadecimal output length and deprecates algorithm-implicit hash_hex for new contracts. Reverse dependency metadata remains synchronized to the active graph.",
+      "last_modified_date": "2026-08-03"
     },
     {
       "ds_id": "DS-002",
@@ -195,7 +211,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-028"
@@ -203,7 +219,18 @@
       "dependent_schemas": [],
       "rtm_mapping_basis": "Existing GitHub_File references in RTM-1.6; DS_ID populated in RTM-1.7.",
       "rtm_ids": [
-        "RTM-00004"
+        "RTM-00004",
+        "RTM-00010",
+        "RTM-00022",
+        "RTM-00026",
+        "RTM-00041",
+        "RTM-00048",
+        "RTM-00068",
+        "RTM-00073",
+        "RTM-00089",
+        "RTM-00090",
+        "RTM-00110",
+        "RTM-00113"
       ],
       "arm_ids": [
         "ARM-101",
@@ -232,12 +259,23 @@
         "NS-6.6-03"
       ],
       "cr_ids": [
-        "CR-004"
+        "CR-004",
+        "CR-010",
+        "CR-022",
+        "CR-026",
+        "CR-041",
+        "CR-048",
+        "CR-068",
+        "CR-073",
+        "CR-089",
+        "CR-090",
+        "CR-110",
+        "CR-113"
       ],
-      "sha256": "bf37ad9726e98b4fd4bbdec99bea2f5de2020bd448a276f2cf9d14b766594cfd",
+      "sha256": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
       "assigned_date": "2026-07-22",
-      "notes": "Existing implemented schema; semantic v2.0 update status is assessed separately.",
-      "last_modified_date": null
+      "notes": "v2.0.1 P1-03/P1-09 correction: public 404 is normalized to RESOURCE_NOT_FOUND; REQUEST_THROTTLED requires 429 plus Retry-After; CAPACITY_UNAVAILABLE uses 503; transport/service conditions are not Governance Outcomes.",
+      "last_modified_date": "2026-08-03"
     },
     {
       "ds_id": "DS-003",
@@ -251,7 +289,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -261,7 +299,8 @@
       "rtm_mapping_basis": "Direct implementation-conformance discovery mapping for claimed AGCP semantics and cross-implementation interoperability; DS-003 exposes explicit release, profile, schema-set, registry, conformance, capability, and interface evidence.",
       "rtm_ids": [
         "RTM-00089",
-        "RTM-00090"
+        "RTM-00090",
+        "RTM-00073"
       ],
       "arm_ids": [
         "ARM-701",
@@ -297,12 +336,13 @@
       ],
       "cr_ids": [
         "CR-089",
-        "CR-090"
+        "CR-090",
+        "CR-073"
       ],
-      "sha256": "e30b271db64b339ec1777bbc8f184f2294a0c70f03c418d1224784dff1dbd40e",
+      "sha256": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
       "assigned_date": "2026-07-22",
-      "notes": "Comprehensively refactored for AGCP v2.0 implementation discovery. The schema now requires explicit supported releases, integrity-bound schema-set contents and hashes, implementation profile, registry releases, L1-L5 conformance claims and evidence, governance capabilities, HTTP contract, attribution, provenance, and integrity. The obsolete statement that specification versions are not embedded was removed.",
-      "last_modified_date": "2026-07-30"
+      "notes": "v2.0.1 P1-14/P1-17 correction: metadata advertises immutable baseline and profile digests, schema and validator-set integrity, active governance version, IF-001 identity, and optional public-safe deployment binding.",
+      "last_modified_date": "2026-08-03"
     },
     {
       "ds_id": "DS-004",
@@ -316,7 +356,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -400,7 +440,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -469,7 +509,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -511,7 +551,8 @@
         "DS-038",
         "DS-039",
         "DS-040",
-        "DS-041"
+        "DS-041",
+        "DS-045"
       ],
       "rtm_mapping_basis": "Direct mapping to CR-007 and relationship-specific contextual mappings to governance compilation, protected-policy preservation, omission analysis, and self-modification isolation requirements in RTM-1.30.",
       "rtm_ids": [
@@ -575,7 +616,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -668,7 +709,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -775,7 +816,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -861,7 +902,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -926,7 +967,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1011,7 +1052,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1112,7 +1153,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-021"
@@ -1189,7 +1230,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1250,7 +1291,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1286,7 +1327,7 @@
         "DS-038",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.45 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00001",
         "RTM-00002",
@@ -1358,7 +1399,7 @@
       ],
       "sha256": "a1f8fd07f742e89a73aee4d682eb79b4ced48ef0a500b76d112011a7a5bc1347",
       "assigned_date": "2026-07-22",
-      "notes": "Step 5 refactor: canonical decision basis, qualified state and evidence, authority, constraints, invariants, attribution, receipt, and refusal relationships are structurally represented. Catalog ARM and NS mappings synchronized from the authoritative DS-015 schema annotation. RTM/CR traceability synchronized to RTM-1.45 by adding RTM-00034 and CR-034.",
+      "notes": "Step 5 refactor: canonical decision basis, qualified state and evidence, authority, constraints, invariants, attribution, receipt, and refusal relationships are structurally represented. Catalog ARM and NS mappings synchronized from the authoritative DS-015 schema annotation. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00034 and CR-034.",
       "last_modified_date": "2026-07-30"
     },
     {
@@ -1373,7 +1414,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1407,7 +1448,7 @@
         "DS-039",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.45 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00010",
         "RTM-00019",
@@ -1456,7 +1497,7 @@
       ],
       "sha256": "f7d8b21bfb28d2ce28fd1fcb3feada1e4b92a7494f9a1bbdfddafe0faa3e0485",
       "assigned_date": "2026-07-22",
-      "notes": "Step 5 refactor: target, scope, lifecycle, validity, state, evidence, authority, consumption, attribution, and non-executable authorization semantics are structurally represented. RTM/CR traceability synchronized to RTM-1.45 by adding RTM-00010 and CR-010.",
+      "notes": "Step 5 refactor: target, scope, lifecycle, validity, state, evidence, authority, consumption, attribution, and non-executable authorization semantics are structurally represented. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00010 and CR-010.",
       "last_modified_date": "2026-07-29"
     },
     {
@@ -1471,7 +1512,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1606,7 +1647,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1744,7 +1785,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1972,7 +2013,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1995,7 +2036,7 @@
         "DS-039",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.45 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00004",
         "RTM-00008",
@@ -2072,7 +2113,7 @@
       ],
       "sha256": "d141c8e3bf9dceb1456afec8f4cd3fc214d8c07c0160d676d54c1471be30101d",
       "assigned_date": "2026-07-22",
-      "notes": "Canonical Governed Action Proposal. Composite proposals now reference canonical DS-035 Bind Set policy/reference definitions and canonical DS-036 Governance Dependency Graph rather than local transitional composite definitions. RTM/CR traceability synchronized to RTM-1.45 by adding RTM-00008;RTM-00009 and CR-008;CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
+      "notes": "Canonical Governed Action Proposal. Composite proposals now reference canonical DS-035 Bind Set policy/reference definitions and canonical DS-036 Governance Dependency Graph rather than local transitional composite definitions. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00008;RTM-00009 and CR-008;CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
       "last_modified_date": "2026-07-30"
     },
     {
@@ -2087,7 +2128,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2191,7 +2232,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -2277,7 +2318,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2409,7 +2450,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2509,7 +2550,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2539,7 +2580,8 @@
         "DS-040",
         "DS-041",
         "DS-042",
-        "DS-043"
+        "DS-043",
+        "DS-045"
       ],
       "rtm_mapping_basis": "Relationship-specific semantic mapping approved for approval, adjudication, quorum, expiration, cancellation, and escalation requirements in RTM-1.13.",
       "rtm_ids": [
@@ -2594,13 +2636,13 @@
         "CR-060",
         "CR-061"
       ],
-      "sha256": "8f8ef63cea20b8ef352fab5dc1049c8883c8f7ec7b190caf9d1d682a2dafab8f",
+      "sha256": "637b768c631538e03f80ff09ad7a65aa89ecdf25c78ecf1a25a12ba7c2f18bbb",
       "assigned_date": "2026-07-22",
-      "notes": "Authoritative DS-026 canonical Governance Approval Artifact. DS-016 is permanently retired and superseded; no active compatibility schema or request property remains. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
+      "notes": "Authoritative DS-026 AGCP-created or AGCP-qualified Governance Approval Artifact. It requires artifact_origin=AGCP_CREATED_OR_QUALIFIED and is not accepted as IF-001 ingress. DS-016 remains permanently retired; DS-045 is the separate active submission schema.",
       "supersedes": [
         "DS-016"
       ],
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-08-03"
     },
     {
       "ds_id": "DS-027",
@@ -2614,7 +2656,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -2709,7 +2751,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -2738,7 +2780,7 @@
         "DS-039",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.45 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00009",
         "RTM-00053",
@@ -2798,7 +2840,7 @@
       ],
       "sha256": "69b7336d93976190c134b1c9459dd8ba5964ce2f40062095831707607177d991",
       "assigned_date": "2026-07-22",
-      "notes": "Authoritative DS-028 canonical Refusal Record for Structural Refusal. Policy denial, authorization failure, commit failure, deferral, and re-evaluation remain non-refusal results unless a separate Structural Refusal is applied. RTM/CR traceability synchronized to RTM-1.45 by adding RTM-00009 and CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
+      "notes": "Authoritative DS-028 canonical Refusal Record for Structural Refusal. Policy denial, authorization failure, commit failure, deferral, and re-evaluation remain non-refusal results unless a separate Structural Refusal is applied. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00009 and CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
       "last_modified_date": "2026-07-30"
     },
     {
@@ -2813,7 +2855,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2891,7 +2933,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2965,7 +3007,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3026,7 +3068,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-020"
@@ -3094,7 +3136,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3178,7 +3220,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3280,7 +3322,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3341,7 +3383,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3420,7 +3462,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3445,7 +3487,7 @@
         "DS-030",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.45 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00034",
         "RTM-00094",
@@ -3470,7 +3512,7 @@
       ],
       "sha256": "38262da8d98899480706d43653a5dc7a65b4145b437532afbaeb5dde2b85eb3a",
       "assigned_date": "2026-07-22",
-      "notes": "Canonical DS-037 Deterministic Adjudication Result. It preserves a complete Admissible Set and resolves contention through explicit governance-significant ordering, conflict, dependency, resource, priority, state, and policy conditions. It prohibits arrival timing and implementation-specific behavior as governance bases and does not itself authorize, bind, or commit a transition. RTM/CR traceability synchronized to RTM-1.45 by adding RTM-00034 and CR-034.",
+      "notes": "Canonical DS-037 Deterministic Adjudication Result. It preserves a complete Admissible Set and resolves contention through explicit governance-significant ordering, conflict, dependency, resource, priority, state, and policy conditions. It prohibits arrival timing and implementation-specific behavior as governance bases and does not itself authorize, bind, or commit a transition. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00034 and CR-034.",
       "last_modified_date": "2026-07-29"
     },
     {
@@ -3485,7 +3527,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3599,7 +3641,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3720,7 +3762,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3766,7 +3808,7 @@
         "DS-039",
         "DS-043"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.45 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00008",
         "RTM-00009",
@@ -3888,7 +3930,7 @@
       ],
       "sha256": "97e1d8d857365e1ab3a4d6884949cea2d4d0c528367c7625bc51e4b4ef0bf063",
       "assigned_date": "2026-07-22",
-      "notes": "Implemented for AGCP v2.0. DS-040 owns Governance Ledger identity, event identity, event type, authoritative ledger position, append-only and hash-chain controls, explicit causal ordering, typed artifact references, correction-by-subsequent-event semantics, retention events, and canonical event references. It is not a general application log and does not itself authorize execution or replace authoritative Canonical State sources. RTM/CR traceability synchronized to RTM-1.45 by adding RTM-00008;RTM-00009;RTM-00034 and CR-008;CR-009;CR-034.",
+      "notes": "Implemented for AGCP v2.0. DS-040 owns Governance Ledger identity, event identity, event type, authoritative ledger position, append-only and hash-chain controls, explicit causal ordering, typed artifact references, correction-by-subsequent-event semantics, retention events, and canonical event references. It is not a general application log and does not itself authorize execution or replace authoritative Canonical State sources. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00008;RTM-00009;RTM-00034 and CR-008;CR-009;CR-034.",
       "last_modified_date": "2026-07-30"
     },
     {
@@ -3903,7 +3945,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3986,7 +4028,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -4057,7 +4099,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -4124,7 +4166,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "schema_dependencies": [
         "DS-001"
       ],
@@ -4202,11 +4244,88 @@
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0 registry cleanup. DS-044 owns canonical registry-document and registry-reference definitions. Authoritative payloads reside only under registries/ and include release, lifecycle, integrity, traceability, and typed-entry controls. Entry-level REG identifiers and direct NS/CR traceability are now mandatory for typed and generic registry entries.",
       "last_modified_date": "2026-07-30"
+    },
+    {
+      "ds_id": "DS-045",
+      "filename": "governance_approval_submission.json",
+      "repository_path": "schemas/governance_approval_submission.json",
+      "canonical_uri": "https://agcp.ai/schemas/governance_approval_submission.json",
+      "title": "Governance Approval Submission",
+      "description": "Untrusted ingress command for submitting approval, adjudication, cosignature, risk-acceptance, cancellation, withdrawal, or quorum-participation content to AGCP. The submission carries claimant-provided content and provenance only. It is not a Governance Approval Artifact, does not establish verification, eligibility, quorum completion, lifecycle effect, Canonical State qualification, authority, ledger ordering, or permission to execute.",
+      "category": "Approval and Adjudication",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.0.1",
+      "schema_dependencies": [
+        "DS-001",
+        "DS-006",
+        "DS-026"
+      ],
+      "dependent_schemas": [],
+      "rtm_mapping_basis": "Direct IF-001 ingress mapping for approval, adjudication, cosignature, quorum, cancellation, withdrawal, and escalation commands; DS-045 is untrusted submission content and DS-026 remains the authoritative record.",
+      "rtm_ids": [
+        "RTM-00012",
+        "RTM-00013",
+        "RTM-00014",
+        "RTM-00015",
+        "RTM-00016",
+        "RTM-00017",
+        "RTM-00018",
+        "RTM-00058",
+        "RTM-00059",
+        "RTM-00060",
+        "RTM-00061"
+      ],
+      "arm_ids": [
+        "ARM-107",
+        "ARM-202",
+        "ARM-302",
+        "ARM-304",
+        "ARM-305",
+        "ARM-308",
+        "ARM-601",
+        "ARM-603",
+        "ARM-609",
+        "ARM-610",
+        "ARM-804",
+        "ARM-805"
+      ],
+      "ns_ids": [
+        "NS-8.6A-01",
+        "NS-8.6A-02",
+        "NS-8.6A-03",
+        "NS-10.8A-03",
+        "NS-13.6B-01",
+        "NS-13.6B-02",
+        "NS-13.6B-03",
+        "NS-13.6B-04",
+        "NS-13.6B-05",
+        "NS-13.6B-06"
+      ],
+      "cr_ids": [
+        "CR-012",
+        "CR-013",
+        "CR-014",
+        "CR-015",
+        "CR-016",
+        "CR-017",
+        "CR-018",
+        "CR-058",
+        "CR-059",
+        "CR-060",
+        "CR-061"
+      ],
+      "sha256": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
+      "assigned_date": "2026-08-03",
+      "last_modified_date": "2026-08-03",
+      "notes": "Implemented for P0-06 command-versus-authoritative-record separation. DS-045 accepts claimant content and provenance only; additionalProperties:false rejects AGCP-derived verification, eligibility, quorum, lifecycle, evidence, digest, replay, and ledger assertions. IF-001 accepts DS-045 and never accepts DS-026 as request content."
     }
   ],
   "proposed_reserved_schemas": [],
   "excluded_non_schema_files": [],
-  "last_modified_date": "2026-07-30",
+  "last_modified_date": "2026-08-03",
   "retired_schemas": [
     {
       "ds_id": "DS-016",
@@ -4219,7 +4338,7 @@
       "artifact_type": "Retired DS Identifier Record",
       "lifecycle_state": "Retired",
       "record_status": "Historical",
-      "specification_version": "v2.0",
+      "specification_version": "v2.0.1",
       "superseded_by": "DS-026",
       "retired_date": "2026-07-30",
       "assigned_date": "2026-07-22",
@@ -4266,5 +4385,12 @@
       "retirement_basis": "Clean AGCP v2.0 migration: backward-compatibility aliases are not retained. All active approval and adjudication representations use DS-026.",
       "identifier_reuse_prohibited": true
     }
-  ]
+  ],
+  "artifact_lifecycle_state": "CURRENT",
+  "repository_release_target": "v2.0.1",
+  "repository_release_target_status": "UNRELEASED_ACCUMULATED_CORRECTION_SET",
+  "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+  "controlling_published_baseline": "v2.0.0",
+  "baseline_date": "2026-07-30",
+  "rtm_dataset_version": "RTM-1.46"
 }

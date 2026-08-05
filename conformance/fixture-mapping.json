@@ -1,12 +1,12 @@
 {
   "fixture_catalog_id": "AGCP-CONFORMANCE-FIXTURES-1.0",
-  "specification_version": "v2.0.0",
+  "specification_version": "v2.0.1",
   "interface_id": "IF-001",
   "interface_version": "v2",
   "schema_catalog": "schemas/catalog/schema-catalog.json",
-  "schema_catalog_version": "1.0.44",
+  "schema_catalog_version": "1.0.50",
   "validation_rule": "Every example_file SHALL validate against the exact schema_file before harness execution. Fixture resolution SHALL occur before OpenAPI request validation.",
-  "fixture_count": 29,
+  "fixture_count": 30,
   "fixtures": [
     {
       "fixture_id": "FX-DS011-SATISFIED",
@@ -17,7 +17,10 @@
       "purpose": "Constraint evaluation satisfied with qualified deterministic inputs.",
       "harness_test_vectors": [
         "TV-PROP-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS011-VIOLATED",
@@ -28,7 +31,10 @@
       "purpose": "Constraint violation producing Structural Refusal.",
       "harness_test_vectors": [
         "TV-PROP-004"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS012-PRESERVED",
@@ -39,7 +45,10 @@
       "purpose": "Invariant preserved under qualified inputs.",
       "harness_test_vectors": [
         "TV-PROP-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS012-HARD-VIOLATION",
@@ -50,7 +59,10 @@
       "purpose": "Hard invariant violation with explicit refusal and lifecycle effects.",
       "harness_test_vectors": [
         "TV-PROP-003"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS018-SINGLE-COMMIT",
@@ -66,7 +78,11 @@
         "TV-COMMIT-004",
         "TV-COMMIT-005",
         "TV-XTEN-003"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS019-COMMIT-SUCCESS",
@@ -77,7 +93,11 @@
       "purpose": "Successful Commit Boundary result.",
       "harness_test_vectors": [
         "TV-COMMIT-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS019-STRUCTURAL-REFUSAL",
@@ -88,7 +108,11 @@
       "purpose": "Commit Boundary Structural Refusal result.",
       "harness_test_vectors": [
         "TV-COMMIT-003"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS026-PARTIAL-QUORUM",
@@ -99,7 +123,11 @@
       "purpose": "Governance Approval Artifact contributing to partial quorum.",
       "harness_test_vectors": [
         "TV-GAPP-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS026-COMPLETED-QUORUM",
@@ -110,7 +138,11 @@
       "purpose": "Governance Approval Artifact satisfying quorum.",
       "harness_test_vectors": [
         "TV-GAPP-002"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS029-ADMISSIBLE",
@@ -121,7 +153,11 @@
       "purpose": "Enforcement Context permitting bind only when all current bindings match.",
       "harness_test_vectors": [
         "TV-COMMIT-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS029-PREVENT",
@@ -132,7 +168,11 @@
       "purpose": "Enforcement Context directing prevention of bind.",
       "harness_test_vectors": [
         "TV-COMMIT-003"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS032-QUALIFIED",
@@ -143,7 +183,10 @@
       "purpose": "Canonical State qualification succeeds.",
       "harness_test_vectors": [
         "TV-STATE-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS032-NOT-QUALIFIED",
@@ -154,7 +197,10 @@
       "purpose": "Canonical State qualification fails.",
       "harness_test_vectors": [
         "TV-STATE-002"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS033-QUALIFIED",
@@ -166,7 +212,10 @@
       "harness_test_vectors": [
         "TV-PROP-001",
         "TV-COMMIT-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS033-NOT-QUALIFIED",
@@ -177,7 +226,10 @@
       "purpose": "Governance Evidence qualification fails.",
       "harness_test_vectors": [
         "TV-PROP-004"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS038-AUTHORIZED",
@@ -188,7 +240,10 @@
       "purpose": "Ledger-derived lifecycle transition to Authorized.",
       "harness_test_vectors": [
         "TV-PROP-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS039-DEGRADED",
@@ -199,7 +254,11 @@
       "purpose": "Continuation degradation requiring governed re-evaluation.",
       "harness_test_vectors": [
         "TV-COMMIT-002"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS039-RECOVERED",
@@ -210,7 +269,11 @@
       "purpose": "Governed recovery restoring commitment eligibility.",
       "harness_test_vectors": [
         "TV-COMMIT-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS040-GENESIS",
@@ -221,7 +284,11 @@
       "purpose": "Genesis ledger event with authoritative sequence position.",
       "harness_test_vectors": [
         "TV-STATE-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS040-SEQUENCED",
@@ -233,7 +300,11 @@
       "harness_test_vectors": [
         "TV-STATE-001",
         "TV-STATE-002"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS041-ACTIVE",
@@ -244,7 +315,11 @@
       "purpose": "Active Governance Configuration including risk-based re-evaluation controls.",
       "harness_test_vectors": [
         "TV-PROP-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS042-VALIDATED",
@@ -253,7 +328,11 @@
       "example_file": "schemas/examples/ds042-compiled-governance-artifact-validated.json",
       "expected_validation": "VALID",
       "purpose": "Compiled Governance Artifact passing constitutional validation and omission analysis.",
-      "harness_test_vectors": []
+      "harness_test_vectors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS043-ACTIVATED",
@@ -262,7 +341,11 @@
       "example_file": "schemas/examples/ds043-controlled-governance-activation-activated.json",
       "expected_validation": "VALID",
       "purpose": "Atomic controlled activation of a validated governance package.",
-      "harness_test_vectors": []
+      "harness_test_vectors": [],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-P0-10-SEMANTIC-FIXTURE-RULES-1.0"
+      }
     },
     {
       "fixture_id": "FX-DS044-REGISTRY",
@@ -271,7 +354,10 @@
       "example_file": "schemas/examples/ds044-registry-document-capability-example.json",
       "expected_validation": "VALID",
       "purpose": "Non-authoritative capability registry document validating DS-044.",
-      "harness_test_vectors": []
+      "harness_test_vectors": [],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS005-REGISTERED",
@@ -288,7 +374,10 @@
         "TV-PEM-005",
         "TV-GART-001",
         "TV-GART-003"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS006-REGISTERED",
@@ -303,7 +392,10 @@
         "TV-POL-003",
         "TV-POL-004",
         "TV-POL-005"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS010-REGISTERED",
@@ -316,7 +408,10 @@
         "TV-PEM-001",
         "TV-POL-001",
         "TV-GART-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS017-AUTHORIZED",
@@ -327,7 +422,10 @@
       "purpose": "Schema-valid available Execution Authorization View used to validate retrieval behavior.",
       "harness_test_vectors": [
         "TV-EAUTH-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     },
     {
       "fixture_id": "FX-DS003-METADATA",
@@ -338,8 +436,27 @@
       "purpose": "Schema-valid IF-001 implementation metadata response used by the metadata positive vector.",
       "harness_test_vectors": [
         "TV-META-001"
-      ]
+      ],
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
+    },
+    {
+      "fixture_id": "FX-DS045-GOVERNANCE-APPROVAL-SUBMISSION",
+      "ds_id": "DS-045",
+      "schema_file": "schemas/governance_approval_submission.json",
+      "example_file": "schemas/examples/ds045-governance-approval-submission-valid.json",
+      "purpose": "Untrusted Governance Approval Submission with claimant provenance and no server-derived authoritative fields.",
+      "expected_validation": "VALID",
+      "semantic_validation": {
+        "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
+      }
     }
   ],
-  "last_validated_date": "2026-07-30"
+  "last_validated_date": "2026-08-03",
+  "semantic_validation_rule": "SEMANTIC_EQUALITY_REQUIRED_FOR_DECLARED_BINDING_GROUPS",
+  "semantic_vector_catalog": "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json",
+  "claimant_assertion_vector_catalog": "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json",
+  "semantic_fixture_count": 14,
+  "rtm_dataset_version": "RTM-1.46"
 }

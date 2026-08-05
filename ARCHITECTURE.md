@@ -117,7 +117,10 @@ governance/
     Versioning, change history, contribution guidance, and release-validation records
 
 implementer/
-    Implementation decision-record template
+    Controlled Implementation Profile format specification and schema
+    Implementation Profile authoring template
+    Controlled and informational profiles
+    Profile catalog and package manifest
 
 reference/
     Reference implementation pseudocode and supporting material
@@ -199,3 +202,43 @@ The following documents provide further information:
 * Runtime Governance Requirements
 * Requirements Traceability Matrix
 * Conformance Test Suite
+
+
+## Controlled IF-002 WASM profile companion
+
+The implementation-independent IF-002 contract remains `spec/AGCP-Policy-Evaluation-Contract.md`. The proposed Rust Student Service profile adopts the separate controlled companion `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md`, with machine-readable ABI and envelope schemas under `api/if-002/` and public vectors under `conformance/if-002/`. This preserves Core technology independence while freezing the selected profile ABI.
+
+## Governance Approval command/record boundary
+
+DS-045 Governance Approval Submission is an untrusted command at IF-001. DS-026 Governance Approval Artifact is an authoritative AGCP-created or AGCP-qualified record. The public contract rejects claimant assertions of server-derived verification, lifecycle, quorum, evidence, replay, digest, and ledger state.
+
+### Algorithm-explicit digest contract
+
+`schemas/common.json#/$defs/content_digest` is the shared algorithm/output-length contract. `conformance/digests/` contains reusable positive and negative vectors, and `governance/validate_content_digest_contract.py` verifies dependent schemas, examples, catalogs, RTM mappings, and test mappings.
+
+## IF-001 Error and Metadata Contract
+
+`schemas/error_response.json`, `schemas/meta_response.json`, `api/AGCP-HTTP-Contract.yaml`, and `registries/rejection-code-registry.json` form the public IF-001 error and metadata contract. Reusable vectors reside under `conformance/http/`; automated validation resides under `governance/`.
+
+## Semantic fixture validation layer
+
+Controlled examples in `schemas/examples/` are structural schema fixtures. The `conformance/semantic-fixtures/` package adds cross-field equality rules and negative mismatch vectors so structurally valid but semantically contradictory objects cannot be accepted as positive conformance evidence. Claimant-assertion negatives remain in the command-versus-record package.
+
+## Normative companion reference integrity
+
+`governance/AGCP-Normative-Companion-Reference-Dispositions.md` and `governance/normative-companion-reference-dispositions.json` control the disposition of absent or noncanonical companion labels. `governance/validate_normative_companion_references.py` scans repository text and Office artifacts, validates canonical replacement paths, and prevents retired labels from reappearing as active normative references.
+
+
+## Release and lifecycle metadata control
+
+`governance/release-lifecycle-metadata.json` separates repository release target, release-target status, controlling published baseline, publication maturity, specification version, artifact lifecycle, and baseline date. Catalogs, normative specification headers, manifests, metadata examples, validation reports, and release notes are validated against that policy.
+
+
+## Repository synchronization control
+
+`governance/AGCP-v2.0.1-repository-synchronization-manifest.json` inventories the accumulated public-repository correction set, and `governance/validate_repository_synchronization.py` verifies catalogs, RTM versions and mappings, manifests, vectors, validation reports, indexes, release records, and file hashes before packaging.
+
+
+## Repository-wide integrity gate
+
+The final public-repository assurance layer aggregates finding-specific validation, cross-artifact synchronization, active-schema metaschema and reference validation, Markdown link integrity, controlled source-hash freshness, RTM disposition completeness, and release-payload duplicate/transitional-file checks. The controlling artifacts are `governance/validate_repository_integrity.py`, `governance/AGCP-v2.0.1-repository-integrity-validation.json`, `.github/workflows/validate-repository-integrity.yml`, and `AGCP-v2.0.1-CORRECTION-SUMMARY.md`. This layer validates the public specification repository only and does not substitute for implementation, deployment, or conformance evidence.

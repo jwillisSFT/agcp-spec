@@ -1,13 +1,20 @@
-> **Controlled repository baseline:** AGCP v2.0.0 Public Review  
+> **Development revision:** AGCP v2.0.1 accumulated correction set (unreleased)  
+> **Working artifact lifecycle:** CURRENT  
+> **Working release status:** UNRELEASED_ACCUMULATED_CORRECTION_SET  
+> **Controlling published baseline:** AGCP v2.0.0 Public Review  
 > **Baseline date:** 2026-07-30  
 > **Baseline composition:** CR-001 through CR-122; RTM-1.45; Schema Catalog 1.0.44; 122 formal Test Cases; 17 Harness Checks; 54 synchronized Harness Test Vectors; and 29 controlled fixtures.  
-> This archive is a fixed review baseline. Any later change requires a versioned revision and a corresponding entry in `governance/CHANGELOG.md`.  
-> **Release notes:** [`RELEASE_NOTES_v2.0.0.md`](RELEASE_NOTES_v2.0.0.md)  
+> **Current worktree composition:** RTM-1.46; Schema Catalog 1.0.50; Interface Catalog 1.0.5; Registry Entry Catalog 1.0.3; Implementation Profile Catalog 1.0.3; 44 active schemas; 94 controlled registry entries; and 30 controlled fixtures.  
+> The v2.0.1 worktree accumulates versioned corrections against the fixed v2.0.0 review baseline. Every change requires a corresponding entry in `governance/CHANGELOG.md`.  
+> **Working release notes:** [`RELEASE_NOTES_v2.0.1.md`](RELEASE_NOTES_v2.0.1.md)  
+> **Correction summary:** [`AGCP-v2.0.1-CORRECTION-SUMMARY.md`](AGCP-v2.0.1-CORRECTION-SUMMARY.md)
+> **Published-baseline release notes:** [`RELEASE_NOTES_v2.0.0.md`](RELEASE_NOTES_v2.0.0.md)  
 
 # AGCP — Governance Control Plane Architecture
 
-**Status:** Public Review — Controlled Baseline  
-**Release:** AGCP v2.0.0  
+**Status:** Unreleased accumulated correction set  
+**Repository release target:** AGCP v2.0.1  
+**Controlling published baseline:** AGCP v2.0.0 Public Review Controlled Baseline  
 **Baseline date:** 2026-07-30  
 **Series:** AGCP Core Specification  
 
@@ -100,11 +107,13 @@ Use repository-relative paths when citing documents. A structured review sequenc
 3. `spec/Architecture Reference Model.docx` — architectural concepts and terminology
 4. `spec/AGCP Normative Statements.docx` — extracted atomic Core obligations
 5. `spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx` — authoritative traceability
-6. `spec/AGCP-Policy-Evaluation-Contract.md` — policy-evaluation companion specification
-7. `spec/AGCP-HTTP-Interface-Specification.md` and `api/AGCP-HTTP-Contract.yaml` — interface semantics and executable contract
-8. `spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md` — Governance Ledger Event requirements
-9. `lifecycle/AGCP Governance Lifecycle Model.md` and `lifecycle/AGCP Normative Governance Progression Table.md` — lifecycle interpretation and progression
-10. `conformance/AGCP-Conformance-Traceability-and-Automation-Model.md`, `conformance/AGCP-Conformance.md`, `conformance/AGCP-Test-Matrix.md`, and `conformance/AGCP-Conformance-Test-Vectors.md` — conformance relationships, profiles, mappings, and executable tests
+6. `spec/AGCP-Policy-Evaluation-Contract.md` — implementation-independent policy-evaluation companion specification
+7. `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md` and `api/if-002/` — controlled Rust Student Service IF-002 WASM ABI companion
+8. `spec/AGCP-HTTP-Interface-Specification.md` and `api/AGCP-HTTP-Contract.yaml` — interface semantics and executable contract
+9. `spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md` — Governance Ledger Event requirements
+10. `lifecycle/AGCP Governance Lifecycle Model.md` and `lifecycle/AGCP Normative Governance Progression Table.md` — lifecycle interpretation and progression
+11. `implementer/README.md`, `implementer/AGCP-Implementation-Profile-Specification.md`, and `implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml` — controlled profile format and authoritative proposed profile
+12. `conformance/AGCP-Conformance-Traceability-and-Automation-Model.md`, `conformance/AGCP-Conformance.md`, `conformance/AGCP-Test-Matrix.md`, and `conformance/AGCP-Conformance-Test-Vectors.md` — conformance relationships, profiles, mappings, and executable tests
 
 ---
 
@@ -115,13 +124,27 @@ The following abbreviated tree lists the current controlled paths used for revie
 ```text
 .
 ├── README.md
+├── RELEASE_NOTES_v2.0.1.md
+├── AGCP-v2.0.1-CORRECTION-SUMMARY.md
 ├── RELEASE_NOTES_v2.0.0.md
 ├── ARCHITECTURE.md
 ├── LICENSE
 ├── NOTICE.md
 ├── .github/
 │   ├── CODEOWNERS
-│   └── ISSUE_TEMPLATE/spec-review.yml
+│   ├── ISSUE_TEMPLATE/spec-review.yml
+│   └── workflows/
+│       ├── validate-implementation-profiles.yml
+│       ├── validate-provenance-wire-format.yml
+│       ├── validate-if002-wasm-machine-contract.yml
+│       ├── validate-command-record-separation.yml
+│       ├── validate-content-digest-contract.yml
+│       ├── validate-http-error-metadata-contract.yml
+│       ├── validate-semantic-fixtures.yml
+│       ├── validate-normative-companion-references.yml
+│       ├── validate-release-lifecycle-metadata.yml
+│       ├── validate-repository-synchronization.yml
+│       └── validate-repository-integrity.yml
 ├── spec/
 │   ├── AGCP_Runtime_Governance_Requirements_CR-001_thru_CR-122.csv
 │   ├── AGCP-Core.docx
@@ -131,6 +154,7 @@ The following abbreviated tree lists the current controlled paths used for revie
 │   ├── AGCP Requirements Traceability Framework.docx
 │   ├── Requirements Traceability Matrix (RTM) Specification.docx
 │   ├── AGCP-Policy-Evaluation-Contract.md
+│   ├── AGCP-WASM-Policy-Evaluation-Machine-Contract.md
 │   ├── AGCP-HTTP-Interface-Specification.md
 │   ├── AGCP-Human-Review-Specification.md
 │   ├── AGCP-Multitenant-Operational-Specification.md
@@ -170,6 +194,9 @@ The following abbreviated tree lists the current controlled paths used for revie
 │   ├── AGCP-Test-Matrix.md
 │   ├── AGCP-Conformance-Harness-Spec.yml
 │   ├── AGCP-Conformance-Test-Vectors.md
+│   ├── if-002/
+│   │   ├── README.md
+│   │   └── AGCP-WASM-PEC-Test-Vectors.json
 │   ├── AGCP Harness Check Registry.md
 │   ├── harness-checks.json
 │   ├── test-mapping.json
@@ -179,13 +206,35 @@ The following abbreviated tree lists the current controlled paths used for revie
 │   ├── AGCP-HTTP-Contract.yaml
 │   ├── INTERFACE-CATALOG.md
 │   ├── interface-catalog.json
-│   └── interface-catalog.csv
+│   ├── interface-catalog.csv
+│   └── if-002/
+│       ├── README.md
+│       ├── AGCP-WASM-PEC-Machine-Contract.json
+│       ├── AGCP-WASM-PEC-Input-Envelope.schema.json
+│       ├── AGCP-WASM-PEC-Output-Envelope.schema.json
+│       └── AGCP-WASM-PEC-Error-Envelope.schema.json
 ├── governance/
 │   ├── AGCP-Versioning.md
 │   ├── CHANGELOG.md
-│   └── CONTRIBUTING.md
+│   ├── CONTRIBUTING.md
+│   ├── AGCP-implementation-profile-validation.json
+│   ├── AGCP-provenance-wire-format-validation.json
+│   ├── AGCP-if002-wasm-machine-contract-validation.json
+│   ├── validate_implementation_profiles.py
+│   ├── validate_provenance_wire_format.py
+│   └── validate_if002_wasm_machine_contract.py
 ├── implementer/
-│   └── AGCP-Implementation-Decision-Record-Template.md
+│   ├── README.md
+│   ├── AGCP-Implementation-Profile-Specification.md
+│   ├── AGCP-Implementation-Profile-Schema.json
+│   ├── AGCP-Implementation-Profile-Template.md
+│   ├── AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml
+│   ├── AGCP-RUST-STUDENT-SERVICE-2.0.0.md
+│   ├── AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md
+│   ├── IMPLEMENTATION-PROFILE-CATALOG.md
+│   ├── implementation-profile-catalog.json
+│   ├── implementation-profile-catalog.csv
+│   └── implementation-profile-manifest.json
 ├── reference/
 │   ├── README.md
 │   └── AGCP-HTTP-Reference-Implementation-Pseudocode.md
@@ -224,7 +273,9 @@ This repository contains specification, traceability, conformance, and supportin
 
 ### Supporting artifacts
 
-- `RELEASE_NOTES_v2.0.0.md` — comparison-based release notes and migration guidance
+- Controlled Implementation Profile format artifacts, profiles, catalogs, and package manifest under `implementer/`
+- `RELEASE_NOTES_v2.0.1.md` — accumulated correction notes for the unreleased v2.0.1 revision
+- `RELEASE_NOTES_v2.0.0.md` — comparison-based release notes and migration guidance for the published baseline
 - Current lifecycle documents under `lifecycle/`
 - Versioning and contribution guidance under `governance/`
 - Reference pseudocode under `reference/`
@@ -237,7 +288,7 @@ This repository contains specification, traceability, conformance, and supportin
 
 - Production implementation code
 - Deployment artifacts
-- Customer operating profiles
+- Unpublished customer-specific operating profiles or deployment overlays; controlled public Implementation Profiles may be included as lower-precedence specification artifacts
 - Cryptographic key material
 - Enterprise-specific configurations
 
@@ -342,3 +393,37 @@ Public technical review comments should be submitted via **GitHub Issues**.
 ---
 
 AGCP specifies a control-plane architecture intended to improve distributed system reliability, lifecycle determinism, and execution-bound governance correctness.
+
+## Governance Approval submission and authoritative record
+
+IF-001 accepts `schemas/governance_approval_submission.json` (DS-045) as untrusted ingress. `schemas/governance_approval_artifact.json` (DS-026) is created or qualified by AGCP after independent processing and is not accepted as request content.
+
+## AGCP v2.0.1 content-digest correction
+
+The cumulative v2.0.1 correction set binds every DS-001 content-digest algorithm to its exact lowercase-hexadecimal output length. Controlled examples, negative vectors, validation, and CI are published under `schemas/examples/`, `conformance/digests/`, and `governance/`.
+
+### Public IF-001 errors and metadata (v2.0.1)
+
+The cumulative v2.0.1 correction set normalizes public protected-resource failures to `404 RESOURCE_NOT_FOUND`, defines pre-governance throttling as `429 REQUEST_THROTTLED` with required delay-seconds `Retry-After`, defines unavailable processing capacity as `503 CAPACITY_UNAVAILABLE`, and keeps governance quota denial as an authoritative Governance Outcome. DS-003 metadata now binds immutable baseline, profile, schema, generated validator, and active-governance integrity.
+
+### Semantic fixture integrity
+
+The v2.0.1 correction stream validates controlled positive fixtures beyond JSON Schema structure. Fourteen fixtures now use internally consistent Tenant, Governance Domain, Proposal, target, policy, authorization, lifecycle, evidence, and Canonical State bindings. Controlled negative vectors remain separate under `conformance/semantic-fixtures/` and `conformance/command-record/`.
+
+## Normative companion reference integrity (v2.0.1)
+
+The cumulative v2.0.1 correction set retires absent umbrella companion labels and requires references to identify the controlled artifacts that actually exist. The dispositions are published in `governance/AGCP-Normative-Companion-Reference-Dispositions.md` and `governance/normative-companion-reference-dispositions.json`; automated validation is provided by `governance/validate_normative_companion_references.py`.
+
+
+## Release and lifecycle metadata
+
+The v2.0.1 worktree separates the unreleased repository target from the controlling published v2.0.0 baseline. Active catalogs and controlled worktree artifacts use lifecycle `CURRENT`; the v2.0.0 baseline retains status `PUBLIC_REVIEW_CONTROLLED_BASELINE` and baseline date `2026-07-30`. The controlled policy and validation are published under `governance/AGCP-Release-Lifecycle-Metadata-Policy.md` and `governance/AGCP-release-lifecycle-metadata-validation.json`.
+
+
+## v2.0.1 repository-wide integrity gate
+
+The final Step 11 gate is defined by [`governance/validate_repository_integrity.py`](governance/validate_repository_integrity.py) and its controlled report, [`governance/AGCP-v2.0.1-repository-integrity-validation.json`](governance/AGCP-v2.0.1-repository-integrity-validation.json). It aggregates every finding-specific validation, verifies repository-wide references, links, catalogs, hashes, RTM dispositions, duplicate-payload absence, and synchronization-manifest coverage, and is executed by [`.github/workflows/validate-repository-integrity.yml`](.github/workflows/validate-repository-integrity.yml). The public correction set is summarized in [`AGCP-v2.0.1-CORRECTION-SUMMARY.md`](AGCP-v2.0.1-CORRECTION-SUMMARY.md).
+
+## v2.0.1 repository synchronization
+
+The accumulated correction set is synchronized through `RTM-1.46`, Schema Catalog `1.0.50`, Interface Catalog `1.0.5`, Registry Entry Catalog `1.0.3`, and Implementation Profile Catalog `1.0.3`. The machine-readable repository manifest and controlled validation report are under `governance/`.

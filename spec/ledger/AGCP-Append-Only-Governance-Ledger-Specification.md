@@ -1,6 +1,12 @@
 # AGCP Append-Only Governance Ledger Specification
 
-**Status:** Normative
+**Status:** Normative  
+**Artifact Lifecycle:** Current  
+**Specification Version:** 2.0.1  
+**Repository Release Target:** AGCP v2.0.1  
+**Repository Release Target Status:** Unreleased Accumulated Correction Set  
+**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-07-30
 
 ## 1. Purpose
 
@@ -218,13 +224,18 @@ A conformant implementation SHALL demonstrate:
 
 This specification complements:
 
--   AGCP Core Specification
--   DS-040 Governance Ledger Event schema
--   AGCP Security Specification
--   AGCP Provenance Wire Format Specification
--   AGCP Human Review Specification
--   Policy Evaluation Contract (PEC)
--   AGCP HTTP Interface Specification
+-   the AGCP Core Specification (`../AGCP-Core.docx`)
+-   DS-040 Governance Ledger Event (`../../schemas/governance_ledger_event.json`)
+-   DS-020 Governance Evidence (`../../schemas/governance_evidence.json`)
+-   DS-033 Evidence Qualification Result (`../../schemas/evidence_qualification_result.json`)
+-   the AGCP Provenance Wire Format Specification (`../AGCP-Provenance-Wire-Format-Specification.md`)
+-   the AGCP Multitenant Operational Specification (`../AGCP-Multitenant-Operational-Specification.md`)
+-   AGCP Error Mapping (`../AGCP-Error-Mapping.md`)
+-   the AGCP Human Adjudication and Governance Approval Specification (`../AGCP-Human-Review-Specification.md`)
+-   the Policy Evaluation Contract (`../AGCP-Policy-Evaluation-Contract.md`)
+-   the AGCP HTTP Interface Specification (`../AGCP-HTTP-Interface-Specification.md`)
+
+Security-relevant ledger obligations are distributed across these controlling artifacts; no standalone security companion is published in this release.
 
 ## 20. Repository Versioning
 

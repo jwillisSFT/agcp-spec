@@ -9,8 +9,8 @@
     "scope_type": "PROPOSAL_IDENTITY",
     "ledger_id": "GL-EXAMPLE-1",
     "stream_id": "stream-id-1",
-    "tenant_id": "tenant-id-1",
-    "governance_domain_id": "governance-domain-id-1",
+    "tenant_id": "tenant-1",
+    "governance_domain_id": "domain-1",
     "total_order_within_scope": true,
     "cross_stream_causality_explicit": true,
     "ordering_scope_digest": {
@@ -34,8 +34,8 @@
     },
     "stream_head_after_append": true
   },
-  "tenant_id": "tenant-id-1",
-  "governance_domain_id": "governance-domain-id-1",
+  "tenant_id": "tenant-1",
+  "governance_domain_id": "domain-1",
   "event_subject": {
     "subject_type": "GOVERNED_ACTION_PROPOSAL",
     "subject_digest": {
@@ -93,15 +93,15 @@
     },
     "policy_refs": [
       {
-        "policy_id": "policy-id-1",
-        "policy_version": "1.0.0",
+        "policy_id": "policy-1",
+        "policy_version": "2.0.0",
         "policy_digest": {
           "algorithm": "SHA-256",
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "artifact_uri": "https://agcp.ai/example/artifact-uri",
-        "tenant_id": "tenant-id-1",
-        "governance_domain_id": "governance-domain-id-1",
+        "tenant_id": "tenant-1",
+        "governance_domain_id": "domain-1",
         "status": "Registered"
       }
     ],
@@ -116,8 +116,8 @@
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "artifact_uri": "https://agcp.ai/example/artifact-uri",
-        "tenant_id": "tenant-id-1",
-        "governance_domain_id": "governance-domain-id-1",
+        "tenant_id": "tenant-1",
+        "governance_domain_id": "domain-1",
         "status": "Registered"
       }
     ],
@@ -134,8 +134,8 @@
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "artifact_uri": "https://agcp.ai/example/artifact-uri",
-        "tenant_id": "tenant-id-1",
-        "governance_domain_id": "governance-domain-id-1",
+        "tenant_id": "tenant-1",
+        "governance_domain_id": "domain-1",
         "status": "Registered"
       }
     ],
@@ -226,12 +226,12 @@
   },
   "provenance": {
     "signer": "example",
-    "signature": {
-      "alg": "SHA-256",
-      "kid": "key-1",
-      "sig": "signature-value"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-1",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-78a1f5293895a7d31ccfee36",
+    "scope": "agcp.governance-artifact",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LTEiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwNDAtZ292ZXJuYW5jZS1sZWRnZXItZXZlbnQtZ2VuZXNpcy5qc29uOiQucHJvdmVuYW5jZQ"
   },
   "replay_material": {
     "ordered_event_content_digest": {

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/meta_response.json",
   "title": "AGCP Implementation Metadata Response",
-  "description": "Canonical, attributable, integrity-protected implementation-capability and release-advertisement response for AGCP interface discovery. DS-003 identifies the implementation release, supported AGCP specification releases, complete integrity-bound schema set, implementation profile, supported registry releases, claimed conformance levels and scope, supported governance capabilities, and implemented HTTP contract without expanding normative behavior, creating authority, or implying conformance beyond demonstrated evidence.",
+  "description": "Canonical DS-003 implementation metadata response. It advertises immutable AGCP baseline identity and digest, implementation profile identity and digest, schema and validator set integrity, active governance version, registries, conformance and capability claims, IF-001 contract identity, and optional public-safe deployment binding.",
   "$comment": "DS-003 supports implementation and conformance discovery under Core Sections 17.1 through 17.10. JSON Schema validates structural completeness and claim-specific evidence requirements. Implementations must additionally verify that advertised releases, schema and registry digests, profile scope, capability support, conformance evidence, and interface behavior match the deployed implementation and controlled publication artifacts.",
   "x-agcp-ds-id": "DS-003",
   "x-agcp-lifecycle-state": "Implemented",
@@ -246,6 +246,32 @@
         },
         "published_at": {
           "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "baseline_reference_type": {
+          "const": "IMMUTABLE_RELEASE_BUNDLE"
+        },
+        "baseline_bundle_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baseline_bundle_publication_status": {
+          "type": "string",
+          "enum": [
+            "UNPUBLISHED",
+            "PUBLISHED"
+          ]
+        },
+        "baseline_bundle_uri": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri-reference",
+          "description": "Immutable bundle URI. Null only while the referenced profile/release remains pre-approval."
+        },
+        "baseline_bundle_digest": {
+          "$ref": "common.json#/$defs/content_digest"
         }
       },
       "required": [
@@ -258,7 +284,37 @@
         "core_specification_uri",
         "core_specification_digest",
         "normative_statement_set_id",
-        "conformance_requirement_set_id"
+        "conformance_requirement_set_id",
+        "baseline_reference_type",
+        "baseline_bundle_name",
+        "baseline_bundle_publication_status",
+        "baseline_bundle_uri",
+        "baseline_bundle_digest"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "baseline_bundle_publication_status": {
+                "const": "PUBLISHED"
+              }
+            },
+            "required": [
+              "baseline_bundle_publication_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "baseline_bundle_uri": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "baseline_bundle_uri"
+            ]
+          }
+        }
       ]
     },
     "schema_release_advertisement": {
@@ -361,6 +417,9 @@
           "minItems": 1,
           "maxItems": 4096,
           "uniqueItems": true
+        },
+        "validator_set": {
+          "$ref": "#/$defs/validator_set_advertisement"
         }
       },
       "required": [
@@ -376,7 +435,8 @@
         "schema_set_digest",
         "schema_count",
         "manifest_complete",
-        "schemas"
+        "schemas",
+        "validator_set"
       ]
     },
     "implementation_profile_advertisement": {
@@ -433,6 +493,13 @@
         },
         "mandatory_core_behavior_redefined": {
           "const": false
+        },
+        "baseline_release_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseline_bundle_digest": {
+          "$ref": "common.json#/$defs/content_digest"
         }
       },
       "required": [
@@ -442,7 +509,9 @@
         "profile_uri",
         "profile_digest",
         "lifecycle_state",
-        "mandatory_core_behavior_redefined"
+        "mandatory_core_behavior_redefined",
+        "baseline_release_id",
+        "baseline_bundle_digest"
       ]
     },
     "registry_release_advertisement": {
@@ -876,6 +945,21 @@
         },
         "extensions_cannot_change_canonical_governance_meaning": {
           "const": true
+        },
+        "baseline_is_immutable_and_digest_bound": {
+          "const": true
+        },
+        "validator_set_is_bound_to_schema_set": {
+          "const": true
+        },
+        "active_governance_version_is_explicit": {
+          "const": true
+        },
+        "deployment_binding_does_not_expand_authority": {
+          "const": true
+        },
+        "moving_branch_is_not_a_release_baseline": {
+          "const": true
         }
       },
       "required": [
@@ -889,7 +973,12 @@
         "metadata_does_not_establish_authority_at_commitment",
         "metadata_does_not_authorize_execution",
         "metadata_is_not_canonical_state",
-        "extensions_cannot_change_canonical_governance_meaning"
+        "extensions_cannot_change_canonical_governance_meaning",
+        "baseline_is_immutable_and_digest_bound",
+        "validator_set_is_bound_to_schema_set",
+        "active_governance_version_is_explicit",
+        "deployment_binding_does_not_expand_authority",
+        "moving_branch_is_not_a_release_baseline"
       ]
     },
     "extensions": {
@@ -947,6 +1036,23 @@
         },
         "metadata_uri": {
           "$ref": "common.json#/$defs/uri"
+        },
+        "implementation_profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "baseline_bundle_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "validator_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "active_governance_version": {
+          "type": "string",
+          "minLength": 1
         }
       },
       "required": [
@@ -956,7 +1062,12 @@
         "implementation_release",
         "default_agcp_release_id",
         "schema_set_id",
-        "response_digest"
+        "response_digest",
+        "implementation_profile_id",
+        "profile_digest",
+        "baseline_bundle_digest",
+        "validator_set_digest",
+        "active_governance_version"
       ]
     },
     "conformance_claim_scope": {
@@ -1071,6 +1182,204 @@
           }
         }
       ]
+    },
+    "validator_set_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "validator_set_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "validator_manifest_uri": {
+          "$ref": "common.json#/$defs/uri"
+        },
+        "validator_manifest_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "validator_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "source_schema_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "generator_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "generator_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "validator_set_id",
+        "validator_manifest_uri",
+        "validator_manifest_digest",
+        "validator_set_digest",
+        "source_schema_set_digest",
+        "generator_name",
+        "generator_version"
+      ]
+    },
+    "active_governance_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "activation_status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "NOT_ACTIVE",
+            "UNAVAILABLE"
+          ]
+        },
+        "governance_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "governance_configuration_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "governance_configuration_digest": {
+          "oneOf": [
+            {
+              "$ref": "common.json#/$defs/content_digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "compiled_governance_artifact_digest": {
+          "oneOf": [
+            {
+              "$ref": "common.json#/$defs/content_digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activation_digest": {
+          "oneOf": [
+            {
+              "$ref": "common.json#/$defs/content_digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "activated_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "source_release_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "activation_status",
+        "governance_version",
+        "governance_configuration_id",
+        "governance_configuration_digest",
+        "compiled_governance_artifact_digest",
+        "activation_digest",
+        "activated_at",
+        "source_release_id"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "activation_status": {
+                "const": "ACTIVE"
+              }
+            },
+            "required": [
+              "activation_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "governance_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "governance_configuration_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "governance_configuration_digest": {
+                "$ref": "common.json#/$defs/content_digest"
+              },
+              "compiled_governance_artifact_digest": {
+                "$ref": "common.json#/$defs/content_digest"
+              },
+              "activation_digest": {
+                "$ref": "common.json#/$defs/content_digest"
+              },
+              "activated_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "deployment_binding_advertisement": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional public-safe opaque deployment binding. It must not disclose secrets or expand governance authority.",
+      "properties": {
+        "deployment_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "node_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workspace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tenant_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "governance_domain_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "deployment_id",
+        "node_id",
+        "workspace_id",
+        "tenant_id",
+        "governance_domain_id",
+        "binding_digest"
+      ]
     }
   },
   "properties": {
@@ -1171,6 +1480,12 @@
     },
     "extensions": {
       "$ref": "#/$defs/extensions"
+    },
+    "active_governance": {
+      "$ref": "#/$defs/active_governance_advertisement"
+    },
+    "deployment_binding": {
+      "$ref": "#/$defs/deployment_binding_advertisement"
     }
   },
   "required": [
@@ -1187,6 +1502,7 @@
     "conformance_claims",
     "supported_governance_capabilities",
     "http_contract",
+    "active_governance",
     "semantic_assertions",
     "attribution",
     "provenance",

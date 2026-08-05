@@ -1,0 +1,207 @@
+{
+  "vector_set_id": "AGCP-CONTENT-DIGEST-TEST-VECTORS-1.0.0",
+  "title": "AGCP Algorithm-Explicit Content Digest Test Vectors",
+  "finding": "P1-12",
+  "schema": "../../schemas/common.json#/$defs/content_digest",
+  "encoding": "lowercase hexadecimal",
+  "algorithm_output_lengths": {
+    "SHA-256": 64,
+    "SHA-384": 96,
+    "SHA-512": 128,
+    "BLAKE2B-256": 64,
+    "BLAKE2B-512": 128
+  },
+  "positive_vectors": [
+    {
+      "id": "CD-PV-001",
+      "description": "Valid SHA-256 digest.",
+      "instance": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "canonicalization": "JCS"
+      },
+      "expected": "VALID"
+    },
+    {
+      "id": "CD-PV-002",
+      "description": "Valid SHA-384 digest.",
+      "instance": {
+        "algorithm": "SHA-384",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "canonicalization": "JCS"
+      },
+      "expected": "VALID"
+    },
+    {
+      "id": "CD-PV-003",
+      "description": "Valid SHA-512 digest.",
+      "instance": {
+        "algorithm": "SHA-512",
+        "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "canonicalization": "JCS"
+      },
+      "expected": "VALID"
+    },
+    {
+      "id": "CD-PV-004",
+      "description": "Valid BLAKE2B-256 digest.",
+      "instance": {
+        "algorithm": "BLAKE2B-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "JCS"
+      },
+      "expected": "VALID"
+    },
+    {
+      "id": "CD-PV-005",
+      "description": "Valid BLAKE2B-512 digest.",
+      "instance": {
+        "algorithm": "BLAKE2B-512",
+        "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "canonicalization": "JCS"
+      },
+      "expected": "VALID"
+    }
+  ],
+  "negative_vectors": [
+    {
+      "id": "CD-NV-001",
+      "description": "SHA-256 value is too short.",
+      "instance": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-002",
+      "description": "SHA-256 value is too long.",
+      "instance": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-003",
+      "description": "SHA-256 value contains uppercase hexadecimal.",
+      "instance": {
+        "algorithm": "SHA-256",
+        "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-004",
+      "description": "SHA-384 value uses a SHA-256-length output.",
+      "instance": {
+        "algorithm": "SHA-384",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-005",
+      "description": "SHA-384 value is one character short.",
+      "instance": {
+        "algorithm": "SHA-384",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-006",
+      "description": "SHA-512 value uses a SHA-384-length output.",
+      "instance": {
+        "algorithm": "SHA-512",
+        "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-007",
+      "description": "SHA-512 value is one character short.",
+      "instance": {
+        "algorithm": "SHA-512",
+        "value": "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-008",
+      "description": "BLAKE2B-256 value uses a 512-bit output.",
+      "instance": {
+        "algorithm": "BLAKE2B-256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-009",
+      "description": "BLAKE2B-512 value uses a 256-bit output.",
+      "instance": {
+        "algorithm": "BLAKE2B-512",
+        "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-010",
+      "description": "Ambiguous BLAKE2B identifier is not a controlled algorithm.",
+      "instance": {
+        "algorithm": "BLAKE2B",
+        "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-011",
+      "description": "Digest value contains a non-hexadecimal character.",
+      "instance": {
+        "algorithm": "SHA-256",
+        "value": "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-012",
+      "description": "Digest algorithm is missing.",
+      "instance": {
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-013",
+      "description": "Digest value is missing.",
+      "instance": {
+        "algorithm": "SHA-256",
+        "canonicalization": "JCS"
+      },
+      "expected": "INVALID"
+    },
+    {
+      "id": "CD-NV-014",
+      "description": "Undeclared digest property is rejected.",
+      "instance": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "canonicalization": "JCS",
+        "encoding": "hex"
+      },
+      "expected": "INVALID"
+    }
+  ]
+}

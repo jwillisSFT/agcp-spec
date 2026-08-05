@@ -31,6 +31,7 @@ These files are non-authoritative examples. Each example validates against the e
 | [`ds041-governance-configuration-active.json`](ds041-governance-configuration-active.json) | DS-041 | [`../governance_configuration.json`](../governance_configuration.json) | Active Governance Configuration including risk-based re-evaluation controls. |
 | [`ds042-compiled-governance-artifact-validated.json`](ds042-compiled-governance-artifact-validated.json) | DS-042 | [`../compiled_governance_artifact.json`](../compiled_governance_artifact.json) | Compiled Governance Artifact passing constitutional validation and omission analysis. |
 | [`ds043-controlled-governance-activation-activated.json`](ds043-controlled-governance-activation-activated.json) | DS-043 | [`../controlled_governance_activation.json`](../controlled_governance_activation.json) | Atomic controlled activation of a validated governance package. |
+| [`ds045-governance-approval-submission-valid.json`](ds045-governance-approval-submission-valid.json) | DS-045 | [`../governance_approval_submission.json`](../governance_approval_submission.json) | Untrusted governance-approval ingress command; contains no AGCP-derived verification or lifecycle results. |
 | [`ds044-registry-document-capability-example.json`](ds044-registry-document-capability-example.json) | DS-044 | [`../registry_document.schema.json`](../registry_document.schema.json) | Non-authoritative capability registry document validating DS-044. |
 
 ## Validation requirements
@@ -39,3 +40,29 @@ These files are non-authoritative examples. Each example validates against the e
 - Treat example digest values as structurally representative unless a validation report explicitly verifies semantic digest recomputation.
 - Resolve harness fixture references before validating HTTP request wrappers against IF-001.
 - Do not use example registries as normative controlled vocabularies.
+
+## DS-001 content-digest examples
+
+- `common-content-digest-examples.json` provides valid SHA-256, SHA-384, SHA-512, BLAKE2B-256, and BLAKE2B-512 examples under the exact algorithm/length and lowercase-hexadecimal contract.
+
+
+## P0-10 corrected positive fixtures
+
+The following 14 positive fixtures were normalized so all references that claim the same Tenant, Governance Domain, Proposal, target, policy, authorization, lifecycle state, evidence, or Canonical State use consistent identifiers:
+
+- `ds018-commit-boundary-request-single.json`
+- `ds019-commit-boundary-result-success.json`
+- `ds019-commit-boundary-result-refusal.json`
+- `ds026-governance-approval-partial-quorum.json`
+- `ds026-governance-approval-completed-quorum.json`
+- `ds029-enforcement-context-admissible.json`
+- `ds029-enforcement-context-prevent.json`
+- `ds039-continuation-integrity-degraded.json`
+- `ds039-continuation-integrity-recovered.json`
+- `ds040-governance-ledger-event-genesis.json`
+- `ds040-governance-ledger-event-sequenced.json`
+- `ds041-governance-configuration-active.json`
+- `ds042-compiled-governance-artifact-validated.json`
+- `ds043-controlled-governance-activation-activated.json`
+
+Negative semantic-mismatch vectors are maintained separately under `conformance/semantic-fixtures/`.

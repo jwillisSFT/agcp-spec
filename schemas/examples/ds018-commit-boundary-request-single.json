@@ -57,7 +57,7 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "proposal_id": "proposal-id-1",
+    "proposal_id": "proposal-1",
     "evaluated_at": "2026-07-30T16:00:00Z"
   },
   "state_qualification_result_ref": {
@@ -110,7 +110,7 @@
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
-    "proposal_id": "proposal-id-1",
+    "proposal_id": "proposal-1",
     "evaluated_at": "2026-07-30T16:00:00Z"
   },
   "governance_binding_validation_result_ref": {
@@ -144,10 +144,10 @@
     "governance_domain_id": "domain-1",
     "policy_enforcement_point": {
       "policy_enforcement_point_id": "policy-enforcement-point-id-1",
-      "tenant_id": "tenant-id-1",
-      "governance_domain_id": "governance-domain-id-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
       "enforcement_scope": {
-        "tenant_id": "tenant-id-1"
+        "tenant_id": "tenant-1"
       },
       "non_bypassable_path_profile": "example"
     },
@@ -187,7 +187,7 @@
         "algorithm": "SHA-256",
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
-      "proposal_id": "proposal-id-1",
+      "proposal_id": "proposal-1",
       "evaluated_at": "2026-07-30T16:00:00Z"
     },
     "authority_lineage_ref": {
@@ -198,7 +198,7 @@
       }
     },
     "canonical_state_ref": {
-      "canonical_state_id": "canonical-state-id-1"
+      "canonical_state_id": "canonical-state-1"
     },
     "state_qualification_result_ref": {
       "evaluation_id": "evaluation-id-1",
@@ -211,7 +211,7 @@
     "qualified_evidence_refs": [
       {
         "evidence_ref": {
-          "governance_evidence_id": "governance-evidence-id-1",
+          "governance_evidence_id": "evidence-1",
           "evidence_digest": {
             "algorithm": "SHA-256",
             "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -241,21 +241,21 @@
       "governance_version_ref": {
         "governance_version_id": "1.0.0"
       },
-      "tenant_id": "tenant-id-1",
-      "governance_domain_id": "governance-domain-id-1",
+      "tenant_id": "tenant-1",
+      "governance_domain_id": "domain-1",
       "effective_at": "2026-07-30T16:00:00Z"
     },
     "policy_refs": [
       {
-        "policy_id": "policy-id-1",
-        "policy_version": "1.0.0",
+        "policy_id": "policy-1",
+        "policy_version": "2.0.0",
         "policy_digest": {
           "algorithm": "SHA-256",
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "artifact_uri": "https://agcp.ai/example/artifact-uri",
-        "tenant_id": "tenant-id-1",
-        "governance_domain_id": "governance-domain-id-1",
+        "tenant_id": "tenant-1",
+        "governance_domain_id": "domain-1",
         "status": "Registered"
       }
     ],
@@ -301,10 +301,10 @@
     },
     "scope_binding": {
       "authorized_scope": {
-        "tenant_id": "tenant-id-1"
+        "tenant_id": "tenant-1"
       },
       "enforcement_scope": {
-        "tenant_id": "tenant-id-1"
+        "tenant_id": "tenant-1"
       },
       "scope_digest": {
         "algorithm": "SHA-256",
@@ -339,7 +339,7 @@
         "algorithm": "SHA-256",
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
-      "proposal_id": "proposal-id-1",
+      "proposal_id": "proposal-1",
       "evaluated_at": "2026-07-30T16:00:00Z"
     },
     "commit_bound_admissibility": {
@@ -509,12 +509,12 @@
   },
   "provenance": {
     "signer": "governance-service-1",
-    "signature": {
-      "alg": "Ed25519",
-      "kid": "key-example",
-      "sig": "signature-example"
-    },
-    "signed_at": "2026-07-30T16:00:00Z"
+    "kid": "key-example",
+    "alg": "Ed25519",
+    "signed_at": "2026-07-30T16:00:00Z",
+    "nonce": "nonce-6baab5c4af75def3efafd638",
+    "scope": "agcp.http.request.body",
+    "signature": "eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2V5LWV4YW1wbGUiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6ZHMwMTgtY29tbWl0LWJvdW5kYXJ5LXJlcXVlc3Qtc2luZ2xlLmpzb246JC5wcm92ZW5hbmNl"
   },
   "semantic_assertions": {
     "all_references_are_bound_to_same_proposal": true,

@@ -3,8 +3,12 @@
 **Status:** Normative\
 **Interface Identifier:** IF-002\
 **Interface Version:** v2\
-**Contract Version:** 2.0.0\
-**AGCP Specification Release:** v2.0.0\
+**Contract Version:** 2.0.1\
+**AGCP Specification Release:** v2.0.1\
+**Artifact Lifecycle:** Current\
+**Repository Release Target Status:** Unreleased Accumulated Correction Set\
+**Controlling Published Baseline:** AGCP v2.0.0 Public Review - Controlled Baseline\
+**Baseline Date:** 2026-07-30\
 **Series:** AGCP Core\
 **Applies To:** All AGCP-conformant implementations
 
@@ -30,8 +34,10 @@ PEC does **not** define:
 
 -   A policy language
 -   A rule engine
--   A bytecode format
+-   A universal bytecode format or ABI
 -   A deployment architecture
+
+A controlled Implementation Profile MAY adopt a profile-specific machine contract that specializes IF-002 for a selected runtime. Such a companion SHALL preserve this specification, SHALL identify its exact applicability, and SHALL NOT be interpreted as a universal AGCP technology requirement.
 
 ## 2. Architectural Context
 
@@ -198,6 +204,12 @@ Breaking interface changes require a MAJOR version increment.
 Backward-compatible additions require a MINOR version increment.
 
 Editorial clarifications require a PATCH increment.
+
+## 16.1 Controlled profile-specific machine contracts
+
+The proposed Rust Student Service profile adopts the controlled companion `IF-002-WASM-RUST-STUDENT-SERVICE-2.0.0`, contract version `1.0.0`, and ABI `agcp_pec_abi_v1`. Its normative human-readable specification is `spec/AGCP-WASM-Policy-Evaluation-Machine-Contract.md`; its machine-readable contract and envelope schemas are under `api/if-002/`.
+
+This adoption does not change the implementation-independent IF-002 contract for implementations that do not adopt that profile companion.
 
 ## 17. Summary
 
