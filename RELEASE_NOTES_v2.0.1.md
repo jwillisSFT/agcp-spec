@@ -16,8 +16,6 @@ This revision integrates the controlled Implementation Profile package required 
 
 - `implementer/AGCP-Implementation-Profile-Specification.md` - controlled profile format specification, version `1.1.0`.
 - `implementer/AGCP-Implementation-Profile-Schema.json` - JSON Schema Draft 2020-12 serialization contract for format version `1.1.0`.
-- `implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.yaml` - authoritative machine-readable proposed profile, version `2.0.0-draft.6`.
-- `implementer/AGCP-RUST-STUDENT-SERVICE-2.0.0.md` - human-readable companion rendering.
 
 ## 3. Template supersession
 
