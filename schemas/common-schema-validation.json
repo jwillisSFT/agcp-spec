@@ -1,14 +1,5 @@
 {
   "status": "PASS",
-<<<<<<< HEAD
-  "validated_at": "2026-07-31",
-  "definition_count": 62,
-  "used_definition_count": 62,
-  "unused_definitions": [],
-  "retired_definition": "pass_fail_enum",
-  "retired_definition_absent": true,
-  "obsolete_references": []
-=======
   "validated_at": "2026-08-03",
   "schema": "schemas/common.json",
   "ds_id": "DS-001",
@@ -39,5 +30,4 @@
     "schemas/examples/common-content-digest-examples.json": "335d62b3e52c0844635c26a9eb97c48242d0d62f0d7fecbf7259264229e0f777",
     "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e"
   }
->>>>>>> 1289678 (Apply AGCP v2.0.1 accumulated correction set from pre-build pass)
 }
