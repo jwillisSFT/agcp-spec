@@ -1,20 +1,32 @@
-# AGCP v2.0.4 Release Notes
+# AGCP v2.0.5 Release Notes
 
-**Release target:** AGCP v2.0.4  
+**Release target:** AGCP v2.0.5  
 **Status:** Public Review Controlled Baseline  
 **Artifact lifecycle:** CURRENT  
 **Controlling baseline status:** PUBLIC_REVIEW_CONTROLLED_BASELINE  
 **Baseline date:** 2026-08-05  
-**Controlling baseline:** AGCP v2.0.4 Public Review Controlled Baseline, 2026-08-05  
+**Controlling baseline:** AGCP v2.0.5 Public Review Controlled Baseline, 2026-08-05  
 **Released:** 2026-08-05
 
-## v2.0.4 public-release finalization
+## v2.0.5 public-release finalization
 
 - Removed all non-public implementation-specific deployment artifacts and references while retaining the generic Implementation Profile framework and informational example.
 - Removed stale references to deleted implementation-specific machine-contract companion artifacts and absent hosted workflow files.
-- Corrected the repository synchronization validator so it accepts the controlled synchronization-manifest release context and produces the v2.0.4 report.
-- Aligned the OpenAPI metadata, catalogs, registries, conformance assets, RTM specification-version column, validation records, repository indexes, and release-specific filenames to v2.0.4.
-- Published v2.0.4 as the current Public Review Controlled Baseline dated 2026-08-05.
+- Corrected the repository synchronization validator so it accepts the controlled synchronization-manifest release context and produces the v2.0.5 report.
+- Aligned the OpenAPI metadata, catalogs, registries, conformance assets, RTM specification-version column, validation records, repository indexes, and release-specific filenames to v2.0.5.
+- Published v2.0.5 as the current Public Review Controlled Baseline dated 2026-08-05.
+
+## v2.0.5 Normative Statement inventory correction
+
+AGCP v2.0.5 clarifies the Normative Statement inventory count used by controlled traceability and assessment tooling:
+
+- **357 unique controlled Normative Statement identifiers** are present in `spec/AGCP Normative Statements.docx` and the RTM traceability set.
+- The Core contains **358 controlled normative source-text occurrences** under the inventory accounting used for this release because the same conformance-scope obligation appears in both Core Sections 2.7 and 17.2.
+- The duplicate Section 17.2 occurrence is canonically represented by `NS-2.7-01`; `NS-17.2-01` is intentionally unassigned and does not represent a second independently testable obligation.
+- The historical v2.0.0 release notes are preserved unchanged. Their statement of "358 Core-derived atomic statements" is the historical source of the count ambiguity and is superseded for current inventory interpretation by this v2.0.5 clarification.
+- `spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx`, the controlled Normative Statements document, and `governance/AGCP-normative-statement-inventory-validation.json` record the disposition.
+
+This correction changes inventory accounting and traceability documentation only. It does not add, remove, weaken, or duplicate a normative obligation, and it does not alter CR or Formal Test Case cardinality.
 
 ## 1. Scope of this accumulated change
 
@@ -81,7 +93,7 @@ This change is additive for public profile-format artifacts and the informationa
 - Added `429 REQUEST_THROTTLED` with required delay-seconds `Retry-After` and `503 CAPACITY_UNAVAILABLE`.
 - Distinguished transport/service rejection from authoritative Governance Outcomes; governance quota or entitlement denial remains a governance result.
 - Expanded DS-003 to bind immutable baseline and profile digests, schema and generated-validator digests, active governance version, and optional public-safe deployment binding.
-- Added reusable vectors, RTM/test mappings, validation, CI, catalogs, and registry release v2.0.4.
+- Added reusable vectors, RTM/test mappings, validation, CI, catalogs, and registry release v2.0.5.
 
 ## P0-10 - Semantic fixture correction
 
@@ -102,8 +114,8 @@ This change is additive for public profile-format artifacts and the informationa
 
 ## P2-01 - Release and lifecycle metadata alignment
 
-- Separated the v2.0.4 repository release target from the controlling v2.0.0 Public Review Controlled Baseline.
-- Standardized active controlled-artifact lifecycle as `CURRENT`, catalog publication status as `CURRENT`, and current repository specification version as `2.0.4`.
+- Separated the v2.0.5 repository release target from the controlling v2.0.0 Public Review Controlled Baseline.
+- Standardized active controlled-artifact lifecycle as `CURRENT`, catalog publication status as `CURRENT`, and current repository specification version as `2.0.5`.
 - Advanced the Schema Catalog to `1.0.49`, Interface Catalog to `1.0.4`, and Registry Entry Catalog to `1.0.2`.
 - Removed unexplained `Working Draft` labels from active schema-catalog and DS-003 metadata artifacts.
 - Aligned normative specification headers, OpenAPI metadata, catalogs, registry metadata, conformance manifest, validation records, repository indexes, and release notes.
@@ -112,7 +124,7 @@ This change is additive for public profile-format artifacts and the informationa
 
 ## Step 10 - Cross-artifact repository synchronization
 
-- Advanced the Requirements Traceability Matrix dataset to `RTM-1.46` and synchronized all 122 rows to specification version `v.2.0.4`.
+- Advanced the Requirements Traceability Matrix dataset to `RTM-1.46` and synchronized all 122 rows to specification version `v.2.0.5`.
 - Advanced the Schema Catalog to `1.0.50`, Interface Catalog to `1.0.5`, Registry Entry Catalog to `1.0.3`, and Implementation Profile Catalog to `1.0.3`.
 - Added the controlled repository synchronization manifest, validator, report, and automated validation.
 - Regenerated current catalog, fixture, test-mapping, companion-disposition, traceability, profile-manifest, and validation records.
@@ -121,9 +133,9 @@ This change is additive for public profile-format artifacts and the informationa
 
 ## Step 11 - Repository-wide integrity validation and correction summary
 
-- Added `governance/validate_repository_integrity.py` and `governance/AGCP-v2.0.4-repository-integrity-validation.json` as the final repository-wide integrity gate.
+- Added `governance/validate_repository_integrity.py` and `governance/AGCP-v2.0.5-repository-integrity-validation.json` as the final repository-wide integrity gate.
 - Re-ran every finding-specific validator and confirmed that Implementation Profile, provenance, command/record, digest, public error/metadata, semantic-fixture, normative-reference, release/lifecycle, and synchronization reports remain current and passing.
 - Verified JSON/YAML parsing, Draft 2020-12 schemas, local JSON Schema and OpenAPI references, repository-relative Markdown links, synchronization-manifest coverage, active-schema hashes, RTM versions and DS/IF/REG dispositions, controlled report source hashes, and absence of byte-identical duplicate or transitional payloads.
 - Registered the final integrity controls in the conformance manifest, README/index files, repository architecture, release notes, and change history.
-- Published v2.0.4 as the Public Review Controlled Baseline; publication does not by itself create an implementation conformance claim.
+- Published v2.0.5 as the Public Review Controlled Baseline; publication does not by itself create an implementation conformance claim.
 - Final repository-wide integrity result: `PASS`, 11 of 11 checks, 23 controlled validation reports, 3,794 local references, 165 repository-relative Markdown links, 48 controlled JSON Schemas, 217 controlled source hashes, zero duplicate-byte groups, and zero transitional filenames.
