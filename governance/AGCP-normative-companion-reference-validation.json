@@ -10,13 +10,13 @@
   "validation_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-VALIDATION",
   "finding": "P1-01",
   "release_target": "v2.0.4",
-  "validation_date": "2026-08-05",
+  "validation_date": "2026-08-14",
   "status": "PASS",
   "summary": {
     "checks": 7,
     "passed": 7,
     "failed": 0,
-    "text_artifacts_scanned": 288,
+    "text_artifacts_scanned": 296,
     "office_artifacts_scanned": 6,
     "retired_labels": 5,
     "active_retired_reference_hits": 0,
@@ -24,7 +24,7 @@
     "corrected_documents": 7
   },
   "scope_counts": {
-    "specifications": 85,
+    "specifications": 92,
     "openapi": 8,
     "registries": 8,
     "examples": 32,
@@ -45,7 +45,7 @@
     {
       "check_id": "NCR-003",
       "status": "PASS",
-      "detail": "Scanned 288 text artifacts and 6 Office artifacts; active retired-label hits: 0"
+      "detail": "Scanned 296 text artifacts and 6 Office artifacts; active retired-label hits: 0"
     },
     {
       "check_id": "NCR-004",
@@ -65,17 +65,17 @@
     {
       "check_id": "NCR-007",
       "status": "PASS",
-      "detail": "Repository scope scanned: {'specifications': 85, 'openapi': 8, 'registries': 8, 'examples': 32, 'catalogs': 13, 'rtm_office': 1}"
+      "detail": "Repository scope scanned: {'specifications': 92, 'openapi': 8, 'registries': 8, 'examples': 32, 'catalogs': 13, 'rtm_office': 1}"
     }
   ],
   "issues": [],
   "source_hashes": {
-    "ARCHITECTURE.md": "7c12074e9f3afb36ce4f4f7673d84e1fcfae9baf2dfa87d069b37ea379d3a2ed",
-    "README.md": "e856d4972b27c30e5ed03ca45b7d2b4e8f80b79d7b78e6ba9dc1158a776fb3c8",
+    "ARCHITECTURE.md": "b5854cfdd2a6e13db1220cc2d27e909888ed13ceea51ac249706171f51031fa3",
+    "README.md": "1ea92d5b6a2e5f16433fa3fd7d6b268961465fdf1b124727516157fe3b471436",
     "conformance/AGCP-Conformance.md": "5cda6c1eaec160f6007e8e684ef30b72124e66ff170fa64ab7c8dcda8c7c274d",
-    "conformance/agcp-conformance-manifest.yml": "ed8dee3e79e89a8a2a96b1c62f13538ba50bf5cec24b5b9222d195905280bfdc",
+    "conformance/agcp-conformance-manifest.yml": "068efbb51c296bd0328360742a883035b5504e0d5a84bcaee7eb064616e0ca57",
     "governance/AGCP-Normative-Companion-Reference-Dispositions.md": "523c601548400f5f1e8431afe1194da7e0e4ff8d0487cb9f593977785d97da86",
-    "governance/AGCP-Versioning.md": "b19d2a0c3ba96ccd3123f3ae29d4b0acbacfbb6c91ec6c7ca334c5d48503f788",
+    "governance/AGCP-Versioning.md": "72f73066f98495459fbeb509e9e8984de6b2fc679104f3f55bce934191642fca",
     "governance/normative-companion-reference-dispositions.json": "24e0054549e6551c8a841fabf590d246cf3b5b3968b28a249245dce84814f250",
     "lifecycle/AGCP Governance Lifecycle Model.md": "55d012a78040f15d59ae2c12168fff92d02f20315a460bfd951989686aff6eb4",
     "lifecycle/AGCP Governance Progression Implementation Guide.md": "634f24f99410c207714ee9dd0c19e3d217de348ff9a2dbf5a21df69bff0d3c41",

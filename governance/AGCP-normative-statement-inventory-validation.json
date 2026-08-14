@@ -1,0 +1,118 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.4",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.4",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-08-05",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "validation_type": "AGCP_NORMATIVE_STATEMENT_INVENTORY_VALIDATION",
+  "status": "PASS",
+  "inventory": {
+    "unique_ns_identifier_count": 357,
+    "core_normative_occurrence_count": 358,
+    "canonical_ns_id": "NS-2.7-01",
+    "unassigned_alias": "NS-17.2-01",
+    "duplicate_core_sections": [
+      "2.7",
+      "17.2"
+    ],
+    "disposition": "CANONICALIZED_DUPLICATE",
+    "reason": "The Section 17.2 source-text occurrence duplicates the obligation already identified as NS-2.7-01 and does not create a second independently testable obligation."
+  },
+  "checks_passed": 10,
+  "checks_total": 10,
+  "checks": [
+    {
+      "check": "duplicated_core_obligation_occurs_twice",
+      "status": "PASS",
+      "detail": {
+        "paragraph_indexes": [
+          104,
+          1268
+        ],
+        "count": 2
+      }
+    },
+    {
+      "check": "normative_statement_document_unique_identifier_count",
+      "status": "PASS",
+      "detail": {
+        "unique_identifiers": 357
+      }
+    },
+    {
+      "check": "canonical_identifier_present_and_alias_unassigned",
+      "status": "PASS",
+      "detail": {
+        "canonical_present": true,
+        "alias_present": false
+      }
+    },
+    {
+      "check": "normative_statement_document_contains_disposition_note",
+      "status": "PASS",
+      "detail": "NS-17.2-01 is intentionally unassigned"
+    },
+    {
+      "check": "rtm_and_normative_statement_identifier_sets_equal",
+      "status": "PASS",
+      "detail": {
+        "rtm_unique_identifiers": 357,
+        "document_unique_identifiers": 357,
+        "only_in_rtm": [],
+        "only_in_document": []
+      }
+    },
+    {
+      "check": "rtm_inventory_disposition_is_controlled",
+      "status": "PASS",
+      "detail": {
+        "Disposition_ID": "NS-DISP-001",
+        "Unassigned_Alias": "NS-17.2-01",
+        "Canonical_NS_ID": "NS-2.7-01",
+        "Duplicate_Core_Sections": "2.7; 17.2",
+        "Disposition": "CANONICALIZED_DUPLICATE",
+        "Reason": "Core Section 17.2 repeats verbatim the conformance-scope obligation already represented by NS-2.7-01 from Core Section 2.7. The duplicate occurrence does not create a second independently testable obligation.",
+        "Unique_NS_Identifier_Count": 357,
+        "Core_Normative_Occurrence_Count": 358,
+        "Specification_Version": "v.2.0.4"
+      }
+    },
+    {
+      "check": "historical_v2_0_0_count_claim_preserved",
+      "status": "PASS",
+      "detail": "RELEASE_NOTES_v2.0.0.md retains historical wording"
+    },
+    {
+      "check": "current_release_notes_record_inventory_correction",
+      "status": "PASS",
+      "detail": "RELEASE_NOTES_v2.0.4.md"
+    },
+    {
+      "check": "readme_records_current_inventory",
+      "status": "PASS",
+      "detail": "README.md"
+    },
+    {
+      "check": "controlled_count_reconciliation",
+      "status": "PASS",
+      "detail": {
+        "unique_ns_identifier_count": 357,
+        "duplicate_core_occurrences_beyond_canonical": 1,
+        "core_normative_occurrence_count": 358
+      }
+    }
+  ],
+  "issues": [],
+  "source_hashes": {
+    "spec/AGCP-Core.docx": "f19f9c07af20a23a51e89fd08a560b6f1a53195a0654c60cdfcec08a69907dfe",
+    "spec/AGCP Normative Statements.docx": "cc336645f8a61c416130f96aaa70c31b9c06dc796f14aa88578ff49d1d134401",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "3d3eef069a6be27f8a24d97a1fdf205c48e689cd0f8a09832d2c12b4c04d4f09",
+    "RELEASE_NOTES_v2.0.0.md": "8b67c2af1de7e5530f90fddae2ff7f8405fdd00870d6e4d6fda239b666998d19",
+    "RELEASE_NOTES_v2.0.4.md": "7c3569c0a94a34e0297feb18e93a90929cce1f4f273215e1ca8c2eed7ccdfa93",
+    "README.md": "1ea92d5b6a2e5f16433fa3fd7d6b268961465fdf1b124727516157fe3b471436",
+    "governance/validate_normative_statement_inventory.py": "8c72fa46daeeab0fd29eac1449603ff5c49071ce6c62efaf43a8048317a0c560"
+  }
+}

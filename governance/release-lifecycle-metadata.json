@@ -2,6 +2,7 @@
   "policy_id": "AGCP-RELEASE-LIFECYCLE-METADATA-1.0",
   "policy_version": "1.1.0",
   "finding": "P2-01",
+  "version_source": "VERSION",
   "repository_release_target": "v2.0.4",
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "controlling_published_baseline": {
@@ -14,7 +15,7 @@
   "current_catalog_publication_status": "CURRENT",
   "current_repository_specification_version": "2.0.4",
   "rules": [
-    "Repository release target, release-target status, controlling published baseline, artifact lifecycle, publication maturity, specification version, and baseline date are separate metadata dimensions.",
+    "The root VERSION file is the sole maintained repository release number; current-release labels are generated or validated from it.",
     "AGCP v2.0.4 is the current Public Review Controlled Baseline for this repository release.",
     "Active controlled artifacts use lifecycle CURRENT and publication status CURRENT unless a more specific controlled lifecycle applies.",
     "Working Draft is reserved for artifacts intentionally outside the controlled current repository set.",

@@ -69,6 +69,13 @@ Example:
 
 The version number applies to the repository release as a whole rather than requiring identical embedded version numbers within every document.
 
+## 3.1 Authoritative repository release-number source
+
+The root `VERSION` file SHALL be the sole maintained source of the current AGCP repository release number. It contains bare Semantic Versioning form (`MAJOR.MINOR.PATCH`). Build and validation tooling SHALL derive release-tag form (`vMAJOR.MINOR.PATCH`), RTM specification-version form (`v.MAJOR.MINOR.PATCH`), release identifiers, and generated release-specific report filenames from that value.
+
+Historical release records SHALL retain the release identity under which they were published and SHALL NOT be rewritten solely because the current `VERSION` value changes.
+
+
 ---
 
 # 4. Version Classification

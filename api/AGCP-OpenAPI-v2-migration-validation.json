@@ -139,12 +139,12 @@
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
     "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
     "conformance/AGCP-if001-executable-operation-coverage-validation.json": "a90d97340f7b37ce3124b41696c839da319ee66214e6f8a003a3a347ddca0b6b",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "3d3eef069a6be27f8a24d97a1fdf205c48e689cd0f8a09832d2c12b4c04d4f09",
     "schemas/error_response.json": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
     "schemas/meta_response.json": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
     "registries/rejection-code-registry.json": "3f11c8880557b4ed5cd2955ab3e0af5151cd661798b3349162970d7475edaed7",
     "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json": "caadcec849862d165ec494abc1b09817cf1bc4473ad67de376a5ec63ea9a43b5",
-    "governance/AGCP-http-error-metadata-validation.json": "7e5adfe1ec5fca062f7a8bdb97d69662745dae0d1e27e86d7e7509316f52070d"
+    "governance/AGCP-http-error-metadata-validation.json": "80e8473b53f01e8fbaadb4bf94126f0acc9951f6be5d0d3465714308c1c363df"
   },
   "response_set_parity": {
     "status": "PASS",

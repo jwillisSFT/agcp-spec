@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Repository-wide integrity validation for the AGCP v2.0.4 public release."""
+"""Repository-wide integrity validation for the current AGCP public release."""
 
 from __future__ import annotations
 
@@ -17,14 +17,9 @@ import yaml
 from jsonschema import Draft202012Validator
 from openpyxl import load_workbook
 
-RELEASE_CONTEXT = {
-    "repository_release_target": "v2.0.4",
-    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.4",
-    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
-    "artifact_lifecycle_state": "CURRENT",
-}
+from release_version import RELEASE_TAG, RTM_SPEC_VERSION, SYNC_MANIFEST, SYNC_REPORT, INTEGRITY_REPORT, CURRENT_RELEASE_NOTES, release_context
+
+RELEASE_CONTEXT = release_context()
 
 FINDINGS = [
     "P0-01", "P0-02", "P0-06", "P0-10",
@@ -52,6 +47,8 @@ CONTROLLED_REPORTS = {
     "repository_synchronization": "governance/AGCP-v2.0.4-repository-synchronization-validation.json",
     "traceability_gap_closure": "governance/AGCP-traceability-gap-closure-validation.json",
     "release_payload_deduplication": "governance/AGCP-release-payload-deduplication-validation.json",
+    "normative_statement_inventory": "governance/AGCP-normative-statement-inventory-validation.json",
+    "version_source": "governance/AGCP-version-source-validation.json",
     "rtm_companion_dispositions": "governance/RTM-1.46-companion-artifact-disposition-validation.json",
     "schema_catalog": "schemas/catalog/schema-catalog-validation.json",
     "interface_traceability": "api/interface-traceability-validation.json",
@@ -65,9 +62,6 @@ CONTROLLED_REPORTS = {
     "governance_compilation_activation": "conformance/AGCP-governance-compilation-activation-executable-validation.json",
 }
 
-INTEGRITY_REPORT = "governance/AGCP-v2.0.4-repository-integrity-validation.json"
-SYNC_MANIFEST = "governance/AGCP-v2.0.4-repository-synchronization-manifest.json"
-SYNC_REPORT = "governance/AGCP-v2.0.4-repository-synchronization-validation.json"
 
 
 def sha256(path: Path) -> str:
@@ -312,6 +306,15 @@ def main() -> int:
     for path, document in parsed.items():
         if path.resolve() in recursive_report_exclusions:
             continue
+        # Do not reinterpret historical release reports against the current source
+        # tree. Their source_hashes are provenance for the release that produced
+        # them, not mutable pointers to current repository bytes.
+        if isinstance(document, dict):
+            rc = document.get("release_context")
+            if isinstance(rc, dict):
+                historical_target = rc.get("repository_release_target") or rc.get("controlling_published_baseline")
+                if isinstance(historical_target, str) and historical_target.startswith("v") and historical_target != RELEASE_TAG:
+                    continue
         for relative, expected_digest in collect_source_hashes(document):
             source = root / relative
             if source.is_file() and re.fullmatch(r"[0-9a-f]{64}", expected_digest):
@@ -354,7 +357,7 @@ def main() -> int:
     for row in range(2, worksheet.max_row + 1):
         if worksheet.cell(row, header["Dataset_Version"]).value != EXPECTED_VERSIONS["rtm_dataset"]:
             rtm_version_issues.append(f"dataset-row-{row}")
-        if worksheet.cell(row, header["Specification_Version"]).value != "v.2.0.4":
+        if worksheet.cell(row, header["Specification_Version"]).value != RTM_SPEC_VERSION:
             rtm_version_issues.append(f"spec-row-{row}")
         for key in disposition_counts:
             value = worksheet.cell(row, header[key]).value
@@ -407,10 +410,10 @@ def main() -> int:
 
     # Verify required final publication artifacts and clean internal Git state except for this validation work.
     required_final_artifacts = [
-        "RELEASE_NOTES_v2.0.4.md",
-        "governance/AGCP-v2.0.4-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
-        "governance/AGCP-v2.0.4-repository-synchronization-manifest.json",
-        "governance/AGCP-v2.0.4-repository-synchronization-validation.json",
+        CURRENT_RELEASE_NOTES,
+        f"governance/AGCP-{RELEASE_TAG}-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
+        SYNC_MANIFEST,
+        SYNC_REPORT,
     ]
     missing_final = [relative for relative in required_final_artifacts if not (root / relative).is_file()]
     issues.extend("missing-final-artifact:" + item for item in missing_final)
@@ -419,7 +422,7 @@ def main() -> int:
     status = "PASS" if not issues else "FAIL"
     report = {
         "release_context": RELEASE_CONTEXT,
-        "validation_type": "AGCP_V2_0_4_REPOSITORY_WIDE_INTEGRITY_VALIDATION",
+        "validation_type": "AGCP_REPOSITORY_WIDE_INTEGRITY_VALIDATION",
         "finding_scope": FINDINGS,
         "document_execution_step": 11,
         "status": status,
@@ -456,7 +459,7 @@ def main() -> int:
             "conformance/test-mapping.json": sha256(root / "conformance/test-mapping.json"),
             "conformance/fixture-mapping.json": sha256(root / "conformance/fixture-mapping.json"),
             "conformance/agcp-conformance-manifest.yml": sha256(root / "conformance/agcp-conformance-manifest.yml"),
-            "RELEASE_NOTES_v2.0.4.md": sha256(root / "RELEASE_NOTES_v2.0.4.md"),
+            CURRENT_RELEASE_NOTES: sha256(root / CURRENT_RELEASE_NOTES),
         },
     }
     report["source_hashes"] = {key: value for key, value in report["source_hashes"].items() if value is not None}

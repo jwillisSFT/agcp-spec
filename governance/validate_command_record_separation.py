@@ -8,6 +8,7 @@ from jsonschema import Draft202012Validator, RefResolver
 from openpyxl import load_workbook
 
 ROOT=Path(__file__).resolve().parents[1]
+from release_version import RELEASE_TAG, SEMVER, release_context
 AFFECTED={f'CR-{i:03d}' for i in [12,13,14,15,16,17,18,58,59,60,61]}
 SERVER_FIELDS={'approval_artifact_id','artifact_origin','status','lifecycle_state_binding','canonical_state_ref_at_adjudication','approver_eligibility','authority_lineage_ref','governance_evidence_refs','cryptographic_verification','replay_protection','artifact_digest','semantic_assertions','lifecycle_effect','artifact_termination','quorum_contribution'}
 issues=[]; checks=[]
@@ -124,7 +125,7 @@ for t in tm['tests']:
         tres.append({'tc':t['tc_id'],'ds45':'DS-045' in t['ds_ids'],'if1':'IF-001' in t['if_ids'],'schema':'schemas/governance_approval_submission.json' in t['schema_files'],'vectors':'conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json' in t.get('supporting_companion_vectors',[])})
 check('test_mapping_affected_rows',len(tres)==11 and all(all(v for k,v in x.items() if k!='tc') for x in tres),tres)
 
-report={'release_context':{'repository_release_target':'v2.0.4','repository_release_target_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','controlling_published_baseline':'v2.0.4','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-08-05','artifact_lifecycle_state':'CURRENT'},
+report={'release_context':release_context(),
  'report_id':'AGCP-P0-06-GOVERNANCE-APPROVAL-COMMAND-RECORD-SEPARATION',
  'status':'PASS' if not issues else 'FAIL','validated_at':'2026-08-03','finding':'P0-06',
  'submission_schema':'schemas/governance_approval_submission.json','submission_ds_id':'DS-045',

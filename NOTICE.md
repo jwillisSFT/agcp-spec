@@ -3,6 +3,12 @@
 
 ---
 
+## Repository release identification
+
+The root `VERSION` file is the authoritative source for the current AGCP repository release number. Generated or injected release labels do not alter the date, scope, or legal effect of this patent disclosure notice, and historical release records retain their original release identity.
+
+---
+
 ## 1. PATENT DISCLOSURE STATEMENT
 
 Attention is drawn to the possibility that implementation of this work, including systems, methods, architectures, and reference designs described herein, may involve subject matter covered by one or more patent applications.

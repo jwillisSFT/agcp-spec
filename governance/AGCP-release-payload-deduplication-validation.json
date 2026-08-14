@@ -60,6 +60,6 @@
   "original_validation_id": "AGCP-RELEASE-PAYLOAD-DEDUPLICATION-2026-07-30",
   "source_hashes": {
     "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
-    "governance/AGCP-traceability-gap-closure-validation.json": "350bc89f62a04220852f0079db6d3235b5faec5a5a2d7e9500ec2e62fbca0e8d"
+    "governance/AGCP-traceability-gap-closure-validation.json": "a7b91b410271c4e012b248b5f3e0d46d2c0aaadaa44b284a9fa884c1379306fb"
   }
 }

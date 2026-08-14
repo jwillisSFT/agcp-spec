@@ -2,6 +2,7 @@ agcp_conformance_manifest:
   spec:
     name: AGCP
     release_model: repository_release
+    version_source: VERSION
     repository_release_target: v2.0.4
     repository_release_target_status: public-review-controlled-baseline
     artifact_lifecycle_state: current
@@ -14,6 +15,14 @@ agcp_conformance_manifest:
     interface_catalog_version: 1.0.5
     registry_entry_catalog_version: 1.0.3
     implementation_profile_catalog_version: 1.0.3
+  normative_statement_inventory:
+    unique_identifier_count: 357
+    core_source_text_occurrence_count: 358
+    canonical_duplicate_identifier: NS-2.7-01
+    intentionally_unassigned_identifier: NS-17.2-01
+    disposition: CANONICALIZED_DUPLICATE
+    validation_script: governance/validate_normative_statement_inventory.py
+    validation_report: governance/AGCP-normative-statement-inventory-validation.json
   release_lifecycle_metadata:
     finding: P2-01
     policy: governance/AGCP-Release-Lifecycle-Metadata-Policy.md

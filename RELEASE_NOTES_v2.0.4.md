@@ -16,6 +16,18 @@
 - Aligned the OpenAPI metadata, catalogs, registries, conformance assets, RTM specification-version column, validation records, repository indexes, and release-specific filenames to v2.0.4.
 - Published v2.0.4 as the current Public Review Controlled Baseline dated 2026-08-05.
 
+## v2.0.4 Normative Statement inventory correction
+
+AGCP v2.0.4 clarifies the Normative Statement inventory count used by controlled traceability and assessment tooling:
+
+- **357 unique controlled Normative Statement identifiers** are present in `spec/AGCP Normative Statements.docx` and the RTM traceability set.
+- The Core contains **358 controlled normative source-text occurrences** under the inventory accounting used for this release because the same conformance-scope obligation appears in both Core Sections 2.7 and 17.2.
+- The duplicate Section 17.2 occurrence is canonically represented by `NS-2.7-01`; `NS-17.2-01` is intentionally unassigned and does not represent a second independently testable obligation.
+- The historical v2.0.0 release notes are preserved unchanged. Their statement of "358 Core-derived atomic statements" is the historical source of the count ambiguity and is superseded for current inventory interpretation by this v2.0.4 clarification.
+- `spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx`, the controlled Normative Statements document, and `governance/AGCP-normative-statement-inventory-validation.json` record the disposition.
+
+This correction changes inventory accounting and traceability documentation only. It does not add, remove, weaken, or duplicate a normative obligation, and it does not alter CR or Formal Test Case cardinality.
+
 ## 1. Scope of this accumulated change
 
 This revision integrates the public Implementation Profile format, schema, template, informational example, catalogs, and validation required by findings P0-01, P1-14, P2-02, and P2-06. Private deployment profiles are outside the public repository.

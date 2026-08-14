@@ -37,8 +37,8 @@
     "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e",
     "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
     "conformance/test-mapping.json": "91ad9c5fb7a1a2042d1917544ac2d76b63ec04797cc1135d9e70a267642a6168",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
-    "governance/validate_content_digest_contract.py": "9edac56056c51c014b1e946d2bc3f7dff027f4d8fe1398dd32b7332827a78025"
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "3d3eef069a6be27f8a24d97a1fdf205c48e689cd0f8a09832d2c12b4c04d4f09",
+    "governance/validate_content_digest_contract.py": "b455cdee0cfcc122c865004a6eeae373d9e6138848675b3cf265323be59abcd3"
   },
   "checks": [
     {

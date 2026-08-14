@@ -12,6 +12,11 @@ Instead, feedback is submitted through **GitHub Issues**.
 
 # Contribution Model
 
+# Release-version maintenance
+
+Maintainers SHALL update the repository release number in the root `VERSION` file rather than independently editing current-release version constants in build or validation scripts. The controlled build synchronizes or validates derived current-release labels. Historical release notes and historical validation records SHALL NOT be rewritten merely because `VERSION` changes.
+
+
 The AGCP specification follows an **issue-driven review process**.
 
 Public reviewers may:

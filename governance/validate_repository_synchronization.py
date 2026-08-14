@@ -2,14 +2,7 @@
 from pathlib import Path
 import argparse, json, hashlib, csv, yaml, sys
 from openpyxl import load_workbook
-
-VERSION = "v2.0.4"
-SPEC_VERSION = "v.2.0.4"
-STATUS = "PUBLIC_REVIEW_CONTROLLED_BASELINE"
-BASELINE_DATE = "2026-08-05"
-MANIFEST = "governance/AGCP-v2.0.4-repository-synchronization-manifest.json"
-REPORT = "governance/AGCP-v2.0.4-repository-synchronization-validation.json"
-INTEGRITY = "governance/AGCP-v2.0.4-repository-integrity-validation.json"
+from release_version import RELEASE_TAG as VERSION, RTM_SPEC_VERSION as SPEC_VERSION, RELEASE_STATUS as STATUS, BASELINE_DATE, SYNC_MANIFEST as MANIFEST, SYNC_REPORT as REPORT, INTEGRITY_REPORT as INTEGRITY, release_context as expected_release_context
 
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 
@@ -25,7 +18,7 @@ def main():
   'baseline_date':mf.get('baseline_date'),
   'artifact_lifecycle_state':mf.get('artifact_lifecycle_state'),
  }
- expected_context={'repository_release_target':VERSION,'repository_release_target_status':STATUS,'controlling_published_baseline':VERSION,'controlling_baseline_status':STATUS,'baseline_date':BASELINE_DATE,'artifact_lifecycle_state':'CURRENT'}
+ expected_context=expected_release_context()
  if release_context != expected_context: issues.append('release-context:'+json.dumps(release_context,sort_keys=True))
  for e in mf['files']:
   p=root/e['path']
@@ -53,6 +46,15 @@ def main():
   if f.resolve() in exclusions: continue
   try:o=json.loads(f.read_text())
   except Exception: continue
+  # Historical release reports are immutable provenance records. Their embedded
+  # source hashes are evaluated against the release that produced them, not the
+  # current source tree.
+  if isinstance(o,dict):
+   rcx=o.get('release_context')
+   if isinstance(rcx,dict):
+    historical_target=rcx.get('repository_release_target') or rcx.get('controlling_published_baseline')
+    if isinstance(historical_target,str) and historical_target.startswith('v') and historical_target!=VERSION:
+     continue
   def walk(x):
    nonlocal checked
    if isinstance(x,dict):
@@ -67,7 +69,7 @@ def main():
    elif isinstance(x,list):
     for v in x: walk(v)
   walk(o)
- report={'release_context':release_context,'validation_type':'AGCP_V2_0_4_REPOSITORY_SYNCHRONIZATION','status':'PASS' if not issues else 'FAIL','checks_passed':12 if not issues else 0,'checks_total':12,'issues':issues,'metrics':{'manifest_file_count':len(mf['files']),'active_schema_count':len(sc['implemented_schemas']),'registry_entry_count':rc['entry_count'],'fixture_count':fm['fixture_count'],'rtm_disposition_counts':counts,'validation_source_hashes_checked':checked},'source_hashes':{MANIFEST:sha(root/MANIFEST),'spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx':sha(root/'spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx'),'schemas/catalog/schema-catalog.json':sha(root/'schemas/catalog/schema-catalog.json'),'api/interface-catalog.json':sha(root/'api/interface-catalog.json'),'registries/registry-entry-catalog.json':sha(root/'registries/registry-entry-catalog.json'),'conformance/test-mapping.json':sha(root/'conformance/test-mapping.json'),'conformance/fixture-mapping.json':sha(root/'conformance/fixture-mapping.json'),'conformance/agcp-conformance-manifest.yml':sha(root/'conformance/agcp-conformance-manifest.yml'),'RELEASE_NOTES_v2.0.4.md':sha(root/'RELEASE_NOTES_v2.0.4.md')}}
+ report={'release_context':release_context,'validation_type':'AGCP_REPOSITORY_SYNCHRONIZATION','status':'PASS' if not issues else 'FAIL','checks_passed':12 if not issues else 0,'checks_total':12,'issues':issues,'metrics':{'manifest_file_count':len(mf['files']),'active_schema_count':len(sc['implemented_schemas']),'registry_entry_count':rc['entry_count'],'fixture_count':fm['fixture_count'],'rtm_disposition_counts':counts,'validation_source_hashes_checked':checked},'source_hashes':{MANIFEST:sha(root/MANIFEST),'spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx':sha(root/'spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx'),'schemas/catalog/schema-catalog.json':sha(root/'schemas/catalog/schema-catalog.json'),'api/interface-catalog.json':sha(root/'api/interface-catalog.json'),'registries/registry-entry-catalog.json':sha(root/'registries/registry-entry-catalog.json'),'conformance/test-mapping.json':sha(root/'conformance/test-mapping.json'),'conformance/fixture-mapping.json':sha(root/'conformance/fixture-mapping.json'),'conformance/agcp-conformance-manifest.yml':sha(root/'conformance/agcp-conformance-manifest.yml'),f'RELEASE_NOTES_{VERSION}.md':sha(root/f'RELEASE_NOTES_{VERSION}.md')}}
  (root/args.report).write_text(json.dumps(report,indent=2)+'\n')
  print(json.dumps({'status':report['status'],'checks':12,'issues':issues},indent=2)); return 0 if not issues else 1
 if __name__=='__main__': sys.exit(main())

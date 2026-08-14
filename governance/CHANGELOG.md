@@ -1,5 +1,13 @@
 # AGCP Change Log
 
+## 2026-08-14 - v2.0.4 Normative Statement inventory and version-source correction
+
+- Clarified the controlled inventory as 357 unique Normative Statement identifiers and 358 Core normative source-text occurrences.
+- Canonicalized the duplicate Core Sections 2.7/17.2 obligation to `NS-2.7-01`; `NS-17.2-01` is intentionally unassigned.
+- Added a controlled RTM disposition worksheet and executable Normative Statement inventory validation.
+- Established root `VERSION` as the sole maintained repository release number and added synchronization/build validation around derived release labels.
+- Preserved historical v2.0.0 and v2.0.1 release notes unchanged.
+
 ## v2.0.4 - 2026-08-05
 
 - Published AGCP v2.0.4 as the current Public Review Controlled Baseline.

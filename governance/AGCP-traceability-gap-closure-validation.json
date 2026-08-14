@@ -96,7 +96,7 @@
     "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
     "api/interface-catalog.json": "bd1aa071d9a792e9be2f25584a0f7bf3ee2b3c55e7ec71afeabca3e7e5460832",
     "registries/registry-entry-catalog.json": "9bc8d9f1791c272357a6e99ff72d3e359c018687f0d71ff1a947d6cb2e511934",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "3d3eef069a6be27f8a24d97a1fdf205c48e689cd0f8a09832d2c12b4c04d4f09",
     "conformance/test-mapping.json": "91ad9c5fb7a1a2042d1917544ac2d76b63ec04797cc1135d9e70a267642a6168",
     "conformance/fixture-mapping.json": "55b6dbb2ad2c2ff7f193d72f9f81779c6abe40f582c01ee5d955aea814fe36bd"
   }

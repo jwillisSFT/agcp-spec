@@ -10,6 +10,16 @@
 
 ---
 
+## Controlled release version source
+
+The repository root `VERSION` file is the sole maintained AGCP repository release number. Current-release labels used by build and validation tooling are derived from that value. Human-authored historical release records are not rewritten when `VERSION` changes.
+
+For this repository snapshot, `VERSION` is `2.0.4`, yielding release tag `v2.0.4` and RTM specification version `v.2.0.4`.
+
+## Normative Statement inventory
+
+The v2.0.4 controlled inventory contains **357 unique Normative Statement identifiers**. The Core has **358 controlled normative source-text occurrences** under the release inventory accounting because the conformance-scope obligation in Core Section 17.2 duplicates the obligation already represented by `NS-2.7-01` from Section 2.7. `NS-17.2-01` is intentionally unassigned. See `RELEASE_NOTES_v2.0.4.md` and `governance/AGCP-normative-statement-inventory-validation.json`.
+
 ## Specification Status
 
 AGCP v2.0.4 is issued as the controlled **Public Review Controlled Baseline** dated 2026-08-05. The contents of this repository snapshot are the fixed basis for review, implementation comparison, and conformance evaluation until a later versioned revision is issued.

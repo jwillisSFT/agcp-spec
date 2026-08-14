@@ -34,8 +34,8 @@
     "api/interface-catalog.json": "bd1aa071d9a792e9be2f25584a0f7bf3ee2b3c55e7ec71afeabca3e7e5460832",
     "conformance/fixture-mapping.json": "55b6dbb2ad2c2ff7f193d72f9f81779c6abe40f582c01ee5d955aea814fe36bd",
     "conformance/test-mapping.json": "91ad9c5fb7a1a2042d1917544ac2d76b63ec04797cc1135d9e70a267642a6168",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
-    "governance/validate_command_record_separation.py": "9252e953e10bb2937b3804a2e0311a10ea4e20e7ab8ed657674066950795ae6a"
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "3d3eef069a6be27f8a24d97a1fdf205c48e689cd0f8a09832d2c12b4c04d4f09",
+    "governance/validate_command_record_separation.py": "ca126f810c50a9fa80531f0cad08e8ecf478e04c4d64b003699031b933a02dc7"
   },
   "checks": [
     {

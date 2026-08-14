@@ -4,6 +4,7 @@ from pathlib import Path
 import copy, hashlib, json, re, sys
 from jsonschema import Draft202012Validator, RefResolver
 ROOT=Path(__file__).resolve().parents[1]
+from release_version import RELEASE_TAG, SEMVER, release_context
 
 def loadj(rel): return json.loads((ROOT/rel).read_text())
 def sha(rel): return hashlib.sha256((ROOT/rel).read_bytes()).hexdigest()
@@ -96,7 +97,7 @@ for v in cmd['negative_vectors']:
 check('claimant_assertion_negative_vector_count',len(claim)==15,len(claim))
 check('all_claimant_assertion_vectors_rejected',all(x['rejected'] for x in claim),[x for x in claim if not x['rejected']])
 
-report={'release_context':{'repository_release_target':'v2.0.4','repository_release_target_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','controlling_published_baseline':'v2.0.4','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-08-05','artifact_lifecycle_state':'CURRENT'},
+report={'release_context':release_context(),
  'report_id':'AGCP-P0-10-P0-06-SEMANTIC-FIXTURE-VALIDATION',
  'status':'PASS' if not issues else 'FAIL','validated_at':'2026-08-03','findings':['P0-10','P0-06'],
  'controlled_fixture_count':len(fm['fixtures']),'corrected_positive_fixture_count':len(pos),

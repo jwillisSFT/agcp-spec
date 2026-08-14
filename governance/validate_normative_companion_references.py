@@ -11,6 +11,7 @@ from pathlib import Path
 
 from docx import Document
 from openpyxl import load_workbook
+from release_version import RELEASE_TAG, SEMVER, release_context
 
 ROOT = Path(__file__).resolve().parents[1]
 DISPOSITION_PATH = ROOT / "governance/normative-companion-reference-dispositions.json"
@@ -251,7 +252,7 @@ def main() -> int:
     })
     source_hashes = {rel: sha256(ROOT / rel) for rel in source_files if (ROOT / rel).exists()}
 
-    report = {'release_context':{'repository_release_target':'v2.0.4','repository_release_target_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','controlling_published_baseline':'v2.0.4','controlling_baseline_status':'PUBLIC_REVIEW_CONTROLLED_BASELINE','baseline_date':'2026-08-05','artifact_lifecycle_state':'CURRENT'},
+    report = {'release_context':release_context(),
         "validation_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-VALIDATION",
         "finding": "P1-01",
         "release_target": "v2.0.4",

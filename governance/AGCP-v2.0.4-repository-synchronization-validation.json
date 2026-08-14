@@ -7,13 +7,13 @@
     "baseline_date": "2026-08-05",
     "artifact_lifecycle_state": "CURRENT"
   },
-  "validation_type": "AGCP_V2_0_4_REPOSITORY_SYNCHRONIZATION",
+  "validation_type": "AGCP_REPOSITORY_SYNCHRONIZATION",
   "status": "PASS",
   "checks_passed": 12,
   "checks_total": 12,
   "issues": [],
   "metrics": {
-    "manifest_file_count": 316,
+    "manifest_file_count": 332,
     "active_schema_count": 44,
     "registry_entry_count": 94,
     "fixture_count": 30,
@@ -34,17 +34,17 @@
         "blank": 0
       }
     },
-    "validation_source_hashes_checked": 174
+    "validation_source_hashes_checked": 181
   },
   "source_hashes": {
-    "governance/AGCP-v2.0.4-repository-synchronization-manifest.json": "750c4808429dea05346a3d13838064afa8df6a517716255e1e976e9734c8fa3e",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
+    "governance/AGCP-v2.0.4-repository-synchronization-manifest.json": "ffffa03d6264210fcdcc661d1a432bf15b296df507097c8a6b013db38ac4f240",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "3d3eef069a6be27f8a24d97a1fdf205c48e689cd0f8a09832d2c12b4c04d4f09",
     "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
     "api/interface-catalog.json": "bd1aa071d9a792e9be2f25584a0f7bf3ee2b3c55e7ec71afeabca3e7e5460832",
     "registries/registry-entry-catalog.json": "9bc8d9f1791c272357a6e99ff72d3e359c018687f0d71ff1a947d6cb2e511934",
     "conformance/test-mapping.json": "91ad9c5fb7a1a2042d1917544ac2d76b63ec04797cc1135d9e70a267642a6168",
     "conformance/fixture-mapping.json": "55b6dbb2ad2c2ff7f193d72f9f81779c6abe40f582c01ee5d955aea814fe36bd",
-    "conformance/agcp-conformance-manifest.yml": "ed8dee3e79e89a8a2a96b1c62f13538ba50bf5cec24b5b9222d195905280bfdc",
-    "RELEASE_NOTES_v2.0.4.md": "b77502bd6c1f2a0bc9f59825bf54d9d579f277a79daf21f0d9baf815d152e066"
+    "conformance/agcp-conformance-manifest.yml": "068efbb51c296bd0328360742a883035b5504e0d5a84bcaee7eb064616e0ca57",
+    "RELEASE_NOTES_v2.0.4.md": "7c3569c0a94a34e0297feb18e93a90929cce1f4f273215e1ca8c2eed7ccdfa93"
   }
 }

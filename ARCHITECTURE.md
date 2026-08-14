@@ -8,6 +8,14 @@ Normative behavior is established first by the published **AGCP Runtime Governan
 
 ---
 
+## Normative Statement identity and duplicate-source disposition
+
+Normative Statement identifiers are controlled traceability identities, not a requirement that every repeated Core source-text occurrence receive a second identifier. In v2.0.4 the controlled inventory contains 357 unique NS identifiers. One conformance-scope obligation occurs verbatim in Core Sections 2.7 and 17.2; it is canonically represented by `NS-2.7-01`, while `NS-17.2-01` is intentionally unassigned. The resulting controlled accounting is therefore 357 unique identifiers and 358 Core normative source-text occurrences.
+
+The root `VERSION` file is the authoritative repository release number. Build and validation tooling derives current release labels from that value; historical release records retain their published version identity.
+
+---
+
 # Architecture Overview
 
 AGCP is a deterministic runtime governance architecture that evaluates and authorizes governance-significant actions immediately prior to execution.

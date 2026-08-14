@@ -24,7 +24,7 @@
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
     "schemas/governance_approval_submission.json": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
     "schemas/examples/ds045-governance-approval-submission-valid.json": "9b0565c40f482ecd1ee58bf21ed873ad01c59d2a8a2f228784b7619239b40714",
-    "governance/validate_semantic_fixtures.py": "f0fcb3e8b0c17aea6a0e74cc5d465f069b33e0546cb7f4adc797dd080339c275",
+    "governance/validate_semantic_fixtures.py": "baa166b83aec59053df1f3d13a441c9a43721ef4d41f04957d927ad27c98fea6",
     "schemas/examples/ds018-commit-boundary-request-single.json": "a0617f170e636fc38cd98cb27cc077de6c777b28d73f9034c64a383e7b41f816",
     "schemas/examples/ds019-commit-boundary-result-success.json": "a1def8918fef6514020fd1ab576b62515df9271a95913e3aceee585e7d14efe3",
     "schemas/examples/ds019-commit-boundary-result-refusal.json": "788e1554c2d12f0130c1a526e141521c9a3ae95defac2445bdcfdec2bcb9531e",

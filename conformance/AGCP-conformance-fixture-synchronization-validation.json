@@ -8,7 +8,7 @@
     "schemas/catalog/schema-catalog.json": "d7e0bf5f5c479abcc404760ff5c81f54773e4e9f0ad24a016a4bf06a62e06ab6",
     "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "99a562c94cd98cce57ed42e03ad6a99ed966d548c6d28176089a75b7740900eb",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
-    "governance/AGCP-semantic-fixture-validation.json": "df10fea024811e116b1ebd44eb83232bc0fa2d95dc776a6c9c6c0823ad9794e7"
+    "governance/AGCP-semantic-fixture-validation.json": "5ff8cbdfe28ad8e7b993821bd53b002f5038bcd7dfae0ff5a67451d3bfcf5aab"
   },
   "summary": {
     "declared_fixture_count": 30,

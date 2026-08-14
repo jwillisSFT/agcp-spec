@@ -13,6 +13,11 @@
 
 This policy separates repository release identity, publication maturity, artifact lifecycle, catalog publication state, and historical introduction or retirement metadata.
 
+## Authoritative version source
+
+The root `VERSION` file is the sole maintained repository release number. Current-release labels in machine-readable metadata, validation output filenames, RTM specification-version cells, and build-controlled release metadata are generated or validated from `VERSION`. Historical release notes and historical records retain their published release identity.
+
+
 ## 2. Controlled dimensions
 
 | Dimension | Controlled value for this release | Meaning |

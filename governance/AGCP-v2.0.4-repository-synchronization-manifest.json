@@ -8,20 +8,21 @@
     "artifact_lifecycle_state": "CURRENT"
   },
   "manifest_type": "AGCP_REPOSITORY_SYNCHRONIZATION_MANIFEST",
-  "manifest_version": "1.0.0",
+  "manifest_version": "1.1.0",
+  "version_source": "VERSION",
   "repository_release_target": "v2.0.4",
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "controlling_published_baseline": "v2.0.4",
   "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "baseline_date": "2026-08-05",
   "artifact_lifecycle_state": "CURRENT",
-  "generated_date": "2026-08-05",
+  "generated_date": "2026-08-14",
   "scope_exclusions": [
     "governance/AGCP-v2.0.4-repository-integrity-validation.json",
     "governance/AGCP-v2.0.4-repository-synchronization-manifest.json",
     "governance/AGCP-v2.0.4-repository-synchronization-validation.json"
   ],
-  "file_count": 316,
+  "file_count": 332,
   "files": [
     {
       "path": ".gitattributes",
@@ -40,8 +41,8 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "sha256": "7c12074e9f3afb36ce4f4f7673d84e1fcfae9baf2dfa87d069b37ea379d3a2ed",
-      "bytes": 11297
+      "sha256": "b5854cfdd2a6e13db1220cc2d27e909888ed13ceea51ac249706171f51031fa3",
+      "bytes": 12119
     },
     {
       "path": "LICENSE",
@@ -49,14 +50,19 @@
       "bytes": 475
     },
     {
+      "path": "Makefile",
+      "sha256": "9cf828d4c20f131776a63cf3f5680daf9551314239499cc1e321a10b8f6a6043",
+      "bytes": 374
+    },
+    {
       "path": "NOTICE.md",
-      "sha256": "ddcb62b3e143a194635af54df3bb81bfe3fc7be96709e01335304034bbd0e10b",
-      "bytes": 3732
+      "sha256": "60aea3763d10c6941141e97bff887db270105e9dcc2a7f5e7e35f7178ec9a364",
+      "bytes": 4064
     },
     {
       "path": "README.md",
-      "sha256": "e856d4972b27c30e5ed03ca45b7d2b4e8f80b79d7b78e6ba9dc1158a776fb3c8",
-      "bytes": 13410
+      "sha256": "1ea92d5b6a2e5f16433fa3fd7d6b268961465fdf1b124727516157fe3b471436",
+      "bytes": 14347
     },
     {
       "path": "RELEASE_NOTES_v2.0.0.md",
@@ -64,9 +70,19 @@
       "bytes": 30798
     },
     {
+      "path": "RELEASE_NOTES_v2.0.1.md",
+      "sha256": "0b82c559f855daf3c7ed0ef11533ebe716f2819f483652f8982acbdc58cc20f9",
+      "bytes": 9541
+    },
+    {
       "path": "RELEASE_NOTES_v2.0.4.md",
-      "sha256": "b77502bd6c1f2a0bc9f59825bf54d9d579f277a79daf21f0d9baf815d152e066",
-      "bytes": 10158
+      "sha256": "7c3569c0a94a34e0297feb18e93a90929cce1f4f273215e1ca8c2eed7ccdfa93",
+      "bytes": 11540
+    },
+    {
+      "path": "VERSION",
+      "sha256": "137f467241023dadfa605db00e630b25a9394d0fc7232718812983ba24b93945",
+      "bytes": 6
     },
     {
       "path": "api/AGCP-HTTP-Contract.yaml",
@@ -80,7 +96,7 @@
     },
     {
       "path": "api/AGCP-OpenAPI-v2-migration-validation.json",
-      "sha256": "900da1d9a14deab4e7e2797cd033fcb6ebe0610c47556c3d956870e7ced95386",
+      "sha256": "879f3e4d0560d106390335df69770e9fd59538dea51ba8f28fb216b8edce50b3",
       "bytes": 33888
     },
     {
@@ -145,7 +161,7 @@
     },
     {
       "path": "conformance/AGCP-conformance-fixture-synchronization-validation.json",
-      "sha256": "ac391f8e192b34adc590b704d990131a1301de3017a075426ae61210713c2b30",
+      "sha256": "d3d0a873efc04c6c493fb333c6c83b43027e3c5b9473181f2265ec1d8f86a96c",
       "bytes": 12453
     },
     {
@@ -180,8 +196,8 @@
     },
     {
       "path": "conformance/agcp-conformance-manifest.yml",
-      "sha256": "ed8dee3e79e89a8a2a96b1c62f13538ba50bf5cec24b5b9222d195905280bfdc",
-      "bytes": 18213
+      "sha256": "068efbb51c296bd0328360742a883035b5504e0d5a84bcaee7eb064616e0ca57",
+      "bytes": 18650
     },
     {
       "path": "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json",
@@ -250,7 +266,7 @@
     },
     {
       "path": "conformance/test-mapping-validation.json",
-      "sha256": "04bfaa594a4cb2b5c96dcc485589f283156faddfa0b9025090fbd250645a0b4c",
+      "sha256": "9145e08054ca6f4970253bfe2b08b43f175d14939033b3b1735fd8ffc312109f",
       "bytes": 417
     },
     {
@@ -340,8 +356,8 @@
     },
     {
       "path": "governance/AGCP-Release-Lifecycle-Metadata-Policy.md",
-      "sha256": "039ec2bd9d4e080c1c59325e1e08f7dee1f5b1ad7718da465685f97a0a382f71",
-      "bytes": 2461
+      "sha256": "e65c6848181f27ee1e54b4c4c6bfdb05368f809944ec62c91986c58452cef7ff",
+      "bytes": 2855
     },
     {
       "path": "governance/AGCP-TRACEABILITY-GAP-CLOSURE-UPDATE.md",
@@ -350,22 +366,22 @@
     },
     {
       "path": "governance/AGCP-Versioning.md",
-      "sha256": "b19d2a0c3ba96ccd3123f3ae29d4b0acbacfbb6c91ec6c7ca334c5d48503f788",
-      "bytes": 21359
+      "sha256": "72f73066f98495459fbeb509e9e8984de6b2fc679104f3f55bce934191642fca",
+      "bytes": 21986
     },
     {
       "path": "governance/AGCP-command-record-separation-validation.json",
-      "sha256": "9bd3422750d05600cc2af365c6a72c4791e4cfb95e11a40ac4d71aced3ac9c19",
+      "sha256": "1e967c4b4392b5287234c3f95fe5f9164b6857b6b1ccb7075362c407f0d6c512",
       "bytes": 13123
     },
     {
       "path": "governance/AGCP-content-digest-contract-validation.json",
-      "sha256": "bb23002829c17183aad5e8915c0210ad9c3569b7c2aee0ed8a673daa922aaf12",
+      "sha256": "bebba6b339f5d5fbbd114a981223ff46b57964292b406383abc02aba643be3fc",
       "bytes": 15101
     },
     {
       "path": "governance/AGCP-http-error-metadata-validation.json",
-      "sha256": "7e5adfe1ec5fca062f7a8bdb97d69662745dae0d1e27e86d7e7509316f52070d",
+      "sha256": "80e8473b53f01e8fbaadb4bf94126f0acc9951f6be5d0d3465714308c1c363df",
       "bytes": 9793
     },
     {
@@ -375,48 +391,78 @@
     },
     {
       "path": "governance/AGCP-normative-companion-reference-validation.json",
-      "sha256": "e54e91f44cb033be505a8fbae1462bfd4ceeb1f474512235935b351c7cbf1f7a",
+      "sha256": "fb4e7098cda79828afb5399d1d556a82eb1ad186756b99e43cbf8bba4d254bbb",
       "bytes": 3644
     },
     {
+      "path": "governance/AGCP-normative-statement-inventory-validation.json",
+      "sha256": "a9d40ca6e6e281884d2d2b4029e64d14856b4e1fd0f999d800ac45e4f14eebaa",
+      "bytes": 4167
+    },
+    {
       "path": "governance/AGCP-provenance-wire-format-validation.json",
-      "sha256": "f10a1aeec9888c12f88dd64dce9d911662b07c6e6f5dc2a5c8ca4d02eba4152c",
+      "sha256": "ad6b0e57af078ffaa6a52b58ce6be8c028a5ed76caea62a9ddd47f52464f610d",
       "bytes": 16763
     },
     {
       "path": "governance/AGCP-release-lifecycle-metadata-validation.json",
-      "sha256": "bf81fa14800d6943753e97c24f7245bd30c6cedd8b2f5426fec38d7afe789754",
-      "bytes": 18877
+      "sha256": "14f634808d93b345df8d5bda61ddd7b424841f09f0832bea670b4962782e5574",
+      "bytes": 18914
     },
     {
       "path": "governance/AGCP-release-payload-deduplication-validation.json",
-      "sha256": "34e459ac4cc726655805c1ce6e16317bbbb6e4cb0ec3ab2780801466fa36762a",
+      "sha256": "674b5d49ad06ee3441e9afc1bfc5235e7cfd6a08a6b558ff3cd7d7b2534d958e",
       "bytes": 2879
     },
     {
       "path": "governance/AGCP-semantic-fixture-validation.json",
-      "sha256": "df10fea024811e116b1ebd44eb83232bc0fa2d95dc776a6c9c6c0823ad9794e7",
+      "sha256": "5ff8cbdfe28ad8e7b993821bd53b002f5038bcd7dfae0ff5a67451d3bfcf5aab",
       "bytes": 24122
     },
     {
       "path": "governance/AGCP-traceability-gap-closure-validation.json",
-      "sha256": "350bc89f62a04220852f0079db6d3235b5faec5a5a2d7e9500ec2e62fbca0e8d",
+      "sha256": "a7b91b410271c4e012b248b5f3e0d46d2c0aaadaa44b284a9fa884c1379306fb",
       "bytes": 2728
     },
     {
-      "path": "governance/AGCP-v2.0.4-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
-      "sha256": "b6ef567018ca0b2fdbcca28c4682b543edf2ac789e2a031bf1ab6635d3a40e66",
+      "path": "governance/AGCP-v2.0.1-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
+      "sha256": "60f27de1ff89bd9c20909bd2894ee86df3424433b43c61786792e428c9cf3f9a",
       "bytes": 1994
     },
     {
+      "path": "governance/AGCP-v2.0.1-repository-integrity-validation.json",
+      "sha256": "92c5f106c669b41eebb38d82971855985d3ab2f9ab045997c6b258e51950d8e3",
+      "bytes": 9583
+    },
+    {
+      "path": "governance/AGCP-v2.0.1-repository-synchronization-manifest.json",
+      "sha256": "df272e28d1aa4ba6111088953f1e28756cf9a6343c9bf226295e98d0baeb9551",
+      "bytes": 57861
+    },
+    {
+      "path": "governance/AGCP-v2.0.1-repository-synchronization-validation.json",
+      "sha256": "65af37774192c7c8e109c87cd685376e189925a44d700f1f6e045b3bebb9cec5",
+      "bytes": 571
+    },
+    {
+      "path": "governance/AGCP-v2.0.4-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
+      "sha256": "96bb04d18077f74fd38b557059bcc75e65bea16896a9ae42f9ea781087ba8fae",
+      "bytes": 2664
+    },
+    {
+      "path": "governance/AGCP-version-source-validation.json",
+      "sha256": "1dce5da46b0b4ac832528ba0d6694e22740f58086f87a6f3011f1b2761603a17",
+      "bytes": 4087
+    },
+    {
       "path": "governance/CHANGELOG.md",
-      "sha256": "b28f9018c46f002c74d458a15bfe5bb2abb7aeeb658f9cdd11e5c29f4c1e994a",
-      "bytes": 28850
+      "sha256": "6cb99d6f4aba0d8224feb663fbe0fa5e2bbec73207da923c423531b73e00897e",
+      "bytes": 29510
     },
     {
       "path": "governance/CONTRIBUTING.md",
-      "sha256": "c02fb29512547927a4e4f7bb598024a046d87fa47c3e092d2603495686e29811",
-      "bytes": 3615
+      "sha256": "19efd4ad7469b63097c13593659d295137fbbd6bf0d34e57f7f2024c87883cfb",
+      "bytes": 4025
     },
     {
       "path": "governance/RTM-1.46-companion-artifact-disposition-validation.json",
@@ -429,64 +475,99 @@
       "bytes": 29566
     },
     {
+      "path": "governance/build_release.py",
+      "sha256": "46f3c798406be51c11b422605e265230f21c0deb5b9b323f28bc9700e4d02d69",
+      "bytes": 2294
+    },
+    {
+      "path": "governance/generate_repository_manifest.py",
+      "sha256": "b0fcc5a4c36802483f704ec4abd4c3ff931034d893f62918be0f68c5a69a2271",
+      "bytes": 1367
+    },
+    {
       "path": "governance/normative-companion-reference-dispositions.json",
       "sha256": "24e0054549e6551c8a841fabf590d246cf3b5b3968b28a249245dce84814f250",
       "bytes": 3523
     },
     {
+      "path": "governance/refresh_source_hashes.py",
+      "sha256": "32c50afcfb2806bc9dec9c8c1a854756d7bf805099a42118d919304d5b8111ae",
+      "bytes": 1996
+    },
+    {
       "path": "governance/release-lifecycle-metadata.json",
-      "sha256": "ade88d6d12345ef579a1ca5400db65c21adae043726fd77dfb9cdc1b97c23678",
-      "bytes": 1606
+      "sha256": "9c39c8106388a230c4c5f3ebf7edb40a87d4ab1992d2ba4dd2d6bca8254babaa",
+      "bytes": 1569
+    },
+    {
+      "path": "governance/release-settings.json",
+      "sha256": "7aef542b82a1811ce942d38f9cca96f8d6ebe644a06eca7101e465f3e4ba238b",
+      "bytes": 478
+    },
+    {
+      "path": "governance/release_version.py",
+      "sha256": "e9cbfb44aa3a78d3276a8476b6f0af95dd0f6414161d131ace68a5c851f9b6ab",
+      "bytes": 3480
+    },
+    {
+      "path": "governance/sync_release_version.py",
+      "sha256": "2eb910a7eee6400d162c11a87a1bf6ea539e53066ed443385023d9b7bfa05f78",
+      "bytes": 8440
     },
     {
       "path": "governance/validate_command_record_separation.py",
-      "sha256": "9252e953e10bb2937b3804a2e0311a10ea4e20e7ab8ed657674066950795ae6a",
-      "bytes": 11687
+      "sha256": "ca126f810c50a9fa80531f0cad08e8ecf478e04c4d64b003699031b933a02dc7",
+      "bytes": 11486
     },
     {
       "path": "governance/validate_content_digest_contract.py",
-      "sha256": "9edac56056c51c014b1e946d2bc3f7dff027f4d8fe1398dd32b7332827a78025",
-      "bytes": 9331
+      "sha256": "b455cdee0cfcc122c865004a6eeae373d9e6138848675b3cf265323be59abcd3",
+      "bytes": 9130
     },
     {
       "path": "governance/validate_http_error_metadata_contract.py",
-      "sha256": "0220313c9796ad7171c65c6d09241029f64f30d65ed533e80fee0b3e378f5fa9",
-      "bytes": 11572
+      "sha256": "059f84c0ee7af7fbb9aa3d0046df41030f34ad568ae5e3cea4b7a907eb395bbf",
+      "bytes": 11373
     },
     {
       "path": "governance/validate_implementation_profiles.py",
-      "sha256": "310407afa488f2fced0cfb3d9368a8ff42971e4b4836eab0dc5eeb95942ac3ad",
-      "bytes": 1796
+      "sha256": "849a8d4b79b3016fc57c3268acb027fb0e625f00bd0c3c39f91c38174bccd579",
+      "bytes": 1595
     },
     {
       "path": "governance/validate_normative_companion_references.py",
-      "sha256": "dc1e89c066cef91e5190617fa2cbecb02afdbab314433c8ff6c637c597c55b65",
-      "bytes": 11768
+      "sha256": "6784f7d44eaa9986801ed48c08d358e36b283f4f1868501ebee9e236412cb834",
+      "bytes": 11567
+    },
+    {
+      "path": "governance/validate_normative_statement_inventory.py",
+      "sha256": "8c72fa46daeeab0fd29eac1449603ff5c49071ce6c62efaf43a8048317a0c560",
+      "bytes": 6120
     },
     {
       "path": "governance/validate_provenance_wire_format.py",
-      "sha256": "f5d4a3155b4191efb6b3024b12e49b6e2e5cb10ae88a5ebff48f50730f09e6f0",
-      "bytes": 14036
+      "sha256": "568e8f93c305ef2c90a023871a4985a1800419f507dcf3892b1fe1b9809f678e",
+      "bytes": 13835
     },
     {
       "path": "governance/validate_release_lifecycle_metadata.py",
-      "sha256": "1bed49d271be0642ae9e96dfac2804ce28f11d4d47917f845f53b38d3706e251",
-      "bytes": 7201
+      "sha256": "2f596bfce70fc9f3f690c632d12af12348643e808a50e9ea0a934203773f0bf4",
+      "bytes": 7280
     },
     {
       "path": "governance/validate_repository_integrity.py",
-      "sha256": "0e625f139cbb328f9b33e65020a1c643b612f919c2a9bb44940a86b9e6449837",
-      "bytes": 23737
+      "sha256": "acaa5565e350d6276a0101e9001065e327d84b1a7f7f58eeee1765703068b108",
+      "bytes": 24026
     },
     {
       "path": "governance/validate_repository_synchronization.py",
-      "sha256": "8f401cf5f3c3ce749641af1027b850102b9414bcc0055d386a24d5add383d079",
-      "bytes": 5711
+      "sha256": "e9cd832e86efdaf5c7bdbe00f3bfd0d2fb6111a7a2caf911260af41f7dc804fd",
+      "bytes": 5918
     },
     {
       "path": "governance/validate_semantic_fixtures.py",
-      "sha256": "f0fcb3e8b0c17aea6a0e74cc5d465f069b33e0546cb7f4adc797dd080339c275",
-      "bytes": 7187
+      "sha256": "baa166b83aec59053df1f3d13a441c9a43721ef4d41f04957d927ad27c98fea6",
+      "bytes": 6986
     },
     {
       "path": "implementer/AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md",
@@ -1525,8 +1606,8 @@
     },
     {
       "path": "spec/AGCP Normative Statements.docx",
-      "sha256": "153eb274c05c2d2d07ec0da27897669465061a40e58344817699faa559e49cd0",
-      "bytes": 64409
+      "sha256": "cc336645f8a61c416130f96aaa70c31b9c06dc796f14aa88578ff49d1d134401",
+      "bytes": 61617
     },
     {
       "path": "spec/AGCP Requirements Traceability Framework.docx",
@@ -1570,8 +1651,8 @@
     },
     {
       "path": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
-      "sha256": "02efa0e93c1fd0b8e36745ec651e7a9f4e0b99bae50cbf9d6b94c5cc1885c171",
-      "bytes": 147771
+      "sha256": "3d3eef069a6be27f8a24d97a1fdf205c48e689cd0f8a09832d2c12b4c04d4f09",
+      "bytes": 148810
     },
     {
       "path": "spec/AGCP_Runtime_Governance_Requirements_CR-001_thru_CR-122.csv",
