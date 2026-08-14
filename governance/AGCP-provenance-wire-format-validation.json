@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.5",
+    "repository_release_target": "v2.0.8",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.5",
+    "controlling_published_baseline": "v2.0.8",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "report_id": "AGCP-P0-02-PROVENANCE-WIRE-SCHEMA-SYNCHRONIZATION",
@@ -17,20 +17,20 @@
   "controlled_fixture_count": 30,
   "harness_provenance_instance_count": 12,
   "source_hashes": {
-    "spec/AGCP-Provenance-Wire-Format-Specification.md": "437b35771087398dcf65c1303577d19bf3a0dcc459d2e76bd59b0240079593a0",
+    "spec/AGCP-Provenance-Wire-Format-Specification.md": "9de4343acfb0df44ef3750ea86d0dc8fb36d8f43c6f39f8d6e1e71c6200ea861",
     "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
-    "api/AGCP-HTTP-Contract.yaml": "af03153d65be2f87096b96f699392d057a195e74b5eb62a7daafb118137f7db7",
-    "spec/AGCP-HTTP-Interface-Specification.md": "b04639fdc40c2eae4ce62ef127c06f6b50476c89d94e1a2fa1dac54afd3c2fb6",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
+    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
     "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
     "conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json": "57436530a4e667c29768026a3a0a90dc3019ec57fc2b96a6f6584dbf2723daa3",
-    "schemas/catalog/schema-catalog.json": "586e4a71929c58eadd81b1fd57a389b80c73a48132b587ec8fbd3ac677104209",
-    "api/interface-catalog.json": "ff4fa44f285ae4fc807700c5b6e732afae24e0d2c5da0498f5869189a33cdaf8",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1daa8317ee0cb711bfbd1489b9ec17770821afb29ae85f8d29d8090b8cf765eb",
+    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
+    "api/interface-catalog.json": "803b1614a0cd0004763879bf0249f809e6a2e8d2a6c8f0d0db2e0ec240a9b364",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
     "governance/validate_provenance_wire_format.py": "568e8f93c305ef2c90a023871a4985a1800419f507dcf3892b1fe1b9809f678e",
-    "conformance/fixture-mapping.json": "7aab2f86d5b5fb981653c35845e17ea4bc0f9a829c8135fc7d845ad12142be81",
-    "conformance/test-mapping.json": "a2e5e55ec6085e50e81de377796d8eff9b22d76654870252ae4756fe3e3c1cf6",
-    "conformance/test-mapping-validation.json": "80f5989cb919ee9adbcff492203d689f50fc00f051818775b797fcd8f21d801c"
+    "conformance/fixture-mapping.json": "b072c0e2dead30fbb0de9c0cd6ebb69107f4a9f6922fbfc465970b7bf901778d",
+    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
+    "conformance/test-mapping-validation.json": "23c3ace16e735f523c80d5564931b15e613ffb574722464a4dd0aac248879d12"
   },
   "checks": [
     {

@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.5",
+    "repository_release_target": "v2.0.8",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.5",
+    "controlling_published_baseline": "v2.0.8",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "validation_type": "AGCP_NORMATIVE_STATEMENT_INVENTORY_VALIDATION",
@@ -77,7 +77,7 @@
         "Reason": "Core Section 17.2 repeats verbatim the conformance-scope obligation already represented by NS-2.7-01 from Core Section 2.7. The duplicate occurrence does not create a second independently testable obligation.",
         "Unique_NS_Identifier_Count": 357,
         "Core_Normative_Occurrence_Count": 358,
-        "Specification_Version": "v.2.0.5"
+        "Specification_Version": "v.2.0.8"
       }
     },
     {
@@ -88,7 +88,7 @@
     {
       "check": "current_release_notes_record_inventory_correction",
       "status": "PASS",
-      "detail": "RELEASE_NOTES_v2.0.5.md"
+      "detail": "RELEASE_NOTES_v2.0.8.md"
     },
     {
       "check": "readme_records_current_inventory",
@@ -109,10 +109,10 @@
   "source_hashes": {
     "spec/AGCP-Core.docx": "f19f9c07af20a23a51e89fd08a560b6f1a53195a0654c60cdfcec08a69907dfe",
     "spec/AGCP Normative Statements.docx": "cc336645f8a61c416130f96aaa70c31b9c06dc796f14aa88578ff49d1d134401",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1daa8317ee0cb711bfbd1489b9ec17770821afb29ae85f8d29d8090b8cf765eb",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
     "RELEASE_NOTES_v2.0.0.md": "8b67c2af1de7e5530f90fddae2ff7f8405fdd00870d6e4d6fda239b666998d19",
-    "RELEASE_NOTES_v2.0.5.md": "756ab36a2433c672b00f20dbbbcc5db88278b6d5999b649e611d56ebda25f7d8",
-    "README.md": "2902d3658141fab585f53e35e1d0ee2ea6783358525b0fc2b13c90884a31c28d",
+    "RELEASE_NOTES_v2.0.8.md": "4eed367ffb6abf7f01696fb2dd7adf42d7083afd85e2a17a4e9c2bf2d1840f81",
+    "README.md": "331470991073d09ff3e0e43ddc931d9a2b00bae6658a5c811c2c2bbf183fac65",
     "governance/validate_normative_statement_inventory.py": "8c72fa46daeeab0fd29eac1449603ff5c49071ce6c62efaf43a8048317a0c560"
   }
 }

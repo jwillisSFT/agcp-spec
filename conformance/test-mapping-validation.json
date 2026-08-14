@@ -5,7 +5,7 @@
   "test_count": 110,
   "private_profile_companion_references": 0,
   "source_hashes": {
-    "conformance/test-mapping.json": "a2e5e55ec6085e50e81de377796d8eff9b22d76654870252ae4756fe3e3c1cf6",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1daa8317ee0cb711bfbd1489b9ec17770821afb29ae85f8d29d8090b8cf765eb"
+    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6"
   }
 }

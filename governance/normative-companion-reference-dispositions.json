@@ -2,7 +2,7 @@
   "document_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-DISPOSITIONS",
   "title": "AGCP Normative Companion Reference Dispositions",
   "version": "1.0.0",
-  "release_target": "v2.0.4",
+  "release_target": "v2.0.8",
   "status": "CONTROLLED",
   "finding": "P1-01",
   "purpose": "Resolve repository references that name normative companion artifacts not present in the controlled release and bind each retired label to existing canonical artifacts.",

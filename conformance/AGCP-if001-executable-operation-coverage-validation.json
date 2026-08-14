@@ -12,12 +12,12 @@
     "test_mapping": "conformance/test-mapping.json"
   },
   "source_hashes": {
-    "api/AGCP-HTTP-Contract.yaml": "af03153d65be2f87096b96f699392d057a195e74b5eb62a7daafb118137f7db7",
-    "spec/AGCP-HTTP-Interface-Specification.md": "b04639fdc40c2eae4ce62ef127c06f6b50476c89d94e1a2fa1dac54afd3c2fb6",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
+    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
     "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
-    "conformance/test-mapping.json": "a2e5e55ec6085e50e81de377796d8eff9b22d76654870252ae4756fe3e3c1cf6",
-    "conformance/harness-checks.json": "97a9d30f166aafe04c954c7344f9a7688584121e68e4516e61f966691597deb8"
+    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
+    "conformance/harness-checks.json": "fa69406d24158a3c64654a43d20ed1bb73d3aa9191a75e51195d38cc6a380df8"
   },
   "summary": {
     "mandatory_operation_count": 10,

@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.5",
+    "repository_release_target": "v2.0.8",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.5",
+    "controlling_published_baseline": "v2.0.8",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "report_id": "AGCP-P0-10-P0-06-SEMANTIC-FIXTURE-VALIDATION",
@@ -19,7 +19,7 @@
   "semantic_negative_vector_count": 10,
   "claimant_assertion_negative_vector_count": 15,
   "source_hashes": {
-    "conformance/fixture-mapping.json": "7aab2f86d5b5fb981653c35845e17ea4bc0f9a829c8135fc7d845ad12142be81",
+    "conformance/fixture-mapping.json": "b072c0e2dead30fbb0de9c0cd6ebb69107f4a9f6922fbfc465970b7bf901778d",
     "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "99a562c94cd98cce57ed42e03ad6a99ed966d548c6d28176089a75b7740900eb",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
     "schemas/governance_approval_submission.json": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",

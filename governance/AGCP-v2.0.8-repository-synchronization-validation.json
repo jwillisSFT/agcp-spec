@@ -1,0 +1,50 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.8",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.8",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-08-14",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "validation_type": "AGCP_REPOSITORY_SYNCHRONIZATION",
+  "status": "PASS",
+  "checks_passed": 12,
+  "checks_total": 12,
+  "issues": [],
+  "metrics": {
+    "manifest_file_count": 346,
+    "active_schema_count": 44,
+    "registry_entry_count": 94,
+    "fixture_count": 30,
+    "rtm_disposition_counts": {
+      "DS_ID": {
+        "assigned": 122,
+        "na": 0,
+        "blank": 0
+      },
+      "IF_ID": {
+        "assigned": 84,
+        "na": 38,
+        "blank": 0
+      },
+      "REG_ID": {
+        "assigned": 117,
+        "na": 5,
+        "blank": 0
+      }
+    },
+    "validation_source_hashes_checked": 161
+  },
+  "source_hashes": {
+    "governance/AGCP-v2.0.8-repository-synchronization-manifest.json": "31b9da9b358b6cdeabf562e4271cb771c41348fd155bd16105f61c2f1f1e1642",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
+    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
+    "api/interface-catalog.json": "803b1614a0cd0004763879bf0249f809e6a2e8d2a6c8f0d0db2e0ec240a9b364",
+    "registries/registry-entry-catalog.json": "b9dc44ce432dd488b8f85666aa3bd620706b769a66af3b4bf2bb1697a86dc818",
+    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
+    "conformance/fixture-mapping.json": "b072c0e2dead30fbb0de9c0cd6ebb69107f4a9f6922fbfc465970b7bf901778d",
+    "conformance/agcp-conformance-manifest.yml": "e73949854b463e42163f42fcc1d09917b0cd1a47c3707b412a33ebff904497ed",
+    "RELEASE_NOTES_v2.0.8.md": "4eed367ffb6abf7f01696fb2dd7adf42d7083afd85e2a17a4e9c2bf2d1840f81"
+  }
+}

@@ -2,7 +2,7 @@
   "catalog_id": "REG-CATALOG-1.0",
   "title": "AGCP Registry Entry Catalog",
   "description": "Authoritative catalog of permanent REG identifiers and direct entry-level NS/CR traceability for active registry entries.",
-  "specification_version": "v2.0.5",
+  "specification_version": "v2.0.8",
   "catalog_version": "1.0.3",
   "publication_status": "CURRENT",
   "last_modified_date": "2026-08-05",
@@ -2088,10 +2088,10 @@
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
-  "repository_release_target": "v2.0.5",
+  "repository_release_target": "v2.0.8",
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "controlling_published_baseline": "v2.0.5",
-  "baseline_date": "2026-08-05",
+  "controlling_published_baseline": "v2.0.8",
+  "baseline_date": "2026-08-14",
   "rtm_dataset_version": "RTM-1.46"
 }

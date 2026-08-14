@@ -57,6 +57,10 @@ CURRENT_REGISTRIES = [
     "registries/rejection-code-registry.json",
 ]
 
+CURRENT_RELEASE_METADATA_JSON = [
+    "governance/normative-companion-reference-dispositions.json",
+]
+
 CURRENT_HUMAN_METADATA = [
     "schemas/SCHEMA-CATALOG.md",
     "schemas/README.md",
@@ -64,6 +68,7 @@ CURRENT_HUMAN_METADATA = [
     "registries/REGISTRY-ENTRY-CATALOG.md",
     "registries/README.md",
     "governance/AGCP-Release-Lifecycle-Metadata-Policy.md",
+    "governance/AGCP-Normative-Companion-Reference-Dispositions.md",
     "spec/AGCP-Multitenant-Operational-Specification.md",
     "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md",
     "spec/AGCP-Policy-Evaluation-Contract.md",
@@ -201,6 +206,32 @@ def sync_machine_release_metadata(write: bool, changed: list[str]) -> None:
     sync["validation_report"] = SYNC_REPORT
     write_json_if_changed(test_map_path, test_map, write, changed)
 
+    # Additional current machine-readable release metadata.
+    for rel in CURRENT_RELEASE_METADATA_JSON:
+        path = ROOT / rel
+        obj = json.loads(path.read_text(encoding="utf-8"))
+        if rel == "governance/normative-companion-reference-dispositions.json":
+            obj["release_target"] = RELEASE_TAG
+        write_json_if_changed(path, obj, write, changed)
+
+    # Current conformance-harness metadata is governed by the repository release.
+    # Version values inside semantic fixture/test payloads remain untouched because
+    # those values model data, not repository release authority.
+    harness_spec_path = ROOT / "conformance/AGCP-Conformance-Harness-Spec.yml"
+    harness_spec_text = harness_spec_path.read_text(encoding="utf-8")
+    harness_spec_updated = re.sub(
+        r"(?m)^(  agcp_release:)\s*v\d+\.\d+\.\d+$",
+        rf"\1 {RELEASE_TAG}",
+        harness_spec_text,
+        count=1,
+    )
+    write_text_if_changed(harness_spec_path, harness_spec_updated, write, changed)
+
+    harness_checks_path = ROOT / "conformance/harness-checks.json"
+    harness_checks = json.loads(harness_checks_path.read_text(encoding="utf-8"))
+    harness_checks["agcp_release"] = RELEASE_TAG
+    write_json_if_changed(harness_checks_path, harness_checks, write, changed)
+
     # Current controlled registries use current release identity. Historical entry
     # introduction metadata is left untouched. Recompute document digests after
     # changing the registry release envelope.
@@ -276,6 +307,9 @@ def replace_current_metadata_labels(text: str) -> str:
         (r"(?mi)(Controlling published baseline\s*\|\s*`)v\d+\.\d+\.\d+(`)", rf"\g<1>{RELEASE_TAG}\2"),
         (r"(?mi)(Controlling published baseline:\s*`?)v\d+\.\d+\.\d+(`?)", rf"\g<1>{RELEASE_TAG}\2"),
         (r"(?mi)(Release target:\*\*\s*AGCP\s+)v\d+\.\d+\.\d+", rf"\g<1>{RELEASE_TAG}"),
+        (r"(?mi)(Baseline Date:\*\*\s*)\d{4}-\d{2}-\d{2}", rf"\g<1>{BASELINE_DATE}"),
+        (r"(?mi)(Baseline date:\s*`?)\d{4}-\d{2}-\d{2}(`?)", rf"\g<1>{BASELINE_DATE}\2"),
+        (r"(?mi)(Baseline date\s*\|\s*`?)\d{4}-\d{2}-\d{2}(`?)", rf"\g<1>{BASELINE_DATE}\2"),
     ]
     for pattern, replacement in patterns:
         text = re.sub(pattern, replacement, text)
@@ -325,7 +359,7 @@ def sync_human_metadata(write: bool, changed: list[str]) -> None:
             )
         elif rel == "conformance/README.md":
             updated = re.sub(
-                r"The cumulative v\d+\.\d+\.\d+ correction set is indexed by `\.\./governance/AGCP-v\d+\.\d+\.\d+-repository-synchronization-manifest\.json`",
+                r"The cumulative v\d+\.\d+\.\d+ (?:correction|repository) set is indexed by `\.\./governance/AGCP-v\d+\.\d+\.\d+-repository-synchronization-manifest\.json`",
                 f"The cumulative {RELEASE_TAG} repository set is indexed by `../{SYNC_MANIFEST}`",
                 updated,
             )
@@ -351,7 +385,7 @@ def sync_human_metadata(write: bool, changed: list[str]) -> None:
     # Root README contains current-release prose in addition to metadata labels.
     path = ROOT / "README.md"
     text = path.read_text(encoding="utf-8")
-    updated = text
+    updated = replace_current_metadata_labels(text)
     updated = re.sub(r"(?m)^> \*\*Current release:\*\* AGCP v\d+\.\d+\.\d+", f"> **Current release:** AGCP {RELEASE_TAG}", updated)
     updated = re.sub(r"(?m)^> \*\*Controlling published baseline:\*\* AGCP v\d+\.\d+\.\d+", f"> **Controlling published baseline:** AGCP {RELEASE_TAG}", updated)
     updated = re.sub(r"(?m)^> This repository snapshot is the controlled AGCP v\d+\.\d+\.\d+", f"> This repository snapshot is the controlled AGCP {RELEASE_TAG}", updated)
@@ -365,9 +399,24 @@ def sync_human_metadata(write: bool, changed: list[str]) -> None:
     updated = re.sub(r"AGCP v\d+\.\d+\.\d+ is issued as the controlled \*\*Public Review Controlled Baseline\*\*", f"AGCP {RELEASE_TAG} is issued as the controlled **Public Review Controlled Baseline**", updated, count=1)
     updated = re.sub(r"This controlled release is AGCP v\d+\.\d+\.\d+ Public Review Controlled Baseline", f"This controlled release is AGCP {RELEASE_TAG} Public Review Controlled Baseline", updated, count=1)
     updated = re.sub(r"AGCP v\d+\.\d+\.\d+ is the current Public Review Controlled Baseline\.", f"AGCP {RELEASE_TAG} is the current Public Review Controlled Baseline.", updated, count=1)
+    updated = re.sub(r"(Public Review Controlled Baseline\*\* dated )\d{4}-\d{2}-\d{2}", rf"\g<1>{BASELINE_DATE}", updated, count=1)
+    updated = re.sub(r"(Public Review Controlled Baseline, baseline date )\d{4}-\d{2}-\d{2}", rf"\g<1>{BASELINE_DATE}", updated, count=1)
+    updated = re.sub(r"(controlled baseline date is `)\d{4}-\d{2}-\d{2}(`)", rf"\g<1>{BASELINE_DATE}\2", updated, count=1)
     updated = re.sub(r"## v\d+\.\d+\.\d+ repository-wide integrity gate", f"## {RELEASE_TAG} repository-wide integrity gate", updated)
     updated = re.sub(r"`governance/AGCP-v\d+\.\d+\.\d+-repository-integrity-validation\.json`", f"`{INTEGRITY_REPORT}`", updated)
     updated = re.sub(r"## v\d+\.\d+\.\d+ repository synchronization", f"## {RELEASE_TAG} repository synchronization", updated)
+    updated = re.sub(
+        r"(?m)^├── RELEASE_NOTES_v\d+\.\d+\.\d+\.md$",
+        f"├── {CURRENT_RELEASE_NOTES}",
+        updated,
+        count=1,
+    )
+    updated = re.sub(
+        r"(?m)^- `RELEASE_NOTES_v\d+\.\d+\.\d+\.md` — release notes for the current v\d+\.\d+\.\d+ Public Review Controlled Baseline$",
+        f"- `{CURRENT_RELEASE_NOTES}` — release notes for the current {RELEASE_TAG} Public Review Controlled Baseline",
+        updated,
+        count=1,
+    )
     write_text_if_changed(path, updated, write, changed)
 
 
@@ -485,19 +534,33 @@ def validate() -> tuple[list[dict], list[str]]:
 
     ck("current_release_notes_present", (ROOT / CURRENT_RELEASE_NOTES).is_file(), CURRENT_RELEASE_NOTES)
 
-    # Validator code may import VERSION-derived constants but must not independently
-    # assign the current release value.
+    # Executable code may import VERSION-derived constants but must not embed the
+    # current repository semantic version as an independent literal dependency.
+    # Historical literals remain permitted where they identify historical records.
     offenders = []
-    assign = re.compile(
-        r"^\s*[A-Z_]*(?:VERSION|RELEASE)[A-Z_]*\s*=\s*[\"'](?:v\.?)?" + re.escape(SEMVER) + r"[\"']",
-        re.M,
-    )
-    for path in sorted((ROOT / "governance").glob("*.py")):
-        if path.name == "release_version.py":
+    current_literal = re.compile(r"(?<![0-9])(?:v\.?)?" + re.escape(SEMVER) + r"(?![0-9])")
+    for path in sorted(ROOT.rglob("*.py")):
+        if ".git" in path.parts or path.name == "release_version.py":
             continue
-        if assign.search(path.read_text(encoding="utf-8")):
+        if current_literal.search(path.read_text(encoding="utf-8")):
             offenders.append(path.relative_to(ROOT).as_posix())
-    ck("python_validators_do_not_maintain_independent_release_version", not offenders, offenders)
+    ck("executable_python_does_not_hardcode_current_release", not offenders, offenders)
+
+    harness_spec = yaml.safe_load((ROOT / "conformance/AGCP-Conformance-Harness-Spec.yml").read_text(encoding="utf-8")) or {}
+    harness_checks = json.loads((ROOT / "conformance/harness-checks.json").read_text(encoding="utf-8"))
+    ck(
+        "conformance_harness_release_metadata",
+        harness_spec.get("meta", {}).get("agcp_release") == RELEASE_TAG and harness_checks.get("agcp_release") == RELEASE_TAG,
+        {"harness_spec": harness_spec.get("meta", {}).get("agcp_release"), "harness_checks": harness_checks.get("agcp_release")},
+    )
+
+    disposition = json.loads((ROOT / "governance/normative-companion-reference-dispositions.json").read_text(encoding="utf-8"))
+    disposition_md = (ROOT / "governance/AGCP-Normative-Companion-Reference-Dispositions.md").read_text(encoding="utf-8")
+    ck(
+        "normative_companion_disposition_release_metadata",
+        disposition.get("release_target") == RELEASE_TAG and f"**Release target:** AGCP {RELEASE_TAG}" in disposition_md,
+        {"json_release_target": disposition.get("release_target")},
+    )
 
     return checks, issues
 

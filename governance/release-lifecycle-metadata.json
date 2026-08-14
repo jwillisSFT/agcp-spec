@@ -3,30 +3,30 @@
   "policy_version": "1.1.0",
   "finding": "P2-01",
   "version_source": "VERSION",
-  "repository_release_target": "v2.0.5",
+  "repository_release_target": "v2.0.8",
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "controlling_published_baseline": {
-    "release_id": "AGCP-v2.0.5",
-    "specification_version": "2.0.5",
+    "release_id": "AGCP-v2.0.8",
+    "specification_version": "2.0.8",
     "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05"
+    "baseline_date": "2026-08-14"
   },
   "current_artifact_lifecycle_state": "CURRENT",
   "current_catalog_publication_status": "CURRENT",
-  "current_repository_specification_version": "2.0.5",
+  "current_repository_specification_version": "2.0.8",
   "rules": [
     "The root VERSION file is the sole maintained repository release number; current-release labels are generated or validated from it.",
-    "AGCP v2.0.5 is the current Public Review Controlled Baseline for this repository release.",
+    "AGCP v2.0.8 is the current Public Review Controlled Baseline for this repository release.",
     "Active controlled artifacts use lifecycle CURRENT and publication status CURRENT unless a more specific controlled lifecycle applies.",
     "Working Draft is reserved for artifacts intentionally outside the controlled current repository set.",
     "Implementation Profiles retain their own controlled lifecycle and status values."
   ],
   "validation_report_release_context": {
-    "repository_release_target": "v2.0.5",
+    "repository_release_target": "v2.0.8",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.5",
+    "controlling_published_baseline": "v2.0.8",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   }
 }

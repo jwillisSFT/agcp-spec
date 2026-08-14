@@ -1,18 +1,18 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.5",
+    "repository_release_target": "v2.0.8",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.5",
+    "controlling_published_baseline": "v2.0.8",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "validation_type": "AGCP_SINGLE_SOURCE_VERSION_VALIDATION",
   "status": "PASS",
   "version_source": "VERSION",
-  "semantic_version": "2.0.5",
-  "release_tag": "v2.0.5",
-  "rtm_specification_version": "v.2.0.5",
+  "semantic_version": "2.0.8",
+  "release_tag": "v2.0.8",
+  "rtm_specification_version": "v.2.0.8",
   "synchronization": {
     "files_requiring_update": []
   },
@@ -21,7 +21,7 @@
       "check": "authoritative_version_source",
       "status": "PASS",
       "detail": {
-        "VERSION": "2.0.5",
+        "VERSION": "2.0.8",
         "metadata_version_source": "VERSION"
       }
     },
@@ -33,30 +33,30 @@
         "policy_version": "1.1.0",
         "finding": "P2-01",
         "version_source": "VERSION",
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
         "controlling_published_baseline": {
-          "release_id": "AGCP-v2.0.5",
-          "specification_version": "2.0.5",
+          "release_id": "AGCP-v2.0.8",
+          "specification_version": "2.0.8",
           "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-          "baseline_date": "2026-08-05"
+          "baseline_date": "2026-08-14"
         },
         "current_artifact_lifecycle_state": "CURRENT",
         "current_catalog_publication_status": "CURRENT",
-        "current_repository_specification_version": "2.0.5",
+        "current_repository_specification_version": "2.0.8",
         "rules": [
           "The root VERSION file is the sole maintained repository release number; current-release labels are generated or validated from it.",
-          "AGCP v2.0.5 is the current Public Review Controlled Baseline for this repository release.",
+          "AGCP v2.0.8 is the current Public Review Controlled Baseline for this repository release.",
           "Active controlled artifacts use lifecycle CURRENT and publication status CURRENT unless a more specific controlled lifecycle applies.",
           "Working Draft is reserved for artifacts intentionally outside the controlled current repository set.",
           "Implementation Profiles retain their own controlled lifecycle and status values."
         ],
         "validation_report_release_context": {
-          "repository_release_target": "v2.0.5",
+          "repository_release_target": "v2.0.8",
           "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-          "controlling_published_baseline": "v2.0.5",
+          "controlling_published_baseline": "v2.0.8",
           "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-          "baseline_date": "2026-08-05",
+          "baseline_date": "2026-08-14",
           "artifact_lifecycle_state": "CURRENT"
         }
       }
@@ -65,8 +65,8 @@
       "check": "openapi_version",
       "status": "PASS",
       "detail": {
-        "info.version": "2.0.5",
-        "release": "v2.0.5"
+        "info.version": "2.0.8",
+        "release": "v2.0.8"
       }
     },
     {
@@ -76,13 +76,13 @@
         "name": "AGCP",
         "release_model": "repository_release",
         "version_source": "VERSION",
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "public-review-controlled-baseline",
         "artifact_lifecycle_state": "current",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "public-review-controlled-baseline",
-        "baseline_date": "2026-08-05",
-        "agcp_release": "v2.0.5",
+        "baseline_date": "2026-08-14",
+        "agcp_release": "v2.0.8",
         "rtm_dataset_version": "RTM-1.46",
         "schema_catalog_version": "1.0.50",
         "interface_catalog_version": "1.0.5",
@@ -94,45 +94,60 @@
       "check": "catalog_release_metadata_schema-catalog",
       "status": "PASS",
       "detail": {
-        "specification_version": "v2.0.5",
-        "repository_release_target": "v2.0.5",
-        "controlling_published_baseline": "v2.0.5"
+        "specification_version": "v2.0.8",
+        "repository_release_target": "v2.0.8",
+        "controlling_published_baseline": "v2.0.8"
       }
     },
     {
       "check": "catalog_release_metadata_interface-catalog",
       "status": "PASS",
       "detail": {
-        "specification_version": "v2.0.5",
-        "repository_release_target": "v2.0.5",
-        "controlling_published_baseline": "v2.0.5"
+        "specification_version": "v2.0.8",
+        "repository_release_target": "v2.0.8",
+        "controlling_published_baseline": "v2.0.8"
       }
     },
     {
       "check": "catalog_release_metadata_registry-entry-catalog",
       "status": "PASS",
       "detail": {
-        "specification_version": "v2.0.5",
-        "repository_release_target": "v2.0.5",
-        "controlling_published_baseline": "v2.0.5"
+        "specification_version": "v2.0.8",
+        "repository_release_target": "v2.0.8",
+        "controlling_published_baseline": "v2.0.8"
       }
     },
     {
       "check": "rtm_specification_version",
       "status": "PASS",
       "detail": [
-        "v.2.0.5"
+        "v.2.0.8"
       ]
     },
     {
       "check": "current_release_notes_present",
       "status": "PASS",
-      "detail": "RELEASE_NOTES_v2.0.5.md"
+      "detail": "RELEASE_NOTES_v2.0.8.md"
     },
     {
-      "check": "python_validators_do_not_maintain_independent_release_version",
+      "check": "executable_python_does_not_hardcode_current_release",
       "status": "PASS",
       "detail": []
+    },
+    {
+      "check": "conformance_harness_release_metadata",
+      "status": "PASS",
+      "detail": {
+        "harness_spec": "v2.0.8",
+        "harness_checks": "v2.0.8"
+      }
+    },
+    {
+      "check": "normative_companion_disposition_release_metadata",
+      "status": "PASS",
+      "detail": {
+        "json_release_target": "v2.0.8"
+      }
     }
   ],
   "issues": []

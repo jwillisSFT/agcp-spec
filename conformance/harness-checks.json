@@ -764,7 +764,7 @@
     "The ARM governs architectural terminology and concept meaning; Core-derived Normative Statements and the RTM support extraction and traceability without changing normative precedence.",
     "Harness checks SHALL remain synchronized with the Requirements Traceability Matrix, conformance test cases, and conformance test vectors."
   ],
-  "agcp_release": "v2.0.0",
+  "agcp_release": "v2.0.8",
   "interface_id": "IF-001",
   "interface_version": "v2",
   "schema_catalog": "schemas/catalog/schema-catalog.json",

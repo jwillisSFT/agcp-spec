@@ -2,7 +2,7 @@
 
 **Status:** Controlled repository reference disposition  
 **Version:** 1.0.0  
-**Release target:** AGCP v2.0.4  
+**Release target:** AGCP v2.0.8  
 **Finding:** P1-01
 
 ## 1. Purpose

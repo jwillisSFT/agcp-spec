@@ -2,7 +2,7 @@
   "catalog_id": "DS-CATALOG-1.0",
   "title": "AGCP Data Schema Catalog",
   "description": "Authoritative catalog and DS namespace assignment for implemented and proposed AGCP JSON Schemas.",
-  "specification_version": "v2.0.5",
+  "specification_version": "v2.0.8",
   "catalog_version": "1.0.50",
   "publication_status": "CURRENT",
   "created_date": "2026-07-22",
@@ -46,7 +46,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-006",
         "DS-007",
@@ -211,7 +211,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-028"
@@ -289,7 +289,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -356,7 +356,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -440,7 +440,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -509,7 +509,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -616,7 +616,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -709,7 +709,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -816,7 +816,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -902,7 +902,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -967,7 +967,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1052,7 +1052,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1153,7 +1153,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-021"
@@ -1230,7 +1230,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1291,7 +1291,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1414,7 +1414,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1512,7 +1512,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1647,7 +1647,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1785,7 +1785,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2013,7 +2013,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2128,7 +2128,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2232,7 +2232,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -2318,7 +2318,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2450,7 +2450,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2550,7 +2550,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2656,7 +2656,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -2751,7 +2751,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -2855,7 +2855,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2933,7 +2933,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3007,7 +3007,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3068,7 +3068,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-020"
@@ -3136,7 +3136,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3220,7 +3220,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3322,7 +3322,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3383,7 +3383,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3462,7 +3462,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3527,7 +3527,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3641,7 +3641,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3762,7 +3762,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3945,7 +3945,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -4028,7 +4028,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -4099,7 +4099,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -4166,7 +4166,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001"
       ],
@@ -4257,7 +4257,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -4338,7 +4338,7 @@
       "artifact_type": "Retired DS Identifier Record",
       "lifecycle_state": "Retired",
       "record_status": "Historical",
-      "specification_version": "v2.0.5",
+      "specification_version": "v2.0.8",
       "superseded_by": "DS-026",
       "retired_date": "2026-07-30",
       "assigned_date": "2026-07-22",
@@ -4387,10 +4387,10 @@
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
-  "repository_release_target": "v2.0.5",
+  "repository_release_target": "v2.0.8",
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "controlling_published_baseline": "v2.0.5",
-  "baseline_date": "2026-08-05",
+  "controlling_published_baseline": "v2.0.8",
+  "baseline_date": "2026-08-14",
   "rtm_dataset_version": "RTM-1.46"
 }

@@ -15,8 +15,8 @@
     ]
   },
   "source_hashes": {
-    "api/AGCP-HTTP-Contract.yaml": "af03153d65be2f87096b96f699392d057a195e74b5eb62a7daafb118137f7db7",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
+    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
     "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c"
   },
   "validation_rules": [

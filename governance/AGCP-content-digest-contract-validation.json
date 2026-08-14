@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.5",
+    "repository_release_target": "v2.0.8",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.5",
+    "controlling_published_baseline": "v2.0.8",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "report_id": "AGCP-P1-12-CONTENT-DIGEST-CONTRACT",
@@ -32,12 +32,12 @@
   "source_hashes": {
     "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
     "schemas/examples/common-content-digest-examples.json": "335d62b3e52c0844635c26a9eb97c48242d0d62f0d7fecbf7259264229e0f777",
-    "api/AGCP-HTTP-Contract.yaml": "af03153d65be2f87096b96f699392d057a195e74b5eb62a7daafb118137f7db7",
-    "spec/AGCP-HTTP-Interface-Specification.md": "b04639fdc40c2eae4ce62ef127c06f6b50476c89d94e1a2fa1dac54afd3c2fb6",
+    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
+    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2",
     "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e",
-    "schemas/catalog/schema-catalog.json": "586e4a71929c58eadd81b1fd57a389b80c73a48132b587ec8fbd3ac677104209",
-    "conformance/test-mapping.json": "a2e5e55ec6085e50e81de377796d8eff9b22d76654870252ae4756fe3e3c1cf6",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1daa8317ee0cb711bfbd1489b9ec17770821afb29ae85f8d29d8090b8cf765eb",
+    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
+    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
     "governance/validate_content_digest_contract.py": "b455cdee0cfcc122c865004a6eeae373d9e6138848675b3cf265323be59abcd3"
   },
   "checks": [

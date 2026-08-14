@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: AGCP HTTP Interface Contract
-  version: 2.0.5
-  description: 'Machine-readable HTTP interface contract for AGCP v2.0.5 contract-compatible
+  version: 2.0.8
+  description: 'Machine-readable HTTP interface contract for AGCP v2.0.8 contract-compatible
     implementations.
 
 
@@ -898,6 +898,6 @@ components:
                   transport_disposition: DEPENDENCY_UNAVAILABLE
 x-agcp-interface-id: IF-001
 x-agcp-interface-version: v2
-x-agcp-specification-release: v2.0.5
+x-agcp-specification-release: v2.0.8
 x-agcp-path-namespace: /agcp/v2
 x-agcp-v1-compatibility: false

@@ -1,15 +1,15 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.5",
+    "repository_release_target": "v2.0.8",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.5",
+    "controlling_published_baseline": "v2.0.8",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "report_id": "AGCP-P2-01-RELEASE-LIFECYCLE-METADATA",
   "status": "PASS",
-  "validated_at": "2026-08-05",
+  "validated_at": "2026-08-14",
   "finding": "P2-01",
   "catalog_versions": {
     "schema": "1.0.50",
@@ -19,32 +19,32 @@
   "specification_count": 7,
   "validation_report_count": 7,
   "source_hashes": {
-    "governance/release-lifecycle-metadata.json": "1316fb5c54b5911148fb71f3a25beeb57a0db4ceece1555163fdb5a8f59cabd5",
-    "governance/AGCP-Release-Lifecycle-Metadata-Policy.md": "9a3d18037be6eb048b443b45624edbd82aa8f44ac02ccb6d9ff16c5d1309a450",
-    "schemas/catalog/schema-catalog.json": "586e4a71929c58eadd81b1fd57a389b80c73a48132b587ec8fbd3ac677104209",
-    "schemas/catalog/schema-catalog.csv": "278d3b545cfb1241f4ff69160dcde9624834a53db5f123d56431c4199c0098f6",
-    "schemas/SCHEMA-CATALOG.md": "c9e05ed9d24e01a4aa5bb3c28032a68edb4668fa1f8835897170067151990c95",
-    "schemas/README.md": "7499531faccd49d820653410d7281c8e79b041722b89396ca21a1972eb97af14",
-    "api/interface-catalog.json": "ff4fa44f285ae4fc807700c5b6e732afae24e0d2c5da0498f5869189a33cdaf8",
-    "api/interface-catalog.csv": "410d4632d9a1f839a16ace5962b00e276933263f3fd1da607305dd7fd254e9dd",
-    "api/INTERFACE-CATALOG.md": "d250b883921daf86a7bc6240f2a0c728e230e89ea44fdfc6ab1a3b13526bb85d",
-    "registries/registry-entry-catalog.json": "95197a04dadf80b7ee48e1b4c4396773cd1889787f392a675ecf716cfa18827e",
-    "registries/registry-entry-catalog.csv": "4052bfc33479f5957d86076c6aed643e1552435323e31c490584ad495def9ed8",
-    "registries/REGISTRY-ENTRY-CATALOG.md": "6db0aed58f1cce9f5a4725ebdd72d73d9ccd998e7c0db698f1f12e698acc14d4",
-    "registries/constraint-type-registry.json": "f3a60f9359e7b9bfe86653d94491b143b1b519df7f791e6859aad70c4d9623de",
-    "registries/invariant-type-registry.json": "4c3c2ea4fc8ba11b381751ab56eafd4387e026b58b59df2fa76eb2443823c3e9",
-    "registries/rejection-code-registry.json": "cf878712be83d65318e36689f84295763300e40aad6bd3a35822666f40306a37",
-    "api/AGCP-HTTP-Contract.yaml": "af03153d65be2f87096b96f699392d057a195e74b5eb62a7daafb118137f7db7",
-    "conformance/agcp-conformance-manifest.yml": "8d15387f831e16d5f3ad2a2718719e1bd72058b096d13a7457e190d9841e091d",
-    "RELEASE_NOTES_v2.0.5.md": "756ab36a2433c672b00f20dbbbcc5db88278b6d5999b649e611d56ebda25f7d8",
-    "governance/validate_release_lifecycle_metadata.py": "2f596bfce70fc9f3f690c632d12af12348643e808a50e9ea0a934203773f0bf4",
-    "spec/AGCP-Multitenant-Operational-Specification.md": "8b33dace5fb9bc56c8a3329cf46e5d0662cc801824984256c5e8f5c401439a1c",
-    "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md": "26de1433318bc1a0874119a1ede939db55620589024b4432adc1d7e026f98767",
-    "spec/AGCP-Policy-Evaluation-Contract.md": "49e426a8ecce9e3b4d5cdee345badd2141cdce5681aaa153c306982b5496e08c",
-    "spec/AGCP-Provenance-Wire-Format-Specification.md": "437b35771087398dcf65c1303577d19bf3a0dcc459d2e76bd59b0240079593a0",
-    "spec/AGCP-Human-Review-Specification.md": "b9ed8790182066c4cbd464a478d58cc978d9f273181303aced51c1b6b959e1c4",
-    "spec/AGCP-Error-Mapping.md": "e47acc4a998873be9d0541a0fc7091bad8ff665fa06cc799f8184deb7ed10deb",
-    "spec/AGCP-HTTP-Interface-Specification.md": "b04639fdc40c2eae4ce62ef127c06f6b50476c89d94e1a2fa1dac54afd3c2fb6"
+    "governance/release-lifecycle-metadata.json": "876b124aead4ef3608516949ef44bac8d759b78a9343c8f8598933af96ac027b",
+    "governance/AGCP-Release-Lifecycle-Metadata-Policy.md": "ee38f289b3698f7af2bfca2a34cd90d27d36dcadb361ecbaeacd373592ee7e79",
+    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
+    "schemas/catalog/schema-catalog.csv": "e3ffd105f1de8ccc479817905bf91dcf40665ec9fa559ace16477dcd8c44457e",
+    "schemas/SCHEMA-CATALOG.md": "da385acc7a161349fef58c1ff7aa26e95d8ac1515e4b86e6f5d1c7a262cac3d6",
+    "schemas/README.md": "c03187e10a549d3c9b6a531f6b7f42f28cceafe8025fe379aff3e09f735e4230",
+    "api/interface-catalog.json": "803b1614a0cd0004763879bf0249f809e6a2e8d2a6c8f0d0db2e0ec240a9b364",
+    "api/interface-catalog.csv": "86110c4ff595051b430a0fa31f8bbeeba8b759890514ec5b2b125c0ef1c3fe96",
+    "api/INTERFACE-CATALOG.md": "bdef27a36edb72a8ea7492233b33a09aa3efa7646cf00a8753d17faf2b5510f9",
+    "registries/registry-entry-catalog.json": "b9dc44ce432dd488b8f85666aa3bd620706b769a66af3b4bf2bb1697a86dc818",
+    "registries/registry-entry-catalog.csv": "56e4bb9ac62008c287aada86d6e825e2e1a4da4fa647b242619523d3934a6c65",
+    "registries/REGISTRY-ENTRY-CATALOG.md": "8af1c2e79bb1f43b11ff35d88cb8ae94af11608514c784b5b467fac835b8ec14",
+    "registries/constraint-type-registry.json": "deee5920759f9db68de07ac9a7f6a0efff99a2364af2918b2eca1ace89828a9b",
+    "registries/invariant-type-registry.json": "8d127ff337e6e28366609f1c15ef447a0c7b3d0043d21c5b5b9a49ef7e6367dd",
+    "registries/rejection-code-registry.json": "1934f2c2a1b0b73dfd1f845adbb00c28cc6da0bcbe11db13fa4e66b7eaa943ab",
+    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
+    "conformance/agcp-conformance-manifest.yml": "e73949854b463e42163f42fcc1d09917b0cd1a47c3707b412a33ebff904497ed",
+    "RELEASE_NOTES_v2.0.8.md": "4eed367ffb6abf7f01696fb2dd7adf42d7083afd85e2a17a4e9c2bf2d1840f81",
+    "governance/validate_release_lifecycle_metadata.py": "fbdd203904081f49474b080c1b6c647ad2d2f5d2bfba7eb45b76a0be0bc5fbb4",
+    "spec/AGCP-Multitenant-Operational-Specification.md": "9afdf01625d4bb1348458974d0938af68ac0879decd709a207aa585f9ca134e0",
+    "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md": "62ecc76fb15637a18b2e7f9b1be2215782f834fe6e62ca29ddcb286e696b0656",
+    "spec/AGCP-Policy-Evaluation-Contract.md": "f07f0bf72e2e2291480bd62f49d962f42f27a4e0270c3cee1a3d24ad09f6dc28",
+    "spec/AGCP-Provenance-Wire-Format-Specification.md": "9de4343acfb0df44ef3750ea86d0dc8fb36d8f43c6f39f8d6e1e71c6200ea861",
+    "spec/AGCP-Human-Review-Specification.md": "965fad7e724d6bd8e6b9f1e4c3fa12ac111207dfba36ad8988d090466dd1baa5",
+    "spec/AGCP-Error-Mapping.md": "6c5cd15e1260666da2b7713ea153fb186dceaf8c1e81320f7bf0f8e55530f6c9",
+    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2"
   },
   "checks": [
     {
@@ -61,14 +61,14 @@
       "check": "schema_catalog_metadata",
       "status": "PASS",
       "detail": {
-        "specification_version": "v2.0.5",
+        "specification_version": "v2.0.8",
         "publication_status": "CURRENT",
         "artifact_lifecycle_state": "CURRENT",
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
         "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
-        "baseline_date": "2026-08-05"
+        "controlling_published_baseline": "v2.0.8",
+        "baseline_date": "2026-08-14"
       }
     },
     {
@@ -80,14 +80,14 @@
       "check": "interface_catalog_metadata",
       "status": "PASS",
       "detail": {
-        "specification_version": "v2.0.5",
+        "specification_version": "v2.0.8",
         "publication_status": "CURRENT",
         "artifact_lifecycle_state": "CURRENT",
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
         "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
-        "baseline_date": "2026-08-05"
+        "controlling_published_baseline": "v2.0.8",
+        "baseline_date": "2026-08-14"
       }
     },
     {
@@ -99,14 +99,14 @@
       "check": "registry_catalog_metadata",
       "status": "PASS",
       "detail": {
-        "specification_version": "v2.0.5",
+        "specification_version": "v2.0.8",
         "publication_status": "CURRENT",
         "artifact_lifecycle_state": "CURRENT",
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
         "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
-        "baseline_date": "2026-08-05"
+        "controlling_published_baseline": "v2.0.8",
+        "baseline_date": "2026-08-14"
       }
     },
     {
@@ -157,37 +157,37 @@
     {
       "check": "spec_header_AGCP-Multitenant-Operational-Specification",
       "status": "PASS",
-      "detail": "# AGCP Multitenant Operational Specification\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.5  \n**Repository Release Target:** AGCP v2.0.5  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-05  \n\n## 1. Purpose\n\nThis specification defines the mandatory multitenant operational\nrequirements for AGCP-conformant implementations.\n\nIt establishes normative requirements for:\n\n-   Tenant lifecycle management\n-   Governance Domain isolation\n-   Namespace isolation"
+      "detail": "# AGCP Multitenant Operational Specification\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.8  \n**Repository Release Target:** AGCP v2.0.8  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-14  \n\n## 1. Purpose\n\nThis specification defines the mandatory multitenant operational\nrequirements for AGCP-conformant implementations.\n\nIt establishes normative requirements for:\n\n-   Tenant lifecycle management\n-   Governance Domain isolation\n-   Namespace isolation"
     },
     {
       "check": "spec_header_AGCP-Append-Only-Governance-Ledger-Specification",
       "status": "PASS",
-      "detail": "# AGCP Append-Only Governance Ledger Specification\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.5  \n**Repository Release Target:** AGCP v2.0.5  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-05  \n\n## 1. Purpose\n\nThis specification defines the mandatory storage contract for the AGCP\nAppend-Only Governance Ledger.\n\nEvery AGCP-conformant implementation SHALL provide an append-only\ngovernance ledger satisfying this specification.\n\nThe ledger is the authoritative, immutable record of\ngovernance-significant events and provides the foundation for governance"
+      "detail": "# AGCP Append-Only Governance Ledger Specification\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.8  \n**Repository Release Target:** AGCP v2.0.8  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-14  \n\n## 1. Purpose\n\nThis specification defines the mandatory storage contract for the AGCP\nAppend-Only Governance Ledger.\n\nEvery AGCP-conformant implementation SHALL provide an append-only\ngovernance ledger satisfying this specification.\n\nThe ledger is the authoritative, immutable record of\ngovernance-significant events and provides the foundation for governance"
     },
     {
       "check": "spec_header_AGCP-Policy-Evaluation-Contract",
       "status": "PASS",
-      "detail": "# AGCP Policy Evaluation Contract (PEC) Specification \n\n**Status:** Normative\\\n**Interface Identifier:** IF-002\\\n**Interface Version:** v2\\\n**Contract Version:** 2.0.5\\\n**AGCP Specification Release:** v2.0.5\\\n**Artifact Lifecycle:** Current\\\n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-05  \n**Series:** AGCP Core\\\n**Applies To:** All AGCP-conformant implementations\n\n## 1. Purpose\n\nThe Policy Evaluation Contract (PEC) defines the normative behavioral\ncontract between the Governance Decision Function (GDF) and a Policy\nEvaluation Module (PEM). It standardizes deterministic evaluation of\ngovernance policy while remaining independent of policy language,"
+      "detail": "# AGCP Policy Evaluation Contract (PEC) Specification \n\n**Status:** Normative\\\n**Interface Identifier:** IF-002\\\n**Interface Version:** v2\\\n**Contract Version:** 2.0.8\\\n**AGCP Specification Release:** v2.0.8\\\n**Artifact Lifecycle:** Current\\\n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-14  \n**Series:** AGCP Core\\\n**Applies To:** All AGCP-conformant implementations\n\n## 1. Purpose\n\nThe Policy Evaluation Contract (PEC) defines the normative behavioral\ncontract between the Governance Decision Function (GDF) and a Policy\nEvaluation Module (PEM). It standardizes deterministic evaluation of\ngovernance policy while remaining independent of policy language,"
     },
     {
       "check": "spec_header_AGCP-Provenance-Wire-Format-Specification",
       "status": "PASS",
-      "detail": "# AGCP Provenance Wire Format Specification\n\n**Status:** Normative\n**Specification Version:** 2.0.5  \n**Artifact Lifecycle:** Current  \n**Repository Release Target:** AGCP v2.0.5  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-05  \n**AGCP Release Series:** v2\n\n## 1. Purpose\n\nThis specification defines the canonical provenance wire envelope, deterministic canonicalization procedure, detached-signature encoding, verification process, and replay-protection requirements for AGCP-conformant implementations.\n\nIt establishes one interoperable, implementation-independent provenance representation for governance requests and governance artifacts. `schemas/common.json#/$defs/provenance` is the authoritative machine-readable schema for this envelope and SHALL remain structurally identical to this specification.\n\n## 2. Scope\n\nThis specification applies to every AGCP request or governance artifact containing a top-level `provenance` member, including:"
+      "detail": "# AGCP Provenance Wire Format Specification\n\n**Status:** Normative\n**Specification Version:** 2.0.8  \n**Artifact Lifecycle:** Current  \n**Repository Release Target:** AGCP v2.0.8  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-14  \n**AGCP Release Series:** v2\n\n## 1. Purpose\n\nThis specification defines the canonical provenance wire envelope, deterministic canonicalization procedure, detached-signature encoding, verification process, and replay-protection requirements for AGCP-conformant implementations.\n\nIt establishes one interoperable, implementation-independent provenance representation for governance requests and governance artifacts. `schemas/common.json#/$defs/provenance` is the authoritative machine-readable schema for this envelope and SHALL remain structurally identical to this specification.\n\n## 2. Scope\n\nThis specification applies to every AGCP request or governance artifact containing a top-level `provenance` member, including:"
     },
     {
       "check": "spec_header_AGCP-Human-Review-Specification",
       "status": "PASS",
-      "detail": "# AGCP Human Adjudication and Governance Approval Specification\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.5  \n**Repository Release Target:** AGCP v2.0.5  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-05  \n\n## 1. Purpose\n\nThis specification defines the normative structure and processing requirements for human adjudication, governed approval, cosignature, risk acceptance, cancellation, withdrawal, and quorum participation within AGCP.\n\nThe public ingress command is the Governance Approval Submission defined by `schemas/governance_approval_submission.json` (DS-045). The canonical authoritative approval record is the Governance Approval Artifact defined by `schemas/governance_approval_artifact.json` (DS-026). Claimant submissions and AGCP-created or AGCP-qualified records are distinct objects and SHALL NOT be conflated.\n\n## 2. Scope\n\nThis specification applies to every AGCP implementation that supports governance decisions requiring human or governed approval participation.\n"
+      "detail": "# AGCP Human Adjudication and Governance Approval Specification\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.8  \n**Repository Release Target:** AGCP v2.0.8  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-14  \n\n## 1. Purpose\n\nThis specification defines the normative structure and processing requirements for human adjudication, governed approval, cosignature, risk acceptance, cancellation, withdrawal, and quorum participation within AGCP.\n\nThe public ingress command is the Governance Approval Submission defined by `schemas/governance_approval_submission.json` (DS-045). The canonical authoritative approval record is the Governance Approval Artifact defined by `schemas/governance_approval_artifact.json` (DS-026). Claimant submissions and AGCP-created or AGCP-qualified records are distinct objects and SHALL NOT be conflated.\n\n## 2. Scope\n\nThis specification applies to every AGCP implementation that supports governance decisions requiring human or governed approval participation.\n"
     },
     {
       "check": "spec_header_AGCP-Error-Mapping",
       "status": "PASS",
-      "detail": "# AGCP Endpoint-Level Error Mapping\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.5  \n**Repository Release Target:** AGCP v2.0.5  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-05  \n**Series:** AGCP Core  \n**Scope:** HTTP status codes, rejection codes, and Governance Evidence behavior for the AGCP HTTP interface.\n\n---\n\n# 1. Purpose\n\nThis document defines the required mapping between HTTP status codes, AGCP rejection codes, and Governance Evidence behavior for AGCP HTTP endpoints.\n\nIt is aligned with:\n"
+      "detail": "# AGCP Endpoint-Level Error Mapping\n\n**Status:** Normative  \n**Artifact Lifecycle:** Current  \n**Specification Version:** 2.0.8  \n**Repository Release Target:** AGCP v2.0.8  \n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-14  \n**Series:** AGCP Core  \n**Scope:** HTTP status codes, rejection codes, and Governance Evidence behavior for the AGCP HTTP interface.\n\n---\n\n# 1. Purpose\n\nThis document defines the required mapping between HTTP status codes, AGCP rejection codes, and Governance Evidence behavior for AGCP HTTP endpoints.\n\nIt is aligned with:\n"
     },
     {
       "check": "spec_header_AGCP-HTTP-Interface-Specification",
       "status": "PASS",
-      "detail": "# AGCP HTTP Interface Specification\n\n**Status:** Normative\\\n**Interface Identifier:** IF-001\\\n**Interface Version:** v2\\\n**AGCP Specification Release:** v2.0.5\\\n**Artifact Lifecycle:** Current\\\n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-05  \n**Applies To:** All AGCP-conformant implementations\n\n------------------------------------------------------------------------\n\n# 1. Purpose\n\nThis specification defines the normative HTTP protocol requirements for\nAGCP-conformant implementations.\n\nThe machine-readable HTTP surface, including paths, operations, request"
+      "detail": "# AGCP HTTP Interface Specification\n\n**Status:** Normative\\\n**Interface Identifier:** IF-001\\\n**Interface Version:** v2\\\n**AGCP Specification Release:** v2.0.8\\\n**Artifact Lifecycle:** Current\\\n**Repository Release Target Status:** Public Review Controlled Baseline  \n**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  \n**Baseline Date:** 2026-08-14  \n**Applies To:** All AGCP-conformant implementations\n\n------------------------------------------------------------------------\n\n# 1. Purpose\n\nThis specification defines the normative HTTP protocol requirements for\nAGCP-conformant implementations.\n\nThe machine-readable HTTP surface, including paths, operations, request"
     },
     {
       "check": "openapi_release_metadata",
@@ -201,13 +201,13 @@
         "name": "AGCP",
         "release_model": "repository_release",
         "version_source": "VERSION",
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "public-review-controlled-baseline",
         "artifact_lifecycle_state": "current",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "public-review-controlled-baseline",
-        "baseline_date": "2026-08-05",
-        "agcp_release": "v2.0.5",
+        "baseline_date": "2026-08-14",
+        "agcp_release": "v2.0.8",
         "rtm_dataset_version": "RTM-1.46",
         "schema_catalog_version": "1.0.50",
         "interface_catalog_version": "1.0.5",
@@ -224,24 +224,24 @@
       "check": "registry_digest_constraint-type-registry",
       "status": "PASS",
       "detail": {
-        "declared": "00ce7e06359fb667c9b686c7fec97d9e9d51a9cbba5c8a59f4352dfcec46dcba",
-        "computed": "00ce7e06359fb667c9b686c7fec97d9e9d51a9cbba5c8a59f4352dfcec46dcba"
+        "declared": "f75359ded7e8431583ee6c93ea64ab752675d8e05c5539b15d3e7a62867a87fe",
+        "computed": "f75359ded7e8431583ee6c93ea64ab752675d8e05c5539b15d3e7a62867a87fe"
       }
     },
     {
       "check": "registry_digest_invariant-type-registry",
       "status": "PASS",
       "detail": {
-        "declared": "b5f5f7ba01ae48284a6edd6db652a33ee003e447e2e5864b4bffd454182887a8",
-        "computed": "b5f5f7ba01ae48284a6edd6db652a33ee003e447e2e5864b4bffd454182887a8"
+        "declared": "8e10a5b3cf5152b3edb1af819f7d19f6484d75fd01f59e3d5774d41e02f467c9",
+        "computed": "8e10a5b3cf5152b3edb1af819f7d19f6484d75fd01f59e3d5774d41e02f467c9"
       }
     },
     {
       "check": "registry_digest_rejection-code-registry",
       "status": "PASS",
       "detail": {
-        "declared": "9115f6d339b8fd312d2fb4830eca23cc9b20110ec13854dc97f0ae346a4036c3",
-        "computed": "9115f6d339b8fd312d2fb4830eca23cc9b20110ec13854dc97f0ae346a4036c3"
+        "declared": "aa2486f8fce5bd5f83ad091da395ffc5c9a4d91e2a7c4da8e5d473be7ad7acf9",
+        "computed": "aa2486f8fce5bd5f83ad091da395ffc5c9a4d91e2a7c4da8e5d473be7ad7acf9"
       }
     },
     {
@@ -253,11 +253,11 @@
       "check": "report_release_context_AGCP-implementation-profile-validation",
       "status": "PASS",
       "detail": {
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-08-05",
+        "baseline_date": "2026-08-14",
         "artifact_lifecycle_state": "CURRENT"
       }
     },
@@ -265,11 +265,11 @@
       "check": "report_release_context_AGCP-provenance-wire-format-validation",
       "status": "PASS",
       "detail": {
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-08-05",
+        "baseline_date": "2026-08-14",
         "artifact_lifecycle_state": "CURRENT"
       }
     },
@@ -277,11 +277,11 @@
       "check": "report_release_context_AGCP-command-record-separation-validation",
       "status": "PASS",
       "detail": {
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-08-05",
+        "baseline_date": "2026-08-14",
         "artifact_lifecycle_state": "CURRENT"
       }
     },
@@ -289,11 +289,11 @@
       "check": "report_release_context_AGCP-content-digest-contract-validation",
       "status": "PASS",
       "detail": {
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-08-05",
+        "baseline_date": "2026-08-14",
         "artifact_lifecycle_state": "CURRENT"
       }
     },
@@ -301,11 +301,11 @@
       "check": "report_release_context_AGCP-http-error-metadata-validation",
       "status": "PASS",
       "detail": {
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-08-05",
+        "baseline_date": "2026-08-14",
         "artifact_lifecycle_state": "CURRENT"
       }
     },
@@ -313,11 +313,11 @@
       "check": "report_release_context_AGCP-semantic-fixture-validation",
       "status": "PASS",
       "detail": {
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-08-05",
+        "baseline_date": "2026-08-14",
         "artifact_lifecycle_state": "CURRENT"
       }
     },
@@ -325,11 +325,11 @@
       "check": "report_release_context_AGCP-normative-companion-reference-validation",
       "status": "PASS",
       "detail": {
-        "repository_release_target": "v2.0.5",
+        "repository_release_target": "v2.0.8",
         "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "controlling_published_baseline": "v2.0.5",
+        "controlling_published_baseline": "v2.0.8",
         "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-        "baseline_date": "2026-08-05",
+        "baseline_date": "2026-08-14",
         "artifact_lifecycle_state": "CURRENT"
       }
     }

@@ -265,7 +265,7 @@ The controlled positive-fixture catalog is subject to both JSON Schema validatio
 
 ## Repository Synchronization
 
-The cumulative v2.0.5 repository set is indexed by `../governance/AGCP-v2.0.5-repository-synchronization-manifest.json` and validated by `../governance/validate_repository_synchronization.py` against `RTM-1.46` and the current catalogs.
+The cumulative v2.0.8 repository set is indexed by `../governance/AGCP-v2.0.8-repository-synchronization-manifest.json` and validated by `../governance/validate_repository_synchronization.py` against `RTM-1.46` and the current catalogs.
 
 
 ## Repository-wide integrity gate

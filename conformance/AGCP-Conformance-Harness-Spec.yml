@@ -20,7 +20,7 @@ meta:
     governance_approval_submission_is_untrusted_ingress: true
     governance_approval_artifact_is_agcp_created_or_qualified_record: true
     submitted_governance_approval_provenance_independently_cryptographically_verified: true
-  agcp_release: v2.0.0
+  agcp_release: v2.0.8
   interface_id: IF-001
   interface_version: v2
   fixture_resolution: Resolve $fixture repository paths and apply $overrides before request-schema and OpenAPI validation.

@@ -8,9 +8,9 @@
   "series": "AGCP Core",
   "description": "Authoritative registry of recognized AGCP constraint types used during Proposal Qualification, Governance Decision Function processing, Governance Self-Protection, Execution Authorization, Commit Boundary processing, and related conformance assessment.",
   "release": {
-    "release_id": "REG-CONSTRAINT-TYPE-v2.0.5",
-    "registry_release": "v2.0.5",
-    "specification_version": "v2.0.5",
+    "release_id": "REG-CONSTRAINT-TYPE-v2.0.8",
+    "registry_release": "v2.0.8",
+    "specification_version": "v2.0.8",
     "publication_status": "CURRENT",
     "published_at": "2026-07-30T12:26:00-04:00",
     "authority": "AGCP controlled repository release",
@@ -34,7 +34,7 @@
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "00ce7e06359fb667c9b686c7fec97d9e9d51a9cbba5c8a59f4352dfcec46dcba"
+      "value": "f75359ded7e8431583ee6c93ea64ab752675d8e05c5539b15d3e7a62867a87fe"
     }
   },
   "traceability": {

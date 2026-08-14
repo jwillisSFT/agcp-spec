@@ -1,10 +1,10 @@
 # AGCP Specification Library
 
 **Artifact Lifecycle:** Current  
-**Repository Release Target:** AGCP v2.0.5  
+**Repository Release Target:** AGCP v2.0.8  
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.5 Public Review Controlled Baseline  
-**Baseline Date:** 2026-08-05
+**Controlling Published Baseline:** AGCP v2.0.8 Public Review Controlled Baseline  
+**Baseline Date:** 2026-08-14
 
 ## Overview
 

@@ -1,7 +1,7 @@
 {
   "manifest_type": "AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_MANIFEST",
   "manifest_version": "1.0.3",
-  "release_target": "v2.0.5",
+  "release_target": "v2.0.8",
   "generated_date": "2026-08-05",
   "profile_format_version": "1.1.0",
   "scope": "Public format, schema, template, informational example, and catalogs only. Operational deployment profiles are distributed separately.",
@@ -28,12 +28,12 @@
     },
     {
       "path": "IMPLEMENTATION-PROFILE-CATALOG.md",
-      "sha256": "7ccb18d6c51b34b0dc36b9c50a83bef410ee36ae2bcd21c942c7806f63817f45",
+      "sha256": "106b154e1671af8ec3fb19e10eb7c378c193100495353b91d4db609ec5bc23dd",
       "bytes": 944
     },
     {
       "path": "implementation-profile-catalog.json",
-      "sha256": "682af3e9db918b86c939d8b56f487c1fb08af82495069e02d89fc20bca2a9790",
+      "sha256": "316a95d72acb8db57a6e1afef1fdb90c70414d59068d52602e1349724234a1ce",
       "bytes": 1211
     },
     {

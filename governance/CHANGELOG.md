@@ -1,3 +1,11 @@
+## 2026-08-14 - v2.0.8 single-source release-version dependency closure
+
+- Published the release-governance correction as v2.0.8; no `RELEASE_NOTES_v2.0.7.md` artifact is included.
+- Reconfirmed root `VERSION` as the sole maintained current AGCP release number and derived current release identifiers and generated release filenames through `governance/release_version.py`.
+- Expanded VERSION-driven synchronization to cover current conformance-harness release metadata and the current normative-companion disposition release identity.
+- Strengthened single-source validation to detect executable-code literals of the current release outside the authoritative version helper.
+- Rebuilt current release metadata, hashes, synchronization records, and integrity records for v2.0.8.
+
 # AGCP Change Log
 
 ## 2026-08-14 - v2.0.5 Normative Statement inventory and version-source correction
