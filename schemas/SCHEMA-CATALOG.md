@@ -2,11 +2,11 @@
 
 - Catalog ID: `DS-CATALOG-1.0`
 - Catalog version: `1.0.50`
-- Specification version: `v2.0.4`
+- Specification version: `v2.0.5`
 - Publication status: `CURRENT`
 - Artifact lifecycle state: `CURRENT`
-- Repository release target: `v2.0.4` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
-- Controlling published baseline: `v2.0.0` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
+- Repository release target: `v2.0.5` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
+- Controlling published baseline: `v2.0.5` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
 - Baseline date: `2026-08-05`
 - Last modified: `2026-08-03`
 

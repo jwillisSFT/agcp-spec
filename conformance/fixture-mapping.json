@@ -1,6 +1,6 @@
 {
   "fixture_catalog_id": "AGCP-CONFORMANCE-FIXTURES-1.0",
-  "specification_version": "v2.0.4",
+  "specification_version": "v2.0.5",
   "interface_id": "IF-001",
   "interface_version": "v2",
   "schema_catalog": "schemas/catalog/schema-catalog.json",

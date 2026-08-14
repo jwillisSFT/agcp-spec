@@ -17,9 +17,9 @@
   "source_hashes": {
     "conformance/AGCP-Conformance-Harness-Spec.yml": "ecc492cbdb8669dd521f9f167544725b5664a0db5344ef678051184c4f7f8db9",
     "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
-    "spec/AGCP-Error-Mapping.md": "c27fef006bd097172d3935f7266042ab2f7f18a2061c0ae32347e9e9ddc37d30",
-    "registries/rejection-code-registry.json": "3f11c8880557b4ed5cd2955ab3e0af5151cd661798b3349162970d7475edaed7",
-    "api/AGCP-HTTP-Contract.yaml": "3a074f0607bf0ed9f8f1adab01c90a8b667636bbba87acc6f6ddacf3041b05f8"
+    "spec/AGCP-Error-Mapping.md": "e47acc4a998873be9d0541a0fc7091bad8ff665fa06cc799f8184deb7ed10deb",
+    "registries/rejection-code-registry.json": "cf878712be83d65318e36689f84295763300e40aad6bd3a35822666f40306a37",
+    "api/AGCP-HTTP-Contract.yaml": "af03153d65be2f87096b96f699392d057a195e74b5eb62a7daafb118137f7db7"
   },
   "validation_rules": [
     "Every declared rejection_code SHALL be an ACTIVE rejection-code registry entry.",

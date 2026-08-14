@@ -3,10 +3,10 @@
 **Status:** Normative\
 **Interface Identifier:** IF-001\
 **Interface Version:** v2\
-**AGCP Specification Release:** v2.0.4\
+**AGCP Specification Release:** v2.0.5\
 **Artifact Lifecycle:** Current\
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.4 Public Review - Controlled Baseline  
+**Controlling Published Baseline:** AGCP v2.0.5 Public Review - Controlled Baseline  
 **Baseline Date:** 2026-08-05  
 **Applies To:** All AGCP-conformant implementations
 
@@ -64,7 +64,7 @@ Conflicts SHALL be resolved using the Core-defined precedence order: published C
 
 ## 3.1 Interface and path versioning
 
-IF-001 uses the canonical path namespace `/agcp/v2`. The path major version is aligned with the version 2 HTTP interface contract for the AGCP v2 interface series. The current contract revision is v2.0.4 and is part of the published v2.0.4 Public Review Controlled Baseline. It is not an independently maintained `/agcp/v1` transport version. This release defines no `/agcp/v1` compatibility routes, aliases, redirects, or fallback request representations.
+IF-001 uses the canonical path namespace `/agcp/v2`. The path major version is aligned with the version 2 HTTP interface contract for the AGCP v2 interface series. The current contract revision is v2.0.5 and is part of the published v2.0.5 Public Review Controlled Baseline. It is not an independently maintained `/agcp/v1` transport version. This release defines no `/agcp/v1` compatibility routes, aliases, redirects, or fallback request representations.
 
 ------------------------------------------------------------------------
 

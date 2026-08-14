@@ -2,18 +2,18 @@
 
 - Catalog ID: `IF-CATALOG-1.0`
 - Catalog version: `1.0.5`
-- Specification version: `v2.0.4`
+- Specification version: `v2.0.5`
 - Publication status: `CURRENT`
 - Artifact lifecycle state: `CURRENT`
-- Repository release target: `v2.0.4` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
-- Controlling published baseline: `v2.0.0` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
+- Repository release target: `v2.0.5` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
+- Controlling published baseline: `v2.0.5` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
 - Baseline date: `2026-08-05`
 - Last modified: `2026-08-03`
 
 | IF ID | Interface | Version | Contract version | Controlled artifact | CR mappings |
 |---|---|---|---|---|---:|
-| `IF-001` | AGCP HTTP Interface v2 | `v2` | `2.0.4` | `spec/AGCP-HTTP-Interface-Specification.md` | 56 |
-| `IF-002` | AGCP Policy Evaluation Contract | `v2` | `2.0.4` | `spec/AGCP-Policy-Evaluation-Contract.md` | 40 |
+| `IF-001` | AGCP HTTP Interface v2 | `v2` | `2.0.5` | `spec/AGCP-HTTP-Interface-Specification.md` | 56 |
+| `IF-002` | AGCP Policy Evaluation Contract | `v2` | `2.0.5` | `spec/AGCP-Policy-Evaluation-Contract.md` | 40 |
 
 ## IF-001 provenance wire contract
 

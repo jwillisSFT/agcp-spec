@@ -255,7 +255,7 @@ def main() -> int:
     report = {'release_context':release_context(),
         "validation_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-VALIDATION",
         "finding": "P1-01",
-        "release_target": "v2.0.4",
+        "release_target": RELEASE_TAG,
         "validation_date": str(date.today()),
         "status": "PASS" if not issues else "FAIL",
         "summary": {

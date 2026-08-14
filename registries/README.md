@@ -3,9 +3,9 @@
 **Status:** Normative  
 **Artifact Lifecycle:** Current  
 **Publication Status:** CURRENT  
-**Repository Release Target:** AGCP v2.0.4  
+**Repository Release Target:** AGCP v2.0.5  
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.4 Public Review Controlled Baseline  
+**Controlling Published Baseline:** AGCP v2.0.5 Public Review Controlled Baseline  
 **Controlling Baseline Status:** PUBLIC_REVIEW_CONTROLLED_BASELINE  
 **Baseline Date:** 2026-08-05  
 **Repository Versioning:** Repository Release Governed

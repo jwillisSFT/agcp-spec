@@ -1,0 +1,322 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.0.5",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.0.5",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-08-05",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "validation_type": "AGCP_REPOSITORY_WIDE_INTEGRITY_VALIDATION",
+  "finding_scope": [
+    "P0-01",
+    "P0-02",
+    "P0-06",
+    "P0-10",
+    "P1-01",
+    "P1-03",
+    "P1-09",
+    "P1-12",
+    "P1-14",
+    "P1-17",
+    "P2-01",
+    "P2-02",
+    "P2-04",
+    "P2-06"
+  ],
+  "document_execution_step": 11,
+  "status": "PASS",
+  "checks_passed": 11,
+  "checks_total": 11,
+  "checks": [
+    {
+      "check": "all_json_and_yaml_parse",
+      "passed": true,
+      "detail": {
+        "json_files": 182,
+        "yaml_files": 4
+      }
+    },
+    {
+      "check": "all_local_schema_and_openapi_refs_resolve",
+      "passed": true,
+      "detail": {
+        "references_checked": 3782
+      }
+    },
+    {
+      "check": "all_controlled_json_schemas_pass_metaschema",
+      "passed": true,
+      "detail": {
+        "schemas_checked": 45
+      }
+    },
+    {
+      "check": "all_repository_relative_markdown_links_resolve",
+      "passed": true,
+      "detail": {
+        "links_checked": 146
+      }
+    },
+    {
+      "check": "repository_synchronization_manifest_is_complete_and_current",
+      "passed": true,
+      "detail": {
+        "manifest_entries": 337,
+        "scope_exclusions": [
+          "governance/AGCP-v2.0.5-repository-integrity-validation.json",
+          "governance/AGCP-v2.0.5-repository-synchronization-manifest.json",
+          "governance/AGCP-v2.0.5-repository-synchronization-validation.json"
+        ]
+      }
+    },
+    {
+      "check": "all_controlled_validation_reports_pass",
+      "passed": true,
+      "detail": {
+        "reports_checked": 24
+      }
+    },
+    {
+      "check": "all_controlled_report_source_hashes_are_current",
+      "passed": true,
+      "detail": {
+        "source_hashes_checked": 170
+      }
+    },
+    {
+      "check": "catalog_versions_and_rtm_dispositions_are_synchronized",
+      "passed": true,
+      "detail": {
+        "versions": {
+          "schema_catalog": "1.0.50",
+          "interface_catalog": "1.0.5",
+          "registry_entry_catalog": "1.0.3",
+          "implementation_profile_catalog": "1.0.3",
+          "test_mapping_rtm": "RTM-1.46",
+          "fixture_mapping_rtm": "RTM-1.46"
+        },
+        "rtm_rows": 122,
+        "rtm_dispositions": {
+          "DS_ID": {
+            "assigned": 122,
+            "na": 0,
+            "blank": 0
+          },
+          "IF_ID": {
+            "assigned": 84,
+            "na": 38,
+            "blank": 0
+          },
+          "REG_ID": {
+            "assigned": 117,
+            "na": 5,
+            "blank": 0
+          }
+        }
+      }
+    },
+    {
+      "check": "all_active_schema_catalog_hashes_match",
+      "passed": true,
+      "detail": {
+        "active_schemas": 44
+      }
+    },
+    {
+      "check": "release_payload_has_no_duplicate_bytes_or_transitional_filenames",
+      "passed": true,
+      "detail": {
+        "byte_identical_duplicate_groups": 0,
+        "transitional_filenames": []
+      }
+    },
+    {
+      "check": "final_release_and_synchronization_artifacts_are_present",
+      "passed": true,
+      "detail": {
+        "required_artifacts": [
+          "RELEASE_NOTES_v2.0.5.md",
+          "governance/AGCP-v2.0.5-REPOSITORY-SYNCHRONIZATION-UPDATE.md",
+          "governance/AGCP-v2.0.5-repository-synchronization-manifest.json",
+          "governance/AGCP-v2.0.5-repository-synchronization-validation.json"
+        ]
+      }
+    }
+  ],
+  "issues": [],
+  "metrics": {
+    "repository_files_in_integrity_scope": 339,
+    "json_files_parsed": 182,
+    "yaml_files_parsed": 4,
+    "local_refs_checked": 3782,
+    "markdown_links_checked": 146,
+    "controlled_json_schemas_checked": 45,
+    "controlled_validation_reports_checked": 24,
+    "controlled_source_hashes_checked": 170,
+    "active_schema_count": 44,
+    "registry_entry_count": 94,
+    "fixture_count": 30,
+    "rtm_rows": 122,
+    "rtm_disposition_counts": {
+      "DS_ID": {
+        "assigned": 122,
+        "na": 0,
+        "blank": 0
+      },
+      "IF_ID": {
+        "assigned": 84,
+        "na": 38,
+        "blank": 0
+      },
+      "REG_ID": {
+        "assigned": 117,
+        "na": 5,
+        "blank": 0
+      }
+    },
+    "byte_identical_duplicate_groups": 0,
+    "transitional_filename_count": 0
+  },
+  "controlled_report_results": {
+    "implementation_profile": {
+      "path": "governance/AGCP-implementation-profile-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "provenance_wire": {
+      "path": "governance/AGCP-provenance-wire-format-validation.json",
+      "status": "PASS",
+      "checks_passed": 39
+    },
+    "command_record": {
+      "path": "governance/AGCP-command-record-separation-validation.json",
+      "status": "PASS",
+      "checks_passed": 31
+    },
+    "content_digest": {
+      "path": "governance/AGCP-content-digest-contract-validation.json",
+      "status": "PASS",
+      "checks_passed": 29
+    },
+    "http_error_metadata": {
+      "path": "governance/AGCP-http-error-metadata-validation.json",
+      "status": "PASS",
+      "checks_passed": 42
+    },
+    "semantic_fixtures": {
+      "path": "governance/AGCP-semantic-fixture-validation.json",
+      "status": "PASS",
+      "checks_passed": 9
+    },
+    "normative_companions": {
+      "path": "governance/AGCP-normative-companion-reference-validation.json",
+      "status": "PASS",
+      "checks_passed": 7
+    },
+    "release_lifecycle": {
+      "path": "governance/AGCP-release-lifecycle-metadata-validation.json",
+      "status": "PASS",
+      "checks_passed": 37
+    },
+    "repository_synchronization": {
+      "path": "governance/AGCP-v2.0.5-repository-synchronization-validation.json",
+      "status": "PASS",
+      "checks_passed": 12
+    },
+    "traceability_gap_closure": {
+      "path": "governance/AGCP-traceability-gap-closure-validation.json",
+      "status": "PASS",
+      "checks_passed": 8
+    },
+    "release_payload_deduplication": {
+      "path": "governance/AGCP-release-payload-deduplication-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "normative_statement_inventory": {
+      "path": "governance/AGCP-normative-statement-inventory-validation.json",
+      "status": "PASS",
+      "checks_passed": 10
+    },
+    "version_source": {
+      "path": "governance/AGCP-version-source-validation.json",
+      "status": "PASS",
+      "checks_passed": 10
+    },
+    "rtm_companion_dispositions": {
+      "path": "governance/RTM-1.46-companion-artifact-disposition-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "schema_catalog": {
+      "path": "schemas/catalog/schema-catalog-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "interface_traceability": {
+      "path": "api/interface-traceability-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "openapi_migration": {
+      "path": "api/AGCP-OpenAPI-v2-migration-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "registry_traceability": {
+      "path": "registries/registry-entry-traceability-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "test_mapping": {
+      "path": "conformance/test-mapping-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "fixture_synchronization": {
+      "path": "conformance/AGCP-conformance-fixture-synchronization-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "if001_operation_coverage": {
+      "path": "conformance/AGCP-if001-executable-operation-coverage-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "harness_error_model": {
+      "path": "conformance/AGCP-harness-error-model-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "harness_request_parameters": {
+      "path": "conformance/AGCP-harness-request-parameter-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    },
+    "governance_compilation_activation": {
+      "path": "conformance/AGCP-governance-compilation-activation-executable-validation.json",
+      "status": "PASS",
+      "checks_passed": null
+    }
+  },
+  "versions": {
+    "rtm_dataset": "RTM-1.46",
+    "schema_catalog": "1.0.50",
+    "interface_catalog": "1.0.5",
+    "registry_entry_catalog": "1.0.3",
+    "implementation_profile_catalog": "1.0.3"
+  },
+  "source_hashes": {
+    "governance/AGCP-v2.0.5-repository-synchronization-manifest.json": "a246ac97f86435006819bb1370628ea8a60488a4a1c32e2dc6286b79e45757ee",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1daa8317ee0cb711bfbd1489b9ec17770821afb29ae85f8d29d8090b8cf765eb",
+    "schemas/catalog/schema-catalog.json": "586e4a71929c58eadd81b1fd57a389b80c73a48132b587ec8fbd3ac677104209",
+    "api/interface-catalog.json": "ff4fa44f285ae4fc807700c5b6e732afae24e0d2c5da0498f5869189a33cdaf8",
+    "registries/registry-entry-catalog.json": "95197a04dadf80b7ee48e1b4c4396773cd1889787f392a675ecf716cfa18827e",
+    "implementer/implementation-profile-catalog.json": "682af3e9db918b86c939d8b56f487c1fb08af82495069e02d89fc20bca2a9790",
+    "conformance/test-mapping.json": "a2e5e55ec6085e50e81de377796d8eff9b22d76654870252ae4756fe3e3c1cf6",
+    "conformance/fixture-mapping.json": "7aab2f86d5b5fb981653c35845e17ea4bc0f9a829c8135fc7d845ad12142be81",
+    "conformance/agcp-conformance-manifest.yml": "8d15387f831e16d5f3ad2a2718719e1bd72058b096d13a7457e190d9841e091d",
+    "RELEASE_NOTES_v2.0.5.md": "756ab36a2433c672b00f20dbbbcc5db88278b6d5999b649e611d56ebda25f7d8"
+  }
+}

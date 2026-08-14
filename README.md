@@ -1,11 +1,11 @@
-> **Current release:** AGCP v2.0.4  
+> **Current release:** AGCP v2.0.5  
 > **Artifact lifecycle:** CURRENT  
 > **Release status:** PUBLIC_REVIEW_CONTROLLED_BASELINE  
-> **Controlling published baseline:** AGCP v2.0.4 Public Review Controlled Baseline  
+> **Controlling published baseline:** AGCP v2.0.5 Public Review Controlled Baseline  
 > **Baseline date:** 2026-08-05
 >
-> This repository snapshot is the controlled AGCP v2.0.4 public-review release. Every change is recorded in `governance/CHANGELOG.md` and synchronized through the controlled catalogs, RTM, validation reports, and repository manifest.  
-> **Current release notes:** [`RELEASE_NOTES_v2.0.4.md`](RELEASE_NOTES_v2.0.4.md)  
+> This repository snapshot is the controlled AGCP v2.0.5 public-review release. Every change is recorded in `governance/CHANGELOG.md` and synchronized through the controlled catalogs, RTM, validation reports, and repository manifest.  
+> **Current release notes:** [`RELEASE_NOTES_v2.0.5.md`](RELEASE_NOTES_v2.0.5.md)  
 > **Prior published-baseline notes:** [`RELEASE_NOTES_v2.0.0.md`](RELEASE_NOTES_v2.0.0.md)
 
 ---
@@ -14,15 +14,15 @@
 
 The repository root `VERSION` file is the sole maintained AGCP repository release number. Current-release labels used by build and validation tooling are derived from that value. Human-authored historical release records are not rewritten when `VERSION` changes.
 
-For this repository snapshot, `VERSION` is `2.0.4`, yielding release tag `v2.0.4` and RTM specification version `v.2.0.4`.
+For this repository snapshot, `VERSION` is `2.0.5`, yielding release tag `v2.0.5` and RTM specification version `v.2.0.5`.
 
 ## Normative Statement inventory
 
-The v2.0.4 controlled inventory contains **357 unique Normative Statement identifiers**. The Core has **358 controlled normative source-text occurrences** under the release inventory accounting because the conformance-scope obligation in Core Section 17.2 duplicates the obligation already represented by `NS-2.7-01` from Section 2.7. `NS-17.2-01` is intentionally unassigned. See `RELEASE_NOTES_v2.0.4.md` and `governance/AGCP-normative-statement-inventory-validation.json`.
+The v2.0.5 controlled inventory contains **357 unique Normative Statement identifiers**. The Core has **358 controlled normative source-text occurrences** under the release inventory accounting because the conformance-scope obligation in Core Section 17.2 duplicates the obligation already represented by `NS-2.7-01` from Section 2.7. `NS-17.2-01` is intentionally unassigned. See `RELEASE_NOTES_v2.0.5.md` and `governance/AGCP-normative-statement-inventory-validation.json`.
 
 ## Specification Status
 
-AGCP v2.0.4 is issued as the controlled **Public Review Controlled Baseline** dated 2026-08-05. The contents of this repository snapshot are the fixed basis for review, implementation comparison, and conformance evaluation until a later versioned revision is issued.
+AGCP v2.0.5 is issued as the controlled **Public Review Controlled Baseline** dated 2026-08-05. The contents of this repository snapshot are the fixed basis for review, implementation comparison, and conformance evaluation until a later versioned revision is issued.
 
 The purpose of this review is to evaluate:
 
@@ -118,6 +118,7 @@ The following abbreviated tree lists the current controlled paths used for revie
 ```text
 .
 ├── README.md
+├── RELEASE_NOTES_v2.0.5.md
 ├── RELEASE_NOTES_v2.0.4.md
 ├── RELEASE_NOTES_v2.0.0.md
 ├── ARCHITECTURE.md
@@ -187,7 +188,8 @@ This repository contains specification, traceability, conformance, and supportin
 ### Supporting artifacts
 
 - Controlled Implementation Profile format artifacts, profiles, catalogs, and package manifest under `implementer/`
-- `RELEASE_NOTES_v2.0.4.md` — release notes for the current v2.0.4 Public Review Controlled Baseline
+- `RELEASE_NOTES_v2.0.5.md` — release notes for the current v2.0.5 Public Review Controlled Baseline
+- `RELEASE_NOTES_v2.0.4.md` — historical release notes for v2.0.4
 - `RELEASE_NOTES_v2.0.0.md` — comparison-based release notes and migration guidance for the published baseline
 - Current lifecycle documents under `lifecycle/`
 - Versioning and contribution guidance under `governance/`
@@ -276,7 +278,7 @@ AGCP follows semantic versioning.
 - **MINOR** — additive normative clarifications  
 - **PATCH** — editorial or non-behavioral corrections  
 
-This controlled release is AGCP v2.0.4 Public Review Controlled Baseline, baseline date 2026-08-05. Subsequent normative or machine-readable changes SHALL be issued as a later versioned revision and recorded in `governance/CHANGELOG.md`.
+This controlled release is AGCP v2.0.5 Public Review Controlled Baseline, baseline date 2026-08-05. Subsequent normative or machine-readable changes SHALL be issued as a later versioned revision and recorded in `governance/CHANGELOG.md`.
 
 ---
 
@@ -330,13 +332,13 @@ The cumulative v2.0.4 correction set retires absent umbrella companion labels an
 
 ## Release and lifecycle metadata
 
-AGCP v2.0.4 is the current Public Review Controlled Baseline. Active catalogs and controlled artifacts use lifecycle `CURRENT`, and the controlled baseline date is `2026-08-05`. The controlled policy and validation are published under `governance/AGCP-Release-Lifecycle-Metadata-Policy.md` and `governance/AGCP-release-lifecycle-metadata-validation.json`.
+AGCP v2.0.5 is the current Public Review Controlled Baseline. Active catalogs and controlled artifacts use lifecycle `CURRENT`, and the controlled baseline date is `2026-08-05`. The controlled policy and validation are published under `governance/AGCP-Release-Lifecycle-Metadata-Policy.md` and `governance/AGCP-release-lifecycle-metadata-validation.json`.
 
 
-## v2.0.4 repository-wide integrity gate
+## v2.0.5 repository-wide integrity gate
 
-The aggregate validator is `governance/validate_repository_integrity.py`; its controlled report is `governance/AGCP-v2.0.4-repository-integrity-validation.json`.
+The aggregate validator is `governance/validate_repository_integrity.py`; its controlled report is `governance/AGCP-v2.0.5-repository-integrity-validation.json`.
 
-## v2.0.4 repository synchronization
+## v2.0.5 repository synchronization
 
 The accumulated correction set is synchronized through `RTM-1.46`, Schema Catalog `1.0.50`, Interface Catalog `1.0.5`, Registry Entry Catalog `1.0.3`, and Implementation Profile Catalog `1.0.3`. The machine-readable repository manifest and controlled validation report are under `governance/`.

@@ -8,14 +8,15 @@
   "series": "AGCP Core",
   "description": "Authoritative registry of recognized AGCP invariant types used across governance evaluation, authorization, Commit Boundary processing, Continuation Integrity, Governance Evidence, and Governance Self-Protection.",
   "release": {
-    "release_id": "REG-INVARIANT-TYPE-v2.0.0",
-    "registry_release": "v2.0.4",
-    "specification_version": "v2.0.4",
+    "release_id": "REG-INVARIANT-TYPE-v2.0.5",
+    "registry_release": "v2.0.5",
+    "specification_version": "v2.0.5",
     "publication_status": "CURRENT",
     "published_at": "2026-07-30T12:26:00-04:00",
     "authority": "AGCP controlled repository release",
     "repository_path": "registries/invariant-type-registry.json",
-    "canonical_uri": "https://agcp.ai/registries/invariant-type-registry.json"
+    "canonical_uri": "https://agcp.ai/registries/invariant-type-registry.json",
+    "supersedes_release_id": "REG-INVARIANT-TYPE-v2.0.0"
   },
   "lifecycle": {
     "lifecycle_state": "ACTIVE",
@@ -33,7 +34,7 @@
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "ca926af1b9d22f88e38481038b0b1ffae7e5833c49036d4e2324ed3a9c4cd51b"
+      "value": "b5f5f7ba01ae48284a6edd6db652a33ee003e447e2e5864b4bffd454182887a8"
     }
   },
   "traceability": {

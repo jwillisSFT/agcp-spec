@@ -188,7 +188,7 @@ Fixtures are resolved and validated before they are used by a vector.
 
 # 6. Controlled Cardinalities and Mapping Rules
 
-The controlled relationships for the current AGCP v2.0.4 model are:
+The controlled relationships for the current AGCP v2.0.5 model are:
 
 | Relationship | Controlled rule |
 |---|---|
@@ -337,7 +337,7 @@ objective evidence evaluated under the complete TC-001 procedure
 
 `TV-PROP-001` can automate substantial portions of `TC-001`, but TC-001 remains the authoritative assessment procedure. The vector result is accepted only for the criteria it actually demonstrates.
 
-At the controlled AGCP v2.0.4 baseline, the mapping set contains 122 Formal Test Cases, 16 Harness Checks, and 28 Harness Test Vectors. These counts are release metadata, not permanent relationship constraints.
+At the controlled AGCP v2.0.5 baseline, the mapping set contains 122 Formal Test Cases, 17 Harness Checks, and 54 Harness Test Vectors. These counts are release metadata, not permanent relationship constraints.
 
 ---
 

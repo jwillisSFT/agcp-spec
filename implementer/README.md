@@ -36,7 +36,7 @@ The validator:
 
 ## Repository synchronization
 
-- Repository release target: `v2.0.4`
+- Repository release target: `v2.0.5`
 - RTM dataset: `RTM-1.46`
 - Profile catalog: `1.0.3`
 - Package manifest: `1.0.3`

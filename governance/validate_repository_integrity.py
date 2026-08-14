@@ -44,7 +44,7 @@ CONTROLLED_REPORTS = {
     "semantic_fixtures": "governance/AGCP-semantic-fixture-validation.json",
     "normative_companions": "governance/AGCP-normative-companion-reference-validation.json",
     "release_lifecycle": "governance/AGCP-release-lifecycle-metadata-validation.json",
-    "repository_synchronization": "governance/AGCP-v2.0.4-repository-synchronization-validation.json",
+    "repository_synchronization": SYNC_REPORT,
     "traceability_gap_closure": "governance/AGCP-traceability-gap-closure-validation.json",
     "release_payload_deduplication": "governance/AGCP-release-payload-deduplication-validation.json",
     "normative_statement_inventory": "governance/AGCP-normative-statement-inventory-validation.json",
