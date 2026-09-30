@@ -240,6 +240,12 @@ Conformance claims must declare:
 
 AGCP is released for public technical review.
 
+Public review is advisory. Submission, discussion, or acknowledgement of
+an issue does not alter the controlled AGCP baseline or confer governance
+or change authority. Sustainable Future Tech retains responsibility for
+AGCP architecture, normative change control, and authoritative releases.
+See CONTRIBUTING.md for the public-review and contribution model.
+
 Feedback categories:
 
 - Normative Defect
