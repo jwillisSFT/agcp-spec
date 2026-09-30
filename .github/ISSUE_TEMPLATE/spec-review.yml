@@ -3,6 +3,18 @@ description: Submit feedback on the AGCP specification
 title: "[Spec Review]: "
 labels: ["review"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reviewing AGCP.
+
+        GitHub Issues are used for public technical review of the specification.
+        Submission of an issue does not modify the controlled AGCP baseline or
+        confer governance or change authority.
+
+        **Do not report exploitable security vulnerabilities through this form.**
+        Use the repository's private vulnerability-reporting mechanism instead.
+        
   - type: input
     id: section
     attributes:
@@ -27,7 +39,7 @@ body:
         - Structural Gap
         - Ambiguity
         - Conformance Clarification
-        - Security Concern
+        - Security Architecture Concern
         - Determinism Concern
         - Multitenant Governance Isolation Concern
     validations:
@@ -46,3 +58,4 @@ body:
     attributes:
       label: Proposed Resolution
       description: Suggested clarification or specification language
+  
