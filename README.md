@@ -303,17 +303,21 @@ Although AGCP may be applied to AI-enabled systems, the architecture is general 
 
 # Security Disclosures
 
-Security-sensitive concerns or matters not appropriate for public issue tracking may be directed to:
+Do not report exploitable vulnerabilities or sensitive security
+information through public GitHub Issues.
 
+Use GitHub Private Vulnerability Reporting for this repository whenever
+possible.
+
+If private vulnerability reporting is unavailable, contact:
 
 research@agcp.ai
 
+See [SECURITY.md](SECURITY.md) for the complete security reporting policy.
 
-Public technical review comments should be submitted via **GitHub Issues**.
-
----
-
-AGCP specifies a control-plane architecture intended to improve distributed system reliability, lifecycle determinism, and execution-bound governance correctness.
+Public architectural and specification-level security concerns that do
+not disclose an exploitable vulnerability may be submitted through
+GitHub Issues.
 
 ## Governance Approval submission and authoritative record
 
