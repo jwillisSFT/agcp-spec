@@ -161,11 +161,11 @@ in `AGCP-Conformance-Traceability-and-Automation-Model.md`.
 
 ## v2.1.x Test Mapping Regeneration Status
 
-`test-mapping.json` has been completely regenerated for `TC-001` through `TC-122` and synchronized to 21 Harness Checks and 71 Harness Test Vectors. The downstream test-control mapping, Harness Vector/Check synchronization, and aggregate conformance-layer validation steps are complete. Final RTM synchronization is complete at `RTM-1.47`.
+`test-mapping.json` has been completely regenerated for `TC-001` through `TC-122` and synchronized to 21 Harness Checks and 135 Harness Test Vectors. The downstream test-control mapping, Harness Vector/Check synchronization, and aggregate conformance-layer validation steps are complete. Final RTM synchronization is complete at `RTM-1.47`.
 
 ## v2.1.x Aggregate Conformance-Layer Validation Status
 
-The synchronized Formal Test Cases, Test Matrix, test mappings, test-control mappings, 21 Harness Checks, 71 Harness Test Vectors, controlled fixtures, DS-050 control vocabulary, and DS-046 Governance Observation Point vocabulary have passed aggregate pre-RTM validation. The validation also corrected a stale machine-readable Harness Check count and removed obsolete semantic-fixture assumptions that DS-018 carries GRF-derived authority/evidence or DS-029 Enforcement Context. See `AGCP-v2.1.x-AGGREGATE-CONFORMANCE-LAYER-VALIDATION.md` and `AGCP-v2.1.x-aggregate-conformance-layer-validation.json`. Final RTM synchronization is complete at `RTM-1.47`.
+The synchronized Formal Test Cases, Test Matrix, test mappings, test-control mappings, 21 Harness Checks, 135 Harness Test Vectors, controlled fixtures, DS-050 control vocabulary, and DS-046 Governance Observation Point vocabulary have passed aggregate pre-RTM validation. The validation also corrected a stale machine-readable Harness Check count and removed obsolete semantic-fixture assumptions that DS-018 carries GRF-derived authority/evidence or DS-029 Enforcement Context. See `AGCP-v2.1.x-AGGREGATE-CONFORMANCE-LAYER-VALIDATION.md` and `AGCP-v2.1.x-aggregate-conformance-layer-validation.json`. Final RTM synchronization is complete at `RTM-1.47`.
 
 ## v2.1.x Test-Control Mapping Regeneration Status
 
@@ -315,7 +315,7 @@ The synchronized v2.1.x change set is closed at `RTM-1.47`. The full overlaid re
 
 ## v2.1.x Conformance Closure Status
 
-The conformance synchronization sequence is complete: 122 Formal Test Cases, the regenerated Test Matrix, 122 test mappings, 122 test-control mappings, 21 Harness Checks, 71 Harness Test Vectors, 36 controlled fixtures, and aggregate conformance-layer validation are synchronized to final `RTM-1.47`. This closes the specification/conformance synchronization step; later source-code implementation and runtime evidence do not retroactively redefine the Formal Test Cases.
+The conformance synchronization sequence is complete: 122 Formal Test Cases, the regenerated Test Matrix, 122 test mappings, 122 test-control mappings, 21 Harness Checks, 135 Harness Test Vectors, 36 controlled fixtures, and aggregate conformance-layer validation are synchronized to final `RTM-1.47`. This closes the specification/conformance synchronization step; later source-code implementation and runtime evidence do not retroactively redefine the Formal Test Cases.
 
 ## Formal Test Case synchronization status
 

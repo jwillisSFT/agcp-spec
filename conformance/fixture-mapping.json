@@ -1,10 +1,10 @@
 {
   "fixture_catalog_id": "AGCP-CONFORMANCE-FIXTURES-1.0",
-  "specification_version": "v2.0.1",
+  "specification_version": "v2.1.0",
   "interface_id": "IF-001",
   "interface_version": "v2",
   "schema_catalog": "schemas/catalog/schema-catalog.json",
-  "schema_catalog_version": "1.0.50",
+  "schema_catalog_version": "1.0.10",
   "validation_rule": "Every example_file SHALL validate against the exact schema_file before harness execution. Fixture resolution SHALL occur before OpenAPI request validation.",
   "fixture_count": 36,
   "fixtures": [

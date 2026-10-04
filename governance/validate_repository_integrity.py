@@ -27,14 +27,6 @@ FINDINGS = [
     "P2-01", "P2-02", "P2-04", "P2-06",
 ]
 
-EXPECTED_VERSIONS = {
-    "rtm_dataset": "RTM-1.46",
-    "schema_catalog": "1.0.50",
-    "interface_catalog": "1.0.5",
-    "registry_entry_catalog": "1.0.3",
-    "implementation_profile_catalog": "1.0.3",
-}
-
 CONTROLLED_REPORTS = {
     "implementation_profile": "governance/AGCP-implementation-profile-validation.json",
     "provenance_wire": "governance/AGCP-provenance-wire-format-validation.json",
@@ -338,16 +330,15 @@ def main() -> int:
         "test_mapping_rtm": test_mapping.get("rtm_dataset_version"),
         "fixture_mapping_rtm": fixture_mapping.get("rtm_dataset_version"),
     }
-    expected_values = {
-        "schema_catalog": EXPECTED_VERSIONS["schema_catalog"],
-        "interface_catalog": EXPECTED_VERSIONS["interface_catalog"],
-        "registry_entry_catalog": EXPECTED_VERSIONS["registry_entry_catalog"],
-        "implementation_profile_catalog": EXPECTED_VERSIONS["implementation_profile_catalog"],
-        "test_mapping_rtm": EXPECTED_VERSIONS["rtm_dataset"],
-        "fixture_mapping_rtm": EXPECTED_VERSIONS["rtm_dataset"],
-    }
-    version_issues = [f"{key}:{value}" for key, value in version_values.items() if value != expected_values[key]]
+    version_issues = []
+    if test_mapping.get("schema_catalog_version") != schema_catalog.get("catalog_version"):
+        version_issues.append("test-mapping/schema-catalog")
+    if fixture_mapping.get("schema_catalog_version") != schema_catalog.get("catalog_version"):
+        version_issues.append("fixture-mapping/schema-catalog")
+    if test_mapping.get("rtm_dataset_version") != fixture_mapping.get("rtm_dataset_version"):
+        version_issues.append("test-mapping/fixture-mapping-rtm")
     issues.extend("version:" + item for item in version_issues)
+    expected_rtm_dataset = test_mapping.get("rtm_dataset_version")
 
     workbook = load_workbook(root / "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx", data_only=False)
     worksheet = workbook[workbook.sheetnames[0]]
@@ -355,7 +346,7 @@ def main() -> int:
     disposition_counts = {key: {"assigned": 0, "na": 0, "blank": 0} for key in ("DS_ID", "IF_ID", "REG_ID")}
     rtm_version_issues: list[str] = []
     for row in range(2, worksheet.max_row + 1):
-        if worksheet.cell(row, header["Dataset_Version"]).value != EXPECTED_VERSIONS["rtm_dataset"]:
+        if worksheet.cell(row, header["Dataset_Version"]).value != expected_rtm_dataset:
             rtm_version_issues.append(f"dataset-row-{row}")
         if worksheet.cell(row, header["Specification_Version"]).value != RTM_SPEC_VERSION:
             rtm_version_issues.append(f"spec-row-{row}")
@@ -448,7 +439,7 @@ def main() -> int:
             "transitional_filename_count": len(transitional),
         },
         "controlled_report_results": report_results,
-        "versions": EXPECTED_VERSIONS,
+        "versions": version_values,
         "source_hashes": {
             SYNC_MANIFEST: sha256(root / SYNC_MANIFEST),
             "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": sha256(root / "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx"),

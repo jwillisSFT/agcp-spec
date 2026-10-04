@@ -3,12 +3,12 @@
   "status": "PASS",
   "validated_at": "2026-08-05",
   "source_hashes": {
-    "conformance/fixture-mapping.json": "b072c0e2dead30fbb0de9c0cd6ebb69107f4a9f6922fbfc465970b7bf901778d",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
-    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
-    "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "99a562c94cd98cce57ed42e03ad6a99ed966d548c6d28176089a75b7740900eb",
+    "conformance/fixture-mapping.json": "b679101192bba825f1a79e37f97cf30ee7d3b35141034358274f57220ebb5b70",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "aa160383bc927c8e87e6914a4120e1f986fe7f81b5525372138ad931e57c28a0",
+    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
+    "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "8eae223db81e1a63cec16032d13fc2d639b8c698f40568329734e4315cb3fac1",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
-    "governance/AGCP-semantic-fixture-validation.json": "cd0a9901f1c7b6cc40362d03599e253c6121e572007d1a73bcfbc2062b975ee1"
+    "governance/AGCP-semantic-fixture-validation.json": "939639984e5b58e696d9dd2037d63e3c0ac0908c41922d802b921ddcf32e8505"
   },
   "summary": {
     "declared_fixture_count": 30,

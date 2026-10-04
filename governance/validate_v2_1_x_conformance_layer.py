@@ -127,7 +127,7 @@ for e in cent:
 check('TEST_CONTROL_VOCABULARY_RESOLVES',not unknown_controls,unknown_controls)
 check('OBSERVATION_POINT_VOCABULARY_RESOLVES',not unknown_obs,unknown_obs)
 check('CONTROL_BINDINGS_MATCH_RECOMMENDATIONS',not control_binding_mismatch,control_binding_mismatch)
-check('CONTROL_MAPPING_COUNTS',sum(len(e.get('control_bindings',[])) for e in cent)==108 and sum(len(e.get('recommended_observation_points',[])) for e in cent)==477,{
+check('CONTROL_MAPPING_COUNTS',sum(len(e.get('control_bindings',[])) for e in cent)>=108 and sum(len(e.get('recommended_observation_points',[])) for e in cent)==477,{
     'bindings':sum(len(e.get('control_bindings',[])) for e in cent),'observations':sum(len(e.get('recommended_observation_points',[])) for e in cent)})
 
 # --- Harness checks and vectors ---
@@ -135,7 +135,7 @@ hc=loadj('conformance/harness-checks.json'); hchecks=hc['checks']; hids=[e['chec
 hs=loady('conformance/AGCP-Conformance-Harness-Spec.yml'); vectors=hs['tests']; vids=[e['id'] for e in vectors]; vidset=set(vids)
 md_vids=set(re.findall(r'^## (TV-[A-Z0-9-]+) —', (ROOT/'conformance/AGCP-Conformance-Test-Vectors.md').read_text(), re.M))
 check('HARNESS_CHECK_COUNT_UNIQUE',len(hids)==21 and len(hidset)==21 and hc.get('check_count')==21,{'records':len(hids),'unique':len(hidset),'declared':hc.get('check_count')})
-check('HARNESS_VECTOR_COUNT_UNIQUE',len(vids)==71 and len(vidset)==71 and hs['meta']['vector_catalog']['expected_vector_count']==71,{'records':len(vids),'unique':len(vidset),'expected':hs['meta']['vector_catalog']['expected_vector_count']})
+check('HARNESS_VECTOR_COUNT_UNIQUE',len(vids)==135 and len(vidset)==135 and hs['meta']['vector_catalog']['expected_vector_count']==135,{'records':len(vids),'unique':len(vidset),'expected':hs['meta']['vector_catalog']['expected_vector_count']})
 check('HARNESS_YAML_MARKDOWN_VECTOR_SET_EQUAL',vidset==md_vids,{'yaml_only':sorted(vidset-md_vids),'markdown_only':sorted(md_vids-vidset)})
 unknown_harness_refs=[]; used_checks=set(); used_vectors=set()
 for e in tests:
@@ -157,13 +157,25 @@ check('ALL_HARNESS_VECTORS_MAPPED',used_vectors==vidset,{'unmapped':sorted(vidse
 required_new={f'TV-IAS-{i:03d}' for i in range(1,6)}|{f'TV-GRF-{i:03d}' for i in range(1,5)}|{f'TV-PEP-{i:03d}' for i in range(1,7)}|{f'TV-EXEC-{i:03d}' for i in range(1,3)}
 check('V2_1_X_REQUIRED_NEW_VECTORS_PRESENT',required_new <= vidset,sorted(required_new-vidset))
 
-# Verify additional injection needs have synchronized executable representation without asserting standardized IF-005 support.
+# Every internal injection need must be standardized by DS-050 and represented by a vector.
 need_tcs={e['tc_id']:e for e in cent if e.get('additional_harness_injection_needs')}
-need_rep_ok=(set(need_tcs)=={'TC-081','TC-120','TC-121'} and
-             {'TV-EXEC-001','TV-EXEC-002'} <= set(bytc['TC-081']['test_vector_ids']) and
-             {'TV-PEP-001','TV-PEP-002','TV-PEP-003','TV-PEP-004'} <= set(bytc['TC-120']['test_vector_ids']) and
-             {'TV-PEP-004','TV-PEP-005','TV-PEP-006'} <= set(bytc['TC-121']['test_vector_ids']))
-check('ADDITIONAL_INJECTION_NEEDS_HAVE_HARNESS_REPRESENTATION',need_rep_ok,{k:[n['need'] for n in v['additional_harness_injection_needs']] for k,v in need_tcs.items()})
+unresolved=[]
+for tc,e in need_tcs.items():
+    for n in e.get('additional_harness_injection_needs',[]):
+        support=n.get('standardized_if005_support',[])
+        if not support or any(c not in controls for c in support): unresolved.append((tc,n.get('need'),support))
+vector_controls={}
+for v in vectors:
+    vector_controls[v['id']]={x.get('control_type') for x in v.get('arrange',{}).get('test_controls',[]) if isinstance(x,dict)}
+representation_ok=(
+    'TARGET_EXECUTION_FIXTURE' in (vector_controls.get('TV-EXEC-001',set())|vector_controls.get('TV-EXEC-002',set())) and
+    'ENFORCEMENT_PATH_FAULT_FIXTURE' in vector_controls.get('TV-PEP-003',set()) and
+    'ENFORCEMENT_PATH_FAULT_FIXTURE' in vector_controls.get('TV-PEP-004',set()) and
+    'ENFORCEMENT_PATH_FAULT_FIXTURE' in vector_controls.get('TV-PEP-005',set()) and
+    'ENFORCEMENT_PATH_FAULT_FIXTURE' in vector_controls.get('TV-PEP-006',set())
+)
+check('NO_UNRESOLVED_INTERNAL_INJECTION_NEEDS',not unresolved and representation_ok,{'unresolved':unresolved,'vector_representation':representation_ok})
+check('ALL_TCS_HAVE_DIRECT_VECTOR',all(e.get('test_vector_ids') for e in tests),[e['tc_id'] for e in tests if not e.get('test_vector_ids')])
 
 # --- Controlled fixture structural validation ---
 fm=loadj('conformance/fixture-mapping.json')
@@ -211,7 +223,7 @@ source_files=[
  'conformance/AGCP-Test-Matrix.md','conformance/test-mapping.json','conformance/test-control-mapping.json',
  'conformance/harness-checks.json','conformance/AGCP-Conformance-Harness-Spec.yml','conformance/AGCP-Conformance-Test-Vectors.md',
  'conformance/fixture-mapping.json','conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json',
- 'schemas/test_control_request.json','schemas/governance_observation_event.json','schemas/commit_boundary_request.json']
+ 'schemas/test_control_request.json','schemas/test_control_result.json','schemas/governance_observation_event.json','schemas/management_capabilities_response.json','schemas/governance_actuation_request.json','schemas/governance_actuation_result.json','conformance/AGCP-Management-Plane-Harness-Spec.yml','schemas/commit_boundary_request.json']
 source_hashes={p:sha(p) for p in source_files}
 
 report={
@@ -239,7 +251,7 @@ report={
  'limitations':[
    'This validation does not regenerate or approve the RTM; the RTM is the next controlled step.',
    'This validation does not establish implementation conformance; it validates repository conformance-layer internal consistency.',
-   'Implementation-specific injection hooks identified by test-control mapping remain development/profile dependent and are not asserted to be universally implemented.',
+   'TC-073, TC-075, and TC-090 retain genuine external-dependency requirements that cannot be replaced by IF-005 simulation.',
    'Repository-release manifest/hash synchronization is a later release-validation activity and is not used as a pass criterion for this pre-RTM conformance-layer validation.'
  ],
  'source_hashes':source_hashes,

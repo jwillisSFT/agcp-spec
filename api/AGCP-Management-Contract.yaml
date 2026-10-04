@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: AGCP Governance Observability, Management, and Test Control API
-  version: 2.1.x
+  version: 2.1.0
   description: Machine-readable contract for IF-003, IF-004, and optional IF-005. Observations distinguish IAS qualification,
     GDF/PDP, GRF, PEP enforcement, commitment, and post-commit execution. Test controls establish source conditions only and
     cannot inject GDF/GRF outcomes.

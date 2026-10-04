@@ -66,3 +66,5 @@ Conformance tests may observe each stage separately. A favorable result at an ea
 # 8. Relationship to Other Specifications
 
 This table is interpreted with the AGCP Core, Architecture Reference Model, AGCP Trust Model, Human Adjudication and Governance Approval Specification, Policy Evaluation Contract, HTTP Interface Specification, Append-Only Governance Ledger Specification, and the controlling Implementation Profile.
+
+Canonical companion bindings: `../schemas/governance_evidence.json` (DS-020 Governance Evidence), `../schemas/evidence_qualification_result.json` (DS-033 Evidence Qualification Result), and `../spec/AGCP-Human-Review-Specification.md` (Human Adjudication and Governance Approval Specification).

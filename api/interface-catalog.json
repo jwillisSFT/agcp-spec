@@ -10,7 +10,7 @@
       "if_id": "IF-001",
       "title": "AGCP HTTP Interface v2",
       "interface_version": "v2",
-      "contract_version": "2.1.x",
+      "contract_version": "2.1.0",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-HTTP-Interface-Specification.md",
@@ -101,7 +101,7 @@
       "if_id": "IF-002",
       "title": "AGCP Policy Evaluation Contract",
       "interface_version": "v2",
-      "contract_version": "2.1.x",
+      "contract_version": "2.1.0",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-Policy-Evaluation-Contract.md",
@@ -154,7 +154,7 @@
       "if_id": "IF-003",
       "title": "AGCP Governance Observation Interface v1",
       "interface_version": "v1",
-      "contract_version": "2.1.x",
+      "contract_version": "2.1.0",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-Governance-Observability-and-Management-Specification.md",
@@ -169,7 +169,7 @@
       "if_id": "IF-004",
       "title": "AGCP Governance Management and Actuation Interface v1",
       "interface_version": "v1",
-      "contract_version": "2.1.x",
+      "contract_version": "2.1.0",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-Governance-Observability-and-Management-Specification.md",
@@ -184,7 +184,7 @@
       "if_id": "IF-005",
       "title": "AGCP Conformance Test Control Interface v1",
       "interface_version": "v1",
-      "contract_version": "2.1.x",
+      "contract_version": "2.1.0",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-Conformance-Test-Control-Specification.md",
@@ -193,7 +193,7 @@
       "normative_companion_specifications": [
         "spec/AGCP-Conformance-Test-Control-Specification.md"
       ],
-      "notes": "Optional isolated test-only surface. AUTHORITY_FIXTURE may emulate identity/authorization source conditions; PEP_OUTCOME_FIXTURE applies only at enforcement. It cannot inject GDF or GRF outcomes."
+      "notes": "Optional isolated test-only surface. Controls establish inputs/dependencies only. TARGET_EXECUTION_FIXTURE supports conditional post-commit asynchronous target testing; ENFORCEMENT_PATH_FAULT_FIXTURE supports controlled enforcement-boundary negative paths after ordinary producing stages. Controls cannot inject governance decisions, execution authorizations, GRF commit results, DS-052 outcomes, or conformance results."
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
@@ -201,6 +201,6 @@
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "controlling_published_baseline": "v2.1.0",
-  "baseline_date": "2026-08-15",
+  "baseline_date": "2026-08-14",
   "rtm_dataset_version": "RTM-1.47"
 }

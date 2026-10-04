@@ -114,8 +114,15 @@ def sync_machine_release_metadata(write: bool, changed: list[str]) -> None:
     api_text = api_path.read_text(encoding="utf-8")
     updated = re.sub(r"(?m)^(  version:)\s*[^\n]+$", rf"\1 {SEMVER}", api_text, count=1)
     updated = re.sub(r"(?m)^(x-agcp-specification-release:)\s*[^\n]+$", rf"\1 {RELEASE_TAG}", updated, count=1)
-    updated = re.sub(r"AGCP v\d+\.\d+\.\d+ contract-compatible", f"AGCP {RELEASE_TAG} contract-compatible", updated)
+    updated = re.sub(r"AGCP v\d+\.\d+\.(?:\d+|x) contract-compatible", f"AGCP {RELEASE_TAG} contract-compatible", updated)
     write_text_if_changed(api_path, updated, write, changed)
+
+    # Management/test-control OpenAPI current release metadata.
+    mgmt_api_path = ROOT / "api/AGCP-Management-Contract.yaml"
+    mgmt_api_text = mgmt_api_path.read_text(encoding="utf-8")
+    mgmt_updated = re.sub(r"(?m)^(  version:)\s*[^\n]+$", rf"\1 {SEMVER}", mgmt_api_text, count=1)
+    mgmt_updated = re.sub(r"(?m)^(x-agcp-specification-release:)\s*[^\n]+$", rf"\1 {RELEASE_TAG}", mgmt_updated, count=1)
+    write_text_if_changed(mgmt_api_path, mgmt_updated, write, changed)
 
     # Conformance manifest release identity.
     man_path = ROOT / "conformance/agcp-conformance-manifest.yml"
@@ -198,6 +205,12 @@ def sync_machine_release_metadata(write: bool, changed: list[str]) -> None:
         fixture["specification_version"] = RELEASE_TAG
     write_json_if_changed(fixture_path, fixture, write, changed)
 
+    # Test-control mapping current specification release.
+    tcmap_path = ROOT / "conformance/test-control-mapping.json"
+    tcmap = json.loads(tcmap_path.read_text(encoding="utf-8"))
+    tcmap["specification_version"] = RELEASE_TAG
+    write_json_if_changed(tcmap_path, tcmap, write, changed)
+
     # Test mapping points at current VERSION-derived synchronization artifacts.
     test_map_path = ROOT / "conformance/test-mapping.json"
     test_map = json.loads(test_map_path.read_text(encoding="utf-8"))
@@ -220,9 +233,15 @@ def sync_machine_release_metadata(write: bool, changed: list[str]) -> None:
     harness_spec_path = ROOT / "conformance/AGCP-Conformance-Harness-Spec.yml"
     harness_spec_text = harness_spec_path.read_text(encoding="utf-8")
     harness_spec_updated = re.sub(
-        r"(?m)^(  agcp_release:)\s*v\d+\.\d+\.\d+$",
+        r"(?m)^(  agcp_release:)\s*v\d+\.\d+\.(?:\d+|x)$",
         rf"\1 {RELEASE_TAG}",
         harness_spec_text,
+        count=1,
+    )
+    harness_spec_updated = re.sub(
+        r"(?m)^(\s*default_agcp_release_id:)\s*AGCP-v\d+\.\d+\.(?:\d+|x)$",
+        rf"\1 {RELEASE_IDENTIFIER}",
+        harness_spec_updated,
         count=1,
     )
     write_text_if_changed(harness_spec_path, harness_spec_updated, write, changed)
@@ -295,18 +314,18 @@ def replace_current_metadata_labels(text: str) -> str:
     # Only controlled current-release metadata labels are rewritten. Historical
     # prose such as "resolved in v2.0.4" is intentionally left unchanged.
     patterns = [
-        (r"(?mi)(Specification Version:\*\*\s*`?)(?:v)?\d+\.\d+\.\d+(`?)", rf"\g<1>{SEMVER}\2"),
-        (r"(?mi)(Specification version:\s*`?)v\d+\.\d+\.\d+(`?)", rf"\g<1>{RELEASE_TAG}\2"),
-        (r"(?mi)(AGCP specification version:\s*`?)v\d+\.\d+\.\d+(`?)", rf"\g<1>{RELEASE_TAG}\2"),
-        (r"(?mi)(AGCP Specification Release:\*\*\s*)v\d+\.\d+\.\d+", rf"\g<1>{RELEASE_TAG}"),
-        (r"(?mi)(Contract Version:\*\*\s*)\d+\.\d+\.\d+", rf"\g<1>{SEMVER}"),
-        (r"(?mi)(Repository Release Target:\*\*\s*AGCP\s+)v\d+\.\d+\.\d+", rf"\g<1>{RELEASE_TAG}"),
-        (r"(?mi)(Repository release target\s*\|\s*`)v\d+\.\d+\.\d+(`)", rf"\g<1>{RELEASE_TAG}\2"),
-        (r"(?mi)(Repository release target:\s*`?)v\d+\.\d+\.\d+(`?)", rf"\g<1>{RELEASE_TAG}\2"),
-        (r"(?mi)(Controlling Published Baseline:\*\*\s*AGCP\s+)v\d+\.\d+\.\d+", rf"\g<1>{RELEASE_TAG}"),
-        (r"(?mi)(Controlling published baseline\s*\|\s*`)v\d+\.\d+\.\d+(`)", rf"\g<1>{RELEASE_TAG}\2"),
-        (r"(?mi)(Controlling published baseline:\s*`?)v\d+\.\d+\.\d+(`?)", rf"\g<1>{RELEASE_TAG}\2"),
-        (r"(?mi)(Release target:\*\*\s*AGCP\s+)v\d+\.\d+\.\d+", rf"\g<1>{RELEASE_TAG}"),
+        (r"(?mi)(Specification Version:\*\*\s*`?)(?:v)?\d+\.\d+\.(?:\d+|x)(`?)", rf"\g<1>{SEMVER}\2"),
+        (r"(?mi)(Specification version:\s*`?)v\d+\.\d+\.(?:\d+|x)(`?)", rf"\g<1>{RELEASE_TAG}\2"),
+        (r"(?mi)(AGCP specification version:\s*`?)v\d+\.\d+\.(?:\d+|x)(`?)", rf"\g<1>{RELEASE_TAG}\2"),
+        (r"(?mi)(AGCP Specification Release:\*\*\s*)v\d+\.\d+\.(?:\d+|x)", rf"\g<1>{RELEASE_TAG}"),
+        (r"(?mi)(Contract Version:\*\*\s*)\d+\.\d+\.(?:\d+|x)", rf"\g<1>{SEMVER}"),
+        (r"(?mi)(Repository Release Target:\*\*\s*AGCP\s+)v\d+\.\d+\.(?:\d+|x)", rf"\g<1>{RELEASE_TAG}"),
+        (r"(?mi)(Repository release target\s*\|\s*`)v\d+\.\d+\.(?:\d+|x)(`)", rf"\g<1>{RELEASE_TAG}\2"),
+        (r"(?mi)(Repository release target:\s*`?)v\d+\.\d+\.(?:\d+|x)(`?)", rf"\g<1>{RELEASE_TAG}\2"),
+        (r"(?mi)(Controlling Published Baseline:\*\*\s*AGCP\s+)v\d+\.\d+\.(?:\d+|x)", rf"\g<1>{RELEASE_TAG}"),
+        (r"(?mi)(Controlling published baseline\s*\|\s*`)v\d+\.\d+\.(?:\d+|x)(`)", rf"\g<1>{RELEASE_TAG}\2"),
+        (r"(?mi)(Controlling published baseline:\s*`?)v\d+\.\d+\.(?:\d+|x)(`?)", rf"\g<1>{RELEASE_TAG}\2"),
+        (r"(?mi)(Release target:\*\*\s*AGCP\s+)v\d+\.\d+\.(?:\d+|x)", rf"\g<1>{RELEASE_TAG}"),
         (r"(?mi)(Baseline Date:\*\*\s*)\d{4}-\d{2}-\d{2}", rf"\g<1>{BASELINE_DATE}"),
         (r"(?mi)(Baseline date:\s*`?)\d{4}-\d{2}-\d{2}(`?)", rf"\g<1>{BASELINE_DATE}\2"),
         (r"(?mi)(Baseline date\s*\|\s*`?)\d{4}-\d{2}-\d{2}(`?)", rf"\g<1>{BASELINE_DATE}\2"),
@@ -317,55 +336,84 @@ def replace_current_metadata_labels(text: str) -> str:
 
 
 def sync_human_metadata(write: bool, changed: list[str]) -> None:
+    release_block_targets = {
+        "schemas/SCHEMA-CATALOG.md",
+        "schemas/README.md",
+        "api/INTERFACE-CATALOG.md",
+        "registries/REGISTRY-ENTRY-CATALOG.md",
+        "registries/README.md",
+    }
     for rel in CURRENT_HUMAN_METADATA:
         path = ROOT / rel
         text = path.read_text(encoding="utf-8")
         updated = replace_current_metadata_labels(text)
+        if rel in release_block_targets:
+            marker = "> **Version source:** `VERSION`"
+            block = (
+                f"> **Version source:** `VERSION`  \n"
+                f"> **Current repository release:** `{RELEASE_TAG}`  \n"
+                f"> **Release status:** `{RELEASE_STATUS}`  \n"
+                f"> **Artifact Lifecycle:** `CURRENT`  \n"
+                f"> **Baseline Date:** `{BASELINE_DATE}`  \n"
+            )
+            if marker in updated:
+                # Replace the generated block as a unit so VERSION remains the only maintained release number.
+                updated = re.sub(
+                    r"> \*\*Version source:\*\* `VERSION`  \n> \*\*Current repository release:\*\* `v[^`]+`  \n> \*\*Release status:\*\* `[^`]+`  \n> \*\*Artifact Lifecycle:\*\* `[^`]+`  \n> \*\*Baseline Date:\*\* `[^`]+`  \n",
+                    block,
+                    updated,
+                    count=1,
+                )
+            else:
+                lines = updated.splitlines(keepends=True)
+                insert_at = 1 if lines and lines[0].startswith("# ") else 0
+                lines.insert(insert_at, "\n" + block + "\n")
+                updated = "".join(lines)
         if rel == "api/INTERFACE-CATALOG.md":
             updated = re.sub(
-                r"(\| `IF-00[12]` \|[^\n]*?\| `v2` \| `)\d+\.\d+\.\d+(` \|)",
+                r"(\| `IF-00[1-5]` \|[^\n]*?\| `v2` \| `)\d+\.\d+\.(?:\d+|x)(` \|)",
                 rf"\g<1>{SEMVER}\2",
                 updated,
             )
         elif rel == "schemas/README.md":
             updated = re.sub(
-                r"(authoritative JSON Schema Draft 2020-12 definitions for the AGCP )v\d+\.\d+\.\d+( schema set)",
+                r"(authoritative JSON Schema Draft 2020-12 definitions for the AGCP )v\d+\.\d+\.(?:\d+|x)( schema set)",
                 rf"\g<1>{RELEASE_TAG}\2",
                 updated,
                 count=1,
             )
         elif rel == "governance/AGCP-Release-Lifecycle-Metadata-Policy.md":
             updated = re.sub(
-                r"(Current repository specification version \| `)\d+\.\d+\.\d+(`)",
+                r"(Current repository specification version \| `)\d+\.\d+\.(?:\d+|x)(`)",
                 rf"\g<1>{SEMVER}\2",
                 updated,
             )
             updated = re.sub(
-                r"(identify the same `)v\d+\.\d+\.\d+(` artifact set)",
+                r"(identify the same `)v\d+\.\d+\.(?:\d+|x)(` artifact set)",
                 rf"\g<1>{RELEASE_TAG}\2",
                 updated,
             )
         elif rel == "spec/AGCP-HTTP-Interface-Specification.md":
             updated = re.sub(
-                r"The current contract revision is v\d+\.\d+\.\d+ and is part of the published v\d+\.\d+\.\d+ Public Review Controlled Baseline\.",
+                r"The current contract revision is v\d+\.\d+\.(?:\d+|x) and is part of the published v\d+\.\d+\.(?:\d+|x) Public Review Controlled Baseline\.",
                 f"The current contract revision is {RELEASE_TAG} and is part of the published {RELEASE_TAG} Public Review Controlled Baseline.",
                 updated,
             )
         elif rel == "ARCHITECTURE.md":
             updated = re.sub(
-                r"`governance/AGCP-v\d+\.\d+\.\d+-repository-synchronization-manifest\.json`",
+                r"`governance/AGCP-v\d+\.\d+\.(?:\d+|x)-repository-synchronization-manifest\.json`",
                 f"`{SYNC_MANIFEST}`",
                 updated,
             )
         elif rel == "conformance/README.md":
             updated = re.sub(
-                r"The cumulative v\d+\.\d+\.\d+ (?:correction|repository) set is indexed by `\.\./governance/AGCP-v\d+\.\d+\.\d+-repository-synchronization-manifest\.json`",
+                r"The cumulative v\d+\.\d+\.(?:\d+|x) (?:correction|repository) set is indexed by `\.\./governance/AGCP-v\d+\.\d+\.(?:\d+|x)-repository-synchronization-manifest\.json`",
                 f"The cumulative {RELEASE_TAG} repository set is indexed by `../{SYNC_MANIFEST}`",
                 updated,
             )
         elif rel == "conformance/AGCP-Conformance-Traceability-and-Automation-Model.md":
             updated = re.sub(
-                r"(controlled relationships for the current AGCP )v\d+\.\d+\.\d+( model are)",
+                r"(controlled relationships for the current AGCP )v\d+\.\d+\.(?:\d+|x)( model are)",
                 rf"\g<1>{RELEASE_TAG}\2",
                 updated,
             )
@@ -374,7 +422,7 @@ def sync_human_metadata(write: bool, changed: list[str]) -> None:
                 harness_spec = yaml.safe_load((ROOT / "conformance/AGCP-Conformance-Harness-Spec.yml").read_text(encoding="utf-8")) or {}
                 vector_count = len(harness_spec.get("tests", []))
                 updated = re.sub(
-                    r"At the controlled AGCP v\d+\.\d+\.\d+ baseline, the mapping set contains 122 Formal Test Cases, \d+ Harness Checks, and \d+ Harness Test Vectors\.",
+                    r"At the controlled AGCP v\d+\.\d+\.(?:\d+|x) baseline, the mapping set contains 122 Formal Test Cases, \d+ Harness Checks, and \d+ Harness Test Vectors\.",
                     f"At the controlled AGCP {RELEASE_TAG} baseline, the mapping set contains 122 Formal Test Cases, {harness_count} Harness Checks, and {vector_count} Harness Test Vectors.",
                     updated,
                 )
@@ -386,33 +434,33 @@ def sync_human_metadata(write: bool, changed: list[str]) -> None:
     path = ROOT / "README.md"
     text = path.read_text(encoding="utf-8")
     updated = replace_current_metadata_labels(text)
-    updated = re.sub(r"(?m)^> \*\*Current release:\*\* AGCP v\d+\.\d+\.\d+", f"> **Current release:** AGCP {RELEASE_TAG}", updated)
-    updated = re.sub(r"(?m)^> \*\*Controlling published baseline:\*\* AGCP v\d+\.\d+\.\d+", f"> **Controlling published baseline:** AGCP {RELEASE_TAG}", updated)
-    updated = re.sub(r"(?m)^> This repository snapshot is the controlled AGCP v\d+\.\d+\.\d+", f"> This repository snapshot is the controlled AGCP {RELEASE_TAG}", updated)
+    updated = re.sub(r"(?m)^> \*\*Current release:\*\* AGCP v\d+\.\d+\.(?:\d+|x)", f"> **Current release:** AGCP {RELEASE_TAG}", updated)
+    updated = re.sub(r"(?m)^> \*\*Controlling published baseline:\*\* AGCP v\d+\.\d+\.(?:\d+|x)", f"> **Controlling published baseline:** AGCP {RELEASE_TAG}", updated)
+    updated = re.sub(r"(?m)^> This repository snapshot is the controlled AGCP v\d+\.\d+\.(?:\d+|x)", f"> This repository snapshot is the controlled AGCP {RELEASE_TAG}", updated)
     updated = re.sub(r"(?m)^> \*\*Current release notes:\*\* .*?$", f"> **Current release notes:** [`{CURRENT_RELEASE_NOTES}`]({CURRENT_RELEASE_NOTES})  ", updated)
     updated = re.sub(
-        r"For this repository snapshot, `VERSION` is `\d+\.\d+\.\d+`, yielding release tag `v\d+\.\d+\.\d+` and RTM specification version `v\.\d+\.\d+\.\d+`\.",
+        r"For this repository snapshot, `VERSION` is `\d+\.\d+\.(?:\d+|x)`, yielding release tag `v\d+\.\d+\.(?:\d+|x)` and RTM specification version `v\.\d+\.\d+\.(?:\d+|x)`\.",
         f"For this repository snapshot, `VERSION` is `{SEMVER}`, yielding release tag `{RELEASE_TAG}` and RTM specification version `{RTM_SPEC_VERSION}`.",
         updated,
     )
-    updated = re.sub(r"The v\d+\.\d+\.\d+ controlled inventory contains \*\*357 unique Normative Statement identifiers\*\*\.", f"The {RELEASE_TAG} controlled inventory contains **357 unique Normative Statement identifiers**.", updated, count=1)
-    updated = re.sub(r"AGCP v\d+\.\d+\.\d+ is issued as the controlled \*\*Public Review Controlled Baseline\*\*", f"AGCP {RELEASE_TAG} is issued as the controlled **Public Review Controlled Baseline**", updated, count=1)
-    updated = re.sub(r"This controlled release is AGCP v\d+\.\d+\.\d+ Public Review Controlled Baseline", f"This controlled release is AGCP {RELEASE_TAG} Public Review Controlled Baseline", updated, count=1)
-    updated = re.sub(r"AGCP v\d+\.\d+\.\d+ is the current Public Review Controlled Baseline\.", f"AGCP {RELEASE_TAG} is the current Public Review Controlled Baseline.", updated, count=1)
+    updated = re.sub(r"The v\d+\.\d+\.(?:\d+|x) controlled inventory contains \*\*357 unique Normative Statement identifiers\*\*\.", f"The {RELEASE_TAG} controlled inventory contains **357 unique Normative Statement identifiers**.", updated, count=1)
+    updated = re.sub(r"AGCP v\d+\.\d+\.(?:\d+|x) is issued as the controlled \*\*Public Review Controlled Baseline\*\*", f"AGCP {RELEASE_TAG} is issued as the controlled **Public Review Controlled Baseline**", updated, count=1)
+    updated = re.sub(r"This controlled release is AGCP v\d+\.\d+\.(?:\d+|x) Public Review Controlled Baseline", f"This controlled release is AGCP {RELEASE_TAG} Public Review Controlled Baseline", updated, count=1)
+    updated = re.sub(r"AGCP v\d+\.\d+\.(?:\d+|x) is the current Public Review Controlled Baseline\.", f"AGCP {RELEASE_TAG} is the current Public Review Controlled Baseline.", updated, count=1)
     updated = re.sub(r"(Public Review Controlled Baseline\*\* dated )\d{4}-\d{2}-\d{2}", rf"\g<1>{BASELINE_DATE}", updated, count=1)
     updated = re.sub(r"(Public Review Controlled Baseline, baseline date )\d{4}-\d{2}-\d{2}", rf"\g<1>{BASELINE_DATE}", updated, count=1)
     updated = re.sub(r"(controlled baseline date is `)\d{4}-\d{2}-\d{2}(`)", rf"\g<1>{BASELINE_DATE}\2", updated, count=1)
-    updated = re.sub(r"## v\d+\.\d+\.\d+ repository-wide integrity gate", f"## {RELEASE_TAG} repository-wide integrity gate", updated)
-    updated = re.sub(r"`governance/AGCP-v\d+\.\d+\.\d+-repository-integrity-validation\.json`", f"`{INTEGRITY_REPORT}`", updated)
-    updated = re.sub(r"## v\d+\.\d+\.\d+ repository synchronization", f"## {RELEASE_TAG} repository synchronization", updated)
+    updated = re.sub(r"## v\d+\.\d+\.(?:\d+|x) repository-wide integrity gate", f"## {RELEASE_TAG} repository-wide integrity gate", updated)
+    updated = re.sub(r"`governance/AGCP-v\d+\.\d+\.(?:\d+|x)-repository-integrity-validation\.json`", f"`{INTEGRITY_REPORT}`", updated)
+    updated = re.sub(r"## v\d+\.\d+\.(?:\d+|x) repository synchronization", f"## {RELEASE_TAG} repository synchronization", updated)
     updated = re.sub(
-        r"(?m)^├── RELEASE_NOTES_v\d+\.\d+\.\d+\.md$",
+        r"(?m)^├── RELEASE_NOTES_v\d+\.\d+\.(?:\d+|x)\.md$",
         f"├── {CURRENT_RELEASE_NOTES}",
         updated,
         count=1,
     )
     updated = re.sub(
-        r"(?m)^- `RELEASE_NOTES_v\d+\.\d+\.\d+\.md` — release notes for the current v\d+\.\d+\.\d+ Public Review Controlled Baseline$",
+        r"(?m)^- `RELEASE_NOTES_v\d+\.\d+\.(?:\d+|x)\.md` — release notes for the current v\d+\.\d+\.(?:\d+|x) Public Review Controlled Baseline$",
         f"- `{CURRENT_RELEASE_NOTES}` — release notes for the current {RELEASE_TAG} Public Review Controlled Baseline",
         updated,
         count=1,

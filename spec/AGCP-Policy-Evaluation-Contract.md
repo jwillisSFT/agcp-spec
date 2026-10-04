@@ -8,7 +8,7 @@
 **Artifact Lifecycle:** Current\
 **Repository Release Target Status:** Public Review Controlled Baseline  
 **Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-15  
+**Baseline Date:** 2026-08-14  
 **Series:** AGCP Core\
 **Applies To:** All AGCP-conformant implementations
 

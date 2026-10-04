@@ -134,7 +134,7 @@ for fx in fixture_map['fixtures']:
     expected=fx.get('expected_validation','VALID')
     actual='VALID' if not errs else 'INVALID'
     fixture_results.append({'fixture_id':fx['fixture_id'],'expected':expected,'actual':actual,'errors':errs[:5]})
-check('controlled_fixture_catalog_valid',len(fixture_results)==30 and all(r['expected']==r['actual'] for r in fixture_results),fixture_results)
+check('controlled_fixture_catalog_valid',len(fixture_results)==fixture_map.get('fixture_count') and all(r['expected']==r['actual'] for r in fixture_results),fixture_results)
 
 # Harness contains no nested provenance signature maps.
 harness=yaml.safe_load((ROOT/'conformance/AGCP-Conformance-Harness-Spec.yml').read_text())
@@ -187,7 +187,7 @@ check('tc005_maps_if001', 'IF-001' in tc5['if_ids'],tc5['if_ids'])
 check('tc005_maps_common_schema', 'schemas/common.json' in tc5['schema_files'],tc5['schema_files'])
 check('tc005_maps_cross_language_vectors', tc5.get('supporting_companion_vectors')==['conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json'],tc5.get('supporting_companion_vectors'))
 fixture_mapping=json.loads((ROOT/'conformance/fixture-mapping.json').read_text())
-check('catalog_version_synchronized', cat['catalog_version']=='1.0.50' and test_mapping['schema_catalog_version']=='1.0.50' and fixture_mapping['schema_catalog_version']=='1.0.50',{'catalog':cat['catalog_version'],'test_mapping':test_mapping['schema_catalog_version'],'fixture_mapping':fixture_mapping['schema_catalog_version']})
+check('catalog_version_synchronized', test_mapping.get('schema_catalog_version')==cat.get('catalog_version') and fixture_mapping.get('schema_catalog_version')==cat.get('catalog_version'),{'catalog':cat.get('catalog_version'),'test_mapping':test_mapping.get('schema_catalog_version'),'fixture_mapping':fixture_mapping.get('schema_catalog_version')})
 
 report={'release_context':release_context(),
  'report_id':'AGCP-P0-02-PROVENANCE-WIRE-SCHEMA-SYNCHRONIZATION',

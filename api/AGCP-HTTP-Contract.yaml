@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: AGCP HTTP Interface Contract
-  version: 2.1.x
+  version: 2.1.0
   description: Machine-readable IF-001 contract aligned to the v2.1.x GDF/PDP -> Execution Authorization -> Governance Realization
     -> PEP architecture. Commitment and completed target execution may be distinct.
 servers:

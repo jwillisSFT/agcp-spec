@@ -1,0 +1,49 @@
+{
+  "operation_id": "tcop-fault-120",
+  "test_scope": "scope-120",
+  "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE",
+  "acceptance_status": "ACCEPTED",
+  "effect_status": "EFFECTIVE",
+  "consumption_status": "OBSERVED",
+  "processed_at": "2026-10-04T10:00:00Z",
+  "effective_at": "2026-10-04T10:00:00Z",
+  "effective_condition": {
+    "fault_target": "ENFORCEMENT_CONTEXT",
+    "fault_mode": "FIELD_SUBSTITUTION"
+  },
+  "effective_condition_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+  "source_adapter": "post-grf-pre-pep-test-adapter",
+  "correlation_id": "corr-120",
+  "consumed_by_refs": [
+    "proposal:P-120"
+  ],
+  "last_consumed_at": "2026-10-04T10:00:01Z",
+  "test_originated": true,
+  "cleanup_required": true,
+  "evidence_refs": [
+    "evidence:tcop-fault-120"
+  ],
+  "observation_refs": [
+    "obs-test-001"
+  ],
+  "summary": "Fault fixture bound and observed by ordinary PEP validation.",
+  "result_digest": "2222222222222222222222222222222222222222222222222222222222222222",
+  "consumption_evidence": {
+    "consumed_by_stages": [
+      "PEP_ENFORCEMENT"
+    ],
+    "derived_result_refs": [
+      "refusal:P-120"
+    ],
+    "normal_governance_path_preserved": true
+  },
+  "mutation_evidence": {
+    "injection_point": "POST_GRF_PRE_PEP",
+    "fault_target": "ENFORCEMENT_CONTEXT",
+    "field_path": "target_ref.target_id",
+    "pre_mutation_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "post_mutation_digest": "2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "result_id": "tcresult-fault-120",
+  "result_version": "1.1"
+}

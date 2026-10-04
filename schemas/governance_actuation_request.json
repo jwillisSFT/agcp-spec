@@ -1,0 +1,497 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_actuation_request.json",
+  "title": "AGCP Governance Actuation Request",
+  "description": "Authenticated management request to introduce a typed controlled governance input or administrative transition without directly fabricating downstream governance results.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principal_id"
+      ],
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "principal_type": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "tenant_state_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tenant_id",
+        "target_state"
+      ],
+      "properties": {
+        "tenant_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_state": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "governance_domain_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "governance_domain",
+        "target_state"
+      ],
+      "properties": {
+        "governance_domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_state": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "governance_configuration_activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "governance_configuration_ref"
+      ],
+      "properties": {
+        "governance_configuration_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "governance_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "governance_configuration_rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_governance_version"
+      ],
+      "properties": {
+        "target_governance_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "authority_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_ref",
+        "event_type"
+      ],
+      "properties": {
+        "authority_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_type": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "delegation_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "delegation_ref",
+        "event_type"
+      ],
+      "properties": {
+        "delegation_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_type": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "evidence_source_administration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_source_ref",
+        "action"
+      ],
+      "properties": {
+        "evidence_source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "human_review_administration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_ref",
+        "action"
+      ],
+      "properties": {
+        "review_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "degradation_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "degradation_scope",
+        "target_state"
+      ],
+      "properties": {
+        "degradation_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_state": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "continuation_reevaluation_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_ref",
+        "reason"
+      ],
+      "properties": {
+        "subject_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "policy_lifecycle_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_ref",
+        "action"
+      ],
+      "properties": {
+        "policy_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "required": [
+    "actuation_id",
+    "actuation_version",
+    "actuation_type",
+    "requested_condition",
+    "requested_by",
+    "reason",
+    "request_digest"
+  ],
+  "properties": {
+    "actuation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actuation_version": {
+      "const": "1.0"
+    },
+    "actuation_type": {
+      "enum": [
+        "TENANT_STATE_TRANSITION",
+        "GOVERNANCE_DOMAIN_TRANSITION",
+        "GOVERNANCE_CONFIGURATION_ACTIVATION",
+        "GOVERNANCE_CONFIGURATION_ROLLBACK",
+        "AUTHORITY_EVENT",
+        "DELEGATION_EVENT",
+        "EVIDENCE_SOURCE_ADMINISTRATION",
+        "HUMAN_REVIEW_ADMINISTRATION",
+        "DEGRADATION_TRANSITION",
+        "CONTINUATION_REEVALUATION_REQUEST",
+        "POLICY_LIFECYCLE_ACTION"
+      ]
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requested_condition": {
+      "type": "object"
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requested_by": {
+      "$ref": "#/$defs/principal"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "TENANT_STATE_TRANSITION"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/tenant_state_transition"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "GOVERNANCE_DOMAIN_TRANSITION"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/governance_domain_transition"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "GOVERNANCE_CONFIGURATION_ACTIVATION"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/governance_configuration_activation"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "GOVERNANCE_CONFIGURATION_ROLLBACK"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/governance_configuration_rollback"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "AUTHORITY_EVENT"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/authority_event"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "DELEGATION_EVENT"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/delegation_event"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "EVIDENCE_SOURCE_ADMINISTRATION"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/evidence_source_administration"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "HUMAN_REVIEW_ADMINISTRATION"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/human_review_administration"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "DEGRADATION_TRANSITION"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/degradation_transition"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "CONTINUATION_REEVALUATION_REQUEST"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/continuation_reevaluation_request"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "actuation_type": {
+            "const": "POLICY_LIFECYCLE_ACTION"
+          }
+        },
+        "required": [
+          "actuation_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "requested_condition": {
+            "$ref": "#/$defs/policy_lifecycle_action"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -19,15 +19,15 @@
   },
   "formal_test_case_count": 122,
   "harness_check_count": 21,
-  "harness_test_vector_count": 71,
+  "harness_test_vector_count": 135,
   "registry_relationships_added_during_final_sync": 24,
   "source_hashes": {
-    "rtm_workbook_sha256": "0c20b146b444cabf54a43491347c764c039362001e09456c42bd39e953125dc7",
-    "test_mapping_sha256": "d09f8887bab8c053b3654e0306d5e6893db1fe4885fe7c87913b9d0e3d102241",
-    "test_control_mapping_sha256": "eadb8c6c4be0236131b46c7b615f188cca3825ad5c8aded407e9564c7c977477",
-    "schema_catalog_json_sha256": "2c3daef5104a973eacf101ea672a764361ae41d9e07fc34cdcf9138d09f527d2",
-    "interface_catalog_json_sha256": "2dabaec9aa1947ca158e5a858c9de9273408dbaa76049f9b77d85c2a1696ad23",
-    "registry_catalog_json_sha256": "3407554e515d8bf6c914b931ed09846da6104313732a373fdfa1f9ebf55d13f0"
+    "rtm_workbook_sha256": "2cbf5d0d83e99863e117275f8059f8072d0cd74269f971c6c2cffe436545e2bc",
+    "test_mapping_sha256": "fe6eda705b39e5ad7e93f74e1ad8222955c565137397bb4a2498af010a8825ee",
+    "test_control_mapping_sha256": "5e3a0ea40870a890f2d26e4d6f2d20696e9f24cfa941477aa55dee660c49b59f",
+    "schema_catalog_json_sha256": "91a62669d119bef49a0dc8d3d94c5579f32fffc8fe5af228f49a105939841bea",
+    "interface_catalog_json_sha256": "4d0647d6c5cb7f922af1db62b264d32654cd345903fe5899eea24d186d235b13",
+    "registry_catalog_json_sha256": "13d53a535f6093fa60bc18f3e6c57f280269d7f062a36ccc6d7fa583faf50c8d"
   },
   "checks": [
     {

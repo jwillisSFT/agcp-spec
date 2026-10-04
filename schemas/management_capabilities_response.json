@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/management_capabilities_response.json",
+  "title": "AGCP Management Capabilities Response",
+  "description": "Machine-readable discovery of observation, actuation, and test-control capabilities. BOUND is a runtime-coupling truth claim, not interface-presence metadata.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "status": {
+      "enum": [
+        "AVAILABLE",
+        "UNAVAILABLE",
+        "NOT_APPLICABLE",
+        "UNKNOWN"
+      ]
+    },
+    "binding": {
+      "enum": [
+        "BOUND",
+        "RECORD_ONLY",
+        "UNBOUND",
+        "NOT_APPLICABLE",
+        "UNKNOWN"
+      ]
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability_id",
+        "status",
+        "runtime_binding_status",
+        "readback_supported"
+      ],
+      "properties": {
+        "capability_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "runtime_binding_status": {
+          "$ref": "#/$defs/binding"
+        },
+        "readback_supported": {
+          "type": "boolean"
+        },
+        "interface_id": {
+          "enum": [
+            "IF-003",
+            "IF-004",
+            "IF-005"
+          ]
+        },
+        "observation_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actuation_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "control_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_adapter": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "required": [
+    "response_version",
+    "implementation_id",
+    "generated_at",
+    "observation_capabilities",
+    "actuation_capabilities",
+    "test_control_capabilities",
+    "test_scope_propagation_supported",
+    "correlation_supported",
+    "response_digest"
+  ],
+  "properties": {
+    "response_version": {
+      "const": "1.0"
+    },
+    "implementation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "observation_capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "actuation_capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "test_control_capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "test_scope_propagation_supported": {
+      "type": "boolean"
+    },
+    "correlation_supported": {
+      "type": "boolean"
+    },
+    "response_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

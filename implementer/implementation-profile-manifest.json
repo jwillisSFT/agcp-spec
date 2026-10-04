@@ -1,7 +1,7 @@
 {
   "manifest_type": "AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_MANIFEST",
   "manifest_version": "2.0.0",
-  "release_target": "v2.1.x",
+  "release_target": "v2.1.0",
   "profile_format_version": "2.0.0",
   "scope": "Public generic implementation-profile framework, IAS/PEP profile specifications, schemas, templates, informational examples, and catalogs. Deployment-specific operational profiles are distributed separately.",
   "files": [
@@ -37,13 +37,13 @@
     },
     {
       "path": "implementation-profile-catalog.json",
-      "sha256": "080fc637e35304e6cb1e932971a197bca4914742536a3692b88d8cf40d44f42d",
+      "sha256": "5cf2ed13e932bde01e820275c222587f381b6903d42cac960d3071a96c47eeb6",
       "bytes": 985
     },
     {
       "path": "implementation-profile-catalog.csv",
-      "sha256": "0d816b007656f44e14bbafff139c8bf209834210cb23f51ee960e4a40be6cb46",
-      "bytes": 459
+      "sha256": "5fc17f6fa75008d5e36ab4a4a644ace99291ef5e6b320c4812c99185a011a817",
+      "bytes": 457
     },
     {
       "path": "AGCP-Identity-and-Authorization-Store-Profile-Specification.md",

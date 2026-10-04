@@ -7,7 +7,7 @@
 **Artifact Lifecycle:** Current\
 **Repository Release Target Status:** Public Review Controlled Baseline  
 **Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-15  
+**Baseline Date:** 2026-08-14  
 **Applies To:** All AGCP-conformant implementations
 
 ------------------------------------------------------------------------
@@ -191,6 +191,8 @@ Responses SHALL conform to `ProposalView`.
 ## 5.4 Governance Approval and Human Adjudication
 
 Human governance participation uses the controlled Governance Approval Submission ingress contract. A submission is a claimant command, not an authoritative approval record.
+
+IF-001 governance-approval ingress SHALL NOT accept DS-026 Governance Approval Artifact as a client-supplied command body. It SHALL accept DS-045 Governance Approval Submission and independently create or qualify authoritative DS-026 evidence.
 
 The caller SHALL be authenticated according to the controlling Implementation Profile. `claimed_approver` and any caller-supplied role, group, entitlement, reviewer class, delegation, permission, or authority-scope field are non-authoritative claims.
 

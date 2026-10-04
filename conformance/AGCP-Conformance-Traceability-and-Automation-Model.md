@@ -337,7 +337,7 @@ objective evidence evaluated under the complete TC-001 procedure
 
 `TV-PROP-001` can automate substantial portions of `TC-001`, but TC-001 remains the authoritative assessment procedure. The vector result is accepted only for the criteria it actually demonstrates.
 
-For the current post-RTM v2.1.x synchronization set (RTM-1.47), the mapping contains 122 Formal Test Cases, 21 Harness Checks, and 71 Harness Test Vectors. These counts are controlled development metadata, not permanent relationship constraints.
+For the current post-RTM v2.1.x synchronization set (RTM-1.47), the mapping contains 122 Formal Test Cases, 21 Harness Checks, and 135 Harness Test Vectors. These counts are controlled development metadata, not permanent relationship constraints.
 
 ---
 

@@ -1,8 +1,8 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.8",
+    "repository_release_target": "v2.1.0",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.8",
+    "controlling_published_baseline": "v2.1.0",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
     "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
@@ -18,7 +18,7 @@
   ],
   "operation_count": 10,
   "public_not_found_harness_instance_count": 9,
-  "registry_entry_count": 42,
+  "registry_entry_count": 49,
   "affected_crs": [
     "CR-010",
     "CR-022",
@@ -34,19 +34,19 @@
   ],
   "source_hashes": {
     "schemas/error_response.json": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
-    "schemas/meta_response.json": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
-    "schemas/examples/ds003-implementation-metadata-response.json": "b86823c9c7df4ba95999aad30e96c4345ae5cb075fcfa1d2e16deb176719a3b1",
-    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
-    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2",
-    "spec/AGCP-Error-Mapping.md": "6c5cd15e1260666da2b7713ea153fb186dceaf8c1e81320f7bf0f8e55530f6c9",
-    "registries/rejection-code-registry.json": "1934f2c2a1b0b73dfd1f845adbb00c28cc6da0bcbe11db13fa4e66b7eaa943ab",
+    "schemas/meta_response.json": "c8e034931dded953522a687ef1d84833e74f3855933145082b89b17ec3aecab6",
+    "schemas/examples/ds003-implementation-metadata-response.json": "6fe67d63995d088868dd1ef8f97fd768ba9f7225596cb39f40f32674328b8264",
+    "api/AGCP-HTTP-Contract.yaml": "2b6437515da9feafb3d606b7316f1a1999b530a645133570a8a2087d6e6a3949",
+    "spec/AGCP-HTTP-Interface-Specification.md": "cfaced45689c68d5c6643ead63161c20a330d4b0a677ccb2da000a7a06f54393",
+    "spec/AGCP-Error-Mapping.md": "8b7442c52864640e1c41c284b253df483725bb4b3426c01c12f1c69c42c1fc63",
+    "registries/rejection-code-registry.json": "d11986472c0129ea699cfb732d8837e6d9d801ce6da12f4b05fbd817d58d416f",
     "conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json": "caadcec849862d165ec494abc1b09817cf1bc4473ad67de376a5ec63ea9a43b5",
-    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
-    "api/interface-catalog.json": "803b1614a0cd0004763879bf0249f809e6a2e8d2a6c8f0d0db2e0ec240a9b364",
-    "registries/registry-entry-catalog.json": "b9dc44ce432dd488b8f85666aa3bd620706b769a66af3b4bf2bb1697a86dc818",
-    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
-    "governance/validate_http_error_metadata_contract.py": "059f84c0ee7af7fbb9aa3d0046df41030f34ad568ae5e3cea4b7a907eb395bbf"
+    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
+    "api/interface-catalog.json": "4d0647d6c5cb7f922af1db62b264d32654cd345903fe5899eea24d186d235b13",
+    "registries/registry-entry-catalog.json": "13d53a535f6093fa60bc18f3e6c57f280269d7f062a36ccc6d7fa583faf50c8d",
+    "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "2cbf5d0d83e99863e117275f8059f8072d0cd74269f971c6c2cffe436545e2bc",
+    "governance/validate_http_error_metadata_contract.py": "2cb87de30f669bd45c8f13fafe92fd675be817dfaf157d5281334cc17fc40db3"
   },
   "checks": [
     {
@@ -182,7 +182,11 @@
     {
       "check": "registry_release",
       "status": "PASS",
-      "detail": ""
+      "detail": {
+        "release": "v2.1.0",
+        "entry_count": 49,
+        "actual_entries": 49
+      }
     },
     {
       "check": "new_transport_codes",
@@ -208,8 +212,8 @@
       "check": "registry_document_digest",
       "status": "PASS",
       "detail": {
-        "declared": "aa2486f8fce5bd5f83ad091da395ffc5c9a4d91e2a7c4da8e5d473be7ad7acf9",
-        "computed": "aa2486f8fce5bd5f83ad091da395ffc5c9a4d91e2a7c4da8e5d473be7ad7acf9"
+        "declared": "fe609eddb525d3f53fc6aba2dbcb980aa07aa171e9a83fce0daac3d5df26fb2c",
+        "computed": "fe609eddb525d3f53fc6aba2dbcb980aa07aa171e9a83fce0daac3d5df26fb2c"
       }
     },
     {
@@ -233,7 +237,7 @@
       ]
     },
     {
-      "check": "schema_catalog_version",
+      "check": "schema_catalog_metadata_present",
       "status": "PASS",
       "detail": ""
     },
@@ -248,7 +252,7 @@
       "detail": ""
     },
     {
-      "check": "interface_catalog_version",
+      "check": "interface_catalog_metadata_present",
       "status": "PASS",
       "detail": ""
     },
@@ -356,14 +360,13 @@
           "CR-041",
           "CR-048",
           "CR-068",
-          "CR-073"
-        ],
-        "formally_defined_unmapped_crs": [
+          "CR-073",
           "CR-089",
           "CR-090",
           "CR-110",
           "CR-113"
         ],
+        "formally_defined_unmapped_crs": [],
         "rows": [
           {
             "tc": "TC-010",
@@ -409,6 +412,34 @@
           },
           {
             "tc": "TC-073",
+            "ds": true,
+            "if": true,
+            "vec": true,
+            "note": true
+          },
+          {
+            "tc": "TC-089",
+            "ds": true,
+            "if": true,
+            "vec": true,
+            "note": true
+          },
+          {
+            "tc": "TC-090",
+            "ds": true,
+            "if": true,
+            "vec": true,
+            "note": true
+          },
+          {
+            "tc": "TC-110",
+            "ds": true,
+            "if": true,
+            "vec": true,
+            "note": true
+          },
+          {
+            "tc": "TC-113",
             "ds": true,
             "if": true,
             "vec": true,

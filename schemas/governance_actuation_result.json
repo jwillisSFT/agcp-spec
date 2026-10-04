@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_actuation_result.json",
+  "title": "AGCP Governance Actuation Result",
+  "description": "Result/readback record. Acceptance and authoritative realization are separate; EFFECTIVE requires attributable evidence of the realized condition.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "actuation_id",
+    "result_version",
+    "actuation_type",
+    "acceptance_status",
+    "realization_status",
+    "processed_at",
+    "result_digest"
+  ],
+  "properties": {
+    "actuation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_version": {
+      "const": "1.0"
+    },
+    "actuation_type": {
+      "enum": [
+        "TENANT_STATE_TRANSITION",
+        "GOVERNANCE_DOMAIN_TRANSITION",
+        "GOVERNANCE_CONFIGURATION_ACTIVATION",
+        "GOVERNANCE_CONFIGURATION_ROLLBACK",
+        "AUTHORITY_EVENT",
+        "DELEGATION_EVENT",
+        "EVIDENCE_SOURCE_ADMINISTRATION",
+        "HUMAN_REVIEW_ADMINISTRATION",
+        "DEGRADATION_TRANSITION",
+        "CONTINUATION_REEVALUATION_REQUEST",
+        "POLICY_LIFECYCLE_ACTION"
+      ]
+    },
+    "acceptance_status": {
+      "enum": [
+        "ACCEPTED",
+        "REJECTED"
+      ]
+    },
+    "realization_status": {
+      "enum": [
+        "PENDING",
+        "EFFECTIVE",
+        "NO_OP",
+        "FAILED",
+        "CANCELLED",
+        "EXPIRED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_condition": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "authoritative_artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "observation_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "ledger_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "failure_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "realization_status": {
+            "const": "EFFECTIVE"
+          }
+        },
+        "required": [
+          "realization_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "effective_at",
+          "effective_condition",
+          "authoritative_artifact_refs",
+          "evidence_refs",
+          "observation_refs"
+        ],
+        "properties": {
+          "authoritative_artifact_refs": {
+            "minItems": 1
+          },
+          "evidence_refs": {
+            "minItems": 1
+          },
+          "observation_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "acceptance_status": {
+            "const": "REJECTED"
+          }
+        },
+        "required": [
+          "acceptance_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "failure_reason"
+        ],
+        "properties": {
+          "realization_status": {
+            "enum": [
+              "FAILED",
+              "NOT_APPLICABLE"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

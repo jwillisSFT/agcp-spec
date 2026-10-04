@@ -2,7 +2,7 @@
 
 **Status:** Informational human-readable mirror  
 **Authoritative executable source:** `AGCP-Conformance-Harness-Spec.yml`  
-**Synchronized vector count:** 71  
+**Synchronized vector count:** 135  
 **Synchronization:** `AGCP-v2.1.x-HARNESS-VECTOR-CHECK-SYNC-2026-10-03`
 
 ## Purpose
@@ -88,6 +88,70 @@ The harness and injection inventory remains under active development. Standardiz
 | `TV-PEP-006` | Co-located GDF GRF and PEP still enforce logical binding and refusal semantics |
 | `TV-EXEC-001` | Successful commitment followed by asynchronous execution success remains COMMITTED until DS-052 success evidence |
 | `TV-EXEC-002` | Successful commitment followed by asynchronous execution failure records DS-052 failure without rewriting commit success |
+| `TV-TC-014` | Direct orchestration for TC-014 — Cosign Wrong State |
+| `TV-TC-017` | Direct orchestration for TC-017 — HITL Expiration -> Rejected |
+| `TV-TC-018` | Direct orchestration for TC-018 — Governance Cancellation -> Rejected |
+| `TV-TC-021` | Direct orchestration for TC-021 — Commit While Rejected |
+| `TV-TC-025` | Direct orchestration for TC-025 — Tenant Decommissioned Before Commit |
+| `TV-TC-031` | Direct orchestration for TC-031 — Dual Authorized Conflicting Actions |
+| `TV-TC-032` | Direct orchestration for TC-032 — Stale Authorization After Prior Commit |
+| `TV-TC-033` | Direct orchestration for TC-033 — Divergent State Assumption Conflict |
+| `TV-TC-034` | Direct orchestration for TC-034 — Concurrent Authorization Race |
+| `TV-TC-036` | Direct orchestration for TC-036 — Missing Intent |
+| `TV-TC-037` | Direct orchestration for TC-037 — Missing Target Resource |
+| `TV-TC-038` | Direct orchestration for TC-038 — Missing Requested Effect |
+| `TV-TC-039` | Direct orchestration for TC-039 — Expired Proposal |
+| `TV-TC-040` | Direct orchestration for TC-040 — Malformed Delegation References |
+| `TV-TC-041` | Direct orchestration for TC-041 — Malformed Evidence References |
+| `TV-TC-042` | Direct orchestration for TC-042 — Canonical Hash Mismatch |
+| `TV-TC-043` | Direct orchestration for TC-043 — Missing Mission/Task Lineage |
+| `TV-TC-044` | Direct orchestration for TC-044 — Broken Delegation Chain |
+| `TV-TC-046` | Direct orchestration for TC-046 — Context Attempts to Override Canonical State |
+| `TV-TC-047` | Direct orchestration for TC-047 — Provenance Continuity Gap |
+| `TV-TC-048` | Direct orchestration for TC-048 — Canonical State Unavailable |
+| `TV-TC-049` | Direct orchestration for TC-049 — Stale Canonical State |
+| `TV-TC-050` | Direct orchestration for TC-050 — Conflicting Canonical-State Sources |
+| `TV-TC-051` | Direct orchestration for TC-051 — Telemetry Conflicts With Canonical State |
+| `TV-TC-052` | Direct orchestration for TC-052 — Canonical-State Hash Mismatch |
+| `TV-TC-053` | Direct orchestration for TC-053 — Structural Refusal Due to Invariant Violation |
+| `TV-TC-054` | Direct orchestration for TC-054 — Structural Refusal Due to Missing Evidence |
+| `TV-TC-055` | Direct orchestration for TC-055 — Structural Refusal Due to Canonical-State Conflict |
+| `TV-TC-056` | Direct orchestration for TC-056 — Refusal Record Missing Attribution |
+| `TV-TC-057` | Direct orchestration for TC-057 — Refusal Record Not Replayable |
+| `TV-TC-058` | Direct orchestration for TC-058 — Escalation Required but Missing Artifact |
+| `TV-TC-059` | Direct orchestration for TC-059 — Escalation Resolved to Commit |
+| `TV-TC-060` | Direct orchestration for TC-060 — Escalation Resolved to Refusal |
+| `TV-TC-061` | Direct orchestration for TC-061 — Deferred Authorization Expires |
+| `TV-TC-062` | Direct orchestration for TC-062 — Missing Canonical-State Reference |
+| `TV-TC-063` | Direct orchestration for TC-063 — Missing Invariant References |
+| `TV-TC-064` | Direct orchestration for TC-064 — Missing Evidence Hashes |
+| `TV-TC-066` | Direct orchestration for TC-066 — Receipt Replay Hash Mismatch |
+| `TV-TC-067` | Direct orchestration for TC-067 — Evidence Changes Between Proposal and Commit |
+| `TV-TC-069` | Direct orchestration for TC-069 — Evidence Lineage Gap Across Agents |
+| `TV-TC-070` | Direct orchestration for TC-070 — Governance Context Preserved Across Handoff |
+| `TV-TC-071` | Direct orchestration for TC-071 — Downstream Agent Drops Context |
+| `TV-TC-072` | Direct orchestration for TC-072 — Cross-Domain Delegation Requires Escalation |
+| `TV-TC-073` | Direct orchestration for TC-073 — REST vs Message Bus Same Result |
+| `TV-TC-074` | Direct orchestration for TC-074 — Canonically Equivalent Payloads Same Result |
+| `TV-TC-075` | Direct orchestration for TC-075 — Different Implementations Produce Same Decision |
+| `TV-TC-076` | Direct orchestration for TC-076 — Same Proposal + Same State + Same Invariants = Same Decision |
+| `TV-TC-077` | Direct orchestration for TC-077 — Same Proposal Across Distributed Nodes |
+| `TV-TC-078` | Direct orchestration for TC-078 — Determinism Under Non-Deterministic Agent Inputs |
+| `TV-TC-083` | Direct orchestration for TC-083 — Canonical State and Decision Remain Synchronized |
+| `TV-TC-086` | Direct orchestration for TC-086 — Receipt Reproduces Original Decision |
+| `TV-TC-089` | Direct orchestration for TC-089 — Implementation Passes AGCP Conformance Suite |
+| `TV-TC-090` | Direct orchestration for TC-090 — Independent Implementations Produce Equivalent Outcomes |
+| `TV-TC-092` | Direct orchestration for TC-092 — DEGRADED as Non-Terminal State |
+| `TV-TC-094` | Direct orchestration for TC-094 — Admissible Set Determination |
+| `TV-TC-095` | Direct orchestration for TC-095 — Deterministic Adjudication of Competing Futures |
+| `TV-TC-097` | Direct orchestration for TC-097 — Evidence Qualification Before Admissibility |
+| `TV-TC-098` | Direct orchestration for TC-098 — Continuation Integrity Preservation |
+| `TV-TC-099` | Direct orchestration for TC-099 — Admissible Path Viability Tracking |
+| `TV-TC-104` | Direct orchestration for TC-104 — Governance Decision State Suitability |
+| `TV-TC-105` | Direct orchestration for TC-105 — Composite Proposal Representation |
+| `TV-TC-106` | Direct orchestration for TC-106 — Governance Dependency Graph Evaluation |
+| `TV-TC-108` | Direct orchestration for TC-108 — Coupling Classification |
+| `TV-TC-115` | Direct orchestration for TC-115 — Recursive Authority Containment |
 
 ## Vector definitions
 
@@ -5482,3 +5546,1027 @@ Fixture references are resolved before schema/interface validation. New v2.1.x f
 # Relationship to AGCP conformance
 
 Passing applicable vectors produces objective evidence under the controlling Formal Test Case. It does not independently establish conformance and does not supersede the published CRs, Core, adopted companion specifications, Implementation Profile, Formal Test Cases, or final RTM.
+
+## TV-TC-014 — Direct orchestration for TC-014 — Cosign Wrong State
+
+**Formal Test Case:** `TC-014`  
+**Conformance Requirement:** `CR-014`  
+**Authoritative procedure:** `conformance/tests/TC011-TC020.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `HUMAN_REVIEW_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`, `HUMAN_REVIEW`, `IDENTITY_AUTHORIZATION_QUALIFICATION`
+
+**Pass rule:** The complete `TC-014` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-017 — Direct orchestration for TC-017 — HITL Expiration -> Rejected
+
+**Formal Test Case:** `TC-017`  
+**Conformance Requirement:** `CR-017`  
+**Authoritative procedure:** `conformance/tests/TC011-TC020.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `VIRTUAL_TIME_SET`, `HUMAN_REVIEW_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `HUMAN_REVIEW`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-017` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-018 — Direct orchestration for TC-018 — Governance Cancellation -> Rejected
+
+**Formal Test Case:** `TC-018`  
+**Conformance Requirement:** `CR-018`  
+**Authoritative procedure:** `conformance/tests/TC011-TC020.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `HUMAN_REVIEW_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `IDENTITY_AUTHORIZATION_QUALIFICATION`
+
+**Pass rule:** The complete `TC-018` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-021 — Direct orchestration for TC-021 — Commit While Rejected
+
+**Formal Test Case:** `TC-021`  
+**Conformance Requirement:** `CR-021`  
+**Authoritative procedure:** `conformance/tests/TC021-TC030.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `GOVERNANCE_DECISION`, `PEP_ENFORCEMENT`, `RESULTING_STATE_VALIDATION`
+
+**Pass rule:** The complete `TC-021` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-025 — Direct orchestration for TC-025 — Tenant Decommissioned Before Commit
+
+**Formal Test Case:** `TC-025`  
+**Conformance Requirement:** `CR-025`  
+**Authoritative procedure:** `conformance/tests/TC021-TC030.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `TENANT_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`, `RESULTING_STATE_VALIDATION`
+
+**Pass rule:** The complete `TC-025` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-031 — Direct orchestration for TC-031 — Dual Authorized Conflicting Actions
+
+**Formal Test Case:** `TC-031`  
+**Conformance Requirement:** `CR-031`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `AUTHORITY_REDERIVATION`, `PEP_ENFORCEMENT`
+
+**Pass rule:** The complete `TC-031` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-032 — Direct orchestration for TC-032 — Stale Authorization After Prior Commit
+
+**Formal Test Case:** `TC-032`  
+**Conformance Requirement:** `CR-032`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`, `RESULTING_STATE_VALIDATION`, `AUTHORITY_REDERIVATION`
+
+**Pass rule:** The complete `TC-032` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-033 — Direct orchestration for TC-033 — Divergent State Assumption Conflict
+
+**Formal Test Case:** `TC-033`  
+**Conformance Requirement:** `CR-033`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-033` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-034 — Direct orchestration for TC-034 — Concurrent Authorization Race
+
+**Formal Test Case:** `TC-034`  
+**Conformance Requirement:** `CR-034`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`
+
+**Pass rule:** The complete `TC-034` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-036 — Direct orchestration for TC-036 — Missing Intent
+
+**Formal Test Case:** `TC-036`  
+**Conformance Requirement:** `CR-036`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`
+
+**Pass rule:** The complete `TC-036` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-037 — Direct orchestration for TC-037 — Missing Target Resource
+
+**Formal Test Case:** `TC-037`  
+**Conformance Requirement:** `CR-037`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`
+
+**Pass rule:** The complete `TC-037` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-038 — Direct orchestration for TC-038 — Missing Requested Effect
+
+**Formal Test Case:** `TC-038`  
+**Conformance Requirement:** `CR-038`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`
+
+**Pass rule:** The complete `TC-038` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-039 — Direct orchestration for TC-039 — Expired Proposal
+
+**Formal Test Case:** `TC-039`  
+**Conformance Requirement:** `CR-039`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `VIRTUAL_TIME_SET`
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`
+
+**Pass rule:** The complete `TC-039` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-040 — Direct orchestration for TC-040 — Malformed Delegation References
+
+**Formal Test Case:** `TC-040`  
+**Conformance Requirement:** `CR-040`  
+**Authoritative procedure:** `conformance/tests/TC031-TC040.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `DELEGATION_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `AUTHORITY_REDERIVATION`
+
+**Pass rule:** The complete `TC-040` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-041 — Direct orchestration for TC-041 — Malformed Evidence References
+
+**Formal Test Case:** `TC-041`  
+**Conformance Requirement:** `CR-041`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `EVIDENCE_QUALIFICATION`, `GOVERNANCE_EVIDENCE`
+
+**Pass rule:** The complete `TC-041` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-042 — Direct orchestration for TC-042 — Canonical Hash Mismatch
+
+**Formal Test Case:** `TC-042`  
+**Conformance Requirement:** `CR-042`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-042` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-043 — Direct orchestration for TC-043 — Missing Mission/Task Lineage
+
+**Formal Test Case:** `TC-043`  
+**Conformance Requirement:** `CR-043`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `AUTHORITY_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`
+
+**Pass rule:** The complete `TC-043` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-044 — Direct orchestration for TC-044 — Broken Delegation Chain
+
+**Formal Test Case:** `TC-044`  
+**Conformance Requirement:** `CR-044`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `DELEGATION_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `AUTHORITY_REDERIVATION`
+
+**Pass rule:** The complete `TC-044` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-046 — Direct orchestration for TC-046 — Context Attempts to Override Canonical State
+
+**Formal Test Case:** `TC-046`  
+**Conformance Requirement:** `CR-046`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-046` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-047 — Direct orchestration for TC-047 — Provenance Continuity Gap
+
+**Formal Test Case:** `TC-047`  
+**Conformance Requirement:** `CR-047`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `AUTHORITATIVE_SOURCE_FAILURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`
+
+**Pass rule:** The complete `TC-047` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-048 — Direct orchestration for TC-048 — Canonical State Unavailable
+
+**Formal Test Case:** `TC-048`  
+**Conformance Requirement:** `CR-048`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `AUTHORITATIVE_SOURCE_FAILURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`, `AUTHORITY_REDERIVATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`
+
+**Pass rule:** The complete `TC-048` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-049 — Direct orchestration for TC-049 — Stale Canonical State
+
+**Formal Test Case:** `TC-049`  
+**Conformance Requirement:** `CR-049`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `VIRTUAL_TIME_SET`, `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-049` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-050 — Direct orchestration for TC-050 — Conflicting Canonical-State Sources
+
+**Formal Test Case:** `TC-050`  
+**Conformance Requirement:** `CR-050`  
+**Authoritative procedure:** `conformance/tests/TC041-TC050.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-050` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-051 — Direct orchestration for TC-051 — Telemetry Conflicts With Canonical State
+
+**Formal Test Case:** `TC-051`  
+**Conformance Requirement:** `CR-051`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-051` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-052 — Direct orchestration for TC-052 — Canonical-State Hash Mismatch
+
+**Formal Test Case:** `TC-052`  
+**Conformance Requirement:** `CR-052`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-052` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-053 — Direct orchestration for TC-053 — Structural Refusal Due to Invariant Violation
+
+**Formal Test Case:** `TC-053`  
+**Conformance Requirement:** `CR-053`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `GOVERNANCE_CONFIGURATION_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-053` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-054 — Direct orchestration for TC-054 — Structural Refusal Due to Missing Evidence
+
+**Formal Test Case:** `TC-054`  
+**Conformance Requirement:** `CR-054`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `EVIDENCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EVIDENCE_QUALIFICATION`, `GOVERNANCE_EVIDENCE`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-054` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-055 — Direct orchestration for TC-055 — Structural Refusal Due to Canonical-State Conflict
+
+**Formal Test Case:** `TC-055`  
+**Conformance Requirement:** `CR-055`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-055` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-056 — Direct orchestration for TC-056 — Refusal Record Missing Attribution
+
+**Formal Test Case:** `TC-056`  
+**Conformance Requirement:** `CR-056`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-056` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-057 — Direct orchestration for TC-057 — Refusal Record Not Replayable
+
+**Formal Test Case:** `TC-057`  
+**Conformance Requirement:** `CR-057`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-057` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-058 — Direct orchestration for TC-058 — Escalation Required but Missing Artifact
+
+**Formal Test Case:** `TC-058`  
+**Conformance Requirement:** `CR-058`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `HUMAN_REVIEW_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `HUMAN_REVIEW`, `IDENTITY_AUTHORIZATION_QUALIFICATION`
+
+**Pass rule:** The complete `TC-058` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-059 — Direct orchestration for TC-059 — Escalation Resolved to Commit
+
+**Formal Test Case:** `TC-059`  
+**Conformance Requirement:** `CR-059`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `HUMAN_REVIEW_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `HUMAN_REVIEW`, `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`, `RESULTING_STATE_VALIDATION`, `IDENTITY_AUTHORIZATION_QUALIFICATION`, `AUTHORITY_REDERIVATION`
+
+**Pass rule:** The complete `TC-059` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-060 — Direct orchestration for TC-060 — Escalation Resolved to Refusal
+
+**Formal Test Case:** `TC-060`  
+**Conformance Requirement:** `CR-060`  
+**Authoritative procedure:** `conformance/tests/TC051-TC060.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `HUMAN_REVIEW_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `HUMAN_REVIEW`, `GOVERNANCE_DECISION`, `IDENTITY_AUTHORIZATION_QUALIFICATION`
+
+**Pass rule:** The complete `TC-060` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-061 — Direct orchestration for TC-061 — Deferred Authorization Expires
+
+**Formal Test Case:** `TC-061`  
+**Conformance Requirement:** `CR-061`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `VIRTUAL_TIME_SET`
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`
+
+**Pass rule:** The complete `TC-061` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-062 — Direct orchestration for TC-062 — Missing Canonical-State Reference
+
+**Formal Test Case:** `TC-062`  
+**Conformance Requirement:** `CR-062`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-062` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-063 — Direct orchestration for TC-063 — Missing Invariant References
+
+**Formal Test Case:** `TC-063`  
+**Conformance Requirement:** `CR-063`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-063` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-064 — Direct orchestration for TC-064 — Missing Evidence Hashes
+
+**Formal Test Case:** `TC-064`  
+**Conformance Requirement:** `CR-064`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `EVIDENCE_QUALIFICATION`, `GOVERNANCE_EVIDENCE`
+
+**Pass rule:** The complete `TC-064` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-066 — Direct orchestration for TC-066 — Receipt Replay Hash Mismatch
+
+**Formal Test Case:** `TC-066`  
+**Conformance Requirement:** `CR-066`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `LEDGER_APPEND`, `DERIVED_LIFECYCLE_STATE`
+
+**Pass rule:** The complete `TC-066` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-067 — Direct orchestration for TC-067 — Evidence Changes Between Proposal and Commit
+
+**Formal Test Case:** `TC-067`  
+**Conformance Requirement:** `CR-067`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `EVIDENCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`, `EVIDENCE_QUALIFICATION`, `GOVERNANCE_EVIDENCE`, `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`, `RESULTING_STATE_VALIDATION`, `AUTHORITY_REDERIVATION`
+
+**Pass rule:** The complete `TC-067` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-069 — Direct orchestration for TC-069 — Evidence Lineage Gap Across Agents
+
+**Formal Test Case:** `TC-069`  
+**Conformance Requirement:** `CR-069`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `EVIDENCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EVIDENCE_QUALIFICATION`, `GOVERNANCE_EVIDENCE`, `IDENTITY_AUTHORIZATION_QUALIFICATION`
+
+**Pass rule:** The complete `TC-069` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-070 — Direct orchestration for TC-070 — Governance Context Preserved Across Handoff
+
+**Formal Test Case:** `TC-070`  
+**Conformance Requirement:** `CR-070`  
+**Authoritative procedure:** `conformance/tests/TC061-TC070.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`, `IDENTITY_AUTHORIZATION_QUALIFICATION`
+
+**Pass rule:** The complete `TC-070` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-071 — Direct orchestration for TC-071 — Downstream Agent Drops Context
+
+**Formal Test Case:** `TC-071`  
+**Conformance Requirement:** `CR-071`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `AUTHORITATIVE_SOURCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`, `IDENTITY_AUTHORIZATION_QUALIFICATION`
+
+**Pass rule:** The complete `TC-071` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-072 — Direct orchestration for TC-072 — Cross-Domain Delegation Requires Escalation
+
+**Formal Test Case:** `TC-072`  
+**Conformance Requirement:** `CR-072`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `DELEGATION_FIXTURE`, `GOVERNANCE_DOMAIN_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `AUTHORITY_REDERIVATION`, `HUMAN_REVIEW`
+
+**Pass rule:** The complete `TC-072` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-073 — Direct orchestration for TC-073 — REST vs Message Bus Same Result
+
+**Formal Test Case:** `TC-073`  
+**Conformance Requirement:** `CR-073`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** alternate transport/message-bus realization required by Formal TC
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`
+
+**Pass rule:** The complete `TC-073` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-074 — Direct orchestration for TC-074 — Canonically Equivalent Payloads Same Result
+
+**Formal Test Case:** `TC-074`  
+**Conformance Requirement:** `CR-074`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`
+
+**Pass rule:** The complete `TC-074` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-075 — Direct orchestration for TC-075 — Different Implementations Produce Same Decision
+
+**Formal Test Case:** `TC-075`  
+**Conformance Requirement:** `CR-075`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** independent implementation required by Formal TC
+
+**Required observation points:** `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-075` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-076 — Direct orchestration for TC-076 — Same Proposal + Same State + Same Invariants = Same Decision
+
+**Formal Test Case:** `TC-076`  
+**Conformance Requirement:** `CR-076`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`, `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-076` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-077 — Direct orchestration for TC-077 — Same Proposal Across Distributed Nodes
+
+**Formal Test Case:** `TC-077`  
+**Conformance Requirement:** `CR-077`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`
+
+**Pass rule:** The complete `TC-077` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-078 — Direct orchestration for TC-078 — Determinism Under Non-Deterministic Agent Inputs
+
+**Formal Test Case:** `TC-078`  
+**Conformance Requirement:** `CR-078`  
+**Authoritative procedure:** `conformance/tests/TC071-TC080.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `AUTHORITATIVE_SOURCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-078` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-083 — Direct orchestration for TC-083 — Canonical State and Decision Remain Synchronized
+
+**Formal Test Case:** `TC-083`  
+**Conformance Requirement:** `CR-083`  
+**Authoritative procedure:** `conformance/tests/TC081-TC090.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-083` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-086 — Direct orchestration for TC-086 — Receipt Reproduces Original Decision
+
+**Formal Test Case:** `TC-086`  
+**Conformance Requirement:** `CR-086`  
+**Authoritative procedure:** `conformance/tests/TC081-TC090.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `LEDGER_APPEND`, `DERIVED_LIFECYCLE_STATE`, `GOVERNANCE_DECISION`, `AUTHORITY_REDERIVATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`, `COMMITMENT_ACCEPTED`, `EXECUTION_OUTCOME`
+
+**Pass rule:** The complete `TC-086` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-089 — Direct orchestration for TC-089 — Implementation Passes AGCP Conformance Suite
+
+**Formal Test Case:** `TC-089`  
+**Conformance Requirement:** `CR-089`  
+**Authoritative procedure:** `conformance/tests/TC081-TC090.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`
+
+**Pass rule:** The complete `TC-089` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-090 — Direct orchestration for TC-090 — Independent Implementations Produce Equivalent Outcomes
+
+**Formal Test Case:** `TC-090`  
+**Conformance Requirement:** `CR-090`  
+**Authoritative procedure:** `conformance/tests/TC081-TC090.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** None required by the mapping.
+
+**External dependencies:** independent implementation/deployment comparison required by Formal TC
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`, `AUTHORITY_REDERIVATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`, `COMMITMENT_ACCEPTED`, `EXECUTION_OUTCOME`
+
+**Pass rule:** The complete `TC-090` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-092 — Direct orchestration for TC-092 — DEGRADED as Non-Terminal State
+
+**Formal Test Case:** `TC-092`  
+**Conformance Requirement:** `CR-092`  
+**Authoritative procedure:** `conformance/tests/TC091-TC100.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `DEGRADATION_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`, `CONTINUATION_INTEGRITY`, `GOVERNANCE_DEGRADATION`
+
+**Pass rule:** The complete `TC-092` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-094 — Direct orchestration for TC-094 — Admissible Set Determination
+
+**Formal Test Case:** `TC-094`  
+**Conformance Requirement:** `CR-094`  
+**Authoritative procedure:** `conformance/tests/TC091-TC100.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `COMPOSITE_GOVERNANCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-094` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-095 — Direct orchestration for TC-095 — Deterministic Adjudication of Competing Futures
+
+**Formal Test Case:** `TC-095`  
+**Conformance Requirement:** `CR-095`  
+**Authoritative procedure:** `conformance/tests/TC091-TC100.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `COMPOSITE_GOVERNANCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-095` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-097 — Direct orchestration for TC-097 — Evidence Qualification Before Admissibility
+
+**Formal Test Case:** `TC-097`  
+**Conformance Requirement:** `CR-097`  
+**Authoritative procedure:** `conformance/tests/TC091-TC100.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `EVIDENCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EVIDENCE_QUALIFICATION`, `GOVERNANCE_EVIDENCE`, `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`
+
+**Pass rule:** The complete `TC-097` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-098 — Direct orchestration for TC-098 — Continuation Integrity Preservation
+
+**Formal Test Case:** `TC-098`  
+**Conformance Requirement:** `CR-098`  
+**Authoritative procedure:** `conformance/tests/TC091-TC100.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `DEGRADATION_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CONTINUATION_INTEGRITY`, `GOVERNANCE_DEGRADATION`, `AUTHORITY_REDERIVATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`, `PEP_ENFORCEMENT`
+
+**Pass rule:** The complete `TC-098` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-099 — Direct orchestration for TC-099 — Admissible Path Viability Tracking
+
+**Formal Test Case:** `TC-099`  
+**Conformance Requirement:** `CR-099`  
+**Authoritative procedure:** `conformance/tests/TC091-TC100.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `DEGRADATION_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `EXECUTION_AUTHORIZATION`, `COMMIT_BOUND_ADMISSIBILITY`, `GOVERNANCE_BINDING_VALIDATION`, `GOVERNANCE_REALIZATION`
+
+**Pass rule:** The complete `TC-099` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-104 — Direct orchestration for TC-104 — Governance Decision State Suitability
+
+**Formal Test Case:** `TC-104`  
+**Conformance Requirement:** `CR-104`  
+**Authoritative procedure:** `conformance/tests/TC101-TC110.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `CANONICAL_STATE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `CANONICAL_STATE_RESOLUTION`, `STATE_QUALIFICATION`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-104` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-105 — Direct orchestration for TC-105 — Composite Proposal Representation
+
+**Formal Test Case:** `TC-105`  
+**Conformance Requirement:** `CR-105`  
+**Authoritative procedure:** `conformance/tests/TC101-TC110.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `COMPOSITE_GOVERNANCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `PROPOSAL_INGRESS`, `PROPOSAL_QUALIFICATION`, `GOVERNANCE_DECISION`
+
+**Pass rule:** The complete `TC-105` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-106 — Direct orchestration for TC-106 — Governance Dependency Graph Evaluation
+
+**Formal Test Case:** `TC-106`  
+**Conformance Requirement:** `CR-106`  
+**Authoritative procedure:** `conformance/tests/TC101-TC110.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `COMPOSITE_GOVERNANCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`
+
+**Pass rule:** The complete `TC-106` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-108 — Direct orchestration for TC-108 — Coupling Classification
+
+**Formal Test Case:** `TC-108`  
+**Conformance Requirement:** `CR-108`  
+**Authoritative procedure:** `conformance/tests/TC101-TC110.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `COMPOSITE_GOVERNANCE_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `GOVERNANCE_DECISION`, `DERIVED_LIFECYCLE_STATE`
+
+**Pass rule:** The complete `TC-108` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.
+
+## TV-TC-115 — Direct orchestration for TC-115 — Recursive Authority Containment
+
+**Formal Test Case:** `TC-115`  
+**Conformance Requirement:** `CR-115`  
+**Authoritative procedure:** `conformance/tests/TC111-TC120.md`
+
+This vector directly invokes the complete Formal Test Case procedure rather than replacing it with a reduced harness assertion. The harness SHALL apply only the mapped setup controls, execute the Formal TC's positive/negative/conditional paths, collect the mapped observation points, and evaluate the Formal TC's own pass/failure criteria.
+
+**Mapped test controls:** `DELEGATION_FIXTURE`
+
+**External dependencies:** None.
+
+**Required observation points:** `AUTHORITY_REDERIVATION`
+
+**Pass rule:** The complete `TC-115` Formal Test Case passes with attributable evidence; any external-dependency requirement remains genuine and may not be satisfied by IF-005 simulation.

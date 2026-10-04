@@ -2,13 +2,14 @@ agcp_conformance_manifest:
   spec:
     name: AGCP
     release_model: repository_release
-    repository_release_target: v2.0.1
-    repository_release_target_status: unreleased-accumulated-correction-set
+    version_source: VERSION
+    repository_release_target: v2.1.0
+    repository_release_target_status: public-review-controlled-baseline
     artifact_lifecycle_state: current
-    controlling_published_baseline: v2.0.0
+    controlling_published_baseline: v2.1.0
     controlling_baseline_status: public-review-controlled-baseline
-    baseline_date: 2026-07-30
-    agcp_release: v2.0.1
+    baseline_date: 2026-08-14
+    agcp_release: v2.1.0
     rtm_dataset_version: RTM-1.47
     schema_catalog_version: 1.0.50
     interface_catalog_version: 1.0.5

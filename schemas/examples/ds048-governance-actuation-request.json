@@ -1,0 +1,17 @@
+{
+  "actuation_id": "act-001",
+  "actuation_version": "1.0",
+  "actuation_type": "TENANT_STATE_TRANSITION",
+  "tenant_id": "T1",
+  "requested_condition": {
+    "tenant_id": "T1",
+    "target_state": "SUSPENDED"
+  },
+  "requested_by": {
+    "principal_id": "admin-001",
+    "principal_type": "HUMAN"
+  },
+  "reason": "Controlled management-plane conformance test",
+  "correlation_id": "corr-act-001",
+  "request_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

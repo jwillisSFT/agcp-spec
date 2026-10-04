@@ -1,0 +1,68 @@
+{
+  "release_context": {
+    "repository_release_target": "v2.1.0",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.1.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-08-14",
+    "artifact_lifecycle_state": "CURRENT"
+  },
+  "validation_type": "AGCP_MANAGEMENT_PLANE_CONTRACT",
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "management_openapi_release",
+      "status": "PASS",
+      "detail": {
+        "info.version": "2.1.0",
+        "release": "v2.1.0"
+      }
+    },
+    {
+      "check": "management_openapi_refs_resolve",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "management_examples_validate",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "new_controls_are_symmetric",
+      "status": "PASS",
+      "detail": {
+        "request_only": [],
+        "result_only": []
+      }
+    },
+    {
+      "check": "new_controls_discoverable",
+      "status": "PASS",
+      "detail": [
+        "ENFORCEMENT_PATH_FAULT_FIXTURE",
+        "TARGET_EXECUTION_FIXTURE"
+      ]
+    },
+    {
+      "check": "management_harness_negative_paths",
+      "status": "PASS",
+      "detail": [
+        "MP-ACT-001",
+        "MP-CAP-001",
+        "MP-OBS-001",
+        "MP-TC-001",
+        "MP-TC-002",
+        "MP-TC-003",
+        "MP-TC-004",
+        "MP-TC-005",
+        "MP-TC-006",
+        "MP-TC-007",
+        "MP-TC-008",
+        "MP-TC-009",
+        "MP-TC-010"
+      ]
+    }
+  ],
+  "issues": []
+}

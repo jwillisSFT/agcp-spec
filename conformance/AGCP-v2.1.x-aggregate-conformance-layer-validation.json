@@ -7,12 +7,12 @@
   "test_mapping_count": 122,
   "test_control_mapping_count": 122,
   "harness_check_count": 21,
-  "harness_test_vector_count": 71,
+  "harness_test_vector_count": 135,
   "controlled_fixture_count": 36,
   "new_ns_disposition_count": 36,
   "formal_change_count": 42,
   "regression_change_count": 22,
-  "test_control_binding_count": 108,
+  "test_control_binding_count": 110,
   "observation_reference_count": 477,
   "additional_harness_injection_need_count": 7,
   "retired_ns_active_reference_count": 0,
@@ -23,20 +23,25 @@
   "limitations": [
     "This validation does not regenerate or approve the RTM; the RTM is the next controlled step.",
     "This validation does not establish implementation conformance; it validates repository conformance-layer internal consistency.",
-    "Implementation-specific injection hooks identified by test-control mapping remain development/profile dependent and are not asserted to be universally implemented.",
+    "TC-073, TC-075, and TC-090 retain genuine external-dependency requirements that cannot be replaced by IF-005 simulation.",
     "Repository-release manifest/hash synchronization is a later release-validation activity and is not used as a pass criterion for this pre-RTM conformance-layer validation."
   ],
   "source_hashes": {
-    "conformance/AGCP-Test-Matrix.md": "888f73082cffc2447ada8674cec7170bdee1ccb7f26d67a7e78c8dd26966ed71",
-    "conformance/test-mapping.json": "4e66c1f08fef4ff30bd6062f076185f508ce54c25364093ba422a06e81dd9973",
-    "conformance/test-control-mapping.json": "294022faef2e11563a677faae73e51006c62f26727733df42a0435ff5f7f6477",
-    "conformance/harness-checks.json": "1fa1cf3a8fcbf59cd5f9d8a99836b69629cf137061e95503c0483b686deba2de",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "29c9e17627e4232f6354bb40866703a1db7bb57680e3a63c6245341e476ae9a1",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "26bcafc6caf6e5bae6e17f6d16f49db8f9dd7abd71f589e977c6a1e386880c4d",
-    "conformance/fixture-mapping.json": "5f25fadf3245028ef705530add24a1a41ca7cd108b74e87db25dd06f4434f658",
+    "conformance/AGCP-Test-Matrix.md": "458db0b2fffd74dc327821e5da050112167c622bc909932b65367ba6cfa45ba6",
+    "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
+    "conformance/test-control-mapping.json": "5f61ee5b6fca3f8ec73034b83f6837031b8dbede08ac2a5966a7144ab854e3ec",
+    "conformance/harness-checks.json": "7a1880ee6dfab691388ff06c1f1cb1f6993f4047a4f2a43d8c022ab67c02f13c",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "aa160383bc927c8e87e6914a4120e1f986fe7f81b5525372138ad931e57c28a0",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "bcff8dfcc067e9b6da85e99610fec27d7427fd4999c286f77209aedfebb2c203",
+    "conformance/fixture-mapping.json": "b679101192bba825f1a79e37f97cf30ee7d3b35141034358274f57220ebb5b70",
     "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "8eae223db81e1a63cec16032d13fc2d639b8c698f40568329734e4315cb3fac1",
-    "schemas/test_control_request.json": "af87cace7933ca95577d98a1ad4df146b2b77dddb5594676a7b89ddcd6978059",
+    "schemas/test_control_request.json": "f9fc775c6cc41ca237126a17bb33c1d24fe7af3727e9a3ba33aedd909075a669",
+    "schemas/test_control_result.json": "1ad6e460c0ef98402811fd8dbfced95199994c58f6d0f14203ed531152667efc",
     "schemas/governance_observation_event.json": "133518ef98d2ca20b613716bbf7c5d8ebccba8f02d4361fad1cc865808b0c97b",
+    "schemas/management_capabilities_response.json": "3cc14345b77f6c6d1db001f73f97b87bcfd0cc66a95003807791107670988092",
+    "schemas/governance_actuation_request.json": "c94f44fdd3dd34de3930ecbe9ee847d856f287da80d388793ab58ab31f454233",
+    "schemas/governance_actuation_result.json": "44ef4d2054eefed7e127b2a2bfaeac45d886e974c5852618f75d879e06b1d1af",
+    "conformance/AGCP-Management-Plane-Harness-Spec.yml": "cca7297b57a5e4ff082da80baaa91e014c0aad03994b2988ae2cf00870bc0df9",
     "schemas/commit_boundary_request.json": "d375be469f32fbf2240adc2b62f1a5fe365e71b15293ddad026468f451229698"
   },
   "checks": [
@@ -158,7 +163,7 @@
       "check_id": "CONTROL_MAPPING_COUNTS",
       "status": "PASS",
       "detail": {
-        "bindings": 108,
+        "bindings": 110,
         "observations": 477
       }
     },
@@ -175,9 +180,9 @@
       "check_id": "HARNESS_VECTOR_COUNT_UNIQUE",
       "status": "PASS",
       "detail": {
-        "records": 71,
-        "unique": 71,
-        "expected": 71
+        "records": 135,
+        "unique": 135,
+        "expected": 135
       }
     },
     {
@@ -213,23 +218,17 @@
       "detail": []
     },
     {
-      "check_id": "ADDITIONAL_INJECTION_NEEDS_HAVE_HARNESS_REPRESENTATION",
+      "check_id": "NO_UNRESOLVED_INTERNAL_INJECTION_NEEDS",
       "status": "PASS",
       "detail": {
-        "TC-081": [
-          "ASYNCHRONOUS_EXECUTION_DELAY_AND_TERMINAL_OUTCOME"
-        ],
-        "TC-120": [
-          "ENFORCEMENT_CONTEXT_TAMPER_OR_SUBSTITUTION",
-          "GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH",
-          "NONFAITHFUL_OR_UNSUPPORTED_PEP_MAPPING"
-        ],
-        "TC-121": [
-          "GRF_TO_PEP_CALLER_IDENTITY_MISMATCH",
-          "GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH",
-          "COLOCATED_GDF_GRF_PEP_LOGICAL_BINDING_NEGATIVE_PATH"
-        ]
+        "unresolved": [],
+        "vector_representation": true
       }
+    },
+    {
+      "check_id": "ALL_TCS_HAVE_DIRECT_VECTOR",
+      "status": "PASS",
+      "detail": []
     },
     {
       "check_id": "CONTROLLED_FIXTURE_COUNT_AND_SCHEMA_VALIDITY",

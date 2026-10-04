@@ -14,13 +14,25 @@ def dig(o): return hashlib.sha256(canon(o)).hexdigest()
 def check(n,ok,d=None): checks.append({'check':n,'status':'PASS' if ok else 'FAIL','detail':d}); issues.append(f'{n}: {d}') if not ok else None
 p=loadj(POLICY); ctx=p['validation_report_release_context']
 check('policy_values',p['repository_release_target']==VERSION and p['repository_release_target_status']==STATUS and p['controlling_published_baseline']['release_id']=='AGCP-'+VERSION and p['controlling_published_baseline']['specification_version']==SPEC and p['controlling_published_baseline']['release_status']==STATUS and p['controlling_published_baseline']['baseline_date']==DATE and p['current_repository_specification_version']==SPEC)
-catalogs={'schema':('schemas/catalog/schema-catalog.json','1.0.50'),'interface':('api/interface-catalog.json','1.0.5'),'registry':('registries/registry-entry-catalog.json','1.0.3')}
-for name,(rel,ver) in catalogs.items():
- d=loadj(rel); check(name+'_catalog_version',d['catalog_version']==ver,d.get('catalog_version')); check(name+'_catalog_metadata',d.get('specification_version')==VERSION and d.get('publication_status')=='CURRENT' and d.get('artifact_lifecycle_state')=='CURRENT' and d.get('repository_release_target')==VERSION and d.get('repository_release_target_status')==STATUS and d.get('release_status')==STATUS and d.get('controlling_published_baseline')==VERSION and d.get('baseline_date')==DATE,{k:d.get(k) for k in ['specification_version','publication_status','artifact_lifecycle_state','repository_release_target','repository_release_target_status','release_status','controlling_published_baseline','baseline_date']})
+catalogs={'schema':'schemas/catalog/schema-catalog.json','interface':'api/interface-catalog.json','registry':'registries/registry-entry-catalog.json'}
+for name,rel in catalogs.items():
+ d=loadj(rel); check(name+'_catalog_version_present',bool(d.get('catalog_version')),d.get('catalog_version')); check(name+'_catalog_metadata',d.get('specification_version')==VERSION and d.get('publication_status')=='CURRENT' and d.get('artifact_lifecycle_state')=='CURRENT' and d.get('repository_release_target')==VERSION and d.get('repository_release_target_status')==STATUS and d.get('release_status')==STATUS and d.get('controlling_published_baseline')==VERSION and d.get('baseline_date')==DATE,{k:d.get(k) for k in ['specification_version','publication_status','artifact_lifecycle_state','repository_release_target','repository_release_target_status','release_status','controlling_published_baseline','baseline_date']})
 sc=loadj('schemas/catalog/schema-catalog.json'); check('schema_entry_spec_versions',all(e['specification_version']==VERSION for e in sc['implemented_schemas']+sc.get('retired_schemas',[])))
-for rel in ['schemas/catalog/schema-catalog.csv','api/interface-catalog.csv','registries/registry-entry-catalog.csv']:
- with (ROOT/rel).open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f))
- check('csv_metadata_'+Path(rel).stem,all(r['repository_release_target']==VERSION and r['repository_release_target_status']==STATUS and r['release_status']==STATUS and r['artifact_lifecycle_state']=='CURRENT' and r['controlling_published_baseline']==VERSION and r['baseline_date']==DATE for r in rows))
+# CSV mirrors carry artifact-specific fields rather than a common release-metadata envelope.
+# Validate the release-bearing fields they actually define and validate catalog identity by content,
+# not by a separately maintained catalog-version literal.
+with (ROOT/'schemas/catalog/schema-catalog.csv').open(newline='',encoding='utf-8') as f:
+ rows=list(csv.DictReader(f))
+check('csv_metadata_schema-catalog', bool(rows) and all(r.get('specification_version')==VERSION for r in rows), {'rows':len(rows),'field':'specification_version','expected':VERSION})
+with (ROOT/'api/interface-catalog.csv').open(newline='',encoding='utf-8') as f:
+ rows=list(csv.DictReader(f))
+check('csv_metadata_interface-catalog', bool(rows) and all(r.get('contract_version')==SPEC for r in rows), {'rows':len(rows),'field':'contract_version','expected':SPEC})
+with (ROOT/'registries/registry-entry-catalog.csv').open(newline='',encoding='utf-8') as f:
+ rows=list(csv.DictReader(f))
+registry_json=loadj('registries/registry-entry-catalog.json')
+registry_ids={e.get('reg_id') for e in registry_json.get('entries',[])}
+csv_registry_ids={r.get('reg_id') for r in rows}
+check('csv_metadata_registry-entry-catalog', bool(rows) and csv_registry_ids==registry_ids, {'csv_rows':len(rows),'json_entries':len(registry_ids)})
 for rel in ['schemas/SCHEMA-CATALOG.md','schemas/README.md','api/INTERFACE-CATALOG.md','registries/REGISTRY-ENTRY-CATALOG.md','registries/README.md']:
  t=(ROOT/rel).read_text(); check('human_metadata_'+Path(rel).name,'CURRENT' in t and VERSION in t and STATUS in t and DATE in t,rel)
 specs=['spec/AGCP-Multitenant-Operational-Specification.md','spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md','spec/AGCP-Policy-Evaluation-Contract.md','spec/AGCP-Provenance-Wire-Format-Specification.md','spec/AGCP-Human-Review-Specification.md','spec/AGCP-Error-Mapping.md','spec/AGCP-HTTP-Interface-Specification.md']
@@ -36,5 +48,5 @@ report_files=['governance/AGCP-implementation-profile-validation.json','governan
 for rel in report_files:
  d=loadj(rel); check('report_release_context_'+Path(rel).stem,d.get('release_context')==ctx,d.get('release_context'))
 source_files=[POLICY,'governance/AGCP-Release-Lifecycle-Metadata-Policy.md','schemas/catalog/schema-catalog.json','schemas/catalog/schema-catalog.csv','schemas/SCHEMA-CATALOG.md','schemas/README.md','api/interface-catalog.json','api/interface-catalog.csv','api/INTERFACE-CATALOG.md','registries/registry-entry-catalog.json','registries/registry-entry-catalog.csv','registries/REGISTRY-ENTRY-CATALOG.md','registries/constraint-type-registry.json','registries/invariant-type-registry.json','registries/rejection-code-registry.json','api/AGCP-HTTP-Contract.yaml','conformance/agcp-conformance-manifest.yml',CURRENT_RELEASE_NOTES,'governance/validate_release_lifecycle_metadata.py']+specs
-report={'release_context':ctx,'report_id':'AGCP-P2-01-RELEASE-LIFECYCLE-METADATA','status':'PASS' if not issues else 'FAIL','validated_at':DATE,'finding':'P2-01','catalog_versions':{'schema':'1.0.50','interface':'1.0.5','registry':'1.0.3'},'specification_count':len(specs),'validation_report_count':len(report_files),'source_hashes':{r:sha(r) for r in source_files},'checks':checks,'issues':issues}
+report={'release_context':ctx,'report_id':'AGCP-P2-01-RELEASE-LIFECYCLE-METADATA','status':'PASS' if not issues else 'FAIL','validated_at':DATE,'finding':'P2-01','catalog_versions':{name:loadj(rel).get('catalog_version') for name,rel in catalogs.items()},'specification_count':len(specs),'validation_report_count':len(report_files),'source_hashes':{r:sha(r) for r in source_files},'checks':checks,'issues':issues}
 (ROOT/'governance/AGCP-release-lifecycle-metadata-validation.json').write_text(json.dumps(report,indent=2,default=str)+'\n'); print(json.dumps({'status':report['status'],'checks':len(checks),'issues':issues},indent=2,default=str)); sys.exit(0 if not issues else 1)

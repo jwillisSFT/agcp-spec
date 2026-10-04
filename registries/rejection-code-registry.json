@@ -8,8 +8,8 @@
   "series": "AGCP Core",
   "description": "Authoritative registry of rejection and failure codes used by AGCP HTTP interfaces, Governance Evidence, conformance tests, and implementation error reporting.",
   "release": {
-    "release_id": "REG-REJECTION-CODE-v2.1.1",
-    "registry_release": "v2.1.1",
+    "release_id": "REG-REJECTION-CODE-v2.1.0",
+    "registry_release": "v2.1.0",
     "specification_version": "v2.1.0",
     "publication_status": "CURRENT",
     "published_at": "2026-10-03T15:30:00-04:00",
@@ -26,14 +26,14 @@
     "integrity_protected": true,
     "digest_algorithm": "SHA-256",
     "canonicalization": "JCS-RFC8785",
-    "entry_count": 42,
+    "entry_count": 49,
     "entry_set_digest": {
       "algorithm": "SHA-256",
-      "value": "28cc3a5913abc390f7855d722801a26a93999e0e1b13eb202af1eeeefb9d2745"
+      "value": "fd47db9320a95e432b4a5a24817a8086ae4bd5c1f1d5a373ecfabf511e629973"
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "a60729db87c57ed0a26ae6f643b10b171318b2c49044eff352d937ecef3ab703"
+      "value": "fe609eddb525d3f53fc6aba2dbcb980aa07aa171e9a83fce0daac3d5df26fb2c"
     }
   },
   "traceability": {

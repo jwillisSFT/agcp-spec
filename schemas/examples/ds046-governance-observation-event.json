@@ -1,0 +1,23 @@
+{
+  "observation_id": "obs-test-001",
+  "observation_version": "1.1",
+  "observation_type": "GOVERNANCE_BINDING_VALIDATION",
+  "control_plane_stage": "GOVERNANCE_REALIZATION",
+  "observed_at": "2026-10-04T10:00:00Z",
+  "implementation_id": "impl-test",
+  "test_scope": "scope-001",
+  "subject_ref": "proposal:P-120",
+  "correlation_id": "corr-120",
+  "caused_by_refs": [
+    "tcop-fault-120"
+  ],
+  "source_refs": [
+    "test-control:tcop-fault-120"
+  ],
+  "authoritative": true,
+  "details": {
+    "binding_valid": false
+  },
+  "summary": "Binding mismatch observed and rejected by ordinary PEP validation.",
+  "observation_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

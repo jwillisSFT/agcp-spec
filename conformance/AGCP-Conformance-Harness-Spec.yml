@@ -1,8 +1,8 @@
 meta:
   suite_id: agcp_conformance_harness
-  status: normative-harness-specification-development-synchronized-v2.1.x
+  status: normative-harness-specification-development-synchronized-v2.1.0
   versioning: repository_release
-  description: Deterministic AGCP conformance harness vectors covering the existing IF-001 surface and the v2.1.x identity/authorization
+  description: Deterministic AGCP conformance harness vectors covering the existing IF-001 surface and the v2.1.0 identity/authorization
     qualification, Governance Decision Function (PDP role), Governance Realization Function, current commit-bound authority,
     PEP Profile mapping, Enforcement Context / Governance Enforcement Binding, commitment, and distinct post-commit execution-outcome
     semantics. Harness operations establish inputs and observe ordinary runtime behavior; they do not inject desired governance
@@ -31,7 +31,7 @@ meta:
     pep_validates_governance_enforcement_binding_and_fails_closed_on_mismatch: true
     commitment_and_completed_execution_are_distinct_when_profile_declares_post_commit_execution: true
     test_controls_may_establish_conditions_but_may_not_inject_governance_outcomes: true
-  agcp_release: v2.1.x
+  agcp_release: v2.1.0
   interface_id: IF-001
   interface_version: v2
   fixture_resolution: Resolve $fixture repository paths and apply $overrides before request-schema and OpenAPI validation.
@@ -39,7 +39,7 @@ meta:
     authoritative_source: conformance/AGCP-Conformance-Harness-Spec.yml
     human_readable_mirror: conformance/AGCP-Conformance-Test-Vectors.md
     required_id_set_equality: true
-    expected_vector_count: 71
+    expected_vector_count: 135
     synchronization_id: AGCP-v2.1.x-HARNESS-VECTOR-CHECK-SYNC-2026-10-03
     development_status: The enumerated standardized and implementation-specific harness paths are the current identified inventory
       and are not asserted to be exhaustive or implemented by every runtime.
@@ -3080,7 +3080,7 @@ tests:
       status: 200
       body:
         response_type: AGCP_IMPLEMENTATION_METADATA
-        default_agcp_release_id: AGCP-v2.0.0
+        default_agcp_release_id: AGCP-v2.1.0
         http_contract:
           supported_path_versions:
           - /agcp/v2
@@ -4375,12 +4375,15 @@ tests:
     - Policy Enforcement Point
   arrange:
     enforcement_context_fixture: ../schemas/examples/ds029-enforcement-context-admissible.json
-    implementation_specific_harness_need: ENFORCEMENT_CONTEXT_TAMPER_OR_SUBSTITUTION
+    test_controls:
+    - control_type: ENFORCEMENT_PATH_FAULT_FIXTURE
+      fault_target: ENFORCEMENT_CONTEXT
+      fault_mode: FIELD_SUBSTITUTION
+      injection_point: POST_GRF_PRE_PEP
+      field_path: target_ref.target_id
+      replacement_value: target-other
   request:
     harness_operation: invoke_pep_with_enforcement_context
-    tamper:
-      field: target_ref.target_id
-      substitute: target-other
   expected:
     context_integrity_valid: false
     enforcement_result: FAILED_CLOSED
@@ -4401,10 +4404,13 @@ tests:
     - Policy Enforcement Point
   arrange:
     enforcement_context_fixture: ../schemas/examples/ds029-enforcement-context-admissible.json
-    implementation_specific_harness_need: GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH
+    test_controls:
+    - control_type: ENFORCEMENT_PATH_FAULT_FIXTURE
+      fault_target: GOVERNANCE_ENFORCEMENT_BINDING
+      fault_mode: DIGEST_MISMATCH
+      injection_point: POST_GRF_PRE_PEP
   request:
     harness_operation: invoke_pep_with_enforcement_context
-    binding_mutation: AUTHORIZATION_OR_TARGET_DIGEST_MISMATCH
   expected:
     governance_enforcement_binding_valid: false
     enforcement_result: FAILED_CLOSED
@@ -4430,10 +4436,12 @@ tests:
       account_status: ACTIVE
       freshness_status: CURRENT
       revocation_status: CLEAR
-    transport_specific_harness_need: GRF_TO_PEP_CALLER_IDENTITY_MISMATCH
+    - control_type: ENFORCEMENT_PATH_FAULT_FIXTURE
+      fault_target: GRF_TO_PEP_CALLER_BINDING
+      fault_mode: UNAUTHORIZED_CALLER
+      injection_point: PEP_CALLER_AUTHENTICATION
   request:
     harness_operation: invoke_pep_with_enforcement_context
-    caller_identity: unqualified-grf-caller
   expected:
     grf_caller_binding_valid: false
     enforcement_result: FAILED_CLOSED
@@ -4453,10 +4461,13 @@ tests:
     - Governance Enforcement Binding
   arrange:
     deployment_topology: COLOCATED
-    implementation_specific_harness_need: COLOCATED_GDF_GRF_PEP_LOGICAL_BINDING_NEGATIVE_PATH
+    test_controls:
+    - control_type: ENFORCEMENT_PATH_FAULT_FIXTURE
+      fault_target: COLOCATED_LOGICAL_BINDING
+      fault_mode: LOGICAL_BINDING_MISMATCH
+      injection_point: COLOCATED_ENFORCEMENT_BOUNDARY
   request:
     harness_operation: invoke_colocated_enforcement_path
-    logical_binding_mutation: AUTHORIZATION_BINDING_MISMATCH
   expected:
     network_boundary_required: false
     logical_gdf_grf_distinction_preserved: true
@@ -4483,9 +4494,10 @@ tests:
     commit_boundary_result: Commit Successful
     execution_completion_mode: POST_COMMIT_ASYNCHRONOUS
     test_controls:
-    - control_type: PEP_OUTCOME_FIXTURE
-      outcome: APPLIED
-      delayed: true
+    - control_type: TARGET_EXECUTION_FIXTURE
+      execution_mode: POST_COMMIT_ASYNCHRONOUS
+      initial_status: PENDING
+      terminal_outcome: SUCCEEDED
   request:
     harness_operation: observe_post_commit_execution
     sequence:
@@ -4521,9 +4533,10 @@ tests:
     commit_boundary_result: Commit Successful
     execution_completion_mode: POST_COMMIT_ASYNCHRONOUS
     test_controls:
-    - control_type: PEP_OUTCOME_FIXTURE
-      outcome: FAILED
-      delayed: true
+    - control_type: TARGET_EXECUTION_FIXTURE
+      execution_mode: POST_COMMIT_ASYNCHRONOUS
+      initial_status: PENDING
+      terminal_outcome: FAILED
   request:
     harness_operation: observe_post_commit_execution
     sequence:
@@ -4543,6 +4556,1505 @@ tests:
     - EXECUTION_OUTCOME
     - DERIVED_LIFECYCLE_STATE
     - GOVERNANCE_EVIDENCE
+- id: TV-TC-014
+  name: "Direct orchestration for TC-014 \u2014 Cosign Wrong State"
+  maps_to:
+    test_cases:
+    - TC-014
+    conformance_requirement: CR-014
+  arrange:
+    formal_test_case: TC-014
+    source_file: conformance/tests/TC011-TC020.md
+    test_controls:
+    - control_type: HUMAN_REVIEW_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-014
+    authoritative_procedure: conformance/tests/TC011-TC020.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    - HUMAN_REVIEW
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-017
+  name: "Direct orchestration for TC-017 \u2014 HITL Expiration -> Rejected"
+  maps_to:
+    test_cases:
+    - TC-017
+    conformance_requirement: CR-017
+  arrange:
+    formal_test_case: TC-017
+    source_file: conformance/tests/TC011-TC020.md
+    test_controls:
+    - control_type: VIRTUAL_TIME_SET
+      require_runtime_binding: BOUND
+    - control_type: HUMAN_REVIEW_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-017
+    authoritative_procedure: conformance/tests/TC011-TC020.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - HUMAN_REVIEW
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-018
+  name: "Direct orchestration for TC-018 \u2014 Governance Cancellation -> Rejected"
+  maps_to:
+    test_cases:
+    - TC-018
+    conformance_requirement: CR-018
+  arrange:
+    formal_test_case: TC-018
+    source_file: conformance/tests/TC011-TC020.md
+    test_controls:
+    - control_type: HUMAN_REVIEW_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-018
+    authoritative_procedure: conformance/tests/TC011-TC020.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-021
+  name: "Direct orchestration for TC-021 \u2014 Commit While Rejected"
+  maps_to:
+    test_cases:
+    - TC-021
+    conformance_requirement: CR-021
+  arrange:
+    formal_test_case: TC-021
+    source_file: conformance/tests/TC021-TC030.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-021
+    authoritative_procedure: conformance/tests/TC021-TC030.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - GOVERNANCE_DECISION
+    - PEP_ENFORCEMENT
+    - RESULTING_STATE_VALIDATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-025
+  name: "Direct orchestration for TC-025 \u2014 Tenant Decommissioned Before Commit"
+  maps_to:
+    test_cases:
+    - TC-025
+    conformance_requirement: CR-025
+  arrange:
+    formal_test_case: TC-025
+    source_file: conformance/tests/TC021-TC030.md
+    test_controls:
+    - control_type: TENANT_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-025
+    authoritative_procedure: conformance/tests/TC021-TC030.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    - RESULTING_STATE_VALIDATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-031
+  name: "Direct orchestration for TC-031 \u2014 Dual Authorized Conflicting Actions"
+  maps_to:
+    test_cases:
+    - TC-031
+    conformance_requirement: CR-031
+  arrange:
+    formal_test_case: TC-031
+    source_file: conformance/tests/TC031-TC040.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-031
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - AUTHORITY_REDERIVATION
+    - PEP_ENFORCEMENT
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-032
+  name: "Direct orchestration for TC-032 \u2014 Stale Authorization After Prior Commit"
+  maps_to:
+    test_cases:
+    - TC-032
+    conformance_requirement: CR-032
+  arrange:
+    formal_test_case: TC-032
+    source_file: conformance/tests/TC031-TC040.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-032
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    - RESULTING_STATE_VALIDATION
+    - AUTHORITY_REDERIVATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-033
+  name: "Direct orchestration for TC-033 \u2014 Divergent State Assumption Conflict"
+  maps_to:
+    test_cases:
+    - TC-033
+    conformance_requirement: CR-033
+  arrange:
+    formal_test_case: TC-033
+    source_file: conformance/tests/TC031-TC040.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-033
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-034
+  name: "Direct orchestration for TC-034 \u2014 Concurrent Authorization Race"
+  maps_to:
+    test_cases:
+    - TC-034
+    conformance_requirement: CR-034
+  arrange:
+    formal_test_case: TC-034
+    source_file: conformance/tests/TC031-TC040.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-034
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-036
+  name: "Direct orchestration for TC-036 \u2014 Missing Intent"
+  maps_to:
+    test_cases:
+    - TC-036
+    conformance_requirement: CR-036
+  arrange:
+    formal_test_case: TC-036
+    source_file: conformance/tests/TC031-TC040.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-036
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-037
+  name: "Direct orchestration for TC-037 \u2014 Missing Target Resource"
+  maps_to:
+    test_cases:
+    - TC-037
+    conformance_requirement: CR-037
+  arrange:
+    formal_test_case: TC-037
+    source_file: conformance/tests/TC031-TC040.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-037
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-038
+  name: "Direct orchestration for TC-038 \u2014 Missing Requested Effect"
+  maps_to:
+    test_cases:
+    - TC-038
+    conformance_requirement: CR-038
+  arrange:
+    formal_test_case: TC-038
+    source_file: conformance/tests/TC031-TC040.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-038
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-039
+  name: "Direct orchestration for TC-039 \u2014 Expired Proposal"
+  maps_to:
+    test_cases:
+    - TC-039
+    conformance_requirement: CR-039
+  arrange:
+    formal_test_case: TC-039
+    source_file: conformance/tests/TC031-TC040.md
+    test_controls:
+    - control_type: VIRTUAL_TIME_SET
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-039
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-040
+  name: "Direct orchestration for TC-040 \u2014 Malformed Delegation References"
+  maps_to:
+    test_cases:
+    - TC-040
+    conformance_requirement: CR-040
+  arrange:
+    formal_test_case: TC-040
+    source_file: conformance/tests/TC031-TC040.md
+    test_controls:
+    - control_type: DELEGATION_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-040
+    authoritative_procedure: conformance/tests/TC031-TC040.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - AUTHORITY_REDERIVATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-041
+  name: "Direct orchestration for TC-041 \u2014 Malformed Evidence References"
+  maps_to:
+    test_cases:
+    - TC-041
+    conformance_requirement: CR-041
+  arrange:
+    formal_test_case: TC-041
+    source_file: conformance/tests/TC041-TC050.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-041
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EVIDENCE_QUALIFICATION
+    - GOVERNANCE_EVIDENCE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-042
+  name: "Direct orchestration for TC-042 \u2014 Canonical Hash Mismatch"
+  maps_to:
+    test_cases:
+    - TC-042
+    conformance_requirement: CR-042
+  arrange:
+    formal_test_case: TC-042
+    source_file: conformance/tests/TC041-TC050.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-042
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-043
+  name: "Direct orchestration for TC-043 \u2014 Missing Mission/Task Lineage"
+  maps_to:
+    test_cases:
+    - TC-043
+    conformance_requirement: CR-043
+  arrange:
+    formal_test_case: TC-043
+    source_file: conformance/tests/TC041-TC050.md
+    test_controls:
+    - control_type: AUTHORITY_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-043
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-044
+  name: "Direct orchestration for TC-044 \u2014 Broken Delegation Chain"
+  maps_to:
+    test_cases:
+    - TC-044
+    conformance_requirement: CR-044
+  arrange:
+    formal_test_case: TC-044
+    source_file: conformance/tests/TC041-TC050.md
+    test_controls:
+    - control_type: DELEGATION_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-044
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - AUTHORITY_REDERIVATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-046
+  name: "Direct orchestration for TC-046 \u2014 Context Attempts to Override Canonical State"
+  maps_to:
+    test_cases:
+    - TC-046
+    conformance_requirement: CR-046
+  arrange:
+    formal_test_case: TC-046
+    source_file: conformance/tests/TC041-TC050.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-046
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-047
+  name: "Direct orchestration for TC-047 \u2014 Provenance Continuity Gap"
+  maps_to:
+    test_cases:
+    - TC-047
+    conformance_requirement: CR-047
+  arrange:
+    formal_test_case: TC-047
+    source_file: conformance/tests/TC041-TC050.md
+    test_controls:
+    - control_type: AUTHORITATIVE_SOURCE_FAILURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-047
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-048
+  name: "Direct orchestration for TC-048 \u2014 Canonical State Unavailable"
+  maps_to:
+    test_cases:
+    - TC-048
+    conformance_requirement: CR-048
+  arrange:
+    formal_test_case: TC-048
+    source_file: conformance/tests/TC041-TC050.md
+    test_controls:
+    - control_type: AUTHORITATIVE_SOURCE_FAILURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-048
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    - AUTHORITY_REDERIVATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-049
+  name: "Direct orchestration for TC-049 \u2014 Stale Canonical State"
+  maps_to:
+    test_cases:
+    - TC-049
+    conformance_requirement: CR-049
+  arrange:
+    formal_test_case: TC-049
+    source_file: conformance/tests/TC041-TC050.md
+    test_controls:
+    - control_type: VIRTUAL_TIME_SET
+      require_runtime_binding: BOUND
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-049
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-050
+  name: "Direct orchestration for TC-050 \u2014 Conflicting Canonical-State Sources"
+  maps_to:
+    test_cases:
+    - TC-050
+    conformance_requirement: CR-050
+  arrange:
+    formal_test_case: TC-050
+    source_file: conformance/tests/TC041-TC050.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-050
+    authoritative_procedure: conformance/tests/TC041-TC050.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-051
+  name: "Direct orchestration for TC-051 \u2014 Telemetry Conflicts With Canonical State"
+  maps_to:
+    test_cases:
+    - TC-051
+    conformance_requirement: CR-051
+  arrange:
+    formal_test_case: TC-051
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-051
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-052
+  name: "Direct orchestration for TC-052 \u2014 Canonical-State Hash Mismatch"
+  maps_to:
+    test_cases:
+    - TC-052
+    conformance_requirement: CR-052
+  arrange:
+    formal_test_case: TC-052
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-052
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-053
+  name: "Direct orchestration for TC-053 \u2014 Structural Refusal Due to Invariant Violation"
+  maps_to:
+    test_cases:
+    - TC-053
+    conformance_requirement: CR-053
+  arrange:
+    formal_test_case: TC-053
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: GOVERNANCE_CONFIGURATION_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-053
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-054
+  name: "Direct orchestration for TC-054 \u2014 Structural Refusal Due to Missing Evidence"
+  maps_to:
+    test_cases:
+    - TC-054
+    conformance_requirement: CR-054
+  arrange:
+    formal_test_case: TC-054
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: EVIDENCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-054
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EVIDENCE_QUALIFICATION
+    - GOVERNANCE_EVIDENCE
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-055
+  name: "Direct orchestration for TC-055 \u2014 Structural Refusal Due to Canonical-State Conflict"
+  maps_to:
+    test_cases:
+    - TC-055
+    conformance_requirement: CR-055
+  arrange:
+    formal_test_case: TC-055
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-055
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-056
+  name: "Direct orchestration for TC-056 \u2014 Refusal Record Missing Attribution"
+  maps_to:
+    test_cases:
+    - TC-056
+    conformance_requirement: CR-056
+  arrange:
+    formal_test_case: TC-056
+    source_file: conformance/tests/TC051-TC060.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-056
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-057
+  name: "Direct orchestration for TC-057 \u2014 Refusal Record Not Replayable"
+  maps_to:
+    test_cases:
+    - TC-057
+    conformance_requirement: CR-057
+  arrange:
+    formal_test_case: TC-057
+    source_file: conformance/tests/TC051-TC060.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-057
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-058
+  name: "Direct orchestration for TC-058 \u2014 Escalation Required but Missing Artifact"
+  maps_to:
+    test_cases:
+    - TC-058
+    conformance_requirement: CR-058
+  arrange:
+    formal_test_case: TC-058
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: HUMAN_REVIEW_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-058
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - HUMAN_REVIEW
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-059
+  name: "Direct orchestration for TC-059 \u2014 Escalation Resolved to Commit"
+  maps_to:
+    test_cases:
+    - TC-059
+    conformance_requirement: CR-059
+  arrange:
+    formal_test_case: TC-059
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: HUMAN_REVIEW_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-059
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - HUMAN_REVIEW
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    - RESULTING_STATE_VALIDATION
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    - AUTHORITY_REDERIVATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-060
+  name: "Direct orchestration for TC-060 \u2014 Escalation Resolved to Refusal"
+  maps_to:
+    test_cases:
+    - TC-060
+    conformance_requirement: CR-060
+  arrange:
+    formal_test_case: TC-060
+    source_file: conformance/tests/TC051-TC060.md
+    test_controls:
+    - control_type: HUMAN_REVIEW_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-060
+    authoritative_procedure: conformance/tests/TC051-TC060.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - HUMAN_REVIEW
+    - GOVERNANCE_DECISION
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-061
+  name: "Direct orchestration for TC-061 \u2014 Deferred Authorization Expires"
+  maps_to:
+    test_cases:
+    - TC-061
+    conformance_requirement: CR-061
+  arrange:
+    formal_test_case: TC-061
+    source_file: conformance/tests/TC061-TC070.md
+    test_controls:
+    - control_type: VIRTUAL_TIME_SET
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-061
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-062
+  name: "Direct orchestration for TC-062 \u2014 Missing Canonical-State Reference"
+  maps_to:
+    test_cases:
+    - TC-062
+    conformance_requirement: CR-062
+  arrange:
+    formal_test_case: TC-062
+    source_file: conformance/tests/TC061-TC070.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-062
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-063
+  name: "Direct orchestration for TC-063 \u2014 Missing Invariant References"
+  maps_to:
+    test_cases:
+    - TC-063
+    conformance_requirement: CR-063
+  arrange:
+    formal_test_case: TC-063
+    source_file: conformance/tests/TC061-TC070.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-063
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-064
+  name: "Direct orchestration for TC-064 \u2014 Missing Evidence Hashes"
+  maps_to:
+    test_cases:
+    - TC-064
+    conformance_requirement: CR-064
+  arrange:
+    formal_test_case: TC-064
+    source_file: conformance/tests/TC061-TC070.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-064
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EVIDENCE_QUALIFICATION
+    - GOVERNANCE_EVIDENCE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-066
+  name: "Direct orchestration for TC-066 \u2014 Receipt Replay Hash Mismatch"
+  maps_to:
+    test_cases:
+    - TC-066
+    conformance_requirement: CR-066
+  arrange:
+    formal_test_case: TC-066
+    source_file: conformance/tests/TC061-TC070.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-066
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - LEDGER_APPEND
+    - DERIVED_LIFECYCLE_STATE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-067
+  name: "Direct orchestration for TC-067 \u2014 Evidence Changes Between Proposal and Commit"
+  maps_to:
+    test_cases:
+    - TC-067
+    conformance_requirement: CR-067
+  arrange:
+    formal_test_case: TC-067
+    source_file: conformance/tests/TC061-TC070.md
+    test_controls:
+    - control_type: EVIDENCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-067
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    - EVIDENCE_QUALIFICATION
+    - GOVERNANCE_EVIDENCE
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    - RESULTING_STATE_VALIDATION
+    - AUTHORITY_REDERIVATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-069
+  name: "Direct orchestration for TC-069 \u2014 Evidence Lineage Gap Across Agents"
+  maps_to:
+    test_cases:
+    - TC-069
+    conformance_requirement: CR-069
+  arrange:
+    formal_test_case: TC-069
+    source_file: conformance/tests/TC061-TC070.md
+    test_controls:
+    - control_type: EVIDENCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-069
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EVIDENCE_QUALIFICATION
+    - GOVERNANCE_EVIDENCE
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-070
+  name: "Direct orchestration for TC-070 \u2014 Governance Context Preserved Across Handoff"
+  maps_to:
+    test_cases:
+    - TC-070
+    conformance_requirement: CR-070
+  arrange:
+    formal_test_case: TC-070
+    source_file: conformance/tests/TC061-TC070.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-070
+    authoritative_procedure: conformance/tests/TC061-TC070.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-071
+  name: "Direct orchestration for TC-071 \u2014 Downstream Agent Drops Context"
+  maps_to:
+    test_cases:
+    - TC-071
+    conformance_requirement: CR-071
+  arrange:
+    formal_test_case: TC-071
+    source_file: conformance/tests/TC071-TC080.md
+    test_controls:
+    - control_type: AUTHORITATIVE_SOURCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-071
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    - IDENTITY_AUTHORIZATION_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-072
+  name: "Direct orchestration for TC-072 \u2014 Cross-Domain Delegation Requires Escalation"
+  maps_to:
+    test_cases:
+    - TC-072
+    conformance_requirement: CR-072
+  arrange:
+    formal_test_case: TC-072
+    source_file: conformance/tests/TC071-TC080.md
+    test_controls:
+    - control_type: DELEGATION_FIXTURE
+      require_runtime_binding: BOUND
+    - control_type: GOVERNANCE_DOMAIN_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-072
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - AUTHORITY_REDERIVATION
+    - HUMAN_REVIEW
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-073
+  name: "Direct orchestration for TC-073 \u2014 REST vs Message Bus Same Result"
+  maps_to:
+    test_cases:
+    - TC-073
+    conformance_requirement: CR-073
+  arrange:
+    formal_test_case: TC-073
+    source_file: conformance/tests/TC071-TC080.md
+    external_dependencies:
+    - alternate transport/message-bus realization required by Formal TC
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-073
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    external_dependency_requirement_preserved: true
+    ordinary_governance_path_preserved: true
+- id: TV-TC-074
+  name: "Direct orchestration for TC-074 \u2014 Canonically Equivalent Payloads Same Result"
+  maps_to:
+    test_cases:
+    - TC-074
+    conformance_requirement: CR-074
+  arrange:
+    formal_test_case: TC-074
+    source_file: conformance/tests/TC071-TC080.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-074
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-075
+  name: "Direct orchestration for TC-075 \u2014 Different Implementations Produce Same Decision"
+  maps_to:
+    test_cases:
+    - TC-075
+    conformance_requirement: CR-075
+  arrange:
+    formal_test_case: TC-075
+    source_file: conformance/tests/TC071-TC080.md
+    external_dependencies:
+    - independent implementation required by Formal TC
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-075
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: true
+    ordinary_governance_path_preserved: true
+- id: TV-TC-076
+  name: "Direct orchestration for TC-076 \u2014 Same Proposal + Same State + Same Invariants = Same Decision"
+  maps_to:
+    test_cases:
+    - TC-076
+    conformance_requirement: CR-076
+  arrange:
+    formal_test_case: TC-076
+    source_file: conformance/tests/TC071-TC080.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-076
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-077
+  name: "Direct orchestration for TC-077 \u2014 Same Proposal Across Distributed Nodes"
+  maps_to:
+    test_cases:
+    - TC-077
+    conformance_requirement: CR-077
+  arrange:
+    formal_test_case: TC-077
+    source_file: conformance/tests/TC071-TC080.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-077
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-078
+  name: "Direct orchestration for TC-078 \u2014 Determinism Under Non-Deterministic Agent Inputs"
+  maps_to:
+    test_cases:
+    - TC-078
+    conformance_requirement: CR-078
+  arrange:
+    formal_test_case: TC-078
+    source_file: conformance/tests/TC071-TC080.md
+    test_controls:
+    - control_type: AUTHORITATIVE_SOURCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-078
+    authoritative_procedure: conformance/tests/TC071-TC080.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-083
+  name: "Direct orchestration for TC-083 \u2014 Canonical State and Decision Remain Synchronized"
+  maps_to:
+    test_cases:
+    - TC-083
+    conformance_requirement: CR-083
+  arrange:
+    formal_test_case: TC-083
+    source_file: conformance/tests/TC081-TC090.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-083
+    authoritative_procedure: conformance/tests/TC081-TC090.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-086
+  name: "Direct orchestration for TC-086 \u2014 Receipt Reproduces Original Decision"
+  maps_to:
+    test_cases:
+    - TC-086
+    conformance_requirement: CR-086
+  arrange:
+    formal_test_case: TC-086
+    source_file: conformance/tests/TC081-TC090.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-086
+    authoritative_procedure: conformance/tests/TC081-TC090.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - LEDGER_APPEND
+    - DERIVED_LIFECYCLE_STATE
+    - GOVERNANCE_DECISION
+    - AUTHORITY_REDERIVATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    - COMMITMENT_ACCEPTED
+    - EXECUTION_OUTCOME
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-089
+  name: "Direct orchestration for TC-089 \u2014 Implementation Passes AGCP Conformance Suite"
+  maps_to:
+    test_cases:
+    - TC-089
+    conformance_requirement: CR-089
+  arrange:
+    formal_test_case: TC-089
+    source_file: conformance/tests/TC081-TC090.md
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-089
+    authoritative_procedure: conformance/tests/TC081-TC090.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-090
+  name: "Direct orchestration for TC-090 \u2014 Independent Implementations Produce Equivalent Outcomes"
+  maps_to:
+    test_cases:
+    - TC-090
+    conformance_requirement: CR-090
+  arrange:
+    formal_test_case: TC-090
+    source_file: conformance/tests/TC081-TC090.md
+    external_dependencies:
+    - independent implementation/deployment comparison required by Formal TC
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-090
+    authoritative_procedure: conformance/tests/TC081-TC090.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    - AUTHORITY_REDERIVATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    - COMMITMENT_ACCEPTED
+    - EXECUTION_OUTCOME
+    external_dependency_requirement_preserved: true
+    ordinary_governance_path_preserved: true
+- id: TV-TC-092
+  name: "Direct orchestration for TC-092 \u2014 DEGRADED as Non-Terminal State"
+  maps_to:
+    test_cases:
+    - TC-092
+    conformance_requirement: CR-092
+  arrange:
+    formal_test_case: TC-092
+    source_file: conformance/tests/TC091-TC100.md
+    test_controls:
+    - control_type: DEGRADATION_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-092
+    authoritative_procedure: conformance/tests/TC091-TC100.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    - CONTINUATION_INTEGRITY
+    - GOVERNANCE_DEGRADATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-094
+  name: "Direct orchestration for TC-094 \u2014 Admissible Set Determination"
+  maps_to:
+    test_cases:
+    - TC-094
+    conformance_requirement: CR-094
+  arrange:
+    formal_test_case: TC-094
+    source_file: conformance/tests/TC091-TC100.md
+    test_controls:
+    - control_type: COMPOSITE_GOVERNANCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-094
+    authoritative_procedure: conformance/tests/TC091-TC100.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-095
+  name: "Direct orchestration for TC-095 \u2014 Deterministic Adjudication of Competing Futures"
+  maps_to:
+    test_cases:
+    - TC-095
+    conformance_requirement: CR-095
+  arrange:
+    formal_test_case: TC-095
+    source_file: conformance/tests/TC091-TC100.md
+    test_controls:
+    - control_type: COMPOSITE_GOVERNANCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-095
+    authoritative_procedure: conformance/tests/TC091-TC100.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-097
+  name: "Direct orchestration for TC-097 \u2014 Evidence Qualification Before Admissibility"
+  maps_to:
+    test_cases:
+    - TC-097
+    conformance_requirement: CR-097
+  arrange:
+    formal_test_case: TC-097
+    source_file: conformance/tests/TC091-TC100.md
+    test_controls:
+    - control_type: EVIDENCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-097
+    authoritative_procedure: conformance/tests/TC091-TC100.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EVIDENCE_QUALIFICATION
+    - GOVERNANCE_EVIDENCE
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-098
+  name: "Direct orchestration for TC-098 \u2014 Continuation Integrity Preservation"
+  maps_to:
+    test_cases:
+    - TC-098
+    conformance_requirement: CR-098
+  arrange:
+    formal_test_case: TC-098
+    source_file: conformance/tests/TC091-TC100.md
+    test_controls:
+    - control_type: DEGRADATION_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-098
+    authoritative_procedure: conformance/tests/TC091-TC100.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CONTINUATION_INTEGRITY
+    - GOVERNANCE_DEGRADATION
+    - AUTHORITY_REDERIVATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    - PEP_ENFORCEMENT
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-099
+  name: "Direct orchestration for TC-099 \u2014 Admissible Path Viability Tracking"
+  maps_to:
+    test_cases:
+    - TC-099
+    conformance_requirement: CR-099
+  arrange:
+    formal_test_case: TC-099
+    source_file: conformance/tests/TC091-TC100.md
+    test_controls:
+    - control_type: DEGRADATION_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-099
+    authoritative_procedure: conformance/tests/TC091-TC100.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - EXECUTION_AUTHORIZATION
+    - COMMIT_BOUND_ADMISSIBILITY
+    - GOVERNANCE_BINDING_VALIDATION
+    - GOVERNANCE_REALIZATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-104
+  name: "Direct orchestration for TC-104 \u2014 Governance Decision State Suitability"
+  maps_to:
+    test_cases:
+    - TC-104
+    conformance_requirement: CR-104
+  arrange:
+    formal_test_case: TC-104
+    source_file: conformance/tests/TC101-TC110.md
+    test_controls:
+    - control_type: CANONICAL_STATE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-104
+    authoritative_procedure: conformance/tests/TC101-TC110.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - CANONICAL_STATE_RESOLUTION
+    - STATE_QUALIFICATION
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-105
+  name: "Direct orchestration for TC-105 \u2014 Composite Proposal Representation"
+  maps_to:
+    test_cases:
+    - TC-105
+    conformance_requirement: CR-105
+  arrange:
+    formal_test_case: TC-105
+    source_file: conformance/tests/TC101-TC110.md
+    test_controls:
+    - control_type: COMPOSITE_GOVERNANCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-105
+    authoritative_procedure: conformance/tests/TC101-TC110.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - PROPOSAL_INGRESS
+    - PROPOSAL_QUALIFICATION
+    - GOVERNANCE_DECISION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-106
+  name: "Direct orchestration for TC-106 \u2014 Governance Dependency Graph Evaluation"
+  maps_to:
+    test_cases:
+    - TC-106
+    conformance_requirement: CR-106
+  arrange:
+    formal_test_case: TC-106
+    source_file: conformance/tests/TC101-TC110.md
+    test_controls:
+    - control_type: COMPOSITE_GOVERNANCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-106
+    authoritative_procedure: conformance/tests/TC101-TC110.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-108
+  name: "Direct orchestration for TC-108 \u2014 Coupling Classification"
+  maps_to:
+    test_cases:
+    - TC-108
+    conformance_requirement: CR-108
+  arrange:
+    formal_test_case: TC-108
+    source_file: conformance/tests/TC101-TC110.md
+    test_controls:
+    - control_type: COMPOSITE_GOVERNANCE_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-108
+    authoritative_procedure: conformance/tests/TC101-TC110.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - GOVERNANCE_DECISION
+    - DERIVED_LIFECYCLE_STATE
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
+- id: TV-TC-115
+  name: "Direct orchestration for TC-115 \u2014 Recursive Authority Containment"
+  maps_to:
+    test_cases:
+    - TC-115
+    conformance_requirement: CR-115
+  arrange:
+    formal_test_case: TC-115
+    source_file: conformance/tests/TC111-TC120.md
+    test_controls:
+    - control_type: DELEGATION_FIXTURE
+      require_runtime_binding: BOUND
+  request:
+    harness_operation: execute_formal_test_case
+    formal_test_case: TC-115
+    authoritative_procedure: conformance/tests/TC111-TC120.md
+  expected:
+    formal_test_case_pass_criteria: SATISFIED
+    required_observation_points:
+    - AUTHORITY_REDERIVATION
+    external_dependency_requirement_preserved: false
+    ordinary_governance_path_preserved: true
 cross_tenant_strategy: HIDE_404
 fixture_catalog:
   mapping_file: fixture-mapping.json

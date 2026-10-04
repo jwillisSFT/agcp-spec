@@ -76,10 +76,5 @@
   },
   "extensions": {
     "x-agcp.example": "ds045-valid-governance-approval-submission"
-  },
-  "semantic_assertions": {
-    "claimed_approver_is_non_authoritative": true,
-    "claimed_roles_and_entitlements_are_non_authoritative": true,
-    "server_must_resolve_authoritative_human_identity_and_authority": true
   }
 }

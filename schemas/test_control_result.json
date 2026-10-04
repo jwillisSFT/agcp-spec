@@ -53,6 +53,8 @@
         "COMPOSITE_GOVERNANCE_FIXTURE",
         "GOVERNANCE_CONFIGURATION_FIXTURE",
         "PEP_OUTCOME_FIXTURE",
+        "TARGET_EXECUTION_FIXTURE",
+        "ENFORCEMENT_PATH_FAULT_FIXTURE",
         "RESET_TEST_SCOPE"
       ]
     },
@@ -165,7 +167,8 @@
               "GOVERNANCE_DECISION",
               "AUTHORITY_REDERIVATION",
               "GOVERNANCE_REALIZATION",
-              "PEP_ENFORCEMENT"
+              "PEP_ENFORCEMENT",
+              "EXECUTION_OUTCOME"
             ]
           },
           "minItems": 1,
@@ -187,6 +190,45 @@
         "consumed_by_stages",
         "normal_governance_path_preserved"
       ]
+    },
+    "mutation_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "injection_point",
+        "fault_target",
+        "pre_mutation_digest",
+        "post_mutation_digest"
+      ],
+      "properties": {
+        "injection_point": {
+          "enum": [
+            "POST_GRF_PRE_PEP",
+            "PEP_CALLER_AUTHENTICATION",
+            "COLOCATED_ENFORCEMENT_BOUNDARY"
+          ]
+        },
+        "fault_target": {
+          "enum": [
+            "ENFORCEMENT_CONTEXT",
+            "GOVERNANCE_ENFORCEMENT_BINDING",
+            "GRF_TO_PEP_CALLER_BINDING",
+            "COLOCATED_LOGICAL_BINDING"
+          ]
+        },
+        "field_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pre_mutation_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "post_mutation_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
     }
   },
   "allOf": [
@@ -291,6 +333,37 @@
             "const": "NOT_APPLICABLE"
           }
         }
+      }
+    },
+    {
+      "if": {
+        "allOf": [
+          {
+            "properties": {
+              "control_type": {
+                "const": "ENFORCEMENT_PATH_FAULT_FIXTURE"
+              }
+            },
+            "required": [
+              "control_type"
+            ]
+          },
+          {
+            "properties": {
+              "consumption_status": {
+                "const": "OBSERVED"
+              }
+            },
+            "required": [
+              "consumption_status"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "required": [
+          "mutation_evidence"
+        ]
       }
     }
   ],

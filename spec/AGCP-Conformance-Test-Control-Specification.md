@@ -47,6 +47,8 @@ The controlled operation vocabulary is:
 - `COMPOSITE_GOVERNANCE_FIXTURE`
 - `GOVERNANCE_CONFIGURATION_FIXTURE`
 - `PEP_OUTCOME_FIXTURE`
+- `TARGET_EXECUTION_FIXTURE`
+- `ENFORCEMENT_PATH_FAULT_FIXTURE`
 - `RESET_TEST_SCOPE`
 
 Every non-reset operation SHALL carry the type-specific fixture defined by DS-050. A generic untyped object is not sufficient for an implementation to claim interoperable support for the control.
@@ -57,7 +59,7 @@ Implementations MAY support a subset and SHALL advertise the supported subset th
 
 Applying a test-control record SHALL NOT be implemented as a disconnected metadata operation when the capability is advertised as runtime-bound.
 
-For each advertised `runtime_binding_status: BOUND` control type, the implementation SHALL connect the isolated Test Control Store to the corresponding authoritative-source adapter or external-dependency adapter used by ordinary governed processing.
+For each advertised `runtime_binding_status: BOUND` control type, the implementation SHALL connect the isolated Test Control Store to the corresponding authoritative-source adapter, external-dependency adapter, or controlled boundary-fault adapter used by ordinary governed processing.
 
 The required processing model is:
 
@@ -167,6 +169,13 @@ A test control SHALL NOT directly inject:
 
 The target runtime SHALL still perform the applicable qualification, GDF/PDP, authorization, Governance Realization, and PEP processing.
 
+
+### 7.1 Controlled boundary-fault injection
+
+`ENFORCEMENT_PATH_FAULT_FIXTURE` MAY perturb an implementation-generated artifact or authenticated boundary condition only after the ordinary producing stage has completed and only at the declared isolated injection point. The control SHALL NOT replace the producing stage, construct the entire artifact under test, skip GRF processing, or directly establish the consuming stage's refusal, commitment, or governance result.
+
+The harness SHALL preserve mutation evidence sufficient to identify the injection point, fault target, affected field when applicable, and pre-/post-mutation digests. Ordinary PEP or logical-boundary validation SHALL remain responsible for detecting the fault and determining the enforcement result.
+
 ## 8. Virtual time
 
 Virtual time controls SHALL be scoped to the declared isolated test scope, deterministic, observable, and reversible. They SHALL NOT alter the host clock or unrelated Tenant/Governance Domain processing.
@@ -188,6 +197,13 @@ A fixture that is intended to behave as a source used by governance evaluation o
 `PEP_OUTCOME_FIXTURE` MAY emulate an external enforcement target only where the behavior under test is the AGCP governance reaction to that external result. It SHALL NOT be used to claim that a real external PEP is implemented or non-bypassable.
 
 `PEP_OUTCOME_FIXTURE` SHALL NOT substitute for GRF application of the controlling PEP Profile, Governance Binding Validation, Enforcement Context construction, or any other normal commitment processing whose behavior is under test.
+
+
+## 10A. Post-commit target execution control
+
+`TARGET_EXECUTION_FIXTURE` MAY emulate a post-commit asynchronous target dependency where the assessed profile separates commitment from completed target execution. The fixture SHALL control only the external target condition and its deterministic release. It SHALL NOT directly create DS-052, a Derived Lifecycle State, or any governance result.
+
+Where deterministic delay is required, `VIRTUAL_TIME_ADVANCE` SHOULD be used to release the target condition. The target/runtime SHALL generate the resulting DS-052 Governed Execution Outcome and any subsequent lifecycle derivation through the ordinary execution-outcome path.
 
 ## 11. Reset semantics
 
@@ -228,6 +244,6 @@ The mapping SHALL NOT treat `RECORD_ONLY`, `UNBOUND`, `PENDING`, or merely accep
 
 The machine-readable interface contract is `api/AGCP-Management-Contract.yaml` and the controlled request/result schemas are DS-050 and DS-051.
 
-## Machine-readable v2.1.x synchronization
+## Machine-readable v2.1.0 synchronization
 
-DS-050 AUTHORITY_FIXTURE can emulate authoritative account status, roles, groups, entitlements, authorization attributes, permissions, revocation, and freshness. PEP_OUTCOME_FIXTURE is consumed only at enforcement. Neither fixture may inject a Governance Decision, Execution Authorization, or GRF commit result.
+DS-050 AUTHORITY_FIXTURE can emulate authoritative account status, roles, groups, entitlements, authorization attributes, permissions, revocation, and freshness. PEP_OUTCOME_FIXTURE is consumed only at enforcement. TARGET_EXECUTION_FIXTURE is consumed only by the post-commit target/execution dependency path. ENFORCEMENT_PATH_FAULT_FIXTURE may perturb only the declared post-production enforcement boundary condition. None may inject a Governance Decision, Execution Authorization, GRF commit result, DS-052 outcome, or conformance result.

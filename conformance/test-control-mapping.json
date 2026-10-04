@@ -1,6 +1,6 @@
 {
   "mapping_id": "AGCP-TC-TEST-CONTROL-MAPPING-1.3",
-  "specification_version": "v2.1.x",
+  "specification_version": "v2.1.0",
   "generated_date": "2026-10-03",
   "regeneration_id": "AGCP-v2.1.x-TEST-CONTROL-MAPPING-REGENERATION-2026-10-03",
   "formal_test_case_count": 122,
@@ -36,6 +36,8 @@
     "COMPOSITE_GOVERNANCE_FIXTURE",
     "GOVERNANCE_CONFIGURATION_FIXTURE",
     "PEP_OUTCOME_FIXTURE",
+    "TARGET_EXECUTION_FIXTURE",
+    "ENFORCEMENT_PATH_FAULT_FIXTURE",
     "RESET_TEST_SCOPE"
   ],
   "governance_observation_point_vocabulary": [
@@ -100,7 +102,7 @@
     "entries_with_recommended_if005_controls": 81,
     "entries_without_recommended_if005_controls": 41,
     "entries_with_external_dependencies": 4,
-    "control_binding_count": 108,
+    "control_binding_count": 110,
     "conditional_or_supporting_control_binding_count": 14,
     "entries_with_additional_harness_injection_needs": 3,
     "additional_harness_injection_need_count": 7,
@@ -112,11 +114,13 @@
       "COMPOSITE_GOVERNANCE_FIXTURE": 8,
       "DEGRADATION_FIXTURE": 8,
       "DELEGATION_FIXTURE": 4,
+      "ENFORCEMENT_PATH_FAULT_FIXTURE": 2,
       "EVIDENCE_FIXTURE": 6,
       "GOVERNANCE_CONFIGURATION_FIXTURE": 13,
       "GOVERNANCE_DOMAIN_FIXTURE": 2,
       "HUMAN_REVIEW_FIXTURE": 12,
-      "PEP_OUTCOME_FIXTURE": 5,
+      "PEP_OUTCOME_FIXTURE": 4,
+      "TARGET_EXECUTION_FIXTURE": 1,
       "TENANT_STATE_FIXTURE": 5,
       "VIRTUAL_TIME_SET": 5
     },
@@ -143,7 +147,8 @@
       "PROPOSAL_QUALIFICATION": 12,
       "RESULTING_STATE_VALIDATION": 20,
       "STATE_QUALIFICATION": 23
-    }
+    },
+    "standard_test_control_type_count": 18
   },
   "entries": [
     {
@@ -2663,26 +2668,26 @@
         "EXECUTION_OUTCOME"
       ],
       "recommended_test_controls": [
-        "PEP_OUTCOME_FIXTURE"
+        "TARGET_EXECUTION_FIXTURE"
       ],
       "external_dependencies": [
         "Commitment-distinct/asynchronous target or profile for the NS-9.5-05 conditional subtest; otherwise evidence-supported Not Applicable."
       ],
       "rule": "Test controls establish preconditions only. The target runtime behavior and the Formal Test Case pass criteria determine the assessment result.",
       "required_runtime_binding_status": "BOUND",
-      "requires_consumption_evidence": false,
+      "requires_consumption_evidence": true,
       "v2_1_x_regression_synchronization": "Lifecycle integrity now permits an authoritative COMMITTED state before a later execution outcome. Where execution is distinct/asynchronous, DS-052 drives the subsequent EXECUTED or failure state.",
       "source_formal_test_case": "conformance/tests/TC081-TC090.md",
       "formal_tc_change_class": "FORMAL_ASSERTION_TRACEABILITY",
       "control_bindings": [
         {
-          "control_type": "PEP_OUTCOME_FIXTURE",
+          "control_type": "TARGET_EXECUTION_FIXTURE",
           "mapping_disposition": "PROFILE_CONDITIONAL_STANDARD_CONTROL",
           "standardization_status": "ENUMERATED_IN_DS_050",
           "implementation_support": "DISCOVER_VIA_IF_003_AT_RUNTIME",
           "required_runtime_binding_status": "BOUND",
           "required_effect_status": "EFFECTIVE",
-          "consumption_evidence_required": false,
+          "consumption_evidence_required": true,
           "outcome_injection_prohibited": true
         }
       ],
@@ -2690,11 +2695,12 @@
       "additional_harness_injection_needs": [
         {
           "need": "ASYNCHRONOUS_EXECUTION_DELAY_AND_TERMINAL_OUTCOME",
-          "status": "PROFILE_CONDITIONAL_DEVELOPMENT_OR_IMPLEMENTATION_DEPENDENT",
+          "status": "STANDARDIZED_IF005_PROFILE_CONDITIONAL",
           "standardized_if005_support": [
-            "PEP_OUTCOME_FIXTURE"
+            "TARGET_EXECUTION_FIXTURE",
+            "VIRTUAL_TIME_ADVANCE"
           ],
-          "note": "Use a bound PEP/external-target outcome adapter only when the assessed profile separates commitment from later execution. Do not inject DS-052 or lifecycle state directly."
+          "note": "Use only when the assessed profile separates commitment from later target execution. The fixture controls the external target condition; DS-052 and lifecycle state remain runtime-generated."
         }
       ],
       "implementation_maturity_interpretation": "MAPPING_IDENTIFIES_STANDARDIZED_CAPABILITY; SUPPORT_MUST_BE_DISCOVERED_AND_PROVEN_FOR_ASSESSED_RUNTIME"
@@ -4137,7 +4143,8 @@
       "recommended_test_controls": [
         "AUTHORITY_FIXTURE",
         "GOVERNANCE_CONFIGURATION_FIXTURE",
-        "PEP_OUTCOME_FIXTURE"
+        "PEP_OUTCOME_FIXTURE",
+        "ENFORCEMENT_PATH_FAULT_FIXTURE"
       ],
       "external_dependencies": [],
       "rule": "Test controls establish preconditions only. The target runtime behavior and the Formal Test Case pass criteria determine the assessment result.",
@@ -4177,21 +4184,35 @@
           "required_effect_status": "EFFECTIVE",
           "consumption_evidence_required": true,
           "outcome_injection_prohibited": true
+        },
+        {
+          "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE",
+          "mapping_disposition": "RECOMMENDED_STANDARD_CONTROL",
+          "standardization_status": "ENUMERATED_IN_DS_050",
+          "implementation_support": "DISCOVER_VIA_IF_003_AT_RUNTIME",
+          "required_runtime_binding_status": "BOUND",
+          "required_effect_status": "EFFECTIVE",
+          "consumption_evidence_required": true,
+          "outcome_injection_prohibited": true
         }
       ],
       "cleanup_control": "RESET_TEST_SCOPE",
       "additional_harness_injection_needs": [
         {
           "need": "ENFORCEMENT_CONTEXT_TAMPER_OR_SUBSTITUTION",
-          "status": "IMPLEMENTATION_SPECIFIC_OR_FUTURE_STANDARDIZATION_CANDIDATE",
-          "standardized_if005_support": [],
-          "note": "A harness may need a controlled pre-PEP mutation path while leaving ordinary GRF construction and PEP validation active. No current DS-050 control directly injects Enforcement Context."
+          "status": "STANDARDIZED_IF005",
+          "standardized_if005_support": [
+            "ENFORCEMENT_PATH_FAULT_FIXTURE"
+          ],
+          "note": "Use a bound post-production enforcement-path fault adapter; ordinary GRF construction and PEP validation remain active and determine the result."
         },
         {
           "need": "GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH",
-          "status": "IMPLEMENTATION_SPECIFIC_OR_FUTURE_STANDARDIZATION_CANDIDATE",
-          "standardized_if005_support": [],
-          "note": "The negative path must test binding mismatch without injecting a desired refusal or commit outcome."
+          "status": "STANDARDIZED_IF005",
+          "standardized_if005_support": [
+            "ENFORCEMENT_PATH_FAULT_FIXTURE"
+          ],
+          "note": "Use a bound post-production enforcement-path fault adapter; ordinary GRF construction and PEP validation remain active and determine the result."
         },
         {
           "need": "NONFAITHFUL_OR_UNSUPPORTED_PEP_MAPPING",
@@ -4221,7 +4242,8 @@
       "recommended_test_controls": [
         "AUTHORITY_FIXTURE",
         "GOVERNANCE_CONFIGURATION_FIXTURE",
-        "PEP_OUTCOME_FIXTURE"
+        "PEP_OUTCOME_FIXTURE",
+        "ENFORCEMENT_PATH_FAULT_FIXTURE"
       ],
       "external_dependencies": [],
       "rule": "Test controls establish preconditions only. The target runtime behavior and the Formal Test Case pass criteria determine the assessment result.",
@@ -4261,29 +4283,43 @@
           "required_effect_status": "EFFECTIVE",
           "consumption_evidence_required": true,
           "outcome_injection_prohibited": true
+        },
+        {
+          "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE",
+          "mapping_disposition": "RECOMMENDED_STANDARD_CONTROL",
+          "standardization_status": "ENUMERATED_IN_DS_050",
+          "implementation_support": "DISCOVER_VIA_IF_003_AT_RUNTIME",
+          "required_runtime_binding_status": "BOUND",
+          "required_effect_status": "EFFECTIVE",
+          "consumption_evidence_required": true,
+          "outcome_injection_prohibited": true
         }
       ],
       "cleanup_control": "RESET_TEST_SCOPE",
       "additional_harness_injection_needs": [
         {
           "need": "GRF_TO_PEP_CALLER_IDENTITY_MISMATCH",
-          "status": "PARTIALLY_STANDARDIZED_OR_TRANSPORT_SPECIFIC",
+          "status": "STANDARDIZED_IF005",
           "standardized_if005_support": [
-            "AUTHORITY_FIXTURE"
+            "ENFORCEMENT_PATH_FAULT_FIXTURE"
           ],
-          "note": "AUTHORITY_FIXTURE is suitable when caller authorization is resolved from an authoritative source. mTLS/workload-identity mismatch may require a transport-specific harness path."
+          "note": "Use the bound enforcement-path fault adapter at the declared caller-authentication, pre-PEP, or co-located logical enforcement boundary while preserving ordinary validation/refusal/evidence processing."
         },
         {
           "need": "GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH",
-          "status": "IMPLEMENTATION_SPECIFIC_OR_FUTURE_STANDARDIZATION_CANDIDATE",
-          "standardized_if005_support": [],
-          "note": "Exercise an exact binding mismatch while preserving ordinary GRF/PEP validation and fail-closed semantics."
+          "status": "STANDARDIZED_IF005",
+          "standardized_if005_support": [
+            "ENFORCEMENT_PATH_FAULT_FIXTURE"
+          ],
+          "note": "Use the bound enforcement-path fault adapter at the declared caller-authentication, pre-PEP, or co-located logical enforcement boundary while preserving ordinary validation/refusal/evidence processing."
         },
         {
           "need": "COLOCATED_GDF_GRF_PEP_LOGICAL_BINDING_NEGATIVE_PATH",
-          "status": "IMPLEMENTATION_SPECIFIC_OBSERVATION_OR_INJECTION_NEED",
-          "standardized_if005_support": [],
-          "note": "Co-location removes a network boundary but not logical authorization, binding, refusal, and evidence requirements; internal test hooks may be needed to prove the negative path."
+          "status": "STANDARDIZED_IF005",
+          "standardized_if005_support": [
+            "ENFORCEMENT_PATH_FAULT_FIXTURE"
+          ],
+          "note": "Use the bound enforcement-path fault adapter at the declared caller-authentication, pre-PEP, or co-located logical enforcement boundary while preserving ordinary validation/refusal/evidence processing."
         }
       ],
       "implementation_maturity_interpretation": "MAPPING_IDENTIFIES_STANDARDIZED_CAPABILITY; SUPPORT_MUST_BE_DISCOVERED_AND_PROVEN_FOR_ASSESSED_RUNTIME"

@@ -1,7 +1,7 @@
 > **Current published baseline:** AGCP v2.1.0 Public Review Controlled Baseline  
 > **Synchronized change-set target:** AGCP v2.1.x  
 > **Change-set status:** CLOSED FOR DOWNSTREAM IMPLEMENTATION  
-> **Controlling published baseline date:** 2026-08-15
+> **Controlling published baseline date:** 2026-08-14
 >
 > The v2.1.x synchronization change set is complete through Trust Model, ARM, Core, Companion/Profile, Normative Statements, DS/interface/API, Formal Test Cases, Test Matrix, test mappings, test-control mappings, Harness Vectors/Checks, aggregate conformance validation, and final RTM synchronization at `RTM-1.47`. The exact publication Semantic Version for this synchronized change set has not been assigned by this closure step; the currently published baseline remains v2.1.0 until a controlled release decision is made.  
 > **v2.1.x synchronization notes:** [`RELEASE_NOTES_v2.1.x.md`](RELEASE_NOTES_v2.1.x.md)  
@@ -21,7 +21,7 @@ The synchronized v2.1.x inventory contains **393 permanent Normative Statement i
 
 ## Specification Status
 
-AGCP v2.1.0 remains the controlled **Public Review Controlled Baseline** dated 2026-08-15. This repository working snapshot also contains the closed v2.1.x synchronization change set used for downstream implementation handoff. That synchronized change set is not a separately published AGCP release until release governance assigns and records a publication version.
+AGCP v2.1.0 remains the controlled **Public Review Controlled Baseline** dated 2026-08-14. This repository working snapshot also contains the closed v2.1.x synchronization change set used for downstream implementation handoff. That synchronized change set is not a separately published AGCP release until release governance assigns and records a publication version.
 
 The purpose of this review is to evaluate:
 
@@ -130,7 +130,7 @@ The following abbreviated tree lists the current controlled paths used for revie
 ```text
 .
 ├── README.md
-├── RELEASE_NOTES_v2.1.x.md
+├── RELEASE_NOTES_v2.1.0.md
 ├── RELEASE_NOTES_v2.1.0.md
 ├── RELEASE_NOTES_v2.0.4.md
 ├── RELEASE_NOTES_v2.0.0.md
@@ -310,7 +310,7 @@ AGCP follows semantic versioning.
 - **MINOR** — additive normative clarifications  
 - **PATCH** — editorial or non-behavioral corrections  
 
-The currently published baseline is AGCP v2.1.0 Public Review Controlled Baseline, baseline date 2026-08-15. The synchronized v2.1.x change set documented here is closed for downstream implementation but is not assigned a new publication Semantic Version by this closure step. Publication SHALL occur only through a later controlled release decision recorded in the release-governance artifacts.
+The currently published baseline is AGCP v2.1.0 Public Review Controlled Baseline, baseline date 2026-08-14. The synchronized v2.1.x change set documented here is closed for downstream implementation but is not assigned a new publication Semantic Version by this closure step. Publication SHALL occur only through a later controlled release decision recorded in the release-governance artifacts.
 
 ---
 
@@ -368,14 +368,14 @@ The cumulative v2.0.4 correction set retires absent umbrella companion labels an
 
 ## Release and lifecycle metadata
 
-AGCP v2.1.0 is the current Public Review Controlled Baseline. Active catalogs and controlled artifacts use lifecycle `CURRENT`, and the controlled baseline date is `2026-08-15`. The controlled policy and validation are published under `governance/AGCP-Release-Lifecycle-Metadata-Policy.md` and `governance/AGCP-release-lifecycle-metadata-validation.json`.
+AGCP v2.1.0 is the current Public Review Controlled Baseline. Active catalogs and controlled artifacts use lifecycle `CURRENT`, and the controlled baseline date is `2026-08-14`. The controlled policy and validation are published under `governance/AGCP-Release-Lifecycle-Metadata-Policy.md` and `governance/AGCP-release-lifecycle-metadata-validation.json`.
 
 
 ## Published-baseline repository integrity
 
 The v2.1.0 published-baseline aggregate validator remains `governance/validate_repository_integrity.py`, with its historical controlled report under the v2.1.0 release artifacts. The closed v2.1.x synchronization change set is validated separately so historical v2.1.0 release evidence is not silently rewritten.
 
-## v2.1.x repository synchronization closure
+## v2.1.0 repository synchronization closure
 
 The synchronized change set is complete through `RTM-1.47`; the current Schema, Interface, Registry Entry, and Implementation Profile catalogs carry reciprocal RTM synchronization metadata. The closure record, full repository closure manifest, and closure validation report are `governance/AGCP-v2.1.x-REPOSITORY-CLOSURE.md`, `governance/AGCP-v2.1.x-repository-closure-manifest.json`, and `governance/AGCP-v2.1.x-repository-closure-validation.json`.
 

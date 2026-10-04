@@ -15,9 +15,9 @@
     ]
   },
   "source_hashes": {
-    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c"
+    "api/AGCP-HTTP-Contract.yaml": "2b6437515da9feafb3d606b7316f1a1999b530a645133570a8a2087d6e6a3949",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "aa160383bc927c8e87e6914a4120e1f986fe7f81b5525372138ad931e57c28a0",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "bcff8dfcc067e9b6da85e99610fec27d7427fd4999c286f77209aedfebb2c203"
   },
   "validation_rules": [
     "Each request SHALL resolve to exactly one IF-001 OpenAPI operation by HTTP method and path template.",

@@ -1,0 +1,99 @@
+meta:
+  suite_id: agcp_management_plane_harness
+  status: normative-harness-specification
+  versioning: repository_release
+  version_source: VERSION
+  description: Executable coupling checks for IF-003/IF-004/IF-005. The harness proves runtime binding, scope isolation, correlation,
+    readback, asynchronous target consumption, and controlled enforcement-boundary fault injection without injecting governance
+    outcomes.
+checks:
+- id: MP-CAP-001
+  name: Capability discovery truthfully distinguishes BOUND from record-only surfaces
+  procedure:
+  - GET /agcp/management/v1/capabilities
+  - Verify every advertised IF-005 control has status, runtime_binding_status, and readback_supported
+  - Treat only BOUND controls as eligible Formal TC preconditions
+  pass: No RECORD_ONLY, UNBOUND, or UNKNOWN control is treated as an established precondition.
+- id: MP-OBS-001
+  name: Observation correlation and test-scope visibility
+  procedure:
+  - Execute a scoped governed request
+  - Query IF-003 observations by correlation_id and test_scope
+  - Verify source/condition/causal references identify the consumed controlled condition
+  pass: Attributable GOP evidence correlates the governed attempt to the consumed source condition.
+- id: MP-ACT-001
+  name: Actuation acceptance is distinct from realization
+  procedure:
+  - POST a valid DS-048 actuation
+  - Verify ACCEPTED/PENDING does not establish effect
+  - Poll GET actuation result until terminal
+  pass: EFFECTIVE is reported only with authoritative artifact, evidence, and observation references.
+- id: MP-TC-001
+  name: IF-005 BOUND EFFECTIVE OBSERVED chain
+  procedure:
+  - POST DS-050 control with isolated X-AGCP-Test-Scope
+  - Poll until runtime_binding_status=BOUND and effect_status=EFFECTIVE
+  - Execute matching IF-001 request
+  - Poll until consumption_status=OBSERVED and verify correlated DS-046 observation
+  pass: The condition is consumed by ordinary governed processing and is independently attributable.
+- id: MP-TC-002
+  name: Test-scope isolation
+  procedure:
+  - Apply a control in scope A
+  - Execute equivalent request in scope B or without a test scope
+  - Compare observations
+  pass: The scope-A condition has no effect outside scope A.
+- id: MP-TC-003
+  name: Reset semantics
+  procedure:
+  - Apply and consume a control
+  - RESET_TEST_SCOPE
+  - Execute a new matching request
+  pass: Future requests use ordinary sources while historical evidence remains intact.
+- id: MP-TC-004
+  name: RECORD_ONLY cannot establish a precondition
+  procedure:
+  - Advertise or configure a RECORD_ONLY control
+  - Submit the control
+  - Attempt to use it as Formal TC setup
+  pass: Harness refuses to treat it as an established precondition.
+- id: MP-TC-005
+  name: Asynchronous execution fixture consumption
+  procedure:
+  - Apply TARGET_EXECUTION_FIXTURE with initial PENDING
+  - Commit through ordinary path
+  - Verify COMMITTED while execution remains pending
+  - Advance virtual time or release dependency
+  - Observe runtime-generated DS-052 terminal outcome
+  pass: The fixture controls only the external target condition; DS-052 and lifecycle state are runtime-generated.
+- id: MP-TC-006
+  name: Post-GRF Enforcement Context mutation
+  procedure:
+  - Apply ENFORCEMENT_PATH_FAULT_FIXTURE targeting ENFORCEMENT_CONTEXT at POST_GRF_PRE_PEP
+  - Allow GRF to construct normal DS-029
+  - Verify mutation evidence and ordinary PEP validation
+  pass: PEP detects mismatch and fails closed without an injected governance result.
+- id: MP-TC-007
+  name: Governance Enforcement Binding mismatch
+  procedure:
+  - Apply ENFORCEMENT_PATH_FAULT_FIXTURE targeting GOVERNANCE_ENFORCEMENT_BINDING
+  - Exercise normal GRF-to-PEP path
+  pass: Binding mismatch is attributed and rejected before governed consequence.
+- id: MP-TC-008
+  name: Optional correlation identifier omission
+  procedure:
+  - Submit valid DS-050 without correlation_id
+  - Read DS-051 result
+  pass: Request succeeds and result omits correlation_id rather than serializing null.
+- id: MP-TC-009
+  name: GRF-to-PEP caller identity mismatch
+  procedure:
+  - Apply ENFORCEMENT_PATH_FAULT_FIXTURE targeting GRF_TO_PEP_CALLER_BINDING at PEP_CALLER_AUTHENTICATION
+  - Invoke ordinary enforcement path
+  pass: Unqualified caller is rejected independently of otherwise valid carried context.
+- id: MP-TC-010
+  name: Co-located logical binding negative path
+  procedure:
+  - Apply ENFORCEMENT_PATH_FAULT_FIXTURE targeting COLOCATED_LOGICAL_BINDING
+  - Invoke co-located GDF/GRF/PEP path
+  pass: Logical authorization/binding/refusal/evidence semantics remain enforced without requiring a network boundary.

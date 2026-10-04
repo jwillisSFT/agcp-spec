@@ -1,0 +1,46 @@
+{
+  "response_version": "1.0",
+  "implementation_id": "impl-test",
+  "generated_at": "2026-10-04T10:00:00Z",
+  "observation_capabilities": [
+    {
+      "capability_id": "obs-governance-binding",
+      "status": "AVAILABLE",
+      "runtime_binding_status": "BOUND",
+      "readback_supported": true,
+      "interface_id": "IF-003",
+      "observation_type": "GOVERNANCE_BINDING_VALIDATION"
+    }
+  ],
+  "actuation_capabilities": [
+    {
+      "capability_id": "act-tenant-state",
+      "status": "AVAILABLE",
+      "runtime_binding_status": "BOUND",
+      "readback_supported": true,
+      "interface_id": "IF-004",
+      "actuation_type": "TENANT_STATE_TRANSITION"
+    }
+  ],
+  "test_control_capabilities": [
+    {
+      "capability_id": "tc-target-execution",
+      "status": "AVAILABLE",
+      "runtime_binding_status": "BOUND",
+      "readback_supported": true,
+      "interface_id": "IF-005",
+      "control_type": "TARGET_EXECUTION_FIXTURE"
+    },
+    {
+      "capability_id": "tc-enforcement-fault",
+      "status": "AVAILABLE",
+      "runtime_binding_status": "BOUND",
+      "readback_supported": true,
+      "interface_id": "IF-005",
+      "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE"
+    }
+  ],
+  "test_scope_propagation_supported": true,
+  "correlation_supported": true,
+  "response_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

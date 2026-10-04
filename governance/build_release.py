@@ -6,7 +6,8 @@ from pathlib import Path
 from release_version import ROOT, SYNC_MANIFEST, SYNC_REPORT, INTEGRITY_REPORT
 
 SEMANTIC_VALIDATORS=[
- ["governance/sync_release_version.py","--write"],
+ ["governance/sync_release_version.py","--check"],
+ ["governance/validate_management_plane_contract.py"],
  ["governance/validate_implementation_profiles.py"],
  ["governance/validate_provenance_wire_format.py"],
  ["governance/validate_command_record_separation.py"],
@@ -25,6 +26,8 @@ def run(root: Path, argv: list[str]) -> None:
 
 def main()->int:
     ap=argparse.ArgumentParser(); ap.add_argument("--repo",default=str(ROOT)); ap.add_argument("--validate-only",action="store_true"); a=ap.parse_args(); root=Path(a.repo).resolve()
+    if not a.validate_only:
+        run(root,["governance/sync_release_version.py","--write"])
     for cmd in SEMANTIC_VALIDATORS: run(root,cmd)
     # Refresh embedded source hashes to a fixed point. Some controlled reports refer
     # to other controlled reports, so one pass can legitimately cause a second pass.

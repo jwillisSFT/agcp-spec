@@ -2,6 +2,8 @@
 from pathlib import Path
 import argparse, hashlib, json
 
+from release_version import release_context
+
 
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 
@@ -28,7 +30,7 @@ def main():
         s=(root/'implementer'/rel).read_text().lower()
         for token in prohibited:
             if token in s: issues.append(f'generic profile contamination:{rel}:{token}')
-    report={'validation_type':'AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_VALIDATION','status':'PASS' if not issues else 'FAIL','profile_format_version':'2.0.0','informational_examples_checked':len(entries),'manifest_files_checked':len(man.get('files',[])),'issues':issues}
+    report={'release_context':release_context(),'validation_type':'AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_VALIDATION','status':'PASS' if not issues else 'FAIL','profile_format_version':'2.0.0','informational_examples_checked':len(entries),'manifest_files_checked':len(man.get('files',[])),'issues':issues}
     out=json.dumps(report,indent=2)+'\n'
     target=Path(a.report) if a.report else root/'governance/AGCP-implementation-profile-validation.json'; target.write_text(out)
     print(out,end=''); return 0 if not issues else 1

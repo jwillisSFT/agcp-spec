@@ -1,5 +1,12 @@
 # Registry Entry Catalog
 
+> **Version source:** `VERSION`  
+> **Current repository release:** `v2.1.0`  
+> **Release status:** `PUBLIC_REVIEW_CONTROLLED_BASELINE`  
+> **Artifact Lifecycle:** `CURRENT`  
+> **Baseline Date:** `2026-08-14`  
+
+
 Updated 2026-10-03. Total permanent registry entries: **101**.
 
 | REG | Registry | Entry | Status |

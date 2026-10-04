@@ -4,7 +4,7 @@
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
     "controlling_published_baseline": "v2.1.0",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-15",
+    "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "report_id": "AGCP-P0-10-P0-06-SEMANTIC-FIXTURE-VALIDATION",
@@ -19,11 +19,11 @@
   "semantic_negative_vector_count": 10,
   "claimant_assertion_negative_vector_count": 15,
   "source_hashes": {
-    "conformance/fixture-mapping.json": "5f25fadf3245028ef705530add24a1a41ca7cd108b74e87db25dd06f4434f658",
+    "conformance/fixture-mapping.json": "b679101192bba825f1a79e37f97cf30ee7d3b35141034358274f57220ebb5b70",
     "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "8eae223db81e1a63cec16032d13fc2d639b8c698f40568329734e4315cb3fac1",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
-    "schemas/governance_approval_submission.json": "abcb7a0303e0e7a55e59e452c00c5f0427f66482514c8b7d136bd0aaf53a1d21",
-    "schemas/examples/ds045-governance-approval-submission-valid.json": "cb4aadef2299be914e1fbbbc8df715c64a4139c2f395b4eaf877ff2fdb691e65",
+    "schemas/governance_approval_submission.json": "29b8834fe0659546e5f6a8485bcdc502599baeb696fa04c40578a749d43d40b6",
+    "schemas/examples/ds045-governance-approval-submission-valid.json": "9b0565c40f482ecd1ee58bf21ed873ad01c59d2a8a2f228784b7619239b40714",
     "governance/validate_semantic_fixtures.py": "baa166b83aec59053df1f3d13a441c9a43721ef4d41f04957d927ad27c98fea6",
     "schemas/examples/ds018-commit-boundary-request-single.json": "0fea0b93dc0a6c4d64f4cb09eaf44f3ca4ecac2cc29f94269cafe181aab1e4e8",
     "schemas/examples/ds019-commit-boundary-result-success.json": "16acbb27ee9e2f94788bfae7237680ce2e3344b240da7a6989d61e8f3b874675",
@@ -433,9 +433,7 @@
       "id": "NV-CMDREC-012",
       "rejected": true,
       "errors": [
-        "'claimed_approver_is_non_authoritative' is a required property",
-        "'claimed_roles_and_entitlements_are_non_authoritative' is a required property",
-        "'server_must_resolve_authoritative_human_identity_and_authority' is a required property"
+        "Additional properties are not allowed ('semantic_assertions' was unexpected)"
       ]
     },
     {

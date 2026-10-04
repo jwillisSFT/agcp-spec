@@ -15,11 +15,11 @@
     "expected_status_instances_checked": 58
   },
   "source_hashes": {
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
-    "spec/AGCP-Error-Mapping.md": "6c5cd15e1260666da2b7713ea153fb186dceaf8c1e81320f7bf0f8e55530f6c9",
-    "registries/rejection-code-registry.json": "1934f2c2a1b0b73dfd1f845adbb00c28cc6da0bcbe11db13fa4e66b7eaa943ab",
-    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314"
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "aa160383bc927c8e87e6914a4120e1f986fe7f81b5525372138ad931e57c28a0",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "bcff8dfcc067e9b6da85e99610fec27d7427fd4999c286f77209aedfebb2c203",
+    "spec/AGCP-Error-Mapping.md": "8b7442c52864640e1c41c284b253df483725bb4b3426c01c12f1c69c42c1fc63",
+    "registries/rejection-code-registry.json": "d11986472c0129ea699cfb732d8837e6d9d801ce6da12f4b05fbd817d58d416f",
+    "api/AGCP-HTTP-Contract.yaml": "2b6437515da9feafb3d606b7316f1a1999b530a645133570a8a2087d6e6a3949"
   },
   "validation_rules": [
     "Every declared rejection_code SHALL be an ACTIVE rejection-code registry entry.",

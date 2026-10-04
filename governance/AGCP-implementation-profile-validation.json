@@ -1,4 +1,12 @@
 {
+  "release_context": {
+    "repository_release_target": "v2.1.0",
+    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "controlling_published_baseline": "v2.1.0",
+    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
+    "baseline_date": "2026-08-14",
+    "artifact_lifecycle_state": "CURRENT"
+  },
   "validation_type": "AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_VALIDATION",
   "status": "PASS",
   "profile_format_version": "2.0.0",

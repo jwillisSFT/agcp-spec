@@ -1,22 +1,22 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.8",
+    "repository_release_target": "v2.1.0",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.8",
+    "controlling_published_baseline": "v2.1.0",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
     "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
   },
   "validation_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-VALIDATION",
   "finding": "P1-01",
-  "release_target": "v2.0.8",
-  "validation_date": "2026-08-14",
+  "release_target": "v2.1.0",
+  "validation_date": "2026-10-04",
   "status": "PASS",
   "summary": {
     "checks": 7,
     "passed": 7,
     "failed": 0,
-    "text_artifacts_scanned": 307,
+    "text_artifacts_scanned": 422,
     "office_artifacts_scanned": 6,
     "retired_labels": 5,
     "active_retired_reference_hits": 0,
@@ -24,10 +24,10 @@
     "corrected_documents": 7
   },
   "scope_counts": {
-    "specifications": 100,
-    "openapi": 8,
+    "specifications": 128,
+    "openapi": 9,
     "registries": 8,
-    "examples": 32,
+    "examples": 44,
     "catalogs": 13,
     "rtm_office": 1
   },
@@ -45,7 +45,7 @@
     {
       "check_id": "NCR-003",
       "status": "PASS",
-      "detail": "Scanned 307 text artifacts and 6 Office artifacts; active retired-label hits: 0"
+      "detail": "Scanned 422 text artifacts and 6 Office artifacts; active retired-label hits: 0"
     },
     {
       "check_id": "NCR-004",
@@ -65,24 +65,24 @@
     {
       "check_id": "NCR-007",
       "status": "PASS",
-      "detail": "Repository scope scanned: {'specifications': 100, 'openapi': 8, 'registries': 8, 'examples': 32, 'catalogs': 13, 'rtm_office': 1}"
+      "detail": "Repository scope scanned: {'specifications': 128, 'openapi': 9, 'registries': 8, 'examples': 44, 'catalogs': 13, 'rtm_office': 1}"
     }
   ],
   "issues": [],
   "source_hashes": {
-    "ARCHITECTURE.md": "cecd8727e46fb70310c64132ae3be55717f3037bbcfe2ac2e2495f8c38ff66d5",
-    "README.md": "331470991073d09ff3e0e43ddc931d9a2b00bae6658a5c811c2c2bbf183fac65",
-    "conformance/AGCP-Conformance.md": "5cda6c1eaec160f6007e8e684ef30b72124e66ff170fa64ab7c8dcda8c7c274d",
-    "conformance/agcp-conformance-manifest.yml": "e73949854b463e42163f42fcc1d09917b0cd1a47c3707b412a33ebff904497ed",
-    "governance/AGCP-Normative-Companion-Reference-Dispositions.md": "828b5be767684a10e81bb9a65dd04b87c7867b5755577ae6bf502f0043f592ac",
+    "ARCHITECTURE.md": "cd5a0ef49cc647507bfc655496443c729583b70d7d88cae5099c9daa7025d391",
+    "README.md": "9451d3459830907081b16b8ca32964360b94c8191fef82c6e4bba09b4ce0a956",
+    "conformance/AGCP-Conformance.md": "7c2822aea341f352942ec72573c667df360d5315ee3cf8418d4a8119519b6d09",
+    "conformance/agcp-conformance-manifest.yml": "10cf0976de9cdbbf62248d443690ed1e549299e7932018443c9b84713af912d1",
+    "governance/AGCP-Normative-Companion-Reference-Dispositions.md": "0a73616ee6102b80bf39593e3508fbe59234105a30983f6a1bbae1ebd3a029f1",
     "governance/AGCP-Versioning.md": "72f73066f98495459fbeb509e9e8984de6b2fc679104f3f55bce934191642fca",
-    "governance/normative-companion-reference-dispositions.json": "1f19395f1ebbdf7b521476673077d64010c79d6dfbb357fb22500c4473d4e9e9",
-    "lifecycle/AGCP Governance Lifecycle Model.md": "55d012a78040f15d59ae2c12168fff92d02f20315a460bfd951989686aff6eb4",
-    "lifecycle/AGCP Governance Progression Implementation Guide.md": "634f24f99410c207714ee9dd0c19e3d217de348ff9a2dbf5a21df69bff0d3c41",
-    "lifecycle/AGCP Normative Governance Progression Table.md": "5871dc6e951da09cb249f877dee0269ff238417f27cb98650d00ab4b47c3f64f",
-    "lifecycle/README.md": "91547049939b66d3878bb29521008c93f2bb42bf42cf129e83d914f5ccd79c19",
-    "spec/AGCP-Human-Review-Specification.md": "965fad7e724d6bd8e6b9f1e4c3fa12ac111207dfba36ad8988d090466dd1baa5",
-    "spec/README.md": "b0e8bdb5742337ecaaaa13261f13f11b8c85f210fba81a688af178f5d45522af",
-    "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md": "62ecc76fb15637a18b2e7f9b1be2215782f834fe6e62ca29ddcb286e696b0656"
+    "governance/normative-companion-reference-dispositions.json": "f9cfe211ea14875760d8c57392a7cedabb915509cdf1f8ab73af63af90586fce",
+    "lifecycle/AGCP Governance Lifecycle Model.md": "3160e00af3a66c89431a2953d805b12c7b1ba9159bcad1fd9ee84fa270e93174",
+    "lifecycle/AGCP Governance Progression Implementation Guide.md": "3e7970f6fa4c2f16e1b07d9757ebc89bf63e03948aa02ed27752da9250b883c5",
+    "lifecycle/AGCP Normative Governance Progression Table.md": "b2af247341ae07058e28e155fa0df2bfa3079dd84d8f8f79374e0c5e23c4a51c",
+    "lifecycle/README.md": "33bd5dee8ccefbe4a923b1ec846b4c8956f012454d26003b47bf2dda0b43bba1",
+    "spec/AGCP-Human-Review-Specification.md": "06cd09af6f94bdca7d5ace325352a412f1a9feb1ed1563edcfc3da5e22743161",
+    "spec/README.md": "48bdb98c3ec5e1d18d2d2d054300bcd8abef644601e583d6ff96e6fc7f7da272",
+    "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md": "4722f0d8fd97abb82fe9dfc01af853d1be19ce04bcf8fe6c355927e87d0cb544"
   }
 }

@@ -6,7 +6,7 @@
 **Repository Release Target:** AGCP v2.1.0  
 **Repository Release Target Status:** Public Review Controlled Baseline  
 **Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-15  
+**Baseline Date:** 2026-08-14  
 **Series:** AGCP Core  
 **Scope:** HTTP status codes, rejection codes, and Governance Evidence behavior for the AGCP HTTP interface.
 

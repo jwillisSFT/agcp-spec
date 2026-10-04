@@ -1,0 +1,28 @@
+{
+  "actuation_id": "act-001",
+  "result_version": "1.0",
+  "actuation_type": "TENANT_STATE_TRANSITION",
+  "acceptance_status": "ACCEPTED",
+  "realization_status": "EFFECTIVE",
+  "processed_at": "2026-10-04T10:00:01Z",
+  "effective_at": "2026-10-04T10:00:02Z",
+  "effective_condition": {
+    "tenant_id": "T1",
+    "target_state": "SUSPENDED"
+  },
+  "authoritative_artifact_refs": [
+    "tenant:T1"
+  ],
+  "evidence_refs": [
+    "evidence:act-001"
+  ],
+  "observation_refs": [
+    "obs:act-001"
+  ],
+  "ledger_refs": [
+    "ledger:act-001"
+  ],
+  "correlation_id": "corr-act-001",
+  "summary": "Tenant transition realized through authoritative management path.",
+  "result_digest": "1111111111111111111111111111111111111111111111111111111111111111"
+}

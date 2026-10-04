@@ -1190,7 +1190,7 @@
         "CR-108",
         "CR-109"
       ],
-      "sha256": "81c7c6829e73ea9a5f547aec7070be8b7d9974df60e8adf3bc0e34caca5913e9",
+      "sha256": "b4d125ca8bf2569b30b020fc304b145a0d20fc0253d52bb5818768b2c3e18883",
       "assigned_date": "2026-07-22",
       "notes": "Transport-envelope-only submission wrapper. The proposal member is deliberately untyped at transport validation so DS-021 validation occurs inside Proposal Qualification and structurally invalid proposals can produce Structural Refusal.",
       "last_modified_date": "2026-10-03"
@@ -4248,10 +4248,10 @@
         "CR-060",
         "CR-061"
       ],
-      "sha256": "abcb7a0303e0e7a55e59e452c00c5f0427f66482514c8b7d136bd0aaf53a1d21",
+      "sha256": "29b8834fe0659546e5f6a8485bcdc502599baeb696fa04c40578a749d43d40b6",
       "assigned_date": "2026-08-03",
-      "last_modified_date": "2026-10-03",
-      "notes": "Implemented for P0-06 command-versus-authoritative-record separation. DS-045 accepts claimant content and provenance only; additionalProperties:false rejects AGCP-derived verification, eligibility, quorum, lifecycle, evidence, digest, replay, and ledger assertions. IF-001 accepts DS-045 and never accepts DS-026 as request content."
+      "last_modified_date": "2026-10-04",
+      "notes": "Implemented for P0-06 command-versus-authoritative-record separation. DS-045 accepts claimant content and provenance only; additionalProperties:false rejects AGCP-derived verification, eligibility, quorum, lifecycle, evidence, digest, replay, and ledger assertions. IF-001 accepts DS-045 and never accepts DS-026 as request content. DS-045 ingress command/record separation corrected: server-derived semantic_assertions removed from claimant-controlled submission input."
     },
     {
       "ds_id": "DS-046",
@@ -4304,9 +4304,9 @@
       ],
       "ns_ids": [],
       "cr_ids": [],
-      "sha256": "1b6bafd146265c9374fe4024f1f2de931db6eaa7a11cfb8a8520a02dc13fb395",
+      "sha256": "3cc14345b77f6c6d1db001f73f97b87bcfd0cc66a95003807791107670988092",
       "assigned_date": "2026-08-15",
-      "last_modified_date": "2026-08-15",
+      "last_modified_date": "2026-10-04",
       "notes": "v2.1.0 corrected contract: truthful BOUND/RECORD_ONLY/UNBOUND discovery and source/actuation readback requirements."
     },
     {
@@ -4332,9 +4332,9 @@
       ],
       "ns_ids": [],
       "cr_ids": [],
-      "sha256": "9b31fe2ce2a2aeb5305f8c16d48b0c3390c04b0974851168cdf5f65f9de89e11",
+      "sha256": "c94f44fdd3dd34de3930ecbe9ee847d856f287da80d388793ab58ab31f454233",
       "assigned_date": "2026-08-15",
-      "last_modified_date": "2026-08-15",
+      "last_modified_date": "2026-10-04",
       "notes": "v2.1.0 corrected management-plane contract: actuation payloads are type-specific."
     },
     {
@@ -4360,9 +4360,9 @@
       ],
       "ns_ids": [],
       "cr_ids": [],
-      "sha256": "161522c69ed45b75d7c348274b8d810e1596ea0c1179a14b8d38f4c9acc9f4b7",
+      "sha256": "44ef4d2054eefed7e127b2a2bfaeac45d886e974c5852618f75d879e06b1d1af",
       "assigned_date": "2026-08-15",
-      "last_modified_date": "2026-08-15",
+      "last_modified_date": "2026-10-04",
       "notes": "v2.1.0 corrected management-plane contract: acceptance and authoritative realization are separate."
     },
     {
@@ -4390,10 +4390,10 @@
       ],
       "ns_ids": [],
       "cr_ids": [],
-      "sha256": "af87cace7933ca95577d98a1ad4df146b2b77dddb5594676a7b89ddcd6978059",
+      "sha256": "f9fc775c6cc41ca237126a17bb33c1d24fe7af3727e9a3ba33aedd909075a669",
       "assigned_date": "2026-08-15",
-      "last_modified_date": "2026-10-03",
-      "notes": "v2.1.0 corrected contract: typed non-reset controls; optional correlation_id is omitted when absent and JSON null is prohibited."
+      "last_modified_date": "2026-10-04",
+      "notes": "v2.1.0 testability closure: typed controls include post-commit target execution and controlled enforcement-path fault fixtures; optional correlation_id remains omit-when-absent."
     },
     {
       "ds_id": "DS-051",
@@ -4418,10 +4418,10 @@
       ],
       "ns_ids": [],
       "cr_ids": [],
-      "sha256": "1a73f2398a7da6cc553dd19955019db10b331e5a63d33e11b0c19c0f83108fa5",
+      "sha256": "1ad6e460c0ef98402811fd8dbfced95199994c58f6d0f14203ed531152667efc",
       "assigned_date": "2026-08-15",
-      "last_modified_date": "2026-10-03",
-      "notes": "v2.1.0 corrected contract: acceptance/effect/consumption separation; optional correlation_id is omitted when absent and JSON null is prohibited."
+      "last_modified_date": "2026-10-04",
+      "notes": "v2.1.0 testability closure: effect/consumption readback includes execution-outcome consumption and mutation evidence for enforcement-path fault controls."
     },
     {
       "ds_id": "DS-052",
@@ -4640,6 +4640,6 @@
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "controlling_published_baseline": "v2.1.0",
-  "baseline_date": "2026-08-15",
+  "baseline_date": "2026-08-14",
   "rtm_dataset_version": "RTM-1.47"
 }

@@ -1,0 +1,20 @@
+{
+  "operation_id": "tcop-fault-120",
+  "control_version": "1.1",
+  "test_scope": "scope-120",
+  "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE",
+  "fixture": {
+    "fault_target": "ENFORCEMENT_CONTEXT",
+    "fault_mode": "FIELD_SUBSTITUTION",
+    "injection_point": "POST_GRF_PRE_PEP",
+    "field_path": "target_ref.target_id",
+    "replacement_value": "target-other"
+  },
+  "requested_by": {
+    "principal_id": "harness"
+  },
+  "reason": "Exercise TC-120 context integrity rejection",
+  "test_only": true,
+  "correlation_id": "corr-120",
+  "request_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

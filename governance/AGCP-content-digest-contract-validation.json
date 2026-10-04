@@ -1,8 +1,8 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.8",
+    "repository_release_target": "v2.1.0",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.8",
+    "controlling_published_baseline": "v2.1.0",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
     "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
@@ -19,8 +19,8 @@
     "BLAKE2B-256": 64,
     "BLAKE2B-512": 128
   },
-  "dependent_schema_count": 40,
-  "controlled_digest_instance_count": 966,
+  "dependent_schema_count": 42,
+  "controlled_digest_instance_count": 990,
   "positive_vector_count": 5,
   "negative_vector_count": 14,
   "affected_crs": [
@@ -30,15 +30,15 @@
     "CR-066"
   ],
   "source_hashes": {
-    "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+    "schemas/common.json": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4",
     "schemas/examples/common-content-digest-examples.json": "335d62b3e52c0844635c26a9eb97c48242d0d62f0d7fecbf7259264229e0f777",
-    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
-    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2",
+    "api/AGCP-HTTP-Contract.yaml": "2b6437515da9feafb3d606b7316f1a1999b530a645133570a8a2087d6e6a3949",
+    "spec/AGCP-HTTP-Interface-Specification.md": "cfaced45689c68d5c6643ead63161c20a330d4b0a677ccb2da000a7a06f54393",
     "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e",
-    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
-    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
-    "governance/validate_content_digest_contract.py": "b455cdee0cfcc122c865004a6eeae373d9e6138848675b3cf265323be59abcd3"
+    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
+    "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "2cbf5d0d83e99863e117275f8059f8072d0cd74269f971c6c2cffe436545e2bc",
+    "governance/validate_content_digest_contract.py": "8ad8a89dbd147a44ba627f0769a174413ada8a34e9574ec4199539be9cbc86e4"
   },
   "checks": [
     {
@@ -213,56 +213,61 @@
       ]
     },
     {
-      "check": "dependent_schema_count",
+      "check": "dependent_schema_references_resolve",
       "status": "PASS",
-      "detail": [
-        "schemas/authority_lineage.json",
-        "schemas/authority_rederivation_result.json",
-        "schemas/bind_set.json",
-        "schemas/canonical_state.json",
-        "schemas/commit_boundary_request.json",
-        "schemas/commit_boundary_result.json",
-        "schemas/compiled_governance_artifact.json",
-        "schemas/constraint_artifact.json",
-        "schemas/constraint_evaluation.json",
-        "schemas/continuation_integrity_result.json",
-        "schemas/controlled_governance_activation.json",
-        "schemas/delegation_artifact.json",
-        "schemas/deterministic_adjudication_result.json",
-        "schemas/enforcement_context.json",
-        "schemas/evidence_qualification_result.json",
-        "schemas/exception_artifact.json",
-        "schemas/execution_authorization_view.json",
-        "schemas/governance_approval_artifact.json",
-        "schemas/governance_artifact_view.json",
-        "schemas/governance_binding_validation_result.json",
-        "schemas/governance_configuration.json",
-        "schemas/governance_context_envelope.json",
-        "schemas/governance_decision_result.json",
-        "schemas/governance_dependency_graph.json",
-        "schemas/governance_evidence.json",
-        "schemas/governance_ledger_event.json",
-        "schemas/governance_lifecycle_record.json",
-        "schemas/governance_receipt.json",
-        "schemas/governed_action_proposal.json",
-        "schemas/invariant_definition.json",
-        "schemas/invariant_evaluation.json",
-        "schemas/meta_response.json",
-        "schemas/policy_artifact.json",
-        "schemas/policy_evaluation_module_artifact.json",
-        "schemas/proposal_view.json",
-        "schemas/refusal_record.json",
-        "schemas/registry_document.schema.json",
-        "schemas/resulting_state_validation_result.json",
-        "schemas/state_qualification_result.json",
-        "schemas/tenant.json"
-      ]
+      "detail": {
+        "count": 42,
+        "files": [
+          "schemas/authority_lineage.json",
+          "schemas/authority_rederivation_result.json",
+          "schemas/bind_set.json",
+          "schemas/canonical_state.json",
+          "schemas/commit_boundary_request.json",
+          "schemas/commit_boundary_result.json",
+          "schemas/compiled_governance_artifact.json",
+          "schemas/constraint_artifact.json",
+          "schemas/constraint_evaluation.json",
+          "schemas/continuation_integrity_result.json",
+          "schemas/controlled_governance_activation.json",
+          "schemas/delegation_artifact.json",
+          "schemas/deterministic_adjudication_result.json",
+          "schemas/enforcement_context.json",
+          "schemas/evidence_qualification_result.json",
+          "schemas/exception_artifact.json",
+          "schemas/execution_authorization_view.json",
+          "schemas/governance_approval_artifact.json",
+          "schemas/governance_artifact_view.json",
+          "schemas/governance_binding_validation_result.json",
+          "schemas/governance_configuration.json",
+          "schemas/governance_context_envelope.json",
+          "schemas/governance_decision_result.json",
+          "schemas/governance_dependency_graph.json",
+          "schemas/governance_evidence.json",
+          "schemas/governance_ledger_event.json",
+          "schemas/governance_lifecycle_record.json",
+          "schemas/governance_receipt.json",
+          "schemas/governed_action_proposal.json",
+          "schemas/governed_execution_outcome.json",
+          "schemas/identity_authorization_qualification_result.json",
+          "schemas/invariant_definition.json",
+          "schemas/invariant_evaluation.json",
+          "schemas/meta_response.json",
+          "schemas/policy_artifact.json",
+          "schemas/policy_evaluation_module_artifact.json",
+          "schemas/proposal_view.json",
+          "schemas/refusal_record.json",
+          "schemas/registry_document.schema.json",
+          "schemas/resulting_state_validation_result.json",
+          "schemas/state_qualification_result.json",
+          "schemas/tenant.json"
+        ]
+      }
     },
     {
       "check": "controlled_digest_instances_valid",
       "status": "PASS",
       "detail": {
-        "count": 966,
+        "count": 990,
         "errors": []
       }
     },
@@ -449,6 +454,42 @@
           "expected": "VALID",
           "actual": "VALID",
           "errors": []
+        },
+        {
+          "fixture_id": "FX-DS052-PENDING",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS052-SUCCEEDED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS052-FAILED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS053-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS053-NOT-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS053-SOURCE-UNAVAILABLE",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
         }
       ]
     },
@@ -479,7 +520,7 @@
       "detail": ""
     },
     {
-      "check": "schema_catalog_version",
+      "check": "schema_catalog_metadata_present",
       "status": "PASS",
       "detail": ""
     },
@@ -487,8 +528,8 @@
       "check": "ds001_catalog_hash",
       "status": "PASS",
       "detail": {
-        "catalog": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
-        "actual": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d"
+        "catalog": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4",
+        "actual": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4"
       }
     },
     {

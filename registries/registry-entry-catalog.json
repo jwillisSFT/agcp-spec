@@ -2231,6 +2231,6 @@
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "controlling_published_baseline": "v2.1.0",
-  "baseline_date": "2026-08-15",
+  "baseline_date": "2026-08-14",
   "rtm_dataset_version": "RTM-1.47"
 }

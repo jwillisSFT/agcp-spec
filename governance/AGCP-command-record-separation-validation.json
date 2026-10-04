@@ -1,8 +1,8 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.8",
+    "repository_release_target": "v2.1.0",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.8",
+    "controlling_published_baseline": "v2.1.0",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
     "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
@@ -17,31 +17,31 @@
   "authoritative_record_ds_id": "DS-026",
   "affected_cr_count": 11,
   "negative_vector_count": 15,
-  "controlled_fixture_count": 30,
+  "controlled_fixture_count": 36,
   "source_hashes": {
-    "schemas/governance_approval_submission.json": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
-    "schemas/governance_approval_artifact.json": "52656fc18ea4a4786aa62f16ac80426261f8d370c14271559fd7d9cf8d740625",
+    "schemas/governance_approval_submission.json": "29b8834fe0659546e5f6a8485bcdc502599baeb696fa04c40578a749d43d40b6",
+    "schemas/governance_approval_artifact.json": "6b3364d2282585e0c9c537882cabaa1d73b15af49c20b9eeaffda95a9fc6af1b",
     "schemas/examples/ds045-governance-approval-submission-valid.json": "9b0565c40f482ecd1ee58bf21ed873ad01c59d2a8a2f228784b7619239b40714",
-    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
-    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2",
-    "spec/AGCP-Human-Review-Specification.md": "965fad7e724d6bd8e6b9f1e4c3fa12ac111207dfba36ad8988d090466dd1baa5",
-    "spec/AGCP-Error-Mapping.md": "6c5cd15e1260666da2b7713ea153fb186dceaf8c1e81320f7bf0f8e55530f6c9",
+    "api/AGCP-HTTP-Contract.yaml": "2b6437515da9feafb3d606b7316f1a1999b530a645133570a8a2087d6e6a3949",
+    "spec/AGCP-HTTP-Interface-Specification.md": "cfaced45689c68d5c6643ead63161c20a330d4b0a677ccb2da000a7a06f54393",
+    "spec/AGCP-Human-Review-Specification.md": "06cd09af6f94bdca7d5ace325352a412f1a9feb1ed1563edcfc3da5e22743161",
+    "spec/AGCP-Error-Mapping.md": "8b7442c52864640e1c41c284b253df483725bb4b3426c01c12f1c69c42c1fc63",
     "reference/AGCP-HTTP-Reference-Implementation-Pseudocode.md": "fd1b30291a633a4efa6eb70cc433c5407053b9ebb78e11c66940594cbd230f09",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "aa160383bc927c8e87e6914a4120e1f986fe7f81b5525372138ad931e57c28a0",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "bcff8dfcc067e9b6da85e99610fec27d7427fd4999c286f77209aedfebb2c203",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
-    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
-    "api/interface-catalog.json": "803b1614a0cd0004763879bf0249f809e6a2e8d2a6c8f0d0db2e0ec240a9b364",
-    "conformance/fixture-mapping.json": "b072c0e2dead30fbb0de9c0cd6ebb69107f4a9f6922fbfc465970b7bf901778d",
-    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
-    "governance/validate_command_record_separation.py": "ca126f810c50a9fa80531f0cad08e8ecf478e04c4d64b003699031b933a02dc7"
+    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
+    "api/interface-catalog.json": "4d0647d6c5cb7f922af1db62b264d32654cd345903fe5899eea24d186d235b13",
+    "conformance/fixture-mapping.json": "b679101192bba825f1a79e37f97cf30ee7d3b35141034358274f57220ebb5b70",
+    "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "2cbf5d0d83e99863e117275f8059f8072d0cd74269f971c6c2cffe436545e2bc",
+    "governance/validate_command_record_separation.py": "b963e49cc6d5821f7c0eda859afcfe7beaad756e1cc2003e38552ed701c2bc23"
   },
   "checks": [
     {
       "check": "all_schema_documents_metaschema_valid",
       "status": "PASS",
-      "detail": 97
+      "detail": 136
     },
     {
       "check": "ds045_identity",
@@ -271,7 +271,7 @@
       "detail": ""
     },
     {
-      "check": "schema_catalog_version",
+      "check": "schema_catalog_metadata_present",
       "status": "PASS",
       "detail": ""
     },
@@ -279,14 +279,14 @@
       "check": "schema_catalog_counts",
       "status": "PASS",
       "detail": {
-        "implemented_schema_count": 44,
+        "implemented_schema_count": 52,
         "proposed_reserved_schema_count": 0,
         "excluded_registry_payload_count": 0,
         "rtm_rows_with_ds_assignments": 122,
-        "highest_assigned_ds_identifier": "DS-045",
-        "implemented_count": 44,
+        "highest_assigned_ds_identifier": "DS-053",
+        "implemented_count": 52,
         "proposed_reserved_count": 0,
-        "total_assigned_count": 45,
+        "total_assigned_count": 53,
         "retired_schema_count": 1,
         "retired_count": 1,
         "rtm_rows_with_explicit_ds_disposition": 122,
@@ -294,8 +294,9 @@
         "rtm_rows_with_explicit_if_disposition": 122,
         "rtm_rows_with_reg_assignments": 117,
         "rtm_rows_with_explicit_reg_disposition": 122,
-        "interface_definition_count": 2,
-        "registry_entry_count": 94
+        "interface_definition_count": 5,
+        "registry_entry_count": 101,
+        "highest_assigned_ds_id": "DS-053"
       }
     },
     {

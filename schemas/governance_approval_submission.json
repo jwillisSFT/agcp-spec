@@ -7,7 +7,7 @@
   "x-agcp-ds-id": "DS-045",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
-  "x-agcp-schema-role": "Governance Approval Submission — Untrusted Ingress Command",
+  "x-agcp-schema-role": "Governance Approval Submission \u2014 Untrusted Ingress Command",
   "x-agcp-normative-basis": {
     "architecture_reference_model": [
       "ARM-107",
@@ -181,26 +181,6 @@
           "maxItems": 256
         }
       }
-    },
-    "semantic_assertions": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "claimed_approver_is_non_authoritative": {
-          "const": true
-        },
-        "claimed_roles_and_entitlements_are_non_authoritative": {
-          "const": true
-        },
-        "server_must_resolve_authoritative_human_identity_and_authority": {
-          "const": true
-        }
-      },
-      "required": [
-        "claimed_approver_is_non_authoritative",
-        "claimed_roles_and_entitlements_are_non_authoritative",
-        "server_must_resolve_authoritative_human_identity_and_authority"
-      ]
     }
   },
   "required": [

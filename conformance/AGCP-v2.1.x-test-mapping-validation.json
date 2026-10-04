@@ -43,13 +43,13 @@
   "downstream_vector_check_content_status": "PENDING_SYNCHRONIZATION",
   "rtm_status": "PENDING_FINAL_RTM_SYNCHRONIZATION",
   "source_hashes": {
-    "conformance/test-mapping.json": "cf59a8cac30519eca06c5022eb45ee434b8c3862989484340aea25b82726b498",
-    "conformance/AGCP-Test-Matrix.md": "d481a70c32faa99d17fdb80c0f6f96b44b0d94bedbb6935bb2a92547bfbe2349",
-    "conformance/v2.1.x-formal-test-sync.json": "c9795aa4a601f80718dd453ad56bd7b2a854d4719810e630d1f8d3f937167d00",
-    "schemas/catalog/schema-catalog.json": "288b10fc092204242b0340de4405bbcd6e1505fcc3dfcd6278c628894c1dc6cd",
-    "api/interface-catalog.json": "c472b22ef94bd982afcf63974047f38948f47a839e15bbf092ff85f7c06ebf75",
-    "registries/registry-entry-catalog.json": "6e203f419066cd310ba490bc9890909f72cca88312971a7655d259b3cbdcc7ea",
-    "conformance/AGCP-Test-Mapping.md": "f503f41d5710a372cc1b557b6b0b3bc4ebe750a4a4975dbbb8f96d215308ff8c"
+    "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
+    "conformance/AGCP-Test-Matrix.md": "458db0b2fffd74dc327821e5da050112167c622bc909932b65367ba6cfa45ba6",
+    "conformance/v2.1.x-formal-test-sync.json": "fb364e9484c72790276c5f85b7ec399660f78b1982799468144bbea78da1f0ad",
+    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
+    "api/interface-catalog.json": "4d0647d6c5cb7f922af1db62b264d32654cd345903fe5899eea24d186d235b13",
+    "registries/registry-entry-catalog.json": "13d53a535f6093fa60bc18f3e6c57f280269d7f062a36ccc6d7fa583faf50c8d",
+    "conformance/AGCP-Test-Mapping.md": "bbdd56ce36f17f793b358e5ebc8f352815d3ab58c10cff8ad6933d25fd3d5dc5"
   },
   "errors": [],
   "human_readable_mirror": "conformance/AGCP-Test-Mapping.md"

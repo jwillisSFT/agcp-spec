@@ -477,6 +477,91 @@
         }
       },
       "description": "Test-only external PEP outcome fixture consumed at the enforcement stage. It SHALL NOT establish GRF current commit eligibility or substitute for PEP Profile mapping."
+    },
+    "target_execution_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "execution_mode",
+        "initial_status",
+        "terminal_outcome"
+      ],
+      "properties": {
+        "execution_mode": {
+          "const": "POST_COMMIT_ASYNCHRONOUS"
+        },
+        "initial_status": {
+          "const": "PENDING"
+        },
+        "terminal_outcome": {
+          "enum": [
+            "SUCCEEDED",
+            "FAILED",
+            "PARTIAL",
+            "CANCELLED",
+            "INDETERMINATE"
+          ]
+        },
+        "release_after_virtual_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "target_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Test-only external target/execution dependency fixture. It SHALL NOT directly create DS-052, Derived Lifecycle State, or a governance result."
+    },
+    "enforcement_path_fault_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fault_target",
+        "fault_mode",
+        "injection_point"
+      ],
+      "properties": {
+        "fault_target": {
+          "enum": [
+            "ENFORCEMENT_CONTEXT",
+            "GOVERNANCE_ENFORCEMENT_BINDING",
+            "GRF_TO_PEP_CALLER_BINDING",
+            "COLOCATED_LOGICAL_BINDING"
+          ]
+        },
+        "fault_mode": {
+          "enum": [
+            "FIELD_SUBSTITUTION",
+            "FIELD_OMISSION",
+            "STALE_VALUE",
+            "DIGEST_MISMATCH",
+            "UNAUTHORIZED_CALLER",
+            "LOGICAL_BINDING_MISMATCH"
+          ]
+        },
+        "injection_point": {
+          "enum": [
+            "POST_GRF_PRE_PEP",
+            "PEP_CALLER_AUTHENTICATION",
+            "COLOCATED_ENFORCEMENT_BOUNDARY"
+          ]
+        },
+        "field_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "replacement_value": {},
+        "replacement_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Controlled negative-test mutation applied only after the ordinary producing stage. It SHALL NOT replace GRF processing or inject the expected refusal, commitment, or governance outcome."
     }
   },
   "required": [
@@ -518,6 +603,8 @@
         "COMPOSITE_GOVERNANCE_FIXTURE",
         "GOVERNANCE_CONFIGURATION_FIXTURE",
         "PEP_OUTCOME_FIXTURE",
+        "TARGET_EXECUTION_FIXTURE",
+        "ENFORCEMENT_PATH_FAULT_FIXTURE",
         "RESET_TEST_SCOPE"
       ]
     },
@@ -888,6 +975,50 @@
         "properties": {
           "fixture": {
             "$ref": "#/$defs/pep_outcome_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "TARGET_EXECUTION_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/target_execution_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "ENFORCEMENT_PATH_FAULT_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/enforcement_path_fault_fixture"
           }
         }
       }

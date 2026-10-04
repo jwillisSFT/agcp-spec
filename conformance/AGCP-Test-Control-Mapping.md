@@ -1,15 +1,15 @@
 # AGCP Formal Test Case Observation and Test-Control Mapping
 
-**Specification release:** `v2.1.x`  
+**Specification release:** `v2.1.0`  
 **Formal Test Case coverage:** `TC-001` through `TC-122`  
 **Mapping identifier:** `AGCP-TC-TEST-CONTROL-MAPPING-1.3`  
 **Authority:** execution aid only; each Formal Test Case remains the authoritative assessment procedure.
 
-This file is the human-readable mirror of `test-control-mapping.json`. It was regenerated after the Formal Test Cases, Test Matrix, and test mappings were synchronized. It maps each Formal TC to Governance Observation Points, standardized IF-005 precondition controls where useful, explicit external dependencies, and any additional harness injection need that is not yet represented by a standardized IF-005 operation.
+This file is the human-readable mirror of `test-control-mapping.json`. It was regenerated after the Formal Test Cases, Test Matrix, and test mappings were synchronized. It maps each Formal TC to Governance Observation Points, standardized IF-005 precondition controls where useful, explicit external dependencies, and additional harness injection needs together with their current standardization disposition.
 
 ## Development status
 
-The test-control, fixture-injection, and observation-point inventory remains under active development. A control listed here is a standardized capability that may be used when the assessed implementation advertises and proves runtime-bound support; the mapping does **not** assert that every reference implementation already implements every control or internal hook. Additional implementation-specific hooks may be required for certain negative-path tests until a standardized control exists.
+The test-control, fixture-injection, and observation-point inventory remains under active development. A control listed here is a standardized capability that may be used when the assessed implementation advertises and proves runtime-bound support; the mapping does **not** assert that every reference implementation already implements every control or internal hook. The previously identified TC-081/TC-120/TC-121 internal injection needs are standardized by DS-050 controls. Implementation support remains profile/runtime dependent and must be discovered and proven through IF-003/IF-005.
 
 ## Runtime binding gate
 
@@ -30,9 +30,9 @@ A mapped IF-005 control establishes a Formal TC precondition only when all appli
 - TCs with recommended standardized IF-005 controls: **81**
 - TCs without recommended standardized IF-005 controls: **41**
 - TCs with explicit external dependencies: **4**
-- Standardized control bindings: **108**
+- Standardized control bindings: **110**
 - Conditional/supporting standardized control bindings: **14**
-- TCs with additional non-standardized harness injection needs: **3**
+- TCs with unresolved non-standardized internal harness injection needs: **0**
 - Additional harness injection needs recorded: **7**
 
 ## Standardized IF-005 control usage
@@ -46,17 +46,21 @@ A mapped IF-005 control establishes a Formal TC precondition only when all appli
 | `COMPOSITE_GOVERNANCE_FIXTURE` | 8 |
 | `DEGRADATION_FIXTURE` | 8 |
 | `DELEGATION_FIXTURE` | 4 |
+| `ENFORCEMENT_PATH_FAULT_FIXTURE` | 2 |
 | `EVIDENCE_FIXTURE` | 6 |
 | `GOVERNANCE_CONFIGURATION_FIXTURE` | 13 |
 | `GOVERNANCE_DOMAIN_FIXTURE` | 2 |
 | `HUMAN_REVIEW_FIXTURE` | 12 |
-| `PEP_OUTCOME_FIXTURE` | 5 |
+| `PEP_OUTCOME_FIXTURE` | 4 |
+| `TARGET_EXECUTION_FIXTURE` | 1 |
 | `TENANT_STATE_FIXTURE` | 5 |
 | `VIRTUAL_TIME_SET` | 5 |
 
+Standardized DS-050 control types: **18**
+
 ## Per-Test-Case mapping
 
-`Recommended controls` are standardized IF-005 source/dependency controls, not outcome injectors. `Additional harness need` identifies a negative-path setup that may require an implementation-specific test hook or future standardization.
+`Recommended controls` are standardized IF-005 source/dependency controls, not outcome injectors. `Additional harness need` identifies a negative-path or external-condition setup and records whether it is standardized by IF-005, profile-conditional, or externally dependent.
 
 | TC | Requirement | Setup | Governance Observation Points | Recommended controls | External dependency | Additional harness need |
 |---|---|---|---|---|---|---|
@@ -140,7 +144,7 @@ A mapped IF-005 control establishes a Formal TC precondition only when all appli
 | `TC-078` | Determinism Under Non-Deterministic Agent Inputs | `TEST_ACTUATION_RECOMMENDED` | `GOVERNANCE_DECISION` | `AUTHORITATIVE_SOURCE_FIXTURE` | — | — |
 | `TC-079` | Authorized Actions Successfully Commit | `PUBLIC_RUNTIME_OR_MANAGEMENT_OBSERVATION` | `EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION`<br>`COMMITMENT_ACCEPTED` | — | — | — |
 | `TC-080` | Unauthorized Actions Never Commit | `PUBLIC_RUNTIME_OR_MANAGEMENT_OBSERVATION` | `EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION` | — | — | — |
-| `TC-081` | Every Action Follows Valid Lifecycle Transitions | `PUBLIC_RUNTIME_OR_MANAGEMENT_OBSERVATION` | `LEDGER_APPEND`<br>`DERIVED_LIFECYCLE_STATE`<br>`AUTHORITY_REDERIVATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT`<br>`COMMITMENT_ACCEPTED`<br>`EXECUTION_OUTCOME` | `PEP_OUTCOME_FIXTURE` | Commitment-distinct/asynchronous target or profile for the NS-9.5-05 conditional subtest; otherwise evidence-supported Not Applicable. | `ASYNCHRONOUS_EXECUTION_DELAY_AND_TERMINAL_OUTCOME` |
+| `TC-081` | Every Action Follows Valid Lifecycle Transitions | `PUBLIC_RUNTIME_OR_MANAGEMENT_OBSERVATION` | `LEDGER_APPEND`<br>`DERIVED_LIFECYCLE_STATE`<br>`AUTHORITY_REDERIVATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT`<br>`COMMITMENT_ACCEPTED`<br>`EXECUTION_OUTCOME` | `TARGET_EXECUTION_FIXTURE` | Commitment-distinct/asynchronous target or profile for the NS-9.5-05 conditional subtest; otherwise evidence-supported Not Applicable. | `ASYNCHRONOUS_EXECUTION_DELAY_AND_TERMINAL_OUTCOME` |
 | `TC-082` | Derived State Matches Ledger Reconstruction | `PUBLIC_RUNTIME_OR_MANAGEMENT_OBSERVATION` | `CANONICAL_STATE_RESOLUTION`<br>`STATE_QUALIFICATION`<br>`LEDGER_APPEND`<br>`DERIVED_LIFECYCLE_STATE`<br>`COMMITMENT_ACCEPTED`<br>`EXECUTION_OUTCOME` | — | — | — |
 | `TC-083` | Canonical State and Decision Remain Synchronized | `TEST_ACTUATION_RECOMMENDED` | `CANONICAL_STATE_RESOLUTION`<br>`STATE_QUALIFICATION`<br>`GOVERNANCE_DECISION` | `CANONICAL_STATE_FIXTURE` | — | — |
 | `TC-084` | Commit Uses Latest Canonical State | `TEST_ACTUATION_RECOMMENDED` | `CANONICAL_STATE_RESOLUTION`<br>`STATE_QUALIFICATION`<br>`EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION` | `CANONICAL_STATE_FIXTURE` | — | — |
@@ -179,11 +183,11 @@ A mapped IF-005 control establishes a Formal TC precondition only when all appli
 | `TC-117` | Governance Self-Modification Isolation | `TEST_ACTUATION_RECOMMENDED` | `GOVERNANCE_DECISION`<br>`DERIVED_LIFECYCLE_STATE` | `GOVERNANCE_CONFIGURATION_FIXTURE` | — | — |
 | `TC-118` | Autonomous Coordination Bounds | `TEST_ACTUATION_RECOMMENDED` | `GOVERNANCE_DECISION`<br>`DERIVED_LIFECYCLE_STATE`<br>`AUTHORITY_REDERIVATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT` | `AUTHORITATIVE_SOURCE_FIXTURE`<br>`AUTHORITY_FIXTURE`<br>`COMPOSITE_GOVERNANCE_FIXTURE` | — | — |
 | `TC-119` | Enforcement Context Availability | `TEST_ACTUATION_RECOMMENDED` | `EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION` | `PEP_OUTCOME_FIXTURE` | — | — |
-| `TC-120` | Enforcement Decision Integrity | `TEST_ACTUATION_RECOMMENDED` | `EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`GOVERNANCE_DECISION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION` | `AUTHORITY_FIXTURE`<br>`GOVERNANCE_CONFIGURATION_FIXTURE`<br>`PEP_OUTCOME_FIXTURE` | — | `ENFORCEMENT_CONTEXT_TAMPER_OR_SUBSTITUTION`<br>`GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH`<br>`NONFAITHFUL_OR_UNSUPPORTED_PEP_MAPPING` |
-| `TC-121` | Governance Enforcement Binding | `TEST_ACTUATION_RECOMMENDED` | `EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`GOVERNANCE_DECISION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION` | `AUTHORITY_FIXTURE`<br>`GOVERNANCE_CONFIGURATION_FIXTURE`<br>`PEP_OUTCOME_FIXTURE` | — | `GRF_TO_PEP_CALLER_IDENTITY_MISMATCH`<br>`GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH`<br>`COLOCATED_GDF_GRF_PEP_LOGICAL_BINDING_NEGATIVE_PATH` |
+| `TC-120` | Enforcement Decision Integrity | `TEST_ACTUATION_RECOMMENDED` | `EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`GOVERNANCE_DECISION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION` | `AUTHORITY_FIXTURE`<br>`GOVERNANCE_CONFIGURATION_FIXTURE`<br>`PEP_OUTCOME_FIXTURE`<br>`ENFORCEMENT_PATH_FAULT_FIXTURE` | — | `ENFORCEMENT_CONTEXT_TAMPER_OR_SUBSTITUTION`<br>`GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH`<br>`NONFAITHFUL_OR_UNSUPPORTED_PEP_MAPPING` |
+| `TC-121` | Governance Enforcement Binding | `TEST_ACTUATION_RECOMMENDED` | `EXECUTION_AUTHORIZATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`GOVERNANCE_DECISION`<br>`PEP_ENFORCEMENT`<br>`RESULTING_STATE_VALIDATION`<br>`AUTHORITY_REDERIVATION` | `AUTHORITY_FIXTURE`<br>`GOVERNANCE_CONFIGURATION_FIXTURE`<br>`PEP_OUTCOME_FIXTURE`<br>`ENFORCEMENT_PATH_FAULT_FIXTURE` | — | `GRF_TO_PEP_CALLER_IDENTITY_MISMATCH`<br>`GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH`<br>`COLOCATED_GDF_GRF_PEP_LOGICAL_BINDING_NEGATIVE_PATH` |
 | `TC-122` | Risk-Based Re-Evaluation | `TEST_ACTUATION_RECOMMENDED` | `CONTINUATION_INTEGRITY`<br>`GOVERNANCE_DEGRADATION`<br>`AUTHORITY_REDERIVATION`<br>`COMMIT_BOUND_ADMISSIBILITY`<br>`GOVERNANCE_BINDING_VALIDATION`<br>`GOVERNANCE_REALIZATION`<br>`PEP_ENFORCEMENT` | `CANONICAL_STATE_FIXTURE`<br>`EVIDENCE_FIXTURE`<br>`AUTHORITY_FIXTURE`<br>`DEGRADATION_FIXTURE`<br>`GOVERNANCE_CONFIGURATION_FIXTURE` | — | — |
 
-## Additional harness injection needs requiring implementation-specific support or future standardization
+## Additional harness injection needs and standardization disposition
 
 ### TC-081 — Every Action Follows Valid Lifecycle Transitions
 
@@ -212,3 +216,7 @@ When a TC uses IF-005, the harness should invoke `RESET_TEST_SCOPE` after eviden
 ## Downstream status
 
 Test-control mapping regeneration and Harness Test Vector/Check synchronization are complete. Aggregate conformance-layer validation has passed. Final RTM synchronization is complete at `RTM-1.47`.
+
+## v2.1.0 test/injection-point closure
+
+The current DS-050 vocabulary standardizes the previously implementation-specific TC-081/TC-120/TC-121 needs through `TARGET_EXECUTION_FIXTURE` and `ENFORCEMENT_PATH_FAULT_FIXTURE`. `GOVERNANCE_CONFIGURATION_FIXTURE` remains the control for unsupported/nonfaithful PEP mapping setup. TC-073, TC-075, and TC-090 remain genuine external-dependency tests and are not satisfiable by IF-005 simulation.

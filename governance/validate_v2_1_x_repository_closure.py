@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib, json, re, sys, urllib.parse
 from pathlib import Path
 from openpyxl import load_workbook
+from release_version import SEMVER, RELEASE_TAG
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / 'governance/AGCP-v2.1.x-repository-closure-manifest.json'
@@ -37,17 +38,17 @@ def main():
 
     version=(ROOT/'VERSION').read_text().strip() if (ROOT/'VERSION').is_file() else None
     notes=(ROOT/'RELEASE_NOTES_v2.1.x.md').read_text(encoding='utf-8') if (ROOT/'RELEASE_NOTES_v2.1.x.md').is_file() else ''
-    version_ok=(version=='2.1.0' and 'Publication version:** Not assigned by this closure step' in notes)
+    version_ok=(version==SEMVER and 'Publication version:** Not assigned by this closure step' in notes)
     add(checks,'published_baseline_preserved_and_new_publication_version_not_silently_assigned',version_ok,{'VERSION':version})
     if not version_ok: errors.append('release-version-boundary')
 
     rtm=j('spec/AGCP-v2.1.x-rtm-synchronization-validation.json')
-    rtm_ok=(rtm.get('status')=='PASS' and rtm.get('rtm_dataset_version')=='RTM-1.47' and rtm.get('main_rtm_row_count')==122 and rtm.get('active_normative_statement_count')==390 and rtm.get('retired_normative_statement_count')==3 and rtm.get('harness_check_count')==21 and rtm.get('harness_test_vector_count')==71 and not rtm.get('errors') and not rtm.get('warnings'))
+    rtm_ok=(rtm.get('status')=='PASS' and rtm.get('rtm_dataset_version')=='RTM-1.47' and rtm.get('main_rtm_row_count')==122 and rtm.get('active_normative_statement_count')==390 and rtm.get('retired_normative_statement_count')==3 and rtm.get('harness_check_count')==21 and rtm.get('harness_test_vector_count')==135 and not rtm.get('errors') and not rtm.get('warnings'))
     add(checks,'final_rtm_synchronization_passes',rtm_ok,{k:rtm.get(k) for k in ['rtm_dataset_version','main_rtm_row_count','ns_cr_relationship_count','active_normative_statement_count','retired_normative_statement_count','formal_test_case_count','harness_check_count','harness_test_vector_count']})
     if not rtm_ok: errors.append('rtm-validation')
 
     agg=j('conformance/AGCP-v2.1.x-aggregate-conformance-layer-validation.json')
-    agg_ok=(agg.get('status')=='PASS' and agg.get('formal_test_case_count')==122 and agg.get('test_mapping_count')==122 and agg.get('test_control_mapping_count')==122 and agg.get('harness_check_count')==21 and agg.get('harness_test_vector_count')==71 and agg.get('controlled_fixture_count')==36 and not agg.get('errors') and not agg.get('warnings'))
+    agg_ok=(agg.get('status')=='PASS' and agg.get('formal_test_case_count')==122 and agg.get('test_mapping_count')==122 and agg.get('test_control_mapping_count')==122 and agg.get('harness_check_count')==21 and agg.get('harness_test_vector_count')==135 and agg.get('controlled_fixture_count')==36 and not agg.get('errors') and not agg.get('warnings'))
     add(checks,'aggregate_conformance_layer_validation_passes',agg_ok,{k:agg.get(k) for k in ['formal_test_case_count','test_mapping_count','test_control_mapping_count','harness_check_count','harness_test_vector_count','controlled_fixture_count']})
     if not agg_ok: errors.append('aggregate-conformance-validation')
 
@@ -130,7 +131,7 @@ def main():
       'status':status,
       'validated_at':'2026-10-03',
       'synchronization_target':'v2.1.x',
-      'controlling_published_baseline':'v2.1.0',
+      'controlling_published_baseline':RELEASE_TAG,
       'publication_version_assignment':'NOT_ASSIGNED_BY_CLOSURE_STEP',
       'rtm_dataset_version':'RTM-1.47',
       'checks_passed':sum(1 for c in checks if c['status']=='PASS'),

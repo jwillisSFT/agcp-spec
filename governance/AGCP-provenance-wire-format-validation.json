@@ -1,8 +1,8 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.8",
+    "repository_release_target": "v2.1.0",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.8",
+    "controlling_published_baseline": "v2.1.0",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
     "baseline_date": "2026-08-14",
     "artifact_lifecycle_state": "CURRENT"
@@ -14,23 +14,23 @@
   "wire_schema": "schemas/common.json#/$defs/provenance",
   "dependent_schema_count": 21,
   "wire_example_count": 18,
-  "controlled_fixture_count": 30,
+  "controlled_fixture_count": 36,
   "harness_provenance_instance_count": 12,
   "source_hashes": {
-    "spec/AGCP-Provenance-Wire-Format-Specification.md": "9de4343acfb0df44ef3750ea86d0dc8fb36d8f43c6f39f8d6e1e71c6200ea861",
-    "schemas/common.json": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
-    "api/AGCP-HTTP-Contract.yaml": "6d0eec2bb72a5206cd3e0dde90e58062335a568bce15765f03e9653ec8cf8314",
-    "spec/AGCP-HTTP-Interface-Specification.md": "727ee0d2cf69b7e41320210dec9d82054635fcfdd5c85a633faed886c73082c2",
-    "conformance/AGCP-Conformance-Harness-Spec.yml": "409019906270d085ef4650744c3dc9e2c7ea138b846706e1ca292dc1e2f64544",
-    "conformance/AGCP-Conformance-Test-Vectors.md": "b23c0a1aa12ce2209b0e306f3981ed7512fd0fea975ac6b959cf62d0038fba5c",
+    "spec/AGCP-Provenance-Wire-Format-Specification.md": "eccf56a287aca8765274fa5052d2df54cdc7fbe44d0c401020b7204a749f5f11",
+    "schemas/common.json": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4",
+    "api/AGCP-HTTP-Contract.yaml": "2b6437515da9feafb3d606b7316f1a1999b530a645133570a8a2087d6e6a3949",
+    "spec/AGCP-HTTP-Interface-Specification.md": "cfaced45689c68d5c6643ead63161c20a330d4b0a677ccb2da000a7a06f54393",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "aa160383bc927c8e87e6914a4120e1f986fe7f81b5525372138ad931e57c28a0",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "bcff8dfcc067e9b6da85e99610fec27d7427fd4999c286f77209aedfebb2c203",
     "conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json": "57436530a4e667c29768026a3a0a90dc3019ec57fc2b96a6f6584dbf2723daa3",
-    "schemas/catalog/schema-catalog.json": "8bc90c750fd29142016f41300e6436c6a8887a781e058af1f95d2a419b4cfe79",
-    "api/interface-catalog.json": "803b1614a0cd0004763879bf0249f809e6a2e8d2a6c8f0d0db2e0ec240a9b364",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6",
-    "governance/validate_provenance_wire_format.py": "568e8f93c305ef2c90a023871a4985a1800419f507dcf3892b1fe1b9809f678e",
-    "conformance/fixture-mapping.json": "b072c0e2dead30fbb0de9c0cd6ebb69107f4a9f6922fbfc465970b7bf901778d",
-    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
-    "conformance/test-mapping-validation.json": "23c3ace16e735f523c80d5564931b15e613ffb574722464a4dd0aac248879d12"
+    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
+    "api/interface-catalog.json": "4d0647d6c5cb7f922af1db62b264d32654cd345903fe5899eea24d186d235b13",
+    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "2cbf5d0d83e99863e117275f8059f8072d0cd74269f971c6c2cffe436545e2bc",
+    "governance/validate_provenance_wire_format.py": "6bfeb1da339543d02f386e3e4e3c2ab741b39ceb0c06071a9734c0a593c38cad",
+    "conformance/fixture-mapping.json": "b679101192bba825f1a79e37f97cf30ee7d3b35141034358274f57220ebb5b70",
+    "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
+    "conformance/test-mapping-validation.json": "cbdc2fd77d19837ea1a08202288019ca7d16729c1c5167e4c2aa549dde40adcb"
   },
   "checks": [
     {
@@ -466,6 +466,42 @@
           "expected": "VALID",
           "actual": "VALID",
           "errors": []
+        },
+        {
+          "fixture_id": "FX-DS052-PENDING",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS052-SUCCEEDED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS052-FAILED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS053-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS053-NOT-QUALIFIED",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
+        },
+        {
+          "fixture_id": "FX-DS053-SOURCE-UNAVAILABLE",
+          "expected": "VALID",
+          "actual": "VALID",
+          "errors": []
         }
       ]
     },
@@ -496,8 +532,8 @@
       "check": "ds001_catalog_hash",
       "status": "PASS",
       "detail": {
-        "catalog": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
-        "actual": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d"
+        "catalog": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4",
+        "actual": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4"
       }
     },
     {
@@ -539,7 +575,7 @@
     {
       "check": "rtm_cr005_files",
       "status": "PASS",
-      "detail": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Provenance-Wire-Format-Specification.md;schemas/evidence_qualification_result.json;schemas/governance_decision_result.json;registries/constraint-type-registry.json;registries/rejection-code-registry.json;registries/registry-entry-catalog.json;schemas/common.json;api/AGCP-HTTP-Contract.yaml;spec/AGCP-HTTP-Interface-Specification.md;conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json;governance/AGCP-provenance-wire-format-validation.json"
+      "detail": "spec/AGCP-Core.docx;lifecycle/AGCP Governance Lifecycle Model.md;lifecycle/AGCP Normative Governance Progression Table.md;conformance/AGCP-Conformance-Test-Vectors.md;conformance/test-mapping.json;spec/AGCP-Provenance-Wire-Format-Specification.md;schemas/evidence_qualification_result.json;schemas/governance_decision_result.json;registries/constraint-type-registry.json;registries/rejection-code-registry.json;registries/registry-entry-catalog.json;schemas/common.json;api/AGCP-HTTP-Contract.yaml;spec/AGCP-HTTP-Interface-Specification.md;conformance/provenance/AGCP-Provenance-Wire-Format-Test-Vectors.json;governance/AGCP-provenance-wire-format-validation.json;conformance/tests/TC001-TC010.md;conformance/AGCP-Test-Matrix.md;conformance/test-control-mapping.json;conformance/harness-checks.json;implementer/AGCP-Implementation-Profile-Specification.md"
     },
     {
       "check": "rtm_cr005_companion",
@@ -582,9 +618,9 @@
       "check": "catalog_version_synchronized",
       "status": "PASS",
       "detail": {
-        "catalog": "1.0.50",
-        "test_mapping": "1.0.50",
-        "fixture_mapping": "1.0.50"
+        "catalog": "1.0.10",
+        "test_mapping": "1.0.10",
+        "fixture_mapping": "1.0.10"
       }
     }
   ],
