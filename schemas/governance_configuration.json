@@ -41,11 +41,14 @@
       "NS-15.6A-04",
       "NS-15.6B-01",
       "NS-15.6B-02",
-      "NS-15.7-02"
+      "NS-15.7-02",
+      "NS-17.5-03",
+      "NS-17.5-04"
     ],
     "conformance_requirements": [
       "CR-117",
-      "CR-122"
+      "CR-122",
+      "CR-121"
     ]
   },
   "type": "object",
@@ -166,6 +169,61 @@
     },
     "controlled_governance_activation_ref": {
       "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+    },
+    "identity_authorization_store_profile_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
+      },
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true
+    },
+    "pep_profile_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/pep_profile_ref"
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true
+    },
+    "pep_profile_selection_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "$ref": "common.json#/$defs/identifier"
+          },
+          "governed_action_type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "target_type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "pep_profile_ref": {
+            "$ref": "common.json#/$defs/pep_profile_ref"
+          },
+          "selection_digest": {
+            "$ref": "common.json#/$defs/content_digest"
+          }
+        },
+        "required": [
+          "rule_id",
+          "governed_action_type",
+          "target_type",
+          "pep_profile_ref",
+          "selection_digest"
+        ]
+      },
+      "uniqueItems": true,
+      "maxItems": 1024
     }
   },
   "required": [

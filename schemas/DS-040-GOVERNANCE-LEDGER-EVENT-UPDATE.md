@@ -1,23 +1,13 @@
-# DS-040 Governance Ledger Event Update
+# DS-040 - Governance Ledger Event Update
 
-Date: 2026-07-30
+**Status:** Updated for the AGCP v2.1.x GDF/PDP -> Execution Authorization -> Governance Realization -> PEP architecture synchronization.  
+**Date:** 2026-10-03  
+**Schema:** `governance_ledger_event.json`
 
-## Result
+## Changes in this update
 
-Implemented `governance_ledger_event.json` as the canonical append-only, integrity-linked, totally ordered Governance Ledger event.
+- Synchronized DS-040 with the revised Core, Normative Statements, Identity and Authorization Store Profile, PEP Profile, commitment/execution separation, and downstream evidence/lifecycle semantics as applicable.
 
-## Canonical ownership
+## Compatibility and authority
 
-DS-040 now owns Governance Ledger identifiers, event identifiers, event types, ledger positions, and event references. The superseded generic definitions were removed from `common.json`.
-
-## Governance semantics
-
-The schema records or references proposal submissions, context and state, evidence and qualification, authority and approvals, decisions and authorizations, commitments, enforcement outcomes, receipts, Structural Refusals, lifecycle transitions, continuation events, governance compilation, controlled activation, corrections, and retention events. It requires explicit ordering scope, sequence, predecessor linkage, digest chain, attribution, provenance, evidence continuity, governance basis, replay material, tenant isolation, and append-only controls.
-
-## Prohibitions
-
-The schema prohibits timestamp, arrival, storage, transport, or implementation scheduling as an authoritative ordering basis. It prohibits in-place mutation, unauthorized deletion, sequence reuse, event replacement without a subsequent superseding event, authority creation, execution authorization, and operational commitment by reference alone.
-
-## Traceability
-
-Schema Catalog version: 1.0.33. RTM version: RTM-1.37.
+The frozen CR set is unchanged. This schema update realizes obligations already expressed by the revised Core and Normative Statements; it does not create a new CR. Deployment-specific identity-store or PEP product details remain controlled by Implementation Profiles and referenced IAS/PEP Profiles.

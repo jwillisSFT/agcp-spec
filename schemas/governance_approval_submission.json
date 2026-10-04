@@ -29,16 +29,17 @@
       "13.6B"
     ],
     "normative_statements": [
-      "NS-8.6A-01",
       "NS-8.6A-02",
-      "NS-8.6A-03",
       "NS-10.8A-03",
       "NS-13.6B-01",
       "NS-13.6B-02",
       "NS-13.6B-03",
       "NS-13.6B-04",
       "NS-13.6B-05",
-      "NS-13.6B-06"
+      "NS-13.6B-06",
+      "NS-13.6B-07",
+      "NS-13.6B-08",
+      "NS-13.6B-09"
     ],
     "conformance_requirements": [
       "CR-012",
@@ -51,7 +52,9 @@
       "CR-058",
       "CR-059",
       "CR-060",
-      "CR-061"
+      "CR-061",
+      "CR-045",
+      "CR-065"
     ]
   },
   "type": "object",
@@ -151,6 +154,53 @@
     },
     "extensions": {
       "$ref": "#/$defs/namespaced_extensions"
+    },
+    "claimant_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional claimant-supplied hints for human-review UX/correlation only. They are non-authoritative and SHALL NOT establish reviewer identity, role, entitlement, authority, or scope.",
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "claimed_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 128
+        },
+        "claimed_entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        }
+      }
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "claimed_approver_is_non_authoritative": {
+          "const": true
+        },
+        "claimed_roles_and_entitlements_are_non_authoritative": {
+          "const": true
+        },
+        "server_must_resolve_authoritative_human_identity_and_authority": {
+          "const": true
+        }
+      },
+      "required": [
+        "claimed_approver_is_non_authoritative",
+        "claimed_roles_and_entitlements_are_non_authoritative",
+        "server_must_resolve_authoritative_human_identity_and_authority"
+      ]
     }
   },
   "required": [

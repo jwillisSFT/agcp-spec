@@ -135,6 +135,49 @@
           "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         }
       }
+    ],
+    "identity_authorization_qualification_result_ref": {
+      "qualification_result_id": "iaq-approval-001",
+      "qualification_outcome": "QUALIFIED",
+      "stable_subject_id": "subject-001",
+      "result_digest": {
+        "algorithm": "SHA-256",
+        "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "resolved_at": "2026-10-03T12:00:00Z",
+      "ias_profile_ref": {
+        "profile_id": "IAS-GENERIC-ENTERPRISE",
+        "profile_version": "1.0.0",
+        "profile_digest": {
+          "algorithm": "SHA-256",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    },
+    "ias_profile_ref": {
+      "profile_id": "IAS-GENERIC-ENTERPRISE",
+      "profile_version": "1.0.0",
+      "profile_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "stable_subject_id": "subject-001",
+    "authoritative_account_id": "account-001",
+    "authorization_scope_verified": true,
+    "freshness_verified": true,
+    "revocation_status_clear": true,
+    "required_entitlements": [
+      "approve-governed-action"
+    ],
+    "satisfied_entitlements": [
+      "approve-governed-action"
+    ],
+    "reviewer_classes": [
+      "governance-reviewer"
+    ],
+    "governance_permissions": [
+      "approve-governed-action"
     ]
   },
   "authority_lineage_ref": {

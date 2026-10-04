@@ -1,30 +1,13 @@
-# DS-041 Governance Configuration Update
+# DS-041 - Governance Configuration Update
 
-## Status
+**Status:** Updated for the AGCP v2.1.x GDF/PDP -> Execution Authorization -> Governance Realization -> PEP architecture synchronization.  
+**Date:** 2026-10-03  
+**Schema:** `governance_configuration.json`
 
-Implemented as `schemas/governance_configuration.json` under DS-041.
+## Changes in this update
 
-## Purpose
+- Synchronized DS-041 with the revised Core, Normative Statements, Identity and Authorization Store Profile, PEP Profile, commitment/execution separation, and downstream evidence/lifecycle semantics as applicable.
 
-DS-041 is the canonical explicit, attributable, versioned, integrity-protected, and governance-evaluation-available configuration artifact. It includes deterministic risk-based re-evaluation controls required to identify affected nonterminal proposals when material governance conditions change.
+## Compatibility and authority
 
-## Clean migration changes
-
-The canonical Governance Configuration identifier and reference moved from `common.json` to DS-041. No backward-compatibility alias remains. Direct consumers now reference DS-041.
-
-## Direct RTM mappings
-
-- RTM-00117 / CR-117 — Governance Self-Modification Isolation
-- RTM-00122 / CR-122 — Risk-Based Re-Evaluation
-
-## Key controls
-
-- complete explicit setting manifest;
-- hidden and implicit configuration prohibited;
-- externally retrievable and evaluation-available artifact;
-- deterministic material-change rules and proposal selectors;
-- preservation of unaffected proposals;
-- external approval, compilation, constitutional validation, omission analysis, and controlled activation for changes;
-- integrity, provenance, evidence, attribution, and replay material;
-- active configuration bound to Governance Version and atomic activation evidence;
-- no authority-at-commitment, execution authorization, or self-activation semantics.
+The frozen CR set is unchanged. This schema update realizes obligations already expressed by the revised Core and Normative Statements; it does not create a new CR. Deployment-specific identity-store or PEP product details remain controlled by Implementation Profiles and referenced IAS/PEP Profiles.

@@ -2,7 +2,7 @@
 
 **Status:** Controlled repository reference disposition  
 **Version:** 1.0.0  
-**Release target:** AGCP v2.0.8  
+**Release target:** AGCP v2.1.0  
 **Finding:** P1-01
 
 ## 1. Purpose
@@ -71,3 +71,9 @@ Historical comparison records may preserve earlier wording when the text is expl
 ## 5. Change-control rule
 
 A future standalone companion may be introduced only through the controlled repository change process. Until such an artifact is published, cataloged, traceably mapped, and included in a versioned release, repository documents shall not reference it as an existing normative source.
+
+## 6. Architectural and implementer profile references
+
+`spec/AGCP-Trust-Model.md` is a controlled architectural trust reference, not a normative companion and not a new source of conformance obligations.
+
+`implementer/AGCP-Identity-and-Authorization-Store-Profile-Specification.md` and `implementer/AGCP-PEP-Profile-Specification.md` are controlled implementer-profile specifications. References to them shall not describe them as superior to CR/Core or as normative companions. A controlling Implementation Profile adopts concrete IAS/PEP Profile instances as implementation selections.

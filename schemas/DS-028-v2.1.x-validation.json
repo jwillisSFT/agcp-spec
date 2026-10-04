@@ -1,0 +1,13 @@
+{
+  "validation_type": "AGCP_V2_1_X_DS_VALIDATION",
+  "ds_id": "DS-028",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_file": "schemas/refusal_record.json",
+  "schema_sha256": "33c7b36ee50ff068a763c784e150ef3b7b46de6fb2cf5f9934dc9dccd1de543f",
+  "metaschema_valid": true,
+  "local_refs_resolved": true,
+  "examples_checked": 0,
+  "example_errors": [],
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
+}

@@ -826,3 +826,12 @@ Conformance Test Case (TC)
 Conformance SHALL be demonstrated using the official AGCP Requirements Traceability Matrix (RTM) and Conformance Test Suite.
 
 Implementations MAY exceed the minimum requirements defined by this specification, provided all mandatory requirements applicable to the claimed conformance profile are satisfied.
+
+## Optional Governance Observation and Test-Control Surfaces
+
+AGCP v2.1.0 defines IF-003 Governance Observation, IF-004 Governance Management and Actuation, and optional IF-005 Conformance Test Control as supporting interfaces. These surfaces improve runtime observability, administrative control, and Formal Test Case controllability but do not weaken or replace any CR or Formal Test Case pass criterion. IF-005 is not required for a conformance profile unless an adopted Implementation Profile expressly makes it applicable. Where IF-005 is absent and a Formal Test Case precondition cannot otherwise be established, the assessment disposition is determined by the applicable assessment methodology rather than being inferred as Pass.
+
+
+## v2.1.x Test Case synchronization status
+
+The controlled Formal Test Case set remains TC-001 through TC-122. Current Test Case procedures, executable Harness Checks/Test Vectors, and the authoritative RTM are synchronized to the v2.1.x Core/Normative Statements; the final RTM dataset is `RTM-1.47`.

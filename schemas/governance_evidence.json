@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/governance_evidence.json",
   "title": "Governance Evidence",
-  "description": "Canonical immutable Governance Evidence record. It contains typed evidence-item references, explicit ordering, integrity digests, attributable provenance-chain continuity, qualification results, Governance Ledger references, and links to canonical governance outcomes. Raw or arbitrary evidence payloads are not normative content; governance-significant evidence is represented through typed, resolvable, digest-bound artifact references.",
+  "description": "Canonical immutable Governance Evidence record. It contains typed evidence-item references, explicit governing-state, configuration, constraint and invariant references where applicable, explicit ordering, integrity digests, attributable provenance-chain continuity, qualification results, Governance Ledger references, and links to canonical governance outcomes. Raw or arbitrary evidence payloads are not normative content.",
   "$comment": "DS-020 is the canonical evidence container and reference owner. Evidence qualification is represented by DS-033; the existence of an evidence artifact alone does not establish freshness, authority, integrity, resolvability, sufficiency, or availability.",
   "x-agcp-ds-id": "DS-020",
   "x-agcp-lifecycle-state": "Implemented",
@@ -68,7 +68,10 @@
       "NS-10.6-01",
       "NS-10.7-01",
       "NS-10.8-01",
-      "NS-10.9-01"
+      "NS-10.9-01",
+      "NS-10.7-02",
+      "NS-10.8A-02",
+      "NS-10.8A-03"
     ],
     "conformance_requirements": [
       "CR-041",
@@ -378,6 +381,50 @@
       },
       "maxItems": 256,
       "uniqueItems": true
+    },
+    "governance_configuration_ref": {
+      "$ref": "governance_configuration.json#/$defs/governance_configuration_ref"
+    },
+    "constraint_evaluation_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "constraint_evaluation.json#/$defs/constraint_evaluation_ref"
+      },
+      "uniqueItems": true
+    },
+    "invariant_evaluation_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "invariant_evaluation.json#/$defs/invariant_evaluation_ref"
+      },
+      "uniqueItems": true
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "governed_execution_outcome_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "pep_profile_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/pep_profile_ref"
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true
     }
   },
   "required": [
@@ -443,6 +490,34 @@
             "refusal_record_refs"
           ]
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "governance_stage": {
+            "enum": [
+              "Governance Decision Function",
+              "Execution Authorization",
+              "Continuation Integrity",
+              "Governance Realization",
+              "Commit-Bound Admissibility",
+              "Commit Boundary",
+              "Policy Enforcement Point"
+            ]
+          }
+        },
+        "required": [
+          "governance_stage"
+        ]
+      },
+      "then": {
+        "required": [
+          "canonical_state_ref",
+          "governance_configuration_ref",
+          "constraint_evaluation_refs",
+          "invariant_evaluation_refs"
+        ]
       }
     }
   ],

@@ -211,6 +211,59 @@
     },
     "extensions": {
       "$ref": "#/$defs/namespaced_extensions"
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "identity_authorization_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stable_subject_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "authoritative_account_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "governance_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "scope": {
+          "$ref": "common.json#/$defs/governance_scope"
+        },
+        "ias_profile_ref": {
+          "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
+        }
+      },
+      "required": [
+        "stable_subject_id",
+        "authoritative_account_id",
+        "ias_profile_ref"
+      ]
     }
   },
   "allOf": [
@@ -1183,5 +1236,16 @@
       },
       "additionalProperties": true
     }
+  },
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-12.2-03",
+      "NS-12.3-01",
+      "NS-12.4-01"
+    ],
+    "conformance_requirements": [
+      "CR-025",
+      "CR-096"
+    ]
   }
 }

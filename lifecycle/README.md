@@ -150,3 +150,11 @@ Lifecycle documentation follows repository-release versioning and evolves with t
 # Canonical Evidence and Companion References
 
 Lifecycle documents use DS-020 Governance Evidence (`../schemas/governance_evidence.json`) and DS-033 Evidence Qualification Result (`../schemas/evidence_qualification_result.json`) as the canonical machine-readable evidence artifacts. Canonical companion-reference dispositions are maintained in `../governance/AGCP-Normative-Companion-Reference-Dispositions.md`.
+
+## v2.1.x Governance Realization Alignment
+
+The lifecycle documents use the following controlled progression:
+
+`Proposal -> GDF/PDP -> Governance Decision -> Execution Authorization -> Continuation / re-evaluation as applicable -> GRF / Commit-Bound Admissibility -> PEP -> commitment -> governed execution outcome`.
+
+The AGCP Trust Model is an architectural trust reference for identity, authority, GRF-to-PEP, and PEP-to-target boundaries. The controlling Implementation Profile may reference an Identity and Authorization Store (IAS) Profile and one or more PEP Profiles. Those implementation artifacts do not replace Core lifecycle semantics.

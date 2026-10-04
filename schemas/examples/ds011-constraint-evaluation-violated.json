@@ -96,7 +96,8 @@
     "authority": "QUALIFIED",
     "lifecycle": "QUALIFIED",
     "all_required_inputs_qualified": true,
-    "unqualified_required_dimensions": []
+    "unqualified_required_dimensions": [],
+    "identity_authorization": "NOT_REQUIRED"
   },
   "qualified_input_hashes": {
     "proposal_digest": {

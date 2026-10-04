@@ -53,11 +53,15 @@
       "NS-17.9-01",
       "NS-17.9-02",
       "NS-17.10-01",
-      "NS-17.10-02"
+      "NS-17.10-02",
+      "NS-17.5-04"
     ],
     "conformance_requirements": [
       "CR-089",
-      "CR-090"
+      "CR-090",
+      "CR-102",
+      "CR-119",
+      "CR-120"
     ]
   },
   "type": "object",
@@ -1486,6 +1490,63 @@
     },
     "deployment_binding": {
       "$ref": "#/$defs/deployment_binding_advertisement"
+    },
+    "identity_authorization_store_profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
+      },
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "description": "Active IAS Profile bindings, where the implementation uses authoritative identity/authorization qualification."
+    },
+    "pep_profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/pep_profile_ref"
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "description": "Active PEP Profile bindings used by Governance Realization."
+    },
+    "governance_function_placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gdf_pdp_placement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "grf_placement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "gdf_grf_colocated": {
+          "type": "boolean"
+        },
+        "commit_execution_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ATOMIC_COMMIT_AND_EXECUTION",
+              "COMMIT_THEN_ASYNCHRONOUS_EXECUTION"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "gdf_pdp_placement",
+        "grf_placement",
+        "gdf_grf_colocated",
+        "commit_execution_modes"
+      ]
     }
   },
   "required": [

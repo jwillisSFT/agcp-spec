@@ -33,7 +33,22 @@
       "15.6B",
       "16.6A"
     ],
-    "conformance_requirement_relationship": "Shared vocabulary only; direct CR-to-DS mappings are assigned through dependent schemas and authoritative RTM records."
+    "conformance_requirement_relationship": "Shared vocabulary only; direct CR-to-DS mappings are assigned through dependent schemas and authoritative RTM records.",
+    "normative_statements": [
+      "NS-4.12A-01",
+      "NS-4.12A-02",
+      "NS-9.5-05",
+      "NS-17.5-04"
+    ],
+    "conformance_requirements": [
+      "CR-016",
+      "CR-045",
+      "CR-065",
+      "CR-102",
+      "CR-119",
+      "CR-120",
+      "CR-121"
+    ]
   },
   "$defs": {
     "identifier": {
@@ -276,7 +291,7 @@
         "Commit Failed",
         "Governed Re-evaluation Required"
       ],
-      "description": "Commit Boundary outcome."
+      "description": "Commit Boundary outcome. Commit Successful means the exact governed transition was accepted through the protected commit/enforcement path; it does not universally mean asynchronous target execution has completed."
     },
     "governance_artifact_status_enum": {
       "type": "string",
@@ -316,7 +331,9 @@
         "Governance Self-Protection",
         "Governance Compilation",
         "Controlled Governance Activation",
-        "Autonomous Coordination"
+        "Autonomous Coordination",
+        "Identity and Authorization Qualification",
+        "Governed Execution Outcome"
       ],
       "description": "Governance pipeline stage or supporting governance service. Continuation Integrity applies before final Commit-Bound Admissibility while a proposal remains nonterminal."
     },
@@ -1234,6 +1251,81 @@
         "governance_configuration_ref",
         "evaluated_at"
       ]
+    },
+    "identity_authorization_qualification_result_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for DS-053 Identity and Authorization Qualification Result."
+    },
+    "governed_execution_outcome_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]*$",
+      "description": "Stable identifier for DS-052 Governed Execution Outcome."
+    },
+    "identity_authorization_store_profile_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Integrity-bound reference to the implementation-selected Identity and Authorization Store (IAS) Profile. The profile qualifies identity-system authorization and entitlements; it is not AGCP Execution Authorization.",
+      "properties": {
+        "profile_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "profile_version": {
+          "$ref": "#/$defs/version_string"
+        },
+        "profile_uri": {
+          "$ref": "#/$defs/uri"
+        },
+        "profile_digest": {
+          "$ref": "#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_version",
+        "profile_digest"
+      ]
+    },
+    "pep_profile_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Integrity-bound reference to the implementation-selected PEP Profile used by the Governance Realization Function to map a commit-eligible governed transition to a concrete enforcement interface.",
+      "properties": {
+        "profile_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "profile_version": {
+          "$ref": "#/$defs/version_string"
+        },
+        "profile_uri": {
+          "$ref": "#/$defs/uri"
+        },
+        "profile_digest": {
+          "$ref": "#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_version",
+        "profile_digest"
+      ]
+    },
+    "execution_status_enum": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "PARTIALLY_SUCCEEDED",
+        "FAILED",
+        "CANCELLED",
+        "INDETERMINATE"
+      ],
+      "description": "Post-commit operational execution status. Commitment and execution completion may be distinct."
     }
   }
 }

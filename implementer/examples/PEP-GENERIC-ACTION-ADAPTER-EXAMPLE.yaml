@@ -1,0 +1,51 @@
+profile:
+  profile_id: PEP-GENERIC-ACTION-ADAPTER-EXAMPLE
+  profile_version: 1.0.0
+  digest:
+    algorithm: SHA-256
+    value: "0000000000000000000000000000000000000000000000000000000000000000"
+pep:
+  implementation_id: generic-enforcement-adapter
+  interface: protected_service_interface
+  endpoint_reference: serviceref://pep/generic
+caller_authentication:
+  allowed_caller: governance-realization-workload
+  mechanism: workload_identity_plus_integrity_protected_request
+  credential_reference: secretref://grf/pep-caller
+mappings:
+  - governed_action: resource.quarantine
+    target_type: resource
+    pep_operation: quarantine_v1
+    required_fields: [proposal_id, authorization_id, target_id, requested_effect]
+    target_identifier_mapping: exact_target_id
+    allowed_transformations: [canonical_field_renaming]
+  - governed_action: access.revoke
+    target_type: identity_or_principal
+    pep_operation: revoke_access_v1
+    required_fields: [proposal_id, authorization_id, target_id, requested_effect]
+    target_identifier_mapping: exact_target_id
+    allowed_transformations: [canonical_field_renaming]
+enforcement_context:
+  required_fields: [proposal_id, authorization_id, tenant_id, governance_domain, action, target, commit_eligibility, profile_id, validity]
+  binding_requirements: [exact_proposal, exact_action, exact_target, current_authorization, current_commit_eligibility]
+idempotency:
+  key_rule: digest_of_proposal_action_target_and_authorization
+  single_use: true
+  retry_rule: same_key_same_request_returns_prior_result
+response_mapping:
+  success: commit_or_execution_success_as_declared
+  refusal: non_execution
+  failure: non_execution_with_evidence
+  unknown_response: fail_closed
+commit_execution_relationship: ASYNCHRONOUS_OR_DISTINCT
+target_authority:
+  credential_reference: secretref://pep/target-writer
+  scope: only_declared_action_target_mappings
+evidence:
+  required_receipts: [pep_receipt, target_outcome_receipt]
+  request_digest: true
+  response_digest: true
+failure_behavior:
+  unsupported_mapping: fail_closed_no_approximation
+  binding_failure: fail_closed
+  pep_unavailable: no_commit_or_profile_defined_recovery

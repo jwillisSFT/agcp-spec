@@ -6,8 +6,7 @@
     "request_digest": {
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    },
-    "policy_enforcement_point_id": "policy-enforcement-point-id-1"
+    }
   },
   "proposal_ref": {
     "proposal_identity": {
@@ -109,6 +108,14 @@
     "result_digest": {
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "pep_profile_ref": {
+      "profile_id": "PEP-GENERIC-ACTION-ADAPTER",
+      "profile_version": "1.0.0",
+      "profile_digest": {
+        "algorithm": "SHA-256",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
     }
   },
   "commit_boundary_outcome": "Commit Successful",
@@ -119,7 +126,7 @@
       "lifecycle_transition_id": "GLT-EXAMPLE-1",
       "lifecycle_record_id": "GLR-EXAMPLE-1",
       "proposal_id": "proposal-1",
-      "to_state": "SUBMITTED",
+      "to_state": "COMMITTED",
       "terminality_after": "NONTERMINAL",
       "ledger_event_ref": {
         "ledger_event_id": "GLE-EXAMPLE-COMMIT",
@@ -171,9 +178,9 @@
       "current_state": {
         "lifecycle_record_id": "GLR-EXAMPLE-1",
         "proposal_id": "proposal-1",
-        "derived_lifecycle_state": "EXECUTED",
-        "terminality": "TERMINAL",
-        "commitment_eligibility": "INELIGIBLE_TERMINAL",
+        "derived_lifecycle_state": "COMMITTED",
+        "terminality": "NONTERMINAL",
+        "commitment_eligibility": "COMMITTED_AWAITING_EXECUTION_OUTCOME",
         "ledger_position": {
           "ledger_id": "GL-EXAMPLE-1",
           "stream_id": "proposal-1",
@@ -206,7 +213,7 @@
       },
       "last_updated_at": "2026-07-30T16:00:00Z"
     },
-    "terminal": true,
+    "terminal": false,
     "transition_basis_digest": {
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -263,20 +270,21 @@
     },
     "replay_profile": "example"
   },
-  "executed_transition_ids": [
-    "transition-1"
-  ],
-  "committed_state_digest": {
-    "algorithm": "SHA-256",
-    "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
-  },
-  "execution_result_ref": {
-    "execution_record_id": "execution-result-1",
-    "execution_record_uri": "https://agcp.ai/example/execution/result-1",
-    "execution_digest": {
+  "pep_profile_ref": {
+    "profile_id": "PEP-GENERIC-ACTION-ADAPTER",
+    "profile_version": "1.0.0",
+    "profile_digest": {
       "algorithm": "SHA-256",
-      "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-    },
-    "recorded_at": "2026-07-30T16:00:00Z"
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  "execution_completion_mode": "POST_COMMIT_ASYNCHRONOUS",
+  "governed_execution_outcome_ref": {
+    "execution_outcome_id": "exec-outcome-001",
+    "execution_status": "PENDING",
+    "outcome_digest": {
+      "algorithm": "SHA-256",
+      "value": "7777777777777777777777777777777777777777777777777777777777777777"
+    }
   }
 }

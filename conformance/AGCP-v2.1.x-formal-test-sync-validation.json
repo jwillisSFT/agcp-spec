@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "formal_test_case_count": 122,
+  "batch_file_count": 13,
+  "formal_change_count": 42,
+  "regression_only_change_count": 22,
+  "affected_count": 64,
+  "new_ns_count_covered": 36,
+  "retired_ns_active_reference_count": 0,
+  "new_top_level_tc_count": 0,
+  "test_control_mapping_entry_count": 122,
+  "rtm_status": "PENDING_FINAL_RTM_SYNCHRONIZATION",
+  "checks": [
+    "122 unique TC headings",
+    "all direct NS metadata has a direct assertion block",
+    "all 36 new NS IDs assigned to an existing TC",
+    "retired NS IDs absent from active TC mappings/assertion headings",
+    "all 64 identified TCs contain v2.1.x regression synchronization guidance",
+    "test-control observation points valid against DS-046 enum"
+  ]
+}

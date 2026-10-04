@@ -1,7 +1,13 @@
-# DS-045 Governance Approval Submission Update
+# DS-045 - Governance Approval Submission Update
 
-**Finding:** P0-06  
-**Schema Catalog:** 1.0.50  
-**Date:** 2026-08-03
+**Status:** Updated for the AGCP v2.1.x GDF/PDP -> Execution Authorization -> Governance Realization -> PEP architecture synchronization.  
+**Date:** 2026-10-03  
+**Schema:** `governance_approval_submission.json`
 
-DS-045 is the untrusted IF-001 governance-approval ingress command. It carries claimant content and provenance but cannot carry AGCP-derived verification, eligibility, Canonical State, authority, replay, quorum, lifecycle, evidence, digest, or ledger results. DS-026 remains the authoritative AGCP-created or AGCP-qualified Governance Approval Artifact and now requires `artifact_origin = AGCP_CREATED_OR_QUALIFIED`.
+## Changes in this update
+
+- Synchronized DS-045 with the revised Core, Normative Statements, Identity and Authorization Store Profile, PEP Profile, commitment/execution separation, and downstream evidence/lifecycle semantics as applicable.
+
+## Compatibility and authority
+
+The frozen CR set is unchanged. This schema update realizes obligations already expressed by the revised Core and Normative Statements; it does not create a new CR. Deployment-specific identity-store or PEP product details remain controlled by Implementation Profiles and referenced IAS/PEP Profiles.

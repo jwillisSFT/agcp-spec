@@ -1,0 +1,1241 @@
+{
+  "package": "AGCP-v2.1.x-Cumulative-Repository-Changes",
+  "generated_at": "2026-10-03",
+  "file_count": 242,
+  "scope": "Cumulative repository files changed or added through Trust Model, ARM, Core, companion/profile, Normative Statements, DS/interface/API, governance-chain documentation, Formal Test Case synchronization, Test Matrix regeneration, test-mapping regeneration, test-control/observation mapping regeneration, Harness Test Vector/Harness Check synchronization, aggregate conformance-layer validation, final RTM synchronization, and README/release-note/repository-manifest closure.",
+  "closure_status": "CLOSED_FOR_DOWNSTREAM_IMPLEMENTATION",
+  "publication_version_assignment": "NOT_ASSIGNED_BY_CLOSURE_STEP",
+  "controlling_published_baseline": "v2.1.0",
+  "synchronization_target": "v2.1.x",
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE",
+  "rtm_dataset_version": "RTM-1.47",
+  "tc_status": "FORMAL_TC_SYNCHRONIZATION_COMPLETE",
+  "test_matrix_status": "REGENERATED_FROM_SYNCHRONIZED_FORMAL_TCS",
+  "test_mapping_status": "REGENERATED_AND_SYNCHRONIZED_TO_HARNESS_LAYER",
+  "test_control_mapping_status": "REGENERATED_FOR_TC_001_THROUGH_TC_122",
+  "vector_check_status": "SYNCHRONIZED",
+  "aggregate_conformance_layer_validation_status": "PASS",
+  "repository_closure_validation_status": "PASS",
+  "repository_closure_validation_check_count": 10,
+  "repository_closure_manifest_file_count": 476,
+  "formal_tc_count": 122,
+  "active_normative_statement_count": 390,
+  "permanent_normative_statement_identifier_count": 393,
+  "retired_normative_statement_count": 3,
+  "harness_check_count": 21,
+  "harness_test_vector_count": 71,
+  "fixture_mapping_count": 36,
+  "next_controlled_step": "GENERIC_SOURCE_SYNCHRONIZATION",
+  "files": [
+    {
+      "path": "AGCP-Machine-Readable-Governance-Chain.md",
+      "bytes": 40213,
+      "sha256": "cc8a0df8939362eeec1984c300be3da4368a5c75c097b44c98fb0252c9206837"
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "bytes": 15554,
+      "sha256": "cd5a0ef49cc647507bfc655496443c729583b70d7d88cae5099c9daa7025d391"
+    },
+    {
+      "path": "COMPANION_PROFILE_CHANGESET.md",
+      "bytes": 1228,
+      "sha256": "b82329eb6a01f1db09a3e2653c8ae75a206d5d6ec803b23a56c3a798f07552f7"
+    },
+    {
+      "path": "DS_INTERFACE_API_CHANGESET.md",
+      "bytes": 1356,
+      "sha256": "7eedb96c8c1ccc0b356674a603dc32a3b94a94b279cece653e4bf0fefb650d7c"
+    },
+    {
+      "path": "DS_INTERFACE_API_VALIDATION_SUMMARY.json",
+      "bytes": 1505,
+      "sha256": "1a3868a2414698901fc4973b38c6229d60af06393f1cd401f38709ade1dc3c66"
+    },
+    {
+      "path": "PACKAGE_README.md",
+      "bytes": 2839,
+      "sha256": "892101bd552b3fa2778d7697a942f993d8200015890b89dbaae0671c1adb2e0d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 21586,
+      "sha256": "6c6f90ca046f7d8aa322b95035692775d197524045812012f3f9e481a0247e04"
+    },
+    {
+      "path": "RELEASE_NOTES_v2.1.x.md",
+      "bytes": 5480,
+      "sha256": "2b45e0bf342b2b71c5c21f600b64d4bdf08f1176bcaeedaf7b6243fb669c6e8e"
+    },
+    {
+      "path": "api/AGCP-HTTP-Contract.yaml",
+      "bytes": 35583,
+      "sha256": "f155cb53b70acc78837e15e434461fa0488dc20cb25496993cfb17ca57c0c8a8"
+    },
+    {
+      "path": "api/AGCP-Management-Contract.yaml",
+      "bytes": 6623,
+      "sha256": "816a022415643840d22a3c7dc12a6ffaaa61a201ec22b46d8eddcd3fe540ab3b"
+    },
+    {
+      "path": "api/AGCP-OPENAPI-V2-MIGRATION-UPDATE.md",
+      "bytes": 1239,
+      "sha256": "69bbfeebb172bd0ab57b66f6c21e05ea9a19a0037f51d72f666319c25c463db4"
+    },
+    {
+      "path": "api/AGCP-OpenAPI-v2-migration-validation.json",
+      "bytes": 625,
+      "sha256": "7bf55ba35d8633d36b10e45ff23332174af56c5768ec88254ae65e700bbbc8a3"
+    },
+    {
+      "path": "api/INTERFACE-CATALOG.md",
+      "bytes": 1723,
+      "sha256": "d2bb33516eaa1b99338cd4fd7ed6f194d5ee7e800e6400ed56958d487bd4da89"
+    },
+    {
+      "path": "api/interface-catalog.csv",
+      "bytes": 3857,
+      "sha256": "f11c67c2682decac4801cbd6c23d1538b92c6cb3e01ea18b6b5930957a1a0720"
+    },
+    {
+      "path": "api/interface-catalog.json",
+      "bytes": 7020,
+      "sha256": "2dabaec9aa1947ca158e5a858c9de9273408dbaa76049f9b77d85c2a1696ad23"
+    },
+    {
+      "path": "api/interface-traceability-validation.json",
+      "bytes": 1967,
+      "sha256": "1401f8567e33238a60f9e50c85383be151b42b2d2cb46a827e07760eedab51a7"
+    },
+    {
+      "path": "conformance/AGCP Harness Check Registry.md",
+      "bytes": 35522,
+      "sha256": "c63440343d69d5c1c9508783282fa511fa0eac559da6dcca7e089cb3b779b846"
+    },
+    {
+      "path": "conformance/AGCP-Conformance-Harness-Spec.yml",
+      "bytes": 163459,
+      "sha256": "29c9e17627e4232f6354bb40866703a1db7bb57680e3a63c6245341e476ae9a1"
+    },
+    {
+      "path": "conformance/AGCP-Conformance-Test-Vectors.md",
+      "bytes": 144680,
+      "sha256": "26bcafc6caf6e5bae6e17f6d16f49db8f9dd7abd71f589e977c6a1e386880c4d"
+    },
+    {
+      "path": "conformance/AGCP-Conformance-Traceability-and-Automation-Model.md",
+      "bytes": 24286,
+      "sha256": "982699e4cc9fe3020d1043fcdd6d434ebc2190cd9f5fd8d1eb289b5e43b71c15"
+    },
+    {
+      "path": "conformance/AGCP-Conformance.md",
+      "bytes": 34500,
+      "sha256": "7c2822aea341f352942ec72573c667df360d5315ee3cf8418d4a8119519b6d09"
+    },
+    {
+      "path": "conformance/AGCP-Test-Control-Mapping.md",
+      "bytes": 35975,
+      "sha256": "9e8c616338715d27cdd8fa000272d8ad3fcc6eb848e604069e80a5d6dc640f83"
+    },
+    {
+      "path": "conformance/AGCP-Test-Mapping.md",
+      "bytes": 30054,
+      "sha256": "85d61ffe173008b0319124662999cd3e21fe7b90720737d16597186d7edead0b"
+    },
+    {
+      "path": "conformance/AGCP-Test-Matrix.md",
+      "bytes": 37018,
+      "sha256": "458db0b2fffd74dc327821e5da050112167c622bc909932b65367ba6cfa45ba6"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-AGGREGATE-CONFORMANCE-LAYER-VALIDATION.md",
+      "bytes": 6712,
+      "sha256": "eabaf957feeef0ba02942d39c4feadf4c1f6b396af58da9a115f8103f0bbe0f3"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-FORMAL-TEST-CASE-SYNCHRONIZATION-UPDATE.md",
+      "bytes": 2929,
+      "sha256": "135988ce66a977d30ecf2b143827680225ee6b864234a03a796d29772bd9155c"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-HARNESS-VECTOR-CHECK-SYNCHRONIZATION-UPDATE.md",
+      "bytes": 2795,
+      "sha256": "40443390daba3581c5373254c943ab53bd219bbbed7255bebb7f1e34029e3858"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-TEST-CONTROL-MAPPING-REGENERATION-UPDATE.md",
+      "bytes": 2288,
+      "sha256": "7b09a231a0e3501e3ab2858bfcdf5d0e1c6f6bd5414a62d051929c6212cf0656"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-TEST-MAPPING-REGENERATION-UPDATE.md",
+      "bytes": 2475,
+      "sha256": "82682e8ffdcb7db5ca95cbabf58afd6c76eef2a23b58c8e1e56ded30a8d54010"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-TEST-MATRIX-REGENERATION-UPDATE.md",
+      "bytes": 1376,
+      "sha256": "e7478639b49c4b09a4db8f1e72ad75a8803d10de2163e2d9ad093c95bd39c86a"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-aggregate-conformance-layer-validation.json",
+      "bytes": 8445,
+      "sha256": "8813d254302b0ed050a63b10d8ca15a2e881f822f2c0463a3e0a25f128a35a07"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-formal-test-sync-validation.json",
+      "bytes": 780,
+      "sha256": "e68dbbd52f6735c57d536a63025ffc71accc2134f2e7bc3a1589cd5dbfc38f37"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-harness-vector-check-validation.json",
+      "bytes": 1899,
+      "sha256": "0191bc13f5a3a5868a2d16aa99d7c1885d7b7d47bf6dd8a99229593ebd3c0a8c"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-test-control-mapping-validation.json",
+      "bytes": 1092,
+      "sha256": "15c30a4293027cf960714750fe96ecdbc96cc643de00ead1b87ab5a244b23d99"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-test-mapping-validation.json",
+      "bytes": 2275,
+      "sha256": "b8961ec3c87b3973cf18ae5aa13d7e2e6ca5ac3d0175f04627c329b12ffa8f38"
+    },
+    {
+      "path": "conformance/AGCP-v2.1.x-test-matrix-validation.json",
+      "bytes": 839,
+      "sha256": "6a1158adbcb0c54c11653fdade2293c8d0363c5acb513567987d3acc8c82095e"
+    },
+    {
+      "path": "conformance/Conformance Test Suite.md",
+      "bytes": 6796,
+      "sha256": "cf79467e6db2b175cc986159651624c38d98d2a59d94473f88007860fd96b454"
+    },
+    {
+      "path": "conformance/README.md",
+      "bytes": 19564,
+      "sha256": "affa46563c07605dbc26c5527f309bd989dd93f92dc45ac9c5eccae6d2e4b5bf"
+    },
+    {
+      "path": "conformance/agcp-conformance-manifest.yml",
+      "bytes": 20508,
+      "sha256": "b5ee3644175e1e010c1f0c8463c7df458bbebfc1309974ff72036c65fa45f890"
+    },
+    {
+      "path": "conformance/fixture-mapping.json",
+      "bytes": 21217,
+      "sha256": "90addd21000ca4f55d2db1055c5ad57c5f94968b3584bce911fc8ee2c7d635e7"
+    },
+    {
+      "path": "conformance/harness-checks.json",
+      "bytes": 40366,
+      "sha256": "1fa1cf3a8fcbf59cd5f9d8a99836b69629cf137061e95503c0483b686deba2de"
+    },
+    {
+      "path": "conformance/harness-vector-check-validation.json",
+      "bytes": 1899,
+      "sha256": "0191bc13f5a3a5868a2d16aa99d7c1885d7b7d47bf6dd8a99229593ebd3c0a8c"
+    },
+    {
+      "path": "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json",
+      "bytes": 25296,
+      "sha256": "8eae223db81e1a63cec16032d13fc2d639b8c698f40568329734e4315cb3fac1"
+    },
+    {
+      "path": "conformance/test-control-mapping-validation.json",
+      "bytes": 1092,
+      "sha256": "15c30a4293027cf960714750fe96ecdbc96cc643de00ead1b87ab5a244b23d99"
+    },
+    {
+      "path": "conformance/test-control-mapping.json",
+      "bytes": 211939,
+      "sha256": "eadb8c6c4be0236131b46c7b615f188cca3825ad5c8aded407e9564c7c977477"
+    },
+    {
+      "path": "conformance/test-mapping-validation.json",
+      "bytes": 409,
+      "sha256": "cbdc2fd77d19837ea1a08202288019ca7d16729c1c5167e4c2aa549dde40adcb"
+    },
+    {
+      "path": "conformance/test-mapping.json",
+      "bytes": 249427,
+      "sha256": "d09f8887bab8c053b3654e0306d5e6893db1fe4885fe7c87913b9d0e3d102241"
+    },
+    {
+      "path": "conformance/tests/README.md",
+      "bytes": 2913,
+      "sha256": "382b591cb697d4fa3c18009e31ad0322ddfdb6173143eeaf65e009c9fc971b42"
+    },
+    {
+      "path": "conformance/tests/TC001-TC010.md",
+      "bytes": 144853,
+      "sha256": "fef9de97ee64e771f651072cbdfae8ea581c7cd8d4d99115bc09498c960e7e97"
+    },
+    {
+      "path": "conformance/tests/TC011-TC020.md",
+      "bytes": 139681,
+      "sha256": "f42c3198636934403e3e864b64035a18e748b828712479567d8b0a03ff9f2f41"
+    },
+    {
+      "path": "conformance/tests/TC021-TC030.md",
+      "bytes": 138089,
+      "sha256": "00978358e5f1d261416eb305e8af8601d2fabd58c1db6a3ec332e2beaf6ec974"
+    },
+    {
+      "path": "conformance/tests/TC031-TC040.md",
+      "bytes": 161013,
+      "sha256": "cbd0f6f353be5e3cd626d8ea8d473f954fa30320590d1220d32b851ee2486d33"
+    },
+    {
+      "path": "conformance/tests/TC041-TC050.md",
+      "bytes": 143445,
+      "sha256": "6544186f2f5de4e4ad46e6228b82a4ae77b0b37bc849941668b0ce7a86829ef6"
+    },
+    {
+      "path": "conformance/tests/TC051-TC060.md",
+      "bytes": 124914,
+      "sha256": "b39981d70c28c6fd8eae803550f3767c8ae5bfac73123fbb576b92ce2e803108"
+    },
+    {
+      "path": "conformance/tests/TC061-TC070.md",
+      "bytes": 164882,
+      "sha256": "343d1f97835d2ce66743e774ec076a54b2456e709dc45e32decfa9e3a066dfe7"
+    },
+    {
+      "path": "conformance/tests/TC071-TC080.md",
+      "bytes": 119847,
+      "sha256": "dfa58a0f5630947a3c70760a10f62af193bc358cf614d0059ba757b31d0d6ba6"
+    },
+    {
+      "path": "conformance/tests/TC081-TC090.md",
+      "bytes": 244789,
+      "sha256": "7e26b37471d12e479bff5205b22d1650205170df230ea95f423bfe0b3f8c9db7"
+    },
+    {
+      "path": "conformance/tests/TC091-TC100.md",
+      "bytes": 199873,
+      "sha256": "5b7be7d6d1b655b58fc03c0d7f570d6af697978e821a467004877a71c5e44ead"
+    },
+    {
+      "path": "conformance/tests/TC101-TC110.md",
+      "bytes": 150759,
+      "sha256": "cbad9f0a40622f56b5a78a005d865f8d486a44b1c7a08b7cb6ecb66a8bdebde6"
+    },
+    {
+      "path": "conformance/tests/TC111-TC120.md",
+      "bytes": 280475,
+      "sha256": "5e1d557a0c98db15257f72998601211b035f5aba7e7eb860a6b1072a4714e8f6"
+    },
+    {
+      "path": "conformance/tests/TC121-TC122.md",
+      "bytes": 74372,
+      "sha256": "7cb99ac3223699e4afb597e9491cc5665cd18a48f2665ffbe76266eb5e2df23a"
+    },
+    {
+      "path": "conformance/v2.1.x-formal-test-sync.json",
+      "bytes": 4939,
+      "sha256": "fb364e9484c72790276c5f85b7ec399660f78b1982799468144bbea78da1f0ad"
+    },
+    {
+      "path": "governance/AGCP-Normative-Companion-Reference-Dispositions.md",
+      "bytes": 4522,
+      "sha256": "0a73616ee6102b80bf39593e3508fbe59234105a30983f6a1bbae1ebd3a029f1"
+    },
+    {
+      "path": "governance/AGCP-implementation-profile-validation.json",
+      "bytes": 226,
+      "sha256": "56598b2f8cb5d0c303bdab75a94b51d8b85c02b071f684e1c73c5fbd4972b605"
+    },
+    {
+      "path": "governance/AGCP-semantic-fixture-validation.json",
+      "bytes": 24422,
+      "sha256": "8746340175729baaa1ab63bdce1ed9766abed90a8629f0435fcd11f336719958"
+    },
+    {
+      "path": "governance/AGCP-v2.1.x-REPOSITORY-CLOSURE.md",
+      "bytes": 3673,
+      "sha256": "56791b1a9ec5306045d8f0ae1fac8b671211332ed736c73dd3851dbdc71ff98d"
+    },
+    {
+      "path": "governance/AGCP-v2.1.x-repository-closure-manifest.json",
+      "bytes": 87203,
+      "sha256": "29ed3273c3808fa342b7ba614eb23ec7f1e05592a903a3b029fd5444ebcae4fb"
+    },
+    {
+      "path": "governance/AGCP-v2.1.x-repository-closure-validation.json",
+      "bytes": 2736,
+      "sha256": "e3f42cf6c264bb60210e744608d7650ad8f23d4542fbd9432e82c5599827a2cf"
+    },
+    {
+      "path": "governance/normative-companion-reference-dispositions.json",
+      "bytes": 3846,
+      "sha256": "f9cfe211ea14875760d8c57392a7cedabb915509cdf1f8ab73af63af90586fce"
+    },
+    {
+      "path": "governance/validate_implementation_profiles.py",
+      "bytes": 2655,
+      "sha256": "edb60255749f23e21282191dec848421ab39e26dec0819ff342d8dfb44840311"
+    },
+    {
+      "path": "governance/validate_v2_1_x_conformance_layer.py",
+      "bytes": 17644,
+      "sha256": "545234e19b14b18d8f8dd820e21c268ea1cb75a2bc731ddf40686ec6c1270950"
+    },
+    {
+      "path": "governance/validate_v2_1_x_repository_closure.py",
+      "bytes": 9390,
+      "sha256": "c813bb255a7a6f0346a2f0a671a0e3ec0ad299732e03df476f830b8b8514124e"
+    },
+    {
+      "path": "implementer/AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md",
+      "bytes": 5009,
+      "sha256": "516e2af55d1b93b220c8b9932c5e479286a82332a5a49b406ff4a036f5e95af0"
+    },
+    {
+      "path": "implementer/AGCP-Identity-and-Authorization-Store-Profile-Schema.json",
+      "bytes": 6847,
+      "sha256": "29752e11c59cf2ddaa772816e21c492379f5c52025942b14dc63a88f988aacc0"
+    },
+    {
+      "path": "implementer/AGCP-Identity-and-Authorization-Store-Profile-Specification.md",
+      "bytes": 4313,
+      "sha256": "94865607aebd5c0818a559a35af7c5d3497b60a1fc81ae8284ad9afa46b1315e"
+    },
+    {
+      "path": "implementer/AGCP-Identity-and-Authorization-Store-Profile-Template.md",
+      "bytes": 1660,
+      "sha256": "027b04fa43db879650c18087668a7305e8425101785fc0702c6edcd559bb4109"
+    },
+    {
+      "path": "implementer/AGCP-Implementation-Profile-Schema.json",
+      "bytes": 25971,
+      "sha256": "3e791f7707bbcdf88d9e2282f04c3b47d991c5228895e67535e037c33614c202"
+    },
+    {
+      "path": "implementer/AGCP-Implementation-Profile-Specification.md",
+      "bytes": 8316,
+      "sha256": "d718482a1ba155cd9f68ae36f2ad146b563fa11638d39c6adf492f71a3eb7565"
+    },
+    {
+      "path": "implementer/AGCP-Implementation-Profile-Template.md",
+      "bytes": 6492,
+      "sha256": "33c551243d9950bb9992462df2786cb61196ff50320827b5e8b3546131e7b0ef"
+    },
+    {
+      "path": "implementer/AGCP-PEP-Profile-Schema.json",
+      "bytes": 6611,
+      "sha256": "3225ecebccf727c5a83a190cb0aed47db37490a37a4d9f58ae7a8997e72c6483"
+    },
+    {
+      "path": "implementer/AGCP-PEP-Profile-Specification.md",
+      "bytes": 3574,
+      "sha256": "832334153a3da00560a8055e2bfc1e62eedc1a60045ffa84e7a81f1c5449435a"
+    },
+    {
+      "path": "implementer/AGCP-PEP-Profile-Template.md",
+      "bytes": 1748,
+      "sha256": "14b0df23fdde095343ae88cc2f15842f08cdd8ade258d3e5bdeb708275632259"
+    },
+    {
+      "path": "implementer/IMPLEMENTATION-PROFILE-CATALOG.md",
+      "bytes": 502,
+      "sha256": "e976ca18e585ef526a1cf9df476b0f693836742d0dfd3255b7193a0ab089df94"
+    },
+    {
+      "path": "implementer/README.md",
+      "bytes": 1071,
+      "sha256": "0b6050f1aedc20df0b466293e49581b31d0bdec4c1d8e37060260c8fa364676f"
+    },
+    {
+      "path": "implementer/examples/IAS-GENERIC-ENTERPRISE-EXAMPLE.md",
+      "bytes": 900,
+      "sha256": "12481d6e2d222f49ba870fab0bc7e442b9d0cdb2910fe87ee1912a719ebcaa9e"
+    },
+    {
+      "path": "implementer/examples/IAS-GENERIC-ENTERPRISE-EXAMPLE.yaml",
+      "bytes": 2340,
+      "sha256": "7f22c9bc81ccc62a69da5d4bbf27a87a2249a1d0db9b53332341b6c172dff22b"
+    },
+    {
+      "path": "implementer/examples/PEP-GENERIC-ACTION-ADAPTER-EXAMPLE.md",
+      "bytes": 548,
+      "sha256": "a81c2d27f769c0be5a608d97956457a845f39b85af3de0ce3cac28a633004bd9"
+    },
+    {
+      "path": "implementer/examples/PEP-GENERIC-ACTION-ADAPTER-EXAMPLE.yaml",
+      "bytes": 2159,
+      "sha256": "7ebfe554f64f615673b6cbb2dfca02549a0011a5b1be6bb0d07b64f1f29ffbe9"
+    },
+    {
+      "path": "implementer/implementation-profile-catalog.csv",
+      "bytes": 459,
+      "sha256": "0d816b007656f44e14bbafff139c8bf209834210cb23f51ee960e4a40be6cb46"
+    },
+    {
+      "path": "implementer/implementation-profile-catalog.json",
+      "bytes": 985,
+      "sha256": "080fc637e35304e6cb1e932971a197bca4914742536a3692b88d8cf40d44f42d"
+    },
+    {
+      "path": "implementer/implementation-profile-manifest.json",
+      "bytes": 3565,
+      "sha256": "a1aeaca8740a113501da2315bd54c596388f110eab43a1d518bada662c2861df"
+    },
+    {
+      "path": "lifecycle/AGCP Governance Lifecycle Model.md",
+      "bytes": 46453,
+      "sha256": "3160e00af3a66c89431a2953d805b12c7b1ba9159bcad1fd9ee84fa270e93174"
+    },
+    {
+      "path": "lifecycle/AGCP Governance Progression Implementation Guide.md",
+      "bytes": 11011,
+      "sha256": "3e7970f6fa4c2f16e1b07d9757ebc89bf63e03948aa02ed27752da9250b883c5"
+    },
+    {
+      "path": "lifecycle/AGCP Normative Governance Progression Table.md",
+      "bytes": 4912,
+      "sha256": "19b7621f0034cbef6f9eb12438dc4d80e996700c234671a30e3efe1ae2ba6f30"
+    },
+    {
+      "path": "lifecycle/README.md",
+      "bytes": 6329,
+      "sha256": "33bd5dee8ccefbe4a923b1ec846b4c8956f012454d26003b47bf2dda0b43bba1"
+    },
+    {
+      "path": "registries/README.md",
+      "bytes": 337,
+      "sha256": "15c2842023ff2ccaab8c72226ffb21385723d4d32656bfd49af10719734081a9"
+    },
+    {
+      "path": "registries/REGISTRY-ENTRY-CATALOG.md",
+      "bytes": 7571,
+      "sha256": "e0b396f93d3c88d2816554176f8b94fbfa85d46f6a0757d6489bd680a024159a"
+    },
+    {
+      "path": "registries/registry-entry-catalog.csv",
+      "bytes": 25938,
+      "sha256": "4bf853f59e71e72f144d79fba0ccc2e2f456b97c451c8bdaef30ce6e6e2ba8c4"
+    },
+    {
+      "path": "registries/registry-entry-catalog.json",
+      "bytes": 63061,
+      "sha256": "3407554e515d8bf6c914b931ed09846da6104313732a373fdfa1f9ebf55d13f0"
+    },
+    {
+      "path": "registries/registry-entry-traceability-validation.json",
+      "bytes": 905,
+      "sha256": "814fa5bbf136b1cb306b3a82997f2c7179de8942b3a808a3cda6b0ac978b2ef8"
+    },
+    {
+      "path": "registries/rejection-code-registry.json",
+      "bytes": 49676,
+      "sha256": "7ed4a50e7ee5c4f7e3c7cf225a5e86205ed5a13ef63179b7ac9c97405dc38e54"
+    },
+    {
+      "path": "schemas/COMMON-SCHEMA-UPDATE.md",
+      "bytes": 802,
+      "sha256": "f61fcfecdc5dd86c2b64e8f20fc35f7c3bee8b5aff16289ac199c0d157c6a56d"
+    },
+    {
+      "path": "schemas/DS-001-v2.1.x-validation.json",
+      "bytes": 415,
+      "sha256": "39615fb77ad7903cab2a56293c610946ae1f71b8b4c0aeddd08a1681cf1b42f1"
+    },
+    {
+      "path": "schemas/DS-003-IMPLEMENTATION-METADATA-RESPONSE-UPDATE.md",
+      "bytes": 829,
+      "sha256": "6c150a2aac8129e46247708d202142884a4998926eaed9a22fb5c92b9cafb3d9"
+    },
+    {
+      "path": "schemas/DS-003-v2.1.x-validation.json",
+      "bytes": 422,
+      "sha256": "9486546398bf69e24f620f44772e05ed3892b2833464941c35643dd3f1926297"
+    },
+    {
+      "path": "schemas/DS-006-GOVERNANCE-POLICY-ARTIFACT-UPDATE.md",
+      "bytes": 694,
+      "sha256": "8693a25a1a1aeb44a78fe0c14460a5ed638df8a1406128dc82b48f4ec6fa181e"
+    },
+    {
+      "path": "schemas/DS-006-v2.1.x-validation.json",
+      "bytes": 424,
+      "sha256": "3b8f899fd4f39d6bc350c94c685b4b62077efbbba2815e268a72cbf4bb4bea67"
+    },
+    {
+      "path": "schemas/DS-007-GOVERNANCE-CONSTRAINT-ARTIFACT-UPDATE.md",
+      "bytes": 681,
+      "sha256": "86821693de887bede8b7602e2064dd08766688a9b9d2cb0c32829b8b858d9d6f"
+    },
+    {
+      "path": "schemas/DS-007-v2.1.x-validation.json",
+      "bytes": 428,
+      "sha256": "0db57552581573a67ae02ae881dc7c69f70984cf1432a8e12123efbf6f2b6790"
+    },
+    {
+      "path": "schemas/DS-008-GOVERNANCE-INVARIANT-DEFINITION-UPDATE.md",
+      "bytes": 683,
+      "sha256": "a1258aa965a67881078e152418eaa3e65c859f2e20be9a612765d74979c0f76e"
+    },
+    {
+      "path": "schemas/DS-008-v2.1.x-validation.json",
+      "bytes": 429,
+      "sha256": "614b8d56ff241566fe1f1aec52073b08388124a13537d51a0649dda492120d40"
+    },
+    {
+      "path": "schemas/DS-011-GOVERNANCE-CONSTRAINT-EVALUATION-UPDATE.md",
+      "bytes": 695,
+      "sha256": "bbae6965ad2ab6c4ade0e06ca8be01d6fb2919d65a285fb20558ccec28977713"
+    },
+    {
+      "path": "schemas/DS-011-v2.1.x-validation.json",
+      "bytes": 430,
+      "sha256": "9d703c4a9a7642655f2f9dfef1b2c218695a99a30d6f6891b4c8b8b32cd1c2a1"
+    },
+    {
+      "path": "schemas/DS-012-GOVERNANCE-INVARIANT-EVALUATION-UPDATE.md",
+      "bytes": 693,
+      "sha256": "564a234e6b5b596dd169ee774b6164d4a4d5b1c886d8d0603effe85fd18b8e1c"
+    },
+    {
+      "path": "schemas/DS-012-v2.1.x-validation.json",
+      "bytes": 429,
+      "sha256": "2ade987fdf734165b5e24d2b96eb53641e5eee45292ee03646a1230917757bfa"
+    },
+    {
+      "path": "schemas/DS-014-PROPOSAL-VIEW-UPDATE.md",
+      "bytes": 805,
+      "sha256": "be43af0048d72937756f3e7a090e8e3e3ba5fe66f8839b4e7171d0ffbb7abdf8"
+    },
+    {
+      "path": "schemas/DS-014-v2.1.x-validation.json",
+      "bytes": 422,
+      "sha256": "793d16497c85e849355920b5169832d2b19f4d7af753f753c673370c7a32b98b"
+    },
+    {
+      "path": "schemas/DS-015-GOVERNANCE-DECISION-RESULT-UPDATE.md",
+      "bytes": 831,
+      "sha256": "1662a75079ab020cc0329cf7e4dd836ce953bde99c5f16fc61a922494d47d13b"
+    },
+    {
+      "path": "schemas/DS-015-v2.1.x-validation.json",
+      "bytes": 435,
+      "sha256": "b2ee2075b71f466678d86bbfcd1f08bfd55980b6598ae7580ab6f3f7f558e084"
+    },
+    {
+      "path": "schemas/DS-017-EXECUTION-AUTHORIZATION-VIEW-UPDATE.md",
+      "bytes": 835,
+      "sha256": "0b85d83b92437b383a05d1a81ad52e5e428687f7a9c0c52d161b5f5439a50e7e"
+    },
+    {
+      "path": "schemas/DS-017-v2.1.x-validation.json",
+      "bytes": 437,
+      "sha256": "2924c1ad94c327ff86621cb65247ed4b3040082947106a596742e9922b39d82d"
+    },
+    {
+      "path": "schemas/DS-018-COMMIT-BOUNDARY-REQUEST-UPDATE.md",
+      "bytes": 837,
+      "sha256": "0aa07f55654a5fe3598cba19a5a07e5b87b3defd68b9c5e0b51e74eb60f6258f"
+    },
+    {
+      "path": "schemas/DS-018-v2.1.x-validation.json",
+      "bytes": 432,
+      "sha256": "5de285dbc7674c9acbabf9edd9d7d90dfb92fecf0fa22e1831c2dbb8cdd42cdd"
+    },
+    {
+      "path": "schemas/DS-019-COMMIT-BOUNDARY-RESULT-UPDATE.md",
+      "bytes": 749,
+      "sha256": "e350850b2566f81fdada179fd4de6011d01e3fd129c073526b0ec20eddb72823"
+    },
+    {
+      "path": "schemas/DS-019-v2.1.x-validation.json",
+      "bytes": 431,
+      "sha256": "64bcef903974eaaf2953d8ef2dd02dd97491700479580941f9ec641182d317ae"
+    },
+    {
+      "path": "schemas/DS-020-GOVERNANCE-EVIDENCE-UPDATE.md",
+      "bytes": 817,
+      "sha256": "38243675af4ec0ec3b416ac5d81528eba7a125d0d076d7e730f2fc361eb80d15"
+    },
+    {
+      "path": "schemas/DS-020-v2.1.x-validation.json",
+      "bytes": 428,
+      "sha256": "18641aa9dc3f3c135cd8e1c37180d5a234d46c43b509305a2274b8001c40f6f2"
+    },
+    {
+      "path": "schemas/DS-022-GOVERNANCE-CONTEXT-ENVELOPE-UPDATE.md",
+      "bytes": 833,
+      "sha256": "32690a9ce49969335b38fdcb38055ff3fe87189645c9cf7dd4fd68b1a9623bc3"
+    },
+    {
+      "path": "schemas/DS-022-v2.1.x-validation.json",
+      "bytes": 436,
+      "sha256": "b6905f87fb87eba71fa2e13fbbafa653b8c9f65c0e9bd833e07911b934e0058f"
+    },
+    {
+      "path": "schemas/DS-024-AUTHORITY-LINEAGE-UPDATE.md",
+      "bytes": 813,
+      "sha256": "0f4200480ae8fcbb4358fe00b8e9537de05e0ed7d8272db2b944252fce1d05c6"
+    },
+    {
+      "path": "schemas/DS-024-v2.1.x-validation.json",
+      "bytes": 426,
+      "sha256": "8f03d876469d0e2e6aac1a66a93db4ce5e9e1c49a4b81f207d95cdd593612655"
+    },
+    {
+      "path": "schemas/DS-026-GOVERNANCE-APPROVAL-ARTIFACT-UPDATE.md",
+      "bytes": 790,
+      "sha256": "223b235534fff325df2d77a9537ad47364918f152d328552242e741cac10aed4"
+    },
+    {
+      "path": "schemas/DS-026-v2.1.x-validation.json",
+      "bytes": 437,
+      "sha256": "74c4286a18051f42a84b62bfc6d28774fbdf05c68819c0b8ed42f926ceb1f8b5"
+    },
+    {
+      "path": "schemas/DS-027-GOVERNANCE-RECEIPT-UPDATE.md",
+      "bytes": 815,
+      "sha256": "1bbd527eb5c1017924c4f25420b9ee20ba4882501c9eddf4492f45eb3f1b53cd"
+    },
+    {
+      "path": "schemas/DS-027-v2.1.x-validation.json",
+      "bytes": 427,
+      "sha256": "e3859315a55495fe5affd49c4d3edd700e37ccfb870a021a92ee7f055c9f1efa"
+    },
+    {
+      "path": "schemas/DS-028-REFUSAL-RECORD-UPDATE.md",
+      "bytes": 807,
+      "sha256": "4ed3df5a9cc92069bb8ff784615b1f30634293becbae6268aea0bbd32e40d4da"
+    },
+    {
+      "path": "schemas/DS-028-v2.1.x-validation.json",
+      "bytes": 423,
+      "sha256": "3717cfbaf44b97c46d15e2373d8236c9252e039011ca73d093e7f1445712a9b3"
+    },
+    {
+      "path": "schemas/DS-029-ENFORCEMENT-CONTEXT-UPDATE.md",
+      "bytes": 713,
+      "sha256": "de1ead1a36e37145168e915c2683201d90665cd6ae74ca5d35066ac51ac6bf13"
+    },
+    {
+      "path": "schemas/DS-029-v2.1.x-validation.json",
+      "bytes": 428,
+      "sha256": "23c26d2503ddf1266bc0794624d62f7011a9468154e52d09df48fda1a01623d9"
+    },
+    {
+      "path": "schemas/DS-030-GOVERNANCE-BINDING-VALIDATION-RESULT-UPDATE.md",
+      "bytes": 851,
+      "sha256": "eaa37ca707c2d82a78f7328abda754a58dc368d5a2c9c1629822b504062f0cb7"
+    },
+    {
+      "path": "schemas/DS-030-v2.1.x-validation.json",
+      "bytes": 445,
+      "sha256": "0702a36d64ea1c8ae2399808eb4d819b0caae0bbbbee218224b010ae14c4b2dc"
+    },
+    {
+      "path": "schemas/DS-034-AUTHORITY-REDERIVATION-RESULT-UPDATE.md",
+      "bytes": 726,
+      "sha256": "714e188a7f3ba469fa1f3d8d7eee18d81e23ce49c0377b9effc67e155952b60e"
+    },
+    {
+      "path": "schemas/DS-034-v2.1.x-validation.json",
+      "bytes": 438,
+      "sha256": "65681edbb8a93b6eedf97dc1ea8a7a5232a88bf7239bad17725a2b9f316fd6ef"
+    },
+    {
+      "path": "schemas/DS-038-GOVERNANCE-LIFECYCLE-RECORD-UPDATE.md",
+      "bytes": 1295,
+      "sha256": "16940f42f655ba28d51d7871112ea958def9c6c6b50e7a76745bb12bf8f1362b"
+    },
+    {
+      "path": "schemas/DS-038-v2.1.x-validation.json",
+      "bytes": 436,
+      "sha256": "4b49e7039264151557ff2dba6d1f7471be61b7ea197a12698a6e515dd35ec5f0"
+    },
+    {
+      "path": "schemas/DS-040-GOVERNANCE-LEDGER-EVENT-UPDATE.md",
+      "bytes": 825,
+      "sha256": "d5c78f1d7ed5b4d32dfb5b9df4d13ea6c926a544cb83565bcf6f3cdc613499e9"
+    },
+    {
+      "path": "schemas/DS-040-v2.1.x-validation.json",
+      "bytes": 432,
+      "sha256": "55637e901343f260d8a635f66670340b2a81a12881370ed7ec63189315990bfe"
+    },
+    {
+      "path": "schemas/DS-041-GOVERNANCE-CONFIGURATION-UPDATE.md",
+      "bytes": 827,
+      "sha256": "a2abaa829660cf65d0a4ea88267b16acfc5f5d32a38008f303d2912d7296c6a5"
+    },
+    {
+      "path": "schemas/DS-041-v2.1.x-validation.json",
+      "bytes": 433,
+      "sha256": "220c1ea12d3b10b51b44bd7bc38b092bb64a1fca7dcc8a439f58db7478b9e76e"
+    },
+    {
+      "path": "schemas/DS-045-GOVERNANCE-APPROVAL-SUBMISSION-UPDATE.md",
+      "bytes": 839,
+      "sha256": "dc367a102e79a2da2d975e1b98d4af9789c4b939dd40a54989acfcc628b095fb"
+    },
+    {
+      "path": "schemas/DS-045-v2.1.x-validation.json",
+      "bytes": 439,
+      "sha256": "d8b7ca5a34833eb210fb99b738c18842a2f2c347f3406564182b9ecd8f0318d7"
+    },
+    {
+      "path": "schemas/DS-046-GOVERNANCE-OBSERVATION-EVENT-UPDATE.md",
+      "bytes": 840,
+      "sha256": "89e28bd2fadf8ccf42f08c6f59bee0a305792aa23777e926937bff45dc8c7948"
+    },
+    {
+      "path": "schemas/DS-046-v2.1.x-validation.json",
+      "bytes": 437,
+      "sha256": "0ad1ead7221808e754d8474b9a9cafa52686cf853c1991ee8282779200db9a5d"
+    },
+    {
+      "path": "schemas/DS-050-TEST-CONTROL-REQUEST-UPDATE.md",
+      "bytes": 824,
+      "sha256": "60b34d23f8bbe8dbd043cdfbc17bcb6a335518d3407c04100a822a0f2e61b428"
+    },
+    {
+      "path": "schemas/DS-050-v2.1.x-validation.json",
+      "bytes": 429,
+      "sha256": "255be6e4eb549551b8b8a42445176adf8a088a1901945d097c8be06977dce69c"
+    },
+    {
+      "path": "schemas/DS-051-TEST-CONTROL-RESULT-UPDATE.md",
+      "bytes": 822,
+      "sha256": "fec9da4b98825e806dbf9596896476b05c492b8696e1ad3ec404bcbe977420bb"
+    },
+    {
+      "path": "schemas/DS-051-v2.1.x-validation.json",
+      "bytes": 428,
+      "sha256": "8ea1f6711366617160ff2714575d8605bb39b7984472c903e76fdd512137f482"
+    },
+    {
+      "path": "schemas/DS-052-GOVERNED-EXECUTION-OUTCOME-UPDATE.md",
+      "bytes": 673,
+      "sha256": "c282e98d24373016c4b6137e114049caca443a21c3611befaa3c3b7e1b7ce774"
+    },
+    {
+      "path": "schemas/DS-052-GOVERNED-EXECUTION-OUTCOME.md",
+      "bytes": 367,
+      "sha256": "4ba5c7b05f98c1e8f34c0cb818936929eb72d57980513ce45f5c12ffc93505f3"
+    },
+    {
+      "path": "schemas/DS-052-v2.1.x-validation.json",
+      "bytes": 435,
+      "sha256": "8fbe72b3bc1c7f22448afc2a4a6fc8221f6b37ca58fa33719b27e95ffc9bb9c8"
+    },
+    {
+      "path": "schemas/DS-053-IDENTITY-AUTHORIZATION-QUALIFICATION-RESULT-UPDATE.md",
+      "bytes": 734,
+      "sha256": "7196fcf21757829a7c21de48c8f9b08b23eb6bb6d97e813ff27db3f8bb74b10e"
+    },
+    {
+      "path": "schemas/DS-053-IDENTITY-AUTHORIZATION-QUALIFICATION-RESULT.md",
+      "bytes": 522,
+      "sha256": "3fc9efaa477823c0a7b22a3b856d1cafddf448dfdf4ffc9e3da448613b70406a"
+    },
+    {
+      "path": "schemas/DS-053-v2.1.x-validation.json",
+      "bytes": 452,
+      "sha256": "c2c46bf1c0f34dc06fde18f3d3488c9b25c3c4b45c679da7dbc330ca86bbecb7"
+    },
+    {
+      "path": "schemas/DS-v2.1.x-schema-regression-validation.json",
+      "bytes": 351,
+      "sha256": "83e2ef32405822971b967bf1570fc3ffa9113b5674c35c5a08219fa44f70d8e0"
+    },
+    {
+      "path": "schemas/README.md",
+      "bytes": 356,
+      "sha256": "88db68c993fc5c5bffcef6f029667e3603c339f18ef6c3219148dead2fb259db"
+    },
+    {
+      "path": "schemas/SCHEMA-CATALOG.md",
+      "bytes": 4829,
+      "sha256": "36e31ed03ca542eb580ca6fe76fa051bce9d8c8e9fe0c61cccf1f8e98c22e16e"
+    },
+    {
+      "path": "schemas/authority_lineage.json",
+      "bytes": 35715,
+      "sha256": "b0063ce99ad6d0d71c0291d1d6209516bfc0173f3539ccb48cacbdf52bad294a"
+    },
+    {
+      "path": "schemas/authority_rederivation_result.json",
+      "bytes": 53351,
+      "sha256": "e41c9a54b4dd47a2a6b845e50082a3654ebfd350ba29b13d788ce5d6ce670afd"
+    },
+    {
+      "path": "schemas/canonical_state.json",
+      "bytes": 22069,
+      "sha256": "d7cd455c039d07bb43702eff679093c5b0086f63dcd5291944f5c481b9187457"
+    },
+    {
+      "path": "schemas/catalog/schema-catalog-validation.json",
+      "bytes": 496,
+      "sha256": "916ba6c402c3cc937e55df73b038b024335f5c09438e1e6758339568c6825d00"
+    },
+    {
+      "path": "schemas/catalog/schema-catalog.csv",
+      "bytes": 97446,
+      "sha256": "781c82dc80fc65ddf1a419f8cab7a7db7546375d4c6b305180cf0f13b98a8529"
+    },
+    {
+      "path": "schemas/catalog/schema-catalog.json",
+      "bytes": 165204,
+      "sha256": "2c3daef5104a973eacf101ea672a764361ae41d9e07fc34cdcf9138d09f527d2"
+    },
+    {
+      "path": "schemas/commit_boundary_request.json",
+      "bytes": 11228,
+      "sha256": "d375be469f32fbf2240adc2b62f1a5fe365e71b15293ddad026468f451229698"
+    },
+    {
+      "path": "schemas/commit_boundary_result.json",
+      "bytes": 14309,
+      "sha256": "d40a3f01f681de22d665b5c021bfba59be593019b694280fa62557cdbdff7040"
+    },
+    {
+      "path": "schemas/common.json",
+      "bytes": 40152,
+      "sha256": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4"
+    },
+    {
+      "path": "schemas/constraint_artifact.json",
+      "bytes": 52863,
+      "sha256": "d6c801e16db659d992a4d0799191a9dc7a0982be2ce4ed6aafad521a12e697ab"
+    },
+    {
+      "path": "schemas/constraint_evaluation.json",
+      "bytes": 30455,
+      "sha256": "9af8cd34e5bd5f40210d7345a62f660da022381b164544a36ee8f6fe28b31f96"
+    },
+    {
+      "path": "schemas/continuation_integrity_result.json",
+      "bytes": 106179,
+      "sha256": "4ccd2073b309da618f4216382a392f27e1cf77392f70e3cfb20b4d35a69f73bf"
+    },
+    {
+      "path": "schemas/delegation_artifact.json",
+      "bytes": 22603,
+      "sha256": "16190eca22f101e20ef86b9702e490ff9d031c46624ae3c2d4e6299bb80de63a"
+    },
+    {
+      "path": "schemas/deterministic_adjudication_result.json",
+      "bytes": 38187,
+      "sha256": "d646a4c6a6994aeaea63acb5ba82520697c49ede71e1b8144ef21fb74ced06a8"
+    },
+    {
+      "path": "schemas/enforcement_context.json",
+      "bytes": 35404,
+      "sha256": "b1deccbfcbe2a01d67be111df6132a7a93161d598e202394c766f547fe5248d0"
+    },
+    {
+      "path": "schemas/examples/ds003-implementation-metadata-response.json",
+      "bytes": 11884,
+      "sha256": "6fe67d63995d088868dd1ef8f97fd768ba9f7225596cb39f40f32674328b8264"
+    },
+    {
+      "path": "schemas/examples/ds011-constraint-evaluation-satisfied.json",
+      "bytes": 13197,
+      "sha256": "cd337388e731a1f180e4a4b478ea835b0e415b3e935109e307aa5e845ff50bce"
+    },
+    {
+      "path": "schemas/examples/ds011-constraint-evaluation-violated.json",
+      "bytes": 15356,
+      "sha256": "905784c700728acfa71126e63ef98c60f000fbbaff8316594659409288d59a0b"
+    },
+    {
+      "path": "schemas/examples/ds012-invariant-evaluation-hard-violation.json",
+      "bytes": 19034,
+      "sha256": "f02788c96025cf7dfd236a765f2aec0cbe67ba82d021130a414b12efb85c49e1"
+    },
+    {
+      "path": "schemas/examples/ds012-invariant-evaluation-preserved.json",
+      "bytes": 14322,
+      "sha256": "41ae8275c4728c88064d3483aafa12a7349bef81d3c416fadffabf0fb3f7df52"
+    },
+    {
+      "path": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "bytes": 3181,
+      "sha256": "0fea0b93dc0a6c4d64f4cb09eaf44f3ca4ecac2cc29f94269cafe181aab1e4e8"
+    },
+    {
+      "path": "schemas/examples/ds019-commit-boundary-result-refusal.json",
+      "bytes": 11854,
+      "sha256": "2d3c8aecc320b7e8811e1365c9684dde7f863714fee7cfaf3bc09f93776cb09c"
+    },
+    {
+      "path": "schemas/examples/ds019-commit-boundary-result-success.json",
+      "bytes": 10047,
+      "sha256": "16acbb27ee9e2f94788bfae7237680ce2e3344b240da7a6989d61e8f3b874675"
+    },
+    {
+      "path": "schemas/examples/ds026-governance-approval-completed-quorum.json",
+      "bytes": 10763,
+      "sha256": "70e6a0d3422bf527c2f200944990ef2d0bb72502cd4437854069f66073d1ad6c"
+    },
+    {
+      "path": "schemas/examples/ds026-governance-approval-partial-quorum.json",
+      "bytes": 9606,
+      "sha256": "ffd98ea18a4a9196778ec92eda7751b038214b212f73434ba162681d4818df81"
+    },
+    {
+      "path": "schemas/examples/ds029-enforcement-context-admissible.json",
+      "bytes": 12878,
+      "sha256": "204d51bd3a4858230f546c78ff9aecb40b07174d0b8ff49a23bb659e14493c54"
+    },
+    {
+      "path": "schemas/examples/ds029-enforcement-context-prevent.json",
+      "bytes": 12964,
+      "sha256": "15c9417f26ecc0596f52ed5911d0ce51156420954fcbc8d9da061fe254c05418"
+    },
+    {
+      "path": "schemas/examples/ds045-governance-approval-submission-valid.json",
+      "bytes": 2554,
+      "sha256": "cb4aadef2299be914e1fbbbc8df715c64a4139c2f395b4eaf877ff2fdb691e65"
+    },
+    {
+      "path": "schemas/examples/ds052-governed-execution-outcome-failed.json",
+      "bytes": 3120,
+      "sha256": "1156a36a701fb51215a3070dbcdca1021f93e1e44837982c08848ccf63510ac9"
+    },
+    {
+      "path": "schemas/examples/ds052-governed-execution-outcome-pending.json",
+      "bytes": 2811,
+      "sha256": "848e2e68236ae54da5780a03b3304a69e30b7bf85c625fdb04028143457b6202"
+    },
+    {
+      "path": "schemas/examples/ds052-governed-execution-outcome-success.json",
+      "bytes": 3114,
+      "sha256": "58b6d284611d66b6eaf5f33bb79520909eca185c99aa93735f3c2184a4f2e640"
+    },
+    {
+      "path": "schemas/examples/ds053-identity-authorization-not-qualified.json",
+      "bytes": 3166,
+      "sha256": "7e674f9aef45b969526be38342d76bffc1ebeede4f46517a56f08ab43bb62f23"
+    },
+    {
+      "path": "schemas/examples/ds053-identity-authorization-qualified.json",
+      "bytes": 3042,
+      "sha256": "0360100df5c1b2b66d3c78dc2a32aab2897ab3d1edd678a6283ac6b98d95418d"
+    },
+    {
+      "path": "schemas/examples/ds053-identity-authorization-source-unavailable.json",
+      "bytes": 3213,
+      "sha256": "6de125bd60a5aee8ddd4b2e927052c28cceea16851785678f4cdad7cfaaf76a8"
+    },
+    {
+      "path": "schemas/execution_authorization_view.json",
+      "bytes": 16647,
+      "sha256": "d16590a72ec44fb0c482fe58bd330880e56cb0840929ff948ccf163c2b744a08"
+    },
+    {
+      "path": "schemas/governance_approval_artifact.json",
+      "bytes": 30372,
+      "sha256": "6b3364d2282585e0c9c537882cabaa1d73b15af49c20b9eeaffda95a9fc6af1b"
+    },
+    {
+      "path": "schemas/governance_approval_submission.json",
+      "bytes": 9013,
+      "sha256": "abcb7a0303e0e7a55e59e452c00c5f0427f66482514c8b7d136bd0aaf53a1d21"
+    },
+    {
+      "path": "schemas/governance_binding_validation_result.json",
+      "bytes": 49791,
+      "sha256": "ce9e2ca6caa1c28df2803be327db5e6b306ce9c9595ad42c68e7892f7896eb83"
+    },
+    {
+      "path": "schemas/governance_configuration.json",
+      "bytes": 30054,
+      "sha256": "2650e422b7ac4bdcf237684afa23631597ec9d4927444417aadff540c1ccedfd"
+    },
+    {
+      "path": "schemas/governance_context_envelope.json",
+      "bytes": 20932,
+      "sha256": "0de3718cd4dabc5715d98cd9ff1ee5922ec8dedcb020fad09fde653595d2cb47"
+    },
+    {
+      "path": "schemas/governance_decision_result.json",
+      "bytes": 15502,
+      "sha256": "4ad6c7213ab17fa747b62a2ac3fd47570cadb610bf8b8b010f6a89c244005e52"
+    },
+    {
+      "path": "schemas/governance_dependency_graph.json",
+      "bytes": 57383,
+      "sha256": "5535c892869dfb60abc10a1e261a3a52bf47ee8687a48e4980911c1d8cb7ae67"
+    },
+    {
+      "path": "schemas/governance_evidence.json",
+      "bytes": 21712,
+      "sha256": "415479f994bef3c716253fe31167569f13bfb43c1d2d7c146b5db8d3df8bec0f"
+    },
+    {
+      "path": "schemas/governance_ledger_event.json",
+      "bytes": 62790,
+      "sha256": "bf2631796c4bd4261340e77c6d3b1cfed81c6dc8cd2f3b7bbfed854978d4437a"
+    },
+    {
+      "path": "schemas/governance_lifecycle_record.json",
+      "bytes": 77960,
+      "sha256": "a4485a75806b14471e4d5773ab67cd537f64903bb337eaaa56de79c3a22809bb"
+    },
+    {
+      "path": "schemas/governance_observation_event.json",
+      "bytes": 3587,
+      "sha256": "133518ef98d2ca20b613716bbf7c5d8ebccba8f02d4361fad1cc865808b0c97b"
+    },
+    {
+      "path": "schemas/governance_receipt.json",
+      "bytes": 16625,
+      "sha256": "41985462249804b53ce046e58642d61baf3184dcc8cd1957d58636191fa7e44a"
+    },
+    {
+      "path": "schemas/governed_execution_outcome.json",
+      "bytes": 7636,
+      "sha256": "f402eebeba121b07dd2c2d92ed6452ca4fc2e090be024ceb94b964de7c78ba66"
+    },
+    {
+      "path": "schemas/identity_authorization_qualification_result.json",
+      "bytes": 11075,
+      "sha256": "4b267b03f1d024e70534ab13e6d6fce4d10a244849497164c4560aab202adaf7"
+    },
+    {
+      "path": "schemas/invariant_definition.json",
+      "bytes": 58988,
+      "sha256": "2f1959c540181e87e74b8671b2384db77b38bba8546ee4ba315a27d752fea175"
+    },
+    {
+      "path": "schemas/invariant_evaluation.json",
+      "bytes": 53869,
+      "sha256": "87d35027a5e311bb20ae0d9ccd544324273d55f3806033e20efd60c80d1b9b52"
+    },
+    {
+      "path": "schemas/meta_response.json",
+      "bytes": 44406,
+      "sha256": "c8e034931dded953522a687ef1d84833e74f3855933145082b89b17ec3aecab6"
+    },
+    {
+      "path": "schemas/policy_artifact.json",
+      "bytes": 50085,
+      "sha256": "7c55d8e2897f76bd15dc7e6ee97f39c7e9252261157d96892aefe290f83c7085"
+    },
+    {
+      "path": "schemas/policy_evaluation_module_artifact.json",
+      "bytes": 39483,
+      "sha256": "9ca75412c61826181691432b4ac562887220467872f7b20204a4ae25c681d164"
+    },
+    {
+      "path": "schemas/proposal_view.json",
+      "bytes": 12967,
+      "sha256": "4062e8890ee8e57281dedc280d164a84ed73d407da38351556b2c138a2510ce4"
+    },
+    {
+      "path": "schemas/refusal_record.json",
+      "bytes": 20965,
+      "sha256": "33c7b36ee50ff068a763c784e150ef3b7b46de6fb2cf5f9934dc9dccd1de543f"
+    },
+    {
+      "path": "schemas/tenant.json",
+      "bytes": 42285,
+      "sha256": "dc3741e97f9693a6d86a9939f03bf19e474d9ffd4302976bef0adb0d1aff5ad8"
+    },
+    {
+      "path": "schemas/test_control_request.json",
+      "bytes": 20155,
+      "sha256": "af87cace7933ca95577d98a1ad4df146b2b77dddb5594676a7b89ddcd6978059"
+    },
+    {
+      "path": "schemas/test_control_result.json",
+      "bytes": 7214,
+      "sha256": "1a73f2398a7da6cc553dd19955019db10b331e5a63d33e11b0c19c0f83108fa5"
+    },
+    {
+      "path": "spec/AGCP Normative Statements.docx",
+      "bytes": 64676,
+      "sha256": "5c5e7569f35e80c2c2473a59b5300ae851650ffd95659d9e0723fa3ddd012cb8"
+    },
+    {
+      "path": "spec/AGCP-Conformance-Test-Control-Specification.md",
+      "bytes": 12015,
+      "sha256": "ffa1a4b3aea918e855e8b1f4543960840b73d9967225e0a36705dbf5e235332d"
+    },
+    {
+      "path": "spec/AGCP-Core.docx",
+      "bytes": 97889,
+      "sha256": "cd5cf454edd34de8cc1e413a5a2c029665880d3788a05dd475bc78f731374b7c"
+    },
+    {
+      "path": "spec/AGCP-Error-Mapping.md",
+      "bytes": 18143,
+      "sha256": "f30d7f2cb1792a5fa2e53f4eeb19fd41d87b553a99f25a2e798032353849a6d1"
+    },
+    {
+      "path": "spec/AGCP-Governance-Observability-and-Management-Specification.md",
+      "bytes": 14511,
+      "sha256": "6f55fbc378becb5edf59ae5a6642f9d8de3f260cc46237d2d9a57149117642d5"
+    },
+    {
+      "path": "spec/AGCP-HTTP-Interface-Specification.md",
+      "bytes": 26682,
+      "sha256": "b84702358f631c70d4192d16c18f8ecfe063e8e291194c9d7ef7780bd2e7b195"
+    },
+    {
+      "path": "spec/AGCP-Human-Review-Specification.md",
+      "bytes": 12823,
+      "sha256": "ee6f9d3dbb70cc33d4104fd2dd479459c9d90d10eefa3f8a2505a6a544682784"
+    },
+    {
+      "path": "spec/AGCP-Multitenant-Operational-Specification.md",
+      "bytes": 7713,
+      "sha256": "dae32d780d375f68450cbedbd2c376cd1ca028a9d86d280eb84ef3ec640e8d23"
+    },
+    {
+      "path": "spec/AGCP-Policy-Evaluation-Contract.md",
+      "bytes": 9377,
+      "sha256": "9a6629bfe5802cc3dfe58931e44ad842ab10677f20773dde3430d3a4063e0b14"
+    },
+    {
+      "path": "spec/AGCP-Provenance-Wire-Format-Specification.md",
+      "bytes": 9485,
+      "sha256": "a9096f899d42cb5cc96d47620bb05aeb05d9c4f02352a1bab93af5f5d1910709"
+    },
+    {
+      "path": "spec/AGCP-Trust-Model.md",
+      "bytes": 54054,
+      "sha256": "1ab5e2c6545159d920bcd2342c9c608a145782a123974f77134c80310a2bc232"
+    },
+    {
+      "path": "spec/AGCP-v2.1.x-RTM-SYNCHRONIZATION-UPDATE.md",
+      "bytes": 2791,
+      "sha256": "6f8224ff9f360e36d63c5f06864d6e45f24d727ce3a17dbfc7956a628f5565a9"
+    },
+    {
+      "path": "spec/AGCP-v2.1.x-rtm-synchronization-validation.json",
+      "bytes": 5718,
+      "sha256": "a469a58fd1953601656916d2cdd1f1ff1d937f08a1368651d3ffde64a3a4ac8f"
+    },
+    {
+      "path": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
+      "bytes": 163402,
+      "sha256": "0c20b146b444cabf54a43491347c764c039362001e09456c42bd39e953125dc7"
+    },
+    {
+      "path": "spec/Architecture Reference Model.docx",
+      "bytes": 98211,
+      "sha256": "105c609fed323356e3b636bf71221080d042c99cb5daec3a1ed9efffdcc2fc43"
+    },
+    {
+      "path": "spec/README.md",
+      "bytes": 9448,
+      "sha256": "71bbed119fa7d324690f665d231ec1efdd76c30f2f91bf59a3ca7fd7525d7af9"
+    },
+    {
+      "path": "spec/ledger/AGCP-Append-Only-Governance-Ledger-Specification.md",
+      "bytes": 15427,
+      "sha256": "a91c7d14250dc21d188ed779bc26a1dada1b577d4d191aa10f643e187ac3d619"
+    }
+  ]
+}

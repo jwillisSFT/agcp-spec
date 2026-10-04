@@ -1,0 +1,56 @@
+{
+  "validation_type": "AGCP_V2_1_X_DS_INTERFACE_API_INTEGRATED_VALIDATION",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_count": 52,
+  "retired_schema_count": 1,
+  "highest_ds_id": "DS-053",
+  "schema_metaschema_errors": 0,
+  "local_ref_errors": 0,
+  "schema_examples_checked": 42,
+  "schema_example_errors": 0,
+  "profile_example_results": [
+    {
+      "schema": "implementer/AGCP-Identity-and-Authorization-Store-Profile-Schema.json",
+      "example": "implementer/examples/IAS-GENERIC-ENTERPRISE-EXAMPLE.yaml",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "schema": "implementer/AGCP-PEP-Profile-Schema.json",
+      "example": "implementer/examples/PEP-GENERIC-ACTION-ADAPTER-EXAMPLE.yaml",
+      "status": "PASS",
+      "errors": []
+    }
+  ],
+  "rejection_registry_valid": true,
+  "registry_entry_count": 101,
+  "rejection_code_count": 49,
+  "interface_ids": [
+    "IF-001",
+    "IF-002",
+    "IF-003",
+    "IF-004",
+    "IF-005"
+  ],
+  "api_results": [
+    {
+      "file": "api/AGCP-HTTP-Contract.yaml",
+      "openapi": "3.1.0",
+      "path_count": 10,
+      "status": "PASS"
+    },
+    {
+      "file": "api/AGCP-Management-Contract.yaml",
+      "openapi": "3.1.0",
+      "path_count": 6,
+      "status": "PASS"
+    }
+  ],
+  "api_ref_errors": [],
+  "retired_ns_references_in_active_artifacts": 0,
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE",
+  "conformance_test_status": "FORMAL_TC_SYNCHRONIZATION_COMPLETE",
+  "issues": [],
+  "local_ref_count": 3758
+}

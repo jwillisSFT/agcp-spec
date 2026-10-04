@@ -142,6 +142,7 @@
         "GOVERNANCE_EVIDENCE_RECORDED",
         "EVIDENCE_QUALIFICATION_RECORDED",
         "AUTHORITY_LINEAGE_RECORDED",
+        "IDENTITY_AUTHORIZATION_QUALIFIED",
         "AUTHORITY_REDERIVATION_RECORDED",
         "GOVERNANCE_APPROVAL_RECORDED",
         "GOVERNANCE_DECISION_RECORDED",
@@ -151,9 +152,11 @@
         "DEPENDENCY_GRAPH_RECORDED",
         "BIND_SET_RECORDED",
         "DETERMINISTIC_ADJUDICATION_RECORDED",
+        "GOVERNANCE_REALIZATION_RECORDED",
         "COMMIT_BOUNDARY_REQUESTED",
         "COMMITMENT_RECORDED",
         "ENFORCEMENT_OUTCOME_RECORDED",
+        "EXECUTION_OUTCOME_RECORDED",
         "GOVERNANCE_RECEIPT_RECORDED",
         "STRUCTURAL_REFUSAL_RECORDED",
         "LIFECYCLE_TRANSITION_RECORDED",
@@ -171,6 +174,7 @@
         "PROPOSAL",
         "CONTEXT_AND_STATE",
         "EVIDENCE",
+        "IDENTITY_AND_AUTHORIZATION",
         "AUTHORITY_AND_APPROVAL",
         "DECISION_AND_AUTHORIZATION",
         "COMMITMENT_AND_ENFORCEMENT",
@@ -984,6 +988,15 @@
         },
         "controlled_governance_activation_ref": {
           "$ref": "controlled_governance_activation.json#/$defs/controlled_governance_activation_ref"
+        },
+        "identity_authorization_qualification_result_ref": {
+          "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+        },
+        "governed_execution_outcome_ref": {
+          "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref"
+        },
+        "pep_profile_ref": {
+          "$ref": "common.json#/$defs/pep_profile_ref"
         }
       },
       "description": "Canonical artifact and outcome references recorded by the event; no unrestricted generic payload is permitted.",

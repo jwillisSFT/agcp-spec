@@ -2,7 +2,7 @@
   "document_id": "AGCP-NORMATIVE-COMPANION-REFERENCE-DISPOSITIONS",
   "title": "AGCP Normative Companion Reference Dispositions",
   "version": "1.0.0",
-  "release_target": "v2.0.8",
+  "release_target": "v2.1.0",
   "status": "CONTROLLED",
   "finding": "P1-01",
   "purpose": "Resolve repository references that name normative companion artifacts not present in the controlled release and bind each retired label to existing canonical artifacts.",
@@ -61,6 +61,8 @@
     "Normative references shall identify an existing controlled repository path or an explicitly identified external normative source.",
     "A subject-area label shall not be written as though it were a standalone normative artifact when no such artifact exists.",
     "Distributed normative obligations shall reference the applicable controlling artifacts rather than an invented umbrella specification.",
-    "Historical records may preserve retired labels only when clearly identified as historical or disposition metadata."
+    "Historical records may preserve retired labels only when clearly identified as historical or disposition metadata.",
+    "The AGCP Trust Model is an architectural reference and shall not be described as a normative companion or independent conformance authority.",
+    "IAS Profile and PEP Profile specifications are controlled implementer-profile artifacts adopted through an Implementation Profile, not standalone normative companions."
   ]
 }

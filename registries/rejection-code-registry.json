@@ -8,11 +8,11 @@
   "series": "AGCP Core",
   "description": "Authoritative registry of rejection and failure codes used by AGCP HTTP interfaces, Governance Evidence, conformance tests, and implementation error reporting.",
   "release": {
-    "release_id": "REG-REJECTION-CODE-v2.0.8",
-    "registry_release": "v2.0.8",
-    "specification_version": "v2.0.8",
+    "release_id": "REG-REJECTION-CODE-v2.1.1",
+    "registry_release": "v2.1.1",
+    "specification_version": "v2.1.0",
     "publication_status": "CURRENT",
-    "published_at": "2026-08-03T12:11:00-04:00",
+    "published_at": "2026-10-03T15:30:00-04:00",
     "authority": "AGCP controlled repository release",
     "repository_path": "registries/rejection-code-registry.json",
     "canonical_uri": "https://agcp.ai/registries/rejection-code-registry.json",
@@ -20,7 +20,7 @@
   },
   "lifecycle": {
     "lifecycle_state": "ACTIVE",
-    "effective_from": "2026-07-30T09:27:00-04:00"
+    "effective_from": "2026-10-03T15:30:00-04:00"
   },
   "integrity": {
     "integrity_protected": true,
@@ -33,7 +33,7 @@
     },
     "document_digest": {
       "algorithm": "SHA-256",
-      "value": "aa2486f8fce5bd5f83ad091da395ffc5c9a4d91e2a7c4da8e5d473be7ad7acf9"
+      "value": "a60729db87c57ed0a26ae6f643b10b171318b2c49044eff352d937ecef3ab703"
     }
   },
   "traceability": {
@@ -1401,6 +1401,187 @@
       "entry_digest": {
         "algorithm": "SHA-256",
         "value": "7e8e4563628556877b0d035da4ad5cd0ab86595d232927caa338ea9fb46eacbf"
+      }
+    },
+    {
+      "reg_id": "REG-095",
+      "code": "IDENTITY_AUTHORIZATION_SOURCE_UNAVAILABLE",
+      "ns_refs": [
+        "NS-4.12A-01",
+        "NS-6.4-04"
+      ],
+      "cr_refs": [
+        "CR-005",
+        "CR-016",
+        "CR-045",
+        "CR-065"
+      ],
+      "category": "authority_qualification",
+      "default_http_status": 503,
+      "retryable": true,
+      "governance_stage": "Identity and Authorization Qualification",
+      "governance_evidence": "required",
+      "description": "Required authoritative identity/authorization source is unavailable, preventing qualification of governance-significant identity, account, role, entitlement, or authorization attributes.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.1.x",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "f2ef4e8272169b7cf7e7a0ce112d9a17a4bb260149b3eb50fa91388950cfdf25"
+      }
+    },
+    {
+      "reg_id": "REG-096",
+      "code": "IDENTITY_AUTHORIZATION_NOT_QUALIFIED",
+      "ns_refs": [
+        "NS-4.12A-02",
+        "NS-6.4-04",
+        "NS-13.6B-07"
+      ],
+      "cr_refs": [
+        "CR-016",
+        "CR-045",
+        "CR-065"
+      ],
+      "category": "authority_qualification",
+      "default_http_status": 403,
+      "retryable": false,
+      "governance_stage": "Identity and Authorization Qualification",
+      "governance_evidence": "required",
+      "description": "The authoritative subject/account/role/entitlement/authorization basis does not satisfy the required governance qualification.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.1.x",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "53d023d69e49880b2133dd9012e00e2044a4a78f020bb2e07f8392d0bd74b13a"
+      }
+    },
+    {
+      "reg_id": "REG-097",
+      "code": "IDENTITY_AUTHORIZATION_STALE",
+      "ns_refs": [
+        "NS-6.4-04",
+        "NS-12.2-03"
+      ],
+      "cr_refs": [
+        "CR-015",
+        "CR-024",
+        "CR-096"
+      ],
+      "category": "authority_qualification",
+      "default_http_status": 409,
+      "retryable": true,
+      "governance_stage": "Authority Re-Derivation",
+      "governance_evidence": "required",
+      "description": "Required authoritative identity/authorization data is stale or outside the profile-defined freshness horizon.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.1.x",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "eed2f34235235ffd9254ecb1d4074272c42269f3d6522bfc08cd4be617f16a44"
+      }
+    },
+    {
+      "reg_id": "REG-098",
+      "code": "PEP_PROFILE_UNAVAILABLE",
+      "ns_refs": [
+        "NS-9.4-05",
+        "NS-9.4-06"
+      ],
+      "cr_refs": [
+        "CR-102",
+        "CR-119",
+        "CR-120",
+        "CR-121"
+      ],
+      "category": "enforcement_mapping",
+      "default_http_status": 503,
+      "retryable": true,
+      "governance_stage": "Governance Realization",
+      "governance_evidence": "required",
+      "description": "The controlling PEP Profile required to realize the commit-eligible transition cannot be resolved or loaded.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.1.x",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "4966356a99c83d6cc3a09d8c3fbd0ab3129ec46711005442b62dfd627ce548c8"
+      }
+    },
+    {
+      "reg_id": "REG-099",
+      "code": "PEP_PROFILE_MISMATCH",
+      "ns_refs": [
+        "NS-9.4-05",
+        "NS-9.6A-04"
+      ],
+      "cr_refs": [
+        "CR-022",
+        "CR-119",
+        "CR-120",
+        "CR-121"
+      ],
+      "category": "enforcement_mapping",
+      "default_http_status": 409,
+      "retryable": false,
+      "governance_stage": "Governance Realization",
+      "governance_evidence": "required",
+      "description": "The selected PEP Profile identity/version/digest or target/action binding does not match the controlling governance configuration.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.1.x",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "14d38414fca1cf6e5929fadab98abd4abdf295bec5353072fd5265ea65d51baa"
+      }
+    },
+    {
+      "reg_id": "REG-100",
+      "code": "ENFORCEMENT_MAPPING_UNSUPPORTED",
+      "ns_refs": [
+        "NS-9.4-06",
+        "NS-4.13E-02"
+      ],
+      "cr_refs": [
+        "CR-087",
+        "CR-120",
+        "CR-121"
+      ],
+      "category": "enforcement_mapping",
+      "default_http_status": 422,
+      "retryable": false,
+      "governance_stage": "Governance Realization",
+      "governance_evidence": "required",
+      "description": "No supported PEP Profile mapping can faithfully represent the exact commit-eligible governed transition. Approximation or substitution is prohibited.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.1.x",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "ae3ec9fafb6811eee749556d8c72db94854f739abc4541b4a48c5cca12d44176"
+      }
+    },
+    {
+      "reg_id": "REG-101",
+      "code": "GOVERNANCE_ENFORCEMENT_BINDING_INVALID",
+      "ns_refs": [
+        "NS-9.4-07",
+        "NS-9.6A-04",
+        "NS-9.6A-06"
+      ],
+      "cr_refs": [
+        "CR-022",
+        "CR-119",
+        "CR-120",
+        "CR-121"
+      ],
+      "category": "binding_validation",
+      "default_http_status": 409,
+      "retryable": false,
+      "governance_stage": "Policy Enforcement Point",
+      "governance_evidence": "required",
+      "description": "The Governance Enforcement Binding, Enforcement Context, GRF caller binding, PEP Profile binding, or action/target binding is invalid or mismatched.",
+      "entry_status": "ACTIVE",
+      "introduced_in_release": "v2.1.x",
+      "entry_digest": {
+        "algorithm": "SHA-256",
+        "value": "a377e63b0e7289658dc7ff00f44ad2a9ddeecee58c5a70018e6e36ce04809906"
       }
     }
   ],

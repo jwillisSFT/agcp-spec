@@ -1,32 +1,29 @@
 {
   "catalog_type": "AGCP_IMPLEMENTATION_PROFILE_CATALOG",
-  "catalog_version": "1.0.3",
-  "release_target": "2.0.8",
+  "catalog_version": "2.0.0",
+  "release_target": "2.1.x",
   "entries": [
     {
       "profile_id": "AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE",
-      "name": "AGCP Full-Scope Multitenant Training and Client Demonstration Implementation Profile - Informational Example",
-      "profile_version": "1.3.0",
+      "name": "AGCP Full-Scope Multitenant Reference Implementation Profile - Informational Example",
+      "profile_version": "2.0.0",
       "status": "INFORMATIONAL_EXAMPLE",
       "lifecycle_state": "EXAMPLE",
       "authoritative_yaml": null,
       "human_readable_markdown": "AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md",
-      "profile_format_version": null,
+      "profile_format_version": "2.0.0",
       "profile_digest_algorithm": null,
       "profile_digest": null,
-      "agcp_baseline": "2.0.0",
-      "baseline_bundle": null,
-      "baseline_bundle_sha256": null,
-      "baseline_bundle_uri": null,
+      "agcp_baseline": "2.1.x",
       "conformance_claim_status": "NOT_CLAIMED",
-      "production_claim_allowed": false
+      "production_claim_allowed": false,
+      "referenced_profile_types": [
+        "IAS_PROFILE",
+        "PEP_PROFILE"
+      ]
     }
   ],
   "catalog_format": "JSON_DATA",
-  "repository_release_target": "v2.0.8",
-  "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "artifact_lifecycle_state": "CURRENT",
-  "controlling_published_baseline": "v2.0.8",
-  "baseline_date": "2026-08-14",
-  "rtm_dataset_version": "RTM-1.46"
+  "repository_release_target": "v2.1.x",
+  "artifact_lifecycle_state": "CURRENT"
 }

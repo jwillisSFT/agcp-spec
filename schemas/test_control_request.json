@@ -1,0 +1,928 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/test_control_request.json",
+  "title": "AGCP Test Control Request",
+  "description": "Explicit test-only request to establish or reset an isolated conformance-test condition. Every non-reset control has a type-specific fixture payload and may establish inputs only, never the expected governance conclusion.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "principal": {
+      "type": "object",
+      "required": [
+        "principal_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "virtual_time_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "instant"
+      ],
+      "properties": {
+        "instant": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "virtual_time_advance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seconds"
+      ],
+      "properties": {
+        "seconds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "authoritative_source_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "source_class",
+        "source_version",
+        "payload"
+      ],
+      "properties": {
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_class": {
+          "enum": [
+            "CANONICAL_STATE",
+            "EVIDENCE",
+            "AUTHORITY",
+            "DELEGATION",
+            "GOVERNANCE_CONFIGURATION",
+            "TENANT",
+            "GOVERNANCE_DOMAIN",
+            "POLICY",
+            "LIFECYCLE",
+            "TARGET",
+            "EXTERNAL_GOVERNANCE_CONDITION"
+          ]
+        },
+        "source_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "authoritative_source_failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "failure_mode"
+      ],
+      "properties": {
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure_mode": {
+          "enum": [
+            "UNAVAILABLE",
+            "TIMEOUT",
+            "INTEGRITY_FAILURE",
+            "STALE",
+            "CONFLICT"
+          ]
+        }
+      }
+    },
+    "canonical_state_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_state_ref",
+        "state_digest",
+        "components"
+      ],
+      "properties": {
+        "canonical_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "components": {
+          "type": "object"
+        }
+      }
+    },
+    "evidence_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_ref",
+        "qualification"
+      ],
+      "properties": {
+        "evidence_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualification": {
+          "enum": [
+            "QUALIFIED",
+            "UNQUALIFIED",
+            "UNAVAILABLE",
+            "EXPIRED",
+            "REVOKED",
+            "INTEGRITY_FAILURE"
+          ]
+        },
+        "evidence_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "authority_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_ref",
+        "principal_id",
+        "authority_status"
+      ],
+      "properties": {
+        "authority_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_status": {
+          "enum": [
+            "VALID",
+            "REVOKED",
+            "EXPIRED",
+            "OUT_OF_SCOPE",
+            "UNVERIFIABLE"
+          ]
+        },
+        "scope_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "account_status": {
+          "enum": [
+            "ACTIVE",
+            "DISABLED",
+            "SUSPENDED",
+            "REVOKED",
+            "EXPIRED",
+            "NOT_FOUND",
+            "INDETERMINATE"
+          ]
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "maxItems": 512
+        },
+        "authorization_attributes": {
+          "type": "object",
+          "additionalProperties": true,
+          "maxProperties": 256
+        },
+        "governance_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "maxItems": 512
+        },
+        "reviewer_classes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "maxItems": 128
+        },
+        "revocation_status": {
+          "enum": [
+            "CLEAR",
+            "REVOKED",
+            "INDETERMINATE"
+          ]
+        },
+        "freshness_status": {
+          "enum": [
+            "CURRENT",
+            "STALE",
+            "EXPIRED",
+            "INDETERMINATE"
+          ]
+        },
+        "ias_profile_ref": {
+          "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
+        }
+      },
+      "description": "Test-only source condition for identity/authority resolution. It may emulate account state, roles, groups, entitlements, authorization attributes, permissions, scope, revocation, and freshness. It SHALL NOT directly inject a Governance Decision, Execution Authorization, GRF commit result, or production PEP authority."
+    },
+    "delegation_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "delegation_ref",
+        "delegation_status"
+      ],
+      "properties": {
+        "delegation_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "delegation_status": {
+          "enum": [
+            "VALID",
+            "REVOKED",
+            "EXPIRED",
+            "SCOPE_VIOLATION",
+            "BROKEN_CHAIN",
+            "CROSS_DOMAIN_ESCALATION_REQUIRED"
+          ]
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "human_review_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_state"
+      ],
+      "properties": {
+        "review_state": {
+          "enum": [
+            "REQUIRED",
+            "PENDING",
+            "QUORUM_PARTIAL",
+            "QUORUM_COMPLETE",
+            "EXPIRED",
+            "CANCELLED"
+          ]
+        },
+        "required_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "quorum_threshold": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "valid_until": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "tenant_state_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "PROVISIONED",
+            "ACTIVE",
+            "INACTIVE",
+            "SUSPENDED",
+            "DECOMMISSIONED"
+          ]
+        }
+      }
+    },
+    "governance_domain_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "SUSPENDED",
+            "DECOMMISSIONED"
+          ]
+        }
+      }
+    },
+    "degradation_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "degradation_status",
+        "condition_type"
+      ],
+      "properties": {
+        "degradation_status": {
+          "enum": [
+            "DEGRADED",
+            "RECOVERED"
+          ]
+        },
+        "condition_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "materiality": {
+          "enum": [
+            "LOW",
+            "MODERATE",
+            "HIGH",
+            "CRITICAL"
+          ]
+        }
+      }
+    },
+    "composite_governance_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dependency_status"
+      ],
+      "properties": {
+        "dependency_status": {
+          "enum": [
+            "SATISFIED",
+            "UNSATISFIED",
+            "CONFLICT",
+            "CHANGED"
+          ]
+        },
+        "bind_set_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dependency_graph_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "governance_configuration_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "governance_configuration_ref",
+        "configuration_status",
+        "settings"
+      ],
+      "properties": {
+        "governance_configuration_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configuration_status": {
+          "enum": [
+            "DRAFT",
+            "VALIDATED",
+            "APPROVED",
+            "ACTIVE",
+            "SUPERSEDED",
+            "RETIRED",
+            "REJECTED"
+          ]
+        },
+        "settings": {
+          "type": "object"
+        }
+      }
+    },
+    "pep_outcome_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome"
+      ],
+      "properties": {
+        "outcome": {
+          "enum": [
+            "APPLIED",
+            "REJECTED",
+            "FAILED",
+            "TIMEOUT",
+            "PARTIAL"
+          ]
+        },
+        "result_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pep_profile_ref": {
+          "$ref": "common.json#/$defs/pep_profile_ref"
+        }
+      },
+      "description": "Test-only external PEP outcome fixture consumed at the enforcement stage. It SHALL NOT establish GRF current commit eligibility or substitute for PEP Profile mapping."
+    }
+  },
+  "required": [
+    "operation_id",
+    "control_version",
+    "test_scope",
+    "control_type",
+    "requested_by",
+    "reason",
+    "test_only",
+    "request_digest"
+  ],
+  "properties": {
+    "operation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "control_version": {
+      "const": "1.1"
+    },
+    "test_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "control_type": {
+      "enum": [
+        "VIRTUAL_TIME_SET",
+        "VIRTUAL_TIME_ADVANCE",
+        "AUTHORITATIVE_SOURCE_FIXTURE",
+        "AUTHORITATIVE_SOURCE_FAILURE",
+        "CANONICAL_STATE_FIXTURE",
+        "EVIDENCE_FIXTURE",
+        "AUTHORITY_FIXTURE",
+        "DELEGATION_FIXTURE",
+        "HUMAN_REVIEW_FIXTURE",
+        "TENANT_STATE_FIXTURE",
+        "GOVERNANCE_DOMAIN_FIXTURE",
+        "DEGRADATION_FIXTURE",
+        "COMPOSITE_GOVERNANCE_FIXTURE",
+        "GOVERNANCE_CONFIGURATION_FIXTURE",
+        "PEP_OUTCOME_FIXTURE",
+        "RESET_TEST_SCOPE"
+      ]
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixture": {
+      "type": "object"
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requested_by": {
+      "$ref": "#/$defs/principal"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "test_only": {
+      "const": true
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional request correlation identifier. When omitted by the caller, the server SHALL treat it as absent. A generated result SHALL omit correlation_id rather than serialize JSON null; when present the value SHALL be a non-empty string.",
+      "x-agcp-null-semantics": "OMIT_WHEN_ABSENT_NULL_PROHIBITED"
+    },
+    "request_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "VIRTUAL_TIME_SET"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/virtual_time_set"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "VIRTUAL_TIME_ADVANCE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/virtual_time_advance"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "AUTHORITATIVE_SOURCE_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/authoritative_source_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "AUTHORITATIVE_SOURCE_FAILURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/authoritative_source_failure"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "CANONICAL_STATE_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/canonical_state_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "EVIDENCE_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/evidence_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "AUTHORITY_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/authority_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "DELEGATION_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/delegation_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "HUMAN_REVIEW_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/human_review_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "TENANT_STATE_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/tenant_state_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "GOVERNANCE_DOMAIN_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/governance_domain_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "DEGRADATION_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/degradation_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "COMPOSITE_GOVERNANCE_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/composite_governance_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "GOVERNANCE_CONFIGURATION_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/governance_configuration_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "PEP_OUTCOME_FIXTURE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "fixture"
+        ],
+        "properties": {
+          "fixture": {
+            "$ref": "#/$defs/pep_outcome_fixture"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "RESET_TEST_SCOPE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "fixture"
+          ]
+        }
+      }
+    }
+  ],
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-4.12A-01",
+      "NS-9.4-05",
+      "NS-9.4-06"
+    ],
+    "conformance_requirements": [
+      "CR-096",
+      "CR-119",
+      "CR-120",
+      "CR-121"
+    ]
+  }
+}

@@ -29,16 +29,18 @@
       "13.6B"
     ],
     "normative_statements": [
-      "NS-8.6A-01",
       "NS-8.6A-02",
-      "NS-8.6A-03",
       "NS-10.8A-03",
       "NS-13.6B-01",
       "NS-13.6B-02",
       "NS-13.6B-03",
       "NS-13.6B-04",
       "NS-13.6B-05",
-      "NS-13.6B-06"
+      "NS-13.6B-06",
+      "NS-13.6B-07",
+      "NS-13.6B-08",
+      "NS-13.6B-09",
+      "NS-13.6B-10"
     ],
     "conformance_requirements": [
       "CR-012",
@@ -51,7 +53,10 @@
       "CR-058",
       "CR-059",
       "CR-060",
-      "CR-061"
+      "CR-061",
+      "CR-045",
+      "CR-065",
+      "CR-096"
     ]
   },
   "type": "object",
@@ -579,7 +584,7 @@
     },
     "approver_eligibility": {
       "type": "object",
-      "description": "Attributable verification that the approver is eligible under current governance policy, role, authority, tenant, domain, scope, and subject-status conditions.",
+      "description": "Attributable verification that the approver is the independently qualified authoritative human subject and is currently eligible under account status, tenant/domain, role, entitlement, reviewer class, governance permission, scope, authority, freshness, revocation, and applicable separation-of-duty conditions. Claimant-supplied identity/role/entitlement claims are not authoritative.",
       "additionalProperties": false,
       "properties": {
         "eligibility_outcome": {
@@ -632,6 +637,67 @@
           },
           "minItems": 1,
           "uniqueItems": true
+        },
+        "identity_authorization_qualification_result_ref": {
+          "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+        },
+        "ias_profile_ref": {
+          "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
+        },
+        "stable_subject_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "authoritative_account_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "required_entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "satisfied_entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "reviewer_classes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "uniqueItems": true,
+          "maxItems": 128
+        },
+        "governance_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "authorization_scope_verified": {
+          "const": true
+        },
+        "freshness_verified": {
+          "const": true
+        },
+        "revocation_status_clear": {
+          "const": true
         }
       },
       "required": [
@@ -644,7 +710,14 @@
         "authority_verified",
         "verified_at",
         "verifier",
-        "qualification_evidence_refs"
+        "qualification_evidence_refs",
+        "identity_authorization_qualification_result_ref",
+        "ias_profile_ref",
+        "stable_subject_id",
+        "authoritative_account_id",
+        "authorization_scope_verified",
+        "freshness_verified",
+        "revocation_status_clear"
       ]
     },
     "decision_reason": {

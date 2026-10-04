@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/enforcement_context.json",
   "title": "Enforcement Context",
-  "description": "Canonical, independently identifiable and traceable integrity-protected enforcement-facing projection of the completed governance basis supplied by the Governance Realization Function to a specific Policy Enforcement Point. It binds the proposal, decision, authorization, current proposal-specific authority, qualified evidence, target, Tenant, policy, qualified Canonical State, lifecycle state, scope, validity, Governance Version, resulting-state validation, composite conditions, and Governance Binding Validation needed to apply the decision correctly. Enforcement Context does not replace Canonical State, the Governance Context Envelope, or Governance Evidence and does not itself create authority, authorize execution, or commit a transition.",
+  "description": "Integrity-protected enforcement-facing context assembled by the Governance Realization Function for one exact commit-eligible governed transition. It binds the proposal, decision, Execution Authorization, current authority, current qualified state/evidence, target/action, PEP Profile and mapping, Governance Enforcement Binding, and PEP caller context without widening governance meaning.",
   "$comment": "DS-029 implements ARM-212 and supports ARM-211 and ARM-213, Core Section 9.6A, NS-9.6A-03 through NS-9.6A-04, and CR-119 through CR-121. JSON Schema validates structure and outcome consistency. Implementations must additionally verify semantic equality among all bound identifiers, digests, scopes, validity windows, lifecycle states, and governance versions at the Policy Enforcement Point.",
   "x-agcp-ds-id": "DS-029",
   "x-agcp-lifecycle-state": "Implemented",
@@ -33,12 +33,22 @@
       "NS-9.4-03",
       "NS-9.4-04",
       "NS-9.6A-03",
-      "NS-9.6A-04"
+      "NS-9.6A-04",
+      "NS-9.4-05",
+      "NS-9.4-06",
+      "NS-9.4-07",
+      "NS-9.4-08",
+      "NS-9.4-09",
+      "NS-9.6A-05",
+      "NS-9.6A-06"
     ],
     "conformance_requirements": [
       "CR-119",
       "CR-120",
-      "CR-121"
+      "CR-121",
+      "CR-022",
+      "CR-096",
+      "CR-102"
     ]
   },
   "type": "object",
@@ -226,6 +236,56 @@
     },
     "continuation_integrity_result_ref": {
       "$ref": "continuation_integrity_result.json#/$defs/continuation_integrity_result_ref"
+    },
+    "pep_profile_ref": {
+      "$ref": "common.json#/$defs/pep_profile_ref"
+    },
+    "grf_assembler": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "grf_caller_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "caller_principal": {
+          "$ref": "common.json#/$defs/principal"
+        },
+        "caller_credential_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "authentication_assurance": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "caller_principal",
+        "authentication_assurance",
+        "binding_digest"
+      ]
+    },
+    "profile_mapping_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "profile_mapping_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
     }
   },
   "required": [
@@ -262,7 +322,11 @@
     "context_digest",
     "integrity_signature",
     "replay_material",
-    "semantic_assertions"
+    "semantic_assertions",
+    "pep_profile_ref",
+    "grf_assembler",
+    "profile_mapping_id",
+    "profile_mapping_digest"
   ],
   "allOf": [
     {
@@ -732,6 +796,9 @@
           "minItems": 1,
           "maxItems": 128,
           "uniqueItems": true
+        },
+        "current_identity_authorization_qualified": {
+          "const": true
         }
       },
       "required": [
@@ -742,7 +809,8 @@
         "qualified_evidence_used",
         "current_authority_rederived",
         "binding_validated",
-        "resulting_state_validated"
+        "resulting_state_validated",
+        "current_identity_authorization_qualified"
       ],
       "allOf": [
         {
@@ -1173,6 +1241,9 @@
           },
           "minItems": 1,
           "uniqueItems": true
+        },
+        "pep_profile_ref": {
+          "$ref": "common.json#/$defs/pep_profile_ref"
         }
       },
       "required": [
@@ -1180,7 +1251,8 @@
         "enforcement_context_ref",
         "outcome",
         "enforced_at",
-        "result_digest"
+        "result_digest",
+        "pep_profile_ref"
       ],
       "allOf": [
         {

@@ -1,0 +1,309 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/test_control_result.json",
+  "title": "AGCP Test Control Result",
+  "description": "Attributable result and readback record for an isolated AGCP test control. Acceptance, effective runtime binding, and observed consumption are separate states. EFFECTIVE means the scoped runtime source adapter will consume the condition for matching governed requests; it does not mean the condition has already been exercised.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "operation_id",
+    "result_id",
+    "result_version",
+    "test_scope",
+    "control_type",
+    "acceptance_status",
+    "effect_status",
+    "consumption_status",
+    "processed_at",
+    "test_originated",
+    "cleanup_required",
+    "summary",
+    "result_digest"
+  ],
+  "properties": {
+    "operation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_version": {
+      "const": "1.1"
+    },
+    "test_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "control_type": {
+      "enum": [
+        "VIRTUAL_TIME_SET",
+        "VIRTUAL_TIME_ADVANCE",
+        "AUTHORITATIVE_SOURCE_FIXTURE",
+        "AUTHORITATIVE_SOURCE_FAILURE",
+        "CANONICAL_STATE_FIXTURE",
+        "EVIDENCE_FIXTURE",
+        "AUTHORITY_FIXTURE",
+        "DELEGATION_FIXTURE",
+        "HUMAN_REVIEW_FIXTURE",
+        "TENANT_STATE_FIXTURE",
+        "GOVERNANCE_DOMAIN_FIXTURE",
+        "DEGRADATION_FIXTURE",
+        "COMPOSITE_GOVERNANCE_FIXTURE",
+        "GOVERNANCE_CONFIGURATION_FIXTURE",
+        "PEP_OUTCOME_FIXTURE",
+        "RESET_TEST_SCOPE"
+      ]
+    },
+    "acceptance_status": {
+      "enum": [
+        "ACCEPTED",
+        "REJECTED"
+      ]
+    },
+    "effect_status": {
+      "enum": [
+        "PENDING",
+        "EFFECTIVE",
+        "RESET",
+        "EXPIRED",
+        "FAILED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "consumption_status": {
+      "enum": [
+        "NOT_YET_OBSERVED",
+        "OBSERVED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_condition": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "effective_condition_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_adapter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional request correlation identifier. When omitted by the caller, the server SHALL treat it as absent. A generated result SHALL omit correlation_id rather than serialize JSON null; when present the value SHALL be a non-empty string.",
+      "x-agcp-null-semantics": "OMIT_WHEN_ABSENT_NULL_PROHIBITED"
+    },
+    "consumed_by_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "last_consumed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "test_originated": {
+      "const": true
+    },
+    "cleanup_required": {
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "observation_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "failure_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "consumption_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Evidence that a test-originated source condition was consumed by ordinary governance processing at the appropriate stage rather than injected as an outcome.",
+      "properties": {
+        "consumed_by_stages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "IDENTITY_AUTHORIZATION_QUALIFICATION",
+              "GOVERNANCE_DECISION",
+              "AUTHORITY_REDERIVATION",
+              "GOVERNANCE_REALIZATION",
+              "PEP_ENFORCEMENT"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "derived_result_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "normal_governance_path_preserved": {
+          "const": true
+        }
+      },
+      "required": [
+        "consumed_by_stages",
+        "normal_governance_path_preserved"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "effect_status": {
+            "const": "EFFECTIVE"
+          }
+        },
+        "required": [
+          "effect_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "effective_at",
+          "effective_condition",
+          "effective_condition_digest",
+          "source_adapter",
+          "evidence_refs"
+        ],
+        "properties": {
+          "evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "consumption_status": {
+            "const": "OBSERVED"
+          }
+        },
+        "required": [
+          "consumption_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "consumed_by_refs",
+          "last_consumed_at",
+          "observation_refs"
+        ],
+        "properties": {
+          "consumed_by_refs": {
+            "minItems": 1
+          },
+          "observation_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "acceptance_status": {
+            "const": "REJECTED"
+          }
+        },
+        "required": [
+          "acceptance_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "failure_reason"
+        ],
+        "properties": {
+          "effect_status": {
+            "enum": [
+              "FAILED",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "consumption_status": {
+            "const": "NOT_APPLICABLE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "const": "RESET_TEST_SCOPE"
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "effect_status": {
+            "const": "RESET"
+          },
+          "consumption_status": {
+            "const": "NOT_APPLICABLE"
+          }
+        }
+      }
+    }
+  ],
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-9.4-05",
+      "NS-9.4-06"
+    ],
+    "conformance_requirements": [
+      "CR-096",
+      "CR-119",
+      "CR-120",
+      "CR-121"
+    ]
+  }
+}

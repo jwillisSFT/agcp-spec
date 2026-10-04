@@ -26,11 +26,17 @@
     "normative_statements": [
       "NS-4.6-01",
       "NS-4.7-01",
-      "NS-13.6A-02"
+      "NS-13.6A-02",
+      "NS-9.5-05",
+      "NS-10.4-01"
     ],
     "conformance_requirements": [
       "CR-010",
-      "CR-011"
+      "CR-011",
+      "CR-023",
+      "CR-047",
+      "CR-067",
+      "CR-068"
     ]
   },
   "type": "object",
@@ -230,6 +236,27 @@
       },
       "additionalProperties": true,
       "maxProperties": 64
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "current_governed_execution_outcome_ref": {
+      "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref"
+    },
+    "governed_execution_outcome_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
     }
   },
   "required": [

@@ -17,59 +17,21 @@
     {
       "file": "schemas/examples/ds018-commit-boundary-request-single.json",
       "equivalence_groups": {
-        "proposal": [
-          "proposal_ref.proposal_identity.proposal_id",
-          "authority_rederivation_result_ref.proposal_id",
-          "qualified_evidence_refs[0].qualification_result_ref.proposal_id",
-          "resulting_state_validation_result_ref.proposal_id",
-          "enforcement_context.proposal_identity.proposal_id",
-          "enforcement_context.authority_rederivation_result_ref.proposal_id",
-          "enforcement_context.lifecycle_binding.lifecycle_state_ref.proposal_id",
-          "enforcement_context.resulting_state_validation_result_ref.proposal_id"
-        ],
         "tenant": [
           "proposal_ref.proposal_identity.tenant_id",
           "proposal_ref.target_ref.tenant_id",
           "tenant_id",
-          "target_ref.tenant_id",
-          "enforcement_context.proposal_identity.tenant_id",
-          "enforcement_context.tenant_id",
-          "enforcement_context.policy_enforcement_point.tenant_id",
-          "enforcement_context.policy_enforcement_point.enforcement_scope.tenant_id",
-          "enforcement_context.target_ref.tenant_id",
-          "enforcement_context.governance_configuration_ref.tenant_id",
-          "enforcement_context.policy_refs[0].tenant_id",
-          "enforcement_context.scope_binding.authorized_scope.tenant_id",
-          "enforcement_context.scope_binding.enforcement_scope.tenant_id"
+          "target_ref.tenant_id"
         ],
         "domain": [
           "proposal_ref.proposal_identity.governance_domain_id",
           "proposal_ref.target_ref.governance_domain_id",
           "governance_domain_id",
-          "target_ref.governance_domain_id",
-          "enforcement_context.proposal_identity.governance_domain_id",
-          "enforcement_context.governance_domain_id",
-          "enforcement_context.policy_enforcement_point.governance_domain_id",
-          "enforcement_context.target_ref.governance_domain_id",
-          "enforcement_context.governance_configuration_ref.governance_domain_id",
-          "enforcement_context.policy_refs[0].governance_domain_id"
+          "target_ref.governance_domain_id"
         ],
         "target": [
           "proposal_ref.target_ref.target_id",
-          "target_ref.target_id",
-          "enforcement_context.target_ref.target_id"
-        ],
-        "authorization": [
-          "execution_authorization_ref.authorization_id",
-          "enforcement_context.execution_authorization_ref.authorization_id"
-        ],
-        "canonical_state": [
-          "state_qualification_result_ref.canonical_state_ref.canonical_state_id",
-          "enforcement_context.canonical_state_ref.canonical_state_id"
-        ],
-        "evidence": [
-          "qualified_evidence_refs[0].evidence_ref.governance_evidence_id",
-          "enforcement_context.qualified_evidence_refs[0].evidence_ref.governance_evidence_id"
+          "target_ref.target_id"
         ]
       }
     },
@@ -108,6 +70,10 @@
         "lifecycle": [
           "proposal_ref.proposal_identity.proposal_id",
           "lifecycle_effect.governance_lifecycle_record_ref.current_state.proposal_id"
+        ],
+        "enforcement_context": [
+          "enforcement_context_ref.enforcement_context_id",
+          "enforcement_result.enforcement_context_ref.enforcement_context_id"
         ]
       }
     },
@@ -183,6 +149,13 @@
         ],
         "policy": [
           "policy_refs[0].policy_id"
+        ],
+        "evidence": [
+          "lifecycle_state_binding.verification_evidence_ref.governance_evidence_id",
+          "approver_eligibility.qualification_evidence_refs[0].governance_evidence_id",
+          "lifecycle_effect.governance_evidence_refs[0].governance_evidence_id",
+          "cryptographic_verification.verification_evidence_ref.governance_evidence_id",
+          "replay_protection.verification_evidence_ref.governance_evidence_id"
         ]
       }
     },
@@ -574,7 +547,7 @@
     {
       "id": "NV-SEM-003",
       "mismatch_class": "PROPOSAL",
-      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "base_fixture": "schemas/examples/ds029-enforcement-context-admissible.json",
       "mutation": {
         "path": "authority_rederivation_result_ref.proposal_id",
         "value": "proposal-other"
@@ -586,7 +559,7 @@
       "mismatch_class": "TARGET",
       "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
       "mutation": {
-        "path": "enforcement_context.target_ref.target_id",
+        "path": "target_ref.target_id",
         "value": "target-other"
       },
       "expected": "SEMANTIC_MISMATCH"
@@ -614,20 +587,20 @@
     {
       "id": "NV-SEM-007",
       "mismatch_class": "EVIDENCE",
-      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "base_fixture": "schemas/examples/ds026-governance-approval-partial-quorum.json",
       "mutation": {
-        "path": "enforcement_context.qualified_evidence_refs[0].evidence_ref.governance_evidence_id",
+        "path": "approver_eligibility.qualification_evidence_refs[0].governance_evidence_id",
         "value": "evidence-other"
       },
       "expected": "SEMANTIC_MISMATCH"
     },
     {
       "id": "NV-SEM-008",
-      "mismatch_class": "AUTHORIZATION",
-      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "mismatch_class": "ENFORCEMENT_CONTEXT",
+      "base_fixture": "schemas/examples/ds019-commit-boundary-result-success.json",
       "mutation": {
-        "path": "enforcement_context.execution_authorization_ref.authorization_id",
-        "value": "authorization-other"
+        "path": "enforcement_result.enforcement_context_ref.enforcement_context_id",
+        "value": "enforcement-context-other"
       },
       "expected": "SEMANTIC_MISMATCH"
     },
@@ -644,9 +617,9 @@
     {
       "id": "NV-SEM-010",
       "mismatch_class": "CANONICAL_STATE",
-      "base_fixture": "schemas/examples/ds018-commit-boundary-request-single.json",
+      "base_fixture": "schemas/examples/ds039-continuation-integrity-degraded.json",
       "mutation": {
-        "path": "enforcement_context.canonical_state_ref.canonical_state_id",
+        "path": "risk_based_re_evaluation_result.renewed_state_qualification_ref.canonical_state_ref.canonical_state_id",
         "value": "canonical-state-other"
       },
       "expected": "SEMANTIC_MISMATCH"

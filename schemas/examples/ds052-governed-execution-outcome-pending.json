@@ -1,0 +1,93 @@
+{
+  "execution_outcome_id": "exec-outcome-001",
+  "result_type": "GOVERNED_EXECUTION_OUTCOME",
+  "proposal_ref": {
+    "proposal_identity": {
+      "proposal_id": "proposal-001",
+      "tenant_id": "tenant-a",
+      "governance_domain_id": "domain-a",
+      "canonical_content_digest": {
+        "algorithm": "SHA-256",
+        "value": "4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      "originator": {
+        "principal_id": "agent-001",
+        "principal_type": "AGENT"
+      }
+    },
+    "target_ref": {
+      "target_id": "target-001"
+    },
+    "proposal_digest": {
+      "algorithm": "SHA-256",
+      "value": "4444444444444444444444444444444444444444444444444444444444444444"
+    }
+  },
+  "action_id": "action-001",
+  "tenant_id": "tenant-a",
+  "governance_domain_id": "domain-a",
+  "target_ref": {
+    "target_id": "target-001"
+  },
+  "commit_boundary_result_ref": {
+    "commit_boundary_result_id": "commit-result-001",
+    "result_digest": {
+      "algorithm": "SHA-256",
+      "value": "5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "outcome": "Commit Successful"
+  },
+  "enforcement_context_ref": {
+    "enforcement_context_id": "enfctx-001",
+    "context_digest": {
+      "algorithm": "SHA-256",
+      "value": "6666666666666666666666666666666666666666666666666666666666666666"
+    },
+    "policy_enforcement_point_id": "pep-001"
+  },
+  "pep_profile_ref": {
+    "profile_id": "PEP-GENERIC-ACTION-ADAPTER",
+    "profile_version": "1.0.0",
+    "profile_digest": {
+      "algorithm": "SHA-256",
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  "policy_enforcement_point_id": "pep-001",
+  "execution_status": "PENDING",
+  "accepted_for_execution_at": "2026-10-03T12:00:00Z",
+  "attribution": {
+    "principal": {
+      "principal_id": "pep-001",
+      "principal_type": "SERVICE"
+    },
+    "attributed_at": "2026-10-03T12:00:00Z"
+  },
+  "outcome_digest": {
+    "algorithm": "SHA-256",
+    "value": "7777777777777777777777777777777777777777777777777777777777777777"
+  },
+  "integrity_signature": {
+    "alg": "EdDSA",
+    "kid": "pep-key-1",
+    "sig": "ZmFrZQ=="
+  },
+  "replay_material": {
+    "commit_result_digest": {
+      "algorithm": "SHA-256",
+      "value": "5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "enforcement_context_digest": {
+      "algorithm": "SHA-256",
+      "value": "6666666666666666666666666666666666666666666666666666666666666666"
+    },
+    "pep_profile_digest": {
+      "algorithm": "SHA-256",
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "outcome_digest": {
+      "algorithm": "SHA-256",
+      "value": "7777777777777777777777777777777777777777777777777777777777777777"
+    }
+  }
+}

@@ -49,6 +49,17 @@ Each Conformance Test Case SHALL verify every Normative Statement mapped to its 
 
 A Test Case MAY contain multiple assertions where necessary to verify all mapped Normative Statements.
 
+
+## v2.1.x Formal Test Case Synchronization
+
+The current controlled Formal Test Case set remains **TC-001 through TC-122**. No new top-level Test Case is introduced because the published CR set remains CR-001 through CR-122 and the one-CR-to-one-TC rule remains in force.
+
+New or revised Core-derived Normative Statements are incorporated into the existing CR-linked Test Cases as direct, conditional, or supporting/contextual assertions. The current TC files have been synchronized to the v2.1.x Core and Normative Statements and then incorporated into the final RTM synchronization (`RTM-1.47`). `v2.1.x-formal-test-sync.json` preserves the controlled traceability delta applied during that synchronization.
+
+Retired NS identifiers `NS-8.6A-01`, `NS-8.6A-03`, and `NS-9.1-01` remain reserved identifiers and are not current test targets.
+
+The machine-readable `test-mapping.json`, test-control mappings, Harness Checks, and Harness Test Vectors have been synchronized for all 122 Formal Test Cases, aggregate conformance-layer validation has passed, and final RTM synchronization is complete at `RTM-1.47`.
+
 ## Test Organization
 
 ```text
@@ -57,6 +68,7 @@ conformance/
 ├── AGCP-Conformance.md
 ├── Conformance Test Suite.md
 ├── AGCP-Test-Matrix.md
+├── AGCP-Test-Mapping.md
 ├── AGCP Harness Check Registry.md
 ├── harness-checks.json
 ├── AGCP-Conformance-Harness-Spec.yml
@@ -115,7 +127,7 @@ The Requirements Traceability Matrix is the authoritative mapping between:
 - Normative Statements (NS)
 - Conformance Test Cases (TC)
 
-The Conformance Test Suite SHALL remain synchronized with the RTM.
+The Conformance Test Suite SHALL remain synchronized with the RTM. During this controlled v2.1.x update sequence, the Formal Test Cases were synchronized first and the final RTM synchronization is now complete at RTM-1.47.
 
 ## Relationship to Individual Test Cases
 
@@ -126,3 +138,8 @@ Detailed execution procedures are maintained in the controlled Test Case batch d
 ## Versioning
 
 This document is governed by the AGCP repository release. The authoritative Test Suite is the version included in the controlled repository release and SHALL remain synchronized with the RTM, Formal Test Cases, relationship model, and machine-readable conformance mappings.
+
+## v2.1.0 management/test-plane execution aid
+
+The controlled Formal Test Cases remain unchanged in authority. `test-control-mapping.json` may be used to select Governance Observation Points and optional isolated test controls needed to establish a Formal TC precondition. These controls do not alter pass criteria and cannot substitute for independent implementations, alternate transports, or other external dependencies explicitly required by a Formal TC.
+

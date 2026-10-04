@@ -1,0 +1,103 @@
+{
+  "validation_id": "AGCP-v2.1.x-REPOSITORY-CLOSURE-VALIDATION-2026-10-03",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "synchronization_target": "v2.1.x",
+  "controlling_published_baseline": "v2.1.0",
+  "publication_version_assignment": "NOT_ASSIGNED_BY_CLOSURE_STEP",
+  "rtm_dataset_version": "RTM-1.47",
+  "checks_passed": 10,
+  "check_count": 10,
+  "checks": [
+    {
+      "check": "required_closure_artifacts_present",
+      "status": "PASS",
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "check": "published_baseline_preserved_and_new_publication_version_not_silently_assigned",
+      "status": "PASS",
+      "detail": {
+        "VERSION": "2.1.0"
+      }
+    },
+    {
+      "check": "final_rtm_synchronization_passes",
+      "status": "PASS",
+      "detail": {
+        "rtm_dataset_version": "RTM-1.47",
+        "main_rtm_row_count": 122,
+        "ns_cr_relationship_count": 460,
+        "active_normative_statement_count": 390,
+        "retired_normative_statement_count": 3,
+        "formal_test_case_count": 122,
+        "harness_check_count": 21,
+        "harness_test_vector_count": 71
+      }
+    },
+    {
+      "check": "aggregate_conformance_layer_validation_passes",
+      "status": "PASS",
+      "detail": {
+        "formal_test_case_count": 122,
+        "test_mapping_count": 122,
+        "test_control_mapping_count": 122,
+        "harness_check_count": 21,
+        "harness_test_vector_count": 71,
+        "controlled_fixture_count": 36
+      }
+    },
+    {
+      "check": "authoritative_rtm_workbook_matches_final_dataset",
+      "status": "PASS",
+      "detail": {
+        "data_rows": 122,
+        "sheet": "AGCP_RTM_Repository_ARM_Co",
+        "max_columns": 52
+      }
+    },
+    {
+      "check": "current_machine_readable_validation_summaries_reflect_final_rtm_sync",
+      "status": "PASS",
+      "detail": {
+        "pending_reports": [],
+        "reports_checked": 34
+      }
+    },
+    {
+      "check": "retired_ns_not_active_test_mapping_targets",
+      "status": "PASS",
+      "detail": {
+        "retired_ids_found": []
+      }
+    },
+    {
+      "check": "root_readme_reflects_closed_v2_1_x_inventory",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "closure_document_markdown_links_resolve",
+      "status": "PASS",
+      "detail": {
+        "links_checked": 4,
+        "issues": []
+      }
+    },
+    {
+      "check": "repository_closure_manifest_complete_and_current",
+      "status": "PASS",
+      "detail": {
+        "manifest_entries": 476,
+        "unlisted": [],
+        "extra": [],
+        "hash_or_size_mismatches": []
+      }
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "next_controlled_step": "GENERIC_SOURCE_SYNCHRONIZATION"
+}

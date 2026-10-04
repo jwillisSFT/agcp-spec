@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governed_execution_outcome.json",
+  "title": "Governed Execution Outcome",
+  "description": "Canonical attributable post-commit operational outcome for a governed transition. It distinguishes commitment from later target realization, including asynchronous, partial, failed, cancelled, or indeterminate operational outcomes.",
+  "$comment": "DS-052 is downstream of a successful commitment. It does not retroactively broaden the Governance Decision, Execution Authorization, or commit result.",
+  "x-agcp-ds-id": "DS-052",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Post-Commit Governed Execution Outcome",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-211",
+      "ARM-212",
+      "ARM-213",
+      "ARM-601",
+      "ARM-702"
+    ],
+    "core_sections": [
+      "9.5",
+      "9.6",
+      "10.3",
+      "10.4",
+      "10.8A"
+    ],
+    "normative_statements": [
+      "NS-9.5-02",
+      "NS-9.5-05",
+      "NS-10.3-01",
+      "NS-10.4-01",
+      "NS-10.8A-02",
+      "NS-10.8A-03"
+    ],
+    "conformance_requirements": [
+      "CR-019",
+      "CR-022",
+      "CR-023",
+      "CR-047",
+      "CR-067",
+      "CR-068",
+      "CR-119",
+      "CR-120",
+      "CR-121"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "execution_outcome_id": {
+      "$ref": "common.json#/$defs/governed_execution_outcome_id"
+    },
+    "result_type": {
+      "const": "GOVERNED_EXECUTION_OUTCOME"
+    },
+    "proposal_ref": {
+      "$ref": "governed_action_proposal.json#/$defs/governed_action_proposal_ref"
+    },
+    "action_id": {
+      "$ref": "common.json#/$defs/action_id"
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "target_ref": {
+      "$ref": "common.json#/$defs/target_ref"
+    },
+    "commit_boundary_result_ref": {
+      "$ref": "commit_boundary_result.json#/$defs/commit_boundary_result_ref"
+    },
+    "enforcement_context_ref": {
+      "$ref": "enforcement_context.json#/$defs/enforcement_context_ref"
+    },
+    "pep_profile_ref": {
+      "$ref": "common.json#/$defs/pep_profile_ref"
+    },
+    "policy_enforcement_point_id": {
+      "$ref": "common.json#/$defs/policy_enforcement_point_id"
+    },
+    "execution_status": {
+      "$ref": "common.json#/$defs/execution_status_enum"
+    },
+    "accepted_for_execution_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "execution_started_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "execution_completed_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "target_transition_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/action_id"
+      },
+      "uniqueItems": true,
+      "maxItems": 1024
+    },
+    "resulting_state_validation_result_ref": {
+      "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
+    },
+    "resulting_state_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "target_receipt_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/uri"
+      },
+      "uniqueItems": true,
+      "maxItems": 256
+    },
+    "failure_information": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "failure_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "failure_reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "partial_effect": {
+          "type": "boolean"
+        },
+        "recovery_required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "failure_reason"
+      ]
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "uniqueItems": true,
+      "maxItems": 512
+    },
+    "ledger_event_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_ledger_event.json#/$defs/governance_ledger_event_ref"
+      },
+      "uniqueItems": true,
+      "maxItems": 256
+    },
+    "outcome_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commit_result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "enforcement_context_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "pep_profile_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "outcome_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "commit_result_digest",
+        "enforcement_context_digest",
+        "pep_profile_digest",
+        "outcome_digest"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]+:[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64
+    }
+  },
+  "required": [
+    "execution_outcome_id",
+    "result_type",
+    "proposal_ref",
+    "action_id",
+    "tenant_id",
+    "target_ref",
+    "commit_boundary_result_ref",
+    "enforcement_context_ref",
+    "pep_profile_ref",
+    "policy_enforcement_point_id",
+    "execution_status",
+    "accepted_for_execution_at",
+    "attribution",
+    "outcome_digest",
+    "integrity_signature",
+    "replay_material"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "execution_status": {
+            "enum": [
+              "SUCCEEDED",
+              "PARTIALLY_SUCCEEDED",
+              "FAILED",
+              "CANCELLED"
+            ]
+          }
+        },
+        "required": [
+          "execution_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "execution_completed_at"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "execution_status": {
+            "enum": [
+              "FAILED",
+              "PARTIALLY_SUCCEEDED",
+              "INDETERMINATE"
+            ]
+          }
+        },
+        "required": [
+          "execution_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "failure_information"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "governed_execution_outcome_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Integrity-bound reference to DS-052 Governed Execution Outcome.",
+      "properties": {
+        "execution_outcome_id": {
+          "$ref": "common.json#/$defs/governed_execution_outcome_id"
+        },
+        "execution_status": {
+          "$ref": "common.json#/$defs/execution_status_enum"
+        },
+        "outcome_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "accepted_for_execution_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "execution_completed_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        }
+      },
+      "required": [
+        "execution_outcome_id",
+        "execution_status",
+        "outcome_digest"
+      ]
+    }
+  }
+}

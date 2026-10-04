@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/implementer/AGCP-PEP-Profile-Schema.json",
+  "title": "AGCP PEP Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "pep",
+    "caller_authentication",
+    "mappings",
+    "enforcement_context",
+    "idempotency",
+    "response_mapping",
+    "commit_execution_relationship",
+    "target_authority",
+    "evidence",
+    "failure_behavior"
+  ],
+  "properties": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "profile_version",
+        "digest"
+      ],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "digest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "algorithm",
+            "value"
+          ],
+          "properties": {
+            "algorithm": {
+              "const": "SHA-256"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      }
+    },
+    "pep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation_id",
+        "interface"
+      ],
+      "properties": {
+        "implementation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interface": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endpoint_reference": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "caller_authentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_caller",
+        "mechanism"
+      ],
+      "properties": {
+        "allowed_caller": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mechanism": {
+          "type": "string",
+          "minLength": 1
+        },
+        "credential_reference": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "mappings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "governed_action",
+          "target_type",
+          "pep_operation",
+          "required_fields",
+          "allowed_transformations"
+        ],
+        "properties": {
+          "governed_action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pep_operation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_fields": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "target_identifier_mapping": {
+            "type": "string",
+            "minLength": 1
+          },
+          "allowed_transformations": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "enforcement_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_fields",
+        "binding_requirements"
+      ],
+      "properties": {
+        "required_fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "binding_requirements": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key_rule",
+        "single_use",
+        "retry_rule"
+      ],
+      "properties": {
+        "key_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "single_use": {
+          "type": "boolean"
+        },
+        "retry_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "response_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "success",
+        "refusal",
+        "failure"
+      ],
+      "properties": {
+        "success": {
+          "type": "string",
+          "minLength": 1
+        },
+        "refusal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unknown_response": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "commit_execution_relationship": {
+      "enum": [
+        "ATOMIC",
+        "ASYNCHRONOUS_OR_DISTINCT",
+        "MIXED_BY_OPERATION"
+      ]
+    },
+    "target_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credential_reference",
+        "scope"
+      ],
+      "properties": {
+        "credential_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_receipts"
+      ],
+      "properties": {
+        "required_receipts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "request_digest": {
+          "type": "boolean"
+        },
+        "response_digest": {
+          "type": "boolean"
+        }
+      }
+    },
+    "failure_behavior": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unsupported_mapping",
+        "binding_failure",
+        "pep_unavailable"
+      ],
+      "properties": {
+        "unsupported_mapping": {
+          "type": "string",
+          "minLength": 1
+        },
+        "binding_failure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pep_unavailable": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

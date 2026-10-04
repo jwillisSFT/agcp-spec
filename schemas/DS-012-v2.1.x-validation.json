@@ -1,0 +1,13 @@
+{
+  "validation_type": "AGCP_V2_1_X_DS_VALIDATION",
+  "ds_id": "DS-012",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_file": "schemas/invariant_evaluation.json",
+  "schema_sha256": "87d35027a5e311bb20ae0d9ccd544324273d55f3806033e20efd60c80d1b9b52",
+  "metaschema_valid": true,
+  "local_refs_resolved": true,
+  "examples_checked": 2,
+  "example_errors": [],
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
+}

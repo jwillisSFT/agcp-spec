@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_count": 52,
+  "metaschema_error_count": 0,
+  "local_ref_count": 3758,
+  "local_ref_error_count": 0,
+  "example_pass_count": 42,
+  "example_error_count": 0,
+  "api_reference_error_count": 0,
+  "metaschema_errors": [],
+  "reference_errors": [],
+  "example_errors": [],
+  "api_errors": []
+}

@@ -1,17 +1,17 @@
-# DS-038 Governance Lifecycle Record Update
+# DS-038 - Governance Lifecycle Record Update
 
-DS-038 establishes the canonical Governance Lifecycle Record for AGCP v2.0. The record is bound to stable Proposal Identity and derives authoritative lifecycle state from ordered Governance Ledger records. It preserves complete lifecycle-transition history and transition basis, distinguishes terminal and nonterminal state, records approval, refusal, receipt, expiration, cancellation, degradation, re-evaluation, recovery, commitment, and execution effects, and supports deterministic reconstruction and external retrieval.
+**Status:** Updated for the AGCP v2.1.x GDF/PDP -> Execution Authorization -> Governance Realization -> PEP architecture synchronization.  
+**Date:** 2026-10-03  
+**Schema:** `governance_lifecycle_record.json`
 
-## Clean migration
+## Changes in this update
 
-DS-038 now owns lifecycle record identity, Derived Lifecycle State, terminality, lifecycle-state references, lifecycle-transition references, and Governance Lifecycle Record references. The superseded shared definitions were removed from `common.json`, and all dependent schemas were migrated to DS-038 references.
+- Adds COMMITTED lifecycle state and separates COMMITMENT_ACCEPTED from EXECUTION_COMPLETION.
 
-## Semantic protections
+## Compatibility and authority
 
-- Internal processing state cannot become canonical externally visible lifecycle state.
-- Only permitted transitions supported by required governance decision and evidence may change lifecycle state.
-- Terminal source states cannot transition back to nonterminal state.
-- Executed Proposal Identity instances are terminal and non-repeatable.
-- DEGRADED is nonterminal, blocks commitment, and requires governed re-evaluation or recovery.
-- Approval or quorum alone does not establish authority at commitment or authorize execution.
-- Ledger ordering, not timestamp or storage ordering, is authoritative.
+The frozen CR set is unchanged. This schema update realizes obligations already expressed by the revised Core and Normative Statements; it does not create a new CR. Deployment-specific identity-store or PEP product details remain controlled by Implementation Profiles and referenced IAS/PEP Profiles.
+## v2.1.x commitment/execution lifecycle clarification
+
+The lifecycle now distinguishes commitment acceptance from later operational execution completion. `COMMITMENT_ACCEPTED` transitions to nonterminal `COMMITTED` with `commitment_eligibility=COMMITTED_AWAITING_EXECUTION_OUTCOME` and consumed execution authorization. A later `EXECUTION_COMPLETION` transitions `COMMITTED` to terminal `EXECUTED`; `EXECUTION_FAILURE` transitions to terminal `EXECUTION_FAILED`. `COMMITMENT_AND_EXECUTION` remains available for implementations where commitment and execution complete atomically.
+

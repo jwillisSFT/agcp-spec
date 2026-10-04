@@ -1,38 +1,29 @@
 {
   "status": "PASS",
-  "validated_at": "2026-08-05",
-  "catalog_version": "1.0.3",
-  "registry_entry_count": 94,
+  "validated_at": "2026-10-03",
+  "catalog_version": "1.0.4",
+  "registry_entry_count": 101,
   "identifier_range": [
     "REG-001",
-    "REG-094"
+    "REG-101"
   ],
   "constraint_entry_count": 26,
   "invariant_entry_count": 26,
-  "rejection_code_entry_count": 42,
+  "rejection_code_entry_count": 49,
   "all_entries_have_reg_id": true,
-  "all_entries_have_ns_refs": true,
-  "all_entries_have_cr_refs": true,
-  "registry_release": "v2.0.4",
-  "registry_document_sha256": "19726bc7a8da1181eaf7c74054cc0a677031ff36a67807dac779f5f654c9da12",
-  "p1_03_p1_09": {
-    "resource_not_found_successor": "REG-059",
-    "deprecated_public_specific_codes": [
-      "REG-060",
-      "REG-061",
-      "REG-062",
-      "REG-063"
-    ],
-    "request_throttled": "REG-093",
-    "capacity_unavailable": "REG-094",
-    "status": "PASS"
-  },
-  "release_context": {
-    "repository_release_target": "v2.0.4",
-    "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.4",
-    "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-05",
-    "artifact_lifecycle_state": "CURRENT"
-  }
+  "all_entries_have_current_ns_refs": true,
+  "all_entries_have_valid_cr_refs": true,
+  "registry_release": "v2.1.1",
+  "registry_document_sha256": "7ed4a50e7ee5c4f7e3c7cf225a5e86205ed5a13ef63179b7ac9c97405dc38e54",
+  "new_v2_1_x_rejection_codes": [
+    "ENFORCEMENT_MAPPING_UNSUPPORTED",
+    "GOVERNANCE_ENFORCEMENT_BINDING_INVALID",
+    "IDENTITY_AUTHORIZATION_NOT_QUALIFIED",
+    "IDENTITY_AUTHORIZATION_SOURCE_UNAVAILABLE",
+    "IDENTITY_AUTHORIZATION_STALE",
+    "PEP_PROFILE_MISMATCH",
+    "PEP_PROFILE_UNAVAILABLE"
+  ],
+  "issues": [],
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
 }

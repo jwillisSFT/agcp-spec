@@ -3,11 +3,11 @@
 **Status:** Normative\
 **Interface Identifier:** IF-001\
 **Interface Version:** v2\
-**AGCP Specification Release:** v2.0.8\
+**AGCP Specification Release:** v2.1.0\
 **Artifact Lifecycle:** Current\
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-14  
+**Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-08-15  
 **Applies To:** All AGCP-conformant implementations
 
 ------------------------------------------------------------------------
@@ -64,7 +64,7 @@ Conflicts SHALL be resolved using the Core-defined precedence order: published C
 
 ## 3.1 Interface and path versioning
 
-IF-001 uses the canonical path namespace `/agcp/v2`. The path major version is aligned with the version 2 HTTP interface contract for the AGCP v2 interface series. The current contract revision is v2.0.8 and is part of the published v2.0.8 Public Review Controlled Baseline. It is not an independently maintained `/agcp/v1` transport version. This release defines no `/agcp/v1` compatibility routes, aliases, redirects, or fallback request representations.
+IF-001 uses the canonical path namespace `/agcp/v2`. The path major version is aligned with the version 2 HTTP interface contract for the AGCP v2 interface series. The current contract revision is v2.1.0 and is part of the published v2.1.0 Public Review Controlled Baseline. It is not an independently maintained `/agcp/v1` transport version. This release defines no `/agcp/v1` compatibility routes, aliases, redirects, or fallback request representations.
 
 ------------------------------------------------------------------------
 
@@ -190,62 +190,40 @@ Responses SHALL conform to `ProposalView`.
 
 ## 5.4 Governance Approval and Human Adjudication
 
-`POST /agcp/v2/proposals/{proposal_id}/governance-approvals`
+Human governance participation uses the controlled Governance Approval Submission ingress contract. A submission is a claimant command, not an authoritative approval record.
 
-Accepts one DS-045 `GovernanceApprovalSubmission` as untrusted claimant ingress for human adjudication, cosignature, risk acceptance, cancellation, withdrawal, or quorum participation. The operation SHALL NOT accept DS-026 `GovernanceApprovalArtifact` as request content.
+The caller SHALL be authenticated according to the controlling Implementation Profile. `claimed_approver` and any caller-supplied role, group, entitlement, reviewer class, delegation, permission, or authority-scope field are non-authoritative claims.
 
-The submission MAY carry claimant-provided approval content, claimed approver identity, claimant provenance, validity intent, and quorum association. It SHALL NOT carry or authoritatively assert AGCP-created fields, including approval-artifact identity or status, signature-verification outcome, replay uniqueness, approver eligibility, current lifecycle eligibility, Canonical State qualification, Authority Lineage qualification, Governance Evidence, quorum count or completion, lifecycle effect, artifact digest, semantic-verification results, or Governance Ledger ordering.
+Before creating or qualifying the authoritative Governance Approval Artifact, AGCP SHALL bind the authenticated subject to the submission and resolve the authoritative identity and authorization/entitlement record through the implementation-selected IAS Profile. The resulting eligibility determination SHALL follow the Human Adjudication and Governance Approval Specification.
 
-AGCP SHALL validate DS-045 and provenance first; bind the authenticated subject, Tenant, Governance Domain, Proposal Identity, target, scope, and policy context; resolve current qualified governance inputs; independently verify authority, eligibility, validity, replay uniqueness, and signature; deterministically evaluate quorum and lifecycle effects; record Governance Evidence and ordered Governance Ledger events; and only then create or qualify a DS-026 `GovernanceApprovalArtifact`.
-
-Clients SHALL provide an `Idempotency-Key` header. The key SHALL be scoped to the `tenant_id` carried by `GovernanceApprovalSubmission` and to this endpoint. Equivalent reuse SHALL NOT create duplicate approval, adjudication, cosignature, risk-acceptance, cancellation, withdrawal, artifact, evidence, ledger, or quorum effects; conflicting reuse SHALL produce `409` with rejection code `IDEMPOTENCY_CONFLICT`.
-
-Responses SHALL conform to `ProposalView`. Any DS-026 record returned or referenced in the resulting view is authoritative AGCP-created or AGCP-qualified evidence, not an echo of claimant-supplied record state.
-
-------------------------------------------------------------------------
+The HTTP interface SHALL NOT permit a claimant to self-assert AGCP verification, current approval eligibility, quorum satisfaction, or authoritative identity/entitlement state.
 
 ## 5.5 Execution Authorization
 
-`GET /agcp/v2/execution-authorizations/{authorization_id}`
+Execution Authorization retrieval exposes the authoritative authorization state associated with the governed proposal according to the Core and controlled schemas.
 
-Returns the authoritative Execution Authorization representation.
+A successful read of an Execution Authorization SHALL NOT be interpreted as a commit, a target effect, or proof that the authorization is still usable at the time of commitment. Current commitment-sensitive conditions are established later by the Governance Realization Function (GRF).
 
-The request SHALL provide `authorization_id` as a required path parameter and SHALL
-provide `tenant_id` and `governance_domain_id` as required query parameters. The
-query-parameter pair SHALL identify the tenant and Governance Domain in which the
-Execution Authorization is resolved and SHALL be processed according to the scope
-semantics defined in the IF-001 Contract Parity Summary.
-
-Responses SHALL conform to `ExecutionAuthorizationView`.
-
-------------------------------------------------------------------------
+Clients SHALL treat the returned authorization as an input to the subsequent governed progression defined by the lifecycle and controlling Implementation Profile.
 
 ## 5.6 Commit Boundary
 
-`POST /agcp/v2/commit-boundary/commit`
+`POST /agcp/v2/commit-boundary/commit` is the public IF-001 invocation for Governance Realization / commit-bound processing. The endpoint SHALL NOT be interpreted as a direct PEP endpoint.
 
-Performs Commit Boundary processing.
+For an eligible request, the GRF SHALL, as applicable:
 
-Requests SHALL conform to `CommitBoundaryRequest`.
+1. validate the Execution Authorization and proposal binding;
+2. re-establish current commitment-sensitive authority, Canonical State, evidence, lifecycle, and prior-use conditions;
+3. perform Governance Binding Validation and Commit-Bound Admissibility;
+4. apply the Implementation Profile-selected PEP Profile or equivalent controlled enforcement mapping;
+5. construct or complete the integrity-protected Enforcement Context; and
+6. invoke or coordinate the selected PEP through the protected enforcement path.
 
-Clients SHALL provide an `Idempotency-Key` header. The key SHALL be scoped to the
-`tenant_id` carried by `CommitBoundaryRequest` and to this endpoint. Equivalent reuse
-SHALL NOT produce a duplicate commitment or governed consequence; conflicting reuse
-SHALL produce `409` with rejection code `IDEMPOTENCY_CONFLICT`.
+The PEP SHALL control whether the exact commit-eligible governed transition crosses the enforcement boundary. The GRF and PEP MAY be co-located, but their logical responsibilities remain distinct and testable.
 
-Responses SHALL conform to `CommitBoundaryResult`.
+A successful Commit Boundary Result means that AGCP accepted the exact governed transition for application at the defined commitment point. It SHALL NOT universally be interpreted as proof that a downstream asynchronous target operation has already completed. Where commitment and target completion are distinct, later execution/outcome evidence SHALL establish operational realization.
 
-Commit Boundary processing SHALL NOT be attempted unless Proposal Qualification,
-Governance Decision Function processing, Execution Authorization, and any applicable
-pre-commit Continuation Integrity obligations for the nonterminal Proposal have been
-successfully satisfied.
-
-At the Commit Boundary, the Governance Realization Function SHALL coordinate current
-Canonical State Resolution, State Qualification, Evidence Qualification, Authority
-Re-Derivation, Governance Binding Validation, Commit-Bound Admissibility, and enforcement
-through the applicable Policy Enforcement Point.
-
-------------------------------------------------------------------------
+The controlling Implementation Profile and PEP Profile define protected GRF-to-PEP interface details. IF-001 does not standardize a public generic PEP API.
 
 ## 5.7 Governance Evidence
 
@@ -449,3 +427,35 @@ Pre-governance throttling SHALL return HTTP 429 with rejection code `REQUEST_THR
 ## 6.3 Metadata, Immutable Distribution, and Active Governance
 
 `GET /agcp/v2/meta` SHALL advertise the immutable AGCP baseline bundle identity and digest, the claimed Implementation Profile identity and digest, schema-set and generated-validator-set identities and digests, the active governance version and activation integrity, and the implemented IF-001 contract. A published baseline URI SHALL identify an immutable release artifact and SHALL NOT resolve to a moving branch. Optional deployment, node, workspace, Tenant, and Governance Domain binding SHALL use public-safe opaque identifiers and SHALL NOT expand authority or disclose secrets. Verified claims SHALL remain evidence-bound.
+
+## Management and test-plane separation
+
+Beginning with AGCP v2.1.0, IF-001 remains the governed-action HTTP interface. Governance observation and administrative management are exposed, when implemented, through IF-003 and IF-004 under the separate `api/AGCP-Management-Contract.yaml`. Optional isolated conformance test control uses IF-005. IF-003/004/005 SHALL NOT be used to bypass IF-001 Proposal, Governance Decision, Execution Authorization, Commit Boundary, or ledger semantics.
+
+
+## 13. Test-Scope Propagation for IF-005
+
+Beginning with the corrected AGCP v2.1.0 management/test-control contract, IF-001 operations other than metadata MAY receive the optional `X-AGCP-Test-Scope` header defined by `api/AGCP-HTTP-Contract.yaml`.
+
+The header is valid only when IF-005 is implemented and enabled and the caller is authorized for the named isolated test scope. When accepted, the exact scope identifier SHALL propagate through the authoritative-source, temporal, authority, evidence, human-review, continuation, and enforcement adapters used by that governed request. Test-scoped inputs SHALL NOT affect requests lacking the same authorized scope.
+
+An implementation SHALL NOT accept an unauthorized test-scope header and then silently process the request with test fixtures.
+
+### 13.1 Proposal transport validation versus Proposal Qualification
+
+DS-013 validates the submission transport envelope. It intentionally does not pre-validate the `proposal` member against DS-021.
+
+The candidate Proposal is untrusted governance input. Proposal Qualification SHALL validate it against DS-021 and all applicable semantic qualification rules. A DS-021 structural failure, missing mandatory proposal dimension, unsupported proposal schema/version, or equivalent proposal-qualification defect SHALL therefore remain capable of producing the authoritative Structural Refusal behavior required by the AGCP Core and Formal Test Cases rather than being converted into a transport-only parsing outcome.
+
+Transport errors remain appropriate for malformed HTTP, invalid JSON, missing transport envelope, authentication failures that prevent governance ingress, or other failures that occur before a candidate Proposal can enter Proposal Qualification.
+## Generated governance artifact validation
+
+Before an AGCP-generated or AGCP-qualified governance artifact is persisted, returned as authoritative, or referenced by an authoritative Governance Ledger event, the implementation SHALL validate the artifact against the active controlled DS schema for that artifact type. A schema-invalid internally generated artifact is an implementation failure and SHALL NOT be persisted or exposed as an authoritative governance outcome. This validation is additional to, and does not replace, the semantic obligations of the Core Specification.
+
+## Current-release metadata default
+
+The implementation metadata endpoint SHALL identify the AGCP release actually compiled or configured for the running server. Repository builds produced from this controlled source SHALL derive the default current-release identifier from the root `VERSION` source (or an immutable build artifact generated from it), rather than from an independently maintained hard-coded release literal. Historical supported releases MAY also be advertised, but `default_agcp_release_id` SHALL identify a member of `supported_agcp_releases` and SHALL match the active current-release expectation used by the controlled harness for the running release.
+
+## Machine-readable v2.1.x synchronization
+
+IF-001 now uses DS-018 as the public Governance Realization invocation request. The caller does not provide authoritative commitment-time state, Authority Re-Derivation, Governance Binding Validation, Enforcement Context, PEP identity, or PEP Profile selection. The GRF establishes those facts. DS-019 records commitment and references DS-052 for post-commit execution outcome. Approval ingress is qualified through DS-053.

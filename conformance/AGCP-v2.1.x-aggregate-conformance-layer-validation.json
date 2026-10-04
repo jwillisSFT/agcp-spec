@@ -1,0 +1,277 @@
+{
+  "validation_id": "AGCP-v2.1.x-AGGREGATE-CONFORMANCE-LAYER-VALIDATION-2026-10-03",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "scope": "Pre-RTM aggregate validation of the synchronized Formal TC, Test Matrix, test mapping, test-control mapping, Harness Check, Harness Test Vector, fixture, DS-050, and DS-046 conformance layers.",
+  "formal_test_case_count": 122,
+  "test_mapping_count": 122,
+  "test_control_mapping_count": 122,
+  "harness_check_count": 21,
+  "harness_test_vector_count": 71,
+  "controlled_fixture_count": 36,
+  "new_ns_disposition_count": 36,
+  "formal_change_count": 42,
+  "regression_change_count": 22,
+  "test_control_binding_count": 108,
+  "observation_reference_count": 477,
+  "additional_harness_injection_need_count": 7,
+  "retired_ns_active_reference_count": 0,
+  "semantic_fixture_correction_applied": true,
+  "semantic_fixture_correction_summary": "Removed obsolete DS-018 assumptions that the caller supplies GRF-derived authority/evidence/DS-029 content; remapped negative semantic vectors to the current DS-018/DS-019/DS-026/DS-029/DS-039 boundaries.",
+  "rtm_status": "PENDING_FINAL_RTM_SYNCHRONIZATION",
+  "next_controlled_step": "FINAL_RTM_SYNCHRONIZATION",
+  "limitations": [
+    "This validation does not regenerate or approve the RTM; the RTM is the next controlled step.",
+    "This validation does not establish implementation conformance; it validates repository conformance-layer internal consistency.",
+    "Implementation-specific injection hooks identified by test-control mapping remain development/profile dependent and are not asserted to be universally implemented.",
+    "Repository-release manifest/hash synchronization is a later release-validation activity and is not used as a pass criterion for this pre-RTM conformance-layer validation."
+  ],
+  "source_hashes": {
+    "conformance/AGCP-Test-Matrix.md": "888f73082cffc2447ada8674cec7170bdee1ccb7f26d67a7e78c8dd26966ed71",
+    "conformance/test-mapping.json": "4e66c1f08fef4ff30bd6062f076185f508ce54c25364093ba422a06e81dd9973",
+    "conformance/test-control-mapping.json": "294022faef2e11563a677faae73e51006c62f26727733df42a0435ff5f7f6477",
+    "conformance/harness-checks.json": "1fa1cf3a8fcbf59cd5f9d8a99836b69629cf137061e95503c0483b686deba2de",
+    "conformance/AGCP-Conformance-Harness-Spec.yml": "29c9e17627e4232f6354bb40866703a1db7bb57680e3a63c6245341e476ae9a1",
+    "conformance/AGCP-Conformance-Test-Vectors.md": "26bcafc6caf6e5bae6e17f6d16f49db8f9dd7abd71f589e977c6a1e386880c4d",
+    "conformance/fixture-mapping.json": "5f25fadf3245028ef705530add24a1a41ca7cd108b74e87db25dd06f4434f658",
+    "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "8eae223db81e1a63cec16032d13fc2d639b8c698f40568329734e4315cb3fac1",
+    "schemas/test_control_request.json": "af87cace7933ca95577d98a1ad4df146b2b77dddb5594676a7b89ddcd6978059",
+    "schemas/governance_observation_event.json": "133518ef98d2ca20b613716bbf7c5d8ebccba8f02d4361fad1cc865808b0c97b",
+    "schemas/commit_boundary_request.json": "d375be469f32fbf2240adc2b62f1a5fe365e71b15293ddad026468f451229698"
+  },
+  "checks": [
+    {
+      "check_id": "FORMAL_TC_COUNT",
+      "status": "PASS",
+      "detail": 122
+    },
+    {
+      "check_id": "FORMAL_TC_CONTINUOUS",
+      "status": "PASS",
+      "detail": {
+        "missing": [],
+        "extra": []
+      }
+    },
+    {
+      "check_id": "FORMAL_CR_ONE_TO_ONE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "FORMAL_DIRECT_ASSERTION_HEADINGS",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "FORMAL_CONDITIONAL_ASSERTION_HEADINGS",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "FORMAL_SYNC_COUNTS",
+      "status": "PASS",
+      "detail": {
+        "formal": 42,
+        "regression": 22,
+        "total": 64
+      }
+    },
+    {
+      "check_id": "NEW_NS_DISPOSITIONS_36",
+      "status": "PASS",
+      "detail": {
+        "count": 36,
+        "mismatches": []
+      }
+    },
+    {
+      "check_id": "RETIRED_NS_NOT_ACTIVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "MATRIX_TC_COUNT",
+      "status": "PASS",
+      "detail": 122
+    },
+    {
+      "check_id": "MATRIX_MATCHES_FORMAL_TC",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "TEST_MAPPING_COUNT",
+      "status": "PASS",
+      "detail": {
+        "records": 122,
+        "unique": 122
+      }
+    },
+    {
+      "check_id": "TEST_MAPPING_MATCHES_FORMAL_TC",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "TEST_MAPPING_REFERENCED_FILES_EXIST",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "TEST_MAPPING_CATALOG_IDS_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "TEST_MAPPING_CHANGE_CLASS_COUNTS",
+      "status": "PASS",
+      "detail": {
+        "formal": 42,
+        "regression": 22
+      }
+    },
+    {
+      "check_id": "TEST_CONTROL_MAPPING_COUNT",
+      "status": "PASS",
+      "detail": {
+        "records": 122,
+        "unique": 122
+      }
+    },
+    {
+      "check_id": "TEST_CONTROL_VOCABULARY_RESOLVES",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "OBSERVATION_POINT_VOCABULARY_RESOLVES",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "CONTROL_BINDINGS_MATCH_RECOMMENDATIONS",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "CONTROL_MAPPING_COUNTS",
+      "status": "PASS",
+      "detail": {
+        "bindings": 108,
+        "observations": 477
+      }
+    },
+    {
+      "check_id": "HARNESS_CHECK_COUNT_UNIQUE",
+      "status": "PASS",
+      "detail": {
+        "records": 21,
+        "unique": 21,
+        "declared": 21
+      }
+    },
+    {
+      "check_id": "HARNESS_VECTOR_COUNT_UNIQUE",
+      "status": "PASS",
+      "detail": {
+        "records": 71,
+        "unique": 71,
+        "expected": 71
+      }
+    },
+    {
+      "check_id": "HARNESS_YAML_MARKDOWN_VECTOR_SET_EQUAL",
+      "status": "PASS",
+      "detail": {
+        "yaml_only": [],
+        "markdown_only": []
+      }
+    },
+    {
+      "check_id": "HARNESS_REFERENCES_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "ALL_HARNESS_CHECKS_MAPPED",
+      "status": "PASS",
+      "detail": {
+        "unmapped": []
+      }
+    },
+    {
+      "check_id": "ALL_HARNESS_VECTORS_MAPPED",
+      "status": "PASS",
+      "detail": {
+        "unmapped": []
+      }
+    },
+    {
+      "check_id": "V2_1_X_REQUIRED_NEW_VECTORS_PRESENT",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "ADDITIONAL_INJECTION_NEEDS_HAVE_HARNESS_REPRESENTATION",
+      "status": "PASS",
+      "detail": {
+        "TC-081": [
+          "ASYNCHRONOUS_EXECUTION_DELAY_AND_TERMINAL_OUTCOME"
+        ],
+        "TC-120": [
+          "ENFORCEMENT_CONTEXT_TAMPER_OR_SUBSTITUTION",
+          "GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH",
+          "NONFAITHFUL_OR_UNSUPPORTED_PEP_MAPPING"
+        ],
+        "TC-121": [
+          "GRF_TO_PEP_CALLER_IDENTITY_MISMATCH",
+          "GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH",
+          "COLOCATED_GDF_GRF_PEP_LOGICAL_BINDING_NEGATIVE_PATH"
+        ]
+      }
+    },
+    {
+      "check_id": "CONTROLLED_FIXTURE_COUNT_AND_SCHEMA_VALIDITY",
+      "status": "PASS",
+      "detail": {
+        "count": 36,
+        "errors": []
+      }
+    },
+    {
+      "check_id": "SEMANTIC_FIXTURE_VALIDATION_PASS",
+      "status": "PASS",
+      "detail": {
+        "status": "PASS",
+        "issues": []
+      }
+    },
+    {
+      "check_id": "DS018_DOES_NOT_ACCEPT_GRF_DERIVED_AUTHORITY_CONTEXT",
+      "status": "PASS",
+      "detail": {
+        "schema_forbidden": [],
+        "example_forbidden": []
+      }
+    },
+    {
+      "check_id": "COMMIT_VECTORS_DO_NOT_INJECT_DERIVED_ENFORCEMENT_CONTEXT",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "PRIOR_CONTROLLED_STEP_REPORTS_PASS",
+      "status": "PASS",
+      "detail": {
+        "conformance/AGCP-v2.1.x-formal-test-sync-validation.json": "PASS",
+        "conformance/AGCP-v2.1.x-test-matrix-validation.json": "PASS",
+        "conformance/AGCP-v2.1.x-test-mapping-validation.json": "PASS",
+        "conformance/AGCP-v2.1.x-test-control-mapping-validation.json": "PASS",
+        "conformance/AGCP-v2.1.x-harness-vector-check-validation.json": "PASS"
+      }
+    }
+  ],
+  "warnings": [],
+  "errors": []
+}

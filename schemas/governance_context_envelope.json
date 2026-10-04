@@ -53,7 +53,9 @@
       "NS-10.8A-03",
       "NS-16.6A-01",
       "NS-16.6A-02",
-      "NS-16.6A-03"
+      "NS-16.6A-03",
+      "NS-4.12-01",
+      "NS-6.6A-03"
     ],
     "conformance_requirements": [
       "CR-040",
@@ -67,7 +69,9 @@
       "CR-069",
       "CR-070",
       "CR-071",
-      "CR-118"
+      "CR-118",
+      "CR-005",
+      "CR-065"
     ]
   },
   "type": "object",
@@ -479,6 +483,14 @@
           "minItems": 1,
           "maxItems": 128,
           "uniqueItems": true
+        },
+        "governed_execution_outcome_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       }
     },
@@ -638,6 +650,16 @@
     },
     "extensions": {
       "$ref": "#/$defs/namespaced_extensions"
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true,
+      "description": "Authoritative DS-053 qualification results. identity_context principals and claimant/context assertions cannot override these results."
     }
   },
   "required": [

@@ -1,0 +1,248 @@
+{
+  "validation_id": "AGCP-v2.1.x-FINAL-RTM-SYNCHRONIZATION-VALIDATION-2026-10-03",
+  "synchronization_id": "AGCP-v2.1.x-FINAL-RTM-SYNCHRONIZATION-2026-10-03",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "rtm_dataset_version": "RTM-1.47",
+  "specification_version": "v.2.1.0",
+  "authoritative_workbook": "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx",
+  "main_rtm_row_count": 122,
+  "main_rtm_column_count": 52,
+  "ns_cr_relationship_count": 460,
+  "active_normative_statement_count": 390,
+  "retired_normative_statement_count": 3,
+  "relationship_class_counts": {
+    "Contextual": 13,
+    "Direct": 283,
+    "Supporting": 149,
+    "Conditional": 15
+  },
+  "formal_test_case_count": 122,
+  "harness_check_count": 21,
+  "harness_test_vector_count": 71,
+  "registry_relationships_added_during_final_sync": 24,
+  "source_hashes": {
+    "rtm_workbook_sha256": "0c20b146b444cabf54a43491347c764c039362001e09456c42bd39e953125dc7",
+    "test_mapping_sha256": "d09f8887bab8c053b3654e0306d5e6893db1fe4885fe7c87913b9d0e3d102241",
+    "test_control_mapping_sha256": "eadb8c6c4be0236131b46c7b615f188cca3825ad5c8aded407e9564c7c977477",
+    "schema_catalog_json_sha256": "2c3daef5104a973eacf101ea672a764361ae41d9e07fc34cdcf9138d09f527d2",
+    "interface_catalog_json_sha256": "2dabaec9aa1947ca158e5a858c9de9273408dbaa76049f9b77d85c2a1696ad23",
+    "registry_catalog_json_sha256": "3407554e515d8bf6c914b931ed09846da6104313732a373fdfa1f9ebf55d13f0"
+  },
+  "checks": [
+    {
+      "check_id": "WORKBOOK_SHEETS",
+      "status": "PASS",
+      "detail": [
+        "AGCP_RTM_Repository_ARM_Co",
+        "NS_CR_Relationships"
+      ]
+    },
+    {
+      "check_id": "MAIN_ROW_COUNT",
+      "status": "PASS",
+      "detail": 122
+    },
+    {
+      "check_id": "MAIN_COLUMN_COUNT",
+      "status": "PASS",
+      "detail": 52
+    },
+    {
+      "check_id": "CR_UNIQUENESS",
+      "status": "PASS",
+      "detail": 122
+    },
+    {
+      "check_id": "TC_UNIQUENESS",
+      "status": "PASS",
+      "detail": 122
+    },
+    {
+      "check_id": "RTM_ID_UNIQUENESS",
+      "status": "PASS",
+      "detail": 122
+    },
+    {
+      "check_id": "CR_TC_ONE_TO_ONE",
+      "status": "PASS",
+      "detail": 122
+    },
+    {
+      "check_id": "DATASET_VERSION",
+      "status": "PASS",
+      "detail": "RTM-1.47"
+    },
+    {
+      "check_id": "SYNC_STATUS",
+      "status": "PASS",
+      "detail": "RTM-1.47"
+    },
+    {
+      "check_id": "NS_CR_RELATIONSHIP_COUNT",
+      "status": "PASS",
+      "detail": 460
+    },
+    {
+      "check_id": "NS_CR_PAIR_UNIQUENESS",
+      "status": "PASS",
+      "detail": 460
+    },
+    {
+      "check_id": "ACTIVE_NS_FULL_COVERAGE",
+      "status": "PASS",
+      "detail": {
+        "covered": 390,
+        "active": 390,
+        "missing": []
+      }
+    },
+    {
+      "check_id": "RETIRED_NS_NOT_ACTIVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "RELATIONSHIP_CLASSES",
+      "status": "PASS",
+      "detail": {
+        "Contextual": 13,
+        "Direct": 283,
+        "Supporting": 149,
+        "Conditional": 15
+      }
+    },
+    {
+      "check_id": "REF_DS_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REF_IF_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REF_REG_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REF_CHECK_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REF_VEC_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REF_CONTROL_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REF_OBS_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REF_PROFILE_RESOLVE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "MACHINE_MAPPING_RECIPROCITY",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "SCHEMA_CATALOG_RTM_RECIPROCITY",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "INTERFACE_CATALOG_RTM_RECIPROCITY",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "REGISTRY_CATALOG_RTM_RECIPROCITY",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "CATALOG_RTM_VERSION",
+      "status": "PASS",
+      "detail": [
+        "RTM-1.47",
+        "RTM-1.47",
+        "RTM-1.47"
+      ]
+    },
+    {
+      "check_id": "TEST_MAPPING_RTM_VERSION",
+      "status": "PASS",
+      "detail": {
+        "version": "RTM-1.47",
+        "status": "SYNCHRONIZED_RTM_1_47"
+      }
+    },
+    {
+      "check_id": "TEST_CONTROL_RTM_VERSION",
+      "status": "PASS",
+      "detail": {
+        "version": "RTM-1.47",
+        "status": "SYNCHRONIZED_RTM_1_47"
+      }
+    },
+    {
+      "check_id": "DS052_ASSIGNED",
+      "status": "PASS",
+      "detail": [
+        "CR-023",
+        "CR-047",
+        "CR-067",
+        "CR-079",
+        "CR-081",
+        "CR-082",
+        "CR-085",
+        "CR-086"
+      ]
+    },
+    {
+      "check_id": "DS053_ASSIGNED",
+      "status": "PASS",
+      "detail": [
+        "CR-045",
+        "CR-065",
+        "CR-071",
+        "CR-096"
+      ]
+    },
+    {
+      "check_id": "SCHEMA_CATALOG_JSON_CSV_MIRROR",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "NO_FORMULAS",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "NO_SPREADSHEET_ERROR_LITERALS",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check_id": "LIVE_STATUS_DOCS_POST_RTM",
+      "status": "PASS",
+      "detail": []
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "next_controlled_step": "GENERIC_SOURCE_SYNCHRONIZATION"
+}

@@ -1,11 +1,13 @@
 {
+  "validation_id": "AGCP-v2.1.x-TEST-MAPPING-POST-HARNESS-SYNC-2026-10-03",
   "status": "PASS",
-  "validated_at": "2026-08-05",
-  "rtm_dataset_version": "RTM-1.46",
-  "test_count": 110,
-  "private_profile_companion_references": 0,
-  "source_hashes": {
-    "conformance/test-mapping.json": "149ed1172049974ef4668a080735454ef54ce87c7c98845231d146777692621e",
-    "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "1eaa3b77ab54d8d6b8719c104f04c46390846c17229c4f13b137841617c639a6"
-  }
+  "test_case_count": 122,
+  "harness_check_count": 21,
+  "test_vector_count": 71,
+  "unknown_harness_check_references": [],
+  "unknown_test_vector_references": [],
+  "unreferenced_harness_check_ids": [],
+  "unreferenced_test_vector_ids": [],
+  "vector_check_status": "SYNCHRONIZED",
+  "rtm_status": "PENDING"
 }

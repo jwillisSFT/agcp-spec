@@ -1,0 +1,431 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/identity_authorization_qualification_result.json",
+  "title": "Identity and Authorization Qualification Result",
+  "description": "Canonical result of resolving an authenticated subject against the implementation-selected Identity and Authorization Store Profile. It records authoritative identity, account status, tenant/domain relationships, roles, groups, entitlements, governance authorization attributes, reviewer classes, scope, validity, freshness, revocation state, source basis, and qualification evidence. These authorization and entitlement attributes are governance inputs and are not AGCP Execution Authorization.",
+  "$comment": "DS-053 distinguishes authoritative identity/authorization qualification from Canonical State qualification, generic Evidence Qualification, Governance Decision, and Execution Authorization.",
+  "x-agcp-ds-id": "DS-053",
+  "x-agcp-lifecycle-state": "Implemented",
+  "x-agcp-catalog": "catalog/schema-catalog.json",
+  "x-agcp-schema-role": "Identity and Authorization Qualification Result",
+  "x-agcp-normative-basis": {
+    "architecture_reference_model": [
+      "ARM-107",
+      "ARM-301",
+      "ARM-302",
+      "ARM-308",
+      "ARM-804"
+    ],
+    "core_sections": [
+      "4.12",
+      "4.12A",
+      "6.3",
+      "6.4",
+      "7.3",
+      "12.2",
+      "12.3",
+      "12.4",
+      "13.6B",
+      "17.5"
+    ],
+    "normative_statements": [
+      "NS-4.12-01",
+      "NS-4.12A-01",
+      "NS-4.12A-02",
+      "NS-6.4-04",
+      "NS-6.4-05",
+      "NS-12.2-03",
+      "NS-12.3-01",
+      "NS-12.4-01",
+      "NS-13.6B-07",
+      "NS-13.6B-08",
+      "NS-13.6B-09",
+      "NS-17.5-04"
+    ],
+    "conformance_requirements": [
+      "CR-005",
+      "CR-014",
+      "CR-015",
+      "CR-016",
+      "CR-027",
+      "CR-045",
+      "CR-065",
+      "CR-096"
+    ]
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "qualification_result_id": {
+      "$ref": "common.json#/$defs/identity_authorization_qualification_result_id"
+    },
+    "result_type": {
+      "const": "IDENTITY_AUTHORIZATION_QUALIFICATION_RESULT"
+    },
+    "qualification_stage": {
+      "type": "string",
+      "enum": [
+        "PROPOSAL_QUALIFICATION",
+        "GOVERNANCE_DECISION",
+        "EXECUTION_AUTHORIZATION",
+        "AUTHORITY_REDERIVATION",
+        "HUMAN_REVIEW",
+        "GOVERNANCE_REALIZATION"
+      ]
+    },
+    "authenticated_subject": {
+      "$ref": "common.json#/$defs/principal"
+    },
+    "stable_subject_id": {
+      "$ref": "common.json#/$defs/identifier"
+    },
+    "authoritative_account_id": {
+      "$ref": "common.json#/$defs/identifier"
+    },
+    "account_status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DISABLED",
+        "SUSPENDED",
+        "REVOKED",
+        "EXPIRED",
+        "NOT_FOUND",
+        "INDETERMINATE"
+      ]
+    },
+    "tenant_id": {
+      "$ref": "common.json#/$defs/tenant_id"
+    },
+    "governance_domain_id": {
+      "$ref": "common.json#/$defs/governance_domain_id"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "uniqueItems": true,
+      "maxItems": 256
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "uniqueItems": true,
+      "maxItems": 256
+    },
+    "entitlements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "uniqueItems": true,
+      "maxItems": 512
+    },
+    "authorization_attributes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "array"
+        ]
+      },
+      "maxProperties": 256
+    },
+    "reviewer_classes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "uniqueItems": true,
+      "maxItems": 128
+    },
+    "governance_permissions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "uniqueItems": true,
+      "maxItems": 512
+    },
+    "effective_scope": {
+      "$ref": "common.json#/$defs/governance_scope"
+    },
+    "delegation_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "delegation_artifact.json#/$defs/delegation_artifact_ref"
+      },
+      "uniqueItems": true,
+      "maxItems": 256
+    },
+    "authority_lineage_ref": {
+      "$ref": "authority_lineage.json#/$defs/authority_lineage_ref"
+    },
+    "ias_profile_ref": {
+      "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
+    },
+    "authoritative_source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.json#/$defs/authoritative_source_ref"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "maxItems": 64
+    },
+    "source_record_version": {
+      "$ref": "common.json#/$defs/version_string"
+    },
+    "source_record_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "resolved_at": {
+      "$ref": "common.json#/$defs/timestamp_rfc3339"
+    },
+    "validity_horizon": {
+      "$ref": "common.json#/$defs/validity_window"
+    },
+    "freshness_status": {
+      "type": "string",
+      "enum": [
+        "CURRENT",
+        "STALE",
+        "EXPIRED",
+        "INDETERMINATE"
+      ]
+    },
+    "revocation_status": {
+      "type": "string",
+      "enum": [
+        "CLEAR",
+        "REVOKED",
+        "INDETERMINATE"
+      ]
+    },
+    "qualification_outcome": {
+      "type": "string",
+      "enum": [
+        "QUALIFIED",
+        "NOT_QUALIFIED",
+        "SOURCE_UNAVAILABLE",
+        "STALE",
+        "CONFLICTING",
+        "SUBJECT_NOT_FOUND",
+        "SUBJECT_DISABLED",
+        "INDETERMINATE"
+      ]
+    },
+    "qualification_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      },
+      "uniqueItems": true,
+      "maxItems": 128
+    },
+    "qualification_evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governance_evidence.json#/$defs/governance_evidence_ref"
+      },
+      "uniqueItems": true,
+      "maxItems": 256
+    },
+    "attribution": {
+      "$ref": "common.json#/$defs/attribution"
+    },
+    "result_digest": {
+      "$ref": "common.json#/$defs/content_digest"
+    },
+    "integrity_signature": {
+      "$ref": "common.json#/$defs/signature"
+    },
+    "replay_material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ias_profile_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "source_record_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "input_set_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        }
+      },
+      "required": [
+        "ias_profile_digest",
+        "input_set_digest",
+        "result_digest"
+      ]
+    },
+    "semantic_assertions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "claimant_assertions_are_non_authoritative": {
+          "const": true
+        },
+        "identity_authorization_is_not_execution_authorization": {
+          "const": true
+        },
+        "qualification_does_not_itself_produce_governance_decision": {
+          "const": true
+        },
+        "source_scope_and_freshness_are_enforced": {
+          "const": true
+        }
+      },
+      "required": [
+        "claimant_assertions_are_non_authoritative",
+        "identity_authorization_is_not_execution_authorization",
+        "qualification_does_not_itself_produce_governance_decision",
+        "source_scope_and_freshness_are_enforced"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9.-]+:[A-Za-z0-9_.-]+$"
+      },
+      "additionalProperties": true,
+      "maxProperties": 64
+    }
+  },
+  "required": [
+    "qualification_result_id",
+    "result_type",
+    "qualification_stage",
+    "authenticated_subject",
+    "stable_subject_id",
+    "authoritative_account_id",
+    "account_status",
+    "ias_profile_ref",
+    "authoritative_source_refs",
+    "resolved_at",
+    "freshness_status",
+    "revocation_status",
+    "qualification_outcome",
+    "attribution",
+    "result_digest",
+    "integrity_signature",
+    "replay_material",
+    "semantic_assertions"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "qualification_outcome": {
+            "const": "QUALIFIED"
+          }
+        },
+        "required": [
+          "qualification_outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "account_status": {
+            "const": "ACTIVE"
+          },
+          "freshness_status": {
+            "const": "CURRENT"
+          },
+          "revocation_status": {
+            "const": "CLEAR"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "qualification_outcome": {
+            "enum": [
+              "NOT_QUALIFIED",
+              "SOURCE_UNAVAILABLE",
+              "STALE",
+              "CONFLICTING",
+              "SUBJECT_NOT_FOUND",
+              "SUBJECT_DISABLED",
+              "INDETERMINATE"
+            ]
+          }
+        },
+        "required": [
+          "qualification_outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "qualification_reasons"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "identity_authorization_qualification_result_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Integrity-bound reference to DS-053 Identity and Authorization Qualification Result.",
+      "properties": {
+        "qualification_result_id": {
+          "$ref": "common.json#/$defs/identity_authorization_qualification_result_id"
+        },
+        "qualification_outcome": {
+          "type": "string",
+          "enum": [
+            "QUALIFIED",
+            "NOT_QUALIFIED",
+            "SOURCE_UNAVAILABLE",
+            "STALE",
+            "CONFLICTING",
+            "SUBJECT_NOT_FOUND",
+            "SUBJECT_DISABLED",
+            "INDETERMINATE"
+          ]
+        },
+        "stable_subject_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "result_digest": {
+          "$ref": "common.json#/$defs/content_digest"
+        },
+        "resolved_at": {
+          "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "ias_profile_ref": {
+          "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
+        }
+      },
+      "required": [
+        "qualification_result_id",
+        "qualification_outcome",
+        "result_digest"
+      ]
+    }
+  }
+}

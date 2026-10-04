@@ -41,7 +41,10 @@
       "NS-15.6A-03",
       "NS-15.6A-04",
       "NS-15.6B-01",
-      "NS-15.6B-02"
+      "NS-15.6B-02",
+      "NS-6.3-01",
+      "NS-7.3-01",
+      "NS-7.6A-01"
     ],
     "conformance_requirements": [
       "CR-007",
@@ -50,7 +53,10 @@
       "CR-112",
       "CR-113",
       "CR-114",
-      "CR-117"
+      "CR-117",
+      "CR-005",
+      "CR-045",
+      "CR-065"
     ]
   },
   "type": "object",
@@ -1024,6 +1030,7 @@
               "EVIDENCE_QUALIFICATION",
               "AUTHORITY_LINEAGE",
               "AUTHORITY_REDERIVATION",
+              "IDENTITY_AUTHORIZATION_QUALIFICATION",
               "APPROVAL",
               "LIFECYCLE_STATE",
               "GOVERNANCE_CONFIGURATION",
@@ -1036,7 +1043,8 @@
             ]
           },
           "minItems": 1,
-          "uniqueItems": true
+          "uniqueItems": true,
+          "description": "Qualified inputs required by the deterministic condition. IDENTITY_AUTHORIZATION_QUALIFICATION means DS-053 authoritative identity/authorization qualification, not client claims or AGCP Execution Authorization."
         },
         "deterministic": {
           "const": true

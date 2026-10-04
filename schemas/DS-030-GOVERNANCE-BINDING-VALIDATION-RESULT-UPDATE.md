@@ -1,24 +1,13 @@
-# DS-030 Governance Binding Validation Result Update
+# DS-030 - Governance Binding Validation Result Update
 
-## Status
+**Status:** Updated for the AGCP v2.1.x GDF/PDP -> Execution Authorization -> Governance Realization -> PEP architecture synchronization.  
+**Date:** 2026-10-03  
+**Schema:** `governance_binding_validation_result.json`
 
-Implemented on 2026-07-29.
+## Changes in this update
 
-## Canonical artifact
+- Synchronized DS-030 with the revised Core, Normative Statements, Identity and Authorization Store Profile, PEP Profile, commitment/execution separation, and downstream evidence/lifecycle semantics as applicable.
 
-- DS ID: `DS-030`
-- Filename: `governance_binding_validation_result.json`
-- Canonical URI: `https://agcp.ai/schemas/governance_binding_validation_result.json`
+## Compatibility and authority
 
-## Purpose
-
-DS-030 records whether the governance binding originally evaluated remains intact immediately before enforcement and commitment. The result compares proposal identity, decision, authorization, current authority, evidence, target, Tenant, governance domain, policy, qualified Canonical State, Derived Lifecycle State, scope, validity, Governance Version, and applicable composite bind conditions.
-
-## Outcome semantics
-
-- `VALID`: Enforcement Context assembly may proceed.
-- `INVALID`: Structural Refusal is required.
-- `RE_EVALUATION_REQUIRED`: affected governance determinations must be renewed.
-- `INDETERMINATE`: required inputs cannot be resolved and processing is blocked.
-
-DS-030 does not itself establish authority, authorize execution, apply enforcement, or commit a transition.
+The frozen CR set is unchanged. This schema update realizes obligations already expressed by the revised Core and Normative Statements; it does not create a new CR. Deployment-specific identity-store or PEP product details remain controlled by Implementation Profiles and referenced IAS/PEP Profiles.

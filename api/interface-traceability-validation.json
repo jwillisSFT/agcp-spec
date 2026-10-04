@@ -1,26 +1,55 @@
 {
+  "release_context": {
+    "repository_release_target": "v2.1.x",
+    "artifact_lifecycle_state": "CURRENT",
+    "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
+  },
   "status": "PASS",
-  "validated_at": "2026-08-05",
-  "interface_count": 2,
-  "catalog_version": "1.0.5",
+  "validated_at": "2026-10-03",
+  "interface_count": 5,
+  "catalog_version": "1.0.9",
   "interfaces": [
     {
       "if_id": "IF-001",
-      "contract_version": "2.0.4",
+      "contract_version": "2.1.x",
       "specification_file": "spec/AGCP-HTTP-Interface-Specification.md",
-      "cr_count": 56
+      "machine_readable_contract": "api/AGCP-HTTP-Contract.yaml",
+      "artifacts_present": true
     },
     {
       "if_id": "IF-002",
-      "contract_version": "2.0.4",
+      "contract_version": "2.1.x",
       "specification_file": "spec/AGCP-Policy-Evaluation-Contract.md",
-      "cr_count": 40
+      "machine_readable_contract": null,
+      "artifacts_present": true
+    },
+    {
+      "if_id": "IF-003",
+      "contract_version": "2.1.x",
+      "specification_file": "spec/AGCP-Governance-Observability-and-Management-Specification.md",
+      "machine_readable_contract": "api/AGCP-Management-Contract.yaml",
+      "artifacts_present": true
+    },
+    {
+      "if_id": "IF-004",
+      "contract_version": "2.1.x",
+      "specification_file": "spec/AGCP-Governance-Observability-and-Management-Specification.md",
+      "machine_readable_contract": "api/AGCP-Management-Contract.yaml",
+      "artifacts_present": true
+    },
+    {
+      "if_id": "IF-005",
+      "contract_version": "2.1.x",
+      "specification_file": "spec/AGCP-Conformance-Test-Control-Specification.md",
+      "machine_readable_contract": "api/AGCP-Management-Contract.yaml",
+      "artifacts_present": true
     }
   ],
-  "private_profile_references": 0,
+  "no_new_public_interface_added": true,
   "source_hashes": {
-    "api/interface-catalog.json": "803b1614a0cd0004763879bf0249f809e6a2e8d2a6c8f0d0db2e0ec240a9b364",
-    "api/interface-catalog.csv": "86110c4ff595051b430a0fa31f8bbeeba8b759890514ec5b2b125c0ef1c3fe96",
-    "api/INTERFACE-CATALOG.md": "bdef27a36edb72a8ea7492233b33a09aa3efa7646cf00a8753d17faf2b5510f9"
-  }
+    "api/interface-catalog.json": "c472b22ef94bd982afcf63974047f38948f47a839e15bbf092ff85f7c06ebf75",
+    "api/AGCP-HTTP-Contract.yaml": "f155cb53b70acc78837e15e434461fa0488dc20cb25496993cfb17ca57c0c8a8",
+    "api/AGCP-Management-Contract.yaml": "816a022415643840d22a3c7dc12a6ffaaa61a201ec22b46d8eddcd3fe540ab3b"
+  },
+  "issues": []
 }

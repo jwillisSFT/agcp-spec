@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "step": "TEST_MATRIX_REGENERATION",
+  "source_formal_tc_count": 122,
+  "tc_identifier_range": "TC-001 through TC-122",
+  "continuous_unique_tc_ids": true,
+  "cr_tc_one_to_one_alignment": true,
+  "formal_assertion_traceability_change_count": 42,
+  "regression_scenario_change_count": 22,
+  "unchanged_tc_count": 58,
+  "new_ns_disposition_count": 36,
+  "retired_ns_active_metadata_reference_count": 0,
+  "direct_ns_relationship_count": 283,
+  "conditional_ns_relationship_count": 15,
+  "supporting_ns_relationship_count": 162,
+  "downstream_test_mapping_status": "PENDING_REGENERATION",
+  "downstream_test_control_mapping_status": "PENDING_REGENERATION",
+  "downstream_vector_check_status": "PENDING_REGENERATION",
+  "rtm_status": "PENDING_FINAL_RTM_SYNCHRONIZATION",
+  "errors": []
+}

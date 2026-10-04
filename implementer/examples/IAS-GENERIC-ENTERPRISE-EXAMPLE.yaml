@@ -1,0 +1,45 @@
+profile:
+  profile_id: IAS-GENERIC-ENTERPRISE-EXAMPLE
+  profile_version: 1.0.0
+  digest:
+    algorithm: SHA-256
+    value: "0000000000000000000000000000000000000000000000000000000000000000"
+sources:
+  - source_id: enterprise-identity-authority
+    source_type: GENERIC_DIRECTORY_OR_IAM
+    authoritative_fact_classes: [subject_identity, account_status, tenant_membership, roles, groups, entitlements, governance_permissions, reviewer_classes, delegation]
+    subject_identifiers: [authenticated_subject, stable_subject_id, account_id]
+    tenant_domain_scope: tenant_and_governance_domain_attributes
+    resolution: protected_server_side_adapter
+    service_identity_reference: secretref://ias/reader
+    trust_basis: authenticated_transport_plus_source_integrity
+    freshness: 60s_max_cache_for_commitment_sensitive_facts
+    failure_behavior: fail_closed
+subject_resolution:
+  authenticated_subject_key: authenticated_subject
+  stable_subject_key: stable_subject_id
+  account_key: account_id
+  ambiguous_mapping_behavior: fail_closed
+authorization_facts:
+  fact_classes:
+    - {name: account_status, semantics: current_account_eligibility, source_id: enterprise-identity-authority, commitment_sensitive: true}
+    - {name: entitlement, semantics: named_authorization_entitlements, source_id: enterprise-identity-authority, commitment_sensitive: true}
+    - {name: reviewer_class, semantics: governance_review_eligibility_class, source_id: enterprise-identity-authority, commitment_sensitive: true}
+    - {name: role, semantics: organizational_or_governance_role, source_id: enterprise-identity-authority, commitment_sensitive: false}
+source_composition:
+  precedence: [enterprise-identity-authority]
+  conflict_behavior: fail_closed
+freshness:
+  default_policy: profile_declared_ttl
+  commit_revalidation: refresh_commitment_sensitive_facts_when_required
+failure_behavior:
+  unavailable: non_execution
+  stale: non_execution_or_governed_reevaluation
+  conflict: non_execution
+  ineligible: approval_or_authority_not_accepted
+security:
+  credential_reference_policy: references_only_no_secrets
+  least_privilege: read_only_required_subject_and_authorization_facts
+evidence:
+  recorded_fields: [profile_id, profile_version, source_id, stable_subject_id, fact_basis, freshness_result]
+  sensitive_data_policy: minimize_directory_attributes

@@ -1,0 +1,13 @@
+{
+  "validation_type": "AGCP_V2_1_X_DS_VALIDATION",
+  "ds_id": "DS-053",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_file": "schemas/identity_authorization_qualification_result.json",
+  "schema_sha256": "4b267b03f1d024e70534ab13e6d6fce4d10a244849497164c4560aab202adaf7",
+  "metaschema_valid": true,
+  "local_refs_resolved": true,
+  "examples_checked": 3,
+  "example_errors": [],
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
+}

@@ -1,0 +1,13 @@
+{
+  "validation_type": "AGCP_V2_1_X_DS_VALIDATION",
+  "ds_id": "DS-038",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_file": "schemas/governance_lifecycle_record.json",
+  "schema_sha256": "a4485a75806b14471e4d5773ab67cd537f64903bb337eaaa56de79c3a22809bb",
+  "metaschema_valid": true,
+  "local_refs_resolved": true,
+  "examples_checked": 1,
+  "example_errors": [],
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
+}

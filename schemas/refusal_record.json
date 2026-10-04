@@ -120,6 +120,12 @@
     },
     "semantic_assertions": {
       "$ref": "#/$defs/semantic_assertions"
+    },
+    "identity_authorization_qualification_result_ref": {
+      "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+    },
+    "pep_profile_ref": {
+      "$ref": "common.json#/$defs/pep_profile_ref"
     }
   },
   "required": [
@@ -728,5 +734,19 @@
         "supports_independent_replay_verification"
       ]
     }
+  },
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-6.4-04",
+      "NS-9.4-06",
+      "NS-9.6A-04"
+    ],
+    "conformance_requirements": [
+      "CR-004",
+      "CR-016",
+      "CR-087",
+      "CR-120",
+      "CR-121"
+    ]
   }
 }

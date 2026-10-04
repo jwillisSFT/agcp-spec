@@ -239,7 +239,43 @@ Controlled examples in `schemas/examples/` are structural schema fixtures. The `
 
 ## Repository synchronization control
 
-`governance/AGCP-v2.0.8-repository-synchronization-manifest.json` inventories the accumulated public-repository correction set, and `governance/validate_repository_synchronization.py` verifies catalogs, RTM versions and mappings, manifests, vectors, validation reports, indexes, release records, and file hashes before packaging.
+`governance/AGCP-v2.1.0-repository-synchronization-manifest.json` inventories the accumulated public-repository correction set, and `governance/validate_repository_synchronization.py` verifies catalogs, RTM versions and mappings, manifests, vectors, validation reports, indexes, release records, and file hashes before packaging.
 
 
 ## Repository-wide integrity gate
+
+## Governance Observability and Management Plane (v2.1.0)
+
+AGCP v2.1.0 introduces a logically separate Governance Observability and Management Plane. Governance Observation Points (GOPs) expose read-only, attributable runtime state and governance-stage observations. Governance Actuation Points (GAPs) accept authenticated, authorized administrative inputs that are processed through ordinary authoritative governance mechanisms; they do not directly rewrite downstream governance outcomes.
+
+```text
+                 AGCP Management / Test Plane
+                           |
+             +-------------+-------------+
+             |                           |
+             v                           v
+ Governance Observation Points   Governance Actuation Points
+          (GOP / IF-003)              (GAP / IF-004)
+             |                           |
+             +-------------+-------------+
+                           |
+                       AGCP Runtime
+                           |
+                  Optional IF-005 Test
+                  Control (isolated only)
+```
+
+IF-005 is an optional Conformance Test Control interface for deterministic precondition establishment. It cannot inject expected governance results. Test controls establish typed, scope-isolated source conditions and are usable for Formal Test Case setup only when capability discovery reports the control as `BOUND`, the operation reaches `EFFECTIVE`, and the governed runtime consumes the condition through the same authorized `X-AGCP-Test-Scope` path. IF-004 likewise distinguishes accepted/PENDING administrative requests from authoritative `EFFECTIVE` realization with readback evidence. Capability discovery distinguishes `BOUND`, `RECORD_ONLY`, `UNBOUND`, `NOT_APPLICABLE`, and `UNKNOWN`, preventing a record-only surface from being mistaken for a runtime control. The management contract is `api/AGCP-Management-Contract.yaml`; normative behavior is defined by the v2.1.0 observability/management and test-control companion specifications.
+
+## v2.1.x Trust, Governance Realization, and Profile Alignment
+
+The controlled architecture distinguishes the Governance Decision Function / PDP from the Governance Realization Function (GRF). A Governance Decision does not by itself establish commit-bound authority. Execution Authorization is later consumed by the GRF, which re-establishes current commitment-sensitive eligibility, applies the controlling PEP Profile, constructs the Enforcement Context, and presents the exact transition to the PEP. The PEP controls crossing of the enforcement boundary.
+
+`spec/AGCP-Trust-Model.md` is the controlled non-normative architectural trust reference. It is subordinate to the published CRs and Core and does not independently create conformance requirements.
+
+The generic implementer framework includes two subordinate controlled profile types:
+
+- Identity and Authorization Store (IAS) Profile - authoritative identity plus identity-system roles, groups, entitlements, governance permissions, reviewer classes, scopes, delegation/authority attributes, validity, and account state used as governance input; and
+- PEP Profile - exact GRF-to-PEP action/target mapping, Enforcement Context requirements, caller authentication, PEP-to-target authority, response mapping, and fail-closed behavior.
+
+Deployment-specific profiles remain separate from the generic specification unless intentionally published.

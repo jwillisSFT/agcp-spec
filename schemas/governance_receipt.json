@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/governance_receipt.json",
   "title": "Governance Receipt",
-  "description": "Canonical attributable and integrity-protected record of a non-refusal AGCP governance result. A Governance Receipt binds a Governed Action Proposal and its qualified governance basis to the recorded decision, authorization, approval, deterministic adjudication, commitment, enforcement, execution outcome, lifecycle transition, continuation outcome, or governed re-evaluation result. It is governance evidence rather than a mere application response and does not itself create authority at commitment or permission to execute. Structural Refusal is documented through a Refusal Record, not this schema.",
+  "description": "Canonical attributable and integrity-protected record of a non-refusal AGCP governance result. A Governance Receipt binds a Governed Action Proposal and its qualified governance basis to the recorded decision, authorization, approval, deterministic adjudication, commitment, enforcement, execution outcome, lifecycle transition, continuation outcome, or governed re-evaluation result. It is governance evidence rather than a mere application response and does not itself create authority at commitment or permission to execute. Structural Refusal is documented through a Refusal Record, not this schema. A receipt records commitment and may reference a distinct DS-052 post-commit execution outcome; commitment and completed target execution are not assumed to be identical events.",
   "x-agcp-ds-id": "DS-027",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
@@ -80,7 +80,7 @@
       "$ref": "governance_lifecycle_record.json#/$defs/lifecycle_transition_ref"
     },
     "execution_outcome_ref": {
-      "$ref": "#/$defs/execution_outcome_ref"
+      "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref"
     },
     "qualified_evidence_refs": {
       "type": "array",
@@ -143,6 +143,9 @@
     },
     "governance_lifecycle_record_ref": {
       "$ref": "governance_lifecycle_record.json#/$defs/governance_lifecycle_record_ref"
+    },
+    "pep_profile_ref": {
+      "$ref": "common.json#/$defs/pep_profile_ref"
     }
   },
   "required": [
@@ -390,36 +393,6 @@
         "result_digest"
       ]
     },
-    "execution_outcome_ref": {
-      "type": "object",
-      "description": "Reference to an observed post-commit execution outcome without re-executing the historical action during replay.",
-      "additionalProperties": false,
-      "properties": {
-        "execution_outcome_id": {
-          "$ref": "common.json#/$defs/identifier"
-        },
-        "outcome": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 256
-        },
-        "observed_at": {
-          "$ref": "common.json#/$defs/timestamp_rfc3339"
-        },
-        "outcome_digest": {
-          "$ref": "common.json#/$defs/content_digest"
-        },
-        "outcome_uri": {
-          "$ref": "common.json#/$defs/uri"
-        }
-      },
-      "required": [
-        "execution_outcome_id",
-        "outcome",
-        "observed_at",
-        "outcome_digest"
-      ]
-    },
     "evidence_continuity_record": {
       "type": "object",
       "description": "Integrity evidence preserving the proposal-to-basis-to-result relationship across evaluation, enforcement, handoff, lifecycle transition, and outcome.",
@@ -600,5 +573,17 @@
         "supports_independent_replay_verification"
       ]
     }
+  },
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-9.5-05",
+      "NS-10.4-01",
+      "NS-10.8A-02"
+    ],
+    "conformance_requirements": [
+      "CR-047",
+      "CR-067",
+      "CR-068"
+    ]
   }
 }

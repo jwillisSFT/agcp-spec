@@ -1,23 +1,13 @@
-# DS-027 Governance Receipt Update
+# DS-027 - Governance Receipt Update
 
-## Status
+**Status:** Updated for the AGCP v2.1.x GDF/PDP -> Execution Authorization -> Governance Realization -> PEP architecture synchronization.  
+**Date:** 2026-10-03  
+**Schema:** `governance_receipt.json`
 
-Implemented `DS-027 governance_receipt.json` as the canonical attributable, integrity-protected record for every non-refusal governance result. Structural Refusal remains outside DS-027 and is represented by the reserved DS-028 Refusal Record.
+## Changes in this update
 
-## Canonical scope
+- Synchronized DS-027 with the revised Core, Normative Statements, Identity and Authorization Store Profile, PEP Profile, commitment/execution separation, and downstream evidence/lifecycle semantics as applicable.
 
-DS-027 records proposal qualification, governance decision, execution authorization, approval or adjudication, commitment, enforcement, execution outcome, lifecycle transition, continuation-integrity, risk-based re-evaluation, and other explicitly non-refusal outcomes.
+## Compatibility and authority
 
-The receipt binds Proposal Identity, tenant, governance domain, target, Governance Version, qualified governance basis, evidence, authority, lifecycle, and the recorded result. It requires attribution, integrity protection, Governance Ledger recording or reference, Evidence Continuity, and independent replay-verification material.
-
-## Dependent schema changes
-
-- `governance_decision_result.json`: non-refusal decisions require a Governance Receipt; Structural Refusal requires a Refusal Record reference.
-- `execution_authorization_view.json`: every authorization outcome requires a Governance Receipt.
-- `commit_boundary_result.json`: every represented Commit Boundary outcome requires a Governance Receipt.
-- `proposal_view.json`: exposes receipt and refusal references across the proposal lifecycle.
-- `governance_evidence.json`: may aggregate receipt, refusal, and ledger-event references.
-
-## Traceability
-
-RTM RTM-1.14 maps DS-027 to CR-062 through CR-069 and CR-086. Schema Catalog 1.0.9 marks DS-027 Implemented and Active.
+The frozen CR set is unchanged. This schema update realizes obligations already expressed by the revised Core and Normative Statements; it does not create a new CR. Deployment-specific identity-store or PEP product details remain controlled by Implementation Profiles and referenced IAS/PEP Profiles.

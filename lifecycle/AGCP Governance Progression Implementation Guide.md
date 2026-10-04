@@ -68,49 +68,43 @@ The evaluation engine SHOULD NOT:
 
 # 4. Recommended Internal Processing Sequence
 
-1. Receive Proposal.
-2. Validate schema.
-3. Verify provenance.
-4. Validate replay protection.
-5. Validate idempotency.
-6. Validate tenant and Governance Domain.
-7. Resolve applicable governance configuration.
-8. Perform Proposal Qualification.
-9. Execute Governance Decision Function.
-10. Perform governed approval or adjudication where required.
-11. Generate Execution Authorization or establish another eligible nonterminal lifecycle state.
-12. While the Proposal remains nonterminal before commitment, maintain Continuation Integrity where applicable.
-13. Detect material governance-condition changes and identify affected Proposals using active risk-based governance configuration.
-14. Re-evaluate affected Proposals, assess Admissible Path Viability, and perform governed recovery or policy-defined disposition where required.
-15. Immediately before commitment, perform Governance Realization: resolve current Canonical State, qualify state and evidence, re-derive authority, validate governance binding and resulting state, and resolve final Commit-Bound Admissibility.
-16. Execute non-bypassable Commit Boundary enforcement.
-17. Record Governance Evidence throughout each applicable governance-significant stage.
-18. Append governance-significant events to the ordered Append-Only Governance Ledger.
-19. Permit governed execution only when Commit Boundary processing succeeds.
+A conforming implementation should preserve the following logical sequence even when multiple functions are co-located in one service:
 
----
+1. receive and qualify the proposal;
+2. resolve Canonical State and other qualified governance inputs;
+3. resolve qualified identity/authorization context through the IAS Profile when applicable;
+4. execute the Governance Decision Function / PDP and persist the Governance Decision;
+5. complete human adjudication or governed re-evaluation as required;
+6. produce proposal-bound Execution Authorization when eligible;
+7. maintain Continuation Integrity for nonterminal proposals;
+8. invoke the Governance Realization Function;
+9. re-derive current authority and commitment-sensitive state/evidence;
+10. perform Governance Binding Validation and Commit-Bound Admissibility;
+11. deterministically select and apply the controlling PEP Profile;
+12. construct the required Enforcement Context and exact PEP request;
+13. invoke the PEP through the protected path;
+14. record the commitment event if the exact transition is accepted;
+15. execute or observe the target operation; and
+16. record execution outcome, lifecycle, and evidence.
+
+Co-location does not permit an earlier stage result to substitute for a later-stage check.
 
 # 5. Guard Enforcement Matrix
 
-| Guard | Platform | Governance Evaluation |
-|-------|:-------:|:---------------------:|
-| Schema validation | Yes | No |
-| Provenance validation | Yes | No |
-| Replay protection | Yes | No |
-| Idempotency | Yes | No |
-| Tenant validation | Yes | No |
-| Governance Domain validation | Yes | No |
-| Policy evaluation | No | Yes |
-| Constraint evaluation | No | Yes |
-| Invariant evaluation | No | Yes |
-| Human Review determination | No | Yes |
-| Execution Authorization validation | Yes | No |
-| Continuation Integrity lifecycle control | Shared | Shared |
-| Governance Realization and binding validation | Shared | Shared |
-| Commit Boundary enforcement | Yes | No |
-| Canonical State validation | Yes | No |
+| Guard / responsibility | GDF / PDP | GRF | PEP | Target/adapter |
+|---|---:|---:|---:|---:|
+| policy/constraint/invariant evaluation | Primary | Re-invoke if required | No | No |
+| authoritative human identity/entitlement as governance input | Consume qualified result | Revalidate when commitment-sensitive | No | No |
+| Governance Decision | Primary | Consume | No reinterpretation | No |
+| Execution Authorization | No | Validate/consume | Validate reference as profile requires | No |
+| current authority/state/lifecycle/prior-use | No | Primary | Verify enforcement-facing subset | No |
+| PEP Profile selection/application | No | Primary | Enforce declared mapping contract | No |
+| Enforcement Context creation | No | Primary | Validate/consume | No |
+| prevention of unauthorized crossing | No | Coordinate | Primary | Honor protected interface |
+| target credential | No | No direct use unless GRF+PEP co-located by profile | Primary holder | Validate caller |
+| actual operational mutation | No | No | Mediate/invoke | Perform |
 
----
+The PEP is not a second general-purpose policy engine. It may validate the integrity and applicability of the enforcement-facing bindings required to prevent an ineligible transition.
 
 # 6. Governance Evidence
 
@@ -161,27 +155,15 @@ Recommended resolution sequence:
 
 # 9. Continuation Integrity, Governance Realization, and Commit Boundary Normative Restatements
 
-**Normative restatement.** The requirements in this section restate mandatory obligations from AGCP Core Sections 9.4, 9.6A, 9.6B, 13.1, 13.2, 13.4, 13.6, and 13.6A and the corresponding Normative Statements. They do not create or modify an obligation; the controlling Core and Normative Statement text governs interpretation.
+Continuation Integrity preserves the validity of nonterminal governed processing between earlier evaluation and the later commitment attempt.
 
-While a Proposal remains nonterminal before commitment, Continuation Integrity SHALL ensure that the Proposal retains a verified continuation basis and at least one admissible path toward binding until it reaches a terminal lifecycle state or successfully completes Commit Boundary processing. Continuation Integrity SHALL preserve and re-establish, where required, the governance basis supporting the Proposal throughout its pre-commit lifecycle.
+Governance Realization is the logical function that determines whether an authorized transition is still usable now. It consumes current qualified governance inputs, performs Authority Re-Derivation, Governance Binding Validation, and Commit-Bound Admissibility, and prepares the transition for enforcement.
 
-Continuation Integrity SHALL apply active risk-based governance configuration to determine when material changes to authority, evidence, Canonical State, policy, configuration, lifecycle, validity, tenant, target, dependency, coupling, or cross-domain conditions require re-evaluation of affected nonterminal Proposals. The governance control plane SHALL deterministically re-evaluate affected nonterminal Proposals when such material changes may affect continued execution admissibility, in accordance with active risk-based governance configuration.
+Where human identity/authorization is commitment-sensitive, GRF resolution uses the controlling IAS Profile. Where a concrete PEP is used, the GRF applies the controlling PEP Profile to map the exact commit-eligible transition into the PEP-supported representation and Enforcement Context.
 
-Immediately before commitment, the Governance Realization Function SHALL coordinate current Canonical State Resolution, State Qualification, Evidence Qualification, Authority Re-Derivation, Governance Binding Validation, Commit-Bound Admissibility, and enforcement. Governance Realization and Commit Boundary processing SHALL perform the applicable validations required by the Core, including verification that:
+A PEP Profile may transform representation but may not widen targets, substitute a similar action, discard governance-significant fields, weaken conditions, or reinterpret the Governance Decision. If no faithful mapping exists, the operation fails closed.
 
-- the Proposal remains nonterminal and eligible for commitment;
-- applicable Continuation Integrity requirements are satisfied;
-- Execution Authorization remains valid;
-- required governed approval or adjudication remains valid where applicable;
-- tenant and Governance Domain remain eligible;
-- Authority Lineage remains valid;
-- current Canonical State and qualified evidence support authority and admissibility;
-- governance binding and resulting-state requirements remain satisfied; and
-- final Commit-Bound Admissibility is established.
-
-Failure of any required validation SHALL prevent commitment and governed execution or SHALL require renewed governance processing, as applicable. An authorized nonterminal Proposal SHALL NOT proceed to commitment when mandatory governance conditions are no longer satisfied. A Proposal SHALL NOT proceed to commitment when its verified continuation basis or at least one admissible path to binding can no longer be established. Pending, rejected, refused, expired, cancelled, superseded, or degraded Proposals SHALL NOT commit unless governance establishes an eligible transition. Post-commit monitoring, intervention, or termination controls are distinct from Continuation Integrity unless separately established by an applicable requirement or implementation profile.
-
----
+The Commit Boundary is the protected boundary at which the PEP permits the exact eligible transition to cross into consequence or prevents it. A successful commitment is not necessarily completed target execution when the target is asynchronous.
 
 # 10. Deterministic Replay
 

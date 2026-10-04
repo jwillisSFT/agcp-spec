@@ -1,12 +1,12 @@
 {
   "suite_id": "agcp_conformance",
   "artifact_type": "conformance_harness_checks",
-  "status": "informational_executable_mapping",
+  "status": "informational_executable_mapping_v2.1.x_synchronized",
   "versioning": {
     "model": "repository_release",
     "embedded_spec_version": false
   },
-  "generated_at": "2026-07-31T11:30:00Z",
+  "generated_at": "2026-10-03T21:30:00Z",
   "traceability_model": {
     "authoritative_chain": [
       "Published AGCP Runtime Governance Conformance Requirements (CRs)",
@@ -56,7 +56,7 @@
     },
     {
       "check_id": "CHECK-GOVERNANCE-DECISION",
-      "validated_capability": "Governance Decision Function produces deterministic governance outcomes from qualified proposals and authoritative inputs.",
+      "validated_capability": "Governance Decision Function (PDP role) produces deterministic governance outcomes from qualified proposals and authoritative inputs and remains distinct from GRF commit-time realization.",
       "severity": "MUST",
       "applies_to": {
         "pipeline_stages": [
@@ -72,7 +72,8 @@
           "TV-PROP-001",
           "TV-PROP-002",
           "TV-PROP-003",
-          "TV-PROP-007"
+          "TV-PROP-007",
+          "TV-GRF-003"
         ],
         "fixtures": [
           "schemas/examples/ds011-constraint-evaluation-satisfied.json",
@@ -112,7 +113,9 @@
           "TV-GAPP-001",
           "TV-GAPP-002",
           "TV-GAPP-003",
-          "TV-GAPP-004"
+          "TV-GAPP-004",
+          "TV-IAS-001",
+          "TV-IAS-002"
         ],
         "fixtures": [
           "schemas/examples/ds026-governance-approval-partial-quorum.json",
@@ -174,7 +177,7 @@
     },
     {
       "check_id": "CHECK-COMMIT-BOUNDARY",
-      "validated_capability": "Commit Boundary processing gates governance-significant execution and validates current governance conditions immediately before commit.",
+      "validated_capability": "Commit processing invokes the GRF to establish current eligibility, apply the selected PEP Profile, assemble Enforcement Context, and require PEP mediation before the governed consequence.",
       "severity": "MUST",
       "applies_to": {
         "pipeline_stages": [
@@ -196,7 +199,13 @@
           "TV-COMMIT-002",
           "TV-COMMIT-003",
           "TV-COMMIT-004",
-          "TV-COMMIT-005"
+          "TV-COMMIT-005",
+          "TV-GRF-001",
+          "TV-GRF-002",
+          "TV-GRF-003",
+          "TV-GRF-004",
+          "TV-PEP-001",
+          "TV-PEP-002"
         ],
         "fixtures": [
           "schemas/examples/ds018-commit-boundary-request-single.json",
@@ -207,11 +216,10 @@
         ]
       },
       "expected_behavior": [
-        "Successful commit requires valid Execution Authorization.",
-        "Commit Boundary processing rejects missing, invalid, or stale authorization.",
-        "Commit Boundary processing validates current governance conditions.",
-        "No governance-significant execution occurs before successful Commit Boundary processing.",
-        "Successful Commit Boundary processing is recorded in the Append-Only Governance Ledger."
+        "The caller requests commit processing using DS-018 and does not authoritatively supply DS-029 Enforcement Context.",
+        "The GRF independently re-establishes current authority, state, evidence, validity, lifecycle, and binding sufficiency.",
+        "The GRF selects/applies the controlling PEP Profile and assembles the Enforcement Context.",
+        "The PEP mediates the governed consequence and fails closed on invalid, stale, mismatched, replayed, unsupported, or unrepresentable enforcement."
       ],
       "evidence_required": [
         "Commit Boundary request",
@@ -236,7 +244,15 @@
         "test_vectors": [
           "TV-EVID-001",
           "TV-PROP-001",
-          "TV-COMMIT-001"
+          "TV-COMMIT-001",
+          "TV-IAS-003",
+          "TV-GRF-002",
+          "TV-PEP-003",
+          "TV-PEP-004",
+          "TV-PEP-005",
+          "TV-PEP-006",
+          "TV-EXEC-001",
+          "TV-EXEC-002"
         ]
       },
       "expected_behavior": [
@@ -437,7 +453,8 @@
           "TV-EAUTH-003",
           "TV-PEM-003",
           "TV-POL-003",
-          "TV-GART-003"
+          "TV-GART-003",
+          "TV-IAS-005"
         ],
         "schemas": [
           "schemas/tenant.json",
@@ -543,7 +560,7 @@
     },
     {
       "check_id": "CHECK-QUALIFIED-GOVERNANCE-INPUTS",
-      "validated_capability": "Canonical State, Governance Evidence, and authority are independently qualified or re-derived before commitment.",
+      "validated_capability": "Canonical State, Governance Evidence, identity/authorization facts, and authority are independently qualified or re-derived at the applicable evaluation horizon before commitment.",
       "severity": "MUST",
       "applies_to": {
         "pipeline_stages": [
@@ -565,7 +582,15 @@
         "test_vectors": [
           "TV-STATE-001",
           "TV-STATE-002",
-          "TV-COMMIT-001"
+          "TV-COMMIT-001",
+          "TV-IAS-001",
+          "TV-IAS-002",
+          "TV-IAS-003",
+          "TV-IAS-004",
+          "TV-IAS-005",
+          "TV-GRF-001",
+          "TV-GRF-002",
+          "TV-GRF-004"
         ]
       },
       "expected_behavior": [
@@ -603,7 +628,10 @@
         "test_vectors": [
           "TV-PROP-001",
           "TV-COMMIT-001",
-          "TV-COMMIT-002"
+          "TV-COMMIT-002",
+          "TV-EXEC-001",
+          "TV-EXEC-002",
+          "TV-GRF-003"
         ]
       },
       "expected_behavior": [
@@ -755,6 +783,154 @@
         "Tenant and Governance Domain scope result",
         "Idempotency result where applicable"
       ]
+    },
+    {
+      "check_id": "CHECK-IDENTITY-AUTHORIZATION-QUALIFICATION",
+      "validated_capability": "IAS Profile resolution produces qualified identity and authorization facts (DS-053) from authoritative sources without converting claimant assertions into authority or producing a Governance Decision/Execution Authorization by itself.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Identity and Authorization Qualification"
+        ],
+        "schemas": [
+          "schemas/identity_authorization_qualification_result.json"
+        ],
+        "test_vectors": [
+          "TV-IAS-001",
+          "TV-IAS-002",
+          "TV-IAS-003",
+          "TV-IAS-004",
+          "TV-IAS-005"
+        ],
+        "fixtures": [
+          "schemas/examples/ds053-identity-authorization-qualified.json",
+          "schemas/examples/ds053-identity-authorization-not-qualified.json",
+          "schemas/examples/ds053-identity-authorization-source-unavailable.json"
+        ]
+      },
+      "expected_behavior": [
+        "Authenticated subject is resolved through the controlling IAS Profile and authoritative source.",
+        "Claimant-supplied roles, entitlements, reviewer classes, or authorization attributes cannot override authoritative qualification.",
+        "Unavailable, stale, conflicting, disabled, revoked, or out-of-scope authority fails closed as required by the applicable TC/profile.",
+        "DS-053 is governance input and is not AGCP Execution Authorization or a Governance Decision."
+      ],
+      "evidence_required": [
+        "DS-053 Identity and Authorization Qualification Result",
+        "IAS Profile identity/version/digest",
+        "Authoritative source reference/version/digest",
+        "Qualification evidence and attribution"
+      ]
+    },
+    {
+      "check_id": "CHECK-GOVERNANCE-REALIZATION",
+      "validated_capability": "The GRF independently establishes current commit eligibility from current canonical state, evidence, authority, lifecycle, validity, and binding conditions, invokes GDF re-evaluation when required, and constructs the enforcement-facing context without becoming the policy decision function.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Governance Realization Function",
+          "Commit-Bound Admissibility"
+        ],
+        "schemas": [
+          "schemas/authority_rederivation_result.json",
+          "schemas/governance_binding_validation_result.json",
+          "schemas/enforcement_context.json",
+          "schemas/commit_boundary_result.json"
+        ],
+        "test_vectors": [
+          "TV-GRF-001",
+          "TV-GRF-002",
+          "TV-GRF-003",
+          "TV-GRF-004"
+        ]
+      },
+      "expected_behavior": [
+        "Prior favorable Governance Decision and Execution Authorization are inputs, not current commit eligibility.",
+        "Current authority is re-derived at the commitment horizon.",
+        "Material policy-relevant change causes governed GDF re-evaluation rather than policy reinterpretation by the GRF.",
+        "The GRF selects/applies the PEP Profile and assembles DS-029 only after current eligibility is established."
+      ],
+      "evidence_required": [
+        "DS-034 Authority Re-Derivation Result",
+        "Current Canonical State and evidence references",
+        "DS-030 Governance Binding Validation Result where applicable",
+        "GRF attribution",
+        "PEP Profile reference/digest",
+        "DS-029 Enforcement Context when eligible"
+      ]
+    },
+    {
+      "check_id": "CHECK-PEP-ENFORCEMENT-BINDING",
+      "validated_capability": "The PEP enforces the exact GRF-authorized consequence using the selected PEP Profile and Governance Enforcement Binding, rejecting unsupported/non-faithful mappings, context tampering, binding mismatch, replay, and unqualified GRF callers.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Policy Enforcement Point"
+        ],
+        "schemas": [
+          "schemas/enforcement_context.json",
+          "schemas/governance_binding_validation_result.json",
+          "schemas/commit_boundary_result.json"
+        ],
+        "test_vectors": [
+          "TV-PEP-001",
+          "TV-PEP-002",
+          "TV-PEP-003",
+          "TV-PEP-004",
+          "TV-PEP-005",
+          "TV-PEP-006"
+        ]
+      },
+      "expected_behavior": [
+        "Supported mappings preserve the exact governed action/target semantics.",
+        "Unsupported or unrepresentable mappings fail closed.",
+        "Tampered or substituted Enforcement Context is rejected.",
+        "Governance Enforcement Binding mismatch is rejected.",
+        "The GRF-to-PEP caller binding is enforced, including logically when functions are co-located."
+      ],
+      "evidence_required": [
+        "PEP Profile identity/version/digest and mapping ID/digest",
+        "DS-029 Enforcement Context",
+        "Governance Enforcement Binding validation evidence",
+        "Authenticated GRF caller binding where applicable",
+        "PEP enforcement result and target receipt/no-effect evidence"
+      ]
+    },
+    {
+      "check_id": "CHECK-GOVERNED-EXECUTION-OUTCOME",
+      "validated_capability": "Where execution is asynchronous or otherwise distinct from commitment, DS-052 records the subsequent operational outcome and lifecycle remains COMMITTED until execution-outcome evidence establishes EXECUTED or EXECUTION_FAILED.",
+      "severity": "MUST",
+      "applies_to": {
+        "pipeline_stages": [
+          "Post-Commit Governed Execution Outcome"
+        ],
+        "schemas": [
+          "schemas/governed_execution_outcome.json",
+          "schemas/governance_lifecycle_record.json",
+          "schemas/commit_boundary_result.json"
+        ],
+        "test_vectors": [
+          "TV-EXEC-001",
+          "TV-EXEC-002"
+        ],
+        "fixtures": [
+          "schemas/examples/ds052-governed-execution-outcome-pending.json",
+          "schemas/examples/ds052-governed-execution-outcome-success.json",
+          "schemas/examples/ds052-governed-execution-outcome-failed.json"
+        ]
+      },
+      "expected_behavior": [
+        "Commit Successful does not by itself establish completed operational execution when the profile declares post-commit execution.",
+        "PENDING/IN_PROGRESS execution outcome preserves COMMITTED lifecycle status.",
+        "SUCCEEDED produces the applicable executed lifecycle outcome.",
+        "FAILED records execution failure without rewriting the prior commit result."
+      ],
+      "evidence_required": [
+        "DS-019 Commit Boundary Result",
+        "DS-052 Governed Execution Outcome",
+        "Lifecycle transition record",
+        "Target receipt/result references",
+        "Governance Evidence and ledger references"
+      ]
     }
   ],
   "notes": [
@@ -764,10 +940,12 @@
     "The ARM governs architectural terminology and concept meaning; Core-derived Normative Statements and the RTM support extraction and traceability without changing normative precedence.",
     "Harness checks SHALL remain synchronized with the Requirements Traceability Matrix, conformance test cases, and conformance test vectors."
   ],
-  "agcp_release": "v2.0.8",
+  "agcp_release": "v2.0.0",
   "interface_id": "IF-001",
   "interface_version": "v2",
   "schema_catalog": "schemas/catalog/schema-catalog.json",
   "fixture_mapping": "conformance/fixture-mapping.json",
-  "check_count": 17
+  "check_count": 21,
+  "synchronization_id": "AGCP-v2.1.x-HARNESS-VECTOR-CHECK-SYNC-2026-10-03",
+  "development_status": "Current identified executable inventory; not an assertion that all useful test/injection points are final or implemented by every runtime."
 }

@@ -1,10 +1,10 @@
 {
   "release_context": {
-    "repository_release_target": "v2.0.8",
+    "repository_release_target": "v2.1.0",
     "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "controlling_published_baseline": "v2.0.8",
+    "controlling_published_baseline": "v2.1.0",
     "controlling_baseline_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-    "baseline_date": "2026-08-14",
+    "baseline_date": "2026-08-15",
     "artifact_lifecycle_state": "CURRENT"
   },
   "report_id": "AGCP-P0-10-P0-06-SEMANTIC-FIXTURE-VALIDATION",
@@ -14,24 +14,24 @@
     "P0-10",
     "P0-06"
   ],
-  "controlled_fixture_count": 30,
+  "controlled_fixture_count": 36,
   "corrected_positive_fixture_count": 14,
   "semantic_negative_vector_count": 10,
   "claimant_assertion_negative_vector_count": 15,
   "source_hashes": {
-    "conformance/fixture-mapping.json": "b072c0e2dead30fbb0de9c0cd6ebb69107f4a9f6922fbfc465970b7bf901778d",
-    "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "99a562c94cd98cce57ed42e03ad6a99ed966d548c6d28176089a75b7740900eb",
+    "conformance/fixture-mapping.json": "5f25fadf3245028ef705530add24a1a41ca7cd108b74e87db25dd06f4434f658",
+    "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "8eae223db81e1a63cec16032d13fc2d639b8c698f40568329734e4315cb3fac1",
     "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json": "4e630a8cbbe27a476f8cd9765db250b3500b3fa3ffd374b1add1ca76cf52ffa8",
-    "schemas/governance_approval_submission.json": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
-    "schemas/examples/ds045-governance-approval-submission-valid.json": "9b0565c40f482ecd1ee58bf21ed873ad01c59d2a8a2f228784b7619239b40714",
+    "schemas/governance_approval_submission.json": "abcb7a0303e0e7a55e59e452c00c5f0427f66482514c8b7d136bd0aaf53a1d21",
+    "schemas/examples/ds045-governance-approval-submission-valid.json": "cb4aadef2299be914e1fbbbc8df715c64a4139c2f395b4eaf877ff2fdb691e65",
     "governance/validate_semantic_fixtures.py": "baa166b83aec59053df1f3d13a441c9a43721ef4d41f04957d927ad27c98fea6",
-    "schemas/examples/ds018-commit-boundary-request-single.json": "a0617f170e636fc38cd98cb27cc077de6c777b28d73f9034c64a383e7b41f816",
-    "schemas/examples/ds019-commit-boundary-result-success.json": "a1def8918fef6514020fd1ab576b62515df9271a95913e3aceee585e7d14efe3",
-    "schemas/examples/ds019-commit-boundary-result-refusal.json": "788e1554c2d12f0130c1a526e141521c9a3ae95defac2445bdcfdec2bcb9531e",
-    "schemas/examples/ds026-governance-approval-partial-quorum.json": "29fe67a6d8fde8da31a80a9aaa8896c60ea5743d7ae1cae0cd1a5cb1980e7625",
-    "schemas/examples/ds026-governance-approval-completed-quorum.json": "0384d1a96bdcacf27b288767bb4898e9390ea8cd65eb1cb54b66aa56f24105de",
-    "schemas/examples/ds029-enforcement-context-admissible.json": "d5beace27d2cb5ebb677457b6574861323cac58452319e266c8f252e84b14d93",
-    "schemas/examples/ds029-enforcement-context-prevent.json": "55ddca5eafdba0cb4138a46a0207abd5f3b5b4f3c6b5a7a3b69b0f775edc0163",
+    "schemas/examples/ds018-commit-boundary-request-single.json": "0fea0b93dc0a6c4d64f4cb09eaf44f3ca4ecac2cc29f94269cafe181aab1e4e8",
+    "schemas/examples/ds019-commit-boundary-result-success.json": "16acbb27ee9e2f94788bfae7237680ce2e3344b240da7a6989d61e8f3b874675",
+    "schemas/examples/ds019-commit-boundary-result-refusal.json": "2d3c8aecc320b7e8811e1365c9684dde7f863714fee7cfaf3bc09f93776cb09c",
+    "schemas/examples/ds026-governance-approval-partial-quorum.json": "ffd98ea18a4a9196778ec92eda7751b038214b212f73434ba162681d4818df81",
+    "schemas/examples/ds026-governance-approval-completed-quorum.json": "70e6a0d3422bf527c2f200944990ef2d0bb72502cd4437854069f66073d1ad6c",
+    "schemas/examples/ds029-enforcement-context-admissible.json": "204d51bd3a4858230f546c78ff9aecb40b07174d0b8ff49a23bb659e14493c54",
+    "schemas/examples/ds029-enforcement-context-prevent.json": "15c9417f26ecc0596f52ed5911d0ce51156420954fcbc8d9da061fe254c05418",
     "schemas/examples/ds039-continuation-integrity-degraded.json": "9be247a3f7c43d21286c867fcd3dffa4965f4146edabdb93d8283403723b187e",
     "schemas/examples/ds039-continuation-integrity-recovered.json": "8b414c5b024d75a8573fdf429f1ab0811465e3ee3d95f7cab8d07ee1b2e4fccf",
     "schemas/examples/ds040-governance-ledger-event-genesis.json": "409575ccc2655883314688ae84f2057e2e18813ec65b1e7cb15174f0f3ebad0c",
@@ -179,22 +179,14 @@
         {
           "group": "proposal",
           "paths": [
-            "proposal_ref.proposal_identity.proposal_id",
+            "proposal_identity.proposal_id",
             "authority_rederivation_result_ref.proposal_id",
-            "qualified_evidence_refs[0].qualification_result_ref.proposal_id",
-            "resulting_state_validation_result_ref.proposal_id",
-            "enforcement_context.proposal_identity.proposal_id",
-            "enforcement_context.authority_rederivation_result_ref.proposal_id",
-            "enforcement_context.lifecycle_binding.lifecycle_state_ref.proposal_id",
-            "enforcement_context.resulting_state_validation_result_ref.proposal_id"
+            "lifecycle_binding.lifecycle_state_ref.proposal_id",
+            "resulting_state_validation_result_ref.proposal_id"
           ],
           "values": [
             "proposal-1",
             "proposal-other",
-            "proposal-1",
-            "proposal-1",
-            "proposal-1",
-            "proposal-1",
             "proposal-1",
             "proposal-1"
           ]
@@ -210,11 +202,9 @@
           "group": "target",
           "paths": [
             "proposal_ref.target_ref.target_id",
-            "target_ref.target_id",
-            "enforcement_context.target_ref.target_id"
+            "target_ref.target_id"
           ],
           "values": [
-            "target-1",
             "target-1",
             "target-other"
           ]
@@ -267,30 +257,36 @@
         {
           "group": "evidence",
           "paths": [
-            "qualified_evidence_refs[0].evidence_ref.governance_evidence_id",
-            "enforcement_context.qualified_evidence_refs[0].evidence_ref.governance_evidence_id"
+            "lifecycle_state_binding.verification_evidence_ref.governance_evidence_id",
+            "approver_eligibility.qualification_evidence_refs[0].governance_evidence_id",
+            "lifecycle_effect.governance_evidence_refs[0].governance_evidence_id",
+            "cryptographic_verification.verification_evidence_ref.governance_evidence_id",
+            "replay_protection.verification_evidence_ref.governance_evidence_id"
           ],
           "values": [
-            "evidence-1",
-            "evidence-other"
+            "governance-evidence-id-1",
+            "evidence-other",
+            "governance-evidence-id-1",
+            "governance-evidence-id-1",
+            "governance-evidence-id-1"
           ]
         }
       ]
     },
     {
       "id": "NV-SEM-008",
-      "mismatch_class": "AUTHORIZATION",
+      "mismatch_class": "ENFORCEMENT_CONTEXT",
       "schema_valid": true,
       "semantic_issues": [
         {
-          "group": "authorization",
+          "group": "enforcement_context",
           "paths": [
-            "execution_authorization_ref.authorization_id",
-            "enforcement_context.execution_authorization_ref.authorization_id"
+            "enforcement_context_ref.enforcement_context_id",
+            "enforcement_result.enforcement_context_ref.enforcement_context_id"
           ],
           "values": [
-            "authorization-id-1",
-            "authorization-other"
+            "enforcement-context-id-1",
+            "enforcement-context-other"
           ]
         }
       ]
@@ -342,10 +338,12 @@
         {
           "group": "canonical_state",
           "paths": [
-            "state_qualification_result_ref.canonical_state_ref.canonical_state_id",
-            "enforcement_context.canonical_state_ref.canonical_state_id"
+            "canonical_state_basis.canonical_state_ref.canonical_state_id",
+            "canonical_state_basis.state_qualification_result_ref.canonical_state_ref.canonical_state_id",
+            "risk_based_re_evaluation_result.renewed_state_qualification_ref.canonical_state_ref.canonical_state_id"
           ],
           "values": [
+            "canonical-state-1",
             "canonical-state-1",
             "canonical-state-other"
           ]
@@ -435,7 +433,9 @@
       "id": "NV-CMDREC-012",
       "rejected": true,
       "errors": [
-        "Additional properties are not allowed ('semantic_assertions' was unexpected)"
+        "'claimed_approver_is_non_authoritative' is a required property",
+        "'claimed_roles_and_entitlements_are_non_authoritative' is a required property",
+        "'server_must_resolve_authoritative_human_identity_and_authority' is a required property"
       ]
     },
     {
@@ -561,22 +561,14 @@
             {
               "group": "proposal",
               "paths": [
-                "proposal_ref.proposal_identity.proposal_id",
+                "proposal_identity.proposal_id",
                 "authority_rederivation_result_ref.proposal_id",
-                "qualified_evidence_refs[0].qualification_result_ref.proposal_id",
-                "resulting_state_validation_result_ref.proposal_id",
-                "enforcement_context.proposal_identity.proposal_id",
-                "enforcement_context.authority_rederivation_result_ref.proposal_id",
-                "enforcement_context.lifecycle_binding.lifecycle_state_ref.proposal_id",
-                "enforcement_context.resulting_state_validation_result_ref.proposal_id"
+                "lifecycle_binding.lifecycle_state_ref.proposal_id",
+                "resulting_state_validation_result_ref.proposal_id"
               ],
               "values": [
                 "proposal-1",
                 "proposal-other",
-                "proposal-1",
-                "proposal-1",
-                "proposal-1",
-                "proposal-1",
                 "proposal-1",
                 "proposal-1"
               ]
@@ -592,11 +584,9 @@
               "group": "target",
               "paths": [
                 "proposal_ref.target_ref.target_id",
-                "target_ref.target_id",
-                "enforcement_context.target_ref.target_id"
+                "target_ref.target_id"
               ],
               "values": [
-                "target-1",
                 "target-1",
                 "target-other"
               ]
@@ -649,30 +639,36 @@
             {
               "group": "evidence",
               "paths": [
-                "qualified_evidence_refs[0].evidence_ref.governance_evidence_id",
-                "enforcement_context.qualified_evidence_refs[0].evidence_ref.governance_evidence_id"
+                "lifecycle_state_binding.verification_evidence_ref.governance_evidence_id",
+                "approver_eligibility.qualification_evidence_refs[0].governance_evidence_id",
+                "lifecycle_effect.governance_evidence_refs[0].governance_evidence_id",
+                "cryptographic_verification.verification_evidence_ref.governance_evidence_id",
+                "replay_protection.verification_evidence_ref.governance_evidence_id"
               ],
               "values": [
-                "evidence-1",
-                "evidence-other"
+                "governance-evidence-id-1",
+                "evidence-other",
+                "governance-evidence-id-1",
+                "governance-evidence-id-1",
+                "governance-evidence-id-1"
               ]
             }
           ]
         },
         {
           "id": "NV-SEM-008",
-          "mismatch_class": "AUTHORIZATION",
+          "mismatch_class": "ENFORCEMENT_CONTEXT",
           "schema_valid": true,
           "semantic_issues": [
             {
-              "group": "authorization",
+              "group": "enforcement_context",
               "paths": [
-                "execution_authorization_ref.authorization_id",
-                "enforcement_context.execution_authorization_ref.authorization_id"
+                "enforcement_context_ref.enforcement_context_id",
+                "enforcement_result.enforcement_context_ref.enforcement_context_id"
               ],
               "values": [
-                "authorization-id-1",
-                "authorization-other"
+                "enforcement-context-id-1",
+                "enforcement-context-other"
               ]
             }
           ]
@@ -724,10 +720,12 @@
             {
               "group": "canonical_state",
               "paths": [
-                "state_qualification_result_ref.canonical_state_ref.canonical_state_id",
-                "enforcement_context.canonical_state_ref.canonical_state_id"
+                "canonical_state_basis.canonical_state_ref.canonical_state_id",
+                "canonical_state_basis.state_qualification_result_ref.canonical_state_ref.canonical_state_id",
+                "risk_based_re_evaluation_result.renewed_state_qualification_ref.canonical_state_ref.canonical_state_id"
               ],
               "values": [
+                "canonical-state-1",
                 "canonical-state-1",
                 "canonical-state-other"
               ]

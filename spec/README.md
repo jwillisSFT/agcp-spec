@@ -1,10 +1,11 @@
 # AGCP Specification Library
 
 **Artifact Lifecycle:** Current  
-**Repository Release Target:** AGCP v2.0.8  
-**Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.8 Public Review Controlled Baseline  
-**Baseline Date:** 2026-08-14
+**Current Published Repository Release:** AGCP v2.1.0  
+**Synchronized Change-Set Target:** AGCP v2.1.x  
+**Change-Set Status:** Closed for downstream implementation  
+**Controlling Published Baseline:** AGCP v2.1.0 Public Review Controlled Baseline  
+**Baseline Date:** 2026-08-15
 
 ## Overview
 
@@ -172,3 +173,25 @@ For repository usage and project information, see:
 Repository documents shall reference controlled artifacts by canonical title and path. The controlled disposition of retired absent companion labels and noncanonical titles is published in `../governance/AGCP-Normative-Companion-Reference-Dispositions.md` with a machine-readable companion at `../governance/normative-companion-reference-dispositions.json`.
 
 Governance Evidence is represented by DS-020 (`../schemas/governance_evidence.json`) and DS-033 (`../schemas/evidence_qualification_result.json`) under the controlling CR and Core obligations; no separate umbrella evidence specification is implied.
+
+## v2.1.0 Governance Observability and Management Plane
+
+The normative companion set now includes `AGCP-Governance-Observability-and-Management-Specification.md` (IF-003/IF-004) and `AGCP-Conformance-Test-Control-Specification.md` (optional IF-005). These interfaces support operational management, observability, and executable conformance metrology without weakening the governed-action or commit-boundary model.
+
+
+## v2.1.x Final Traceability Closure
+
+The synchronized specification layer is closed through `RTM-1.47`. The v2.1.x Normative Statement inventory contains 393 permanent identifiers, 390 current statements, and three retired/reserved identifiers. Formal Test Cases remain TC-001 through TC-122. DS/interface/profile/catalog relationships and the conformance support layer are synchronized through the final RTM. Repository-level closure status and validation are recorded in `../governance/AGCP-v2.1.x-REPOSITORY-CLOSURE.md` and `../governance/AGCP-v2.1.x-repository-closure-validation.json`.
+
+## v2.1.x Trust, Governance Realization, and Profile Alignment
+
+The controlled architecture distinguishes the Governance Decision Function / PDP from the Governance Realization Function (GRF). A Governance Decision does not by itself establish commit-bound authority. Execution Authorization is later consumed by the GRF, which re-establishes current commitment-sensitive eligibility, applies the controlling PEP Profile, constructs the Enforcement Context, and presents the exact transition to the PEP. The PEP controls crossing of the enforcement boundary.
+
+`spec/AGCP-Trust-Model.md` is the controlled non-normative architectural trust reference. It is subordinate to the published CRs and Core and does not independently create conformance requirements.
+
+The generic implementer framework includes two subordinate controlled profile types:
+
+- Identity and Authorization Store (IAS) Profile - authoritative identity plus identity-system roles, groups, entitlements, governance permissions, reviewer classes, scopes, delegation/authority attributes, validity, and account state used as governance input; and
+- PEP Profile - exact GRF-to-PEP action/target mapping, Enforcement Context requirements, caller authentication, PEP-to-target authority, response mapping, and fail-closed behavior.
+
+Deployment-specific profiles remain separate from the generic specification unless intentionally published.

@@ -188,7 +188,7 @@ Fixtures are resolved and validated before they are used by a vector.
 
 # 6. Controlled Cardinalities and Mapping Rules
 
-The controlled relationships for the current AGCP v2.0.8 model are:
+The controlled relationships for the current AGCP v2.1.0 model are:
 
 | Relationship | Controlled rule |
 |---|---|
@@ -337,7 +337,7 @@ objective evidence evaluated under the complete TC-001 procedure
 
 `TV-PROP-001` can automate substantial portions of `TC-001`, but TC-001 remains the authoritative assessment procedure. The vector result is accepted only for the criteria it actually demonstrates.
 
-At the controlled AGCP v2.0.8 baseline, the mapping set contains 122 Formal Test Cases, 17 Harness Checks, and 54 Harness Test Vectors. These counts are release metadata, not permanent relationship constraints.
+For the current post-RTM v2.1.x synchronization set (RTM-1.47), the mapping contains 122 Formal Test Cases, 21 Harness Checks, and 71 Harness Test Vectors. These counts are controlled development metadata, not permanent relationship constraints.
 
 ---
 
@@ -362,3 +362,14 @@ Harness Checks and Test Vectors automate portions of that assessment and produce
 ```
 
 Conformance levels classify the cumulative scope of obligations. They do not create separate harness authorities. Complete conformance is determined at the Formal Test Case and profile levels using all required automated and non-automated evidence.
+
+## Governance Observation and Test-Control Evidence (v2.1.0)
+
+Governance Observation Point records, Governance Actuation records, and Conformance Test Control records are supporting execution evidence. They may establish that a Formal Test Case precondition existed, identify an authoritative or derived runtime observation, or preserve the setup used for reproducible execution. They SHALL NOT independently establish a requirement result and SHALL NOT supersede the Formal Test Case.
+
+When IF-005 is used, the harness SHALL preserve the test-control request and result separately from the target runtime request, response, Governance Evidence, Governance Ledger records, and replay/restart artifacts. A test control may establish an input or external dependency condition but SHALL NOT inject the expected Governance Decision, Execution Authorization, Structural Refusal, Derived Lifecycle State, or assessment outcome. `test-control-mapping.json` is an execution aid only.
+
+
+## v2.1.x final RTM synchronization note
+
+The Formal Test Cases, Test Matrix, `test-mapping.json`, `test-control-mapping.json`, Harness Checks, and Harness Test Vectors have been synchronized to the current v2.1.x Core/Normative Statements and have passed aggregate conformance-layer validation. This ordering does not change normative precedence. These artifacts are synchronized to the authoritative RTM dataset `RTM-1.47` and remain subordinate to the governing specifications and Formal Test Cases.

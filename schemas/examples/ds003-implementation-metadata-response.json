@@ -5,7 +5,7 @@
   "implementation": {
     "implementation_id": "AGCP-TEST",
     "implementation_name": "AGCP Test Implementation",
-    "implementation_release": "2.0.4",
+    "implementation_release": "2.1.0",
     "implementation_build_digest": {
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -18,8 +18,8 @@
   },
   "supported_agcp_releases": [
     {
-      "release_id": "AGCP-v2.0.0",
-      "specification_version": "2.0.0",
+      "release_id": "AGCP-v2.1.0",
+      "specification_version": "2.1.0",
       "support_status": "CURRENT",
       "publication_status": "PUBLISHED",
       "release_manifest_uri": "https://agcp.example/test",
@@ -35,7 +35,7 @@
       "normative_statement_set_id": "TEST",
       "conformance_requirement_set_id": "TEST",
       "baseline_reference_type": "IMMUTABLE_RELEASE_BUNDLE",
-      "baseline_bundle_name": "agcp-spec-v.2.0.0.zip",
+      "baseline_bundle_name": "agcp-spec-v.2.1.0.zip",
       "baseline_bundle_publication_status": "UNPUBLISHED",
       "baseline_bundle_uri": null,
       "baseline_bundle_digest": {
@@ -45,12 +45,12 @@
       "published_at": "2026-07-30T09:27:00-04:00"
     }
   ],
-  "default_agcp_release_id": "AGCP-v2.0.0",
+  "default_agcp_release_id": "AGCP-v2.1.0",
   "schema_set": {
-    "schema_set_id": "DS-SET-v2.0.4",
+    "schema_set_id": "DS-SET-v2.1.0",
     "schema_catalog_id": "DS-CATALOG-1.0",
-    "catalog_version": "1.0.50",
-    "agcp_specification_version": "2.0.4",
+    "catalog_version": "1.0.53",
+    "agcp_specification_version": "2.1.0",
     "publication_status": "RELEASE_CANDIDATE",
     "catalog_uri": "https://agcp.example/test",
     "catalog_digest": {
@@ -96,7 +96,7 @@
         "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       },
       "generator_name": "agcp-validator-generator",
-      "generator_version": "2.0.4"
+      "generator_version": "2.1.0"
     }
   },
   "implementation_profile": {
@@ -110,7 +110,7 @@
     },
     "lifecycle_state": "ACTIVE",
     "mandatory_core_behavior_redefined": false,
-    "baseline_release_id": "AGCP-v2.0.0",
+    "baseline_release_id": "AGCP-v2.1.0",
     "baseline_bundle_digest": {
       "algorithm": "SHA-256",
       "value": "790bffe0883c5371c6007986e373e275c9e966cb40c84c8186f38e4365f8c326"
@@ -123,8 +123,8 @@
         "registry_id": "REG-CONSTRAINT-TYPE",
         "registry_name": "AGCP Constraint Type Registry",
         "registry_kind": "CONSTRAINT_TYPE",
-        "release_id": "REG-CONSTRAINT-TYPE-v2.0.0",
-        "registry_release": "2.0.0",
+        "release_id": "REG-CONSTRAINT-TYPE-v2.1.0",
+        "registry_release": "v2.1.0",
         "lifecycle_state": "ACTIVE",
         "canonical_uri": "https://agcp.example/registries/constraint-type.json",
         "document_digest": {
@@ -140,8 +140,8 @@
         "registry_id": "REG-INVARIANT-TYPE",
         "registry_name": "AGCP Invariant Type Registry",
         "registry_kind": "INVARIANT_TYPE",
-        "release_id": "REG-INVARIANT-TYPE-v2.0.0",
-        "registry_release": "2.0.0",
+        "release_id": "REG-INVARIANT-TYPE-v2.1.0",
+        "registry_release": "v2.1.0",
         "lifecycle_state": "ACTIVE",
         "canonical_uri": "https://agcp.example/registries/invariant-type.json",
         "document_digest": {
@@ -157,8 +157,8 @@
         "registry_id": "REG-REJECTION-CODE",
         "registry_name": "AGCP Rejection Code Registry",
         "registry_kind": "REJECTION_CODE",
-        "release_id": "REG-REJECTION-CODE-v2.0.0",
-        "registry_release": "2.0.0",
+        "release_id": "REG-REJECTION-CODE-v2.1.0",
+        "registry_release": "v2.1.0",
         "lifecycle_state": "ACTIVE",
         "canonical_uri": "https://agcp.example/registries/rejection-code.json",
         "document_digest": {
@@ -179,7 +179,7 @@
       "claim_status": "NOT_CLAIMED",
       "implementation_profile_id": "PROF-TEST-001",
       "agcp_release_ids": [
-        "AGCP-v2.0.0"
+        "AGCP-v2.1.0"
       ],
       "claim_scope": {
         "scope_type": "IMPLEMENTATION",
@@ -291,7 +291,7 @@
       "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     },
     "activated_at": "2026-08-03T12:00:00-04:00",
-    "source_release_id": "AGCP-v2.0.0"
+    "source_release_id": "AGCP-v2.1.0"
   },
   "deployment_binding": {
     "deployment_id": "DEPLOYMENT-TEST-001",
@@ -303,5 +303,36 @@
       "algorithm": "SHA-256",
       "value": "1111111111111111111111111111111111111111111111111111111111111111"
     }
+  },
+  "identity_authorization_store_profiles": [
+    {
+      "profile_id": "IAS-GENERIC-ENTERPRISE",
+      "profile_version": "1.0.0",
+      "profile_uri": "https://example.invalid/profiles/ias-generic-enterprise",
+      "profile_digest": {
+        "algorithm": "SHA-256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "pep_profiles": [
+    {
+      "profile_id": "PEP-GENERIC-ACTION-ADAPTER",
+      "profile_version": "1.0.0",
+      "profile_uri": "https://example.invalid/profiles/pep-generic-action-adapter",
+      "profile_digest": {
+        "algorithm": "SHA-256",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
+  ],
+  "governance_function_placement": {
+    "gdf_pdp_placement": "agcp-control-plane",
+    "grf_placement": "agcp-control-plane",
+    "gdf_grf_colocated": true,
+    "commit_execution_modes": [
+      "ATOMIC_COMMIT_AND_EXECUTION",
+      "COMMIT_THEN_ASYNCHRONOUS_EXECUTION"
+    ]
   }
 }

@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/commit_boundary_result.json",
   "title": "Commit Boundary Result",
-  "description": "Canonical attributable and integrity-protected result of Commit Boundary and Policy Enforcement Point processing. It records the exact request, proposal, decision, authorization, current authority, Governance Binding Validation, Resulting-State Validation, Enforcement Context, PEP outcome, executed transition set, lifecycle effect, Governance Evidence, Governance Receipt, and any Structural Refusal.",
-  "$comment": "DS-019 records final bind-time governance realization. A successful result requires PEP permission and an executed governed transition set; failed or re-evaluation outcomes cannot claim execution.",
+  "description": "Canonical attributable and integrity-protected result of Governance Realization, Commit-Bound Admissibility, Governance Enforcement Binding, and Policy Enforcement Point processing at the Commit Boundary. Commit Successful records acceptance of the exact governed transition through the protected enforcement path; it does not universally assert that asynchronous target execution has completed.",
+  "$comment": "DS-019 records commitment. DS-052 records the downstream operational execution outcome. Atomic implementations may create a terminal DS-052 outcome in the same transaction; asynchronous implementations may create a PENDING/IN_PROGRESS DS-052 outcome at commit and update/append later execution evidence.",
   "x-agcp-ds-id": "DS-019",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
@@ -35,7 +35,13 @@
       "NS-9.6A-04",
       "NS-9.6B-01",
       "NS-9.6B-04",
-      "NS-9.6B-05"
+      "NS-9.6B-05",
+      "NS-9.5-02",
+      "NS-9.5-03",
+      "NS-9.5-05",
+      "NS-9.6A-01",
+      "NS-9.6A-05",
+      "NS-9.6A-06"
     ],
     "conformance_requirements": [
       "CR-019",
@@ -140,21 +146,6 @@
     "rejection_code": {
       "$ref": "common.json#/$defs/rejection_code"
     },
-    "executed_transition_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "common.json#/$defs/action_id"
-      },
-      "minItems": 1,
-      "maxItems": 1024,
-      "uniqueItems": true
-    },
-    "committed_state_digest": {
-      "$ref": "common.json#/$defs/content_digest"
-    },
-    "execution_result_ref": {
-      "$ref": "#/$defs/execution_result_ref"
-    },
     "lifecycle_effect": {
       "$ref": "#/$defs/lifecycle_effect"
     },
@@ -193,6 +184,21 @@
       },
       "additionalProperties": true,
       "maxProperties": 64
+    },
+    "pep_profile_ref": {
+      "$ref": "common.json#/$defs/pep_profile_ref"
+    },
+    "governed_execution_outcome_ref": {
+      "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref",
+      "description": "Post-commit operational outcome. A successful commit may reference a PENDING/IN_PROGRESS outcome when target execution is asynchronous."
+    },
+    "execution_completion_mode": {
+      "type": "string",
+      "enum": [
+        "ATOMIC_WITH_COMMIT",
+        "POST_COMMIT_ASYNCHRONOUS"
+      ],
+      "description": "Whether operational execution completes atomically with commitment or after commitment."
     }
   },
   "required": [
@@ -221,7 +227,9 @@
     "result_attribution",
     "result_digest",
     "integrity_signature",
-    "replay_material"
+    "replay_material",
+    "pep_profile_ref",
+    "execution_completion_mode"
   ],
   "allOf": [
     {
@@ -237,9 +245,7 @@
       },
       "then": {
         "required": [
-          "executed_transition_ids",
-          "committed_state_digest",
-          "execution_result_ref"
+          "governed_execution_outcome_ref"
         ],
         "properties": {
           "structural_refusal_applied": {
@@ -253,16 +259,6 @@
             },
             "required": [
               "outcome"
-            ]
-          },
-          "lifecycle_effect": {
-            "properties": {
-              "terminal": {
-                "const": true
-              }
-            },
-            "required": [
-              "terminal"
             ]
           }
         },
@@ -311,26 +307,7 @@
         },
         "required": [
           "rejection_code"
-        ],
-        "not": {
-          "anyOf": [
-            {
-              "required": [
-                "executed_transition_ids"
-              ]
-            },
-            {
-              "required": [
-                "committed_state_digest"
-              ]
-            },
-            {
-              "required": [
-                "execution_result_ref"
-              ]
-            }
-          ]
-        }
+        ]
       }
     },
     {
@@ -358,40 +335,11 @@
           },
           "structural_refusal_applied": {
             "const": false
-          },
-          "lifecycle_effect": {
-            "properties": {
-              "terminal": {
-                "const": false
-              }
-            },
-            "required": [
-              "terminal"
-            ]
           }
         },
         "not": {
-          "anyOf": [
-            {
-              "required": [
-                "executed_transition_ids"
-              ]
-            },
-            {
-              "required": [
-                "committed_state_digest"
-              ]
-            },
-            {
-              "required": [
-                "execution_result_ref"
-              ]
-            },
-            {
-              "required": [
-                "refusal_record_ref"
-              ]
-            }
+          "required": [
+            "refusal_record_ref"
           ]
         }
       }
@@ -533,28 +481,6 @@
         "commit_boundary_result_id",
         "outcome",
         "result_digest"
-      ]
-    },
-    "execution_result_ref": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "execution_record_id": {
-          "$ref": "common.json#/$defs/identifier"
-        },
-        "execution_record_uri": {
-          "$ref": "common.json#/$defs/uri"
-        },
-        "execution_digest": {
-          "$ref": "common.json#/$defs/content_digest"
-        },
-        "recorded_at": {
-          "$ref": "common.json#/$defs/timestamp_rfc3339"
-        }
-      },
-      "required": [
-        "execution_record_id",
-        "execution_digest"
       ]
     },
     "lifecycle_effect": {

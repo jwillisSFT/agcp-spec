@@ -1,24 +1,11 @@
 # AGCP Interface Definition Catalog
 
-- Catalog ID: `IF-CATALOG-1.0`
-- Catalog version: `1.0.5`
-- Specification version: `v2.0.8`
-- Publication status: `CURRENT`
-- Artifact lifecycle state: `CURRENT`
-- Repository release target: `v2.0.8` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
-- Controlling published baseline: `v2.0.8` (`PUBLIC_REVIEW_CONTROLLED_BASELINE`)
-- Baseline date: `2026-08-14`
-- Last modified: `2026-08-03`
+Updated 2026-10-03. No IF-006 is introduced. IAS lookup and GRF-to-PEP transport remain Implementation Profile / IAS Profile / PEP Profile controlled rather than standardized public AGCP interfaces.
 
-| IF ID | Interface | Version | Contract version | Controlled artifact | CR mappings |
-|---|---|---|---|---|---:|
-| `IF-001` | AGCP HTTP Interface v2 | `v2` | `2.0.8` | `spec/AGCP-HTTP-Interface-Specification.md` | 56 |
-| `IF-002` | AGCP Policy Evaluation Contract | `v2` | `2.0.8` | `spec/AGCP-Policy-Evaluation-Contract.md` | 40 |
-
-## IF-001 provenance wire contract
-
-IF-001 is explicitly mapped to CR-005 for requests and submitted artifacts carrying provenance. The machine-readable contract references `schemas/common.json#/$defs/provenance`, and the normative representation is defined by `spec/AGCP-Provenance-Wire-Format-Specification.md`.
-
-## IF-001 v2.0.4 Public Error and Metadata Contract
-
-IF-001 normalizes public protected-resource lookup failures to `404 RESOURCE_NOT_FOUND`, defines pre-governance throttling as `429 REQUEST_THROTTLED` with required delay-seconds `Retry-After`, defines unavailable system/node capacity as `503 CAPACITY_UNAVAILABLE`, and keeps governance quota or entitlement denial as an authoritative Governance Outcome. DS-003 metadata advertises immutable baseline and profile digests, schema and validator digests, active governance version, and optional public-safe deployment binding.
+| ID | Interface | Contract | Notes |
+|---|---|---|---|
+| IF-001 | AGCP HTTP Interface v2 | 2.1.x | IF-001 invokes Governance Realization through /commit-boundary/commit. The GRF independently establishes current commit eligibility, selects/applies the PEP Profile, constructs Enforcement Context, and mediates the PEP. Commit Successful is distinct from later asynchronous execution completion. Approval ingress uses server-side IAS qualification; no public IAS or PEP interface is standardized. |
+| IF-002 | AGCP Policy Evaluation Contract | 2.1.x | GDF/PDP deterministic evaluation contract. It may consume DS-053 qualified identity/authorization input but does not perform Governance Realization or PEP enforcement. |
+| IF-003 | AGCP Governance Observation Interface v1 | 2.1.x | Read-only observations distinguish IAS qualification, GDF/PDP, GRF, PEP enforcement, commitment, and post-commit execution outcome. |
+| IF-004 | AGCP Governance Management and Actuation Interface v1 | 2.1.x | Supporting production management surface. Request acceptance is distinct from authoritative realization; status readback is provided and EFFECTIVE requires ordinary authoritative governance mechanisms, evidence, and observation. |
+| IF-005 | AGCP Conformance Test Control Interface v1 | 2.1.x | Optional isolated test-only surface. AUTHORITY_FIXTURE may emulate identity/authorization source conditions; PEP_OUTCOME_FIXTURE applies only at enforcement. It cannot inject GDF or GRF outcomes. |

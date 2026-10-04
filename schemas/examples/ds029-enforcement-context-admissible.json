@@ -229,7 +229,8 @@
     "qualified_evidence_used": true,
     "current_authority_rederived": true,
     "binding_validated": true,
-    "resulting_state_validated": true
+    "resulting_state_validated": true,
+    "current_identity_authorization_qualified": true
   },
   "enforcement_directive": {
     "directive": "PERMIT_BIND_IF_ALL_CURRENT_BINDINGS_MATCH",
@@ -358,5 +359,25 @@
     "governed_consequence_requires_pep_mediation": true,
     "context_may_support_permit_enforcement": true,
     "continuation_integrity_preserved_until_final_admissibility": true
+  },
+  "pep_profile_ref": {
+    "profile_id": "PEP-GENERIC-ACTION-ADAPTER",
+    "profile_version": "1.0.0",
+    "profile_digest": {
+      "algorithm": "SHA-256",
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  "grf_assembler": {
+    "principal": {
+      "principal_id": "grf-service",
+      "principal_type": "SERVICE"
+    },
+    "attributed_at": "2026-10-03T12:00:00Z"
+  },
+  "profile_mapping_id": "generic-action-map-v1",
+  "profile_mapping_digest": {
+    "algorithm": "SHA-256",
+    "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
   }
 }

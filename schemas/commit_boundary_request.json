@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/commit_boundary_request.json",
   "title": "Commit Boundary Request",
-  "description": "Canonical integrity-protected request for Commit Boundary processing. It presents the specific canonical proposal, decision, Execution Authorization, current Authority Re-Derivation, qualified state and evidence, Resulting-State Validation, Governance Binding Validation, composite-governance results when applicable, and complete DS-029 Enforcement Context to a specific Policy Enforcement Point.",
-  "$comment": "DS-018 carries the completed governance basis to the Commit Boundary. JSON Schema cannot compare arbitrary identifiers and digests across referenced objects; implementations must reject any semantic mismatch and fail closed.",
+  "description": "Canonical integrity-protected request that initiates Governance Realization / Commit Boundary processing for a previously authorized proposal. The caller supplies the proposal and Execution Authorization basis; the GRF independently establishes current authority, current qualified state/evidence, binding validity, PEP Profile selection, Enforcement Context, and enforcement readiness before invoking the PEP.",
+  "$comment": "DS-018 is the public GRF/commit-processing invocation contract. Client input cannot select an arbitrary PEP Profile or assert authoritative commitment-time state, authority, binding validation, or Enforcement Context.",
   "x-agcp-ds-id": "DS-018",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
@@ -35,7 +35,12 @@
       "NS-9.4-02",
       "NS-9.6A-03",
       "NS-9.6A-04",
-      "NS-9.6B-01"
+      "NS-9.6B-01",
+      "NS-9.1-03",
+      "NS-9.2-01",
+      "NS-9.2-02",
+      "NS-9.4-05",
+      "NS-9.4-06"
     ],
     "conformance_requirements": [
       "CR-019",
@@ -111,83 +116,6 @@
         }
       ]
     },
-    "authority_rederivation_result_ref": {
-      "allOf": [
-        {
-          "$ref": "authority_rederivation_result.json#/$defs/authority_rederivation_result_ref"
-        },
-        {
-          "properties": {
-            "outcome": {
-              "const": "AUTHORITY_ESTABLISHED"
-            }
-          },
-          "required": [
-            "outcome"
-          ]
-        }
-      ]
-    },
-    "state_qualification_result_ref": {
-      "allOf": [
-        {
-          "$ref": "state_qualification_result.json#/$defs/state_qualification_result_ref"
-        },
-        {
-          "properties": {
-            "outcome": {
-              "const": "QUALIFIED"
-            }
-          },
-          "required": [
-            "outcome"
-          ]
-        }
-      ]
-    },
-    "qualified_evidence_refs": {
-      "type": "array",
-      "items": {
-        "$ref": "evidence_qualification_result.json#/$defs/qualified_evidence_ref"
-      },
-      "minItems": 1,
-      "maxItems": 512,
-      "uniqueItems": true
-    },
-    "resulting_state_validation_result_ref": {
-      "allOf": [
-        {
-          "$ref": "resulting_state_validation_result.json#/$defs/resulting_state_validation_result_ref"
-        },
-        {
-          "properties": {
-            "outcome": {
-              "const": "VALID"
-            }
-          },
-          "required": [
-            "outcome"
-          ]
-        }
-      ]
-    },
-    "governance_binding_validation_result_ref": {
-      "allOf": [
-        {
-          "$ref": "governance_binding_validation_result.json#/$defs/governance_binding_validation_result_ref"
-        },
-        {
-          "properties": {
-            "outcome": {
-              "const": "VALID"
-            }
-          },
-          "required": [
-            "outcome"
-          ]
-        }
-      ]
-    },
     "transition_mode": {
       "type": "string",
       "enum": [
@@ -205,17 +133,11 @@
     "deterministic_adjudication_result_ref": {
       "$ref": "deterministic_adjudication_result.json#/$defs/deterministic_adjudication_result_ref"
     },
-    "enforcement_context": {
-      "$ref": "enforcement_context.json"
-    },
     "action_representation_digest": {
       "$ref": "common.json#/$defs/content_digest"
     },
     "request_timestamp": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
-    },
-    "policy_enforcement_point_id": {
-      "$ref": "common.json#/$defs/policy_enforcement_point_id"
     },
     "request_sequence": {
       "$ref": "common.json#/$defs/sequence_number"
@@ -246,6 +168,26 @@
     },
     "continuation_integrity_result_ref": {
       "$ref": "continuation_integrity_result.json#/$defs/continuation_integrity_result_ref"
+    },
+    "client_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024
+      },
+      "uniqueItems": true,
+      "maxItems": 128,
+      "description": "Optional non-authoritative context references supplied by the caller. The GRF SHALL independently establish all commitment-sensitive current authority, state, evidence, binding, PEP Profile selection, and Enforcement Context."
+    },
+    "identity_authorization_qualification_hint_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "uniqueItems": true,
+      "maxItems": 64,
+      "description": "Optional references for correlation only. The GRF SHALL re-resolve or validate commitment-sensitive IAS-qualified authority according to the controlling profile."
     }
   },
   "required": [
@@ -258,16 +200,9 @@
     "target_ref",
     "governance_decision_ref",
     "execution_authorization_ref",
-    "authority_rederivation_result_ref",
-    "state_qualification_result_ref",
-    "qualified_evidence_refs",
-    "resulting_state_validation_result_ref",
-    "governance_binding_validation_result_ref",
     "transition_mode",
-    "enforcement_context",
     "action_representation_digest",
     "request_timestamp",
-    "policy_enforcement_point_id",
     "request_sequence",
     "request_attribution",
     "request_digest",
@@ -413,17 +348,13 @@
         "tenant_id": {
           "$ref": "common.json#/$defs/tenant_id"
         },
-        "policy_enforcement_point_id": {
-          "$ref": "common.json#/$defs/policy_enforcement_point_id"
-        },
         "request_timestamp": {
           "$ref": "common.json#/$defs/timestamp_rfc3339"
         }
       },
       "required": [
         "commit_boundary_request_id",
-        "request_digest",
-        "policy_enforcement_point_id"
+        "request_digest"
       ]
     },
     "semantic_assertions": {
@@ -439,9 +370,6 @@
         "all_references_are_bound_to_same_tenant": {
           "const": true
         },
-        "enforcement_context_matches_request": {
-          "const": true
-        },
         "request_does_not_itself_commit_transition": {
           "const": true
         },
@@ -450,16 +378,23 @@
         },
         "continuation_integrity_preserved_until_bind_time": {
           "const": true
+        },
+        "grf_independently_establishes_current_commit_basis": {
+          "const": true
+        },
+        "caller_cannot_select_arbitrary_pep_profile": {
+          "const": true
         }
       },
       "required": [
         "all_references_are_bound_to_same_proposal",
         "all_references_are_bound_to_same_target",
         "all_references_are_bound_to_same_tenant",
-        "enforcement_context_matches_request",
         "request_does_not_itself_commit_transition",
         "mismatch_requires_fail_closed",
-        "continuation_integrity_preserved_until_bind_time"
+        "continuation_integrity_preserved_until_bind_time",
+        "grf_independently_establishes_current_commit_basis",
+        "caller_cannot_select_arbitrary_pep_profile"
       ]
     }
   }

@@ -2,46 +2,16 @@
 
 **Status:** Informational human-readable mirror  
 **Authoritative executable source:** `AGCP-Conformance-Harness-Spec.yml`  
-**Controlled request-parameter validation:** `AGCP-harness-request-parameter-validation.json`  
-**Synchronized vector count:** 54
-
----
+**Synchronized vector count:** 71  
+**Synchronization:** `AGCP-v2.1.x-HARNESS-VECTOR-CHECK-SYNC-2026-10-03`
 
 ## Purpose
 
-This document is the human-readable rendering of the executable AGCP conformance vector catalog.
-It SHALL contain exactly the same vector identifiers as `AGCP-Conformance-Harness-Spec.yml` and
-SHALL NOT define independent vectors, aliases, or alternate meanings for an executable vector ID.
+This document is the human-readable rendering of the executable AGCP conformance vector catalog. It contains the same vector identifiers as the YAML harness specification. Harness vectors provide executable support for Formal Test Cases and do not create independent normative requirements.
 
-The authoritative conformance traceability chain remains:
+## Development status
 
-```text
-Published AGCP Runtime Governance Conformance Requirements (CRs)
-        +
-AGCP Core Specification
-        +
-Applicable adopted normative Companion Specification obligations
-        |
-        | mapped in the authoritative RTM using Core-derived
-        | Normative Statement (NS) identifiers
-        v
-Conformance Test Case (TC)
-        v
-Harness Test Vector
-```
-
-Harness vectors provide executable realization and do not create independent normative requirements.
-
----
-
-## Catalog synchronization rule
-
-- The YAML harness specification is the authoritative executable catalog.
-- This Markdown file is generated or reviewed against that YAML catalog.
-- Vector identifier sets, names, requests, setup conditions, captures, and expected outcomes must remain synchronized.
-- Catalog validation fails if either file contains an identifier absent from the other.
-- Every primary request and every HTTP setup prestep SHALL supply all path, query, and header parameters required by `../api/AGCP-HTTP-Contract.yaml`; the controlled result is recorded in `AGCP-harness-request-parameter-validation.json`.
-- Governance Approval vectors that exercise semantic cryptographic failure SHALL remain structurally valid under DS-045 `GovernanceApprovalSubmission`. After schema validation, the harness SHALL independently verify claimant provenance, authenticated identity binding, key binding, and submission-digest binding. DS-026 is created or qualified only after those checks and SHALL never be supplied as request content.
+The harness and injection inventory remains under active development. Standardized IF-005 controls and the implementation-specific hooks represented here are the currently identified mechanisms needed to exercise the Formal Test Cases; additional internal test points may be identified as the reference implementation and negative-test corpus mature.
 
 ## Complete vector index
 
@@ -59,7 +29,7 @@ Harness vectors provide executable realization and do not create independent nor
 | `TV-GET-001` | Get authorized Proposal View returns externally observable governance state and never SUBMITTED |
 | `TV-GET-002` | Pre-decision proposal state is not externally observable |
 | `TV-GAPP-001` | Partial Governance Approval quorum -> Pending Human Review outcome remains |
-| `TV-GAPP-002` | Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum -> Execution Authorization available |
+| `TV-GAPP-002` | Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum |
 | `TV-GAPP-003` | Expired Governance Approval Submission -> GOVERNANCE_APPROVAL_EXPIRED |
 | `TV-GAPP-004` | Schema-valid Governance Approval Submission with invalid provenance signature -> GOVERNANCE_APPROVAL_INVALID |
 | `TV-COMMIT-001` | Commit Boundary succeeds with valid Execution Authorization |
@@ -101,14 +71,29 @@ Harness vectors provide executable realization and do not create independent nor
 | `TV-GACT-001` | Approved and validated governance package activates atomically with evidence, lineage, and Governance Version establishment |
 | `TV-GACT-002` | Injected member-activation failure prevents partial activation and preserves the prior authoritative version |
 | `TV-GROLL-001` | Governed rollback restores the prior Governance Version atomically and preserves evidence and lineage |
+| `TV-IAS-001` | Authoritative IAS qualification yields DS-053 QUALIFIED without granting execution authority |
+| `TV-IAS-002` | Claimant-supplied role or entitlement cannot override authoritative IAS qualification |
+| `TV-IAS-003` | Authoritative IAS source unavailable fails closed and produces DS-053 SOURCE_UNAVAILABLE |
+| `TV-IAS-004` | Account disablement or revocation after authorization is detected during current authority re-derivation |
+| `TV-IAS-005` | IAS-qualified entitlement in one governance domain does not establish authority in another domain |
+| `TV-GRF-001` | GRF independently establishes current commit eligibility and assembles Enforcement Context |
+| `TV-GRF-002` | Current authority change after Execution Authorization prevents commitment |
+| `TV-GRF-003` | Material current-state change causes governed GDF re-evaluation while preserving GDF/GRF responsibility separation |
+| `TV-GRF-004` | Composite transition fails current admissibility when any required participant loses authority |
+| `TV-PEP-001` | Supported PEP Profile faithfully maps the exact governed transition and PEP permits the bound consequence |
+| `TV-PEP-002` | Unsupported or non-faithful PEP Profile mapping fails closed with no governed effect |
+| `TV-PEP-003` | Enforcement Context tamper or substitution is rejected by the PEP |
+| `TV-PEP-004` | Governance Enforcement Binding mismatch is rejected before the governed consequence |
+| `TV-PEP-005` | Unqualified GRF-to-PEP caller identity is rejected even when the carried context is otherwise valid |
+| `TV-PEP-006` | Co-located GDF GRF and PEP still enforce logical binding and refusal semantics |
+| `TV-EXEC-001` | Successful commitment followed by asynchronous execution success remains COMMITTED until DS-052 success evidence |
+| `TV-EXEC-002` | Successful commitment followed by asynchronous execution failure records DS-052 failure without rewriting commit success |
 
----
-
-# Proposal Submission and Qualification
+## Vector definitions
 
 ## TV-PROP-001 — Submit qualified proposal -> Authorized for Commit Boundary Processing
 
-### Traceability and applicability
+### Mapping
 
 ```yaml
 profiles:
@@ -264,16 +249,16 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-eb70fac9b793fa04ef47c0ed
+      nonce: nonce-1c7fd9ecb3442eaad711ce8f
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MjYx
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDM
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-001
   extensions:
     x-agcp.test-vector: P-PROP-001
 ```
 
-### Captured values
+### Capture
 
 ```yaml
 save_proposal_id_as: P_PROP_001
@@ -505,16 +490,16 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-399b6f11932336f6b89ce5fb
+      nonce: nonce-b7128b670f061958067edc2c
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246NTAx
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDQ
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-002
   extensions:
     x-agcp.test-vector: P-PROP-002
 ```
 
-### Captured values
+### Capture
 
 ```yaml
 save_proposal_id_as: P_PROP_002
@@ -722,16 +707,16 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-aa317a60af96d8e7949aa7bb
+      nonce: nonce-46e47ce4703e987255c1acea
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246NzE3
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDU
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-003
   extensions:
     x-agcp.test-vector: P-PROP-003
 ```
 
-### Captured values
+### Capture
 
 ```yaml
 save_proposal_id_as: P_PROP_003
@@ -986,9 +971,9 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-f279a575002ab1fc85c23d2d
+      nonce: nonce-84c31c937c6ceef2f1d35444
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..SU5WQUxJRDptYXJrZG93bjo5ODA
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..SU5WQUxJRDpoYXJuZXNzLTAwNg
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-005
   extensions:
@@ -1163,9 +1148,9 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-658cca408c30c0a95b3e250b
+      nonce: nonce-a9847604beab861f76f2a8ed
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTE1Ng
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDc
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-006
   extensions:
@@ -1342,9 +1327,9 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-4091d97cfc6e7eff4afd8846
+      nonce: nonce-e57dc8795299cf25277b0f5f
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTMzNA
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDg
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-007
   extensions:
@@ -1533,9 +1518,9 @@ presteps:
         kid: kid-test
         alg: Ed25519
         signed_at: '2026-07-30T16:00:00Z'
-        nonce: nonce-f3b876e7aa1287698ce54b8f
+        nonce: nonce-ff9df5d0958e32bdc9b3fda8
         scope: agcp.http.request.body
-        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTUyNA
+        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMDk
     submitted_at: '2026-07-30T16:00:00Z'
     client_request_id: CR-TV-PROP-008
     extensions:
@@ -1668,9 +1653,9 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-bd8d570da8adb54118160998
+      nonce: nonce-d34225e1706b92a6dd36ffe0
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTY1OA
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTA
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-PROP-008
   extensions:
@@ -1816,9 +1801,9 @@ presteps:
         kid: kid-test
         alg: Ed25519
         signed_at: '2026-07-30T16:00:00Z'
-        nonce: nonce-f4e4e7a3c58093add14be947
+        nonce: nonce-31cb613bec5a1815dee0e9a9
         scope: agcp.http.request.body
-        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTgwNQ
+        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTE
     submitted_at: '2026-07-30T16:00:00Z'
     client_request_id: CR-PROP-009-A
     extensions:
@@ -1951,9 +1936,9 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-5baab0b10420931fc987f9b7
+      nonce: nonce-52117d00f1a15ca78eadc3b6
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MTkzOQ
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTI
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-PROP-009-B
   extensions:
@@ -1971,8 +1956,6 @@ ledger_no_append: true
 ```
 
 ---
-
-# Proposal Retrieval and External State
 
 ## TV-GET-001 — Get authorized Proposal View returns externally observable governance state and never SUBMITTED
 
@@ -2046,14 +2029,11 @@ http:
     governance_evidence_generated: false
     outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
     transport_disposition: NOT_FOUND
+    message: The requested resource was not found.
 ledger_no_append: true
 ```
 
 ---
-
-# Governance Approval and Adjudication
-
-Controlled command/record separation vectors: `conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json`.
 
 ## TV-GAPP-001 — Partial Governance Approval quorum -> Pending Human Review outcome remains
 
@@ -2182,9 +2162,9 @@ presteps:
         kid: kid-test
         alg: Ed25519
         signed_at: '2026-07-30T16:00:00Z'
-        nonce: nonce-0201158b154ebd4e78837f76
+        nonce: nonce-c3bc330684a91dbb38432eda
         scope: agcp.http.request.body
-        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MjE2Mg
+        signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTM
     submitted_at: '2026-07-30T16:00:00Z'
     client_request_id: CR-TV-GAPP-001
     extensions:
@@ -2261,7 +2241,7 @@ schema: proposal_view.json
 
 ---
 
-## TV-GAPP-002 — Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum -> Execution Authorization available
+## TV-GAPP-002 — Valid Governance Approval Submission is qualified into an authoritative artifact and completes quorum
 
 ### Initial conditions and setup
 
@@ -2289,7 +2269,7 @@ body:
     target.governance_domain_id: domain-primary
 ```
 
-### Captured values
+### Capture
 
 ```yaml
 save_authorization_id_as: EA_GAPP_002
@@ -2434,15 +2414,15 @@ body:
 
 ```yaml
 request_validation:
-  governance_approval_request: PASS
-  governance_approval_artifact_ds026: PASS
+  governance_approval_submission_ds045: PASS
+  claimant_server_derived_fields_absent: true
 semantic_verification:
   cryptographic_verifier_invoked: true
   signature_valid: false
   key_binding_valid: false
-  artifact_digest_binding_valid: false
   outcome: FAILED
   rejection_code: GOVERNANCE_APPROVAL_INVALID
+  submission_digest_binding_valid: false
 http:
   status: 422
   body:
@@ -2452,9 +2432,17 @@ ledger_no_append: true
 
 ---
 
-# Governance Realization and Commit Boundary
-
 ## TV-COMMIT-001 — Commit Boundary succeeds with valid Execution Authorization
+
+### Mapping
+
+```yaml
+concepts:
+- Governance Realization Function
+- Current Commit-Bound Admissibility
+- PEP Profile
+- Policy Enforcement Point
+```
 
 ### Initial conditions and setup
 
@@ -2489,17 +2477,9 @@ body:
     action_id: A_PROP_001
     governance_decision_ref.governance_decision_id: GD_PROP_001
     execution_authorization_ref.authorization_id: ${EA_PROP_001}
-    enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
-    enforcement_context.proposal_identity.tenant_id: T1
-    enforcement_context.proposal_identity.governance_domain_id: domain-primary
-    enforcement_context.action_id: A_PROP_001
-    enforcement_context.tenant_id: T1
-    enforcement_context.governance_domain_id: domain-primary
-    enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
-    enforcement_context.execution_authorization_ref.authorization_id: ${EA_PROP_001}
 ```
 
-### Captured values
+### Capture
 
 ```yaml
 save_commit_boundary_ref_as: CB_COMMIT_001
@@ -2540,11 +2520,29 @@ governance_evidence:
   requires_ledger_reference: true
 schema_fixture: ../schemas/examples/ds019-commit-boundary-result-success.json
 schema: commit_boundary_result.json
+governance_realization:
+  caller_supplied_enforcement_context_authoritative: false
+  current_commit_eligibility_independently_established: true
+  enforcement_context_assembled_by_grf_when_eligible: true
+pep_semantics:
+  pep_profile_selected_by_grf: true
+  governed_consequence_requires_pep_mediation: true
+  no_bypass_effect: true
 ```
 
 ---
 
 ## TV-COMMIT-002 — Commit Boundary while governed approval remains incomplete -> ACTION_NOT_AUTHORIZED
+
+### Mapping
+
+```yaml
+concepts:
+- Governance Realization Function
+- Current Commit-Bound Admissibility
+- PEP Profile
+- Policy Enforcement Point
+```
 
 ### Initial conditions and setup
 
@@ -2573,14 +2571,6 @@ body:
     action_id: A_PENDING
     governance_decision_ref.governance_decision_id: governance-decision-pending
     execution_authorization_ref.authorization_id: EA_SHOULD_NOT_EXIST
-    enforcement_context.proposal_identity.proposal_id: ${P_GAPP_001}
-    enforcement_context.proposal_identity.tenant_id: T1
-    enforcement_context.proposal_identity.governance_domain_id: domain-primary
-    enforcement_context.action_id: A_PENDING
-    enforcement_context.tenant_id: T1
-    enforcement_context.governance_domain_id: domain-primary
-    enforcement_context.governance_decision_ref.governance_decision_id: governance-decision-pending
-    enforcement_context.execution_authorization_ref.authorization_id: EA_SHOULD_NOT_EXIST
 ```
 
 ### Expected result
@@ -2591,11 +2581,29 @@ http:
   body:
     rejection_code: ACTION_NOT_AUTHORIZED
 ledger_no_append: true
+governance_realization:
+  caller_supplied_enforcement_context_authoritative: false
+  current_commit_eligibility_independently_established: false
+  enforcement_context_assembled_by_grf_when_eligible: false
+pep_semantics:
+  pep_profile_selected_by_grf: true
+  governed_consequence_requires_pep_mediation: true
+  no_bypass_effect: true
 ```
 
 ---
 
 ## TV-COMMIT-003 — Commit Boundary with mismatched authorization -> ACTION_NOT_AUTHORIZED
+
+### Mapping
+
+```yaml
+concepts:
+- Governance Realization Function
+- Current Commit-Bound Admissibility
+- PEP Profile
+- Policy Enforcement Point
+```
 
 ### Initial conditions and setup
 
@@ -2624,14 +2632,6 @@ body:
     action_id: A_PROP_001
     governance_decision_ref.governance_decision_id: GD_PROP_001
     execution_authorization_ref.authorization_id: EA_BAD
-    enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
-    enforcement_context.proposal_identity.tenant_id: T1
-    enforcement_context.proposal_identity.governance_domain_id: domain-primary
-    enforcement_context.action_id: A_PROP_001
-    enforcement_context.tenant_id: T1
-    enforcement_context.governance_domain_id: domain-primary
-    enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
-    enforcement_context.execution_authorization_ref.authorization_id: EA_BAD
 ```
 
 ### Expected result
@@ -2643,11 +2643,29 @@ http:
     rejection_code: ACTION_NOT_AUTHORIZED
 ledger_no_append: true
 governance_refusal_fixture: ../schemas/examples/ds019-commit-boundary-result-refusal.json
+governance_realization:
+  caller_supplied_enforcement_context_authoritative: false
+  current_commit_eligibility_independently_established: false
+  enforcement_context_assembled_by_grf_when_eligible: false
+pep_semantics:
+  pep_profile_selected_by_grf: true
+  governed_consequence_requires_pep_mediation: true
+  no_bypass_effect: true
 ```
 
 ---
 
 ## TV-COMMIT-004 — Commit replay after Commit Successful -> ACTION_NOT_AUTHORIZED
+
+### Mapping
+
+```yaml
+concepts:
+- Governance Realization Function
+- Current Commit-Bound Admissibility
+- PEP Profile
+- Policy Enforcement Point
+```
 
 ### Initial conditions and setup
 
@@ -2677,14 +2695,6 @@ body:
     action_id: A_PROP_001
     governance_decision_ref.governance_decision_id: GD_PROP_001
     execution_authorization_ref.authorization_id: ${EA_PROP_001}
-    enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
-    enforcement_context.proposal_identity.tenant_id: T1
-    enforcement_context.proposal_identity.governance_domain_id: domain-primary
-    enforcement_context.action_id: A_PROP_001
-    enforcement_context.tenant_id: T1
-    enforcement_context.governance_domain_id: domain-primary
-    enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
-    enforcement_context.execution_authorization_ref.authorization_id: ${EA_PROP_001}
 ```
 
 ### Expected result
@@ -2695,11 +2705,29 @@ http:
   body:
     rejection_code: ACTION_NOT_AUTHORIZED
 ledger_no_append: true
+governance_realization:
+  caller_supplied_enforcement_context_authoritative: false
+  current_commit_eligibility_independently_established: false
+  enforcement_context_assembled_by_grf_when_eligible: false
+pep_semantics:
+  pep_profile_selected_by_grf: true
+  governed_consequence_requires_pep_mediation: true
+  no_bypass_effect: true
 ```
 
 ---
 
 ## TV-COMMIT-005 — Commit Boundary when tenant not ACTIVE -> TENANT_STATE_INVALID
+
+### Mapping
+
+```yaml
+concepts:
+- Governance Realization Function
+- Current Commit-Bound Admissibility
+- PEP Profile
+- Policy Enforcement Point
+```
 
 ### Initial conditions and setup
 
@@ -2731,14 +2759,6 @@ body:
     action_id: A_PROP_001
     governance_decision_ref.governance_decision_id: GD_PROP_001
     execution_authorization_ref.authorization_id: ${EA_PROP_001}
-    enforcement_context.proposal_identity.proposal_id: ${P_PROP_001}
-    enforcement_context.proposal_identity.tenant_id: T1
-    enforcement_context.proposal_identity.governance_domain_id: domain-primary
-    enforcement_context.action_id: A_PROP_001
-    enforcement_context.tenant_id: T1
-    enforcement_context.governance_domain_id: domain-primary
-    enforcement_context.governance_decision_ref.governance_decision_id: GD_PROP_001
-    enforcement_context.execution_authorization_ref.authorization_id: ${EA_PROP_001}
 ```
 
 ### Expected result
@@ -2749,11 +2769,17 @@ http:
   body:
     rejection_code: TENANT_STATE_INVALID
 ledger_no_append: true
+governance_realization:
+  caller_supplied_enforcement_context_authoritative: false
+  current_commit_eligibility_independently_established: false
+  enforcement_context_assembled_by_grf_when_eligible: false
+pep_semantics:
+  pep_profile_selected_by_grf: true
+  governed_consequence_requires_pep_mediation: true
+  no_bypass_effect: true
 ```
 
 ---
-
-# Governance Evidence
 
 ## TV-EVID-001 — Governance Evidence view validates DS-040 Governance Ledger Event references
 
@@ -2803,8 +2829,6 @@ ledger_no_append: true
 ```
 
 ---
-
-# Canonical State Resolution
 
 ## TV-STATE-001 — Canonical State resolution from qualified authoritative sources succeeds
 
@@ -2872,11 +2896,9 @@ timestamp_or_storage_order_must_not_override_sequence_order: true
 
 ---
 
-# Cross-Tenant Isolation
-
 ## TV-XTEN-SETUP — Setup tenant T2 proposal for cross-tenant tests
 
-### Traceability and applicability
+### Mapping
 
 ```yaml
 profiles:
@@ -3030,16 +3052,16 @@ body:
       kid: kid-test
       alg: Ed25519
       signed_at: '2026-07-30T16:00:00Z'
-      nonce: nonce-4e8de49a3d3c23242c46c060
+      nonce: nonce-a8ee94d2eddb2e4605430961
       scope: agcp.http.request.body
-      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6bWFya2Rvd246MzA3NA
+      signature: eyJhbGciOiJFZDI1NTE5Iiwia2lkIjoia2lkLXRlc3QiLCJ0eXAiOiJBR0NQK1BST1YifQ..VkFMSUQ6aGFybmVzcy0wMTQ
   submitted_at: '2026-07-30T16:00:00Z'
   client_request_id: CR-TV-XTEN-SETUP
   extensions:
     x-agcp.test-vector: TV-XTEN-SETUP
 ```
 
-### Captured values
+### Capture
 
 ```yaml
 save_proposal_id_as: P_T2_001
@@ -3101,6 +3123,7 @@ http:
         governance_evidence_generated: false
         outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
         transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
 ledger_no_append: true
 ```
 
@@ -3152,6 +3175,7 @@ http:
         governance_evidence_generated: false
         outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
         transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
 ledger_no_append: true
 ```
 
@@ -3186,14 +3210,6 @@ body:
     action_id: A_T2_001
     governance_decision_ref.governance_decision_id: GD_T2_001
     execution_authorization_ref.authorization_id: ${EA_T2_001}
-    enforcement_context.proposal_identity.proposal_id: ${P_T2_001}
-    enforcement_context.proposal_identity.tenant_id: T2
-    enforcement_context.proposal_identity.governance_domain_id: domain-secondary
-    enforcement_context.action_id: A_T2_001
-    enforcement_context.tenant_id: T2
-    enforcement_context.governance_domain_id: domain-secondary
-    enforcement_context.governance_decision_ref.governance_decision_id: GD_T2_001
-    enforcement_context.execution_authorization_ref.authorization_id: ${EA_T2_001}
 ```
 
 ### Expected result
@@ -3214,6 +3230,7 @@ http:
         governance_evidence_generated: false
         outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
         transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
 ledger_no_append: true
 ```
 
@@ -3256,12 +3273,24 @@ http:
         governance_evidence_generated: false
         outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
         transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
 ledger_no_append: true
 ```
 
 ---
 
 ## TV-META-001 — Implementation metadata advertises the controlled IF-001 and conformance surface
+
+### Mapping
+
+```yaml
+profiles:
+- L1
+concepts:
+- Implementation Metadata
+- HTTP Interface Contract
+- Conformance Discovery
+```
 
 ### Initial conditions and setup
 
@@ -3295,6 +3324,17 @@ schema_fixture: ../schemas/examples/ds003-implementation-metadata-response.json
 ---
 
 ## TV-EAUTH-001 — Retrieve an available Execution Authorization view
+
+### Mapping
+
+```yaml
+profiles:
+- L1
+- L4
+concepts:
+- Execution Authorization
+- External Governance-State Retrieval
+```
 
 ### Initial conditions and setup
 
@@ -3359,6 +3399,7 @@ http:
     governance_evidence_generated: false
     outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
     transport_disposition: NOT_FOUND
+    message: The requested resource was not found.
 ledger_no_append: true
 ```
 
@@ -3401,6 +3442,7 @@ http:
         governance_evidence_generated: false
         outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
         transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
 ledger_no_append: true
 ```
 
@@ -3919,6 +3961,7 @@ http:
     governance_evidence_generated: false
     outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
     transport_disposition: NOT_FOUND
+    message: The requested resource was not found.
 ledger_no_append: true
 ```
 
@@ -3980,12 +4023,28 @@ http:
         governance_evidence_generated: false
         outcome_classification: TRANSPORT_OR_APPLICATION_ERROR
         transport_disposition: NOT_FOUND
+        message: The requested resource was not found.
 ledger_no_append: true
 ```
 
 ---
 
 ## TV-GCFG-001 — Validate active Governance Configuration, controlled change requirements, and risk-based re-evaluation configuration
+
+### Mapping
+
+```yaml
+profiles:
+- L2
+- L3
+- L4
+- L5
+concepts:
+- Governance Configuration
+- Governance Self-Modification Isolation
+- Risk-Based Re-Evaluation
+- Governance Evidence
+```
 
 ### Initial conditions and setup
 
@@ -4044,6 +4103,19 @@ governance_evidence_refs: __NON_EMPTY__
 ---
 
 ## TV-GCOMP-001 — Equivalent qualified governance inputs compile deterministically to the same machine-evaluable artifact and lineage
+
+### Mapping
+
+```yaml
+profiles:
+- L2
+- L3
+concepts:
+- Governance Compilation
+- Deterministic Governance
+- Governance Artifact Lineage
+- Governance Evidence
+```
 
 ### Initial conditions and setup
 
@@ -4104,6 +4176,18 @@ schema_fixture: ../schemas/examples/ds042-compiled-governance-artifact-validated
 
 ## TV-GCONST-001 — Constitutional validation preserves protected constraints and permits activation eligibility
 
+### Mapping
+
+```yaml
+profiles:
+- L3
+- L4
+concepts:
+- Constitutional Validation
+- Constitutional Constraint Preservation
+- Governance Self-Protection
+```
+
 ### Initial conditions and setup
 
 ```yaml
@@ -4129,7 +4213,7 @@ validation_scope:
 schema_validation:
   compiled_governance_artifact.json: PASS
 constitutional_validation_result:
-  outcome: PASSED
+  outcome: PASS
   findings: []
 semantic_preservation:
   protected_constraints_non_derogable: true
@@ -4149,6 +4233,19 @@ governance_evidence_refs: __NON_EMPTY__
 ---
 
 ## TV-GCONST-002 — Attempted weakening of a protected constitutional constraint fails validation and cannot become activation-eligible
+
+### Mapping
+
+```yaml
+profiles:
+- L3
+- L4
+concepts:
+- Constitutional Validation
+- Constitutional Constraint Preservation
+- Governance Self-Protection
+- Structural Refusal
+```
 
 ### Initial conditions and setup
 
@@ -4193,6 +4290,18 @@ governance_evidence:
 
 ## TV-GOMIT-001 — Material governance omission is detected before activation eligibility
 
+### Mapping
+
+```yaml
+profiles:
+- L3
+- L4
+concepts:
+- Governance Omission Analysis
+- Constitutional Validation
+- Governance Self-Protection
+```
+
 ### Initial conditions and setup
 
 ```yaml
@@ -4234,6 +4343,18 @@ governance_evidence:
 ---
 
 ## TV-GSELF-001 — A governed system cannot directly modify its active admissibility conditions
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+concepts:
+- Governance Self-Protection
+- Governance Self-Modification Isolation
+- Controlled Governance Activation
+- Structural Refusal
+```
 
 ### Initial conditions and setup
 
@@ -4277,6 +4398,21 @@ governance_evidence:
 ---
 
 ## TV-GACT-001 — Approved and validated governance package activates atomically with evidence, lineage, and Governance Version establishment
+
+### Mapping
+
+```yaml
+profiles:
+- L2
+- L3
+- L4
+concepts:
+- Controlled Governance Activation
+- Atomic Governance Activation
+- Governance Version
+- Governance Evidence
+- Governance Artifact Lineage
+```
 
 ### Initial conditions and setup
 
@@ -4337,6 +4473,19 @@ schema_fixture: ../schemas/examples/ds043-controlled-governance-activation-activ
 
 ## TV-GACT-002 — Injected member-activation failure prevents partial activation and preserves the prior authoritative version
 
+### Mapping
+
+```yaml
+profiles:
+- L3
+- L4
+concepts:
+- Atomic Governance Activation
+- Governance Self-Protection
+- Prior-Version Preservation
+- Structural Refusal
+```
+
 ### Initial conditions and setup
 
 ```yaml
@@ -4385,6 +4534,20 @@ governance_ledger_event:
 
 ## TV-GROLL-001 — Governed rollback restores the prior Governance Version atomically and preserves evidence and lineage
 
+### Mapping
+
+```yaml
+profiles:
+- L3
+- L4
+concepts:
+- Governed Rollback
+- Atomic Governance Activation
+- Governance Version
+- Governance Evidence
+- Governance Artifact Lineage
+```
+
 ### Initial conditions and setup
 
 ```yaml
@@ -4430,28 +4593,892 @@ deterministic_replay_supported: true
 
 ---
 
+## TV-IAS-001 — Authoritative IAS qualification yields DS-053 QUALIFIED without granting execution authority
+
+### Mapping
+
+```yaml
+profiles:
+- L2
+- L3
+- L4
+- L5
+concepts:
+- Identity and Authorization Store Profile
+- Identity and Authorization Qualification
+- DS-053
+- Governance Decision Function
+```
+
+### Initial conditions and setup
+
+```yaml
+authenticated_subject: user-001
+test_controls:
+- control_type: AUTHORITY_FIXTURE
+  account_status: ACTIVE
+  authority_status: VALID
+  roles:
+  - governance-reviewer
+  entitlements:
+  - approve-governed-action
+  freshness_status: CURRENT
+  revocation_status: CLEAR
+fixture: ../schemas/examples/ds053-identity-authorization-qualified.json
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: qualify_identity_authorization
+ias_profile: IAS-GENERIC-ENTERPRISE
+authenticated_subject: user-001
+qualification_stage: HUMAN_REVIEW
+```
+
+### Expected result
+
+```yaml
+schema: identity_authorization_qualification_result.json
+schema_fixture: ../schemas/examples/ds053-identity-authorization-qualified.json
+qualification_outcome: QUALIFIED
+claimant_assertions_are_non_authoritative: true
+identity_authorization_is_not_execution_authorization: true
+qualification_does_not_itself_produce_governance_decision: true
+observation_points:
+- IDENTITY_AUTHORIZATION_QUALIFICATION
+```
+
+---
+
+## TV-IAS-002 — Claimant-supplied role or entitlement cannot override authoritative IAS qualification
+
+### Mapping
+
+```yaml
+profiles:
+- L2
+- L3
+- L4
+- L5
+concepts:
+- Identity and Authorization Qualification
+- Claimant Assertions
+- Authority Qualification
+```
+
+### Initial conditions and setup
+
+```yaml
+authenticated_subject: user-001
+claimant_assertions:
+  roles:
+  - governance-reviewer
+  entitlements:
+  - approve-governed-action
+test_controls:
+- control_type: AUTHORITY_FIXTURE
+  account_status: ACTIVE
+  authority_status: VALID
+  roles:
+  - employee
+  entitlements: []
+  freshness_status: CURRENT
+  revocation_status: CLEAR
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: qualify_identity_authorization
+ias_profile: IAS-GENERIC-ENTERPRISE
+authenticated_subject: user-001
+qualification_stage: HUMAN_REVIEW
+```
+
+### Expected result
+
+```yaml
+schema: identity_authorization_qualification_result.json
+schema_fixture: ../schemas/examples/ds053-identity-authorization-not-qualified.json
+qualification_outcome: NOT_QUALIFIED
+claimant_role_or_entitlement_accepted_as_authoritative: false
+governance_permission_established_from_claim_only: false
+observation_points:
+- IDENTITY_AUTHORIZATION_QUALIFICATION
+- GOVERNANCE_DECISION
+```
+
+---
+
+## TV-IAS-003 — Authoritative IAS source unavailable fails closed and produces DS-053 SOURCE_UNAVAILABLE
+
+### Mapping
+
+```yaml
+profiles:
+- L2
+- L3
+- L4
+- L5
+concepts:
+- Identity and Authorization Qualification
+- Authoritative Source Failure
+- Fail Closed
+```
+
+### Initial conditions and setup
+
+```yaml
+authenticated_subject: user-001
+test_controls:
+- control_type: AUTHORITATIVE_SOURCE_FAILURE
+  source_class: AUTHORITY
+  failure_mode: UNAVAILABLE
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: qualify_identity_authorization
+ias_profile: IAS-GENERIC-ENTERPRISE
+authenticated_subject: user-001
+qualification_stage: HUMAN_REVIEW
+```
+
+### Expected result
+
+```yaml
+schema: identity_authorization_qualification_result.json
+schema_fixture: ../schemas/examples/ds053-identity-authorization-source-unavailable.json
+qualification_outcome: SOURCE_UNAVAILABLE
+positive_authority_inferred: false
+governed_consequence_permitted: false
+observation_points:
+- IDENTITY_AUTHORIZATION_QUALIFICATION
+- DERIVED_LIFECYCLE_STATE
+```
+
+---
+
+## TV-IAS-004 — Account disablement or revocation after authorization is detected during current authority re-derivation
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Identity and Authorization Qualification
+- Authority Re-Derivation
+- Governance Realization Function
+- Commit-Bound Admissibility
+```
+
+### Initial conditions and setup
+
+```yaml
+prior_execution_authorization: AVAILABLE
+test_controls:
+- control_type: AUTHORITY_FIXTURE
+  account_status: DISABLED
+  authority_status: REVOKED
+  revocation_status: REVOKED
+  freshness_status: CURRENT
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: perform_governance_realization
+proposal_id: P-IAS-004
+authorization_id: EA-IAS-004
+require_current_identity_authorization_qualification: true
+```
+
+### Expected result
+
+```yaml
+authority_rederivation:
+  outcome: AUTHORITY_NOT_ESTABLISHED
+  disposition: STRUCTURAL_REFUSAL_REQUIRED
+  identity_authorization_status: NOT_QUALIFIED
+commitment_permitted: false
+pep_invoked_for_governed_effect: false
+observation_points:
+- IDENTITY_AUTHORIZATION_QUALIFICATION
+- AUTHORITY_REDERIVATION
+- COMMIT_BOUND_ADMISSIBILITY
+- DERIVED_LIFECYCLE_STATE
+```
+
+---
+
+## TV-IAS-005 — IAS-qualified entitlement in one governance domain does not establish authority in another domain
+
+### Mapping
+
+```yaml
+profiles:
+- L5
+concepts:
+- Identity and Authorization Qualification
+- Cross-Domain Authority Isolation
+- Governance Domain
+```
+
+### Initial conditions and setup
+
+```yaml
+authenticated_subject: user-001
+test_controls:
+- control_type: AUTHORITY_FIXTURE
+  account_status: ACTIVE
+  authority_status: VALID
+  roles:
+  - operator
+  entitlements:
+  - approve-governed-action
+  freshness_status: CURRENT
+  revocation_status: CLEAR
+  scope:
+    tenant_id: T1
+    governance_domain_id: domain-primary
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: qualify_identity_authorization
+ias_profile: IAS-GENERIC-ENTERPRISE
+authenticated_subject: user-001
+requested_scope:
+  tenant_id: T1
+  governance_domain_id: domain-secondary
+```
+
+### Expected result
+
+```yaml
+qualification_outcome: NOT_QUALIFIED
+cross_domain_authority_inferred: false
+governed_consequence_permitted: false
+observation_points:
+- IDENTITY_AUTHORIZATION_QUALIFICATION
+- AUTHORITY_REDERIVATION
+```
+
+---
+
+## TV-GRF-001 — GRF independently establishes current commit eligibility and assembles Enforcement Context
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Governance Realization Function
+- Authority Re-Derivation
+- Commit-Bound Admissibility
+- Enforcement Context
+- PEP Profile
+```
+
+### Initial conditions and setup
+
+```yaml
+prior_governance_decision: Authorized
+prior_execution_authorization: AVAILABLE
+test_controls:
+- control_type: AUTHORITY_FIXTURE
+  account_status: ACTIVE
+  authority_status: VALID
+  freshness_status: CURRENT
+  revocation_status: CLEAR
+- control_type: CANONICAL_STATE_FIXTURE
+  state_ref: CURRENT_VALID
+- control_type: EVIDENCE_FIXTURE
+  qualification: QUALIFIED
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: perform_governance_realization
+proposal_id: P-GRF-001
+authorization_id: EA-GRF-001
+pep_profile: PEP-GENERIC-ACTION-ADAPTER
+```
+
+### Expected result
+
+```yaml
+authority_rederivation:
+  outcome: AUTHORITY_ESTABLISHED
+  disposition: ELIGIBLE_FOR_COMMIT_BOUND_ADMISSIBILITY
+caller_supplied_enforcement_context_authoritative: false
+enforcement_context_assembled_by_grf: true
+pep_profile_selected_by_grf: true
+commit_bound_admissibility: ADMISSIBLE
+observation_points:
+- AUTHORITY_REDERIVATION
+- GOVERNANCE_BINDING_VALIDATION
+- GOVERNANCE_REALIZATION
+- COMMIT_BOUND_ADMISSIBILITY
+```
+
+---
+
+## TV-GRF-002 — Current authority change after Execution Authorization prevents commitment
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Governance Realization Function
+- Authority Re-Derivation
+- Current Authority
+- Commit-Bound Admissibility
+```
+
+### Initial conditions and setup
+
+```yaml
+prior_governance_decision: Authorized
+prior_execution_authorization: AVAILABLE
+test_controls:
+- control_type: AUTHORITY_FIXTURE
+  authority_status: REVOKED
+  account_status: REVOKED
+  revocation_status: REVOKED
+  freshness_status: CURRENT
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: perform_governance_realization
+proposal_id: P-GRF-002
+authorization_id: EA-GRF-002
+```
+
+### Expected result
+
+```yaml
+authority_rederivation:
+  outcome: AUTHORITY_NOT_ESTABLISHED
+  disposition: STRUCTURAL_REFUSAL_REQUIRED
+commit_bound_admissibility: INADMISSIBLE
+pep_permit: false
+governed_consequence: false
+observation_points:
+- AUTHORITY_REDERIVATION
+- COMMIT_BOUND_ADMISSIBILITY
+- DERIVED_LIFECYCLE_STATE
+```
+
+---
+
+## TV-GRF-003 — Material current-state change causes governed GDF re-evaluation while preserving GDF/GRF responsibility separation
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Governance Decision Function
+- Governance Realization Function
+- Governed Re-Evaluation
+- Current Canonical State
+```
+
+### Initial conditions and setup
+
+```yaml
+prior_governance_decision: Authorized
+prior_execution_authorization: AVAILABLE
+test_controls:
+- control_type: CANONICAL_STATE_FIXTURE
+  state_ref: MATERIAL_CHANGE_AFTER_AUTHORIZATION
+- control_type: DEGRADATION_FIXTURE
+  degradation_status: DEGRADED
+  materiality: HIGH
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: perform_governance_realization
+proposal_id: P-GRF-003
+authorization_id: EA-GRF-003
+allow_gdf_reinvocation: true
+```
+
+### Expected result
+
+```yaml
+grf_detects_material_change: true
+grf_reinterprets_policy: false
+gdf_reinvoked: true
+new_governance_decision_attributable_to_gdf: true
+commitment_waits_for_governed_reevaluation: true
+observation_points:
+- CANONICAL_STATE_RESOLUTION
+- GOVERNANCE_DEGRADATION
+- GOVERNANCE_REALIZATION
+- GOVERNANCE_DECISION
+- COMMIT_BOUND_ADMISSIBILITY
+```
+
+---
+
+## TV-GRF-004 — Composite transition fails current admissibility when any required participant loses authority
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Governance Realization Function
+- Composite Governance
+- Participant Authority
+- Commit-Bound Admissibility
+```
+
+### Initial conditions and setup
+
+```yaml
+test_controls:
+- control_type: COMPOSITE_GOVERNANCE_FIXTURE
+  dependency_status: CHANGED
+- control_type: AUTHORITY_FIXTURE
+  authority_status: REVOKED
+  account_status: REVOKED
+  revocation_status: REVOKED
+composite_participants:
+- A
+- B
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: perform_composite_governance_realization
+bind_set_id: BINDSET-GRF-004
+require_current_cba_for_each_participant: true
+```
+
+### Expected result
+
+```yaml
+participant_A_current_eligibility: ELIGIBLE
+participant_B_current_eligibility: INELIGIBLE
+complete_bind_permitted: false
+partial_bind_permitted_only_if_governance_explicitly_authorizes_subset: true
+observation_points:
+- AUTHORITY_REDERIVATION
+- GOVERNANCE_BINDING_VALIDATION
+- COMMIT_BOUND_ADMISSIBILITY
+- GOVERNANCE_REALIZATION
+```
+
+---
+
+## TV-PEP-001 — Supported PEP Profile faithfully maps the exact governed transition and PEP permits the bound consequence
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- PEP Profile
+- Enforcement Context
+- Governance Enforcement Binding
+- Policy Enforcement Point
+```
+
+### Initial conditions and setup
+
+```yaml
+grf_current_eligibility: ADMISSIBLE
+enforcement_context_fixture: ../schemas/examples/ds029-enforcement-context-admissible.json
+pep_profile: PEP-GENERIC-ACTION-ADAPTER
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: invoke_pep_with_enforcement_context
+mapping_case: SUPPORTED_FAITHFUL_MAPPING
+```
+
+### Expected result
+
+```yaml
+pep_profile_mapping_supported: true
+governance_meaning_preserved: true
+governance_enforcement_binding_valid: true
+enforcement_result: PERMITTED
+exact_target_action_preserved: true
+observation_points:
+- GOVERNANCE_REALIZATION
+- PEP_ENFORCEMENT
+- COMMITMENT_ACCEPTED
+```
+
+---
+
+## TV-PEP-002 — Unsupported or non-faithful PEP Profile mapping fails closed with no governed effect
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- PEP Profile
+- Unsupported Mapping
+- Fail Closed
+- Policy Enforcement Point
+```
+
+### Initial conditions and setup
+
+```yaml
+test_controls:
+- control_type: GOVERNANCE_CONFIGURATION_FIXTURE
+  configuration_status: ACTIVE
+pep_profile: PEP-GENERIC-ACTION-ADAPTER
+mapping_case: UNSUPPORTED_OR_NONFAITHFUL
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: invoke_pep_with_enforcement_context
+mapping_case: UNSUPPORTED_OR_NONFAITHFUL
+```
+
+### Expected result
+
+```yaml
+mapping_accepted: false
+enforcement_result: FAILED_CLOSED
+governed_consequence: false
+governance_meaning_widened: false
+observation_points:
+- GOVERNANCE_REALIZATION
+- PEP_ENFORCEMENT
+- DERIVED_LIFECYCLE_STATE
+```
+
+---
+
+## TV-PEP-003 — Enforcement Context tamper or substitution is rejected by the PEP
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Enforcement Context
+- Integrity Binding
+- Policy Enforcement Point
+```
+
+### Initial conditions and setup
+
+```yaml
+enforcement_context_fixture: ../schemas/examples/ds029-enforcement-context-admissible.json
+implementation_specific_harness_need: ENFORCEMENT_CONTEXT_TAMPER_OR_SUBSTITUTION
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: invoke_pep_with_enforcement_context
+tamper:
+  field: target_ref.target_id
+  substitute: target-other
+```
+
+### Expected result
+
+```yaml
+context_integrity_valid: false
+enforcement_result: FAILED_CLOSED
+governed_consequence: false
+tamper_evidence_recorded: true
+observation_points:
+- GOVERNANCE_BINDING_VALIDATION
+- PEP_ENFORCEMENT
+```
+
+---
+
+## TV-PEP-004 — Governance Enforcement Binding mismatch is rejected before the governed consequence
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Governance Enforcement Binding
+- Enforcement Context
+- Policy Enforcement Point
+```
+
+### Initial conditions and setup
+
+```yaml
+enforcement_context_fixture: ../schemas/examples/ds029-enforcement-context-admissible.json
+implementation_specific_harness_need: GOVERNANCE_ENFORCEMENT_BINDING_MISMATCH
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: invoke_pep_with_enforcement_context
+binding_mutation: AUTHORIZATION_OR_TARGET_DIGEST_MISMATCH
+```
+
+### Expected result
+
+```yaml
+governance_enforcement_binding_valid: false
+enforcement_result: FAILED_CLOSED
+governed_consequence: false
+binding_failure_attributed: true
+observation_points:
+- GOVERNANCE_BINDING_VALIDATION
+- PEP_ENFORCEMENT
+```
+
+---
+
+## TV-PEP-005 — Unqualified GRF-to-PEP caller identity is rejected even when the carried context is otherwise valid
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- GRF-to-PEP Trust Boundary
+- Workload Identity
+- Policy Enforcement Point
+```
+
+### Initial conditions and setup
+
+```yaml
+test_controls:
+- control_type: AUTHORITY_FIXTURE
+  authority_status: OUT_OF_SCOPE
+  account_status: ACTIVE
+  freshness_status: CURRENT
+  revocation_status: CLEAR
+transport_specific_harness_need: GRF_TO_PEP_CALLER_IDENTITY_MISMATCH
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: invoke_pep_with_enforcement_context
+caller_identity: unqualified-grf-caller
+```
+
+### Expected result
+
+```yaml
+grf_caller_binding_valid: false
+enforcement_result: FAILED_CLOSED
+governed_consequence: false
+observation_points:
+- GOVERNANCE_REALIZATION
+- PEP_ENFORCEMENT
+```
+
+---
+
+## TV-PEP-006 — Co-located GDF GRF and PEP still enforce logical binding and refusal semantics
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Logical Function Separation
+- Co-Located GDF/GRF/PEP
+- Governance Enforcement Binding
+```
+
+### Initial conditions and setup
+
+```yaml
+deployment_topology: COLOCATED
+implementation_specific_harness_need: COLOCATED_GDF_GRF_PEP_LOGICAL_BINDING_NEGATIVE_PATH
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: invoke_colocated_enforcement_path
+logical_binding_mutation: AUTHORIZATION_BINDING_MISMATCH
+```
+
+### Expected result
+
+```yaml
+network_boundary_required: false
+logical_gdf_grf_distinction_preserved: true
+logical_grf_pep_binding_enforced: true
+enforcement_result: FAILED_CLOSED
+governed_consequence: false
+refusal_and_evidence_recorded: true
+observation_points:
+- GOVERNANCE_DECISION
+- GOVERNANCE_REALIZATION
+- PEP_ENFORCEMENT
+```
+
+---
+
+## TV-EXEC-001 — Successful commitment followed by asynchronous execution success remains COMMITTED until DS-052 success evidence
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Commitment
+- Governed Execution Outcome
+- DS-052
+- Derived Lifecycle State
+```
+
+### Initial conditions and setup
+
+```yaml
+commit_boundary_result: Commit Successful
+execution_completion_mode: POST_COMMIT_ASYNCHRONOUS
+test_controls:
+- control_type: PEP_OUTCOME_FIXTURE
+  outcome: APPLIED
+  delayed: true
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: observe_post_commit_execution
+sequence:
+- COMMIT_SUCCESS
+- EXECUTION_PENDING
+- EXECUTION_SUCCEEDED
+```
+
+### Expected result
+
+```yaml
+commit_result_implies_execution_complete: false
+pending_fixture: ../schemas/examples/ds052-governed-execution-outcome-pending.json
+terminal_fixture: ../schemas/examples/ds052-governed-execution-outcome-success.json
+lifecycle_sequence:
+- COMMITTED
+- EXECUTED
+execution_status_sequence:
+- PENDING
+- SUCCEEDED
+observation_points:
+- COMMITMENT_ACCEPTED
+- EXECUTION_OUTCOME
+- DERIVED_LIFECYCLE_STATE
+```
+
+---
+
+## TV-EXEC-002 — Successful commitment followed by asynchronous execution failure records DS-052 failure without rewriting commit success
+
+### Mapping
+
+```yaml
+profiles:
+- L4
+- L5
+concepts:
+- Commitment
+- Governed Execution Outcome
+- Execution Failure
+- Derived Lifecycle State
+```
+
+### Initial conditions and setup
+
+```yaml
+commit_boundary_result: Commit Successful
+execution_completion_mode: POST_COMMIT_ASYNCHRONOUS
+test_controls:
+- control_type: PEP_OUTCOME_FIXTURE
+  outcome: FAILED
+  delayed: true
+```
+
+### Request or harness operation
+
+```yaml
+harness_operation: observe_post_commit_execution
+sequence:
+- COMMIT_SUCCESS
+- EXECUTION_PENDING
+- EXECUTION_FAILED
+```
+
+### Expected result
+
+```yaml
+commit_result_remains: Commit Successful
+terminal_fixture: ../schemas/examples/ds052-governed-execution-outcome-failed.json
+lifecycle_sequence:
+- COMMITTED
+- EXECUTION_FAILED
+execution_status: FAILED
+commit_success_reinterpreted_as_execution_success: false
+observation_points:
+- COMMITMENT_ACCEPTED
+- EXECUTION_OUTCOME
+- DERIVED_LIFECYCLE_STATE
+- GOVERNANCE_EVIDENCE
+```
+
+---
+
 # Fixture and schema validation
 
-Fixture references are resolved before OpenAPI and request-schema validation. Each executable
-request or fixture SHALL be validated against the schema and interface contract identified in
-the YAML vector. DS-040 ledger-event expectations SHALL validate against
-`schemas/governance_ledger_event.json`.
+Fixture references are resolved before schema/interface validation. New v2.1.x fixtures include DS-052 Governed Execution Outcome and DS-053 Identity and Authorization Qualification Result examples. `DS-018` commit-request vectors do not supply authoritative Enforcement Context; GRF/PEP vectors observe the GRF-created DS-029 and enforcement binding.
 
 # Relationship to AGCP conformance
 
-Passing applicable vectors supports deterministic conformance validation but does not supersede
-the authoritative CR set, Core Specification, Architecture Reference Model, RTM, or formal
-Conformance Test Suite.
-
-
-## External content-digest vector package
-
-The controlled machine-readable package `conformance/digests/AGCP-Content-Digest-Test-Vectors.json` supplements TC-042, TC-052, TC-064, and TC-066 with algorithm/output-length, lowercase-encoding, and negative schema vectors. Formal Test Cases remain authoritative.
-
-## IF-001 Public Error and Metadata Vector Package
-
-The machine-readable package `conformance/http/AGCP-HTTP-Error-Metadata-Test-Vectors.json` is the controlled source for public not-found, throttling, capacity, governance-denial separation, and DS-003 metadata distribution vectors.
-
-## Semantic fixture vectors
-
-The machine-readable semantic fixture vector package is `conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json`. It contains ten explicit semantic-mismatch vectors and references the fifteen claimant-assertion vectors in the command-versus-record package. Negative vectors are not positive fixtures and are not cataloged as successful examples.
+Passing applicable vectors produces objective evidence under the controlling Formal Test Case. It does not independently establish conformance and does not supersede the published CRs, Core, adopted companion specifications, Implementation Profile, Formal Test Cases, or final RTM.

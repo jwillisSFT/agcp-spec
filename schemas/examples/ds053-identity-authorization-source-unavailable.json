@@ -1,0 +1,108 @@
+{
+  "qualification_result_id": "ds053-identity-authorization-source-unavailable",
+  "result_type": "IDENTITY_AUTHORIZATION_QUALIFICATION_RESULT",
+  "qualification_stage": "HUMAN_REVIEW",
+  "authenticated_subject": {
+    "principal_id": "user-001",
+    "principal_type": "USER"
+  },
+  "stable_subject_id": "subject-001",
+  "authoritative_account_id": "account-001",
+  "account_status": "INDETERMINATE",
+  "tenant_id": "tenant-a",
+  "governance_domain_id": "domain-a",
+  "roles": [
+    "governance-reviewer"
+  ],
+  "groups": [
+    "operations"
+  ],
+  "entitlements": [
+    "approve-governed-action"
+  ],
+  "authorization_attributes": {
+    "assurance_level": "high"
+  },
+  "reviewer_classes": [
+    "governance-reviewer"
+  ],
+  "governance_permissions": [
+    "approve-governed-action"
+  ],
+  "effective_scope": {
+    "tenant_id": "tenant-a",
+    "governance_domain_id": "domain-a"
+  },
+  "ias_profile_ref": {
+    "profile_id": "IAS-GENERIC-ENTERPRISE",
+    "profile_version": "1.0.0",
+    "profile_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "authoritative_source_refs": [
+    {
+      "source_id": "identity-store-1",
+      "source_type": "IDENTITY_SYSTEM",
+      "source_version": "1",
+      "source_digest": {
+        "algorithm": "SHA-256",
+        "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      "resolved_at": "2026-10-03T12:00:00Z"
+    }
+  ],
+  "source_record_version": "42",
+  "source_record_digest": {
+    "algorithm": "SHA-256",
+    "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "resolved_at": "2026-10-03T12:00:00Z",
+  "freshness_status": "INDETERMINATE",
+  "revocation_status": "INDETERMINATE",
+  "qualification_outcome": "SOURCE_UNAVAILABLE",
+  "attribution": {
+    "principal": {
+      "principal_id": "ias-resolver",
+      "principal_type": "SERVICE"
+    },
+    "attributed_at": "2026-10-03T12:00:00Z"
+  },
+  "result_digest": {
+    "algorithm": "SHA-256",
+    "value": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "integrity_signature": {
+    "alg": "EdDSA",
+    "kid": "ias-key-1",
+    "sig": "ZmFrZQ=="
+  },
+  "replay_material": {
+    "ias_profile_digest": {
+      "algorithm": "SHA-256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "source_record_digest": {
+      "algorithm": "SHA-256",
+      "value": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "input_set_digest": {
+      "algorithm": "SHA-256",
+      "value": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "result_digest": {
+      "algorithm": "SHA-256",
+      "value": "3333333333333333333333333333333333333333333333333333333333333333"
+    }
+  },
+  "semantic_assertions": {
+    "claimant_assertions_are_non_authoritative": true,
+    "identity_authorization_is_not_execution_authorization": true,
+    "qualification_does_not_itself_produce_governance_decision": true,
+    "source_scope_and_freshness_are_enforced": true
+  },
+  "qualification_reasons": [
+    "Authoritative identity and authorization source unavailable."
+  ]
+}

@@ -1,46 +1,99 @@
 {
   "manifest_type": "AGCP_PUBLIC_IMPLEMENTATION_PROFILE_ARTIFACT_MANIFEST",
-  "manifest_version": "1.0.3",
-  "release_target": "v2.0.8",
-  "generated_date": "2026-08-05",
-  "profile_format_version": "1.1.0",
-  "scope": "Public format, schema, template, informational example, and catalogs only. Operational deployment profiles are distributed separately.",
+  "manifest_version": "2.0.0",
+  "release_target": "v2.1.x",
+  "profile_format_version": "2.0.0",
+  "scope": "Public generic implementation-profile framework, IAS/PEP profile specifications, schemas, templates, informational examples, and catalogs. Deployment-specific operational profiles are distributed separately.",
   "files": [
     {
       "path": "AGCP-Implementation-Profile-Specification.md",
-      "sha256": "4c1de1cd20ab11fc79e8a2e412048fe49a8a5a5a74bfe5c81d5e20506da428d0",
-      "bytes": 12218
+      "sha256": "d718482a1ba155cd9f68ae36f2ad146b563fa11638d39c6adf492f71a3eb7565",
+      "bytes": 8316
     },
     {
       "path": "AGCP-Implementation-Profile-Schema.json",
-      "sha256": "7d6e127bd5c5bfcfc127e9a3080df470ac40e65d8a96845f8484de8ef8db0dd5",
-      "bytes": 65023
+      "sha256": "3e791f7707bbcdf88d9e2282f04c3b47d991c5228895e67535e037c33614c202",
+      "bytes": 25971
     },
     {
       "path": "AGCP-Implementation-Profile-Template.md",
-      "sha256": "51d9351b08850aa4707cd81f568d93ab6ac48651c95dfdb28a36911a83a7c4fe",
-      "bytes": 85626
+      "sha256": "33c551243d9950bb9992462df2786cb61196ff50320827b5e8b3546131e7b0ef",
+      "bytes": 6492
     },
     {
       "path": "AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md",
-      "sha256": "ee871a12b0a609e76b6bf461330e3aead8c8ec0e508806f815430bcd9f73deb7",
-      "bytes": 144545
+      "sha256": "516e2af55d1b93b220c8b9932c5e479286a82332a5a49b406ff4a036f5e95af0",
+      "bytes": 5009
+    },
+    {
+      "path": "README.md",
+      "sha256": "0b6050f1aedc20df0b466293e49581b31d0bdec4c1d8e37060260c8fa364676f",
+      "bytes": 1071
     },
     {
       "path": "IMPLEMENTATION-PROFILE-CATALOG.md",
-      "sha256": "106b154e1671af8ec3fb19e10eb7c378c193100495353b91d4db609ec5bc23dd",
-      "bytes": 944
+      "sha256": "e976ca18e585ef526a1cf9df476b0f693836742d0dfd3255b7193a0ab089df94",
+      "bytes": 502
     },
     {
       "path": "implementation-profile-catalog.json",
-      "sha256": "316a95d72acb8db57a6e1afef1fdb90c70414d59068d52602e1349724234a1ce",
-      "bytes": 1211
+      "sha256": "080fc637e35304e6cb1e932971a197bca4914742536a3692b88d8cf40d44f42d",
+      "bytes": 985
     },
     {
       "path": "implementation-profile-catalog.csv",
-      "sha256": "99c5dae8493e74b8a8ecd89f4c7eead0b53af20bcd03436155bb670d6716d99a",
-      "bytes": 578
+      "sha256": "0d816b007656f44e14bbafff139c8bf209834210cb23f51ee960e4a40be6cb46",
+      "bytes": 459
+    },
+    {
+      "path": "AGCP-Identity-and-Authorization-Store-Profile-Specification.md",
+      "sha256": "94865607aebd5c0818a559a35af7c5d3497b60a1fc81ae8284ad9afa46b1315e",
+      "bytes": 4313
+    },
+    {
+      "path": "AGCP-Identity-and-Authorization-Store-Profile-Schema.json",
+      "sha256": "29752e11c59cf2ddaa772816e21c492379f5c52025942b14dc63a88f988aacc0",
+      "bytes": 6847
+    },
+    {
+      "path": "AGCP-Identity-and-Authorization-Store-Profile-Template.md",
+      "sha256": "027b04fa43db879650c18087668a7305e8425101785fc0702c6edcd559bb4109",
+      "bytes": 1660
+    },
+    {
+      "path": "AGCP-PEP-Profile-Specification.md",
+      "sha256": "832334153a3da00560a8055e2bfc1e62eedc1a60045ffa84e7a81f1c5449435a",
+      "bytes": 3574
+    },
+    {
+      "path": "AGCP-PEP-Profile-Schema.json",
+      "sha256": "3225ecebccf727c5a83a190cb0aed47db37490a37a4d9f58ae7a8997e72c6483",
+      "bytes": 6611
+    },
+    {
+      "path": "AGCP-PEP-Profile-Template.md",
+      "sha256": "14b0df23fdde095343ae88cc2f15842f08cdd8ade258d3e5bdeb708275632259",
+      "bytes": 1748
+    },
+    {
+      "path": "examples/IAS-GENERIC-ENTERPRISE-EXAMPLE.yaml",
+      "sha256": "7f22c9bc81ccc62a69da5d4bbf27a87a2249a1d0db9b53332341b6c172dff22b",
+      "bytes": 2340
+    },
+    {
+      "path": "examples/IAS-GENERIC-ENTERPRISE-EXAMPLE.md",
+      "sha256": "12481d6e2d222f49ba870fab0bc7e442b9d0cdb2910fe87ee1912a719ebcaa9e",
+      "bytes": 900
+    },
+    {
+      "path": "examples/PEP-GENERIC-ACTION-ADAPTER-EXAMPLE.yaml",
+      "sha256": "7ebfe554f64f615673b6cbb2dfca02549a0011a5b1be6bb0d07b64f1f29ffbe9",
+      "bytes": 2159
+    },
+    {
+      "path": "examples/PEP-GENERIC-ACTION-ADAPTER-EXAMPLE.md",
+      "sha256": "a81c2d27f769c0be5a608d97956457a845f39b85af3de0ce3cac28a633004bd9",
+      "bytes": 548
     }
-  ],
-  "rtm_dataset_version": "RTM-1.46"
+  ]
 }

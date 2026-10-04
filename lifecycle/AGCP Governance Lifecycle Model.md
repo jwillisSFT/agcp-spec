@@ -116,13 +116,23 @@ Governance Decision Function
                     │                   │
                     └───────────┬───────┘
                                 ▼
-              Governance Realization and Commit Boundary
+              Governance Realization Function
+                                │
+                                ▼
+                       PEP / Commit Boundary
                                 │
                     ┌───────────┴───────────┐
                     │                       │
                     ▼                       ▼
               Commit Failed          Commit Successful
                                             │
+                                 ┌──────────┴──────────┐
+                                 │                     │
+                                 ▼                     ▼
+                        Atomic completion      Asynchronous target
+                                 │              execution pending
+                                 │                     │
+                                 └──────────┬──────────┘
                                             ▼
                                    Governed Execution
 ```
@@ -391,20 +401,9 @@ Execution Authorization SHALL be based upon the current authoritative governance
 
 ## 8.1 Purpose
 
-Execution Authorization confirms that:
+Execution Authorization records that the proposal has satisfied the authorization-stage conditions required to progress toward commitment. It binds a favorable governance basis to the exact proposal and applicable scope.
 
-- Proposal Qualification has completed successfully;
-- Governance Decision processing has completed successfully;
-- all required DS-026 Governance Approval Artifacts have been accepted and any required quorum has been completed;
-- applicable governance policies remain satisfied;
-- applicable constraints remain satisfied;
-- applicable invariants remain satisfied;
-- applicable exceptions remain valid;
-- tenant state permits execution authorization;
-- Governance Domain requirements are satisfied;
-- authoritative governance information has not changed in a manner requiring re-evaluation.
-
-Execution Authorization represents the final governance authorization prior to Commit Boundary processing.
+Execution Authorization is not a portable execution credential and is not, by itself, authority at commitment. Current usability is established later by the Governance Realization Function.
 
 ## 8.2 Authorization Outcomes
 
@@ -542,6 +541,43 @@ Governance-significant Continuation Integrity events SHALL be recorded in the Ap
 
 ---
 
+# 9A. Governance Realization and Commit-Bound Admissibility
+
+## 9A.1 Purpose
+
+The Governance Realization Function (GRF) establishes whether an already-authorized proposal remains eligible to bind under current commitment-sensitive conditions and prepares the exact transition for protected enforcement.
+
+## 9A.2 Inputs
+
+The GRF consumes, as applicable:
+
+- Qualified Proposal and stable proposal identity;
+- Governance Decision;
+- Execution Authorization;
+- current Canonical State and State Qualification;
+- current Evidence Qualification;
+- current identity/authorization/entitlement facts where commitment-sensitive;
+- current Authority Lineage, delegation, and human-approval state;
+- lifecycle, validity, prior-use, and replay state;
+- target/action binding; and
+- the controlling PEP Profile or equivalent enforcement mapping.
+
+## 9A.3 Processing
+
+The GRF SHALL perform Authority Re-Derivation, Governance Binding Validation, Commit-Bound Admissibility, and any required governed re-evaluation before enforcement.
+
+The GRF applies the selected PEP Profile to the exact commit-eligible transition, constructs or completes the Enforcement Context, and presents the transition to the PEP through the protected enforcement path.
+
+The GRF SHALL NOT widen, approximate, or reinterpret the Governance Decision. If no faithful supported PEP mapping exists, the transition SHALL NOT proceed.
+
+## 9A.4 Outcomes
+
+The GRF may establish current commit eligibility, require governed re-evaluation, or produce a defined non-execution/refusal outcome. A GRF result does not itself bypass the PEP.
+
+## 9A.5 Governance Evidence
+
+Evidence SHALL preserve the current authority basis, binding-validation result, selected PEP Profile reference, Enforcement Context reference, and GRF disposition sufficient for later reconstruction.
+
 # 10. Commit Boundary
 
 The Commit Boundary is the final governance control point immediately preceding governance-significant execution.
@@ -550,23 +586,15 @@ Its purpose is to ensure that execution occurs only after successful governance 
 
 The Commit Boundary is distinct from Execution Authorization.
 
-Execution Authorization determines whether execution is permitted.
+Execution Authorization establishes that a governed transition may proceed toward Governance Realization; it is not permission to execute and does not establish current commit eligibility.
 
-Commit Boundary determines whether execution may actually proceed at that moment.
+The Governance Realization Function re-establishes current commit eligibility and prepares the exact enforcement-facing transition. The Policy Enforcement Point mediates whether that transition crosses the Commit Boundary.
 
 ## 10.1 Purpose
 
-Commit Boundary validates that:
+The Commit Boundary is the protected architectural boundary at which the exact governed transition is accepted for application to the intended target or prevented from crossing into consequence.
 
-- a valid Execution Authorization exists;
-- the authorization remains valid;
-- required DS-026 Governance Approval Artifacts remain ACTIVE, valid, and applicable;
-- tenant state remains eligible;
-- Governance Domain requirements remain satisfied;
-- Canonical State remains valid;
-- authoritative governance conditions have not changed since authorization.
-
-If any required condition is no longer satisfied, execution SHALL NOT proceed.
+The boundary is not itself a policy-decision component. Governance Realization establishes current eligibility at or immediately before this boundary, and the PEP mediates whether the transition crosses it.
 
 ## 10.2 Commit Outcomes
 
@@ -574,9 +602,9 @@ Commit Boundary processing may produce the following outcomes.
 
 ### Commit Successful
 
-Execution may proceed.
+The exact governed transition was accepted at the defined commitment point after successful Governance Realization and PEP mediation.
 
-Governance-significant execution begins only after successful Commit Boundary processing.
+Commit Successful does not universally mean that an asynchronous target operation has completed. When target completion occurs later, Governed Execution records the resulting operational outcome.
 
 ### Commit Failed
 
@@ -590,24 +618,27 @@ Execution is deferred until governance processing has been repeated.
 
 Implementations SHALL NOT rely upon previously issued Execution Authorizations after authoritative governance changes requiring re-evaluation.
 
-## 10.3 Commit Validation
+## 10.3 Commit-Time Governance Realization and Enforcement
 
-Commit Boundary validation SHOULD be performed immediately prior to execution.
+Immediately before commitment, the Governance Realization Function performs or consumes the current state, evidence, authority, lifecycle, binding, and other commitment-sensitive validation required by the Core Specification. It applies the controlling PEP Profile or equivalent enforcement mapping, constructs the required Enforcement Context, and presents the exact commit-eligible transition to the PEP.
 
-Implementations SHOULD minimize the interval between successful Commit Boundary validation and execution to reduce exposure to changing governance conditions.
-
-Where execution cannot begin immediately following validation, implementations MAY require Commit Boundary validation to be repeated.
+The PEP validates the enforcement-facing bindings required by its profile and either permits the exact transition to cross the protected boundary or prevents it. A later asynchronous operational completion does not require the historical commitment decision to be reinterpreted; its operational result is recorded separately as governed execution evidence.
 
 ## 10.4 Governance Evidence
 
-Commit Boundary processing SHALL generate Governance Evidence describing:
+Commit Boundary processing SHALL generate Governance Evidence describing, as applicable:
 
 - Commit Boundary request;
-- validation outcome;
+- Governance Realization and Commit-Bound Admissibility result;
 - Execution Authorization reference;
-- Canonical State reference;
-- provenance;
-- execution decision.
+- current Canonical State, evidence, and Authority Re-Derivation basis;
+- selected PEP Profile or equivalent enforcement mapping;
+- Enforcement Context and Governance Enforcement Binding;
+- PEP enforcement result;
+- commitment result; and
+- provenance.
+
+Where operational execution completes after commitment, the later execution outcome SHALL be recorded separately and linked to the successful commitment.
 
 Successful Commit Boundary processing SHALL be recorded in the Append-Only Governance Ledger.
 

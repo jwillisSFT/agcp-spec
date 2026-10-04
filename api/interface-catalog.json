@@ -1,16 +1,16 @@
 {
   "catalog_id": "IF-CATALOG-1.0",
   "title": "AGCP Interface Definition Catalog",
-  "specification_version": "v2.0.8",
-  "catalog_version": "1.0.5",
+  "specification_version": "v2.1.0",
+  "catalog_version": "1.0.9",
   "publication_status": "CURRENT",
-  "last_modified_date": "2026-08-05",
+  "last_modified_date": "2026-10-03",
   "interfaces": [
     {
       "if_id": "IF-001",
       "title": "AGCP HTTP Interface v2",
       "interface_version": "v2",
-      "contract_version": "2.0.8",
+      "contract_version": "2.1.x",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-HTTP-Interface-Specification.md",
@@ -91,14 +91,17 @@
         "profile_digest_required": true,
         "schema_and_validator_digests_required": true,
         "active_governance_version_required": true,
-        "optional_public_safe_deployment_binding": true
-      }
+        "optional_public_safe_deployment_binding": true,
+        "ias_profile_bindings_advertised_when_applicable": true,
+        "pep_profile_bindings_advertised_when_applicable": true
+      },
+      "notes": "IF-001 invokes Governance Realization through /commit-boundary/commit. The GRF independently establishes current commit eligibility, selects/applies the PEP Profile, constructs Enforcement Context, and mediates the PEP. Commit Successful is distinct from later asynchronous execution completion. Approval ingress uses server-side IAS qualification; no public IAS or PEP interface is standardized."
     },
     {
       "if_id": "IF-002",
       "title": "AGCP Policy Evaluation Contract",
       "interface_version": "v2",
-      "contract_version": "2.0.8",
+      "contract_version": "2.1.x",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
       "specification_file": "spec/AGCP-Policy-Evaluation-Contract.md",
@@ -144,14 +147,60 @@
         "CR-120",
         "CR-121",
         "CR-122"
-      ]
+      ],
+      "notes": "GDF/PDP deterministic evaluation contract. It may consume DS-053 qualified identity/authorization input but does not perform Governance Realization or PEP enforcement."
+    },
+    {
+      "if_id": "IF-003",
+      "title": "AGCP Governance Observation Interface v1",
+      "interface_version": "v1",
+      "contract_version": "2.1.x",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_file": "spec/AGCP-Governance-Observability-and-Management-Specification.md",
+      "machine_readable_contract": "api/AGCP-Management-Contract.yaml",
+      "cr_ids": [],
+      "normative_companion_specifications": [
+        "spec/AGCP-Governance-Observability-and-Management-Specification.md"
+      ],
+      "notes": "Read-only observations distinguish IAS qualification, GDF/PDP, GRF, PEP enforcement, commitment, and post-commit execution outcome."
+    },
+    {
+      "if_id": "IF-004",
+      "title": "AGCP Governance Management and Actuation Interface v1",
+      "interface_version": "v1",
+      "contract_version": "2.1.x",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_file": "spec/AGCP-Governance-Observability-and-Management-Specification.md",
+      "machine_readable_contract": "api/AGCP-Management-Contract.yaml",
+      "cr_ids": [],
+      "normative_companion_specifications": [
+        "spec/AGCP-Governance-Observability-and-Management-Specification.md"
+      ],
+      "notes": "Supporting production management surface. Request acceptance is distinct from authoritative realization; status readback is provided and EFFECTIVE requires ordinary authoritative governance mechanisms, evidence, and observation."
+    },
+    {
+      "if_id": "IF-005",
+      "title": "AGCP Conformance Test Control Interface v1",
+      "interface_version": "v1",
+      "contract_version": "2.1.x",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_file": "spec/AGCP-Conformance-Test-Control-Specification.md",
+      "machine_readable_contract": "api/AGCP-Management-Contract.yaml",
+      "cr_ids": [],
+      "normative_companion_specifications": [
+        "spec/AGCP-Conformance-Test-Control-Specification.md"
+      ],
+      "notes": "Optional isolated test-only surface. AUTHORITY_FIXTURE may emulate identity/authorization source conditions; PEP_OUTCOME_FIXTURE applies only at enforcement. It cannot inject GDF or GRF outcomes."
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
-  "repository_release_target": "v2.0.8",
+  "repository_release_target": "v2.1.0",
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "controlling_published_baseline": "v2.0.8",
-  "baseline_date": "2026-08-14",
-  "rtm_dataset_version": "RTM-1.46"
+  "controlling_published_baseline": "v2.1.0",
+  "baseline_date": "2026-08-15",
+  "rtm_dataset_version": "RTM-1.47"
 }

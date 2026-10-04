@@ -1,12 +1,12 @@
 # AGCP Provenance Wire Format Specification
 
 **Status:** Normative
-**Specification Version:** 2.0.8  
+**Specification Version:** 2.1.0  
 **Artifact Lifecycle:** Current  
-**Repository Release Target:** AGCP v2.0.8  
+**Repository Release Target:** AGCP v2.1.0  
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-14  
+**Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-08-15  
 **AGCP Release Series:** v2
 
 ## 1. Purpose
@@ -92,6 +92,12 @@ Where applicable, signed content SHALL bind:
 - Authority Lineage.
 
 Modification of bound content SHALL invalidate the signature.
+
+### 5.1 Signer Identity Is Not Governance Authority
+
+The provenance signer establishes attributable cryptographic origin for the signed object. Signer identity alone SHALL NOT be interpreted as current governance role, reviewer eligibility, role/group membership, entitlement, delegation, Governance Decision, Execution Authorization, commit eligibility, or PEP authority.
+
+Where governance depends on current identity-system authorization or entitlement information, that information SHALL be qualified through the controlling Implementation Profile and IAS Profile and bound through the applicable governance artifact or evidence. The generic provenance envelope SHALL NOT be overloaded with deployment-specific directory or PEP-profile data.
 
 ## 6. Canonicalization
 

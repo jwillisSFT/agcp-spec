@@ -1,0 +1,238 @@
+{
+  "synchronization_id": "AGCP-v2.1.x-FORMAL-TC-SYNC-2026-10-03",
+  "status": "FORMAL_TEST_CASES_SYNCHRONIZED_RTM_PENDING",
+  "formal_test_case_range": "TC-001 through TC-122",
+  "formal_test_case_count": 122,
+  "new_top_level_test_cases": 0,
+  "formal_traceability_or_assertion_change_count": 42,
+  "regression_scenario_change_count": 22,
+  "total_affected_test_cases": 64,
+  "formal_traceability_or_assertion_tcs": [
+    "TC-001",
+    "TC-002",
+    "TC-003",
+    "TC-004",
+    "TC-014",
+    "TC-015",
+    "TC-016",
+    "TC-019",
+    "TC-022",
+    "TC-024",
+    "TC-026",
+    "TC-031",
+    "TC-032",
+    "TC-040",
+    "TC-045",
+    "TC-047",
+    "TC-048",
+    "TC-058",
+    "TC-060",
+    "TC-062",
+    "TC-065",
+    "TC-067",
+    "TC-068",
+    "TC-079",
+    "TC-080",
+    "TC-081",
+    "TC-082",
+    "TC-084",
+    "TC-085",
+    "TC-087",
+    "TC-088",
+    "TC-089",
+    "TC-096",
+    "TC-102",
+    "TC-103",
+    "TC-113",
+    "TC-117",
+    "TC-118",
+    "TC-119",
+    "TC-120",
+    "TC-121",
+    "TC-122"
+  ],
+  "regression_scenario_only_tcs": [
+    "TC-011",
+    "TC-012",
+    "TC-013",
+    "TC-018",
+    "TC-023",
+    "TC-027",
+    "TC-028",
+    "TC-035",
+    "TC-059",
+    "TC-069",
+    "TC-070",
+    "TC-071",
+    "TC-086",
+    "TC-090",
+    "TC-091",
+    "TC-093",
+    "TC-098",
+    "TC-100",
+    "TC-101",
+    "TC-107",
+    "TC-109",
+    "TC-116"
+  ],
+  "retired_ns_test_targets_removed": {
+    "NS-9.1-01": [
+      "TC-084"
+    ],
+    "NS-8.6A-01": [
+      "TC-096"
+    ],
+    "NS-8.6A-03": [
+      "TC-096"
+    ]
+  },
+  "new_ns_disposition": {
+    "NS-7.1-03": {
+      "tc_id": "TC-031",
+      "relationship": "direct"
+    },
+    "NS-4.12-01": {
+      "tc_id": "TC-045",
+      "relationship": "direct"
+    },
+    "NS-4.12A-02": {
+      "tc_id": "TC-045",
+      "relationship": "direct"
+    },
+    "NS-6.4-04": {
+      "tc_id": "TC-045",
+      "relationship": "direct"
+    },
+    "NS-6.4-05": {
+      "tc_id": "TC-045",
+      "relationship": "direct"
+    },
+    "NS-6.6A-03": {
+      "tc_id": "TC-045",
+      "relationship": "direct"
+    },
+    "NS-13.6B-07": {
+      "tc_id": "TC-065",
+      "relationship": "direct"
+    },
+    "NS-13.6B-08": {
+      "tc_id": "TC-065",
+      "relationship": "conditional"
+    },
+    "NS-13.6B-09": {
+      "tc_id": "TC-065",
+      "relationship": "conditional"
+    },
+    "NS-4.7-02": {
+      "tc_id": "TC-081",
+      "relationship": "support"
+    },
+    "NS-9.5-05": {
+      "tc_id": "TC-081",
+      "relationship": "conditional"
+    },
+    "NS-9.1-03": {
+      "tc_id": "TC-102",
+      "relationship": "direct"
+    },
+    "NS-9.4-07": {
+      "tc_id": "TC-087",
+      "relationship": "direct"
+    },
+    "NS-3.3-03": {
+      "tc_id": "TC-089",
+      "relationship": "support"
+    },
+    "NS-4.12A-01": {
+      "tc_id": "TC-089",
+      "relationship": "conditional"
+    },
+    "NS-17.5-04": {
+      "tc_id": "TC-089",
+      "relationship": "conditional"
+    },
+    "NS-8.4-03": {
+      "tc_id": "TC-096",
+      "relationship": "direct"
+    },
+    "NS-8.6A-04": {
+      "tc_id": "TC-096",
+      "relationship": "direct"
+    },
+    "NS-8.6A-05": {
+      "tc_id": "TC-096",
+      "relationship": "direct"
+    },
+    "NS-12.6-06": {
+      "tc_id": "TC-096",
+      "relationship": "direct"
+    },
+    "NS-8.6A-06": {
+      "tc_id": "TC-096",
+      "relationship": "conditional"
+    },
+    "NS-12.2-03": {
+      "tc_id": "TC-096",
+      "relationship": "conditional"
+    },
+    "NS-13.6B-10": {
+      "tc_id": "TC-096",
+      "relationship": "conditional"
+    },
+    "NS-5.6-01": {
+      "tc_id": "TC-102",
+      "relationship": "conditional"
+    },
+    "NS-16.6-07": {
+      "tc_id": "TC-118",
+      "relationship": "direct"
+    },
+    "NS-4.13B-01": {
+      "tc_id": "TC-120",
+      "relationship": "direct"
+    },
+    "NS-9.4-06": {
+      "tc_id": "TC-120",
+      "relationship": "direct"
+    },
+    "NS-9.4-08": {
+      "tc_id": "TC-120",
+      "relationship": "direct"
+    },
+    "NS-9.4-09": {
+      "tc_id": "TC-120",
+      "relationship": "direct"
+    },
+    "NS-4.13E-01": {
+      "tc_id": "TC-120",
+      "relationship": "conditional"
+    },
+    "NS-4.13E-02": {
+      "tc_id": "TC-120",
+      "relationship": "conditional"
+    },
+    "NS-9.4-05": {
+      "tc_id": "TC-120",
+      "relationship": "conditional"
+    },
+    "NS-13.6-08": {
+      "tc_id": "TC-121",
+      "relationship": "direct"
+    },
+    "NS-9.6A-05": {
+      "tc_id": "TC-121",
+      "relationship": "conditional"
+    },
+    "NS-9.6A-06": {
+      "tc_id": "TC-121",
+      "relationship": "conditional"
+    },
+    "NS-7.6-05": {
+      "tc_id": "TC-122",
+      "relationship": "conditional"
+    }
+  },
+  "rtm_status": "SYNCHRONIZED_RTM_1_47",
+  "principle": "No new CRs or top-level TCs are introduced. New Core-derived obligations are atomized into existing CR-linked Formal Test Cases as direct, conditional, or supporting coverage.",
+  "final_rtm_synchronization_id": "AGCP-v2.1.x-FINAL-RTM-SYNCHRONIZATION-2026-10-03"
+}

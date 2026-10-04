@@ -18,6 +18,18 @@ conformance determinations are defined in
 
 ------------------------------------------------------------------------
 
+## Test and Injection Point Development Status
+
+The conformance test-control, fixture-injection, and Governance Observation Point inventory is under active development. The IF-005 controls, fixture types, observation points, mappings, and related harness capabilities currently enumerated in this directory represent the capabilities identified to date and are not a declaration that every useful test or injection point has already been identified, frozen, or implemented.
+
+Additional controls or observation points may be identified as the reference implementation, negative-test corpus, integration testing, and Formal Test Case automation mature. Some enumerated capabilities may also be only partially implemented by a particular reference implementation until the corresponding source-code adapters, hooks, isolation mechanisms, and evidence paths are completed and qualified.
+
+The specifications define the external semantics, scope, isolation, and prohibited outcome-injection behavior for standardized controls. The exact internal source-code hooks used to realize those controls are implementation details and may evolve while preserving the specified externally observable behavior.
+
+The conformance mapping files may therefore identify planned control or observation capabilities before reference-implementation support is complete. Such entries are development targets until validated by the corresponding implementation and objective conformance evidence. A Formal Test Case remains authoritative for the required assessment; successful setup, fixture injection, observation, or management actuation does not independently constitute a Test Case Pass.
+
+------------------------------------------------------------------------
+
 # Conformance Architecture
 
 The authoritative requirement and assessment path is:
@@ -133,6 +145,10 @@ in `AGCP-Conformance-Traceability-and-Automation-Model.md`.
                                         Vectors, including explicit no-vector
                                         dispositions.
 
+  AGCP-Test-Mapping.md                  Human-readable informational mirror of
+                                        test-mapping.json for TC-001 through
+                                        TC-122.
+
   agcp-conformance-manifest.yml         Index of the conformance package
                                         and execution metadata.
 
@@ -141,6 +157,19 @@ in `AGCP-Conformance-Traceability-and-Automation-Model.md`.
   -----------------------------------------------------------------------
 
 ------------------------------------------------------------------------
+
+
+## v2.1.x Test Mapping Regeneration Status
+
+`test-mapping.json` has been completely regenerated for `TC-001` through `TC-122` and synchronized to 21 Harness Checks and 71 Harness Test Vectors. The downstream test-control mapping, Harness Vector/Check synchronization, and aggregate conformance-layer validation steps are complete. Final RTM synchronization is complete at `RTM-1.47`.
+
+## v2.1.x Aggregate Conformance-Layer Validation Status
+
+The synchronized Formal Test Cases, Test Matrix, test mappings, test-control mappings, 21 Harness Checks, 71 Harness Test Vectors, controlled fixtures, DS-050 control vocabulary, and DS-046 Governance Observation Point vocabulary have passed aggregate pre-RTM validation. The validation also corrected a stale machine-readable Harness Check count and removed obsolete semantic-fixture assumptions that DS-018 carries GRF-derived authority/evidence or DS-029 Enforcement Context. See `AGCP-v2.1.x-AGGREGATE-CONFORMANCE-LAYER-VALIDATION.md` and `AGCP-v2.1.x-aggregate-conformance-layer-validation.json`. Final RTM synchronization is complete at `RTM-1.47`.
+
+## v2.1.x Test-Control Mapping Regeneration Status
+
+`test-control-mapping.json` and `AGCP-Test-Control-Mapping.md` have been completely regenerated for `TC-001` through `TC-122`. All standardized control references validate against DS-050 and all Governance Observation Point references validate against DS-046. The mapping explicitly distinguishes standardized control recommendations from implementation-specific or future-standardization harness injection needs. Those needs are represented in the synchronized Harness Vector/Check layer without claiming universal implementation support. Aggregate conformance-layer validation has passed.
 
 # Scope
 
@@ -178,7 +207,7 @@ Ledger sequence order is authoritative. Timestamp order is not.
 
 # Canonical Fixture Catalog
 
-`fixture-mapping.json` maps every conformance example to its exact active DS schema and expected validation result. The examples are maintained in `../schemas/examples/`. The 29 controlled fixtures include the existing governance, ledger, approval, commit, and registry examples plus schema-valid IF-001 response examples for DS-003, DS-005, DS-006, DS-010, and DS-017.
+`fixture-mapping.json` maps every conformance example to its exact active DS schema and expected validation result. The examples are maintained in `../schemas/examples/`. The 36 controlled fixtures include the existing governance, ledger, approval, commit, and registry examples plus the DS-052 Governed Execution Outcome and DS-053 Identity and Authorization Qualification Result fixtures added for v2.1.x harness synchronization.
 
 Fixture resolution occurs before IF-001 request validation. Commit Boundary tests use the current DS-018 representation and the `/agcp/v2` namespace exclusively.
 
@@ -265,7 +294,29 @@ The controlled positive-fixture catalog is subject to both JSON Schema validatio
 
 ## Repository Synchronization
 
-The cumulative v2.0.8 repository set is indexed by `../governance/AGCP-v2.0.8-repository-synchronization-manifest.json` and validated by `../governance/validate_repository_synchronization.py` against `RTM-1.46` and the current catalogs.
+The synchronized v2.1.x change set is closed at `RTM-1.47`. The full overlaid repository state used for closure validation is indexed by `../governance/AGCP-v2.1.x-repository-closure-manifest.json` and validated by `../governance/AGCP-v2.1.x-repository-closure-validation.json`. The currently published baseline remains v2.1.0 until a separate controlled release designation is made.
 
 
 ## Repository-wide integrity gate
+
+## v2.1.0 observation and test control
+
+`test-control-mapping.json` maps all controlled Formal TCs to recommended IF-003 observations, optional IF-005 precondition controls, or explicit external dependencies. The mapping is an execution aid only; the Formal TC remains authoritative. Successful setup or actuation never constitutes a TC Pass.
+
+
+- [AGCP Management Plane Harness Spec](AGCP-Management-Plane-Harness-Spec.yml) — supporting executable checks for runtime binding, actuation realization, test-scope isolation, and consumption evidence.
+## v2.1.0 server implementation closure aids
+
+- `AGCP-Management-Plane-Harness-Spec.yml` provides supporting checks for truthful GOP/GAP/Test-Control runtime coupling, including the omission-safe optional `correlation_id` case.
+- `AGCP-v2.1.0-Executable-Regression-Requirements.json` is the machine-readable known-defect regression matrix intended for server implementation and pre-conformance CI. It does not create new CRs or replace Formal Test Cases.
+- `../reference/AGCP-v2.1.0-Server-Implementation-Blueprint.md` gives concrete server module boundaries, authoritative-source resolution, Commit Boundary processing order, atomic lifecycle persistence, generated-artifact validation, test-control adapter design, and Rust-oriented implementation notes.
+
+
+
+## v2.1.x Conformance Closure Status
+
+The conformance synchronization sequence is complete: 122 Formal Test Cases, the regenerated Test Matrix, 122 test mappings, 122 test-control mappings, 21 Harness Checks, 71 Harness Test Vectors, 36 controlled fixtures, and aggregate conformance-layer validation are synchronized to final `RTM-1.47`. This closes the specification/conformance synchronization step; later source-code implementation and runtime evidence do not retroactively redefine the Formal Test Cases.
+
+## Formal Test Case synchronization status
+
+The formal Test Cases under `tests/` are now synchronized to the current v2.1.x Core and Normative Statements. The suite remains `TC-001` through `TC-122`; no `TC-123` is introduced. The synchronization updates 42 TCs at the assertion/traceability level and 22 additional TCs at the regression/scenario level. Final RTM synchronization is complete at `RTM-1.47`. See `AGCP-v2.1.x-FORMAL-TEST-CASE-SYNCHRONIZATION-UPDATE.md`, `v2.1.x-formal-test-sync.json`, and `../spec/AGCP-v2.1.x-RTM-SYNCHRONIZATION-UPDATE.md`.

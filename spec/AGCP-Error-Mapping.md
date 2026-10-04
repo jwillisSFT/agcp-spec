@@ -2,11 +2,11 @@
 
 **Status:** Normative  
 **Artifact Lifecycle:** Current  
-**Specification Version:** 2.0.8  
-**Repository Release Target:** AGCP v2.0.8  
+**Specification Version:** 2.1.0  
+**Repository Release Target:** AGCP v2.1.0  
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-14  
+**Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-08-15  
 **Series:** AGCP Core  
 **Scope:** HTTP status codes, rejection codes, and Governance Evidence behavior for the AGCP HTTP interface.
 
@@ -154,6 +154,20 @@ Notes:
 
 ---
 
+## 6A. Identity and Authorization Resolution Failures
+
+Approval ingress SHALL distinguish transport/authentication failure from authoritative human-eligibility failure.
+
+Applicable failures include:
+
+- authenticated subject cannot be resolved to the authoritative IAS record;
+- authoritative account is disabled, revoked, expired, suspended, or otherwise ineligible;
+- required role, group, entitlement, reviewer class, governance permission, delegation, or scope is absent or no longer current;
+- authoritative identity/authorization source is unavailable or cannot satisfy required freshness/integrity; and
+- claimant-supplied identity/authority fields conflict with authoritative resolution.
+
+These conditions SHALL produce non-execution and SHALL NOT create an authoritative approval/quorum contribution. Implementations SHOULD reuse an existing controlled rejection code when its semantics are exact. A new rejection code SHALL be introduced only through the controlled registry/schema change process.
+
 # 7. GET /agcp/v2/execution-authorizations/{authorization_id}
 
 | Failure Path | HTTP Status | rejection_code | Governance Evidence |
@@ -200,6 +214,20 @@ Notes:
 - Replay or reuse of consumed authorization SHALL fail.
 
 ---
+
+## 8A. Governance Realization and PEP Profile Failures
+
+Commit-bound processing SHALL fail closed when the GRF cannot establish a faithful protected enforcement realization. Applicable failures include:
+
+- selected PEP Profile is unavailable, invalid, expired, integrity-mismatched, or not applicable;
+- action/target combination is unsupported by the selected PEP Profile;
+- required proposal, authorization, state, lifecycle, target, or Enforcement Context binding cannot be preserved;
+- a proposed mapping would widen, approximate, substitute, or discard governance-significant semantics;
+- GRF-to-PEP authentication or protected channel requirements are not satisfied;
+- PEP rejects the request or is unavailable; or
+- PEP response cannot be mapped to a controlled AGCP enforcement/outcome state.
+
+A successful commit result establishes acceptance of the exact governed transition at the defined commitment point. It does not necessarily prove completion of a downstream asynchronous target operation. Target completion/failure SHALL be represented by the applicable later evidence/lifecycle semantics when distinct.
 
 # 9. GET /agcp/v2/governance-evidence/{evidence_id}
 

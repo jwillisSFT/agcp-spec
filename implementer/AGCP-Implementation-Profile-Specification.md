@@ -1,203 +1,201 @@
 # AGCP Implementation Profile Specification
 
-Status: Controlled Implementer Specification
-
-Version: `1.1.0`
-
-Schema: [`AGCP-Implementation-Profile-Schema.json`](./AGCP-Implementation-Profile-Schema.json)
+**Status:** Controlled implementer specification  
+**Profile Format Version:** 2.0.0  
+**Repository Release Target:** AGCP v2.1.x
 
 ## 1. Purpose
 
-This specification defines the controlled file format, validation rules, lifecycle rules, and cross-artifact consistency requirements for an AGCP Implementation Profile.
+An AGCP Implementation Profile declares how one implementation realizes the implementation-selectable portions of the AGCP architecture and normative specification. It binds a concrete runtime to controlled choices without weakening higher-precedence CR, Core, or adopted companion requirements.
 
-An Implementation Profile records stable implementation selections, supported capabilities, deployment constraints, interface mappings, trust boundaries, assurance limitations, and profile-specific verification obligations for one identified implementation. It does not replace the AGCP Core, create an alternate conformance model, or permit an implementation to weaken a higher-precedence AGCP obligation.
-
-Validation against the profile schema establishes **profile-format validity only**. It does not establish that the described implementation conforms to AGCP.
+The profile is generic with respect to customer, course, hosting provider, product, and deployment name. Deployment-specific profiles may be distributed separately.
 
 ## 2. Authority and precedence
 
-For files declaring profile format version `1.1.0`:
+An Implementation Profile is subordinate to published CRs, AGCP Core, and applicable adopted normative Companion Specifications. It SHALL NOT create an interpretation that weakens or contradicts those sources.
 
-1. the YAML profile is the authoritative machine-readable representation;
-2. the Markdown profile is its human-readable companion rendering;
-3. the JSON Schema is authoritative for profile serialization structure and data types;
-4. this specification is authoritative for serialization semantics, canonicalization, lifecycle, and cross-file consistency; and
-5. higher-precedence AGCP requirements remain controlling.
-
-When a profile conflicts with a published AGCP requirement, the profile is invalid to the extent of the conflict. The conflict shall be resolved through the controlled specification or profile change process and shall not be resolved by silently changing implementation behavior.
+The Architecture Reference Model and AGCP Trust Model define architectural vocabulary and trust relationships. They do not independently create conformance obligations.
 
 ## 3. Required package
 
-A controlled profile package shall contain:
+A controlled implementation profile package SHALL contain:
 
-```text
-implementer/
-├── AGCP-Implementation-Profile-Specification.md
-├── AGCP-Implementation-Profile-Schema.json
-├── <PROFILE-ID>.yaml
-└── <PROFILE-ID>.md
-```
+- authoritative YAML data conforming to `AGCP-Implementation-Profile-Schema.json`;
+- a human-readable Markdown rendering carrying the same decisions;
+- profile identity and semantic version;
+- AGCP baseline identity;
+- canonical digest; and
+- references to controlled subordinate profiles required by the implementation.
 
-The YAML profile shall validate before the Markdown companion is approved or published.
+Subordinate profile types standardized by this repository are:
+
+1. Identity and Authorization Store (IAS) Profile; and
+2. PEP Profile.
 
 ## 4. Artifact responsibilities
 
 ### 4.1 Format specification
 
-The format specification defines authority, precedence, serialization, canonicalization, lifecycle, extension handling, Markdown consistency, and controlled change procedures.
+This document defines the profile-format semantics.
 
 ### 4.2 JSON Schema
 
-The JSON Schema uses JSON Schema Draft 2020-12, rejects undeclared properties except under the controlled `extensions` namespace, and constrains mandatory sections, identifiers, versions, dates, digests, lifecycle values, and data types.
+`AGCP-Implementation-Profile-Schema.json` defines machine-validatable structure for format 2.0.0.
 
 ### 4.3 YAML profile
 
-The YAML profile is the source of truth for machine processing and shall contain only JSON-compatible data.
+YAML is the authoritative human-editable representation for controlled deployment profiles unless a published profile states another controlled representation.
 
 ### 4.4 Markdown profile
 
-The Markdown profile may add rationale, explanation, diagrams, and review guidance, but it shall not add, remove, or contradict a machine-readable profile decision.
+Markdown is the human-readable rendering and SHALL NOT contradict the authoritative data representation.
 
-## 5. YAML data-model rules
+## 5. Data-model rules
 
-A conforming profile YAML file shall:
+Profiles SHALL:
 
-- decode to one JSON object;
-- use UTF-8 and string object keys;
-- prohibit duplicate keys, custom tags, aliases, and merge keys;
-- prohibit non-finite numeric values;
-- quote date values so they remain JSON strings;
-- represent unresolved optional values as `null`;
-- contain no secrets, credentials, tokens, or private keys; and
-- validate after conversion to the JSON data model.
-
-Optional implementation-specific data may appear only in the top-level `extensions` object. Each extension key shall begin with `x-`.
+- use stable field names;
+- set explicit values for security- and conformance-significant choices;
+- reference secrets rather than embed them;
+- identify external controlled artifacts by identity/version/digest where integrity matters;
+- distinguish normative AGCP requirements from implementation choices; and
+- declare failure behavior for unavailable or unverifiable required dependencies.
 
 ## 6. Required top-level sections
 
-Format version `1.1.0` requires the following sections:
+Format 2.0.0 requires:
 
-| Section | Purpose |
-|---|---|
-| `$schema` | Identifies the controlling JSON Schema. |
-| `document` | Declares artifact type, format version, companion rendering, canonicalization, and digest. |
-| `profile` | Identifies owner, lifecycle, version, and approval authority. |
-| `baseline` | Pins the AGCP release and schema namespace. |
-| `conformance` | Declares target level, claim posture, enforcement scope, and exclusions. |
-| `intended_use` | States approved and prohibited uses. |
-| `implementation` | Defines the stable runtime and deployment architecture. |
-| `platform_topology` | Defines development, class-delivery, and scale-out node roles. |
-| `workspace_model` | Defines team workspaces, access, persistence, and privilege boundaries. |
-| `hosting_assurance_boundary` | Separates provider, operator, student, and unclaimed responsibilities. |
-| `interfaces` | Defines IF-001, routing, management, operations, and PEM interfaces. |
-| `trust_boundaries` | Defines command/record separation and authoritative-boundary rules. |
-| `identity` | Defines platform, workspace, runtime actor, and agent identity. |
-| `cryptography` | Defines signatures, canonicalization, digesting, replay, and key limits. |
-| `canonical_state` | Defines source locality, qualification, snapshotting, and resolution behavior. |
-| `schema_validation` | Defines whole-release build checks and route-specific runtime validation. |
-| `compilation_and_activation` | Separates validator generation from Governance Compilation and Controlled Activation. |
-| `pem_runtime` | Defines deterministic Policy Evaluation Module execution. |
-| `persistence` | Defines platform and governance stores, partitioning, atomicity, and concurrency. |
-| `background_processing` | Defines persistent or scheduled deferred work. |
-| `idempotency` | Defines key scope, request digesting, replay, and conflict behavior. |
-| `validation_pipeline` | Declares ordered request-validation stages. |
-| `http` | Declares HTTP, disclosure, throttling, and capacity behavior. |
-| `reevaluation` | Defines dependency-driven re-evaluation. |
-| `metadata` | Defines metadata generation and advertised state. |
-| `backup_and_recovery` | Defines integrity, off-provider copies, and restoration testing. |
-| `performance_qualification` | Defines class-capacity and failure-mode qualification. |
-| `operational_values` | Identifies mutable values delegated to deployment overlays and runbooks. |
-| `repository_corrections` | Records specification defects that are not implementation choices. |
-| `observed_evidence` | Records dated observations without upgrading them into conformance claims. |
-| `profile_specific_tests` | Declares additional verification imposed by the profile. |
-| `required_decision_records` | Declares ADR/IDR dependencies. |
-| `approval` | Records independent review gates. |
-| `revision_history` | Records controlled profile evolution. |
+- document;
+- profile;
+- baseline;
+- conformance;
+- intended_use;
+- implementation;
+- deployment_topology;
+- assurance_boundary;
+- interfaces;
+- trust_boundaries;
+- governance_functions;
+- identity_and_authorization;
+- cryptography;
+- canonical_state;
+- schema_validation;
+- compilation_and_activation;
+- pem_runtime;
+- enforcement;
+- persistence;
+- background_processing;
+- idempotency;
+- validation_pipeline;
+- http;
+- reevaluation;
+- metadata;
+- backup_and_recovery;
+- performance_qualification;
+- operational_values;
+- repository_corrections;
+- observed_evidence;
+- profile_specific_tests;
+- required_decision_records;
+- approval; and
+- revision_history.
 
 ## 7. Stable decisions and deployment overlays
 
-The base profile shall contain stable decisions that affect interoperability, trust boundaries, conformance scope, persistence semantics, validation behavior, identity binding, Canonical State locality, or assurance claims.
+The base profile SHALL contain stable implementation decisions. Environment-specific addresses, capacity values, secret references, and deployment overlays MAY be separated provided the controlling profile identifies their authority and precedence.
 
-Mutable environment-specific values belong in controlled deployment overlays or runbooks. Examples include provider account, region, product name, hostnames, IP addresses, certificates, exact software versions, absolute paths, quotas, resource limits, backup schedules, telemetry sinks, service-level objectives, and incident contacts.
-
-A profile may name a current provider product as a deployment overlay, but the profile shall also state the minimum node class and shall not treat provider branding as an AGCP requirement.
+An overlay SHALL NOT change the semantic identity of the profile without the change-control process required by Section 16.
 
 ## 8. Canonicalization and profile digest
 
-The profile content digest is calculated as follows:
+The profile SHALL define its canonicalization and content-digest rules. Format 2.0.0 uses RFC 8785 JCS over the authoritative normalized profile representation unless a future profile-format version states otherwise.
 
-1. parse the YAML into the JSON data model;
-2. make a deep copy;
-3. remove `document.digest.value` from the copy;
-4. serialize the remaining object using RFC 8785 JSON Canonicalization Scheme;
-5. hash the canonical UTF-8 bytes with SHA-256; and
-6. store the lowercase hexadecimal result in `document.digest.value`.
+The digest SHALL bind every security- or conformance-significant profile decision except the digest value itself.
 
-The digest scope identifier shall be `PROFILE_DOCUMENT_EXCLUDING_DOCUMENT_DIGEST_VALUE`.
+## 9. Deployment and runtime boundary
 
-## 9. Team workspace and local-runtime rules
+The profile SHALL identify:
 
-A profile that places AGCP in a team workspace shall explicitly identify:
+- deployment pattern and runtime units;
+- process/service placement relevant to AGCP functions;
+- network or IPC trust boundaries relevant to the claim;
+- persistent-state boundaries;
+- operator-managed and external-provider-managed responsibilities; and
+- explicit exclusions from the assurance claim.
 
-- the workspace platform and provisioning mechanism;
-- whether the workspace is individual or shared;
-- how individually authenticated students receive access;
-- whether the workspace operating-system identity is sufficient for AGCP actor attribution;
-- which paths are student-writable and which are operator-protected;
-- whether students receive host root, `sudo`, privileged containers, or the host container socket;
-- where the governance runtime, Canonical State sources, PEP, governed targets, ledger, and evidence reside; and
-- whether a central control node is required for synchronous governance.
+AGCP does not require a particular host, cloud, container platform, IDE, workspace product, or orchestration technology.
 
-A shared shell or shared operating-system account shall not be treated as an authoritative individual actor identity unless an approved identity-binding mechanism establishes the individual subject for each governed operation.
+## 10. Governance function placement
 
-## 10. Scale-out rules
+The profile SHALL declare the placement of:
 
-A multi-node profile shall distinguish vertical scale-up from horizontal scale-out. It shall identify stable team-to-node assignment, stateful workspace placement, migration behavior, control-plane dependencies, and whether adding a node interrupts existing workspaces.
+- Proposal Qualification;
+- Governance Decision Function / PDP;
+- Execution Authorization;
+- Governance Realization Function (GRF);
+- PEP; and
+- governed target/adapter.
 
-Planning capacity is not a conformance claim. Published class capacity requires representative load evidence using the complete workspace image and realistic simultaneous build and multi-agent execution workloads.
+The profile SHALL state whether GDF/PDP and GRF are co-located or independently deployed. If they cross an authentication boundary, the profile SHALL identify the protected interface and workload-identity requirements.
 
-## 11. Identity rules
+Co-location SHALL NOT collapse their logical responsibilities.
 
-Platform login, workspace access, human runtime identity, and agent identity are separate concerns and shall be represented separately.
+## 11. Identity and authorization rules
 
-Individual student accounts are required. Shared credentials are prohibited. A platform login alone does not prove the human actor represented in an AGCP proposal, approval, activation, or other governed record. The runtime actor token or signature shall bind the subject, team, workspace, audience, issuer, and applicable scopes.
+The profile SHALL identify authentication mechanisms for relevant human and workload principals and SHALL reference an IAS Profile when governance-significant identity-system authorization or entitlement information is used.
 
-Agent instances shall use distinct registered identities and shall not inherit authority solely from the human account that launched them.
+The IAS Profile may resolve identity, account state, Tenant/Domain membership, roles, groups, entitlements, reviewer classes, governance permissions, scopes, delegation/authority attributes, and validity.
+
+IAS authorization/entitlement data is governance input. It is not AGCP Execution Authorization and does not itself produce a Governance Decision.
+
+The profile SHALL define where IAS resolution occurs, required freshness, failure behavior, and which functions consume the qualified result.
 
 ## 12. Canonical State locality
 
-A profile shall state where synchronous Canonical State is resolved. Central reporting, assessment, backup, or administration copies shall not become authoritative merely because they are centralized.
-
-Student submissions and agent reports are commands, claims, or observations until qualified. External sources may be used only through approved adapters that create provenance-bound, freshness-bounded, replayable snapshots.
+The profile SHALL identify authoritative Canonical State source classes, qualification boundaries, freshness rules, conflict policy, and locality/remote-resolution assumptions relevant to deterministic governance.
 
 ## 13. Whole-schema-set and runtime validation
 
-A profile that uses AGCP JSON Schemas shall distinguish controlled build processing of the complete pinned schema graph from request-time validation of the operation-specific entry schema and reachable dependencies.
-
-Schema-validator generation is not AGCP Governance Compilation. Governance Compilation and Controlled Governance Activation remain separate processes.
+The profile SHALL identify the schema set and validator set used by the implementation and any integrity bindings exposed through runtime metadata.
 
 ## 14. Lifecycle and approval
 
-Profile lifecycle values are `PROPOSED`, `APPROVED`, `ACTIVE`, `SUPERSEDED`, and `RETIRED`. Profile status values are `DEVELOPMENT_PRE_CONFORMANCE`, `CANDIDATE`, `APPROVED`, and `RETIRED`.
+The profile SHALL declare supported lifecycle capabilities, human-review behavior, commitment semantics, and whether commitment and target execution are atomic or distinct.
 
-A profile may be structurally valid while remaining proposed or pre-conformance. Approval requires resolution of applicable repository corrections, completion of required decision records, objective verification evidence, and approval of all required review gates.
+When human approval is supported, the profile SHALL bind approval identity/eligibility to the IAS Profile and the Human Adjudication and Governance Approval Specification.
 
-## 15. Markdown consistency
+## 15. Enforcement realization and PEP Profiles
 
-The Markdown companion shall reproduce, at minimum:
+For every governed consequence in claimed enforcement scope, the profile SHALL identify the applicable PEP and reference one or more controlled PEP Profiles.
 
-- profile ID, version, lifecycle, and status;
-- authoritative YAML filename, schema filename, format version, and canonical digest;
-- pinned AGCP baseline and digest;
-- conformance posture, scope, exclusions, and intended use;
-- node topology and scale-out model;
-- team workspace, student access, and privilege model;
-- runtime locality and Canonical State model;
-- identity and agent-binding model;
-- schema validation, persistence, backup, performance, and assurance limitations;
-- unresolved decision records and approval gates; and
-- revision history.
+The profile SHALL define deterministic PEP Profile selection using governance-controlled information. A proposer SHALL NOT be able to select a broader/weaker PEP Profile arbitrarily.
+
+The profile SHALL define:
+
+- GRF-to-PEP authentication/trust requirements;
+- PEP endpoint/interface binding;
+- PEP-to-target authority boundary;
+- target credential references;
+- non-bypassability scope;
+- commitment versus asynchronous execution semantics; and
+- evidence/receipt expectations.
+
+The GRF applies the PEP Profile. The PEP Profile SHALL NOT reinterpret or widen the Governance Decision or commit-eligible transition.
 
 ## 16. Change control
 
-A new profile revision is required for a material change to the execution model, node topology, workspace isolation, identity contract, persistence model, cryptographic contract, public interface mapping, PEM runtime, enforcement boundary, Canonical State model, or production-use authorization.
+A profile version change is required when a security-, conformance-, or interoperability-significant decision changes, including:
+
+- IAS Profile identity/version/digest;
+- authoritative identity/entitlement source or mapping;
+- GDF/PDP or GRF placement/trust boundary;
+- PEP Profile identity/version/digest or selection logic;
+- action/target enforcement mapping;
+- PEP-to-target authority;
+- canonical-state source or conflict rules;
+- policy/PEM execution contract;
+- cryptographic trust anchors or required algorithms;
+- commitment semantics; or
+- claimed enforcement/conformance scope.
+
+Backward-compatible editorial changes may use a patch increment. Changes to required data-model structure require a profile-format version change.

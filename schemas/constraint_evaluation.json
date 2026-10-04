@@ -46,7 +46,9 @@
       "NS-7.6A-01",
       "NS-10.5-01",
       "NS-10.5-02",
-      "NS-10.7-01"
+      "NS-10.7-01",
+      "NS-6.4-04",
+      "NS-6.6A-03"
     ],
     "conformance_requirements": [
       "CR-001",
@@ -56,7 +58,9 @@
       "CR-066",
       "CR-075",
       "CR-076",
-      "CR-078"
+      "CR-078",
+      "CR-005",
+      "CR-045"
     ]
   },
   "type": "object",
@@ -150,10 +154,14 @@
               "TARGET",
               "TENANT_DOMAIN",
               "PROPOSAL",
-              "CONSTRAINT"
+              "CONSTRAINT",
+              "IDENTITY_AUTHORIZATION"
             ]
           },
-          "maxItems": 11
+          "maxItems": 12
+        },
+        "identity_authorization": {
+          "$ref": "#/$defs/qualified_dimension_status"
         }
       },
       "required": [
@@ -169,7 +177,8 @@
         "authority",
         "lifecycle",
         "all_required_inputs_qualified",
-        "unqualified_required_dimensions"
+        "unqualified_required_dimensions",
+        "identity_authorization"
       ],
       "allOf": [
         {
@@ -259,6 +268,14 @@
         },
         "evaluation_input_set_digest": {
           "$ref": "common.json#/$defs/content_digest"
+        },
+        "identity_authorization_qualification_result_digests": {
+          "type": "array",
+          "items": {
+            "$ref": "common.json#/$defs/content_digest"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       },
       "required": [
@@ -736,6 +753,16 @@
     },
     "extensions": {
       "$ref": "#/$defs/namespaced_extensions"
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true,
+      "description": "DS-053 authoritative identity/authorization qualifications consumed by the evaluation when required."
     }
   },
   "required": [
@@ -1125,6 +1152,37 @@
         "required": [
           "rejection_code"
         ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input_qualification": {
+            "properties": {
+              "identity_authorization": {
+                "const": "QUALIFIED"
+              }
+            },
+            "required": [
+              "identity_authorization"
+            ]
+          }
+        },
+        "required": [
+          "input_qualification"
+        ]
+      },
+      "then": {
+        "required": [
+          "identity_authorization_qualification_result_refs"
+        ],
+        "properties": {
+          "qualified_input_hashes": {
+            "required": [
+              "identity_authorization_qualification_result_digests"
+            ]
+          }
+        }
       }
     }
   ]

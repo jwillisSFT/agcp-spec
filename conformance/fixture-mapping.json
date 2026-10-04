@@ -1,12 +1,12 @@
 {
   "fixture_catalog_id": "AGCP-CONFORMANCE-FIXTURES-1.0",
-  "specification_version": "v2.0.8",
+  "specification_version": "v2.0.1",
   "interface_id": "IF-001",
   "interface_version": "v2",
   "schema_catalog": "schemas/catalog/schema-catalog.json",
   "schema_catalog_version": "1.0.50",
   "validation_rule": "Every example_file SHALL validate against the exact schema_file before harness execution. Fixture resolution SHALL occur before OpenAPI request validation.",
-  "fixture_count": 30,
+  "fixture_count": 36,
   "fixtures": [
     {
       "fixture_id": "FX-DS011-SATISFIED",
@@ -70,7 +70,7 @@
       "schema_file": "schemas/commit_boundary_request.json",
       "example_file": "schemas/examples/ds018-commit-boundary-request-single.json",
       "expected_validation": "VALID",
-      "purpose": "Current single-transition Commit Boundary request using canonical Enforcement Context.",
+      "purpose": "Current single-transition Commit Boundary request that identifies the prior decision/authorization and target while leaving current authority, current qualified evidence, PEP Profile selection, and DS-029 Enforcement Context construction to the GRF.",
       "harness_test_vectors": [
         "TV-COMMIT-001",
         "TV-COMMIT-002",
@@ -451,6 +451,96 @@
       "semantic_validation": {
         "status": "STRUCTURAL_ONLY_OR_SEPARATELY_VALIDATED"
       }
+    },
+    {
+      "fixture_id": "FX-DS052-PENDING",
+      "ds_id": "DS-052",
+      "schema_file": "schemas/governed_execution_outcome.json",
+      "example_file": "schemas/examples/ds052-governed-execution-outcome-pending.json",
+      "expected_validation": "VALID",
+      "purpose": "Governed Execution Outcome pending after successful commitment.",
+      "harness_test_vectors": [
+        "TV-EXEC-001"
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-v2.1.x-IAS-EXECUTION-OUTCOME-SEMANTICS"
+      }
+    },
+    {
+      "fixture_id": "FX-DS052-SUCCEEDED",
+      "ds_id": "DS-052",
+      "schema_file": "schemas/governed_execution_outcome.json",
+      "example_file": "schemas/examples/ds052-governed-execution-outcome-success.json",
+      "expected_validation": "VALID",
+      "purpose": "Governed Execution Outcome successful completion after commitment.",
+      "harness_test_vectors": [
+        "TV-EXEC-001"
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-v2.1.x-IAS-EXECUTION-OUTCOME-SEMANTICS"
+      }
+    },
+    {
+      "fixture_id": "FX-DS052-FAILED",
+      "ds_id": "DS-052",
+      "schema_file": "schemas/governed_execution_outcome.json",
+      "example_file": "schemas/examples/ds052-governed-execution-outcome-failed.json",
+      "expected_validation": "VALID",
+      "purpose": "Governed Execution Outcome failed operational completion after commitment.",
+      "harness_test_vectors": [
+        "TV-EXEC-002"
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-v2.1.x-IAS-EXECUTION-OUTCOME-SEMANTICS"
+      }
+    },
+    {
+      "fixture_id": "FX-DS053-QUALIFIED",
+      "ds_id": "DS-053",
+      "schema_file": "schemas/identity_authorization_qualification_result.json",
+      "example_file": "schemas/examples/ds053-identity-authorization-qualified.json",
+      "expected_validation": "VALID",
+      "purpose": "Qualified authoritative identity and authorization result.",
+      "harness_test_vectors": [
+        "TV-IAS-001"
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-v2.1.x-IAS-EXECUTION-OUTCOME-SEMANTICS"
+      }
+    },
+    {
+      "fixture_id": "FX-DS053-NOT-QUALIFIED",
+      "ds_id": "DS-053",
+      "schema_file": "schemas/identity_authorization_qualification_result.json",
+      "example_file": "schemas/examples/ds053-identity-authorization-not-qualified.json",
+      "expected_validation": "VALID",
+      "purpose": "Identity and authorization result that does not establish required governance authority.",
+      "harness_test_vectors": [
+        "TV-IAS-002"
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-v2.1.x-IAS-EXECUTION-OUTCOME-SEMANTICS"
+      }
+    },
+    {
+      "fixture_id": "FX-DS053-SOURCE-UNAVAILABLE",
+      "ds_id": "DS-053",
+      "schema_file": "schemas/identity_authorization_qualification_result.json",
+      "example_file": "schemas/examples/ds053-identity-authorization-source-unavailable.json",
+      "expected_validation": "VALID",
+      "purpose": "Identity and authorization qualification source unavailable result.",
+      "harness_test_vectors": [
+        "TV-IAS-003"
+      ],
+      "semantic_validation": {
+        "status": "REQUIRED",
+        "rule_set_id": "AGCP-v2.1.x-IAS-EXECUTION-OUTCOME-SEMANTICS"
+      }
     }
   ],
   "last_validated_date": "2026-08-03",
@@ -458,5 +548,18 @@
   "semantic_vector_catalog": "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json",
   "claimant_assertion_vector_catalog": "conformance/command-record/AGCP-Governance-Approval-Command-Record-Test-Vectors.json",
   "semantic_fixture_count": 14,
-  "rtm_dataset_version": "RTM-1.46"
+  "rtm_dataset_version": "RTM-1.47",
+  "v2_1_x_synchronization": {
+    "id": "AGCP-v2.1.x-HARNESS-VECTOR-CHECK-SYNC-2026-10-03",
+    "fixture_count": 36,
+    "added_fixture_ids": [
+      "FX-DS052-PENDING",
+      "FX-DS052-SUCCEEDED",
+      "FX-DS052-FAILED",
+      "FX-DS053-QUALIFIED",
+      "FX-DS053-NOT-QUALIFIED",
+      "FX-DS053-SOURCE-UNAVAILABLE"
+    ]
+  },
+  "final_rtm_synchronization_id": "AGCP-v2.1.x-FINAL-RTM-SYNCHRONIZATION-2026-10-03"
 }

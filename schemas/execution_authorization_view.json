@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/execution_authorization_view.json",
   "title": "Execution Authorization View",
-  "description": "Canonical externally observable representation of an AGCP Execution Authorization. It binds an authorization outcome to the canonical proposal, Governance Decision Result, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified evidence, Authority Lineage, lifecycle, scope, and validity conditions. Execution Authorization is eligibility evidence for Commit Boundary processing; it is neither authority at commitment nor permission to execute.",
+  "description": "Canonical externally observable representation of an AGCP Execution Authorization. It binds an authorization outcome to the canonical proposal, Governance Decision Result, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified evidence, Authority Lineage, lifecycle, scope, and validity conditions. Execution Authorization is eligibility evidence for Commit Boundary processing; it is neither authority at commitment nor permission to execute. The authorization is consumed by Governance Realization and remains subject to current Authority Re-Derivation, Commit-Bound Admissibility, and PEP mediation.",
   "$comment": "DS-017 validates the structure and internal consistency of Execution Authorization. Current authority must still be re-derived at commitment through DS-034 and all bindings must be revalidated through DS-030.",
   "x-agcp-ds-id": "DS-017",
   "x-agcp-lifecycle-state": "Implemented",
@@ -31,7 +31,14 @@
       "NS-9.3-01",
       "NS-9.3-02",
       "NS-9.4-01",
-      "NS-9.4-02"
+      "NS-9.4-02",
+      "NS-8.1-01",
+      "NS-8.1-03",
+      "NS-8.4-03",
+      "NS-8.6-02",
+      "NS-8.6A-04",
+      "NS-8.6A-05",
+      "NS-8.6A-06"
     ],
     "conformance_requirements": [
       "CR-019",
@@ -48,7 +55,9 @@
       "CR-061",
       "CR-079",
       "CR-080",
-      "CR-084"
+      "CR-084",
+      "CR-096",
+      "CR-102"
     ]
   },
   "type": "object",
@@ -82,7 +91,8 @@
       "$ref": "common.json#/$defs/execution_authorization_outcome_enum"
     },
     "authorized_for_commit_boundary": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "True only when the authorization permits progression toward Governance Realization / Commit Boundary processing. It is not current commit eligibility or permission to execute."
     },
     "issued_at": {
       "$ref": "common.json#/$defs/timestamp_rfc3339"
@@ -218,6 +228,15 @@
       },
       "additionalProperties": true,
       "maxProperties": 64
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
     }
   },
   "required": [

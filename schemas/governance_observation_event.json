@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agcp.ai/schemas/governance_observation_event.json",
+  "title": "AGCP Governance Observation Event",
+  "description": "Read-only attributable observation emitted by an AGCP Governance Observation Point. Observation records support correlation to management/test-control causes and to the authoritative runtime sources actually consumed by governed processing.",
+  "type": "object",
+  "required": [
+    "observation_id",
+    "observation_version",
+    "observation_type",
+    "control_plane_stage",
+    "observed_at",
+    "implementation_id",
+    "subject_ref",
+    "authoritative",
+    "summary",
+    "observation_digest"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "observation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observation_version": {
+      "const": "1.1"
+    },
+    "observation_type": {
+      "enum": [
+        "PROPOSAL_INGRESS",
+        "PROPOSAL_QUALIFICATION",
+        "CANONICAL_STATE_RESOLUTION",
+        "STATE_QUALIFICATION",
+        "EVIDENCE_QUALIFICATION",
+        "GOVERNANCE_DECISION",
+        "HUMAN_REVIEW",
+        "AUTHORITY_REDERIVATION",
+        "EXECUTION_AUTHORIZATION",
+        "CONTINUATION_INTEGRITY",
+        "GOVERNANCE_DEGRADATION",
+        "COMMIT_BOUND_ADMISSIBILITY",
+        "GOVERNANCE_BINDING_VALIDATION",
+        "GOVERNANCE_REALIZATION",
+        "PEP_ENFORCEMENT",
+        "RESULTING_STATE_VALIDATION",
+        "GOVERNANCE_EVIDENCE",
+        "LEDGER_APPEND",
+        "DERIVED_LIFECYCLE_STATE",
+        "IDENTITY_AUTHORIZATION_QUALIFICATION",
+        "COMMITMENT_ACCEPTED",
+        "EXECUTION_OUTCOME"
+      ]
+    },
+    "control_plane_stage": {
+      "enum": [
+        "IDENTITY_CONTEXT",
+        "ACTION_REPRESENTATION",
+        "RULE_EVALUATION",
+        "COMMIT_SEMANTICS",
+        "AUDIT_LIFECYCLE",
+        "AUTHORITY_QUALIFICATION",
+        "GOVERNANCE_REALIZATION",
+        "ENFORCEMENT"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "implementation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "test_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caused_by_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "condition_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "authoritative": {
+      "type": "boolean"
+    },
+    "details": {
+      "type": "object"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observation_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-10.3-01",
+      "NS-10.4-01"
+    ],
+    "conformance_requirements": [
+      "CR-047",
+      "CR-067",
+      "CR-068"
+    ]
+  }
+}

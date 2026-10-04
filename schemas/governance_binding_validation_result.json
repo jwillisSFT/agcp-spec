@@ -28,12 +28,20 @@
       "NS-9.6A-02",
       "NS-9.6A-04",
       "NS-9.6B-03",
-      "NS-9.6B-05"
+      "NS-9.6B-05",
+      "NS-9.4-07",
+      "NS-9.4-08",
+      "NS-9.6A-05",
+      "NS-9.6A-06"
     ],
     "conformance_requirements": [
       "CR-102",
       "CR-107",
-      "CR-109"
+      "CR-109",
+      "CR-022",
+      "CR-119",
+      "CR-120",
+      "CR-121"
     ]
   },
   "type": "object",
@@ -787,6 +795,24 @@
         },
         "binding_digest": {
           "$ref": "common.json#/$defs/content_digest"
+        },
+        "pep_profile_ref": {
+          "$ref": "common.json#/$defs/pep_profile_ref"
+        },
+        "enforcement_context_ref": {
+          "$ref": "enforcement_context.json#/$defs/enforcement_context_ref"
+        },
+        "identity_authorization_qualification_result_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+          },
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "grf_caller_binding_digest": {
+          "$ref": "common.json#/$defs/content_digest"
         }
       },
       "required": [
@@ -806,7 +832,8 @@
         "governance_version_ref",
         "governance_configuration_ref",
         "bind_conditions",
-        "binding_digest"
+        "binding_digest",
+        "pep_profile_ref"
       ]
     },
     "comparison_basis": {

@@ -1,9 +1,9 @@
 {
   "catalog_id": "DS-CATALOG-1.0",
   "title": "AGCP Data Schema Catalog",
-  "description": "Authoritative catalog and DS namespace assignment for implemented and proposed AGCP JSON Schemas.",
-  "specification_version": "v2.0.8",
-  "catalog_version": "1.0.50",
+  "description": "Authoritative catalog and DS namespace assignment for implemented and proposed AGCP JSON Schemas. v2.1.x synchronization adds DS-052 Governed Execution Outcome and DS-053 Identity and Authorization Qualification Result and aligns commitment, GRF/PEP, IAS, and enforcement-profile semantics.",
+  "specification_version": "v2.1.0",
+  "catalog_version": "1.0.10",
   "publication_status": "CURRENT",
   "created_date": "2026-07-22",
   "authoritative_source": "AGCP Schema Repository",
@@ -15,14 +15,14 @@
     "canonical_uri_policy": "Implemented and proposed schemas use https://agcp.ai/schemas/<filename> as the canonical URI."
   },
   "summary": {
-    "implemented_schema_count": 44,
+    "implemented_schema_count": 52,
     "proposed_reserved_schema_count": 0,
     "excluded_registry_payload_count": 0,
     "rtm_rows_with_ds_assignments": 122,
-    "highest_assigned_ds_identifier": "DS-045",
-    "implemented_count": 44,
+    "highest_assigned_ds_identifier": "DS-053",
+    "implemented_count": 52,
     "proposed_reserved_count": 0,
-    "total_assigned_count": 45,
+    "total_assigned_count": 53,
     "retired_schema_count": 1,
     "retired_count": 1,
     "rtm_rows_with_explicit_ds_disposition": 122,
@@ -30,8 +30,9 @@
     "rtm_rows_with_explicit_if_disposition": 122,
     "rtm_rows_with_reg_assignments": 117,
     "rtm_rows_with_explicit_reg_disposition": 122,
-    "interface_definition_count": 2,
-    "registry_entry_count": 94
+    "interface_definition_count": 5,
+    "registry_entry_count": 101,
+    "highest_assigned_ds_id": "DS-053"
   },
   "implemented_schemas": [
     {
@@ -40,13 +41,13 @@
       "repository_path": "schemas/common.json",
       "canonical_uri": "https://agcp.ai/schemas/common.json",
       "title": "AGCP Common Types",
-      "description": "Shared JSON Schema definitions actively required by the AGCP v2.0 schema set. This clean library contains only definitions referenced by implemented schemas or by retained shared definitions; canonical domain objects and result objects are defined in their assigned DS schemas.",
+      "description": "Shared JSON Schema definitions actively required by the AGCP v2.0 schema set. Canonical domain objects and result/reference definitions are owned by their assigned DS schemas; backward-compatibility aliases are not retained.",
       "category": "Common Infrastructure",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-006",
         "DS-007",
@@ -99,7 +100,10 @@
         "DS-042",
         "DS-043",
         "DS-044",
-        "DS-045"
+        "DS-045",
+        "DS-050",
+        "DS-052",
+        "DS-053"
       ],
       "rtm_mapping_basis": "RTM-00005 / CR-005 maps the canonical provenance wire schema and IF-001. RTM-00042, RTM-00052, RTM-00064, and RTM-00066 map the generic algorithm-explicit content-digest contract for replay, Canonical State, evidence, and receipt integrity.",
       "rtm_ids": [
@@ -159,33 +163,10 @@
         "ARM-804"
       ],
       "ns_ids": [
-        "NS-10.5-01",
-        "NS-10.5-02",
-        "NS-10.7-01",
-        "NS-10.8A-01",
-        "NS-10.8A-02",
-        "NS-10.8A-03",
-        "NS-4.6-01",
-        "NS-4.6-02",
-        "NS-4.6-03",
-        "NS-4.6-04",
-        "NS-6.6A-01",
-        "NS-6.6A-02",
-        "NS-7.6A-01",
-        "NS-7.6A-02",
-        "NS-7.6A-03",
-        "NS-8.6A-01",
-        "NS-8.6A-02",
-        "NS-8.6A-03",
-        "NS-9.6A-01",
-        "NS-9.6A-02",
-        "NS-9.6A-03",
-        "NS-9.6A-04",
-        "NS-9.6B-01",
-        "NS-9.6B-02",
-        "NS-9.6B-03",
-        "NS-9.6B-04",
-        "NS-9.6B-05"
+        "NS-4.12A-01",
+        "NS-4.12A-02",
+        "NS-9.5-05",
+        "NS-17.5-04"
       ],
       "cr_ids": [
         "CR-005",
@@ -194,10 +175,10 @@
         "CR-064",
         "CR-066"
       ],
-      "sha256": "04e941f373c33df16431382be6f44fc3c0688615aa0a5e9a908ff21dad3f204d",
+      "sha256": "4e19559269e8183814087beca5b098b12e761a7f013513d430350bfab4328ec4",
       "assigned_date": "2026-07-22",
       "notes": "Canonical AGCP shared-definition library. Provenance is synchronized with the normative wire format. P1-12 binds every supported content-digest algorithm to an exact lowercase-hexadecimal output length and deprecates algorithm-implicit hash_hex for new contracts. Reverse dependency metadata remains synchronized to the active graph.",
-      "last_modified_date": "2026-08-03"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-002",
@@ -205,13 +186,13 @@
       "repository_path": "schemas/error_response.json",
       "canonical_uri": "https://agcp.ai/schemas/error_response.json",
       "title": "AGCP ErrorResponse",
-      "description": "Standard error response for AGCP HTTP interfaces. Rejection codes SHALL be defined by the AGCP rejection-code registry.",
+      "description": "Standard IF-001 error response. Public protected-resource lookup failures use RESOURCE_NOT_FOUND. Pre-governance throttling uses REQUEST_THROTTLED with HTTP 429 and Retry-After. Processing capacity unavailable before governance begins uses CAPACITY_UNAVAILABLE with HTTP 503. These transport/application errors are not Governance Outcomes.",
       "category": "Common Infrastructure",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-028"
@@ -275,7 +256,7 @@
       "sha256": "1523cb73d1c8c91906c06ec52476d75ec7bb8eb28af61caad7635b2fee1ef766",
       "assigned_date": "2026-07-22",
       "notes": "v2.0.4 P1-03/P1-09 correction: public 404 is normalized to RESOURCE_NOT_FOUND; REQUEST_THROTTLED requires 429 plus Retry-After; CAPACITY_UNAVAILABLE uses 503; transport/service conditions are not Governance Outcomes.",
-      "last_modified_date": "2026-08-03"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-003",
@@ -283,13 +264,13 @@
       "repository_path": "schemas/meta_response.json",
       "canonical_uri": "https://agcp.ai/schemas/meta_response.json",
       "title": "AGCP Implementation Metadata Response",
-      "description": "Canonical, attributable, integrity-protected implementation-capability and release-advertisement response for AGCP interface discovery. DS-003 identifies the implementation release, supported AGCP specification releases, complete integrity-bound schema set, implementation profile, supported registry releases, claimed conformance levels and scope, supported governance capabilities, and implemented HTTP contract without expanding normative behavior, creating authority, or implying conformance beyond demonstrated evidence.",
+      "description": "Canonical DS-003 implementation metadata response. It advertises immutable AGCP baseline identity and digest, implementation profile identity and digest, schema and validator set integrity, active governance version, registries, conformance and capability claims, IF-001 contract identity, and optional public-safe deployment binding.",
       "category": "Common Infrastructure",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -298,9 +279,22 @@
       "dependent_schemas": [],
       "rtm_mapping_basis": "Direct implementation-conformance discovery mapping for claimed AGCP semantics and cross-implementation interoperability; DS-003 exposes explicit release, profile, schema-set, registry, conformance, capability, and interface evidence.",
       "rtm_ids": [
+        "RTM-00010",
+        "RTM-00022",
+        "RTM-00026",
+        "RTM-00030",
+        "RTM-00041",
+        "RTM-00048",
+        "RTM-00050",
+        "RTM-00068",
+        "RTM-00070",
+        "RTM-00073",
+        "RTM-00080",
         "RTM-00089",
         "RTM-00090",
-        "RTM-00073"
+        "RTM-00110",
+        "RTM-00113",
+        "RTM-00120"
       ],
       "arm_ids": [
         "ARM-701",
@@ -332,17 +326,31 @@
         "NS-17.9-01",
         "NS-17.9-02",
         "NS-17.10-01",
-        "NS-17.10-02"
+        "NS-17.10-02",
+        "NS-17.5-04"
       ],
       "cr_ids": [
+        "CR-010",
+        "CR-022",
+        "CR-026",
+        "CR-030",
+        "CR-041",
+        "CR-048",
+        "CR-050",
+        "CR-068",
+        "CR-070",
+        "CR-073",
+        "CR-080",
         "CR-089",
         "CR-090",
-        "CR-073"
+        "CR-110",
+        "CR-113",
+        "CR-120"
       ],
-      "sha256": "d9d572a6e9beaa89ca46683875cc8cc606f30b723d9a7a4d9c4453a103265276",
+      "sha256": "c8e034931dded953522a687ef1d84833e74f3855933145082b89b17ec3aecab6",
       "assigned_date": "2026-07-22",
       "notes": "v2.0.4 P1-14/P1-17 correction: metadata advertises immutable baseline and profile digests, schema and validator-set integrity, active governance version, IF-001 identity, and optional public-safe deployment binding.",
-      "last_modified_date": "2026-08-03"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-004",
@@ -350,13 +358,13 @@
       "repository_path": "schemas/tenant.json",
       "canonical_uri": "https://agcp.ai/schemas/tenant.json",
       "title": "AGCP Tenant Governance Record",
-      "description": "Canonical, attributable, versioned, integrity-protected Tenant governance record. DS-004 records the authoritative Tenant operational state and state version, append-only state history and transition basis, active and historical Governance Configuration versions, Tenant Governance Evidence, explicit Tenant and Governance Domain Isolation controls, registry bindings, and complete record integrity. It does not itself establish authority at commitment, authorize execution, or override Canonical State.",
+      "description": "Canonical, attributable, versioned, integrity-protected Tenant governance record. DS-004 records the authoritative Tenant operational state and state version, append-only state history and transition basis, active and historical Governance Configuration versions, Tenant Governance Evidence, explicit Tenant and Governance Domain Isolation controls, registry bindings, and complete record integrity. It does not itself establish authority at commitment, authorize execution, or override Canonical State. Tenant/domain isolation extends through authoritative identity/authorization qualification, Governance Realization, PEP Profile selection, Enforcement Context, and PEP-mediated target authority where those mechanisms are in scope.",
       "category": "Common Infrastructure",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -423,10 +431,10 @@
         "CR-029",
         "CR-030"
       ],
-      "sha256": "c2c3b62db212ef9405a56ed0bc7164214278a4d1e0d8265ceb82173a122f3137",
+      "sha256": "dc3741e97f9693a6d86a9939f03bf19e474d9ffd4302976bef0adb0d1aff5ad8",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for AGCP v2.0. DS-004 now records authoritative Tenant state and version, append-only attributable state history and transition basis, active and historical Governance Configuration versions, Tenant Governance Evidence, explicit isolation controls, registry bindings, provenance, signature, digest, and replay material. Unrestricted metadata and the shared Tenant-state alias were removed.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-005",
@@ -434,13 +442,13 @@
       "repository_path": "schemas/policy_evaluation_module_artifact.json",
       "canonical_uri": "https://agcp.ai/schemas/policy_evaluation_module_artifact.json",
       "title": "Policy Evaluation Module Artifact",
-      "description": "Canonical attributable, versioned, integrity-protected Policy Evaluation Module artifact binding deterministic runtime representation and interface contract to source policies, Governance Configuration, validated compilation, dependency and lineage evidence, Constitutional Validation, Governance Omission Analysis, Governance Self-Protection, Controlled Governance Activation, and Governance Version.",
+      "description": "Canonical attributable, versioned, integrity-protected representation of a Policy Evaluation Module (PEM) artifact used to evaluate compiled governance policy semantics. DS-005 binds the module to source policies, Governance Configuration, deterministic Compilation Context, validated dependencies, Governance Artifact Lineage, Constitutional Validation, Governance Omission Analysis, Governance Self-Protection, Controlled Governance Activation, and Governance Version without itself establishing authority at commitment, determining Commit-Bound Admissibility, authorizing execution, activating governance, or committing a transition. Policy Evaluation Modules implement deterministic Governance Decision Function/PDP evaluation. They may consume DS-053 qualified identity/authorization input through declared schema bindings but do not perform Governance Realization or PEP enforcement.",
       "category": "Governance Artifact",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -492,10 +500,10 @@
         "CR-114",
         "CR-117"
       ],
-      "sha256": "391efa65a1364fe83f8ab8f73c1e6cb594820216fde6768c2ae89a2fb574b502",
+      "sha256": "9ca75412c61826181691432b4ac562887220467872f7b20204a4ae25c681d164",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for AGCP v2.0. DS-005 owns the canonical Policy Evaluation Module artifact and integrity-bound reference. It records deterministic runtime and interface contracts; source policy, configuration, registry, compilation-context, build, dependency, lineage, validation, self-protection, activation, Governance Version, evidence, integrity, and replay bindings without itself establishing authority, admissibility, execution authorization, activation, or commitment.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-006",
@@ -503,13 +511,13 @@
       "repository_path": "schemas/policy_artifact.json",
       "canonical_uri": "https://agcp.ai/schemas/policy_artifact.json",
       "title": "Governance Policy Artifact",
-      "description": "Canonical attributable, versioned, integrity-protected Governance Policy artifact that declares deterministic policy semantics and required governance inputs; binds policy to Governance Configuration; and references DS-042 compilation and DS-043 activation without itself establishing authority, admissibility, execution authorization, activation, or commitment.",
+      "description": "Canonical, independently identifiable, attributable, versioned, integrity-protected representation of governance policy intent applicable to a defined Tenant, governance domain, and effective scope. It declares deterministic policy semantics, required governance inputs, authority, evidence, Canonical State, lifecycle, composite-governance, refusal-path, escalation, and commit requirements; binds those semantics to Governance Configuration; and references the DS-042 Compiled Governance Artifact and DS-043 Controlled Governance Activation records that make validated compiled policy authoritative. The policy artifact does not itself establish authority at commitment, determine Commit-Bound Admissibility, authorize execution, activate governance, or commit a transition.",
       "category": "Governance Artifact",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -588,7 +596,10 @@
         "NS-15.6A-03",
         "NS-15.6A-04",
         "NS-15.6B-01",
-        "NS-15.6B-02"
+        "NS-15.6B-02",
+        "NS-6.3-01",
+        "NS-7.3-01",
+        "NS-7.6A-01"
       ],
       "cr_ids": [
         "CR-007",
@@ -599,10 +610,10 @@
         "CR-114",
         "CR-117"
       ],
-      "sha256": "48aba64b03d02280cfdc4cc377440bb63bcb3089884697440c00df99ee95de93",
+      "sha256": "7c55d8e2897f76bd15dc7e6ee97f39c7e9252261157d96892aefe290f83c7085",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for v2.0 as the canonical policy-intent artifact. Owns the integrity-bound policy reference used by active schemas and directly references DS-041, DS-042, and DS-043.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-007",
@@ -610,13 +621,13 @@
       "repository_path": "schemas/constraint_artifact.json",
       "canonical_uri": "https://agcp.ai/schemas/constraint_artifact.json",
       "title": "Governance Constraint Artifact",
-      "description": "Canonical attributable, versioned, integrity-protected governance constraint artifact with source lineage, deterministic semantics, protected or constitutional classification, Governance Configuration binding, DS-042 compilation and validation projection, DS-043 controlled activation, Governance Version, and explicit non-weakening semantics.",
+      "description": "Canonical attributable, versioned, integrity-protected representation of a governance constraint. DS-007 preserves source lineage, deterministic constraint semantics, protected or constitutional classification, Governance Configuration binding, compilation and validation evidence, Governance Version, Controlled Governance Activation, and non-weakening semantics without itself establishing authority at commitment, determining Commit-Bound Admissibility, authorizing execution, activating governance, or committing a transition.",
       "category": "Governance Artifact",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -665,23 +676,9 @@
         "ARM-512"
       ],
       "ns_ids": [
-        "NS-15.1-01",
-        "NS-15.2-02",
-        "NS-15.3-02",
-        "NS-15.4-01",
-        "NS-15.4-02",
-        "NS-15.5-01",
-        "NS-15.5-02",
-        "NS-15.5-03",
-        "NS-15.6-01",
-        "NS-15.6-02",
-        "NS-15.6-03",
-        "NS-15.6A-01",
-        "NS-15.6A-02",
-        "NS-15.6A-03",
-        "NS-15.6A-04",
-        "NS-15.6B-02",
-        "NS-15.7-01"
+        "NS-6.3-01",
+        "NS-7.3-01",
+        "NS-7.6A-01"
       ],
       "cr_ids": [
         "CR-063",
@@ -692,10 +689,10 @@
         "CR-114",
         "CR-117"
       ],
-      "sha256": "0b8fc440dd6e4fd204d29f27f8c5e04cfd0bfa75bf951d6d61dc0da5d29e763b",
+      "sha256": "d6c801e16db659d992a4d0799191a9dc7a0982be2ce4ed6aafad521a12e697ab",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for v2.0. DS-007 owns the canonical integrity-bound constraint reference used by active schemas; generic shared aliases and unconstrained metadata were removed. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-008",
@@ -703,13 +700,13 @@
       "repository_path": "schemas/invariant_definition.json",
       "canonical_uri": "https://agcp.ai/schemas/invariant_definition.json",
       "title": "Governance Invariant Definition",
-      "description": "Canonical attributable, versioned, integrity-protected governance invariant definition preserving source specification and governance lineage, deterministic invariant semantics, protected or constitutional classification, enforcement level, non-weakening controls, Governance Configuration binding, DS-042 compilation and validation evidence, DS-043 controlled activation, Governance Version, evidence, integrity, and replay material.",
+      "description": "Canonical attributable, versioned, integrity-protected definition of an AGCP governance invariant. DS-008 preserves source specification and governance lineage, deterministic invariant semantics, protected or constitutional classification, enforcement level, Governance Configuration binding, compilation and validation evidence, Governance Version, Controlled Governance Activation, and explicit non-weakening semantics without itself establishing authority at commitment, determining Commit-Bound Admissibility, authorizing execution, activating governance, or committing a transition.",
       "category": "Governance Artifact",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -758,34 +755,9 @@
         "ARM-701"
       ],
       "ns_ids": [
-        "NS-5.5-01",
-        "NS-5.5-02",
-        "NS-7.4-05",
-        "NS-7.5-02",
-        "NS-7.5-03",
-        "NS-7.5-05",
-        "NS-7.7-01",
-        "NS-7.7-02",
-        "NS-7.7-03",
-        "NS-15.1-01",
-        "NS-15.2-01",
-        "NS-15.2-02",
-        "NS-15.2-03",
-        "NS-15.3-02",
-        "NS-15.4-01",
-        "NS-15.4-02",
-        "NS-15.5-02",
-        "NS-15.5-03",
-        "NS-15.6-01",
-        "NS-15.6-03",
-        "NS-15.6A-01",
-        "NS-15.6A-02",
-        "NS-15.6A-03",
-        "NS-15.6A-04",
-        "NS-15.6B-02",
-        "NS-15.7-01",
-        "NS-15.7-02",
-        "NS-15.7-03"
+        "NS-6.3-01",
+        "NS-7.3-01",
+        "NS-7.6A-01"
       ],
       "cr_ids": [
         "CR-003",
@@ -799,10 +771,10 @@
         "CR-114",
         "CR-117"
       ],
-      "sha256": "5a099ae3b21f7094fc2bdc8c4dcc3318733d0ef42b9c267faf6428a78d90bcac",
+      "sha256": "2f1959c540181e87e74b8671b2384db77b38bba8546ee4ba315a27d752fea175",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for AGCP v2.0 as the canonical invariant-definition artifact. DS-008 owns invariant identity, classification, enforcement level, integrity-bound references, deterministic semantics, source and artifact lineage, protected/constitutional non-weakening controls, compilation validation, controlled activation, Governance Version, evidence, and replay material.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-009",
@@ -810,13 +782,13 @@
       "repository_path": "schemas/exception_artifact.json",
       "canonical_uri": "https://agcp.ai/schemas/exception_artifact.json",
       "title": "Governance Exception Artifact",
-      "description": "Canonical attributable, versioned, integrity-protected governance exception artifact permitting only narrowly scoped, time-bounded, authority-backed and externally approved modification of ordinary exceptionable constraint evaluation; protected and constitutional constraints and governance invariants cannot be overridden.",
+      "description": "Canonical attributable, versioned, integrity-protected governance exception artifact. DS-009 permits only narrowly scoped, time-bounded, authority-backed and externally approved modification of ordinary exceptionable constraint evaluation. It cannot override protected or constitutional constraints, cannot override governance invariants, cannot establish authority at commitment, and is authoritative for runtime use only after DS-042 compilation and DS-043 Controlled Governance Activation.",
       "category": "Governance Artifact",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-005",
@@ -888,7 +860,7 @@
       "sha256": "f456adcaddcda034e75a22272a63f1457fee079a6c7db63c3ee4dd8a58c031cc",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for AGCP v2.0. DS-009 owns the canonical integrity-bound exception reference, restricts exceptions to ordinary exceptionable constraints, requires current authority and external approval, and prohibits protected/constitutional weakening, invariant override, scope amplification, bypass, and self-activation.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-010",
@@ -896,13 +868,13 @@
       "repository_path": "schemas/governance_artifact_view.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_artifact_view.json",
       "title": "Governance Artifact View",
-      "description": "Canonical externally observable, integrity-protected read model for a governance artifact and its compilation, validation, approval, activation, Governance Version, lineage, evidence, and lifecycle state.",
+      "description": "Canonical externally observable, integrity-protected read model for a governance-significant artifact and its current compilation, validation, approval, activation, Governance Version, lineage, evidence, and lifecycle state. The view projects authoritative DS-041, DS-042, and DS-043 records without replacing or modifying them.",
       "category": "Governance Artifact",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -953,7 +925,7 @@
       "sha256": "b5632c0bce77a7dd7e94f42850844ae086ac360c7546d55ebf038424b0316f0d",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively updated for v2.0 to project canonical DS-041, DS-042, and DS-043 state without duplicating or replacing authoritative records.",
-      "last_modified_date": "2026-07-29"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-011",
@@ -967,7 +939,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -980,10 +952,11 @@
         "DS-032",
         "DS-033",
         "DS-038",
-        "DS-041"
+        "DS-041",
+        "DS-053"
       ],
       "dependent_schemas": [
-        "DS-015"
+        "DS-020"
       ],
       "rtm_mapping_basis": "Direct and supporting mappings added for constraint-controlled authorization, governing-constraint identification, evidence integrity, attribution, replay, and deterministic evaluation.",
       "rtm_ids": [
@@ -1023,7 +996,9 @@
         "NS-7.6A-01",
         "NS-10.5-01",
         "NS-10.5-02",
-        "NS-10.7-01"
+        "NS-10.7-01",
+        "NS-6.4-04",
+        "NS-6.6A-03"
       ],
       "cr_ids": [
         "CR-001",
@@ -1035,10 +1010,10 @@
         "CR-076",
         "CR-078"
       ],
-      "sha256": "8353d29e3e80262bee2b38c72ea8893c651f63be8ec552311d9956660469032e",
+      "sha256": "9af8cd34e5bd5f40210d7345a62f660da022381b164544a36ee8f6fe28b31f96",
       "assigned_date": "2026-07-22",
       "notes": "Comprehensively refactored for AGCP v2.0 with canonical Proposal, Constraint, Tenant/domain, target, evaluation horizon, Governance Version and Configuration, qualified-input digests, evidence, attribution, integrity, replay, and outcome-specific validation. Unrestricted metadata removed.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-012",
@@ -1052,7 +1027,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1066,10 +1041,11 @@
         "DS-032",
         "DS-033",
         "DS-038",
-        "DS-041"
+        "DS-041",
+        "DS-053"
       ],
       "dependent_schemas": [
-        "DS-015"
+        "DS-020"
       ],
       "rtm_mapping_basis": "Semantic v2.0 mapping established during DS-012 comprehensive evaluation-result refactor.",
       "rtm_ids": [
@@ -1123,7 +1099,9 @@
         "NS-10.8A-01",
         "NS-13.6A-04",
         "NS-13.6B-01",
-        "NS-13.6B-02"
+        "NS-13.6B-02",
+        "NS-6.4-04",
+        "NS-6.6A-03"
       ],
       "cr_ids": [
         "CR-001",
@@ -1136,10 +1114,10 @@
         "CR-078",
         "CR-087"
       ],
-      "sha256": "da1d3c850a79e66f50e88e4193528cbc669bd411973513a43c6b24f2920acafa",
+      "sha256": "87d35027a5e311bb20ae0d9ccd544324273d55f3806033e20efd60c80d1b9b52",
       "assigned_date": "2026-07-22",
       "notes": "Canonical invariant-evaluation result with explicit Structural Refusal, escalation, lifecycle-effect, Governance Evidence, deterministic qualified-input binding, attribution, integrity, and replay semantics.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-013",
@@ -1147,16 +1125,15 @@
       "repository_path": "schemas/proposal_submit_request.json",
       "canonical_uri": "https://agcp.ai/schemas/proposal_submit_request.json",
       "title": "Proposal Submit Request",
-      "description": "Normative transport wrapper for submitting one canonical Governed Action Proposal to an AGCP-conformant implementation. The wrapper supplies transport correlation and namespace-qualified extension data only; all governance-domain content is carried in proposal and validated by DS-021. Submission is not execution and does not confer authority at commitment.",
+      "description": "Normative transport wrapper for submitting one untrusted Proposal object to AGCP Proposal Qualification. The wrapper validates transport-envelope structure only. The proposal member is intentionally not constrained by DS-021 at transport validation time because DS-021 validation is a Proposal Qualification obligation and structural deficiencies must be capable of producing Structural Refusal rather than being converted into a transport-only error.",
       "category": "Governance Workflow",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
-        "DS-001",
-        "DS-021"
+        "DS-001"
       ],
       "dependent_schemas": [],
       "rtm_mapping_basis": "Existing GitHub_File references in RTM-1.6; DS_ID populated in RTM-1.7.",
@@ -1213,10 +1190,10 @@
         "CR-108",
         "CR-109"
       ],
-      "sha256": "b4d125ca8bf2569b30b020fc304b145a0d20fc0253d52bb5818768b2c3e18883",
+      "sha256": "81c7c6829e73ea9a5f547aec7070be8b7d9974df60e8adf3bc0e34caca5913e9",
       "assigned_date": "2026-07-22",
-      "notes": "Transport-only submission wrapper around DS-021. The former flattened domain fields are carried under the required proposal property. The obsolete top-level metadata compatibility member was removed; namespace-qualified extension data uses extensions.",
-      "last_modified_date": "2026-07-30"
+      "notes": "Transport-envelope-only submission wrapper. The proposal member is deliberately untyped at transport validation so DS-021 validation occurs inside Proposal Qualification and structurally invalid proposals can produce Structural Refusal.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-014",
@@ -1230,7 +1207,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1252,7 +1229,9 @@
         "DS-036",
         "DS-037",
         "DS-038",
-        "DS-039"
+        "DS-039",
+        "DS-052",
+        "DS-053"
       ],
       "dependent_schemas": [],
       "rtm_mapping_basis": "Existing GitHub_File references in RTM-1.6; DS_ID populated in RTM-1.7.",
@@ -1268,16 +1247,20 @@
         "ARM-802"
       ],
       "ns_ids": [
-        "NS-13.6A-02"
+        "NS-4.6-01",
+        "NS-4.7-01",
+        "NS-13.6A-02",
+        "NS-9.5-05",
+        "NS-10.4-01"
       ],
       "cr_ids": [
         "CR-010",
         "CR-011"
       ],
-      "sha256": "0c5598297d3bcd233289054add5b8da2430e3b23e342a3dc38ffc6f36902baa8",
+      "sha256": "4062e8890ee8e57281dedc280d164a84ed73d407da38351556b2c138a2510ce4",
       "assigned_date": "2026-07-22",
       "notes": "Step 5 refactor: authoritative lifecycle state is separated from transient processing status and the view now references canonical workflow and governance objects directly.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-015",
@@ -1285,19 +1268,17 @@
       "repository_path": "schemas/governance_decision_result.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_decision_result.json",
       "title": "Governance Decision Result",
-      "description": "Canonical, attributable, integrity-protected result produced by the Governance Decision Function after Proposal Qualification. The result binds the decision to the canonical proposal, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified Governance Evidence, Authority Lineage, applicable constraints and invariants, approvals, evaluation horizon, and deterministic decision basis. Non-refusal outcomes require a DS-027 Governance Receipt; Structural Refusal requires a DS-028 Refusal Record.",
+      "description": "Canonical, attributable, integrity-protected result produced by the Governance Decision Function after Proposal Qualification. The result binds the decision to the canonical proposal, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified Governance Evidence, Authority Lineage, applicable constraints and invariants, approvals, evaluation horizon, and deterministic decision basis. Non-refusal outcomes require a DS-027 Governance Receipt; Structural Refusal requires a DS-028 Refusal Record. The Governance Decision Function realizes the PDP functional role; this result does not by itself establish commit-bound execution eligibility.",
       "category": "Governance Workflow",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
         "DS-009",
-        "DS-011",
-        "DS-012",
         "DS-020",
         "DS-021",
         "DS-022",
@@ -1308,7 +1289,8 @@
         "DS-028",
         "DS-032",
         "DS-033",
-        "DS-041"
+        "DS-041",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-014",
@@ -1327,13 +1309,14 @@
         "DS-038",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.47 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00001",
         "RTM-00002",
         "RTM-00003",
         "RTM-00005",
         "RTM-00007",
+        "RTM-00031",
         "RTM-00034",
         "RTM-00053",
         "RTM-00054",
@@ -1369,7 +1352,9 @@
         "NS-7.4-01",
         "NS-7.5-02",
         "NS-7.6-03",
-        "NS-8.6-04"
+        "NS-8.6-04",
+        "NS-7.1-03",
+        "NS-7.6A-01"
       ],
       "cr_ids": [
         "CR-001",
@@ -1377,6 +1362,7 @@
         "CR-003",
         "CR-005",
         "CR-007",
+        "CR-031",
         "CR-034",
         "CR-053",
         "CR-054",
@@ -1397,10 +1383,10 @@
         "CR-090",
         "CR-104"
       ],
-      "sha256": "a1f8fd07f742e89a73aee4d682eb79b4ced48ef0a500b76d112011a7a5bc1347",
+      "sha256": "4ad6c7213ab17fa747b62a2ac3fd47570cadb610bf8b8b010f6a89c244005e52",
       "assigned_date": "2026-07-22",
-      "notes": "Step 5 refactor: canonical decision basis, qualified state and evidence, authority, constraints, invariants, attribution, receipt, and refusal relationships are structurally represented. Catalog ARM and NS mappings synchronized from the authoritative DS-015 schema annotation. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00034 and CR-034.",
-      "last_modified_date": "2026-07-30"
+      "notes": "Step 5 refactor: canonical decision basis, qualified state and evidence, authority, constraints, invariants, attribution, receipt, and refusal relationships are structurally represented. Catalog ARM and NS mappings synchronized from the authoritative DS-015 schema annotation. RTM/CR traceability synchronized to RTM-1.47 by adding RTM-00034 and CR-034.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-017",
@@ -1408,13 +1394,13 @@
       "repository_path": "schemas/execution_authorization_view.json",
       "canonical_uri": "https://agcp.ai/schemas/execution_authorization_view.json",
       "title": "Execution Authorization View",
-      "description": "Canonical externally observable representation of an AGCP Execution Authorization. It binds an authorization outcome to the canonical proposal, Governance Decision Result, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified evidence, Authority Lineage, lifecycle, scope, and validity conditions. Execution Authorization is eligibility evidence for Commit Boundary processing; it is neither authority at commitment nor permission to execute.",
+      "description": "Canonical externally observable representation of an AGCP Execution Authorization. It binds an authorization outcome to the canonical proposal, Governance Decision Result, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified evidence, Authority Lineage, lifecycle, scope, and validity conditions. Execution Authorization is eligibility evidence for Commit Boundary processing; it is neither authority at commitment nor permission to execute. The authorization is consumed by Governance Realization and remains subject to current Authority Re-Derivation, Commit-Bound Admissibility, and PEP mediation.",
       "category": "Governance Workflow",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -1430,7 +1416,8 @@
         "DS-032",
         "DS-033",
         "DS-038",
-        "DS-041"
+        "DS-041",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-014",
@@ -1448,7 +1435,7 @@
         "DS-039",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.47 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00010",
         "RTM-00019",
@@ -1465,17 +1452,32 @@
         "RTM-00061",
         "RTM-00079",
         "RTM-00080",
-        "RTM-00084"
+        "RTM-00084",
+        "RTM-00102"
       ],
       "arm_ids": [
-        "ARM-407",
+        "ARM-201",
+        "ARM-203",
+        "ARM-205",
+        "ARM-207",
+        "ARM-210",
+        "ARM-401",
         "ARM-601",
-        "ARM-605",
-        "ARM-703",
-        "ARM-802"
+        "ARM-702"
       ],
       "ns_ids": [
-        "NS-13.6A-02"
+        "NS-9.1-02",
+        "NS-9.3-01",
+        "NS-9.3-02",
+        "NS-9.4-01",
+        "NS-9.4-02",
+        "NS-8.1-01",
+        "NS-8.1-03",
+        "NS-8.4-03",
+        "NS-8.6-02",
+        "NS-8.6A-04",
+        "NS-8.6A-05",
+        "NS-8.6A-06"
       ],
       "cr_ids": [
         "CR-010",
@@ -1493,12 +1495,13 @@
         "CR-061",
         "CR-079",
         "CR-080",
-        "CR-084"
+        "CR-084",
+        "CR-102"
       ],
-      "sha256": "f7d8b21bfb28d2ce28fd1fcb3feada1e4b92a7494f9a1bbdfddafe0faa3e0485",
+      "sha256": "d16590a72ec44fb0c482fe58bd330880e56cb0840929ff948ccf163c2b744a08",
       "assigned_date": "2026-07-22",
-      "notes": "Step 5 refactor: target, scope, lifecycle, validity, state, evidence, authority, consumption, attribution, and non-executable authorization semantics are structurally represented. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00010 and CR-010.",
-      "last_modified_date": "2026-07-29"
+      "notes": "Step 5 refactor: target, scope, lifecycle, validity, state, evidence, authority, consumption, attribution, and non-executable authorization semantics are structurally represented. RTM/CR traceability synchronized to RTM-1.47 by adding RTM-00010 and CR-010.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-018",
@@ -1506,28 +1509,23 @@
       "repository_path": "schemas/commit_boundary_request.json",
       "canonical_uri": "https://agcp.ai/schemas/commit_boundary_request.json",
       "title": "Commit Boundary Request",
-      "description": "Canonical integrity-protected request for Commit Boundary processing. It presents the specific canonical proposal, decision, Execution Authorization, current Authority Re-Derivation, qualified state and evidence, Resulting-State Validation, Governance Binding Validation, composite-governance results when applicable, and complete DS-029 Enforcement Context to a specific Policy Enforcement Point.",
+      "description": "Canonical integrity-protected request that initiates Governance Realization / Commit Boundary processing for a previously authorized proposal. The caller supplies the proposal and Execution Authorization basis; the GRF independently establishes current authority, current qualified state/evidence, binding validity, PEP Profile selection, Enforcement Context, and enforcement readiness before invoking the PEP.",
       "category": "Governance Workflow",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
         "DS-017",
         "DS-021",
-        "DS-029",
-        "DS-030",
-        "DS-031",
-        "DS-032",
-        "DS-033",
-        "DS-034",
         "DS-035",
         "DS-036",
         "DS-037",
-        "DS-039"
+        "DS-039",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-014",
@@ -1543,12 +1541,14 @@
         "RTM-00022",
         "RTM-00024",
         "RTM-00028",
+        "RTM-00031",
         "RTM-00032",
         "RTM-00033",
         "RTM-00048",
         "RTM-00049",
         "RTM-00067",
         "RTM-00068",
+        "RTM-00081",
         "RTM-00084",
         "RTM-00096",
         "RTM-00102",
@@ -1562,15 +1562,7 @@
         "RTM-00121"
       ],
       "arm_ids": [
-        "ARM-101",
-        "ARM-201",
-        "ARM-202",
         "ARM-203",
-        "ARM-205",
-        "ARM-206",
-        "ARM-207",
-        "ARM-208",
-        "ARM-209",
         "ARM-210",
         "ARM-211",
         "ARM-212",
@@ -1578,32 +1570,21 @@
         "ARM-216",
         "ARM-217",
         "ARM-401",
-        "ARM-601",
-        "ARM-702",
-        "ARM-807"
+        "ARM-702"
       ],
       "ns_ids": [
-        "NS-4.7-01",
-        "NS-9.7-01",
         "NS-9.3-01",
-        "NS-9.6B-01",
-        "NS-9.4-01",
-        "NS-9.6-02",
-        "NS-5.2.3-02",
-        "NS-9.1-02",
-        "NS-9.6B-02",
-        "NS-9.4-02",
         "NS-9.3-02",
-        "NS-9.7-02",
-        "NS-9.7-03",
-        "NS-9.6B-03",
-        "NS-9.4-03",
+        "NS-9.4-01",
+        "NS-9.4-02",
         "NS-9.6A-03",
         "NS-9.6A-04",
-        "NS-9.6-04",
-        "NS-9.4-04",
-        "NS-9.6B-04",
-        "NS-9.6B-05"
+        "NS-9.6B-01",
+        "NS-9.1-03",
+        "NS-9.2-01",
+        "NS-9.2-02",
+        "NS-9.4-05",
+        "NS-9.4-06"
       ],
       "cr_ids": [
         "CR-019",
@@ -1612,12 +1593,14 @@
         "CR-022",
         "CR-024",
         "CR-028",
+        "CR-031",
         "CR-032",
         "CR-033",
         "CR-048",
         "CR-049",
         "CR-067",
         "CR-068",
+        "CR-081",
         "CR-084",
         "CR-096",
         "CR-102",
@@ -1630,10 +1613,10 @@
         "CR-120",
         "CR-121"
       ],
-      "sha256": "8f50e407cb15729f0845b4cf4ca6aa923a5f071c0522d39c4553d830ca273394",
+      "sha256": "d375be469f32fbf2240adc2b62f1a5fe365e71b15293ddad026468f451229698",
       "assigned_date": "2026-07-22",
       "notes": "Step 5 refactor: Commit Boundary invocation now carries the complete canonical governance basis and DS-029 Enforcement Context.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-019",
@@ -1641,13 +1624,13 @@
       "repository_path": "schemas/commit_boundary_result.json",
       "canonical_uri": "https://agcp.ai/schemas/commit_boundary_result.json",
       "title": "Commit Boundary Result",
-      "description": "Canonical attributable and integrity-protected result of Commit Boundary and Policy Enforcement Point processing. It records the exact request, proposal, decision, authorization, current authority, Governance Binding Validation, Resulting-State Validation, Enforcement Context, PEP outcome, executed transition set, lifecycle effect, Governance Evidence, Governance Receipt, and any Structural Refusal.",
+      "description": "Canonical attributable and integrity-protected result of Governance Realization, Commit-Bound Admissibility, Governance Enforcement Binding, and Policy Enforcement Point processing at the Commit Boundary. Commit Successful records acceptance of the exact governed transition through the protected enforcement path; it does not universally assert that asynchronous target execution has completed.",
       "category": "Governance Workflow",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -1664,14 +1647,16 @@
         "DS-035",
         "DS-036",
         "DS-037",
-        "DS-038"
+        "DS-038",
+        "DS-052"
       ],
       "dependent_schemas": [
         "DS-014",
         "DS-017",
         "DS-020",
         "DS-038",
-        "DS-040"
+        "DS-040",
+        "DS-052"
       ],
       "rtm_mapping_basis": "Existing GitHub_File references in RTM-1.6; DS_ID populated in RTM-1.7.",
       "rtm_ids": [
@@ -1686,6 +1671,7 @@
         "RTM-00033",
         "RTM-00079",
         "RTM-00080",
+        "RTM-00081",
         "RTM-00084",
         "RTM-00087",
         "RTM-00088",
@@ -1700,15 +1686,7 @@
         "RTM-00121"
       ],
       "arm_ids": [
-        "ARM-101",
-        "ARM-201",
-        "ARM-202",
         "ARM-203",
-        "ARM-205",
-        "ARM-206",
-        "ARM-207",
-        "ARM-208",
-        "ARM-209",
         "ARM-210",
         "ARM-211",
         "ARM-212",
@@ -1717,31 +1695,22 @@
         "ARM-217",
         "ARM-401",
         "ARM-601",
-        "ARM-702",
-        "ARM-807"
+        "ARM-702"
       ],
       "ns_ids": [
-        "NS-4.7-01",
-        "NS-9.7-01",
-        "NS-9.3-01",
-        "NS-9.6B-01",
-        "NS-9.4-01",
         "NS-9.6-02",
-        "NS-5.2.3-02",
-        "NS-9.1-02",
-        "NS-9.6B-02",
-        "NS-9.4-02",
-        "NS-9.3-02",
-        "NS-9.7-02",
-        "NS-9.7-03",
-        "NS-9.6B-03",
-        "NS-9.4-03",
+        "NS-9.6-04",
         "NS-9.6A-03",
         "NS-9.6A-04",
-        "NS-9.6-04",
-        "NS-9.4-04",
+        "NS-9.6B-01",
         "NS-9.6B-04",
-        "NS-9.6B-05"
+        "NS-9.6B-05",
+        "NS-9.5-02",
+        "NS-9.5-03",
+        "NS-9.5-05",
+        "NS-9.6A-01",
+        "NS-9.6A-05",
+        "NS-9.6A-06"
       ],
       "cr_ids": [
         "CR-019",
@@ -1755,6 +1724,7 @@
         "CR-033",
         "CR-079",
         "CR-080",
+        "CR-081",
         "CR-084",
         "CR-087",
         "CR-088",
@@ -1768,10 +1738,10 @@
         "CR-120",
         "CR-121"
       ],
-      "sha256": "94cfc5dc8f6b3a8170e638a191abc7f46e0924a44d15c816a7be095660a24c30",
+      "sha256": "d40a3f01f681de22d665b5c021bfba59be593019b694280fa62557cdbdff7040",
       "assigned_date": "2026-07-22",
       "notes": "Step 5 refactor: Commit Boundary outcome now records canonical request, enforcement, executed subset, lifecycle effect, receipt, refusal, attribution, and replay material.",
-      "last_modified_date": "2026-07-29"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-020",
@@ -1779,17 +1749,19 @@
       "repository_path": "schemas/governance_evidence.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_evidence.json",
       "title": "Governance Evidence",
-      "description": "Canonical immutable Governance Evidence record. It contains typed evidence-item references, explicit ordering, integrity digests, attributable provenance-chain continuity, qualification results, Governance Ledger references, and links to canonical governance outcomes. Raw or arbitrary evidence payloads are not normative content; governance-significant evidence is represented through typed, resolvable, digest-bound artifact references.",
+      "description": "Canonical immutable Governance Evidence record. It contains typed evidence-item references, explicit governing-state, configuration, constraint and invariant references where applicable, explicit ordering, integrity digests, attributable provenance-chain continuity, qualification results, Governance Ledger references, and links to canonical governance outcomes. Raw or arbitrary evidence payloads are not normative content.",
       "category": "Governance Workflow",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
         "DS-009",
+        "DS-011",
+        "DS-012",
         "DS-015",
         "DS-017",
         "DS-018",
@@ -1812,7 +1784,10 @@
         "DS-037",
         "DS-038",
         "DS-039",
-        "DS-040"
+        "DS-040",
+        "DS-041",
+        "DS-052",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-001",
@@ -1849,7 +1824,9 @@
         "DS-040",
         "DS-041",
         "DS-042",
-        "DS-043"
+        "DS-043",
+        "DS-052",
+        "DS-053"
       ],
       "rtm_mapping_basis": "Existing GitHub_File references in RTM-1.6; DS_ID populated in RTM-1.7.",
       "rtm_ids": [
@@ -1882,29 +1859,9 @@
         "ARM-102",
         "ARM-105",
         "ARM-108",
-        "ARM-202",
-        "ARM-203",
         "ARM-204",
-        "ARM-205",
-        "ARM-206",
-        "ARM-207",
-        "ARM-208",
-        "ARM-209",
-        "ARM-210",
-        "ARM-211",
-        "ARM-212",
-        "ARM-213",
-        "ARM-216",
-        "ARM-217",
         "ARM-308",
         "ARM-401",
-        "ARM-402",
-        "ARM-403",
-        "ARM-404",
-        "ARM-405",
-        "ARM-406",
-        "ARM-407",
-        "ARM-408",
         "ARM-504",
         "ARM-505",
         "ARM-509",
@@ -1926,50 +1883,24 @@
         "ARM-807"
       ],
       "ns_ids": [
-        "NS-10.2-01",
-        "NS-10.8-01",
-        "NS-10.6-01",
-        "NS-10.7-01",
-        "NS-13.6B-01",
         "NS-7.4-01",
-        "NS-9.6A-01",
-        "NS-10.9-01",
-        "NS-9.6B-01",
-        "NS-10.5-01",
-        "NS-10.3-01",
+        "NS-7.5-02",
         "NS-7.6A-01",
-        "NS-4.6-01",
-        "NS-10.4-01",
-        "NS-10.4-02",
-        "NS-10.5-02",
+        "NS-7.6A-02",
+        "NS-9.6A-01",
         "NS-9.6A-02",
         "NS-10.1-02",
-        "NS-7.5-02",
-        "NS-9.6B-02",
-        "NS-10.9-02",
-        "NS-10.2-02",
-        "NS-10.6-02",
-        "NS-7.6A-02",
-        "NS-4.6-02",
-        "NS-10.8-02",
-        "NS-10.3-02",
-        "NS-10.8A-03",
-        "NS-10.9-03",
-        "NS-10.8-03",
-        "NS-7.6-03",
-        "NS-13.6-03",
-        "NS-7.5-03",
-        "NS-9.6B-03",
-        "NS-5.2.5-03",
-        "NS-10.2-03",
-        "NS-16.6A-03",
-        "NS-4.6-04",
-        "NS-12.6-04",
-        "NS-7.6-04",
-        "NS-8.6-04",
-        "NS-9.6B-04",
-        "NS-9.6B-05",
-        "NS-7.5-05"
+        "NS-10.2-01",
+        "NS-10.3-01",
+        "NS-10.4-01",
+        "NS-10.5-01",
+        "NS-10.6-01",
+        "NS-10.7-01",
+        "NS-10.8-01",
+        "NS-10.9-01",
+        "NS-10.7-02",
+        "NS-10.8A-02",
+        "NS-10.8A-03"
       ],
       "cr_ids": [
         "CR-041",
@@ -1996,10 +1927,10 @@
         "CR-108",
         "CR-109"
       ],
-      "sha256": "fa73a433fa0135b3ac804086fd591617f6789aa8b4843e95429ff05de31b5aa3",
+      "sha256": "415479f994bef3c716253fe31167569f13bfb43c1d2d7c146b5db8d3df8bec0f",
       "assigned_date": "2026-07-22",
-      "notes": "Step 5 refactor: generic evidence payloads were replaced by typed, digest-bound evidence items with ordering, provenance continuity, qualification, ledger, receipt, and refusal relationships. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "notes": "Governance Evidence explicitly carries governing Canonical State, Governance Configuration, constraint-evaluation and invariant-evaluation references on governance decision/authorization/commit paths, in addition to existing typed evidence and replay bindings.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-021",
@@ -2007,25 +1938,22 @@
       "repository_path": "schemas/governed_action_proposal.json",
       "canonical_uri": "https://agcp.ai/schemas/governed_action_proposal.json",
       "title": "Governed Action Proposal",
-      "description": "Canonical domain schema for a governance-significant proposed transition submitted to AGCP runtime-governance evaluation. The object declares stable Proposal Identity, operational intent, target, requested effect, canonical Action Representation, associated Governance Context, provenance, temporal validity, and applicable composite-governance semantics. A Governed Action Proposal is not execution and does not confer authority at commitment.",
+      "description": "Canonical domain schema for a governance-significant proposed transition submitted to AGCP runtime-governance evaluation. The object declares stable Proposal Identity, operational intent, target, requested effect, canonical Action Representation, associated Governance Context, provenance, temporal validity, and applicable composite-governance semantics through the canonical DS-035 Bind Set and DS-036 Governance Dependency Graph. A Governed Action Proposal is not execution and does not confer authority at commitment.",
       "category": "Canonical Governance Object",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
-        "DS-022",
         "DS-024",
-        "DS-035",
-        "DS-036"
+        "DS-035"
       ],
       "dependent_schemas": [
         "DS-011",
         "DS-012",
-        "DS-013",
         "DS-014",
         "DS-015",
         "DS-017",
@@ -2034,9 +1962,10 @@
         "DS-020",
         "DS-038",
         "DS-039",
-        "DS-040"
+        "DS-040",
+        "DS-052"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.47 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00004",
         "RTM-00008",
@@ -2113,8 +2042,8 @@
       ],
       "sha256": "d141c8e3bf9dceb1456afec8f4cd3fc214d8c07c0160d676d54c1471be30101d",
       "assigned_date": "2026-07-22",
-      "notes": "Canonical Governed Action Proposal. Composite proposals now reference canonical DS-035 Bind Set policy/reference definitions and canonical DS-036 Governance Dependency Graph rather than local transitional composite definitions. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00008;RTM-00009 and CR-008;CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "notes": "Canonical Governed Action Proposal. Composite proposals now reference canonical DS-035 Bind Set policy/reference definitions and canonical DS-036 Governance Dependency Graph rather than local transitional composite definitions. RTM/CR traceability synchronized to RTM-1.47 by adding RTM-00008;RTM-00009 and CR-008;CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-022",
@@ -2128,7 +2057,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2144,14 +2073,15 @@
         "DS-036",
         "DS-037",
         "DS-038",
-        "DS-041"
+        "DS-041",
+        "DS-052",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-014",
         "DS-015",
         "DS-017",
         "DS-020",
-        "DS-021",
         "DS-039",
         "DS-040"
       ],
@@ -2199,7 +2129,9 @@
         "NS-10.8A-03",
         "NS-16.6A-01",
         "NS-16.6A-02",
-        "NS-16.6A-03"
+        "NS-16.6A-03",
+        "NS-4.12-01",
+        "NS-6.6A-03"
       ],
       "cr_ids": [
         "CR-040",
@@ -2215,10 +2147,10 @@
         "CR-071",
         "CR-118"
       ],
-      "sha256": "1bd353d10c578a338e793ea86388372d922872eedbd3670628173b444164c1a0",
+      "sha256": "0de3718cd4dabc5715d98cd9ff1ee5922ec8dedcb020fad09fde653595d2cb47",
       "assigned_date": "2026-07-22",
       "notes": "Canonical Governance Context Envelope. Delegation, Authority Lineage, approval, refusal, qualified-evidence, and dependency-graph references resolve to their canonical DS schemas; inline Canonical State remains prohibited.",
-      "last_modified_date": "2026-07-29"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-023",
@@ -2226,13 +2158,13 @@
       "repository_path": "schemas/canonical_state.json",
       "canonical_uri": "https://agcp.ai/schemas/canonical_state.json",
       "title": "Canonical State",
-      "description": "Canonical domain schema for the single qualified and authoritative governance representation of operational reality used for a defined evaluation horizon. Canonical State is resolved deterministically from qualified authoritative governance sources; is distinct from Governance Context, runtime observations, telemetry, local state, and agent belief; and references the independently traceable DS-032 State Qualification Result used to establish suitability for governance evaluation.",
+      "description": "Canonical domain schema for the single qualified and authoritative governance representation of operational reality used for a defined evaluation horizon. Canonical State is resolved deterministically from qualified authoritative governance sources; is distinct from Governance Context, runtime observations, telemetry, local state, and agent belief; and provides the current state basis for admissibility, authority re-derivation, governance binding, continuation, replay, receipts, and refusal. State suitability is established by an integrity-bound reference to the independently traceable DS-032 State Qualification Result. The Governance Ledger is authoritative for recorded governance events, event ordering, and Derived Lifecycle State, but need not originate every governance-relevant fact incorporated into Canonical State.",
       "category": "Canonical Governance Object",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -2284,7 +2216,6 @@
         "NS-7.6-04",
         "NS-7.6A-01",
         "NS-7.7-02",
-        "NS-8.6A-03",
         "NS-9.6A-01",
         "NS-9.6A-02",
         "NS-10.4-01",
@@ -2301,10 +2232,10 @@
         "CR-051",
         "CR-103"
       ],
-      "sha256": "677d84bbef278287b75a995f221c60c8bbeb7aabafce19b764cefa1ca5c62380",
+      "sha256": "d7cd455c039d07bb43702eff679093c5b0086f63dcd5291944f5c481b9187457",
       "assigned_date": "2026-07-22",
       "notes": "Canonical State uses the qualification_result property to carry an integrity-bound DS-032 State Qualification Result reference constrained to outcome QUALIFIED. The former embedded top-level qualification result is not retained. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-024",
@@ -2318,14 +2249,15 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
         "DS-017",
         "DS-020",
         "DS-025",
-        "DS-026"
+        "DS-026",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-004",
@@ -2344,7 +2276,8 @@
         "DS-034",
         "DS-036",
         "DS-039",
-        "DS-040"
+        "DS-040",
+        "DS-053"
       ],
       "rtm_mapping_basis": "Relationship-specific semantic review of verifiable delegation references, deterministic lineage integrity, mission/task continuity, delegation-chain completeness, attribution consistency, provenance continuity, recursive authority containment, and cross-domain authority isolation; synchronized in RTM-1.12.",
       "rtm_ids": [
@@ -2384,44 +2317,9 @@
         "ARM-710"
       ],
       "ns_ids": [
-        "NS-4.4-01",
-        "NS-8.6A-01",
-        "NS-8.6A-02",
-        "NS-8.6A-03",
-        "NS-12.1-01",
-        "NS-12.1-02",
-        "NS-12.2-01",
-        "NS-12.2-02",
+        "NS-12.2-03",
         "NS-12.3-01",
-        "NS-12.3-02",
-        "NS-12.4-01",
-        "NS-12.4-02",
-        "NS-12.4-03",
-        "NS-12.4-04",
-        "NS-12.5-01",
-        "NS-12.5-02",
-        "NS-12.6-01",
-        "NS-12.6-02",
-        "NS-12.6-03",
-        "NS-12.6-04",
-        "NS-12.6-05",
-        "NS-12.7-01",
-        "NS-12.7-02",
-        "NS-12.7-03",
-        "NS-14.1-01",
-        "NS-14.2-01",
-        "NS-14.2-02",
-        "NS-14.3-01",
-        "NS-14.3-02",
-        "NS-14.4-01",
-        "NS-14.4-02",
-        "NS-14.5-01",
-        "NS-14.5-02",
-        "NS-14.6-02",
-        "NS-14.6-03",
-        "NS-14.7-01",
-        "NS-14.7-02",
-        "NS-14.7-03"
+        "NS-12.4-01"
       ],
       "cr_ids": [
         "CR-040",
@@ -2433,10 +2331,10 @@
         "CR-115",
         "CR-116"
       ],
-      "sha256": "f4a898d138d19785057ececfef9e6bab438539300724c43bd2ef96e5bea0b72f",
+      "sha256": "b0063ce99ad6d0d71c0291d1d6209516bfc0173f3539ccb48cacbdf52bad294a",
       "assigned_date": "2026-07-22",
       "notes": "Implemented as the canonical evidentiary authority-chain object. It aggregates DS-025 delegation references, preserves origin, approval, mission/task, scope, revocation, subject eligibility, domain-segment, and replay-protection relationships, and remains evidence for Authority Re-Derivation rather than portable execution authority. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-025",
@@ -2450,7 +2348,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2462,7 +2360,8 @@
         "DS-009",
         "DS-022",
         "DS-024",
-        "DS-034"
+        "DS-034",
+        "DS-053"
       ],
       "rtm_mapping_basis": "Relationship-specific semantic review of verifiable delegation references, deterministic artifact integrity, delegation-chain continuity, attribution consistency, provenance continuity, governed cross-domain transition, and recursive authority containment; synchronized in RTM-1.11.",
       "rtm_ids": [
@@ -2496,7 +2395,6 @@
       "ns_ids": [
         "NS-4.4-01",
         "NS-8.6A-02",
-        "NS-8.6A-03",
         "NS-10.8A-03",
         "NS-12.1-01",
         "NS-12.1-02",
@@ -2533,10 +2431,10 @@
         "CR-072",
         "CR-115"
       ],
-      "sha256": "7ebf7aea68f1b81afd018cbcc0eae09f6820e4faa989977c57ea3142ad372998",
+      "sha256": "16190eca22f101e20ef86b9702e490ff9d031c46624ae3c2d4e6299bb80de63a",
       "assigned_date": "2026-07-22",
       "notes": "Implemented as an immutable delegation-evidence object. Current authority, revocation, expiration, subject eligibility, and commit-time admissibility are re-derived from current qualified governance inputs. DS-022 now uses the DS-025 reference definition. Authority Lineage references now resolve through canonical DS-024.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-026",
@@ -2544,13 +2442,13 @@
       "repository_path": "schemas/governance_approval_artifact.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_approval_artifact.json",
       "title": "Governance Approval Artifact",
-      "description": "Canonical domain schema for an attributable, cryptographically verifiable governance artifact recording human or governed approval, cosignature, positive or negative adjudication, risk acceptance, cancellation, withdrawal, or participation in partial or completed quorum. The artifact is proposal-, lifecycle-, scope-, tenant-, target-, policy-, governance-version-, and validity-bound evidence. It may support lifecycle progression, Authority Re-Derivation, and Commit-Bound Admissibility, but does not itself constitute authority at commitment or permission to execute.",
+      "description": "Authoritative AGCP-created or AGCP-qualified canonical domain schema for an attributable, cryptographically verifiable governance artifact recording human or governed approval, cosignature, positive or negative adjudication, risk acceptance, cancellation, withdrawal, or participation in partial or completed quorum. The artifact is proposal-, lifecycle-, scope-, tenant-, target-, policy-, governance-version-, and validity-bound evidence. It may support lifecycle progression, Authority Re-Derivation, and Commit-Bound Admissibility, but does not itself constitute authority at commitment or permission to execute.",
       "category": "Approval and Adjudication",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2558,7 +2456,8 @@
         "DS-015",
         "DS-020",
         "DS-033",
-        "DS-038"
+        "DS-038",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-004",
@@ -2612,16 +2511,18 @@
         "ARM-805"
       ],
       "ns_ids": [
-        "NS-8.6A-01",
         "NS-8.6A-02",
-        "NS-8.6A-03",
         "NS-10.8A-03",
         "NS-13.6B-01",
         "NS-13.6B-02",
         "NS-13.6B-03",
         "NS-13.6B-04",
         "NS-13.6B-05",
-        "NS-13.6B-06"
+        "NS-13.6B-06",
+        "NS-13.6B-07",
+        "NS-13.6B-08",
+        "NS-13.6B-09",
+        "NS-13.6B-10"
       ],
       "cr_ids": [
         "CR-012",
@@ -2636,13 +2537,13 @@
         "CR-060",
         "CR-061"
       ],
-      "sha256": "52656fc18ea4a4786aa62f16ac80426261f8d370c14271559fd7d9cf8d740625",
+      "sha256": "6b3364d2282585e0c9c537882cabaa1d73b15af49c20b9eeaffda95a9fc6af1b",
       "assigned_date": "2026-07-22",
       "notes": "Authoritative DS-026 AGCP-created or AGCP-qualified Governance Approval Artifact. It requires artifact_origin=AGCP_CREATED_OR_QUALIFIED and is not accepted as IF-001 ingress. DS-016 remains permanently retired; DS-045 is the separate active submission schema.",
       "supersedes": [
         "DS-016"
       ],
-      "last_modified_date": "2026-08-03"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-027",
@@ -2650,13 +2551,13 @@
       "repository_path": "schemas/governance_receipt.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_receipt.json",
       "title": "Governance Receipt",
-      "description": "Canonical attributable and integrity-protected record of a non-refusal AGCP governance result. A Governance Receipt binds a Governed Action Proposal and its qualified governance basis to the recorded decision, authorization, approval or adjudication, commitment, enforcement, execution outcome, lifecycle transition, continuation outcome, or governed re-evaluation result. It is governance evidence rather than a mere application response and does not itself create authority at commitment or permission to execute. Structural Refusal is documented through a Refusal Record, not this schema.",
+      "description": "Canonical attributable and integrity-protected record of a non-refusal AGCP governance result. A Governance Receipt binds a Governed Action Proposal and its qualified governance basis to the recorded decision, authorization, approval, deterministic adjudication, commitment, enforcement, execution outcome, lifecycle transition, continuation outcome, or governed re-evaluation result. It is governance evidence rather than a mere application response and does not itself create authority at commitment or permission to execute. Structural Refusal is documented through a Refusal Record, not this schema. A receipt records commitment and may reference a distinct DS-052 post-commit execution outcome; commitment and completed target execution are not assumed to be identical events.",
       "category": "Evidence and Provenance",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-015",
@@ -2670,7 +2571,8 @@
         "DS-037",
         "DS-038",
         "DS-039",
-        "DS-040"
+        "DS-040",
+        "DS-052"
       ],
       "dependent_schemas": [
         "DS-014",
@@ -2708,20 +2610,9 @@
         "ARM-610"
       ],
       "ns_ids": [
-        "NS-10.1-01",
-        "NS-10.2-01",
-        "NS-10.2-02",
-        "NS-10.2-03",
+        "NS-9.5-05",
         "NS-10.4-01",
-        "NS-10.5-01",
-        "NS-10.5-02",
-        "NS-10.6-01",
-        "NS-10.7-01",
-        "NS-10.7-02",
-        "NS-10.7-03",
-        "NS-10.8A-01",
-        "NS-10.8A-02",
-        "NS-10.8A-03"
+        "NS-10.8A-02"
       ],
       "cr_ids": [
         "CR-062",
@@ -2734,10 +2625,10 @@
         "CR-069",
         "CR-086"
       ],
-      "sha256": "3b39c50b75140a36992ff7962b094d91dd12e05b71dbd0ae307a8fb861f3142f",
+      "sha256": "41985462249804b53ce046e58642d61baf3184dcc8cd1957d58636191fa7e44a",
       "assigned_date": "2026-07-22",
       "notes": "Authoritative DS-027 canonical Governance Receipt for non-refusal governance results. Structural Refusal remains exclusively documented by DS-028 Refusal Record.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-028",
@@ -2751,7 +2642,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -2765,7 +2656,8 @@
         "DS-032",
         "DS-033",
         "DS-038",
-        "DS-040"
+        "DS-040",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-002",
@@ -2780,7 +2672,7 @@
         "DS-039",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.47 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00009",
         "RTM-00053",
@@ -2809,23 +2701,9 @@
         "ARM-804"
       ],
       "ns_ids": [
-        "NS-6.3-02",
-        "NS-6.5-01",
-        "NS-6.5-02",
-        "NS-6.5-03",
-        "NS-7.4-01",
-        "NS-7.4-05",
-        "NS-7.5-01",
-        "NS-9.6A-03",
-        "NS-10.5-01",
-        "NS-10.5-02",
-        "NS-10.7-01",
-        "NS-10.7-02",
-        "NS-10.7-03",
-        "NS-10.8A-01",
-        "NS-10.8A-02",
-        "NS-10.8A-03",
-        "NS-13.6B-01"
+        "NS-6.4-04",
+        "NS-9.4-06",
+        "NS-9.6A-04"
       ],
       "cr_ids": [
         "CR-009",
@@ -2838,10 +2716,10 @@
         "CR-087",
         "CR-088"
       ],
-      "sha256": "69b7336d93976190c134b1c9459dd8ba5964ce2f40062095831707607177d991",
+      "sha256": "33c7b36ee50ff068a763c784e150ef3b7b46de6fb2cf5f9934dc9dccd1de543f",
       "assigned_date": "2026-07-22",
-      "notes": "Authoritative DS-028 canonical Refusal Record for Structural Refusal. Policy denial, authorization failure, commit failure, deferral, and re-evaluation remain non-refusal results unless a separate Structural Refusal is applied. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00009 and CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "notes": "Authoritative DS-028 canonical Refusal Record for Structural Refusal. Policy denial, authorization failure, commit failure, deferral, and re-evaluation remain non-refusal results unless a separate Structural Refusal is applied. RTM/CR traceability synchronized to RTM-1.47 by adding RTM-00009 and CR-009. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-029",
@@ -2849,13 +2727,13 @@
       "repository_path": "schemas/enforcement_context.json",
       "canonical_uri": "https://agcp.ai/schemas/enforcement_context.json",
       "title": "Enforcement Context",
-      "description": "Canonical, independently identifiable and traceable integrity-protected enforcement-facing projection of the completed governance basis supplied by the Governance Realization Function to a specific Policy Enforcement Point. It binds the proposal, decision, authorization, current proposal-specific authority, qualified evidence, target, Tenant, policy, qualified Canonical State, lifecycle state, scope, validity, Governance Version, resulting-state validation, composite conditions, and Governance Binding Validation needed to apply the decision correctly. Enforcement Context does not replace Canonical State, the Governance Context Envelope, or Governance Evidence and does not itself create authority, authorize execution, or commit a transition.",
+      "description": "Integrity-protected enforcement-facing context assembled by the Governance Realization Function for one exact commit-eligible governed transition. It binds the proposal, decision, Execution Authorization, current authority, current qualified state/evidence, target/action, PEP Profile and mapping, Governance Enforcement Binding, and PEP caller context without widening governance meaning.",
       "category": "Commit and Enforcement",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -2874,22 +2752,44 @@
         "DS-037",
         "DS-038",
         "DS-039",
-        "DS-041"
+        "DS-041",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-014",
-        "DS-018",
         "DS-019",
         "DS-020",
         "DS-027",
         "DS-028",
-        "DS-040"
+        "DS-030",
+        "DS-040",
+        "DS-052"
       ],
       "rtm_mapping_basis": "Relationship-specific semantic mapping approved for Enforcement Context availability, Enforcement Decision Integrity, and Governance Enforcement Binding in RTM-1.24.",
       "rtm_ids": [
+        "RTM-00019",
+        "RTM-00022",
+        "RTM-00024",
+        "RTM-00031",
+        "RTM-00032",
+        "RTM-00048",
+        "RTM-00059",
+        "RTM-00067",
+        "RTM-00068",
+        "RTM-00079",
+        "RTM-00080",
+        "RTM-00081",
+        "RTM-00084",
+        "RTM-00087",
+        "RTM-00096",
+        "RTM-00102",
+        "RTM-00107",
+        "RTM-00109",
+        "RTM-00118",
         "RTM-00119",
         "RTM-00120",
-        "RTM-00121"
+        "RTM-00121",
+        "RTM-00122"
       ],
       "arm_ids": [
         "ARM-203",
@@ -2909,17 +2809,44 @@
         "NS-9.4-03",
         "NS-9.4-04",
         "NS-9.6A-03",
-        "NS-9.6A-04"
+        "NS-9.6A-04",
+        "NS-9.4-05",
+        "NS-9.4-06",
+        "NS-9.4-07",
+        "NS-9.4-08",
+        "NS-9.4-09",
+        "NS-9.6A-05",
+        "NS-9.6A-06"
       ],
       "cr_ids": [
+        "CR-019",
+        "CR-022",
+        "CR-024",
+        "CR-031",
+        "CR-032",
+        "CR-048",
+        "CR-059",
+        "CR-067",
+        "CR-068",
+        "CR-079",
+        "CR-080",
+        "CR-081",
+        "CR-084",
+        "CR-087",
+        "CR-096",
+        "CR-102",
+        "CR-107",
+        "CR-109",
+        "CR-118",
         "CR-119",
         "CR-120",
-        "CR-121"
+        "CR-121",
+        "CR-122"
       ],
-      "sha256": "ec6b2f9711c9aeb46750fc156051297040d61b30bccb3641933f1482da338cca",
+      "sha256": "b1deccbfcbe2a01d67be111df6132a7a93161d598e202394c766f547fe5248d0",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-029 Enforcement Context assembled from the completed qualified governance basis and supplied to a specific Policy Enforcement Point. It preserves Governance Enforcement Binding, supports fail-closed mismatch detection, and does not replace source governance objects or independently create authority, authorization, execution, or commitment.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-030",
@@ -2927,19 +2854,20 @@
       "repository_path": "schemas/governance_binding_validation_result.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_binding_validation_result.json",
       "title": "Governance Binding Validation Result",
-      "description": "Canonical, independently identifiable and traceable commit-time result confirming that the proposal remains bound to the same governance decision, execution authorization, current proposal-specific authority, qualified evidence, target, Tenant, governance domain, policy, qualified Canonical State, Derived Lifecycle State, scope, validity window, Governance Version, and applicable composite bind conditions evaluated by governance.",
+      "description": "Canonical, independently identifiable and traceable result of determining immediately before enforcement and commitment whether the proposal remains bound to the same governance decision, execution authorization, current proposal-specific authority, qualified evidence, target, Tenant, governance domain, policy, qualified Canonical State, Derived Lifecycle State, scope, validity window, Governance Version, and applicable composite bind conditions previously evaluated by governance. It prevents substitution, detachment, cross-tenant transfer, stale or mismatched input use, invalid replay, and ungoverned partial binding. A valid result permits Enforcement Context assembly and continued Commit-Bound Admissibility processing but does not itself authorize execution, establish authority, apply enforcement, or commit a transition.",
       "category": "Commit and Enforcement",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
         "DS-015",
         "DS-017",
         "DS-020",
+        "DS-029",
         "DS-031",
         "DS-032",
         "DS-033",
@@ -2948,11 +2876,11 @@
         "DS-036",
         "DS-037",
         "DS-038",
-        "DS-041"
+        "DS-041",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-014",
-        "DS-018",
         "DS-019",
         "DS-020",
         "DS-022",
@@ -2964,9 +2892,12 @@
       ],
       "rtm_mapping_basis": "Relationship-specific semantic mapping approved for Governance Realization, composite pre-bind re-evaluation, and governed partial-binding continuity in RTM-1.23.",
       "rtm_ids": [
+        "RTM-00022",
         "RTM-00102",
         "RTM-00107",
-        "RTM-00109"
+        "RTM-00109",
+        "RTM-00120",
+        "RTM-00121"
       ],
       "arm_ids": [
         "ARM-202",
@@ -2983,17 +2914,24 @@
         "NS-9.6A-02",
         "NS-9.6A-04",
         "NS-9.6B-03",
-        "NS-9.6B-05"
+        "NS-9.6B-05",
+        "NS-9.4-07",
+        "NS-9.4-08",
+        "NS-9.6A-05",
+        "NS-9.6A-06"
       ],
       "cr_ids": [
+        "CR-022",
         "CR-102",
         "CR-107",
-        "CR-109"
+        "CR-109",
+        "CR-120",
+        "CR-121"
       ],
-      "sha256": "59d34233ad865a0194be6f8c559c62f27aae8c56c5f4cd38621ffffb9b1e499f",
+      "sha256": "ce9e2ca6caa1c28df2803be327db5e6b306ce9c9595ad42c68e7892f7896eb83",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-030 commit-time Governance Binding Validation result. It compares the previously evaluated binding with current qualified governance inputs across proposal, decision, authorization, authority, evidence, target, Tenant, policy, Canonical State, lifecycle, scope, validity, Governance Version, and composite bind conditions. It permits Enforcement Context assembly only when all applicable dimensions remain intact and does not itself authorize, enforce, or commit execution.",
-      "last_modified_date": "2026-07-29"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-031",
@@ -3001,13 +2939,13 @@
       "repository_path": "schemas/resulting_state_validation_result.json",
       "canonical_uri": "https://agcp.ai/schemas/resulting_state_validation_result.json",
       "title": "Resulting-State Validation Result",
-      "description": "Canonical, independently identifiable and traceable pre-commit validation of the projected aggregate state produced by one governed transition, a complete Bind Set, or an explicitly governed executable subset. The result preserves applicable constraints, invariants, dependency and coupling conditions, qualified Canonical State, aggregate effects, deterministic projection, attribution, integrity, and replay. It contributes to Commit-Bound Admissibility but does not establish authority, authorize execution, select an executable subset, or commit a transition.",
+      "description": "Canonical, independently identifiable and traceable result of validating before commitment that the state projected to result from one governed transition, a complete Bind Set, or an explicitly governed executable subset satisfies all applicable governance requirements. The result preserves constraints, invariants, dependency and coupling conditions, aggregate-state effects, qualified Canonical State, deterministic projection, attribution, integrity, and replay. It contributes to Commit-Bound Admissibility but does not establish authority, authorize execution, select an executable subset, or itself commit any transition.",
       "category": "Commit and Enforcement",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3019,14 +2957,14 @@
       ],
       "dependent_schemas": [
         "DS-014",
-        "DS-018",
         "DS-019",
         "DS-020",
         "DS-027",
         "DS-029",
         "DS-030",
         "DS-037",
-        "DS-040"
+        "DS-040",
+        "DS-052"
       ],
       "rtm_mapping_basis": "Relationship-specific semantic mapping approved for Governance Realization support and explicit determination that a complete or partial transition set preserves acceptable projected resulting state in RTM-1.21.",
       "rtm_ids": [
@@ -3054,7 +2992,7 @@
       "sha256": "058523ee4755b94e94b8a243dc2a8ca8003b7a0e4c58121af01daffe7245df6d",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-031 pre-commit Resulting-State Validation. It evaluates deterministic projected aggregate state for a single transition, complete Bind Set, or explicitly governed executable subset; preserves constraints, invariants, dependency and coupling conditions; and blocks commitment when the state is invalid or indeterminate. It is not authority, authorization, subset selection, or commitment.",
-      "last_modified_date": "2026-07-29"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-032",
@@ -3068,7 +3006,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-020"
@@ -3078,7 +3016,6 @@
         "DS-012",
         "DS-015",
         "DS-017",
-        "DS-018",
         "DS-020",
         "DS-023",
         "DS-028",
@@ -3122,7 +3059,7 @@
       "sha256": "2a540ebc37c18dc65f769daad00a8cb62a4325f4099c92250feae489d4316e17",
       "assigned_date": "2026-07-22",
       "notes": "Extracted from the transitional State Qualification model embedded in DS-023. DS-032 now records qualified, not-qualified, and indeterminate outcomes; DS-023 accepts only the qualified outcome. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-033",
@@ -3136,7 +3073,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3148,7 +3085,6 @@
         "DS-012",
         "DS-015",
         "DS-017",
-        "DS-018",
         "DS-020",
         "DS-022",
         "DS-023",
@@ -3206,21 +3142,21 @@
       "sha256": "848bf6eb2cdbb78a33b5a4c0f3ae4d6f4d4acbc23fc15b0ada338cc55d536ce3",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-033 Evidence Qualification result. The schema externalizes the transitional shared model, adds mandatory availability qualification, supports qualified, not-qualified, and indeterminate outcomes, and supplies the canonical qualified_evidence_ref used by active governance schemas. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-034",
       "filename": "authority_rederivation_result.json",
       "repository_path": "schemas/authority_rederivation_result.json",
       "canonical_uri": "https://agcp.ai/schemas/authority_rederivation_result.json",
-      "title": "Authority Rederivation Result",
+      "title": "Authority Re-Derivation Result",
       "description": "Canonical, independently identifiable and traceable result of re-deriving proposal-specific authority immediately before commitment from current qualified governance inputs. The result evaluates current Canonical State, Authority Lineage, Delegation Artifacts, Governance Approval Artifacts, qualified evidence, authorization, target, tenant, governance domain, lifecycle, scope, validity, revocation, subject eligibility, recursive containment, and cross-domain isolation. It precedes Commit-Bound Admissibility and Governance Binding Validation and does not itself grant permission to execute.",
       "category": "Authority",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3234,11 +3170,11 @@
         "DS-032",
         "DS-033",
         "DS-038",
-        "DS-041"
+        "DS-041",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-014",
-        "DS-018",
         "DS-019",
         "DS-020",
         "DS-029",
@@ -3275,9 +3211,7 @@
         "ARM-610"
       ],
       "ns_ids": [
-        "NS-8.6A-01",
         "NS-8.6A-02",
-        "NS-8.6A-03",
         "NS-9.6A-01",
         "NS-12.1-01",
         "NS-12.1-02",
@@ -3293,7 +3227,10 @@
         "NS-12.5-02",
         "NS-12.6-02",
         "NS-12.6-03",
-        "NS-12.7-03"
+        "NS-12.7-03",
+        "NS-12.2-03",
+        "NS-12.6-06",
+        "NS-13.6B-10"
       ],
       "cr_ids": [
         "CR-024",
@@ -3305,10 +3242,10 @@
         "CR-115",
         "CR-116"
       ],
-      "sha256": "ad4db7436967a7c8c1e510eddd7f4bea4745b8b1575fd5a53745d3c00b2a23f8",
+      "sha256": "e41c9a54b4dd47a2a6b845e50082a3654ebfd350ba29b13d788ce5d6ce670afd",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-034 commit-time Authority Re-Derivation result. It consumes current qualified Canonical State and evidence, Authority Lineage, Delegation Artifacts, Governance Approval Artifacts, authorization, target, tenant, lifecycle, scope, validity, revocation, recursive-containment, and cross-domain conditions. It is proposal-specific, non-portable, and precedes Commit-Bound Admissibility and Governance Binding Validation.",
-      "last_modified_date": "2026-07-29"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-035",
@@ -3322,7 +3259,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3369,7 +3306,7 @@
       "sha256": "d98a575bec9588c47b03438e7b93316e0eba18a11edf41cafe943ca14be55eac",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-035 complete candidate Bind Set. It preserves parent/sub-transition identity, targets, authority domains, coupling semantics, DS-036 dependency-graph binding, aggregate-effect basis, and declared partial-binding policy. It does not establish authority, authorize execution, determine Partial-Bind Admissibility, or approve an executable subset.",
-      "last_modified_date": "2026-07-29"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-036",
@@ -3377,13 +3314,13 @@
       "repository_path": "schemas/governance_dependency_graph.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_dependency_graph.json",
       "title": "Governance Dependency Graph",
-      "description": "Canonical, independently identifiable and traceable structured representation of governance-significant dependency, prerequisite, ordering, authority, synchronization, consistency, execution, resource, policy, evidence, and state relationships among governed sub-transitions of a composite proposal. The graph makes dependencies explicit for composite evaluation, re-evaluation, Governance Binding Validation, Deterministic Adjudication, Partial-Bind Admissibility, Resulting-State Validation, coordinated enforcement, and replay. It does not itself establish authority, authorize execution, or determine partial-bind admissibility.",
+      "description": "Canonical, independently identifiable and traceable structured representation of governance-significant dependency, prerequisite, ordering, authority, synchronization, consistency, execution, resource, policy, evidence, and state relationships among governed sub-transitions of a composite proposal. The graph makes dependencies explicit for composite evaluation, re-evaluation, Governance Binding Validation, Deterministic Adjudication, Partial-Bind Admissibility, Resulting-State Validation, coordinated enforcement, and replay. It does not itself establish authority, authorize execution, or determine partial-bind admissibility. Commit-sensitive dependency evaluation is performed by the Governance Realization Function as part of Commit-Bound Admissibility; the dependency graph is descriptive input and does not itself commit or enforce.",
       "category": "Composite Governance",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3399,7 +3336,6 @@
         "DS-018",
         "DS-019",
         "DS-020",
-        "DS-021",
         "DS-022",
         "DS-029",
         "DS-030",
@@ -3445,10 +3381,10 @@
         "CR-106",
         "CR-107"
       ],
-      "sha256": "439c23ff76174ffa848605e5f5345bd49f4b5b4ce72319e2d41cf26dc516be20",
+      "sha256": "5535c892869dfb60abc10a1e261a3a52bf47ee8687a48e4980911c1d8cb7ae67",
       "assigned_date": "2026-07-22",
       "notes": "Canonical DS-036 Governance Dependency Graph extracted from DS-021. It models explicit governed sub-transition nodes and typed dependency relationships, requires attributable graph validation and replay material, and mandates deterministic pre-bind re-evaluation after material dependency-condition change. It does not itself establish authority, authorize execution, or determine partial-bind admissibility.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-037",
@@ -3456,13 +3392,13 @@
       "repository_path": "schemas/deterministic_adjudication_result.json",
       "canonical_uri": "https://agcp.ai/schemas/deterministic_adjudication_result.json",
       "title": "Deterministic Adjudication Result",
-      "description": "Canonical, independently identifiable and traceable result of resolving which candidate, if any, may proceed toward commitment when multiple currently admissible transitions contend within the same governance horizon. The result operates on a complete Admissible Set and applies explicit governance-significant ordering, conflict, dependency, resource, priority, state, and policy conditions rather than arrival timing or implementation-specific behavior. It may select one properly bound transition, a validated executable subset, no candidate, or an indeterminate outcome. It contributes to Governance Evidence and commitment processing but does not itself establish authority, authorize execution, validate Governance Binding, or commit a transition.",
+      "description": "Canonical, independently identifiable and traceable result of resolving which candidate, if any, may proceed toward commitment when multiple currently admissible transitions contend within the same governance horizon. The result operates on a complete Admissible Set and applies explicit governance-significant ordering, conflict, dependency, resource, priority, state, and policy conditions rather than arrival timing or implementation-specific behavior. It may select one properly bound transition, a validated executable subset, no candidate, or an indeterminate outcome. It contributes to Governance Evidence and commitment processing but does not itself establish authority, authorize execution, validate Governance Binding, or commit a transition. Adjudication remains subject to Governance Realization current admissibility and PEP mediation at the Commit Boundary.",
       "category": "Composite Governance",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3487,7 +3423,7 @@
         "DS-030",
         "DS-040"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.47 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00034",
         "RTM-00094",
@@ -3510,10 +3446,10 @@
         "CR-094",
         "CR-095"
       ],
-      "sha256": "38262da8d98899480706d43653a5dc7a65b4145b437532afbaeb5dde2b85eb3a",
+      "sha256": "d646a4c6a6994aeaea63acb5ba82520697c49ede71e1b8144ef21fb74ced06a8",
       "assigned_date": "2026-07-22",
-      "notes": "Canonical DS-037 Deterministic Adjudication Result. It preserves a complete Admissible Set and resolves contention through explicit governance-significant ordering, conflict, dependency, resource, priority, state, and policy conditions. It prohibits arrival timing and implementation-specific behavior as governance bases and does not itself authorize, bind, or commit a transition. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00034 and CR-034.",
-      "last_modified_date": "2026-07-29"
+      "notes": "Canonical DS-037 Deterministic Adjudication Result. It preserves a complete Admissible Set and resolves contention through explicit governance-significant ordering, conflict, dependency, resource, priority, state, and policy conditions. It prohibits arrival timing and implementation-specific behavior as governance bases and does not itself authorize, bind, or commit a transition. RTM/CR traceability synchronized to RTM-1.47 by adding RTM-00034 and CR-034.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-038",
@@ -3521,13 +3457,13 @@
       "repository_path": "schemas/governance_lifecycle_record.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_lifecycle_record.json",
       "title": "Governance Lifecycle Record",
-      "description": "Canonical attributable and integrity-protected record of Proposal Identity, authoritative Derived Lifecycle State, complete ordered transition history, transition basis, terminality, approval/refusal effects, expiration, cancellation, degradation, re-evaluation, recovery, commitment, and execution effects.",
+      "description": "Canonical attributable, integrity-protected record of a Governed Action Proposal lifecycle. DS-038 derives authoritative lifecycle state from ordered Governance Ledger records, preserves complete transition history and transition basis, distinguishes terminal from nonterminal state, records approval, refusal, expiration, cancellation, degradation, re-evaluation, recovery, commitment, and execution effects, and binds every lifecycle fact to stable Proposal Identity. It is not an uncontrolled mutable operational status flag and does not itself authorize execution. The lifecycle distinguishes commitment acceptance from later execution completion when operational realization is asynchronous.",
       "category": "Lifecycle and Continuation",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3541,7 +3477,9 @@
         "DS-028",
         "DS-039",
         "DS-040",
-        "DS-041"
+        "DS-041",
+        "DS-052",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-006",
@@ -3592,23 +3530,9 @@
         "ARM-809"
       ],
       "ns_ids": [
-        "NS-13.5-02",
-        "NS-13.5-03",
-        "NS-13.5-04",
-        "NS-13.6A-01",
-        "NS-13.6A-02",
-        "NS-13.6A-03",
-        "NS-13.6A-04",
-        "NS-13.6A-05",
-        "NS-13.6B-01",
-        "NS-13.6B-02",
-        "NS-13.6B-03",
-        "NS-13.6B-04",
-        "NS-13.6B-05",
-        "NS-13.6B-06",
-        "NS-13.6C-01",
-        "NS-13.6C-02",
-        "NS-13.6C-04"
+        "NS-9.5-05",
+        "NS-10.8A-02",
+        "NS-10.8A-03"
       ],
       "cr_ids": [
         "CR-010",
@@ -3624,10 +3548,10 @@
         "CR-092",
         "CR-093"
       ],
-      "sha256": "c53495168585e86d15eb0f4adefb88b82a09ad8cdd96e44c05b227fddde0aff8",
+      "sha256": "a4485a75806b14471e4d5773ab67cd537f64903bb337eaaa56de79c3a22809bb",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. DS-038 owns lifecycle record, lifecycle state, transition, terminality, and canonical lifecycle reference definitions. It derives lifecycle state from ordered ledger records, preserves complete transition basis and history, blocks transient-state exposure, makes executed Proposal Identity terminal and non-repeatable, and records degradation and governed re-evaluation without itself authorizing execution. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-039",
@@ -3635,13 +3559,13 @@
       "repository_path": "schemas/continuation_integrity_result.json",
       "canonical_uri": "https://agcp.ai/schemas/continuation_integrity_result.json",
       "title": "Continuation Integrity Result",
-      "description": "Canonical attributable and integrity-protected result for pre-commit Continuation Integrity, material-change assessment, affected-proposal risk-based re-evaluation, Admissible Path Viability, degradation, commitment suspension, Continuation Recovery, restoration, and governed terminal disposition.",
+      "description": "Canonical attributable and integrity-protected result of Continuation Integrity processing for a nonterminal Governed Action Proposal before final Commit-Bound Admissibility is resolved. DS-039 verifies that the proposal-specific governance basis remains current, synchronized, and sufficiently qualified; evaluates material governance-condition changes and affected-proposal selection under active risk-based governance configuration; tracks Admissible Path Viability; records degradation, commitment suspension, governed re-evaluation, recovery, restoration, or terminal disposition; preserves Proposal Identity and governance lineage; and prevents prior authorization from being treated as unconditional future execution authority. It does not itself authorize execution, establish authority at commitment, bypass Commit-Bound Admissibility, or commit a transition. IAS account/role/entitlement changes map to AUTHORITY_CHANGE. IAS Profile or PEP Profile selection/mapping changes map to GOVERNANCE_CONFIGURATION_CHANGE.",
       "category": "Lifecycle and Continuation",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3745,10 +3669,10 @@
         "CR-107",
         "CR-122"
       ],
-      "sha256": "f4b3aefb86b45f8479635b058dff0a26d8367e8d4b1eb013a18ddd336e335b62",
+      "sha256": "4ccd2073b309da618f4216382a392f27e1cf77392f70e3cfb20b4d35a69f73bf",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. DS-039 owns Continuation Integrity result identity, outcomes, path-viability status, degradation, material-change assessment, risk-based re-evaluation, recovery, and canonical result references. It applies only to nonterminal pre-commit proposals and cannot authorize execution or bypass Commit-Bound Admissibility.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-040",
@@ -3756,13 +3680,13 @@
       "repository_path": "schemas/governance_ledger_event.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_ledger_event.json",
       "title": "Governance Ledger Event",
-      "description": "Canonical attributable, append-only, integrity-linked, totally ordered Governance Ledger event for governance submissions, decisions, approvals, refusals, commitments, enforcement outcomes, lifecycle transitions, continuation events, compilation and activation, and associated evidence references. It is authoritative for recorded governance events, event ordering, and Derived Lifecycle State reconstruction within declared ordering scopes.",
+      "description": "Canonical attributable, append-only, integrity-linked, totally ordered Governance Ledger event. DS-040 records or references governance submissions, context and state records, evidence and qualification results, authority and approvals, decisions and authorizations, refusals, commitments, enforcement outcomes, lifecycle transitions, continuation events, governance compilation and activation, and associated evidence. It preserves authoritative event ordering within an explicit ledger stream, supports per-proposal and dependent-event reconstruction, Derived Lifecycle State, deterministic replay, audit reconstruction, tenant isolation, cryptographic integrity, correction by subsequent event rather than mutation, and long-term verification. Timestamps, arrival order, storage order, node identity, and transport behavior are never authoritative ordering bases. A Governance Ledger event records governance history; it does not itself establish authority at commitment, authorize execution, alter the referenced artifact, or replace qualified authoritative sources used to resolve Canonical State.",
       "category": "Evidence and Provenance",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3793,7 +3717,9 @@
         "DS-039",
         "DS-041",
         "DS-042",
-        "DS-043"
+        "DS-043",
+        "DS-052",
+        "DS-053"
       ],
       "dependent_schemas": [
         "DS-001",
@@ -3806,9 +3732,10 @@
         "DS-031",
         "DS-038",
         "DS-039",
-        "DS-043"
+        "DS-043",
+        "DS-052"
       ],
-      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.46 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments derived from the authoritative RTM-1.47 DS_ID column; the catalog records the corresponding RTM_ID and CR_ID sets without omission or addition.",
       "rtm_ids": [
         "RTM-00008",
         "RTM-00009",
@@ -3928,10 +3855,10 @@
         "CR-091",
         "CR-098"
       ],
-      "sha256": "97e1d8d857365e1ab3a4d6884949cea2d4d0c528367c7625bc51e4b4ef0bf063",
+      "sha256": "bf2631796c4bd4261340e77c6d3b1cfed81c6dc8cd2f3b7bbfed854978d4437a",
       "assigned_date": "2026-07-22",
-      "notes": "Implemented for AGCP v2.0. DS-040 owns Governance Ledger identity, event identity, event type, authoritative ledger position, append-only and hash-chain controls, explicit causal ordering, typed artifact references, correction-by-subsequent-event semantics, retention events, and canonical event references. It is not a general application log and does not itself authorize execution or replace authoritative Canonical State sources. RTM/CR traceability synchronized to RTM-1.46 by adding RTM-00008;RTM-00009;RTM-00034 and CR-008;CR-009;CR-034.",
-      "last_modified_date": "2026-07-30"
+      "notes": "Implemented for AGCP v2.0. DS-040 owns Governance Ledger identity, event identity, event type, authoritative ledger position, append-only and hash-chain controls, explicit causal ordering, typed artifact references, correction-by-subsequent-event semantics, retention events, and canonical event references. It is not a general application log and does not itself authorize execution or replace authoritative Canonical State sources. RTM/CR traceability synchronized to RTM-1.47 by adding RTM-00008;RTM-00009;RTM-00034 and CR-008;CR-009;CR-034.",
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-041",
@@ -3939,13 +3866,13 @@
       "repository_path": "schemas/governance_configuration.json",
       "canonical_uri": "https://agcp.ai/schemas/governance_configuration.json",
       "title": "Governance Configuration",
-      "description": "Canonical explicit, attributable, versioned, integrity-protected, evaluation-available governance-significant configuration, including deterministic risk-based re-evaluation controls and controlled-change requirements.",
+      "description": "Canonical, independently identifiable, attributable, versioned, integrity-protected, and evaluation-available representation of all governance-significant configuration applicable to a defined Tenant, governance domain, scope, and Governance Version. It makes runtime governance settings explicit, prohibits hidden or implicit configuration from influencing governance decisions, preserves controlled change and activation requirements, and includes the active deterministic risk-based re-evaluation configuration used to identify affected nonterminal proposals when material governance conditions change. Governance Configuration does not itself establish authority at commitment, authorize execution, or activate compiled governance.",
       "category": "Governance Compilation",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -3967,6 +3894,7 @@
         "DS-012",
         "DS-015",
         "DS-017",
+        "DS-020",
         "DS-022",
         "DS-029",
         "DS-030",
@@ -4005,16 +3933,18 @@
         "NS-15.6A-04",
         "NS-15.6B-01",
         "NS-15.6B-02",
-        "NS-15.7-02"
+        "NS-15.7-02",
+        "NS-17.5-03",
+        "NS-17.5-04"
       ],
       "cr_ids": [
         "CR-117",
         "CR-122"
       ],
-      "sha256": "1af7552f0e9c8b8f379a157c9680d0f11c5f59abb6e07757fae2e82b4fb1ad03",
+      "sha256": "2650e422b7ac4bdcf237684afa23631597ec9d4927444417aadff540c1ccedfd",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. Canonical reference ownership moved from common.json to DS-041. Active configurations require explicit settings, deterministic risk-based re-evaluation rules, external change control, integrity, availability, and controlled activation binding. Reverse schema dependency metadata synchronized to the active forward schema_dependencies graph in Schema Catalog 1.0.44.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-042",
@@ -4022,13 +3952,13 @@
       "repository_path": "schemas/compiled_governance_artifact.json",
       "canonical_uri": "https://agcp.ai/schemas/compiled_governance_artifact.json",
       "title": "Compiled Governance Artifact",
-      "description": "Canonical versioned, attributable, traceable, integrity-protected, machine-evaluable output of Governance Compilation, including deterministic compilation context, validated dependencies, semantic preservation, artifact lineage, Constitutional Validation, Governance Omission Analysis, Governance Self-Protection, and activation eligibility.",
+      "description": "Canonical, independently identifiable, versioned, attributable, traceable, integrity-protected, machine-evaluable output of Governance Compilation. It preserves the originating governance intent and all applicable constraints, invariants, refusal paths, escalation semantics, evidence requirements, authority rules, commit meaning, compilation context, dependency set, and derivation lineage. It records Constitutional Validation, Governance Omission Analysis, Governance Self-Protection, and activation eligibility, but does not itself establish authority at commitment, determine Commit-Bound Admissibility, authorize execution, or activate governance.",
       "category": "Governance Compilation",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-007",
@@ -4085,7 +4015,7 @@
       "sha256": "5da50676019e44e7a90b73ac383cf1d021601d115321881f8f29e03f2c9d68bc",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. DS-042 owns the Compiled Governance Artifact identifier and reference. It records deterministic compilation, semantic preservation, complete lineage, constitutional validation, omission analysis, self-protection, and activation eligibility without itself activating governance or authorizing execution.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-043",
@@ -4093,13 +4023,13 @@
       "repository_path": "schemas/controlled_governance_activation.json",
       "canonical_uri": "https://agcp.ai/schemas/controlled_governance_activation.json",
       "title": "Controlled Governance Activation",
-      "description": "Canonical atomic activation record for externally approved and constitutionally validated governance packages, establishing Governance Version, effective scope, evidence, prior-version preservation, and rollback basis without authorizing execution.",
+      "description": "Canonical, independently identifiable, version-controlled, attributable, integrity-protected record of the governed operation through which an externally approved and constitutionally validated governance package becomes authoritative for runtime evaluation. It establishes package identity, Governance Version, provenance, approval, effective scope, activation evidence, atomicity, prior-version preservation, and rollback basis as one coherent operation. It remains distinct from execution authorization, Commit-Bound Admissibility, and transition commitment.",
       "category": "Governance Compilation",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-020",
@@ -4152,21 +4082,21 @@
       "sha256": "02840dea425e77a6be5b30e8185b8ec31ef08e72b2991441990e14badaea1adc",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0. DS-043 owns the Controlled Governance Activation record and reference. It requires a complete DS-042 package, external DS-026 approval, successful constitutional validation and omission analysis, atomic activation, Governance Version establishment, prior-version preservation on failure, rollback basis, activation evidence, provenance, integrity, and replay material.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-044",
       "filename": "registry_document.schema.json",
       "repository_path": "schemas/registry_document.schema.json",
       "canonical_uri": "https://agcp.ai/schemas/registry_document.schema.json",
-      "title": "Registry Document",
-      "description": "Canonical validator for controlled registry documents and entries, including stable registry and REG entry identity, release, lifecycle, integrity, direct entry-level NS/CR traceability, release-level architectural traceability, typed entry structure, and non-expansion of Core normative behavior.",
+      "title": "AGCP Registry Document",
+      "description": "Canonical validator for AGCP controlled-registry documents. It binds stable registry and entry identity, release and lifecycle state, integrity, direct entry-level NS/CR traceability, release-level architectural traceability, registry rules, field definitions, and typed entries without allowing a registry to alter Core normative behavior independently.",
       "category": "Registry Validation",
       "artifact_type": "JSON Schema",
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001"
       ],
@@ -4243,7 +4173,7 @@
       "sha256": "3d599604e0027fbd42d4734d87a2de1f7b51802ea9f5d0289f9969c1a0facf4c",
       "assigned_date": "2026-07-22",
       "notes": "Implemented for AGCP v2.0 registry cleanup. DS-044 owns canonical registry-document and registry-reference definitions. Authoritative payloads reside only under registries/ and include release, lifecycle, integrity, traceability, and typed-entry controls. Entry-level REG identifiers and direct NS/CR traceability are now mandatory for typed and generic registry entries.",
-      "last_modified_date": "2026-07-30"
+      "last_modified_date": "2026-10-03"
     },
     {
       "ds_id": "DS-045",
@@ -4257,7 +4187,7 @@
       "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
       "lifecycle_state": "Implemented",
       "record_status": "Active",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "schema_dependencies": [
         "DS-001",
         "DS-006",
@@ -4293,16 +4223,17 @@
         "ARM-805"
       ],
       "ns_ids": [
-        "NS-8.6A-01",
         "NS-8.6A-02",
-        "NS-8.6A-03",
         "NS-10.8A-03",
         "NS-13.6B-01",
         "NS-13.6B-02",
         "NS-13.6B-03",
         "NS-13.6B-04",
         "NS-13.6B-05",
-        "NS-13.6B-06"
+        "NS-13.6B-06",
+        "NS-13.6B-07",
+        "NS-13.6B-08",
+        "NS-13.6B-09"
       ],
       "cr_ids": [
         "CR-012",
@@ -4317,15 +4248,333 @@
         "CR-060",
         "CR-061"
       ],
-      "sha256": "412794ecf4e5d797a7bc637b0ba3b259b72dabea6f9bae3d1744327cb5ca863b",
+      "sha256": "abcb7a0303e0e7a55e59e452c00c5f0427f66482514c8b7d136bd0aaf53a1d21",
       "assigned_date": "2026-08-03",
-      "last_modified_date": "2026-08-03",
+      "last_modified_date": "2026-10-03",
       "notes": "Implemented for P0-06 command-versus-authoritative-record separation. DS-045 accepts claimant content and provenance only; additionalProperties:false rejects AGCP-derived verification, eligibility, quorum, lifecycle, evidence, digest, replay, and ledger assertions. IF-001 accepts DS-045 and never accepts DS-026 as request content."
+    },
+    {
+      "ds_id": "DS-046",
+      "filename": "governance_observation_event.json",
+      "repository_path": "schemas/governance_observation_event.json",
+      "canonical_uri": "https://agcp.ai/schemas/governance_observation_event.json",
+      "title": "AGCP Governance Observation Event",
+      "description": "Read-only attributable observation emitted by an AGCP Governance Observation Point. Observation records support correlation to management/test-control causes and to the authoritative runtime sources actually consumed by governed processing.",
+      "category": "Governance Observability",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [],
+      "dependent_schemas": [],
+      "rtm_mapping_basis": "Supporting management/test-control schema introduced by AGCP v2.1.0; no independent CR/RTM mapping is created solely by this supporting interface artifact.",
+      "rtm_ids": [],
+      "arm_ids": [
+        "ARM-901",
+        "ARM-903"
+      ],
+      "ns_ids": [],
+      "cr_ids": [],
+      "sha256": "133518ef98d2ca20b613716bbf7c5d8ebccba8f02d4361fad1cc865808b0c97b",
+      "assigned_date": "2026-08-15",
+      "last_modified_date": "2026-10-03",
+      "notes": "v2.1.0 corrected management-plane contract: observations support test-scope/correlation/condition/source binding."
+    },
+    {
+      "ds_id": "DS-047",
+      "filename": "management_capabilities_response.json",
+      "repository_path": "schemas/management_capabilities_response.json",
+      "canonical_uri": "https://agcp.ai/schemas/management_capabilities_response.json",
+      "title": "AGCP Management Capabilities Response",
+      "description": "Machine-readable discovery of implemented observation, actuation, and test-control capabilities, including whether each advertised surface is actually bound to governed runtime processing rather than merely accepting or recording requests. Runtime binding declarations are truth claims: BOUND is permitted only when the corresponding source or actuation adapter is connected to the ordinary governed runtime path and has passed the supporting coupling checks.",
+      "category": "Governance Management",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [],
+      "dependent_schemas": [],
+      "rtm_mapping_basis": "Supporting management/test-control schema introduced by AGCP v2.1.0; no independent CR/RTM mapping is created solely by this supporting interface artifact.",
+      "rtm_ids": [],
+      "arm_ids": [
+        "ARM-903",
+        "ARM-905"
+      ],
+      "ns_ids": [],
+      "cr_ids": [],
+      "sha256": "1b6bafd146265c9374fe4024f1f2de931db6eaa7a11cfb8a8520a02dc13fb395",
+      "assigned_date": "2026-08-15",
+      "last_modified_date": "2026-08-15",
+      "notes": "v2.1.0 corrected contract: truthful BOUND/RECORD_ONLY/UNBOUND discovery and source/actuation readback requirements."
+    },
+    {
+      "ds_id": "DS-048",
+      "filename": "governance_actuation_request.json",
+      "repository_path": "schemas/governance_actuation_request.json",
+      "canonical_uri": "https://agcp.ai/schemas/governance_actuation_request.json",
+      "title": "AGCP Governance Actuation Request",
+      "description": "Authenticated management request to introduce a typed controlled governance input or administrative transition without directly mutating downstream governance results. requested_condition is type-bound to actuation_type.",
+      "category": "Governance Management",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [],
+      "dependent_schemas": [],
+      "rtm_mapping_basis": "Supporting management/test-control schema introduced by AGCP v2.1.0; no independent CR/RTM mapping is created solely by this supporting interface artifact.",
+      "rtm_ids": [],
+      "arm_ids": [
+        "ARM-902",
+        "ARM-903"
+      ],
+      "ns_ids": [],
+      "cr_ids": [],
+      "sha256": "9b31fe2ce2a2aeb5305f8c16d48b0c3390c04b0974851168cdf5f65f9de89e11",
+      "assigned_date": "2026-08-15",
+      "last_modified_date": "2026-08-15",
+      "notes": "v2.1.0 corrected management-plane contract: actuation payloads are type-specific."
+    },
+    {
+      "ds_id": "DS-049",
+      "filename": "governance_actuation_result.json",
+      "repository_path": "schemas/governance_actuation_result.json",
+      "canonical_uri": "https://agcp.ai/schemas/governance_actuation_result.json",
+      "title": "AGCP Governance Actuation Result",
+      "description": "Result and readback record for a Governance Actuation Request. Request acceptance is explicitly distinct from authoritative realization. A 2xx response or acceptance_status=ACCEPTED does not mean the requested condition is effective.",
+      "category": "Governance Management",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [],
+      "dependent_schemas": [],
+      "rtm_mapping_basis": "Supporting management/test-control schema introduced by AGCP v2.1.0; no independent CR/RTM mapping is created solely by this supporting interface artifact.",
+      "rtm_ids": [],
+      "arm_ids": [
+        "ARM-902",
+        "ARM-903"
+      ],
+      "ns_ids": [],
+      "cr_ids": [],
+      "sha256": "161522c69ed45b75d7c348274b8d810e1596ea0c1179a14b8d38f4c9acc9f4b7",
+      "assigned_date": "2026-08-15",
+      "last_modified_date": "2026-08-15",
+      "notes": "v2.1.0 corrected management-plane contract: acceptance and authoritative realization are separate."
+    },
+    {
+      "ds_id": "DS-050",
+      "filename": "test_control_request.json",
+      "repository_path": "schemas/test_control_request.json",
+      "canonical_uri": "https://agcp.ai/schemas/test_control_request.json",
+      "title": "AGCP Test Control Request",
+      "description": "Explicit test-only request to establish or reset an isolated conformance-test condition. Every non-reset control has a type-specific fixture payload and may establish inputs only, never the expected governance conclusion.",
+      "category": "Conformance Test Control",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [
+        "DS-001"
+      ],
+      "dependent_schemas": [],
+      "rtm_mapping_basis": "Supporting management/test-control schema introduced by AGCP v2.1.0; no independent CR/RTM mapping is created solely by this supporting interface artifact.",
+      "rtm_ids": [],
+      "arm_ids": [
+        "ARM-904",
+        "ARM-905"
+      ],
+      "ns_ids": [],
+      "cr_ids": [],
+      "sha256": "af87cace7933ca95577d98a1ad4df146b2b77dddb5594676a7b89ddcd6978059",
+      "assigned_date": "2026-08-15",
+      "last_modified_date": "2026-10-03",
+      "notes": "v2.1.0 corrected contract: typed non-reset controls; optional correlation_id is omitted when absent and JSON null is prohibited."
+    },
+    {
+      "ds_id": "DS-051",
+      "filename": "test_control_result.json",
+      "repository_path": "schemas/test_control_result.json",
+      "canonical_uri": "https://agcp.ai/schemas/test_control_result.json",
+      "title": "AGCP Test Control Result",
+      "description": "Attributable result and readback record for an isolated AGCP test control. Acceptance, effective runtime binding, and observed consumption are separate states. EFFECTIVE means the scoped runtime source adapter will consume the condition for matching governed requests; it does not mean the condition has already been exercised.",
+      "category": "Conformance Test Control",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [],
+      "dependent_schemas": [],
+      "rtm_mapping_basis": "Supporting management/test-control schema introduced by AGCP v2.1.0; no independent CR/RTM mapping is created solely by this supporting interface artifact.",
+      "rtm_ids": [],
+      "arm_ids": [
+        "ARM-904",
+        "ARM-905"
+      ],
+      "ns_ids": [],
+      "cr_ids": [],
+      "sha256": "1a73f2398a7da6cc553dd19955019db10b331e5a63d33e11b0c19c0f83108fa5",
+      "assigned_date": "2026-08-15",
+      "last_modified_date": "2026-10-03",
+      "notes": "v2.1.0 corrected contract: acceptance/effect/consumption separation; optional correlation_id is omitted when absent and JSON null is prohibited."
+    },
+    {
+      "ds_id": "DS-052",
+      "filename": "governed_execution_outcome.json",
+      "repository_path": "schemas/governed_execution_outcome.json",
+      "canonical_uri": "https://agcp.ai/schemas/governed_execution_outcome.json",
+      "title": "Governed Execution Outcome",
+      "description": "Canonical attributable post-commit operational outcome for a governed transition. It distinguishes commitment from later target realization, including asynchronous, partial, failed, cancelled, or indeterminate operational outcomes.",
+      "category": "Execution and Evidence",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [
+        "DS-001",
+        "DS-019",
+        "DS-020",
+        "DS-021",
+        "DS-029",
+        "DS-031",
+        "DS-040"
+      ],
+      "dependent_schemas": [
+        "DS-014",
+        "DS-019",
+        "DS-020",
+        "DS-022",
+        "DS-027",
+        "DS-038",
+        "DS-040"
+      ],
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments synchronized from authoritative RTM-1.47 DS_ID rows.",
+      "rtm_ids": [
+        "RTM-00023",
+        "RTM-00047",
+        "RTM-00067",
+        "RTM-00079",
+        "RTM-00081",
+        "RTM-00082",
+        "RTM-00085",
+        "RTM-00086"
+      ],
+      "arm_ids": [
+        "ARM-211",
+        "ARM-212",
+        "ARM-213",
+        "ARM-601",
+        "ARM-702"
+      ],
+      "ns_ids": [
+        "NS-9.5-02",
+        "NS-9.5-05",
+        "NS-10.3-01",
+        "NS-10.4-01",
+        "NS-10.8A-02",
+        "NS-10.8A-03"
+      ],
+      "cr_ids": [
+        "CR-023",
+        "CR-047",
+        "CR-067",
+        "CR-079",
+        "CR-081",
+        "CR-082",
+        "CR-085",
+        "CR-086"
+      ],
+      "assigned_date": "2026-10-03",
+      "last_modified_date": "2026-10-03",
+      "notes": "Separates commitment from post-commit operational execution.",
+      "sha256": "f402eebeba121b07dd2c2d92ed6452ca4fc2e090be024ceb94b964de7c78ba66"
+    },
+    {
+      "ds_id": "DS-053",
+      "filename": "identity_authorization_qualification_result.json",
+      "repository_path": "schemas/identity_authorization_qualification_result.json",
+      "canonical_uri": "https://agcp.ai/schemas/identity_authorization_qualification_result.json",
+      "title": "Identity and Authorization Qualification Result",
+      "description": "Canonical result of resolving an authenticated subject against the implementation-selected Identity and Authorization Store Profile. It records authoritative identity, account status, tenant/domain relationships, roles, groups, entitlements, governance authorization attributes, reviewer classes, scope, validity, freshness, revocation state, source basis, and qualification evidence. These authorization and entitlement attributes are governance inputs and are not AGCP Execution Authorization.",
+      "category": "Identity and Authority Qualification",
+      "artifact_type": "JSON Schema",
+      "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+      "lifecycle_state": "Implemented",
+      "record_status": "Active",
+      "specification_version": "v2.1.0",
+      "schema_dependencies": [
+        "DS-001",
+        "DS-020",
+        "DS-024",
+        "DS-025"
+      ],
+      "dependent_schemas": [
+        "DS-011",
+        "DS-012",
+        "DS-014",
+        "DS-015",
+        "DS-017",
+        "DS-018",
+        "DS-020",
+        "DS-022",
+        "DS-024",
+        "DS-026",
+        "DS-028",
+        "DS-029",
+        "DS-030",
+        "DS-034",
+        "DS-038",
+        "DS-040"
+      ],
+      "rtm_mapping_basis": "Exact DS-to-requirement assignments synchronized from authoritative RTM-1.47 DS_ID rows.",
+      "rtm_ids": [
+        "RTM-00045",
+        "RTM-00065",
+        "RTM-00071",
+        "RTM-00096"
+      ],
+      "arm_ids": [
+        "ARM-107",
+        "ARM-301",
+        "ARM-302",
+        "ARM-308",
+        "ARM-804"
+      ],
+      "ns_ids": [
+        "NS-4.12-01",
+        "NS-4.12A-01",
+        "NS-4.12A-02",
+        "NS-6.4-04",
+        "NS-6.4-05",
+        "NS-12.2-03",
+        "NS-12.3-01",
+        "NS-12.4-01",
+        "NS-13.6B-07",
+        "NS-13.6B-08",
+        "NS-13.6B-09",
+        "NS-17.5-04"
+      ],
+      "cr_ids": [
+        "CR-045",
+        "CR-065",
+        "CR-071",
+        "CR-096"
+      ],
+      "assigned_date": "2026-10-03",
+      "last_modified_date": "2026-10-03",
+      "notes": "Authoritative identity/account/authorization/entitlement qualification; distinct from Execution Authorization.",
+      "sha256": "4b267b03f1d024e70534ab13e6d6fce4d10a244849497164c4560aab202adaf7"
     }
   ],
   "proposed_reserved_schemas": [],
   "excluded_non_schema_files": [],
-  "last_modified_date": "2026-08-05",
+  "last_modified_date": "2026-10-03",
   "retired_schemas": [
     {
       "ds_id": "DS-016",
@@ -4338,7 +4587,7 @@
       "artifact_type": "Retired DS Identifier Record",
       "lifecycle_state": "Retired",
       "record_status": "Historical",
-      "specification_version": "v2.0.8",
+      "specification_version": "v2.1.0",
       "superseded_by": "DS-026",
       "retired_date": "2026-07-30",
       "assigned_date": "2026-07-22",
@@ -4387,10 +4636,10 @@
     }
   ],
   "artifact_lifecycle_state": "CURRENT",
-  "repository_release_target": "v2.0.8",
+  "repository_release_target": "v2.1.0",
   "repository_release_target_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
   "release_status": "PUBLIC_REVIEW_CONTROLLED_BASELINE",
-  "controlling_published_baseline": "v2.0.8",
-  "baseline_date": "2026-08-14",
-  "rtm_dataset_version": "RTM-1.46"
+  "controlling_published_baseline": "v2.1.0",
+  "baseline_date": "2026-08-15",
+  "rtm_dataset_version": "RTM-1.47"
 }

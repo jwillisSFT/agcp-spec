@@ -6,8 +6,7 @@
     "request_digest": {
       "algorithm": "SHA-256",
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    },
-    "policy_enforcement_point_id": "policy-enforcement-point-id-1"
+    }
   },
   "proposal_ref": {
     "proposal_identity": {
@@ -112,7 +111,15 @@
     },
     "mismatch_reasons": [
       "AUTHORIZATION_BINDING_MISMATCH"
-    ]
+    ],
+    "pep_profile_ref": {
+      "profile_id": "PEP-GENERIC-ACTION-ADAPTER",
+      "profile_version": "1.0.0",
+      "profile_digest": {
+        "algorithm": "SHA-256",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
   },
   "commit_boundary_outcome": "Commit Failed",
   "commit_timestamp": "2026-07-30T16:00:00Z",
@@ -322,5 +329,14 @@
       "appended_at": "2026-07-30T16:00:00Z"
     },
     "created_at": "2026-07-30T16:00:00Z"
-  }
+  },
+  "pep_profile_ref": {
+    "profile_id": "PEP-GENERIC-ACTION-ADAPTER",
+    "profile_version": "1.0.0",
+    "profile_digest": {
+      "algorithm": "SHA-256",
+      "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  "execution_completion_mode": "ATOMIC_WITH_COMMIT"
 }

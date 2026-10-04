@@ -39,9 +39,7 @@
       "12.6"
     ],
     "normative_statements": [
-      "NS-8.6A-01",
       "NS-8.6A-02",
-      "NS-8.6A-03",
       "NS-9.6A-01",
       "NS-12.1-01",
       "NS-12.1-02",
@@ -57,7 +55,10 @@
       "NS-12.5-02",
       "NS-12.6-02",
       "NS-12.6-03",
-      "NS-12.7-03"
+      "NS-12.7-03",
+      "NS-12.2-03",
+      "NS-12.6-06",
+      "NS-13.6B-10"
     ],
     "conformance_requirements": [
       "CR-024",
@@ -67,7 +68,8 @@
       "CR-033",
       "CR-096",
       "CR-115",
-      "CR-116"
+      "CR-116",
+      "CR-035"
     ]
   },
   "type": "object",
@@ -238,6 +240,18 @@
     },
     "extensions": {
       "$ref": "#/$defs/namespaced_extensions"
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "ias_profile_ref": {
+      "$ref": "common.json#/$defs/identity_authorization_store_profile_ref"
     }
   },
   "required": [
@@ -902,6 +916,17 @@
         },
         "evaluated_at": {
           "$ref": "common.json#/$defs/timestamp_rfc3339"
+        },
+        "identity_authorization_status": {
+          "type": "string",
+          "enum": [
+            "QUALIFIED",
+            "NOT_QUALIFIED",
+            "STALE",
+            "SOURCE_UNAVAILABLE",
+            "CONFLICTING",
+            "INDETERMINATE"
+          ]
         }
       },
       "required": [
@@ -912,7 +937,8 @@
         "lifecycle_status",
         "validity_status",
         "cross_domain_status",
-        "evaluated_at"
+        "evaluated_at",
+        "identity_authorization_status"
       ]
     },
     "established_authority_input_status": {
@@ -1692,6 +1718,39 @@
         },
         "permission_to_execute": {
           "const": false
+        },
+        "stable_subject_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "authoritative_account_id": {
+          "$ref": "common.json#/$defs/identifier"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 256
+        },
+        "entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 512
+        },
+        "governance_permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 512
+        },
+        "identity_authorization_basis_digest": {
+          "$ref": "common.json#/$defs/content_digest"
         }
       },
       "required": [
@@ -1744,7 +1803,11 @@
         "TENANT_BINDING_MISMATCH",
         "GOVERNANCE_DOMAIN_BINDING_MISMATCH",
         "QUALIFIED_INPUT_MISSING",
-        "OTHER_AUTHORITY_REDERIVATION_FAILURE"
+        "OTHER_AUTHORITY_REDERIVATION_FAILURE",
+        "IDENTITY_AUTHORIZATION_NOT_QUALIFIED",
+        "IDENTITY_AUTHORIZATION_STALE",
+        "IDENTITY_AUTHORIZATION_SOURCE_UNAVAILABLE",
+        "IDENTITY_AUTHORIZATION_CONFLICTING"
       ]
     },
     "authority_failure_reason": {

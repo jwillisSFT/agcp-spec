@@ -2,11 +2,11 @@
 
 **Status:** Normative  
 **Artifact Lifecycle:** Current  
-**Specification Version:** 2.0.8  
-**Repository Release Target:** AGCP v2.0.8  
+**Specification Version:** 2.1.0  
+**Repository Release Target:** AGCP v2.1.0  
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-14  
+**Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-08-15  
 
 ## 1. Purpose
 
@@ -41,6 +41,9 @@ A tenant is an isolated governance namespace containing its own:
 -   Authority Lineage
 -   Governance Evidence namespace
 -   Execution Authorization boundary
+-   Governance Realization / Commit-Bound Admissibility boundary
+-   identity and authorization source/profile bindings
+-   PEP Profile and enforcement-boundary bindings
 -   Governance Domain configuration
 
 Each tenant SHALL be uniquely identified by `tenant_id`.
@@ -98,6 +101,7 @@ Every governance artifact SHALL be tenant-scoped, including:
 -   Governance Approval Artifact
 -   Execution Authorization
 -   Commit Boundary Result
+-   Enforcement Context
 -   Governance Evidence
 
 Resolution of governance artifacts, Governance Configuration, Authority
@@ -137,6 +141,20 @@ expiration.
 Authorized cross-boundary operations SHALL produce Governance Evidence
 in each participating governance domain.
 
+### 6.1 Identity and Authorization Isolation
+
+Authoritative identity and authorization/entitlement resolution SHALL remain Tenant and Governance Domain scoped unless an explicit Governance Trust Artifact authorizes the required cross-boundary relationship.
+
+An implementation SHALL prevent a subject identity, account status, role, group, entitlement, reviewer class, governance permission, delegation, or authority scope resolved for one Tenant or Governance Domain from being silently substituted into another.
+
+The controlling Implementation Profile and IAS Profile SHALL identify the authoritative source scope and any permitted cross-domain trust relationship.
+
+### 6.2 Enforcement Profile Isolation
+
+Governance Realization, PEP Profile selection, Enforcement Context construction, PEP authentication, and target authority SHALL preserve Tenant and Governance Domain binding.
+
+A PEP Profile, GRF caller credential, PEP target credential, or enforcement mapping selected for one Tenant or Governance Domain SHALL NOT authorize another unless the controlling profile and governance explicitly establish that shared scope.
+
 ## 7. Resource Isolation
 
 Implementations SHALL support:
@@ -172,13 +190,16 @@ Implementations SHALL prevent:
 -   Authority Lineage spoofing
 -   Governance Context substitution
 -   Governance Evidence forgery
+-   identity/entitlement substitution across Tenant or Governance Domain boundaries
+-   PEP Profile or Enforcement Context substitution
+-   cross-tenant GRF/PEP credential reuse outside declared scope
 
 ## 11. Administrative Isolation
 
 Administrative operations SHALL be authenticated, authorized, tenant
 scoped, and generate Governance Evidence.
 
-Global administration SHALL NOT bypass tenant isolation guarantees.
+Global administration SHALL NOT bypass tenant isolation guarantees. Administrative authority SHALL NOT substitute for human governance identity/entitlement, GDF/PDP, GRF, PEP, or target authority.
 
 ## 12. Deployment Independence
 
@@ -199,6 +220,9 @@ Conformant implementations SHALL demonstrate:
 -   governance artifact isolation
 -   Governance Evidence isolation
 -   Governance Trust Artifact enforcement
+-   identity/authorization and entitlement isolation
+-   Governance Realization and PEP Profile isolation
+-   Enforcement Context and target-authority isolation
 -   resource isolation
 -   cross-tenant negative testing appropriate to the claimed conformance
     profile

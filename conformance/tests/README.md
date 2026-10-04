@@ -1,6 +1,6 @@
 # AGCP Conformance Test Suite
 
-The Test Cases are organized in files containing ten Test Cases each, except the final file, which contains TC-121 and TC-122. Traceability is generated from the current AGCP Requirements Traceability Matrix.
+The Test Cases are organized in files containing ten Test Cases each, except the final file, which contains TC-121 and TC-122. The current files are synchronized to the v2.1.x Core and Normative Statements. The formal RTM remains the next controlled synchronization step; until that step is completed, `../v2.1.x-formal-test-sync.json` records the delta that must be carried into the RTM.
 
 ## Files
 
@@ -20,7 +20,21 @@ The Test Cases are organized in files containing ten Test Cases each, except the
 
 ## Traceability Rules
 
-- `Direct Test-Generating NS IDs` must exactly match the current RTM for the corresponding CR.
+- `Direct Test-Generating NS IDs` reflect the current v2.1.x Core/Normative Statement synchronization set. After the RTM update, the RTM SHALL match these controlled mappings for the corresponding CR.
 - Conditional NS entries must be tested when applicable or receive an evidence-supported Not Applicable disposition.
 - Supporting/contextual NS entries are integrated constraints or references and are not claimed as independent direct verifications.
 - Each direct NS must map to a unique assertion block with procedure, expected result, evidence, and pass/failure criteria.
+
+## Governance observation and controlled test preconditions
+
+AGCP v2.1.x permits a harness to use IF-003 Governance Observation Points and the optional IF-005 Conformance Test Control interface to observe behavior and establish deterministic preconditions. Test controls SHALL NOT inject the expected outcome. Preserve setup request/result artifacts separately from target runtime evidence. See `../test-control-mapping.json`.
+
+
+## v2.1.x synchronization status
+
+- Formal Test Case identifiers remain `TC-001` through `TC-122`; no `TC-123` is introduced.
+- 42 Test Cases carry formal traceability/assertion changes.
+- 22 additional Test Cases carry regression/scenario changes.
+- Retired NS identifiers `NS-8.6A-01`, `NS-8.6A-03`, and `NS-9.1-01` are not current test targets.
+- New Core-derived NS obligations are incorporated into the existing CR-linked TCs as direct, conditional, or supporting coverage rather than creating new CRs.
+- Final RTM synchronization is complete at `RTM-1.47`; the Formal Test Cases remain the authoritative assessment procedures under the synchronized RTM.

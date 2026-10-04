@@ -2,11 +2,11 @@
 
 **Status:** Normative  
 **Artifact Lifecycle:** Current  
-**Specification Version:** 2.0.8  
-**Repository Release Target:** AGCP v2.0.8  
+**Specification Version:** 2.1.0  
+**Repository Release Target:** AGCP v2.1.0  
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-14  
+**Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-08-15  
 
 ## 1. Purpose
 
@@ -240,3 +240,26 @@ Security-relevant ledger obligations are distributed across these controlling ar
 ## 20. Repository Versioning
 
 Repository releases govern versioning of this specification.
+## Durable successful-commit reconstruction
+
+A durable successful-commit record SHALL allow deterministic reconstruction of the commitment event without collapsing commitment into later execution completion.
+
+The Governance Ledger SHALL preserve or reference, as applicable:
+
+- Proposal Identity and digest;
+- Governance Decision reference;
+- Execution Authorization reference and consumption state;
+- GRF current-authority / Commit-Bound Admissibility result;
+- Governance Binding Validation result;
+- selected PEP Profile identity/version/digest or equivalent controlled enforcement mapping reference;
+- Enforcement Context reference/digest;
+- PEP acceptance/refusal or enforcement receipt;
+- the event treated as commitment by the controlling profile;
+- Governance Evidence supporting commitment; and
+- resulting lifecycle state at the time of the event.
+
+Where the target executes asynchronously after commitment, a later authoritative execution-outcome event SHALL establish successful completion, failure, partial realization, or another controlled outcome. A ledger implementation SHALL NOT derive `EXECUTED` solely from the existence of a successful commitment when the controlling profile defines execution completion as a later event.
+
+Where commitment and execution are atomic in the declared implementation, one durable transaction/event set MAY establish both milestones, provided their logical meanings remain reconstructable.
+
+Replay SHALL reconstruct the historical Governance Decision, authorization, realization, enforcement, commitment, and execution/outcome milestones without reissuing the governed target mutation.

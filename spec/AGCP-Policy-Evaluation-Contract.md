@@ -3,12 +3,12 @@
 **Status:** Normative\
 **Interface Identifier:** IF-002\
 **Interface Version:** v2\
-**Contract Version:** 2.0.8\
-**AGCP Specification Release:** v2.0.8\
+**Contract Version:** 2.1.0\
+**AGCP Specification Release:** v2.1.0\
 **Artifact Lifecycle:** Current\
 **Repository Release Target Status:** Public Review Controlled Baseline  
-**Controlling Published Baseline:** AGCP v2.0.8 Public Review - Controlled Baseline  
-**Baseline Date:** 2026-08-14  
+**Controlling Published Baseline:** AGCP v2.1.0 Public Review - Controlled Baseline  
+**Baseline Date:** 2026-08-15  
 **Series:** AGCP Core\
 **Applies To:** All AGCP-conformant implementations
 
@@ -41,24 +41,26 @@ A controlled Implementation Profile MAY adopt a profile-specific machine contrac
 
 ## 2. Architectural Context
 
-PEC is a component of the Governance Decision Function defined by the
-AGCP Core Specification.
+PEC is a component of the Governance Decision Function (GDF) defined by the AGCP Core Specification. Within AGCP, the GDF realizes the Policy Decision Point (PDP) functional role.
 
 The normative governance pipeline is:
 
-1.  Proposal Qualification
-2.  Governance Decision Function
-    -   Canonical State establishment
-    -   Policy resolution
-    -   Policy Evaluation Module (PEC)
-    -   Policy interaction resolution
-    -   Governance outcome determination
-3.  Execution Authorization
-4.  Continuation Integrity for nonterminal Proposals until final Commit-Bound Admissibility
-5.  Governance Realization and Commit Boundary processing
+1. Proposal Qualification;
+2. Governance Decision Function / PDP;
+   - Canonical State establishment;
+   - qualified identity-and-authorization context resolution where applicable;
+   - policy resolution;
+   - Policy Evaluation Module (PEC);
+   - policy interaction resolution; and
+   - Governance Decision production;
+3. Execution Authorization;
+4. Continuation Integrity and governed re-evaluation for nonterminal Proposals as applicable;
+5. Governance Realization / Commit-Bound Admissibility; and
+6. Policy Enforcement Point (PEP) mediation at the protected enforcement boundary.
 
-PEC SHALL NOT perform Execution Authorization, Commit Boundary
-processing, or Continuation Integrity processing.
+A Governance Decision produced through the GDF/PDP does not by itself establish commit-bound execution eligibility.
+
+PEC SHALL NOT perform Execution Authorization, Governance Realization, Commit Boundary processing, PEP enforcement, or Continuation Integrity processing.
 
 ## 3. Design Principles
 
@@ -74,31 +76,37 @@ PEC SHALL be:
 
 ## 4. Terminology
 
--   **PEC** --- Policy Evaluation Contract.
--   **PEM** --- Policy Evaluation Module implementing this contract.
--   **GDF** --- Governance Decision Function.
--   **Canonical State** --- Authoritative governance state used for
-    evaluation.
--   **Governance Context** --- Context required to evaluate a Qualified
-    Proposal.
--   **Authority Lineage** --- Authoritative chain establishing
-    governance authority.
+- **PEC** --- Policy Evaluation Contract.
+- **PEM** --- Policy Evaluation Module implementing this contract.
+- **GDF** --- Governance Decision Function; the AGCP realization of the PDP functional role.
+- **PDP** --- Policy Decision Point functional role that evaluates policy/governance inputs and renders a decision.
+- **GRF** --- Governance Realization Function that establishes current commit eligibility and prepares enforcement realization.
+- **Canonical State** --- Authoritative governance state used for evaluation.
+- **Governance Context** --- Context required to evaluate a Qualified Proposal.
+- **Authority Lineage** --- Authoritative chain establishing governance authority.
+- **Qualified Identity and Authorization Context** --- deterministic, replayable identity plus identity-system role/group/entitlement/governance-authorization facts resolved through the controlling IAS Profile. It is not AGCP Execution Authorization.
 
 ## 5. Required Inputs
 
 A PEC implementation SHALL receive at minimum:
 
--   Qualified Proposal
--   Canonical State reference
--   Governance Context
--   Applicable governance policy
--   Resolved constraints
--   Resolved invariants
--   Resolved exceptions
--   Authority Lineage
--   Tenant context
--   Governance domain context
--   Governance configuration reference
+- Qualified Proposal;
+- Canonical State reference;
+- Governance Context;
+- Applicable governance policy;
+- Resolved constraints;
+- Resolved invariants;
+- Resolved exceptions;
+- Authority Lineage;
+- Tenant context;
+- Governance Domain context; and
+- Governance Configuration reference.
+
+When policy depends on human or workload identity authorization, the GDF SHALL additionally supply a Qualified Identity and Authorization Context resolved upstream through the controlling IAS Profile.
+
+The Qualified Identity and Authorization Context MAY include stable subject identity, account status, Tenant/Domain membership, roles, groups, entitlements, governance permissions, reviewer classes, delegation/authority attributes, scopes, validity, and source/profile integrity references required by the policy.
+
+PEC SHALL consume the qualified deterministic representation. A PEM SHALL NOT directly query a live identity/authorization store, entitlement service, directory, or other network source during evaluation.
 
 Inputs SHALL be deterministic and replayable.
 
@@ -140,8 +148,7 @@ Specification:
 -   Deferred
 -   Governed Re-evaluation Required
 
-The Governance Decision Function remains the authoritative producer of
-governance outcomes.
+The Governance Decision Function / PDP remains the authoritative producer of governance outcomes. A favorable outcome is not, by itself, current commit eligibility or permission to execute.
 
 ## 9. Canonical State
 
@@ -176,7 +183,7 @@ PEC SHALL NOT:
 -   Append Governance Evidence directly
 -   Modify external systems
 
-All side effects occur outside PEC.
+All side effects occur outside PEC. Identity/authorization resolution and refresh also occur outside the PEM and are supplied as qualified deterministic inputs.
 
 ## 13. Deterministic Replay
 
@@ -207,8 +214,14 @@ Editorial clarifications require a PATCH increment.
 
 ## 17. Summary
 
-The Policy Evaluation Contract standardizes deterministic policy
-evaluation while preserving implementation independence. It forms a
-normative component of the Governance Decision Function and ensures
-policy evaluation remains replayable, testable, Canonical State--driven,
-and consistent with the AGCP Core Specification.
+The Policy Evaluation Contract standardizes deterministic policy evaluation while preserving implementation independence. It forms a normative component of the Governance Decision Function / PDP and ensures policy evaluation remains replayable, testable, Canonical State-driven, and free of direct external side effects.
+
+PEC may evaluate qualified identity/authorization facts such as roles and entitlements, but those facts are resolved upstream through the IAS Profile. PEC does not establish AGCP Execution Authorization, current commit eligibility, Governance Realization, or PEP enforcement.
+
+## Mandatory policy resolution is fail-closed
+
+When a qualified Proposal or active Governance Configuration identifies a mandatory policy, policy module, constraint set, or invariant set, the runtime SHALL resolve and validate that exact current controlled artifact before producing an admissible governance decision. A missing, unresolved, invalid, inactive, mismatched, or out-of-scope mandatory policy basis SHALL NOT fall back to a permissive default and SHALL NOT authorize the Proposal. The governed result SHALL be Structural Refusal or another higher-precedence prohibited-progression outcome required by the Core and applicable Formal Test Case, with attributable Governance Evidence.
+
+## Machine-readable v2.1.x synchronization
+
+Policy evaluation may consume DS-053 qualified identity/authorization inputs when governance requires them. The GDF/PDP remains deterministic and side-effect free; it does not perform live IAS lookup inside a PEM, Governance Realization, or PEP enforcement.

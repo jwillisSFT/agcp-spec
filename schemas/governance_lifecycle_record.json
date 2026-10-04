@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/governance_lifecycle_record.json",
   "title": "Governance Lifecycle Record",
-  "description": "Canonical attributable, integrity-protected record of a Governed Action Proposal lifecycle. DS-038 derives authoritative lifecycle state from ordered Governance Ledger records, preserves complete transition history and transition basis, distinguishes terminal from nonterminal state, records approval, refusal, expiration, cancellation, degradation, re-evaluation, recovery, commitment, and execution effects, and binds every lifecycle fact to stable Proposal Identity. It is not an uncontrolled mutable operational status flag and does not itself authorize execution.",
+  "description": "Canonical attributable, integrity-protected record of a Governed Action Proposal lifecycle. DS-038 derives authoritative lifecycle state from ordered Governance Ledger records, preserves complete transition history and transition basis, distinguishes terminal from nonterminal state, records approval, refusal, expiration, cancellation, degradation, re-evaluation, recovery, commitment, and execution effects, and binds every lifecycle fact to stable Proposal Identity. It is not an uncontrolled mutable operational status flag and does not itself authorize execution. The lifecycle distinguishes commitment acceptance from later execution completion when operational realization is asynchronous.",
   "x-agcp-ds-id": "DS-038",
   "x-agcp-lifecycle-state": "Implemented",
   "x-agcp-catalog": "catalog/schema-catalog.json",
@@ -103,6 +103,7 @@
             "EXPIRED",
             "CANCELLED",
             "SUPERSEDED",
+            "COMMITTED",
             "EXECUTED",
             "EXECUTION_FAILED",
             "GOVERNED_TERMINAL_OUTCOME"
@@ -122,8 +123,10 @@
         "ELIGIBLE_FOR_COMMIT_BOUNDARY_PROCESSING",
         "SUSPENDED",
         "RE_EVALUATION_REQUIRED",
+        "COMMITTED_AWAITING_EXECUTION_OUTCOME",
         "INELIGIBLE_TERMINAL"
-      ]
+      ],
+      "description": "Whether the proposal is eligible for commitment processing. COMMITTED_AWAITING_EXECUTION_OUTCOME means the exact transition has already crossed the commitment boundary and cannot be committed again, while downstream operational execution has not yet reached a terminal outcome."
     },
     "authorization_retention_enum": {
       "type": "string",
@@ -155,11 +158,14 @@
         "GOVERNED_RE_EVALUATION",
         "COMMITMENT_SUSPENSION",
         "CONTINUATION_RECOVERY",
+        "COMMITMENT_ACCEPTED",
+        "EXECUTION_COMPLETION",
         "COMMITMENT_AND_EXECUTION",
         "EXECUTION_FAILURE",
         "GOVERNED_TERMINATION",
         "PROFILE_DEFINED"
-      ]
+      ],
+      "description": "COMMITMENT_ACCEPTED and EXECUTION_COMPLETION are preferred for implementations where commitment and operational completion are distinct. COMMITMENT_AND_EXECUTION remains for atomic implementations and backward compatibility."
     },
     "transition_outcome_enum": {
       "type": "string",
@@ -869,6 +875,105 @@
           "if": {
             "properties": {
               "transition_type": {
+                "const": "COMMITMENT_ACCEPTED"
+              }
+            },
+            "required": [
+              "transition_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "properties": {
+                  "derived_lifecycle_state": {
+                    "const": "COMMITTED"
+                  },
+                  "terminality": {
+                    "const": "NONTERMINAL"
+                  },
+                  "commitment_eligibility": {
+                    "const": "COMMITTED_AWAITING_EXECUTION_OUTCOME"
+                  },
+                  "authorization_retention": {
+                    "const": "CONSUMED"
+                  }
+                },
+                "required": [
+                  "derived_lifecycle_state",
+                  "terminality",
+                  "commitment_eligibility",
+                  "authorization_retention"
+                ]
+              }
+            },
+            "transition_basis": {
+              "required": [
+                "commit_boundary_result_refs",
+                "governance_receipt_refs"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "transition_type": {
+                "const": "EXECUTION_COMPLETION"
+              }
+            },
+            "required": [
+              "transition_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "from_state": {
+                "properties": {
+                  "derived_lifecycle_state": {
+                    "const": "COMMITTED"
+                  },
+                  "terminality": {
+                    "const": "NONTERMINAL"
+                  }
+                },
+                "required": [
+                  "derived_lifecycle_state",
+                  "terminality"
+                ]
+              },
+              "to_state": {
+                "properties": {
+                  "derived_lifecycle_state": {
+                    "const": "EXECUTED"
+                  },
+                  "terminality": {
+                    "const": "TERMINAL"
+                  },
+                  "commitment_eligibility": {
+                    "const": "INELIGIBLE_TERMINAL"
+                  },
+                  "authorization_retention": {
+                    "const": "CONSUMED"
+                  }
+                },
+                "required": [
+                  "derived_lifecycle_state",
+                  "terminality",
+                  "commitment_eligibility",
+                  "authorization_retention"
+                ]
+              }
+            },
+            "required": [
+              "from_state"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "transition_type": {
                 "const": "COMMITMENT_AND_EXECUTION"
               }
             },
@@ -932,12 +1037,16 @@
                   },
                   "commitment_eligibility": {
                     "const": "INELIGIBLE_TERMINAL"
+                  },
+                  "authorization_retention": {
+                    "const": "CONSUMED"
                   }
                 },
                 "required": [
                   "derived_lifecycle_state",
                   "terminality",
-                  "commitment_eligibility"
+                  "commitment_eligibility",
+                  "authorization_retention"
                 ]
               }
             }
@@ -2179,6 +2288,24 @@
     },
     "extensions": {
       "$ref": "#/$defs/namespaced_extensions"
+    },
+    "governed_execution_outcome_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "governed_execution_outcome.json#/$defs/governed_execution_outcome_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true
     }
   },
   "required": [
@@ -2773,5 +2900,18 @@
         }
       }
     }
-  ]
+  ],
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-9.5-05",
+      "NS-10.8A-02",
+      "NS-10.8A-03"
+    ],
+    "conformance_requirements": [
+      "CR-023",
+      "CR-047",
+      "CR-067",
+      "CR-068"
+    ]
+  }
 }

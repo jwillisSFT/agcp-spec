@@ -1,0 +1,13 @@
+{
+  "validation_type": "AGCP_V2_1_X_DS_VALIDATION",
+  "ds_id": "DS-018",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_file": "schemas/commit_boundary_request.json",
+  "schema_sha256": "d375be469f32fbf2240adc2b62f1a5fe365e71b15293ddad026468f451229698",
+  "metaschema_valid": true,
+  "local_refs_resolved": true,
+  "examples_checked": 1,
+  "example_errors": [],
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
+}

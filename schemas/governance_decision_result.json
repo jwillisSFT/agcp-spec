@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/governance_decision_result.json",
   "title": "Governance Decision Result",
-  "description": "Canonical, attributable, integrity-protected result produced by the Governance Decision Function after Proposal Qualification. The result binds the decision to the canonical proposal, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified Governance Evidence, Authority Lineage, applicable constraints and invariants, approvals, evaluation horizon, and deterministic decision basis. Non-refusal outcomes require a DS-027 Governance Receipt; Structural Refusal requires a DS-028 Refusal Record.",
+  "description": "Canonical, attributable, integrity-protected result produced by the Governance Decision Function after Proposal Qualification. The result binds the decision to the canonical proposal, target, Tenant, governance domain, policy and Governance Version, qualified Canonical State, qualified Governance Evidence, Authority Lineage, applicable constraints and invariants, approvals, evaluation horizon, and deterministic decision basis. Non-refusal outcomes require a DS-027 Governance Receipt; Structural Refusal requires a DS-028 Refusal Record. The Governance Decision Function realizes the PDP functional role; this result does not by itself establish commit-bound execution eligibility.",
   "$comment": "DS-015 is the canonical Governance Decision Result. JSON Schema enforces structural and outcome-specific consistency; implementations must also verify semantic equality among all referenced proposal, target, Tenant, state, evidence, authority, policy, scope, lifecycle, validity, and version bindings.",
   "x-agcp-ds-id": "DS-015",
   "x-agcp-lifecycle-state": "Implemented",
@@ -33,7 +33,9 @@
       "NS-7.4-01",
       "NS-7.5-02",
       "NS-7.6-03",
-      "NS-8.6-04"
+      "NS-8.6-04",
+      "NS-7.1-03",
+      "NS-7.6A-01"
     ],
     "conformance_requirements": [
       "CR-001",
@@ -58,7 +60,10 @@
       "CR-085",
       "CR-087",
       "CR-090",
-      "CR-104"
+      "CR-104",
+      "CR-019",
+      "CR-031",
+      "CR-102"
     ]
   },
   "type": "object",
@@ -241,6 +246,16 @@
       "minItems": 1,
       "maxItems": 64,
       "uniqueItems": true
+    },
+    "identity_authorization_qualification_result_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "identity_authorization_qualification_result.json#/$defs/identity_authorization_qualification_result_ref"
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "uniqueItems": true,
+      "description": "Authoritative DS-053 qualification results consumed where identity, role, entitlement, or authorization attributes materially influenced the Governance Decision."
     }
   },
   "required": [

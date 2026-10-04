@@ -1,0 +1,207 @@
+openapi: 3.1.0
+info:
+  title: AGCP Governance Observability, Management, and Test Control API
+  version: 2.1.x
+  description: Machine-readable contract for IF-003, IF-004, and optional IF-005. Observations distinguish IAS qualification,
+    GDF/PDP, GRF, PEP enforcement, commitment, and post-commit execution. Test controls establish source conditions only and
+    cannot inject GDF/GRF outcomes.
+x-agcp-specification-release: v2.1.0
+servers:
+- url: http://127.0.0.1
+security:
+- bearerAuth: []
+paths:
+  /agcp/management/v1/capabilities:
+    get:
+      operationId: getManagementCapabilities
+      x-agcp-interface-id: IF-003
+      responses:
+        '200':
+          description: Management capability discovery including runtime-binding status.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/management_capabilities_response.json
+        '401':
+          description: Authentication required.
+  /agcp/management/v1/observations:
+    get:
+      operationId: listGovernanceObservations
+      x-agcp-interface-id: IF-003
+      parameters:
+      - in: query
+        name: tenant_id
+        schema:
+          type: string
+      - in: query
+        name: governance_domain
+        schema:
+          type: string
+      - in: query
+        name: subject_ref
+        schema:
+          type: string
+      - in: query
+        name: observation_type
+        schema:
+          type: string
+      - in: query
+        name: correlation_id
+        schema:
+          type: string
+      - in: query
+        name: test_scope
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Read-only governance observations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../schemas/governance_observation_event.json
+        '401':
+          description: Authentication required.
+        '403':
+          description: Management scope not authorized.
+      description: Read-only governance observations including identity/authorization qualification, Governance Decision,
+        Authority Re-Derivation, Governance Realization, PEP enforcement, commitment, and post-commit execution outcomes.
+  /agcp/management/v1/actuations:
+    post:
+      operationId: submitGovernanceActuation
+      x-agcp-interface-id: IF-004
+      parameters:
+      - in: header
+        name: Idempotency-Key
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/governance_actuation_request.json
+      responses:
+        '200':
+          description: Actuation acceptance and current realization status. ACCEPTED/PENDING is not evidence that the condition
+            is effective.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/governance_actuation_result.json
+        '400':
+          description: Invalid request.
+        '401':
+          description: Authentication required.
+        '403':
+          description: Actuation authority or scope denied.
+        '409':
+          description: Idempotency or state conflict.
+  /agcp/management/v1/actuations/{actuation_id}:
+    get:
+      operationId: getGovernanceActuationResult
+      x-agcp-interface-id: IF-004
+      parameters:
+      - in: path
+        name: actuation_id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          description: Current authoritative realization/readback status for the actuation.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/governance_actuation_result.json
+        '401':
+          description: Authentication required.
+        '403':
+          description: Actuation scope denied.
+        '404':
+          description: Actuation not found.
+  /agcp/test/v1/controls:
+    post:
+      operationId: applyConformanceTestControl
+      x-agcp-interface-id: IF-005
+      x-agcp-test-only: true
+      parameters:
+      - in: header
+        name: Idempotency-Key
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: header
+        name: X-AGCP-Test-Scope
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/test_control_request.json
+      responses:
+        '200':
+          description: Test-control acceptance and current effect status. A control is usable as a precondition only after
+            effect_status=EFFECTIVE.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/test_control_result.json
+        '400':
+          description: Invalid or unsafe test control.
+        '401':
+          description: Authentication required.
+        '403':
+          description: Test-control authority or isolated scope denied.
+        '409':
+          description: Test-scope or idempotency conflict.
+      description: Apply an isolated test-only source condition. AUTHORITY_FIXTURE may emulate account status, roles, groups,
+        entitlements, authorization attributes, permissions, revocation and freshness. PEP_OUTCOME_FIXTURE is consumed only
+        at the enforcement stage. Test control cannot inject a Governance Decision, Execution Authorization, GRF commit result,
+        or production PEP authority.
+  /agcp/test/v1/controls/{operation_id}:
+    get:
+      operationId: getConformanceTestControlResult
+      x-agcp-interface-id: IF-005
+      x-agcp-test-only: true
+      parameters:
+      - in: path
+        name: operation_id
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - in: header
+        name: X-AGCP-Test-Scope
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      responses:
+        '200':
+          description: Current effect and consumption readback for the test control.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/test_control_result.json
+        '401':
+          description: Authentication required.
+        '403':
+          description: Test-control scope denied.
+        '404':
+          description: Test control not found.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

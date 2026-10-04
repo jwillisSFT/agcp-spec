@@ -1446,6 +1446,10 @@
         },
         "applicable_invariant_set_required": {
           "const": true
+        },
+        "qualified_identity_authorization_required": {
+          "type": "boolean",
+          "description": "True when evaluation requires DS-053 authoritative identity/account/role/entitlement/authorization qualification."
         }
       },
       "required": [
@@ -1459,7 +1463,8 @@
         "governance_version_required",
         "governance_configuration_required",
         "evaluation_horizon_required",
-        "applicable_invariant_set_required"
+        "applicable_invariant_set_required",
+        "qualified_identity_authorization_required"
       ]
     },
     "outcome_semantics": {
@@ -2184,5 +2189,17 @@
       },
       "maxProperties": 64
     }
+  },
+  "x-agcp-normative-basis": {
+    "normative_statements": [
+      "NS-6.3-01",
+      "NS-7.3-01",
+      "NS-7.6A-01"
+    ],
+    "conformance_requirements": [
+      "CR-005",
+      "CR-045",
+      "CR-065"
+    ]
   }
 }

@@ -1,18 +1,8 @@
 # AGCP Implementation Profile Catalog
 
-**Catalog version:** `1.0.3`
-**Release target:** AGCP v2.0.8
-**Scope:** Controlled and informational Implementation Profile artifacts under `implementer/`
+**Catalog version:** 2.0.0  
+**Profile format:** 2.0.0
 
-This catalog identifies public AGCP Implementation Profiles and their authoritative representations. Catalog inclusion establishes discoverability and lifecycle identification only. It does not establish implementation conformance.
+The public catalog contains informational top-level Implementation Profiles. IAS Profiles and PEP Profiles referenced by those examples are controlled subordinate profile artifacts and are listed in the implementation-profile manifest.
 
-| Profile ID | Version | Status | Lifecycle | Public representation | AGCP baseline | Conformance claim |
-|---|---:|---|---|---|---:|---|
-| `AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE` | `1.3.0` | `INFORMATIONAL_EXAMPLE` | `EXAMPLE` | [`AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md`](./AGCP-FULL-SCOPE-MULTITENANT-EXAMPLE-PROFILE.md) | `2.0.0` | `NOT_CLAIMED` |
-
-## Repository synchronization
-
-- Repository release target: `v2.0.8`
-- RTM dataset: `RTM-1.46`
-- Profile catalog: `1.0.3`
-- Package manifest: `1.0.3`
+The catalog does not itself establish conformance. A production or deployment conformance claim requires a controlled deployment-specific profile and objective evidence.

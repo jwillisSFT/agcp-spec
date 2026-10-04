@@ -1,0 +1,13 @@
+{
+  "validation_type": "AGCP_V2_1_X_DS_VALIDATION",
+  "ds_id": "DS-006",
+  "status": "PASS",
+  "validated_at": "2026-10-03",
+  "schema_file": "schemas/policy_artifact.json",
+  "schema_sha256": "7c55d8e2897f76bd15dc7e6ee97f39c7e9252261157d96892aefe290f83c7085",
+  "metaschema_valid": true,
+  "local_refs_resolved": true,
+  "examples_checked": 1,
+  "example_errors": [],
+  "rtm_status": "FINAL_RTM_SYNCHRONIZATION_COMPLETE"
+}
