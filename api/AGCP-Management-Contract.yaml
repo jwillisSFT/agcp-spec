@@ -151,8 +151,8 @@ paths:
               $ref: ../schemas/test_control_request.json
       responses:
         '200':
-          description: Test-control acceptance and current effect status. A control is usable as a precondition only after
-            effect_status=EFFECTIVE.
+          description: Test-control acceptance and current readback. A control is usable as a Formal Test Case precondition
+            only after runtime_binding_status=BOUND and effect_status=EFFECTIVE; acceptance alone is insufficient.
           content:
             application/json:
               schema:
@@ -165,10 +165,62 @@ paths:
           description: Test-control authority or isolated scope denied.
         '409':
           description: Test-scope or idempotency conflict.
-      description: Apply an isolated test-only source condition. AUTHORITY_FIXTURE may emulate account status, roles, groups,
-        entitlements, authorization attributes, permissions, revocation and freshness. PEP_OUTCOME_FIXTURE is consumed only
-        at the enforcement stage. Test control cannot inject a Governance Decision, Execution Authorization, GRF commit result,
-        or production PEP authority.
+      description: Apply an isolated test-only source condition with a finite lease for every non-reset control. AUTHORITY_FIXTURE
+        may emulate account status, roles, groups, entitlements, authorization attributes, permissions, revocation and freshness.
+        PEP_OUTCOME_FIXTURE is consumed only at the enforcement stage. TARGET_EXECUTION_FIXTURE controls only the post-commit
+        external execution dependency. ENFORCEMENT_PATH_FAULT_FIXTURE perturbs only the declared controlled enforcement boundary.
+        Test controls cannot inject a Governance Decision, Execution Authorization, GRF commit result, DS-052 outcome, or
+        production PEP authority.
+    get:
+      operationId: listConformanceTestControls
+      x-agcp-interface-id: IF-005
+      x-agcp-test-only: true
+      parameters:
+      - in: query
+        name: test_scope
+        schema:
+          type: string
+      - in: query
+        name: tenant_id
+        schema:
+          type: string
+      - in: query
+        name: governance_domain
+        schema:
+          type: string
+      - in: query
+        name: control_type
+        schema:
+          type: string
+      - in: query
+        name: effect_status
+        schema:
+          type: string
+      - in: query
+        name: consumption_status
+        schema:
+          type: string
+      - in: query
+        name: cleanup_required
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Authorized enumeration of test-control readback records for recovery, active-control inventory, and
+            verified cleanup.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../schemas/test_control_result.json
+        '401':
+          description: Authentication required.
+        '403':
+          description: Test-control enumeration or requested scope not authorized.
+      description: Enumerate IF-005 control results visible to the caller. Cross-scope enumeration requires explicit recovery/administrative
+        test-control authority; ordinary test controllers SHALL be restricted to their authorized scopes. Enumeration does
+        not establish a Formal Test Case precondition.
   /agcp/test/v1/controls/{operation_id}:
     get:
       operationId: getConformanceTestControlResult
@@ -189,7 +241,7 @@ paths:
           minLength: 1
       responses:
         '200':
-          description: Current effect and consumption readback for the test control.
+          description: Current runtime-binding, effect, lease, attribution, and consumption readback for the test control.
           content:
             application/json:
               schema:

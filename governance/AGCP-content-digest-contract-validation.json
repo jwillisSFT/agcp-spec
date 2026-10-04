@@ -35,7 +35,7 @@
     "api/AGCP-HTTP-Contract.yaml": "2b6437515da9feafb3d606b7316f1a1999b530a645133570a8a2087d6e6a3949",
     "spec/AGCP-HTTP-Interface-Specification.md": "cfaced45689c68d5c6643ead63161c20a330d4b0a677ccb2da000a7a06f54393",
     "conformance/digests/AGCP-Content-Digest-Test-Vectors.json": "a19ba9d16eea0be839562b9a016710465c017a69ae982ac8c1eb456054ed4a9e",
-    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
+    "schemas/catalog/schema-catalog.json": "6fd5e5fabd32510bd15e486a68aaf1b9060d41449005532db700b3eb938e6e98",
     "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
     "spec/AGCP_Requirements_Traceability_Matrix_(RTM).xlsx": "2cbf5d0d83e99863e117275f8059f8072d0cd74269f971c6c2cffe436545e2bc",
     "governance/validate_content_digest_contract.py": "8ad8a89dbd147a44ba627f0769a174413ada8a34e9574ec4199539be9cbc86e4"

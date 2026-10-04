@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/test_control_request.json",
   "title": "AGCP Test Control Request",
-  "description": "Explicit test-only request to establish or reset an isolated conformance-test condition. Every non-reset control has a type-specific fixture payload and may establish inputs only, never the expected governance conclusion.",
+  "description": "Explicit test-only request to establish or reset an isolated conformance-test condition. Every non-reset control has a type-specific fixture payload, a finite expires_at lease, and may establish inputs only, never the expected governance conclusion.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
@@ -580,7 +580,7 @@
       "minLength": 1
     },
     "control_version": {
-      "const": "1.1"
+      "const": "1.2"
     },
     "test_scope": {
       "type": "string",
@@ -1021,6 +1021,25 @@
             "$ref": "#/$defs/enforcement_path_fault_fixture"
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "control_type": {
+            "not": {
+              "const": "RESET_TEST_SCOPE"
+            }
+          }
+        },
+        "required": [
+          "control_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "expires_at"
+        ]
       }
     },
     {

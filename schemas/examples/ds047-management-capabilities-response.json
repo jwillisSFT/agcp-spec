@@ -1,5 +1,5 @@
 {
-  "response_version": "1.0",
+  "response_version": "1.1",
   "implementation_id": "impl-test",
   "generated_at": "2026-10-04T10:00:00Z",
   "observation_capabilities": [
@@ -29,7 +29,20 @@
       "runtime_binding_status": "BOUND",
       "readback_supported": true,
       "interface_id": "IF-005",
-      "control_type": "TARGET_EXECUTION_FIXTURE"
+      "control_type": "TARGET_EXECUTION_FIXTURE",
+      "supported_control_parameters": {
+        "execution_modes": [
+          "POST_COMMIT_ASYNCHRONOUS"
+        ],
+        "terminal_outcomes": [
+          "SUCCEEDED",
+          "FAILED",
+          "PARTIAL",
+          "CANCELLED",
+          "INDETERMINATE"
+        ],
+        "virtual_time_release_supported": true
+      }
     },
     {
       "capability_id": "tc-enforcement-fault",
@@ -37,10 +50,32 @@
       "runtime_binding_status": "BOUND",
       "readback_supported": true,
       "interface_id": "IF-005",
-      "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE"
+      "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE",
+      "supported_control_parameters": {
+        "fault_targets": [
+          "ENFORCEMENT_CONTEXT",
+          "GOVERNANCE_ENFORCEMENT_BINDING",
+          "GRF_TO_PEP_CALLER_BINDING",
+          "COLOCATED_LOGICAL_BINDING"
+        ],
+        "fault_modes": [
+          "FIELD_SUBSTITUTION",
+          "FIELD_OMISSION",
+          "STALE_VALUE",
+          "DIGEST_MISMATCH",
+          "UNAUTHORIZED_CALLER",
+          "LOGICAL_BINDING_MISMATCH"
+        ],
+        "injection_points": [
+          "POST_GRF_PRE_PEP",
+          "PEP_CALLER_AUTHENTICATION",
+          "COLOCATED_ENFORCEMENT_BOUNDARY"
+        ]
+      }
     }
   ],
   "test_scope_propagation_supported": true,
   "correlation_supported": true,
-  "response_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+  "response_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "test_control_enumeration_supported": true
 }

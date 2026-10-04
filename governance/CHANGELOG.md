@@ -412,3 +412,11 @@ Corrected fourteen controlled positive fixtures, added semantic mismatch vectors
 - Retired absent umbrella companion labels and replaced active references with exact controlled repository artifacts.
 - Bound Governance Evidence references to DS-020 and DS-033 under the controlling CR and Core obligations.
 - Normalized the human-adjudication companion title and added controlled reference-disposition metadata, validation, and CI.
+
+## 2026-10-04 — Management Control Plane test-control operability
+
+- Revised DS-050 to wire version 1.2 with mandatory finite leases for non-reset test controls.
+- Revised DS-051 to wire version 1.2 with per-operation runtime-binding, applying-principal, scope, and expiry readback; EFFECTIVE requires BOUND.
+- Revised DS-047 to response version 1.1 with exact supported control variants and test-control enumeration capability discovery.
+- Added authorized IF-005 collection readback for active-control inventory, restart recovery, and verified cleanup.
+- Expanded Management Plane harness and validation to prove variant discovery, binding/effect consistency, expiry safety, and recovery/reset semantics.

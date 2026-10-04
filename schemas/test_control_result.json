@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/test_control_result.json",
   "title": "AGCP Test Control Result",
-  "description": "Attributable result and readback record for an isolated AGCP test control. Acceptance, effective runtime binding, and observed consumption are separate states. EFFECTIVE means the scoped runtime source adapter will consume the condition for matching governed requests; it does not mean the condition has already been exercised.",
+  "description": "Attributable result and readback record for an isolated AGCP test control. Acceptance, per-operation runtime binding, effective runtime readiness, and observed consumption are separate states. EFFECTIVE requires runtime_binding_status=BOUND and means the scoped runtime source adapter will consume the condition for matching governed requests; it does not mean the condition has already been exercised.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -11,6 +11,8 @@
     "result_version",
     "test_scope",
     "control_type",
+    "requested_by",
+    "runtime_binding_status",
     "acceptance_status",
     "effect_status",
     "consumption_status",
@@ -30,7 +32,7 @@
       "minLength": 1
     },
     "result_version": {
-      "const": "1.1"
+      "const": "1.2"
     },
     "test_scope": {
       "type": "string",
@@ -57,6 +59,32 @@
         "ENFORCEMENT_PATH_FAULT_FIXTURE",
         "RESET_TEST_SCOPE"
       ]
+    },
+    "runtime_binding_status": {
+      "enum": [
+        "BOUND",
+        "RECORD_ONLY",
+        "UNBOUND",
+        "NOT_APPLICABLE",
+        "UNKNOWN"
+      ],
+      "description": "Per-operation readback of whether this admitted control is connected to the ordinary runtime path that will consume the controlled condition."
+    },
+    "requested_by": {
+      "$ref": "#/$defs/principal"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Finite test-control lease copied from the admitted non-reset DS-050 request."
     },
     "acceptance_status": {
       "enum": [
@@ -365,6 +393,61 @@
           "mutation_evidence"
         ]
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "effect_status": {
+            "const": "EFFECTIVE"
+          }
+        },
+        "required": [
+          "effect_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "runtime_binding_status": {
+            "const": "BOUND"
+          }
+        },
+        "required": [
+          "runtime_binding_status"
+        ]
+      }
+    },
+    {
+      "if": {
+        "allOf": [
+          {
+            "properties": {
+              "acceptance_status": {
+                "const": "ACCEPTED"
+              }
+            },
+            "required": [
+              "acceptance_status"
+            ]
+          },
+          {
+            "properties": {
+              "control_type": {
+                "not": {
+                  "const": "RESET_TEST_SCOPE"
+                }
+              }
+            },
+            "required": [
+              "control_type"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "required": [
+          "expires_at"
+        ]
+      }
     }
   ],
   "x-agcp-normative-basis": {
@@ -378,5 +461,24 @@
       "CR-120",
       "CR-121"
     ]
+  },
+  "$defs": {
+    "principal": {
+      "type": "object",
+      "required": [
+        "principal_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
   }
 }

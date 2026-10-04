@@ -8,8 +8,8 @@
 
 
 **Specification:** v2.1.0  
-**Catalog version:** 1.0.9  
-**Updated:** 2026-10-03  
+**Catalog version:** 1.0.10  
+**Updated:** 2026-10-04  
 
 Implemented schemas: **52**. DS-016 remains retired/reserved. The highest assigned identifier is **DS-053**.
 

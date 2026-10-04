@@ -193,7 +193,7 @@
       "normative_companion_specifications": [
         "spec/AGCP-Conformance-Test-Control-Specification.md"
       ],
-      "notes": "Optional isolated test-only surface. Controls establish inputs/dependencies only. TARGET_EXECUTION_FIXTURE supports conditional post-commit asynchronous target testing; ENFORCEMENT_PATH_FAULT_FIXTURE supports controlled enforcement-boundary negative paths after ordinary producing stages. Controls cannot inject governance decisions, execution authorizations, GRF commit results, DS-052 outcomes, or conformance results."
+      "notes": "Optional isolated test-only surface. Non-reset controls carry finite leases. Per-operation DS-051 readback exposes runtime binding, effect, consumption, attribution, scope, and expiry; EFFECTIVE requires BOUND. DS-047 advertises exact TARGET_EXECUTION_FIXTURE and ENFORCEMENT_PATH_FAULT_FIXTURE variants. Authorized collection readback supports active-control inventory, restart recovery, and verified cleanup. Controls cannot inject governance decisions, execution authorizations, GRF commit results, DS-052 outcomes, or conformance results."
     }
   ],
   "artifact_lifecycle_state": "CURRENT",

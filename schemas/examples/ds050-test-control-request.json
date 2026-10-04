@@ -1,6 +1,6 @@
 {
   "operation_id": "tcop-fault-120",
-  "control_version": "1.1",
+  "control_version": "1.2",
   "test_scope": "scope-120",
   "control_type": "ENFORCEMENT_PATH_FAULT_FIXTURE",
   "fixture": {
@@ -16,5 +16,6 @@
   "reason": "Exercise TC-120 context integrity rejection",
   "test_only": true,
   "correlation_id": "corr-120",
-  "request_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+  "request_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expires_at": "2026-10-04T10:15:00Z"
 }

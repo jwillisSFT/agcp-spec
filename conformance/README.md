@@ -320,3 +320,11 @@ The conformance synchronization sequence is complete: 122 Formal Test Cases, the
 ## Formal Test Case synchronization status
 
 The formal Test Cases under `tests/` are now synchronized to the current v2.1.x Core and Normative Statements. The suite remains `TC-001` through `TC-122`; no `TC-123` is introduced. The synchronization updates 42 TCs at the assertion/traceability level and 22 additional TCs at the regression/scenario level. Final RTM synchronization is complete at `RTM-1.47`. See `AGCP-v2.1.x-FORMAL-TEST-CASE-SYNCHRONIZATION-UPDATE.md`, `v2.1.x-formal-test-sync.json`, and `../spec/AGCP-v2.1.x-RTM-SYNCHRONIZATION-UPDATE.md`.
+
+## Management Control Plane Test-Control Operability
+
+The v2.1.0 Management Plane contract provides interoperable discovery, actuation, observation, and isolated test-control primitives for a Management Control Plane. DS-050 v1.2 requires finite leases for non-reset test controls; DS-051 v1.2 exposes per-operation runtime binding, applying-principal, scope, expiry, effect, and consumption readback. IF-005 also supports authorized control enumeration so active/orphaned controls can be rediscovered after client-state loss and verified after `RESET_TEST_SCOPE`.
+
+A Management Control Plane SHALL treat a test precondition as established only when the individual control result reports `runtime_binding_status: BOUND` and `effect_status: EFFECTIVE`. Capability discovery alone, HTTP acceptance, `RECORD_ONLY`, or `UNBOUND` status is insufficient. Control-type support also does not imply support for every standardized variant: DS-047 exposes the supported target-execution and enforcement-path-fault variants explicitly.
+
+The Management Plane harness includes checks for exact variant discovery, EFFECTIVE-to-BOUND consistency, finite lease expiry, recovery enumeration, and verified cleanup in addition to scope isolation and consumption evidence.

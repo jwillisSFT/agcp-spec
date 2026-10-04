@@ -46,8 +46,8 @@
     "conformance/test-mapping.json": "80a2cb0e8dcf2d1bd5972d74df8e6dc80dc24c608a9f5b30965d28e65019be9c",
     "conformance/AGCP-Test-Matrix.md": "458db0b2fffd74dc327821e5da050112167c622bc909932b65367ba6cfa45ba6",
     "conformance/v2.1.x-formal-test-sync.json": "fb364e9484c72790276c5f85b7ec399660f78b1982799468144bbea78da1f0ad",
-    "schemas/catalog/schema-catalog.json": "c4435a2b56b0ea659764f1b33437872ca08f3d990b9709e79d234a819e6c4291",
-    "api/interface-catalog.json": "4d0647d6c5cb7f922af1db62b264d32654cd345903fe5899eea24d186d235b13",
+    "schemas/catalog/schema-catalog.json": "6fd5e5fabd32510bd15e486a68aaf1b9060d41449005532db700b3eb938e6e98",
+    "api/interface-catalog.json": "ffef36a8ba8537a4a08112516f4594e792ec2d4aef701fd074a9af82cd952018",
     "registries/registry-entry-catalog.json": "13d53a535f6093fa60bc18f3e6c57f280269d7f062a36ccc6d7fa583faf50c8d",
     "conformance/AGCP-Test-Mapping.md": "bbdd56ce36f17f793b358e5ebc8f352815d3ab58c10cff8ad6933d25fd3d5dc5"
   },

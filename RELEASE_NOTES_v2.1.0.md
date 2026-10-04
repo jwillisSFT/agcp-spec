@@ -19,3 +19,12 @@ Validation is read-only in `make validate`; release synchronization writes occur
 ## Normative Statement inventory
 
 The controlled inventory contains **393 permanent Normative Statement identifiers**: **390 current** and **3 retired/reserved** (`NS-8.6A-01`, `NS-8.6A-03`, and `NS-9.1-01`). `NS-17.2-01` remains intentionally unassigned because the duplicated Core obligation is canonically identified as `NS-2.7-01`.
+
+## Management Control Plane test-control operability
+
+- DS-050 wire contract v1.2 requires a finite `expires_at` lease for every non-reset IF-005 control.
+- DS-051 wire contract v1.2 adds required per-operation `runtime_binding_status` and applying-principal readback, plus Tenant/Governance Domain and lease context; `EFFECTIVE` now normatively implies `BOUND`.
+- DS-047 response v1.1 advertises exact supported variants for target-execution and enforcement-path-fault controls and whether authorized test-control enumeration/recovery is implemented.
+- IF-005 adds authorized `GET /agcp/test/v1/controls` enumeration for active-control inventory, client-restart recovery, and verified cleanup.
+- The Management Plane harness adds exact-variant discovery, EFFECTIVE/BOUND consistency, finite-expiry, and orphan-control recovery/reset checks.
+- These changes do not add new Formal Test Cases or new governance outcome injection mechanisms; they make the existing standardized test and injection points safely operable by a Management Control Plane.

@@ -190,7 +190,9 @@ An actuation/test-control surface advertised as `RECORD_ONLY`, `UNBOUND`, or `UN
 
 Actuation and test-control capability records SHALL also identify whether status readback is supported.
 
-Capability discovery SHALL identify whether test-scope propagation and management/test correlation are supported.
+For `TARGET_EXECUTION_FIXTURE`, capability discovery SHALL identify supported execution modes, terminal outcomes, and whether deterministic virtual-time release is supported. For `ENFORCEMENT_PATH_FAULT_FIXTURE`, capability discovery SHALL identify supported fault targets, fault modes, and injection points. A controller SHALL NOT infer support for a variant merely because the parent `control_type` is advertised.
+
+Capability discovery SHALL identify whether test-scope propagation, management/test correlation, and authorized IF-005 control enumeration/recovery are supported.
 
 Discovery SHALL NOT claim that presence of an interface establishes conformance with any CR or TC.
 
@@ -207,7 +209,7 @@ Actuation SHALL enforce:
 - replay protection;
 - idempotency for retriable state-changing operations;
 - validity/expiry where applicable; and
-- least-privilege separation between observe and actuate authority.
+- least-privilege separation between observe, production actuation, test-control, and cross-scope test-control recovery authority.
 
 Management credentials and management authorization SHALL NOT substitute for:
 
@@ -235,7 +237,9 @@ Production management actuation and IF-005 test actuation are distinct.
 
 When IF-005 is implemented, IF-001 requests MAY carry the optional `X-AGCP-Test-Scope` header defined by the IF-001 contract. The header SHALL be honored only when the caller and scope are authorized for isolated test control. Unauthorized production requests SHALL NOT silently receive test-scoped governance inputs.
 
-The detailed source-overlay and consumption rules are defined by the AGCP Conformance Test Control Specification.
+The detailed source-overlay, finite-lease, readback, consumption, reset, and recovery rules are defined by the AGCP Conformance Test Control Specification.
+
+Where IF-005 control enumeration is implemented, ordinary test controllers SHALL be limited to their authorized test scopes. Cross-scope enumeration used to recover orphaned active controls after controller restart SHALL require explicit recovery/administrative authority and SHALL remain attributable and auditable.
 
 ## 9. Conformance and assessment use
 
@@ -257,7 +261,7 @@ Controlled schemas:
 - DS-047 Management Capabilities Response;
 - DS-048 Governance Actuation Request;
 - DS-049 Governance Actuation Result; and
-- DS-050/DS-051 test-control records as defined by the companion test-control specification.
+- DS-050/DS-051 test-control records as defined by the companion test-control specification, including per-operation runtime binding, finite-lease readback, variant discovery, and authorized active-control recovery.
 ## Runtime-coupling truthfulness
 
 A Management Plane capability SHALL advertise `runtime_binding_status: BOUND` only after the implementation can demonstrate that the corresponding operation is consumed by the same authoritative source-resolution, qualification, lifecycle, or enforcement path used by ordinary governed processing. A record-only handler, queue-only handler, disconnected metadata store, or handler that changes only a management readback SHALL report `RECORD_ONLY` or `UNBOUND`, not `BOUND`.
@@ -266,6 +270,6 @@ For an actuation to become `EFFECTIVE`, the implementation SHALL persist or real
 
 Management-generated authoritative records SHALL validate against their controlled DS schemas before they are persisted, exposed as authoritative, or referenced by the Governance Ledger.
 
-## Machine-readable v2.1.x synchronization
+## Machine-readable v2.1.0 synchronization
 
 DS-046 observations distinguish Identity and Authorization Qualification, GDF/PDP decision, Authority Re-Derivation, Governance Realization, PEP enforcement, commitment, and post-commit execution. IF-004 management authority remains separate from those governance authorities.

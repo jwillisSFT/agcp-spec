@@ -35,13 +35,13 @@
     "conformance/AGCP-Conformance-Test-Vectors.md": "bcff8dfcc067e9b6da85e99610fec27d7427fd4999c286f77209aedfebb2c203",
     "conformance/fixture-mapping.json": "b679101192bba825f1a79e37f97cf30ee7d3b35141034358274f57220ebb5b70",
     "conformance/semantic-fixtures/AGCP-Semantic-Fixture-Test-Vectors.json": "8eae223db81e1a63cec16032d13fc2d639b8c698f40568329734e4315cb3fac1",
-    "schemas/test_control_request.json": "f9fc775c6cc41ca237126a17bb33c1d24fe7af3727e9a3ba33aedd909075a669",
-    "schemas/test_control_result.json": "1ad6e460c0ef98402811fd8dbfced95199994c58f6d0f14203ed531152667efc",
+    "schemas/test_control_request.json": "c8b3ba63aad71dae6846abb4c2cce76f51ff0a1c40f80548978397f70052c7e5",
+    "schemas/test_control_result.json": "b1dd76d8f7badf09357516da3a0c677b671f65f66c685b1182d9ce7ea1e9a6ca",
     "schemas/governance_observation_event.json": "133518ef98d2ca20b613716bbf7c5d8ebccba8f02d4361fad1cc865808b0c97b",
-    "schemas/management_capabilities_response.json": "3cc14345b77f6c6d1db001f73f97b87bcfd0cc66a95003807791107670988092",
+    "schemas/management_capabilities_response.json": "efa054c70872074d1ff53b8b9011013215dd52f02f00329e9d9ddfe256c2cee3",
     "schemas/governance_actuation_request.json": "c94f44fdd3dd34de3930ecbe9ee847d856f287da80d388793ab58ab31f454233",
     "schemas/governance_actuation_result.json": "44ef4d2054eefed7e127b2a2bfaeac45d886e974c5852618f75d879e06b1d1af",
-    "conformance/AGCP-Management-Plane-Harness-Spec.yml": "cca7297b57a5e4ff082da80baaa91e014c0aad03994b2988ae2cf00870bc0df9",
+    "conformance/AGCP-Management-Plane-Harness-Spec.yml": "6045db840bcc696090dad10f27ee77f2877551938979c78e0f63af7ac3c7c979",
     "schemas/commit_boundary_request.json": "d375be469f32fbf2240adc2b62f1a5fe365e71b15293ddad026468f451229698"
   },
   "checks": [

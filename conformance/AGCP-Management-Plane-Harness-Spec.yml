@@ -3,9 +3,9 @@ meta:
   status: normative-harness-specification
   versioning: repository_release
   version_source: VERSION
-  description: Executable coupling checks for IF-003/IF-004/IF-005. The harness proves runtime binding, scope isolation, correlation,
-    readback, asynchronous target consumption, and controlled enforcement-boundary fault injection without injecting governance
-    outcomes.
+  description: Executable coupling checks for IF-003/IF-004/IF-005. The harness proves runtime binding, variant discovery,
+    scope isolation, finite leases, recovery enumeration, correlation, readback, asynchronous target consumption, and controlled
+    enforcement-boundary fault injection without injecting governance outcomes.
 checks:
 - id: MP-CAP-001
   name: Capability discovery truthfully distinguishes BOUND from record-only surfaces
@@ -97,3 +97,38 @@ checks:
   - Apply ENFORCEMENT_PATH_FAULT_FIXTURE targeting COLOCATED_LOGICAL_BINDING
   - Invoke co-located GDF/GRF/PEP path
   pass: Logical authorization/binding/refusal/evidence semantics remain enforced without requiring a network boundary.
+- id: MP-CAP-002
+  name: Test-control variant discovery is explicit
+  procedure:
+  - GET /agcp/management/v1/capabilities
+  - For TARGET_EXECUTION_FIXTURE, inspect execution modes, terminal outcomes, and virtual-time release support
+  - For ENFORCEMENT_PATH_FAULT_FIXTURE, inspect fault targets, fault modes, and injection points
+  - Attempt no unsupported variant
+  pass: The harness can determine exact supported variants before setup and does not infer support from control_type alone.
+- id: MP-TC-011
+  name: EFFECTIVE test controls are runtime-bound
+  procedure:
+  - Apply or inspect an admitted DS-050 control
+  - Read DS-051 while effect_status=EFFECTIVE
+  - Verify runtime_binding_status=BOUND
+  pass: No DS-051 result reports EFFECTIVE with RECORD_ONLY, UNBOUND, NOT_APPLICABLE, or UNKNOWN runtime binding.
+- id: MP-TC-012
+  name: Finite test-control lease expiry
+  procedure:
+  - POST a non-reset DS-050 control with finite expires_at
+  - Verify DS-051 echoes the lease and becomes BOUND + EFFECTIVE
+  - Advance scoped virtual time or wait through the controlled expiry boundary
+  - Execute a matching governed request after expiry
+  - Read DS-051 and correlated observations
+  pass: The expired condition no longer affects ordinary processing, effect_status reports EXPIRED or another specified terminal
+    inactive state, and historical control/evidence records remain available.
+- id: MP-TC-013
+  name: Recovery enumeration and verified reset cleanup
+  procedure:
+  - Create multiple cleanup_required controls in an isolated test scope
+  - Discard the local operation-id list to simulate control-plane client restart
+  - GET /agcp/test/v1/controls?test_scope=<scope>&cleanup_required=true using authorized recovery access
+  - Issue RESET_TEST_SCOPE
+  - Enumerate the scope again
+  pass: The active/orphaned controls are rediscoverable after client-state loss, reset deactivates all scoped conditions,
+    no control remains EFFECTIVE, and historical evidence remains readable.

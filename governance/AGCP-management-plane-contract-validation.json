@@ -37,6 +37,70 @@
       }
     },
     {
+      "check": "test_control_wire_versions",
+      "status": "PASS",
+      "detail": {
+        "DS-050": {
+          "const": "1.2"
+        },
+        "DS-051": {
+          "const": "1.2"
+        }
+      }
+    },
+    {
+      "check": "ds051_required_management_readback",
+      "status": "PASS",
+      "detail": {
+        "required": [
+          "operation_id",
+          "result_id",
+          "result_version",
+          "test_scope",
+          "control_type",
+          "requested_by",
+          "runtime_binding_status",
+          "acceptance_status",
+          "effect_status",
+          "consumption_status",
+          "processed_at",
+          "test_originated",
+          "cleanup_required",
+          "summary",
+          "result_digest"
+        ]
+      }
+    },
+    {
+      "check": "non_reset_controls_require_finite_lease",
+      "status": "PASS",
+      "detail": {
+        "non_reset_without_expiry_error_count": 1,
+        "reset_without_expiry_error_count": 0
+      }
+    },
+    {
+      "check": "effective_implies_bound",
+      "status": "PASS",
+      "detail": [
+        "'BOUND' was expected"
+      ]
+    },
+    {
+      "check": "result_requires_applying_principal",
+      "status": "PASS",
+      "detail": [
+        "'requested_by' is a required property"
+      ]
+    },
+    {
+      "check": "accepted_non_reset_result_preserves_expiry",
+      "status": "PASS",
+      "detail": [
+        "'expires_at' is a required property"
+      ]
+    },
+    {
       "check": "new_controls_discoverable",
       "status": "PASS",
       "detail": [
@@ -45,11 +109,83 @@
       ]
     },
     {
+      "check": "test_control_enumeration_discoverable",
+      "status": "PASS",
+      "detail": {
+        "response_version": {
+          "const": "1.1"
+        },
+        "example": true
+      }
+    },
+    {
+      "check": "test_control_variants_discoverable",
+      "status": "PASS",
+      "detail": {
+        "target": {
+          "execution_modes": [
+            "POST_COMMIT_ASYNCHRONOUS"
+          ],
+          "terminal_outcomes": [
+            "SUCCEEDED",
+            "FAILED",
+            "PARTIAL",
+            "CANCELLED",
+            "INDETERMINATE"
+          ],
+          "virtual_time_release_supported": true
+        },
+        "fault": {
+          "fault_targets": [
+            "ENFORCEMENT_CONTEXT",
+            "GOVERNANCE_ENFORCEMENT_BINDING",
+            "GRF_TO_PEP_CALLER_BINDING",
+            "COLOCATED_LOGICAL_BINDING"
+          ],
+          "fault_modes": [
+            "FIELD_SUBSTITUTION",
+            "FIELD_OMISSION",
+            "STALE_VALUE",
+            "DIGEST_MISMATCH",
+            "UNAUTHORIZED_CALLER",
+            "LOGICAL_BINDING_MISMATCH"
+          ],
+          "injection_points": [
+            "POST_GRF_PRE_PEP",
+            "PEP_CALLER_AUTHENTICATION",
+            "COLOCATED_ENFORCEMENT_BOUNDARY"
+          ]
+        }
+      }
+    },
+    {
+      "check": "if005_collection_readback",
+      "status": "PASS",
+      "detail": {
+        "operationId": "listConformanceTestControls",
+        "filters": [
+          "cleanup_required",
+          "consumption_status",
+          "control_type",
+          "effect_status",
+          "governance_domain",
+          "tenant_id",
+          "test_scope"
+        ]
+      }
+    },
+    {
+      "check": "if005_post_requires_bound_and_effective_semantics",
+      "status": "PASS",
+      "detail": "Test-control acceptance and current readback. A control is usable as a Formal Test Case precondition only after runtime_binding_status=BOUND and effect_status=EFFECTIVE; acceptance alone is insufficient."
+    },
+    {
       "check": "management_harness_negative_paths",
       "status": "PASS",
       "detail": [
         "MP-ACT-001",
         "MP-CAP-001",
+        "MP-CAP-002",
         "MP-OBS-001",
         "MP-TC-001",
         "MP-TC-002",
@@ -60,7 +196,33 @@
         "MP-TC-007",
         "MP-TC-008",
         "MP-TC-009",
-        "MP-TC-010"
+        "MP-TC-010",
+        "MP-TC-011",
+        "MP-TC-012",
+        "MP-TC-013"
+      ]
+    },
+    {
+      "check": "management_harness_control_plane_operability",
+      "status": "PASS",
+      "detail": [
+        "MP-ACT-001",
+        "MP-CAP-001",
+        "MP-CAP-002",
+        "MP-OBS-001",
+        "MP-TC-001",
+        "MP-TC-002",
+        "MP-TC-003",
+        "MP-TC-004",
+        "MP-TC-005",
+        "MP-TC-006",
+        "MP-TC-007",
+        "MP-TC-008",
+        "MP-TC-009",
+        "MP-TC-010",
+        "MP-TC-011",
+        "MP-TC-012",
+        "MP-TC-013"
       ]
     }
   ],

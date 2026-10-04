@@ -23,7 +23,8 @@ IF-005 SHALL be disabled by default in production deployments. An implementation
 - identify all resulting control records as test-originated;
 - prevent test controls from silently entering a production Governance Domain;
 - preserve evidence sufficient to distinguish setup from target behavior;
-- provide deterministic cleanup or scope reset; and
+- provide deterministic cleanup or scope reset;
+- require a finite `expires_at` lease on every non-`RESET_TEST_SCOPE` control so abandoned test conditions deactivate without depending on client recovery; and
 - prevent test-scoped inputs from leaking into requests that do not carry the same authorized test scope.
 
 Production distributions MAY compile IF-005 out entirely.
@@ -51,9 +52,9 @@ The controlled operation vocabulary is:
 - `ENFORCEMENT_PATH_FAULT_FIXTURE`
 - `RESET_TEST_SCOPE`
 
-Every non-reset operation SHALL carry the type-specific fixture defined by DS-050. A generic untyped object is not sufficient for an implementation to claim interoperable support for the control.
+Every non-reset operation SHALL carry the type-specific fixture defined by DS-050 and a finite `expires_at` lease. A generic untyped object is not sufficient for an implementation to claim interoperable support for the control. `RESET_TEST_SCOPE` does not require an expiry.
 
-Implementations MAY support a subset and SHALL advertise the supported subset through IF-003 capability discovery.
+Implementations MAY support a subset and SHALL advertise the supported subset through IF-003 capability discovery. For control types with standardized variants, capability discovery SHALL identify the exact supported variants rather than imply that every variant is implemented.
 
 ## 4. Scoped runtime binding model
 
@@ -105,7 +106,7 @@ A test-control operation has three separate dimensions:
 2. **Effect** — whether the scoped runtime source adapter is ready to supply the condition to matching governed requests; and
 3. **Consumption** — whether a governed runtime processing attempt actually consumed the condition.
 
-DS-051 SHALL represent these dimensions separately.
+DS-051 SHALL represent these dimensions separately. DS-051 `runtime_binding_status` is per-operation readback of the admitted control and SHALL NOT be inferred solely from DS-047 capability advertisement.
 
 An HTTP 2xx response or `acceptance_status: ACCEPTED` SHALL NOT establish the precondition.
 
@@ -124,7 +125,7 @@ consumption_status = OBSERVED
 
 with a consumed-by reference and correlated GOP observation.
 
-`effect_status: EFFECTIVE` SHALL NOT be returned if the implementation has only stored or logged the control and ordinary governed processing will ignore it.
+`effect_status: EFFECTIVE` SHALL NOT be returned if the implementation has only stored or logged the control and ordinary governed processing will ignore it. Every DS-051 result with `effect_status: EFFECTIVE` SHALL report `runtime_binding_status: BOUND`.
 
 
 ## 5A. Optional correlation identifier serialization
@@ -142,13 +143,19 @@ An omitted optional correlation identifier SHALL NOT cause HTTP 500, internal sc
 
 ## 6. Status/readback
 
-IF-005 SHALL provide control status/readback through:
+IF-005 SHALL provide per-operation control status/readback through:
 
 `GET /agcp/test/v1/controls/{operation_id}`
 
-The readback operation SHALL require the same isolated test scope and test-control authority rules as the original control.
+and authorized active/historical control enumeration through:
 
-A conformance harness SHALL poll or otherwise observe the result until the control becomes EFFECTIVE, fails, expires, or reaches another terminal control state. A harness SHALL NOT infer effectiveness from elapsed time.
+`GET /agcp/test/v1/controls`
+
+The collection operation SHALL support filtering by `test_scope`, `tenant_id`, `governance_domain`, `control_type`, `effect_status`, `consumption_status`, and `cleanup_required`. It exists for active-control inventory, restart recovery, and verified cleanup; enumeration SHALL NOT itself establish a Formal Test Case precondition.
+
+Per-operation readback SHALL require the same isolated test scope and test-control authority rules as the original control. Cross-scope enumeration SHALL require explicit recovery or administrative test-control authority; ordinary test controllers SHALL be restricted to their authorized scopes.
+
+A conformance harness SHALL poll or otherwise observe the result until the control becomes EFFECTIVE, fails, expires, or reaches another terminal control state. A harness SHALL NOT infer effectiveness from elapsed time. For an admitted non-reset control, DS-051 SHALL preserve the applying principal and the finite lease expiry needed to support recovery and audit.
 
 ## 7. No outcome injection
 
@@ -209,7 +216,9 @@ Where deterministic delay is required, `VIRTUAL_TIME_ADVANCE` SHOULD be used to 
 
 `RESET_TEST_SCOPE` SHALL remove or deactivate every test-originated condition in the named isolated scope and restore future requests in that scope to the ordinary source-selection baseline unless new controls are applied.
 
-Reset SHALL NOT delete or rewrite historical evidence showing that a test control previously existed or was consumed.
+After reset, an authorized controller or harness SHALL be able to enumerate the scope and verify that no prior non-reset control remains `EFFECTIVE`. A cleanup failure SHALL be treated as a dirty/unsafe test environment rather than silently proceeding with subsequent conformance execution.
+
+Reset SHALL NOT delete or rewrite historical evidence showing that a test control previously existed or was consumed. Lease expiry likewise SHALL deactivate the controlled condition without deleting the historical DS-051 result, observations, or evidence.
 
 ## 12. External-dependency limitation
 
@@ -223,7 +232,10 @@ Every admitted test control SHALL produce a Test Control Result recording:
 - test scope;
 - control type;
 - applying principal;
+- Tenant and Governance Domain scope where supplied;
+- finite lease expiry for admitted non-reset controls;
 - acceptance status;
+- per-operation runtime binding status;
 - current effect status;
 - effective condition and digest when effective;
 - source adapter identity when effective;
@@ -246,4 +258,4 @@ The machine-readable interface contract is `api/AGCP-Management-Contract.yaml` a
 
 ## Machine-readable v2.1.0 synchronization
 
-DS-050 AUTHORITY_FIXTURE can emulate authoritative account status, roles, groups, entitlements, authorization attributes, permissions, revocation, and freshness. PEP_OUTCOME_FIXTURE is consumed only at enforcement. TARGET_EXECUTION_FIXTURE is consumed only by the post-commit target/execution dependency path. ENFORCEMENT_PATH_FAULT_FIXTURE may perturb only the declared post-production enforcement boundary condition. None may inject a Governance Decision, Execution Authorization, GRF commit result, DS-052 outcome, or conformance result.
+DS-050 v1.2 requires a finite lease for every non-reset test control. DS-051 v1.2 provides per-operation runtime-binding, applying-principal, scope, and lease readback. AUTHORITY_FIXTURE can emulate authoritative account status, roles, groups, entitlements, authorization attributes, permissions, revocation, and freshness. PEP_OUTCOME_FIXTURE is consumed only at enforcement. TARGET_EXECUTION_FIXTURE is consumed only by the post-commit target/execution dependency path. ENFORCEMENT_PATH_FAULT_FIXTURE may perturb only the declared post-production enforcement boundary condition. None may inject a Governance Decision, Execution Authorization, GRF commit result, DS-052 outcome, or conformance result.

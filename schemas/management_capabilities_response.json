@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agcp.ai/schemas/management_capabilities_response.json",
   "title": "AGCP Management Capabilities Response",
-  "description": "Machine-readable discovery of observation, actuation, and test-control capabilities. BOUND is a runtime-coupling truth claim, not interface-presence metadata.",
+  "description": "Machine-readable discovery of observation, actuation, and test-control capabilities, including runtime binding, readback, supported test-control variants, and active-control enumeration. BOUND is a runtime-coupling truth claim, not interface-presence metadata.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
@@ -68,6 +68,136 @@
         "source_adapter": {
           "type": "string",
           "minLength": 1
+        },
+        "supported_control_parameters": {
+          "$ref": "#/$defs/supported_control_parameters"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "control_type": {
+                "const": "ENFORCEMENT_PATH_FAULT_FIXTURE"
+              }
+            },
+            "required": [
+              "control_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "supported_control_parameters"
+            ],
+            "properties": {
+              "supported_control_parameters": {
+                "required": [
+                  "fault_targets",
+                  "fault_modes",
+                  "injection_points"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "control_type": {
+                "const": "TARGET_EXECUTION_FIXTURE"
+              }
+            },
+            "required": [
+              "control_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "supported_control_parameters"
+            ],
+            "properties": {
+              "supported_control_parameters": {
+                "required": [
+                  "execution_modes",
+                  "terminal_outcomes",
+                  "virtual_time_release_supported"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "supported_control_parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fault_targets": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ENFORCEMENT_CONTEXT",
+              "GOVERNANCE_ENFORCEMENT_BINDING",
+              "GRF_TO_PEP_CALLER_BINDING",
+              "COLOCATED_LOGICAL_BINDING"
+            ]
+          }
+        },
+        "fault_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "FIELD_SUBSTITUTION",
+              "FIELD_OMISSION",
+              "STALE_VALUE",
+              "DIGEST_MISMATCH",
+              "UNAUTHORIZED_CALLER",
+              "LOGICAL_BINDING_MISMATCH"
+            ]
+          }
+        },
+        "injection_points": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "POST_GRF_PRE_PEP",
+              "PEP_CALLER_AUTHENTICATION",
+              "COLOCATED_ENFORCEMENT_BOUNDARY"
+            ]
+          }
+        },
+        "execution_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "POST_COMMIT_ASYNCHRONOUS"
+            ]
+          }
+        },
+        "terminal_outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "SUCCEEDED",
+              "FAILED",
+              "PARTIAL",
+              "CANCELLED",
+              "INDETERMINATE"
+            ]
+          }
+        },
+        "virtual_time_release_supported": {
+          "type": "boolean"
         }
       }
     }
@@ -79,13 +209,14 @@
     "observation_capabilities",
     "actuation_capabilities",
     "test_control_capabilities",
+    "test_control_enumeration_supported",
     "test_scope_propagation_supported",
     "correlation_supported",
     "response_digest"
   ],
   "properties": {
     "response_version": {
-      "const": "1.0"
+      "const": "1.1"
     },
     "implementation_id": {
       "type": "string",
@@ -122,6 +253,10 @@
     "response_digest": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
+    },
+    "test_control_enumeration_supported": {
+      "type": "boolean",
+      "description": "True only when authorized callers can enumerate active/historical IF-005 control results for recovery and verified cleanup."
     }
   }
 }
